@@ -1,6 +1,8 @@
 package bonacci.oogway.parser.goodreads;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,29 +11,39 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import bonacci.oogway.parser.WebCrawler;
 import bonacci.oogway.parser.WisdomGatherer;
 
-public class GoodReadsHunter implements WisdomGatherer {
+public class GoodReadsHunter implements WisdomGatherer, WebCrawler {
 
-	public static void main(String argv[]) {
+	private static final String URL = "http://www.goodreads.com/quotes/tag/";
+			
+	public static void main(String args[]) {
 		GoodReadsHunter gatherer = new GoodReadsHunter();
-		try {
-			List<String> quotes = gatherer.gather();
-			quotes.stream().forEach(System.out::println);
-			} catch (IOException e) {
-			e.printStackTrace();
-		}
+		List<String> quotes = gatherer.gather(args[0]);
+		quotes.stream().forEach(System.out::println);
 	}
 
 	@Override
-	public List<String> gather() throws IOException {
-		Document doc = Jsoup.connect("http://www.goodreads.com/quotes/tag/balcony").get();
-		Elements quotes = doc.select("div.quoteText");
-		return quotes.stream()
-			  .map(this::cleanDiv)
-			  .map(q -> q.text())
-			  .map(this::strip)
-			  .collect(Collectors.toList());
+	public List<String> gather(String tag) {
+		List<String> result = new ArrayList<>();
+		try {
+			Elements quotes = crawl(tag);
+			result = quotes.stream()
+					  .map(this::cleanDiv)
+					  .map(q -> q.text())
+					  .map(this::strip)
+					  .collect(Collectors.toList());
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		return result;
+	}
+
+	@Override
+	public Elements crawl(String searchStr) throws IOException {
+		Document doc = Jsoup.connect(URL + searchStr).get();
+		return doc.select("div.quoteText");
 	}
 
 	private Element cleanDiv(Element el) {
@@ -43,5 +55,4 @@ public class GoodReadsHunter implements WisdomGatherer {
 	private String strip(String str) {
 		return str.substring(str.indexOf("“") + 1, str.lastIndexOf("”"));
 	}
-
 }

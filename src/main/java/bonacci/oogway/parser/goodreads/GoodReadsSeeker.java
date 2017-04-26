@@ -2,7 +2,7 @@ package bonacci.oogway.parser.goodreads;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -14,6 +14,8 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
 import bonacci.oogway.parser.Sannyasin;
+import edu.stanford.nlp.simple.Sentence;
+import edu.stanford.nlp.simple.SentenceAlgorithms;
 
 @Component
 public class GoodReadsSeeker implements Sannyasin {
@@ -28,9 +30,18 @@ public class GoodReadsSeeker implements Sannyasin {
 
 	@Override
 	public List<Function<String, String>> preproces() {
-		return Collections.emptyList();
+		return Arrays.asList(
+								in -> keyphrases(in)
+							);
 	}
 
+	private String keyphrases(String input) {
+		Sentence sentence = new Sentence(input);
+		SentenceAlgorithms algorithms = new SentenceAlgorithms(sentence);
+		List<String> output = algorithms.keyphrases();
+		return output.stream().collect(Collectors.joining(" "));
+	}
+	
 	@Override
 	public List<String> seek(String tag) {
 		List<String> result = new ArrayList<>();
@@ -59,6 +70,6 @@ public class GoodReadsSeeker implements Sannyasin {
 	}
 
 	private String strip(String str) {
-		return str.substring(str.indexOf("ì") + 1, str.lastIndexOf("î"));
+		return str.substring(str.indexOf("‚Äú") + 1, str.lastIndexOf("‚Äù"));
 	}
 }

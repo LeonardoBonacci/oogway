@@ -43,7 +43,7 @@ public class AService {
     }
 
     @PostConstruct
-    public void fill() {
+    private void fill() {
     	repository.deleteAll();
     	//repo.findAll().forEach(a -> System.out.println(a.getId()));
     }

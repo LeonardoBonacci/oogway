@@ -1,31 +1,38 @@
 package bonacci.oogway.parser.goodreads;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
-import bonacci.oogway.parser.WebCrawler;
-import bonacci.oogway.parser.WisdomGatherer;
+import bonacci.oogway.parser.Sannyasin;
 
-public class GoodReadsHunter implements WisdomGatherer, WebCrawler {
+@Component
+public class GoodReadsSeeker implements Sannyasin {
 
 	private static final String URL = "http://www.goodreads.com/quotes/tag/";
 			
 	public static void main(String args[]) {
-		GoodReadsHunter gatherer = new GoodReadsHunter();
-		List<String> quotes = gatherer.gather(args[0]);
+		GoodReadsSeeker gatherer = new GoodReadsSeeker();
+		List<String> quotes = gatherer.seek(args[0]);
 		quotes.stream().forEach(System.out::println);
 	}
 
 	@Override
-	public List<String> gather(String tag) {
+	public List<Function<String, String>> preproces() {
+		return Collections.emptyList();
+	}
+
+	@Override
+	public List<String> seek(String tag) {
 		List<String> result = new ArrayList<>();
 		try {
 			Elements quotes = crawl(tag);
@@ -40,7 +47,6 @@ public class GoodReadsHunter implements WisdomGatherer, WebCrawler {
 		return result;
 	}
 
-	@Override
 	public Elements crawl(String searchStr) throws IOException {
 		Document doc = Jsoup.connect(URL + searchStr).get();
 		return doc.select("div.quoteText");

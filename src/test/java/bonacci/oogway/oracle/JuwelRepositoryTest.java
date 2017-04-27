@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/springContext-test.xml")
-public class ArticleRepositoryTest {
+public class JuwelRepositoryTest {
 
     public static final String RIZWAN_IDREES = "Rizwan Idrees";
     public static final String MOHSIN_HUSEN = "Mohsin Husen";
@@ -26,21 +26,21 @@ public class ArticleRepositoryTest {
 
     @Before
     public void before() {
-        elasticsearchTemplate.deleteIndex(Article.class);
-        elasticsearchTemplate.createIndex(Article.class);
-        elasticsearchTemplate.putMapping(Article.class);
-        elasticsearchTemplate.refresh(Article.class);
+        elasticsearchTemplate.deleteIndex(Juwel.class);
+        elasticsearchTemplate.createIndex(Juwel.class);
+        elasticsearchTemplate.putMapping(Juwel.class);
+        elasticsearchTemplate.refresh(Juwel.class);
 
-        IndexQuery article1 = new ArticleBuilder("1").title("article four").buildIndex();
-        IndexQuery article2 = new ArticleBuilder("2").title("article three").buildIndex();
-        IndexQuery article3 = new ArticleBuilder("3").title("article two").buildIndex();
-        IndexQuery article4 = new ArticleBuilder("4").title("article one").buildIndex();
+        IndexQuery juwel1 = new JuwelTestBuilder("1").essence("juwel four").buildIndex();
+        IndexQuery juwel2 = new JuwelTestBuilder("2").essence("juwel three").buildIndex();
+        IndexQuery juwel3 = new JuwelTestBuilder("3").essence("juwel two").buildIndex();
+        IndexQuery juwel4 = new JuwelTestBuilder("4").essence("juwel one").buildIndex();
 
-        elasticsearchTemplate.index(article1);
-        elasticsearchTemplate.index(article2);
-        elasticsearchTemplate.index(article3);
-        elasticsearchTemplate.index(article4);
-        elasticsearchTemplate.refresh(Article.class);
+        elasticsearchTemplate.index(juwel1);
+        elasticsearchTemplate.index(juwel2);
+        elasticsearchTemplate.index(juwel3);
+        elasticsearchTemplate.index(juwel4);
+        elasticsearchTemplate.refresh(Juwel.class);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class ArticleRepositoryTest {
 //        String facetName = "fauthors";
 //        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchAllQuery()).withFacet(new TermFacetRequestBuilder(facetName).fields("authors.untouched").build()).build();
 //        // when
-//        FacetedPage<Article> result = elasticsearchTemplate.queryForPage(searchQuery, Article.class);
+//        FacetedPage<juwel> result = elasticsearchTemplate.queryForPage(searchQuery, juwel.class);
 //        // then
 //        assertThat(result.getNumberOfElements(), is(equalTo(4)));
 //

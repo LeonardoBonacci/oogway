@@ -16,26 +16,24 @@ import bonacci.oogway.web.ARepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/springContext-test.xml")
-public class SampleArticleRepositoryTest {
+public class SampleJuwelRepositoryTest {
 
     @Resource
-    private ARepository sampleArticleRepository;
+    private ARepository sampleJuwelRepository;
 
     @Before
     public void emptyData(){
-        sampleArticleRepository.deleteAll();
+        sampleJuwelRepository.deleteAll();
     }
 
     @Test
     public void shouldIndexSingleBookEntity(){
-        Article article = new Article();
-        article.setId("123455");
-        article.setTitle("Spring Data Elasticsearch Test Article");
-        //Indexing using sampleArticleRepository
-        sampleArticleRepository.save(article);
+        Juwel juwel = new Juwel("123455", "Spring Data Elasticsearch Test");
+        //Indexing using sampleJuwelRepository
+        sampleJuwelRepository.save(juwel);
         //lets try to search same record in elasticsearch
-        Article indexedArticle = sampleArticleRepository.findOne(article.getId());
+        Juwel indexedArticle = sampleJuwelRepository.findOne(juwel.getId());
         assertThat(indexedArticle,is(notNullValue()));
-        assertThat(indexedArticle.getId(),is(article.getId()));
+        assertThat(indexedArticle.getId(),is(juwel.getId()));
     }
 }

@@ -7,20 +7,25 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 
 @Document(indexName = "oracle", type = "quote", shards = 1, replicas = 0, refreshInterval = "-1")
-public class Article {
+public class Juwel {
 
+	public static final String ESSENCE = "essence";
+	
     @Id
     private String id;
 
     @Field(type = String, store = true)
-    private String title;
+    private String essence;
 
-    public Article() {
+    public Juwel() {}
 
+    public Juwel(String essence) {
+        this.essence = essence;
     }
 
-    public Article(String id) {
-        this.id = id;
+    public Juwel(String id, String essence) {
+    	this.id = id;
+        this.essence = essence;
     }
 
     public void setId(String id) {
@@ -31,12 +36,12 @@ public class Article {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getEssence() {
+        return essence;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setEssence(String essence) {
+        this.essence = essence;
     }
 }
 

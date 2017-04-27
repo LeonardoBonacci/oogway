@@ -16,6 +16,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Matchers;
 
+import bonacci.oogway.sannyas.goodreads.GoodReadsSeeker;
+
 public class GoodReadsHunterTest {
 
 	@Ignore

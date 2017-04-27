@@ -1,4 +1,4 @@
-package bonacci.oogway.parser.goodreads;
+package bonacci.oogway.sannyas.goodreads;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,37 +11,29 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import bonacci.oogway.parser.Sannyasin;
-import edu.stanford.nlp.simple.Sentence;
-import edu.stanford.nlp.simple.SentenceAlgorithms;
+import bonacci.oogway.sannyas.Sannyasin;
+import bonacci.oogway.sannyas.steps.KeyPhraser;
 
 @Component
 public class GoodReadsSeeker implements Sannyasin {
 
 	private static final String URL = "http://www.goodreads.com/quotes/tag/";
-			
-	public static void main(String args[]) {
-		GoodReadsSeeker gatherer = new GoodReadsSeeker();
-		List<String> quotes = gatherer.seek(args[0]);
-		quotes.stream().forEach(System.out::println);
+
+	private final KeyPhraser keyPhraser;
+	
+	@Autowired
+	public GoodReadsSeeker(KeyPhraser keyPhraser) {
+		this.keyPhraser = keyPhraser;
 	}
 
 	@Override
 	public List<Function<String, String>> preproces() {
-		return Arrays.asList(
-								in -> keyphrases(in)
-							);
+		return Arrays.asList(keyPhraser::apply);
 	}
 
-	private String keyphrases(String input) {
-		Sentence sentence = new Sentence(input);
-		SentenceAlgorithms algorithms = new SentenceAlgorithms(sentence);
-		List<String> output = algorithms.keyphrases();
-		return output.stream().collect(Collectors.joining(" "));
-	}
-	
 	@Override
 	public List<String> seek(String tag) {
 		List<String> result = new ArrayList<>();
@@ -71,5 +63,11 @@ public class GoodReadsSeeker implements Sannyasin {
 
 	private String strip(String str) {
 		return str.substring(str.indexOf("“") + 1, str.lastIndexOf("”"));
+	}
+	
+	public static void main(String args[]) {
+		GoodReadsSeeker gatherer = new GoodReadsSeeker(new KeyPhraser());
+		List<String> quotes = gatherer.seek(args[0]);
+		quotes.stream().forEach(System.out::println);
 	}
 }

@@ -12,8 +12,8 @@ import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import bonacci.oogway.oracle.Article;
-import bonacci.oogway.parser.AManager;
+import bonacci.oogway.oracle.Juwel;
+import bonacci.oogway.sannyas.AManager;
 
 @Service
 public class AService {
@@ -36,10 +36,10 @@ public class AService {
     	manager.listen(q);
     	
     	SearchQuery searchQuery = new NativeSearchQueryBuilder()
-    			  .withQuery(QueryBuilders.matchQuery("title", q))
+    			  .withQuery(QueryBuilders.matchQuery(Juwel.ESSENCE, q))
     			  .build();
-    	List<Article> result = repository.search(searchQuery).getContent();
-    	return result.get(new Random().nextInt(result.size())).getTitle();
+    	List<Juwel> result = repository.search(searchQuery).getContent();
+    	return result.get(new Random().nextInt(result.size())).getEssence();
     }
 
     @PostConstruct
@@ -47,5 +47,4 @@ public class AService {
     	repository.deleteAll();
     	//repo.findAll().forEach(a -> System.out.println(a.getId()));
     }
-
 }

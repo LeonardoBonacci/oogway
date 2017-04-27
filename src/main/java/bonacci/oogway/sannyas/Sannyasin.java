@@ -1,4 +1,4 @@
-package bonacci.oogway.parser;
+package bonacci.oogway.sannyas;
 
 import java.util.List;
 import java.util.function.Function;

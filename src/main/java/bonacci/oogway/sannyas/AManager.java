@@ -26,18 +26,24 @@ public class AManager {
 		this.repository = repository;
 	}
 
-    @JmsListener(destination = "mailbox", containerFactory = "aFactory")
+    @JmsListener(destination = "winnetou", containerFactory = "aFactory")
     public void receiveMessage(SmokeSignal smokeSignal) {
     	String input = smokeSignal.getMessage();
         System.out.println("Received <" + smokeSignal + ">");
 
         Collection<Sannyasin> sannyas = applicationContext.getBeansOfType(Sannyasin.class).values();
+		// Seeking consists of four steps
 		for (Sannyasin sannya : sannyas) {
+			// pre-proces the input
 			Function<String,String> preprocessing =	sannya.preproces().stream()
 																	  .reduce(Function.identity(), Function::andThen);
 			String preprocessed = preprocessing.apply(input);
 		
+			// acquire wisdom
 			List<String> found = sannya.seek(preprocessed);
-			found.forEach(f -> repository.index(new Juwel(f)));;
+			
+			found.stream()
+				 .filter(sannya.postfilter()) // filter the wisdom..
+				 .forEach(f -> repository.index(new Juwel(f)));; // ..and persist it
 	  }	}
 }

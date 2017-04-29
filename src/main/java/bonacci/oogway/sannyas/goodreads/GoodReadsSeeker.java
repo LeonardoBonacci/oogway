@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.jsoup.Jsoup;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import bonacci.oogway.sannyas.Sannyasin;
+import bonacci.oogway.sannyas.filters.LengthFilter;
 import bonacci.oogway.sannyas.steps.KeyPhraser;
 
 @Component
@@ -23,15 +25,23 @@ public class GoodReadsSeeker implements Sannyasin {
 	private static final String URL = "http://www.goodreads.com/quotes/tag/";
 
 	private final KeyPhraser keyPhraser;
-	
+
+	private final LengthFilter lengthFilter;
+
 	@Autowired
-	public GoodReadsSeeker(KeyPhraser keyPhraser) {
+	public GoodReadsSeeker(KeyPhraser keyPhraser, LengthFilter lengthFilter) {
 		this.keyPhraser = keyPhraser;
+		this.lengthFilter = lengthFilter;
 	}
 
 	@Override
 	public List<Function<String, String>> preproces() {
 		return Arrays.asList(keyPhraser::apply);
+	}
+
+	@Override
+	public Predicate<String> postfilter() {
+		return lengthFilter;
 	}
 
 	@Override
@@ -66,7 +76,7 @@ public class GoodReadsSeeker implements Sannyasin {
 	}
 	
 	public static void main(String args[]) {
-		GoodReadsSeeker gatherer = new GoodReadsSeeker(new KeyPhraser());
+		GoodReadsSeeker gatherer = new GoodReadsSeeker(new KeyPhraser(), new LengthFilter());
 		List<String> quotes = gatherer.seek(args[0]);
 		quotes.stream().forEach(System.out::println);
 	}

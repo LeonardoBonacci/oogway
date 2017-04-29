@@ -33,7 +33,7 @@ public class AService {
         	return "No question no answer..";
 
         // Send a message - the template reuse the message converter
-        jmsTemplate.convertAndSend("mailbox", new SmokeSignal(q));
+        jmsTemplate.convertAndSend("winnetou", new SmokeSignal(q));
 
         // Consult the oracle..
     	SearchQuery searchQuery = new NativeSearchQueryBuilder()

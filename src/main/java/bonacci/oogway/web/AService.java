@@ -45,6 +45,5 @@ public class AService {
     @PostConstruct
     private void fill() {
     	repository.deleteAll();
-    	//repo.findAll().forEach(a -> System.out.println(a.getId()));
     }
 }

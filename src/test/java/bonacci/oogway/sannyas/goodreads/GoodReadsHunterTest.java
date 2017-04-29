@@ -1,4 +1,4 @@
-package bonacci.oogway.parser.goodreads;
+package bonacci.oogway.sannyas.goodreads;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;

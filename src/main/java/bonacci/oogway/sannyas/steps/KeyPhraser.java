@@ -3,9 +3,12 @@ package bonacci.oogway.sannyas.steps;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import edu.stanford.nlp.simple.Sentence;
 import edu.stanford.nlp.simple.SentenceAlgorithms;
 
+@Component
 public class KeyPhraser implements PreProcesStep {
 
 	@Override

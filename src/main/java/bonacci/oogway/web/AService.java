@@ -9,37 +9,40 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import bonacci.oogway.jms.SmokeSignal;
 import bonacci.oogway.oracle.Juwel;
-import bonacci.oogway.sannyas.AManager;
 
 @Service
 public class AService {
 	
 	private final ARepository repository;
-
-	private final AManager manager;
+	private final JmsTemplate jmsTemplate;
 
 	@Autowired
-	public AService(ARepository repository, AManager manager) {
+	public AService(ARepository repository, JmsTemplate jmsTemplate) {
 		this.repository = repository;
-		this.manager = manager;
+		this.jmsTemplate = jmsTemplate;
 	}
 
     public String index(String q) {
         if (StringUtils.isEmpty(q))
         	return "No question no answer..";
 
-        //TODO camel message here...
-    	manager.listen(q);
-    	
+        // Send a message - the template reuse the message converter
+        jmsTemplate.convertAndSend("mailbox", new SmokeSignal(q));
+
+        // Consult the oracle..
     	SearchQuery searchQuery = new NativeSearchQueryBuilder()
     			  .withQuery(QueryBuilders.matchQuery(Juwel.ESSENCE, q))
     			  .build();
     	List<Juwel> result = repository.search(searchQuery).getContent();
-    	return result.get(new Random().nextInt(result.size())).getEssence();
+
+    	return result.size() > 0 ? result.get(new Random().nextInt(result.size())).getEssence() 
+    							 : "I'm speechless, are you sure?";
     }
 
     @PostConstruct

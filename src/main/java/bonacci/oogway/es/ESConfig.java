@@ -1,4 +1,4 @@
-package bonacci.oogway.web;
+package bonacci.oogway.es;
 
 import java.net.InetAddress;
 

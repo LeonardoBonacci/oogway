@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Import;
 
 import bonacci.oogway.accounts.AccountRepository;
 import bonacci.oogway.accounts.AccountsConfiguration;
+import bonacci.oogway.jms.MessagingConfiguration;
 
 /**
  * Run as a micro-service, registering with the Discovery Server (Eureka).
@@ -21,7 +22,7 @@ import bonacci.oogway.accounts.AccountsConfiguration;
  */
 @EnableAutoConfiguration
 @EnableDiscoveryClient
-@Import(AccountsConfiguration.class)
+@Import({AccountsConfiguration.class, MessagingConfiguration.class})
 public class AccountsServer {
 
 	@Autowired

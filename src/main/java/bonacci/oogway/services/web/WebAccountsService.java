@@ -13,6 +13,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import bonacci.oogway.exceptions.AccountNotFoundException;
+import bonacci.oogway.jms.MessageSender;
 
 /**
  * Hide the access to the microservice inside this local service.
@@ -21,6 +22,9 @@ import bonacci.oogway.exceptions.AccountNotFoundException;
  */
 @Service
 public class WebAccountsService {
+
+	@Autowired
+	private MessageSender sender;
 
 	@Autowired
 	@LoadBalanced
@@ -52,8 +56,12 @@ public class WebAccountsService {
 	public Account findByNumber(String accountNumber) {
 
 		logger.info("findByNumber() invoked: for " + accountNumber);
-		return restTemplate.getForObject(serviceUrl + "/accounts/{number}",
-				Account.class, accountNumber);
+		 // Send a message - the template reuse the message converter
+		sender.sendMessage(accountNumber);
+
+		return null;
+//		return restTemplate.getForObject(serviceUrl + "/accounts/{number}",
+//				Account.class, accountNumber);
 	}
 
 	public List<Account> byOwnerContains(String name) {

@@ -18,8 +18,7 @@ import bonacci.oogway.exceptions.AccountNotFoundException;
 @RestController
 public class AccountsController {
 
-	protected Logger logger = Logger.getLogger(AccountsController.class
-			.getName());
+	protected Logger logger = Logger.getLogger(AccountsController.class.getName());
 	protected AccountRepository accountRepository;
 
 	/**
@@ -32,8 +31,7 @@ public class AccountsController {
 	public AccountsController(AccountRepository accountRepository) {
 		this.accountRepository = accountRepository;
 
-		logger.info("AccountRepository says system has "
-				+ accountRepository.countAccounts() + " accounts");
+		logger.info("AccountRepository says system has " + accountRepository.countAccounts() + " accounts");
 	}
 
 	/**
@@ -71,12 +69,10 @@ public class AccountsController {
 	 */
 	@RequestMapping("/accounts/owner/{name}")
 	public List<Account> byOwner(@PathVariable("name") String partialName) {
-		logger.info("accounts-service byOwner() invoked: "
-				+ accountRepository.getClass().getName() + " for "
+		logger.info("accounts-service byOwner() invoked: " + accountRepository.getClass().getName() + " for "
 				+ partialName);
 
-		List<Account> accounts = accountRepository
-				.findByOwnerContainingIgnoreCase(partialName);
+		List<Account> accounts = accountRepository.findByOwnerContainingIgnoreCase(partialName);
 		logger.info("accounts-service byOwner() found: " + accounts);
 
 		if (accounts == null || accounts.size() == 0)

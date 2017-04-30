@@ -6,7 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestTemplate;
+
+import bonacci.oogway.jms.MessagingConfiguration;
 
 /**
  * Accounts web-server. Works as a microservice client, fetching data from the
@@ -17,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableDiscoveryClient
 @ComponentScan(useDefaultFilters = false) // Disable component scanner
+@Import(MessagingConfiguration.class)
 public class WebServer {
 
 	/**

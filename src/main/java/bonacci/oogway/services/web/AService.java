@@ -18,12 +18,16 @@ import bonacci.oogway.jms.MessageSender;
 @Service
 public class AService {
 	
-	@Autowired
-	private ARepository repository;
+	private final ARepository repository;
+
+	private final MessageSender messageSender;
 
 	@Autowired
-	private MessageSender messageSender;
-
+	public AService(ARepository repository, MessageSender messageSender) {
+		this.repository = repository;
+		this.messageSender = messageSender;
+	}
+	
     public String index(String q) {
         if (StringUtils.isEmpty(q))
         	return "No question no answer..";

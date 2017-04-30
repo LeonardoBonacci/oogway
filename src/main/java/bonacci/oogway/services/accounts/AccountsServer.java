@@ -2,15 +2,14 @@ package bonacci.oogway.services.accounts;
 
 import java.util.logging.Logger;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Import;
 
-import bonacci.oogway.accounts.AccountRepository;
-import bonacci.oogway.accounts.AccountsConfiguration;
+import bonacci.oogway.es.ESConfig;
 import bonacci.oogway.jms.MessagingConfiguration;
+import bonacci.oogway.sannyas.SannyasConfiguration;
 
 /**
  * Run as a micro-service, registering with the Discovery Server (Eureka).
@@ -22,11 +21,11 @@ import bonacci.oogway.jms.MessagingConfiguration;
  */
 @EnableAutoConfiguration
 @EnableDiscoveryClient
-@Import({AccountsConfiguration.class, MessagingConfiguration.class})
+@Import({MessagingConfiguration.class, SannyasConfiguration.class, ESConfig.class})
 public class AccountsServer {
 
-	@Autowired
-	protected AccountRepository accountRepository;
+//	@Autowired
+//	protected AccountRepository accountRepository;
 
 	protected Logger logger = Logger.getLogger(AccountsServer.class.getName());
 

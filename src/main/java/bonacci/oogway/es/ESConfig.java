@@ -17,20 +17,20 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 @EnableElasticsearchRepositories(basePackages = "bonacci.oogway")
 public class ESConfig {
 
-	@Value("${elasticsearch.host}")
-	private String host;
-
-	@Value("${elasticsearch.port}")
-	private int port;
-
-	@Value("${elasticsearch.clustername}")
-	private String clustername;
+//	@Value("${elasticsearch.host}")
+//	private String host;
+//
+//	@Value("${elasticsearch.port}")
+//	private int port;
+//
+//	@Value("${elasticsearch.clustername}")
+//	private String clustername;
 
 	@Bean
 	public Client client() throws Exception {
-		Settings esSettings = Settings.settingsBuilder().put("cluster.name", clustername).build();
+		Settings esSettings = Settings.settingsBuilder().put("cluster.name", "oogway-cluster").build();
 		return TransportClient.builder().settings(esSettings).build()
-				.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(host), port));
+				.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
 	}
 
 	@Bean

@@ -16,6 +16,8 @@ import org.springframework.jms.listener.MessageListenerContainer;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.SimpleMessageConverter;
 
+import bonacci.oogway.sannyas.AManager;
+
 @Configuration
 @ComponentScan(basePackages="bonacci.oogway.jms")
 public class MessagingConfiguration {
@@ -25,7 +27,7 @@ public class MessagingConfiguration {
 	private static final String QUEUE = "winnetou";
 	
 	@Autowired
-	MessageReceiver messageReceiver;
+	private AManager messageReceiver;
 	
 	@Bean
 	public ConnectionFactory connectionFactory(){

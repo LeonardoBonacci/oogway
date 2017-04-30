@@ -8,9 +8,13 @@
 	<parent>
 		<groupId>org.springframework.cloud</groupId>
 		<artifactId>spring-cloud-starter-parent</artifactId>
-<!--  		<version>Dalston.RELEASE</version>-->
-		<version>Brixton.RELEASE</version>
+		<version>Dalston.RELEASE</version>
 	</parent>
+
+	<properties>
+		<!-- Stand-alone RESTFul application for testing only -->
+		<start-class>bonacci.oogway.services.Main</start-class>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -34,6 +38,7 @@
 			<!-- Setup Spring Data common components -->
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-commons</artifactId>
+			<version>1.13.2.RELEASE</version>
 		</dependency>
 
 		<dependency>

@@ -10,5 +10,5 @@ public interface Sannyasin {
 
 	List<String> seek(String truth);
 	
-	Predicate<String> postfilter();
+	List<Predicate<String>> postfilters();
 }

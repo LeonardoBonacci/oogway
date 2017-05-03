@@ -1,4 +1,4 @@
-package bonacci.oogway.oracle;
+package bonacci.oogway.es;
 
 import static org.springframework.data.elasticsearch.annotations.FieldType.String;
 
@@ -44,4 +44,3 @@ public class Juwel {
         this.essence = essence;
     }
 }
-

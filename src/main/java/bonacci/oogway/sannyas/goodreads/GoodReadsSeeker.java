@@ -24,15 +24,11 @@ public class GoodReadsSeeker implements Sannyasin {
 
 	private static final String URL = "http://www.goodreads.com/quotes/tag/";
 
-	private final KeyPhraser keyPhraser;
-
-	private final LengthFilter lengthFilter;
+	@Autowired
+	private KeyPhraser keyPhraser;
 
 	@Autowired
-	public GoodReadsSeeker(KeyPhraser keyPhraser, LengthFilter lengthFilter) {
-		this.keyPhraser = keyPhraser;
-		this.lengthFilter = lengthFilter;
-	}
+	private LengthFilter lengthFilter;
 
 	@Override
 	public List<Function<String, String>> preproces() {
@@ -40,8 +36,8 @@ public class GoodReadsSeeker implements Sannyasin {
 	}
 
 	@Override
-	public Predicate<String> postfilter() {
-		return lengthFilter;
+	public List<Predicate<String>> postfilters() {
+		return Arrays.asList(lengthFilter);
 	}
 
 	@Override
@@ -76,7 +72,7 @@ public class GoodReadsSeeker implements Sannyasin {
 	}
 	
 	public static void main(String args[]) {
-		GoodReadsSeeker gatherer = new GoodReadsSeeker(new KeyPhraser(), new LengthFilter());
+		GoodReadsSeeker gatherer = new GoodReadsSeeker();
 		List<String> quotes = gatherer.seek(args[0]);
 		quotes.stream().forEach(System.out::println);
 	}

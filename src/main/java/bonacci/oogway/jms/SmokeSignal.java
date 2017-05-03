@@ -1,8 +1,12 @@
 package bonacci.oogway.jms;
 
-public class SmokeSignal {
+import java.io.Serializable;
 
-    private String message;
+public class SmokeSignal implements Serializable {
+
+	private static final long serialVersionUID = -4448389103738669559L;
+
+	private String message;
 
     public SmokeSignal() {}
 

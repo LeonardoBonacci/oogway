@@ -14,7 +14,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "bonacci.oogway.web")
+@EnableElasticsearchRepositories(basePackages = "bonacci.oogway")
 public class ESConfig {
 
 	@Value("${elasticsearch.host}")
@@ -37,10 +37,4 @@ public class ESConfig {
 	public ElasticsearchOperations elasticsearchTemplate() throws Exception {
 		return new ElasticsearchTemplate(client());
 	}
-
-// 	Embedded Elasticsearch Server
-//	@Bean
-//	public ElasticsearchOperations elasticsearchTemplate() {
-//		return new ElasticsearchTemplate(new NodeBuilder().local(true).node().client());
-//	}
 }

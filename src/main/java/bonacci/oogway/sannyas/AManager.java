@@ -3,6 +3,7 @@ package bonacci.oogway.sannyas;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -40,13 +41,15 @@ public class AManager implements MessageListener {
 				// pre-proces the input
 				Function<String,String> preprocessing =	sannya.preproces().stream()
 																		  .reduce(Function.identity(), Function::andThen);
-				String preprocessed = preprocessing.apply(input);
+				String preprocessedInput = preprocessing.apply(input);
 			
 				// acquire wisdom
-				List<String> found = sannya.seek(preprocessed);
-				
+				List<String> found = sannya.seek(preprocessedInput);
+
+				Predicate<String> postFiltering =	sannya.postfilters().stream()
+																		.reduce(p -> true, Predicate::and);
 				found.stream()
-					 .filter(sannya.postfilter()) // filter the wisdom..
+					 .filter(postFiltering) // filter the wisdom..
 					 .forEach(f -> repository.index(new Juwel(f)));; // ..and persist it
 		  }	
 		} catch (JMSException e) {

@@ -15,6 +15,7 @@ import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 
 import bonacci.oogway.es.Juwel;
+import bonacci.oogway.jms.SmokeSignal;
 import bonacci.oogway.services.web.ARepository;
 
 @Component
@@ -32,7 +33,7 @@ public class AManager implements MessageListener {
 	@Override
 	public void onMessage(Message message) {
 		try {
-			String input = (String) messageConverter.fromMessage(message);
+			String input =  ((SmokeSignal)messageConverter.fromMessage(message)).getMessage();
 	        System.out.println("Received <" + input + ">");
 
 	        Collection<Sannyasin> sannyas = applicationContext.getBeansOfType(Sannyasin.class).values();
@@ -42,15 +43,14 @@ public class AManager implements MessageListener {
 				Function<String,String> preprocessing =	sannya.preproces().stream()
 																		  .reduce(Function.identity(), Function::andThen);
 				String preprocessedInput = preprocessing.apply(input);
-			
 				// acquire wisdom
 				List<String> found = sannya.seek(preprocessedInput);
-
+				// filter the wisdom..
 				Predicate<String> postFiltering =	sannya.postfilters().stream()
 																		.reduce(p -> true, Predicate::and);
 				found.stream()
-					 .filter(postFiltering) // filter the wisdom..
-					 .forEach(f -> repository.index(new Juwel(f)));; // ..and persist it
+					 .filter(postFiltering) 
+					 .forEach(f -> repository.index(new Juwel(f)));; //..and persist it
 		  }	
 		} catch (JMSException e) {
 			// TODO Auto-generated catch block

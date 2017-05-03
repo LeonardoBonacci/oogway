@@ -33,7 +33,7 @@ public class MessagingConfiguration {
 	public ConnectionFactory connectionFactory(){
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
 		connectionFactory.setBrokerURL(DEFAULT_BROKER_URL);
-		connectionFactory.setTrustedPackages(Arrays.asList("com.websystique.spring"));
+		connectionFactory.setTrustedPackages(Arrays.asList("bonacci.oogway.jms"));
 		return connectionFactory;
 	}
 

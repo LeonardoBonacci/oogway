@@ -9,23 +9,24 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import bonacci.oogway.es.Juwel;
-import bonacci.oogway.jms.MessageSender;
+import bonacci.oogway.jms.SmokeSignal;
 
 @Service
 public class AService {
 	
 	private final ARepository repository;
 
-	private final MessageSender messageSender;
+	private final JmsTemplate jmsTemplate;
 
 	@Autowired
-	public AService(ARepository repository, MessageSender messageSender) {
+	public AService(ARepository repository, JmsTemplate jmsTemplate) {
 		this.repository = repository;
-		this.messageSender = messageSender;
+		this.jmsTemplate = jmsTemplate;
 	}
 	
     public String index(String q) {
@@ -33,8 +34,9 @@ public class AService {
         	return "No question no answer..";
 
         // Send a message to the world...
-        messageSender.sendMessage(q);
+		jmsTemplate.send(session -> session.createObjectMessage(new SmokeSignal(q)));
 
+        
         // Consult the oracle..
     	SearchQuery searchQuery = new NativeSearchQueryBuilder()
     			  .withQuery(QueryBuilders.matchQuery(Juwel.ESSENCE, q))

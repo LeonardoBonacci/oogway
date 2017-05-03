@@ -20,7 +20,7 @@ import bonacci.oogway.sannyas.AManager;
 
 @Configuration
 @ComponentScan(basePackages="bonacci.oogway.jms")
-public class MessagingConfiguration {
+public class JMSConfig {
 
 	private static final String DEFAULT_BROKER_URL = "tcp://localhost:61616";
 	

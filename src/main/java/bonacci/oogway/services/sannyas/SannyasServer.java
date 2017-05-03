@@ -6,12 +6,12 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Import;
 
 import bonacci.oogway.es.ESConfig;
-import bonacci.oogway.jms.MessagingConfiguration;
+import bonacci.oogway.jms.JMSConfig;
 import bonacci.oogway.sannyas.SannyasConfiguration;
 
 @EnableAutoConfiguration
 @EnableDiscoveryClient
-@Import({MessagingConfiguration.class, SannyasConfiguration.class, ESConfig.class})
+@Import({JMSConfig.class, SannyasConfiguration.class, ESConfig.class})
 public class SannyasServer {
 
 	public static void main(String[] args) {

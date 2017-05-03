@@ -26,6 +26,11 @@ eureka:
 #   metadataMap:
 #     instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
       
+# ElasticSearch 
+elasticsearch:
+  host: localhost
+  port: 9300
+  clustername: oogway-cluster
 
 
 

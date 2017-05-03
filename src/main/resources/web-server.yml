@@ -26,3 +26,10 @@ eureka:
 # HTTP Server
 server:
   port: 3333   # HTTP (Tomcat) port
+  
+# ElasticSearch 
+elasticsearch:
+  host: localhost
+  port: 9300
+  clustername: oogway-cluster
+  

@@ -33,28 +33,36 @@ public class AManager implements MessageListener {
 	@Override
 	public void onMessage(Message message) {
 		try {
+			// The purposeful life of a manager:
+			// to receive an order..
 			String input =  ((SmokeSignal)messageConverter.fromMessage(message)).getMessage();
 	        System.out.println("Received <" + input + ">");
 
-	        Collection<Sannyasin> sannyas = applicationContext.getBeansOfType(Sannyasin.class).values();
-			// Seeking consists of four steps
-			for (Sannyasin sannya : sannyas) {
-				// pre-proces the input
-				Function<String,String> preprocessing =	sannya.preproces().stream()
-																		  .reduce(Function.identity(), Function::andThen);
-				String preprocessedInput = preprocessing.apply(input);
-				// acquire wisdom
-				List<String> found = sannya.seek(preprocessedInput);
-				// filter the wisdom..
-				Predicate<String> postFiltering =	sannya.postfilters().stream()
-																		.reduce(p -> true, Predicate::and);
-				found.stream()
-					 .filter(postFiltering) 
-					 .forEach(f -> repository.index(new Juwel(f)));; //..and persist it
-		  }	
+			// and delegate..
+	        delegate(input);
 		} catch (JMSException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}	
+	
+	private void delegate(String input) {
+        Collection<Sannyasin> sannyas = applicationContext.getBeansOfType(Sannyasin.class).values();
+		// Seeking consists of four steps
+		for (Sannyasin sannya : sannyas) {
+			// pre-proces the input
+			Function<String,String> preprocessing =	sannya.preproces().stream()
+																	  .reduce(Function.identity(), Function::andThen);
+			String preprocessedInput = preprocessing.apply(input);
+			// acquire wisdom
+			List<String> found = sannya.seek(preprocessedInput);
+			// filter the wisdom..
+			Predicate<String> postFiltering =	sannya.postfilters().stream()
+																	.reduce(p -> true, Predicate::and);
+			found.stream()
+				 .filter(postFiltering) 
+				 .forEach(f -> repository.index(new Juwel(f)));; //..and persist it
+	  }	
+	}	
+
 }

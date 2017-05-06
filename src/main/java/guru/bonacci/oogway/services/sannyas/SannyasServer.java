@@ -1,5 +1,7 @@
 package guru.bonacci.oogway.services.sannyas;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -23,6 +25,8 @@ import guru.bonacci.oogway.sannyas.SannyasConfiguration;
 @Import({JMSConfig.class, SannyasConfiguration.class, ESConfig.class})
 public class SannyasServer {
 
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	 
 	public static void main(String[] args) {
 		System.setProperty("spring.config.name", "sannyas-server");
 		SpringApplication.run(SannyasServer.class, args);
@@ -40,6 +44,7 @@ public class SannyasServer {
 
 		@RequestMapping(path = "/backdoor", method = RequestMethod.POST)
 		public void index(@RequestBody String input) {
+			logger.info("receiving backdoor index request for: '" + input + "'");
 			manager.delegate(input);
 		}
 	}

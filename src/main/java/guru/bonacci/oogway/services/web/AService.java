@@ -3,8 +3,6 @@ package guru.bonacci.oogway.services.web;
 import java.util.List;
 import java.util.Random;
 
-import javax.annotation.PostConstruct;
-
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
@@ -46,10 +44,5 @@ public class AService {
 
     	return result.size() > 0 ? result.get(new Random().nextInt(result.size())).getEssence() 
     							 : "I'm speechless, are you sure?";
-    }
-
-    @PostConstruct
-    private void fill() {
-    	repository.deleteAll();
     }
 }

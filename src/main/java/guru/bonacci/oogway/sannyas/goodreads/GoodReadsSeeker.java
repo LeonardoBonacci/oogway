@@ -8,6 +8,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -41,24 +42,26 @@ public class GoodReadsSeeker implements Sannyasin {
 	}
 
 	@Override
-	public List<String> seek(String tag) {
-		List<String> result = new ArrayList<>();
-		try {
-			Elements quotes = crawl(tag);
-			result = quotes.stream()
-					  .map(this::cleanDiv)
-					  .map(q -> q.text())
-					  .map(this::strip)
-					  .collect(Collectors.toList());
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
-		return result;
+	public List<String> seek(String tagsAsString) {
+		String[] tags = StringUtils.split(tagsAsString);
+		return Arrays.stream(tags)
+					.map(this::crawl)
+					.flatMap(Elements::stream)
+					.map(this::cleanDiv)
+					.map(q -> q.text())
+					.map(this::strip)
+					.collect(Collectors.toList());
 	}
 
-	public Elements crawl(String searchStr) throws IOException {
-		Document doc = Jsoup.connect(URL + searchStr).get();
-		return doc.select("div.quoteText");
+	public Elements crawl(String searchStr) {
+		try {
+			Document doc = Jsoup.connect(URL + searchStr).get();
+			return doc.select("div.quoteText");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Elements();
 	}
 
 	private Element cleanDiv(Element el) {

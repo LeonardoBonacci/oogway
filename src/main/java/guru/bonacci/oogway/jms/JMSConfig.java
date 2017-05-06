@@ -33,7 +33,7 @@ public class JMSConfig {
 	public ConnectionFactory connectionFactory(){
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
 		connectionFactory.setBrokerURL(DEFAULT_BROKER_URL);
-		connectionFactory.setTrustedPackages(Arrays.asList("bonacci.oogway.jms"));
+		connectionFactory.setTrustedPackages(Arrays.asList("guru.bonacci.oogway.jms"));
 		return connectionFactory;
 	}
 

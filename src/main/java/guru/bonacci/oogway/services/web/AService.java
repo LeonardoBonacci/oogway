@@ -13,6 +13,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import guru.bonacci.oogway.es.ARepository;
 import guru.bonacci.oogway.es.Juwel;
 import guru.bonacci.oogway.jms.SmokeSignal;
 

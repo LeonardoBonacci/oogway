@@ -15,6 +15,9 @@ import guru.bonacci.oogway.jms.JMSConfig;
 import guru.bonacci.oogway.sannyas.AManager;
 import guru.bonacci.oogway.sannyas.SannyasConfiguration;
 
+/**
+ * Micro-service for the retrieval and indexing of wisdom
+ */
 @EnableAutoConfiguration
 @EnableDiscoveryClient
 @Import({JMSConfig.class, SannyasConfiguration.class, ESConfig.class})

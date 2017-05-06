@@ -15,7 +15,7 @@ import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.es.ARepository;
-import guru.bonacci.oogway.es.Juwel;
+import guru.bonacci.oogway.es.Jewel;
 import guru.bonacci.oogway.jms.SmokeSignal;
 
 /**
@@ -65,7 +65,7 @@ public class AManager implements MessageListener {
 			List<String> found = sannya.seek(preprocessedInput);
 			// filter the wisdom..
 			Predicate<String> postFiltering = sannya.postfilters().stream().reduce(p -> true, Predicate::and);
-			found.stream().filter(postFiltering).forEach(f -> repository.index(new Juwel(f)));
+			found.stream().filter(postFiltering).forEach(f -> repository.index(new Jewel(f)));
 			; // ..and persist it
 		}
 	}

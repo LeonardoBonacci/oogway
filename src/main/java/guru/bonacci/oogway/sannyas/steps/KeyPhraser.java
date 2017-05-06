@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 import edu.stanford.nlp.simple.Sentence;
 import edu.stanford.nlp.simple.SentenceAlgorithms;
 
+/**
+ * Determines the important words from a phrase
+ */
 @Component
 public class KeyPhraser implements PreProcesStep {
 

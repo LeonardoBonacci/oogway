@@ -6,8 +6,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 
+/**
+ * A jewel is a cut and polished precious stone
+ */
 @Document(indexName = "oracle", type = "quote", shards = 1, replicas = 0, refreshInterval = "-1")
-public class Juwel {
+public class Jewel {
 
 	public static final String ESSENCE = "essence";
 
@@ -17,14 +20,14 @@ public class Juwel {
 	@Field(type = String, store = true, analyzer = "english")
     private String essence;
 
-	public Juwel() {
+	public Jewel() {
 	}
 
-	public Juwel(String essence) {
+	public Jewel(String essence) {
 		this.essence = essence;
 	}
 
-	public Juwel(String id, String essence) {
+	public Jewel(String id, String essence) {
 		this.id = id;
 		this.essence = essence;
 	}

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import guru.bonacci.oogway.es.ARepository;
-import guru.bonacci.oogway.es.Juwel;
+import guru.bonacci.oogway.es.Jewel;
 import guru.bonacci.oogway.jms.SmokeSignal;
 
 @Service
@@ -40,9 +40,9 @@ public class AService {
         
         // Consult the oracle..
     	SearchQuery searchQuery = new NativeSearchQueryBuilder()
-    			  .withQuery(QueryBuilders.matchQuery(Juwel.ESSENCE, q))
+    			  .withQuery(QueryBuilders.matchQuery(Jewel.ESSENCE, q))
     			  .build();
-    	List<Juwel> result = repository.search(searchQuery).getContent();
+    	List<Jewel> result = repository.search(searchQuery).getContent();
 
     	return result.size() > 0 ? result.get(new Random().nextInt(result.size())).getEssence() 
     							 : "I'm speechless, are you sure?";

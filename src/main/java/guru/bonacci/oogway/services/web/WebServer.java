@@ -14,6 +14,9 @@ import guru.bonacci.oogway.es.ESConfig;
 import guru.bonacci.oogway.jms.JMSConfig;
 import guru.bonacci.oogway.sannyas.SannyasConfiguration;
 
+/**
+ * Micro-service for the user to communicate with
+ */
 @SpringBootApplication
 @EnableDiscoveryClient
 @Import({ JMSConfig.class, ESConfig.class, SannyasConfiguration.class })

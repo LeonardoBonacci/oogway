@@ -26,10 +26,7 @@ import edu.stanford.nlp.util.CoreMap;
  * The idea is that you first build up the pipeline by adding Annotators,
  * and then you take the objects you wish to annotate and pass them in and
  * get in return a fully annotated object.
- *
- *  StanfordCoreNLP loads a lot of models, so you probably
- *  only want to do this once per execution
- */
+s */
 @Component
 public class Lemmatizator implements PreProcesStep {
 

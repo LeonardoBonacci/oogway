@@ -10,37 +10,38 @@ import org.springframework.data.elasticsearch.annotations.Field;
 public class Juwel {
 
 	public static final String ESSENCE = "essence";
-	
-    @Id
-    private String id;
 
-    @Field(type = String, store = true)
+	@Id
+	private String id;
+
+	@Field(type = String, store = true, analyzer = "english")
     private String essence;
 
-    public Juwel() {}
+	public Juwel() {
+	}
 
-    public Juwel(String essence) {
-        this.essence = essence;
-    }
+	public Juwel(String essence) {
+		this.essence = essence;
+	}
 
-    public Juwel(String id, String essence) {
-    	this.id = id;
-        this.essence = essence;
-    }
+	public Juwel(String id, String essence) {
+		this.id = id;
+		this.essence = essence;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public String getEssence() {
-        return essence;
-    }
+	public String getEssence() {
+		return essence;
+	}
 
-    public void setEssence(String essence) {
-        this.essence = essence;
-    }
+	public void setEssence(String essence) {
+		this.essence = essence;
+	}
 }

@@ -15,8 +15,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 @Configuration
-//@ComponentScan
-@EnableElasticsearchRepositories//(basePackages = "bonacci.oogway")
+@EnableElasticsearchRepositories
 public class ESConfig {
 
 	@Value("${elasticsearch.host}")

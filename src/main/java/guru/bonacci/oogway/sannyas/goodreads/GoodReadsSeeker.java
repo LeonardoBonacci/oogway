@@ -1,7 +1,6 @@
 package guru.bonacci.oogway.sannyas.goodreads;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -13,6 +12,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,8 @@ import guru.bonacci.oogway.sannyas.steps.KeyPhraser;
 
 @Component
 public class GoodReadsSeeker implements Sannyasin {
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private static final String URL = "http://www.goodreads.com/quotes/tag/";
 
@@ -58,8 +61,7 @@ public class GoodReadsSeeker implements Sannyasin {
 			Document doc = Jsoup.connect(URL + searchStr).get();
 			return doc.select("div.quoteText");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 		return new Elements();
 	}
@@ -73,7 +75,7 @@ public class GoodReadsSeeker implements Sannyasin {
 	private String strip(String str) {
 		return str.substring(str.indexOf("“") + 1, str.lastIndexOf("”"));
 	}
-	
+
 	public static void main(String args[]) {
 		GoodReadsSeeker gatherer = new GoodReadsSeeker();
 		List<String> quotes = gatherer.seek(args[0]);

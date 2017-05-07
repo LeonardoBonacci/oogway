@@ -1,5 +1,7 @@
 package guru.bonacci.oogway.services.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +24,8 @@ import guru.bonacci.oogway.sannyas.SannyasConfiguration;
 @Import({ JMSConfig.class, ESConfig.class, SannyasConfiguration.class })
 public class WebServer {
 
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	public static void main(String[] args) {
 		System.setProperty("spring.config.name", "web-server");
 		SpringApplication.run(WebServer.class, args);
@@ -39,6 +43,7 @@ public class WebServer {
 
 		@RequestMapping(path = "/", method = RequestMethod.GET)
 		public String index(@RequestParam("q") String q) {
+			logger.info("receiving request for a wise answer on: '" + q + "'");
 			return service.index(q);
 		}
 	}

@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html data-ng-app="bqApp" lang="en">
+   <head>
+      <meta charset="utf-8"/>
+      <link rel="dns-prefetch" href="//ajax.googleapis.com">
+      <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+      <link rel="dns-prefetch" href="//fonts.googleapis.com">
+      <link rel="dns-prefetch" href="//fonts.gstatic.com">
+      <link rel="dns-prefetch" href="//www.google-analytics.com">
+      <link rel="dns-prefetch" href="//googletagservices.com">
+      <link rel="dns-prefetch" href="//i.po.st">
+      <link rel="dns-prefetch" href="//platform.twitter.com">
+      <link rel="dns-prefetch" href="//ad.doubleclick.net">
+      <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+      <link rel="dns-prefetch" href="//partner.googleadservices.com">
+      <link rel="dns-prefetch" href="//i.yldbt.com">
+      <link rel="dns-prefetch" href="//cdn.yldbt.com">
+      <link rel="dns-prefetch" href="//brainyquote-d.openx.net">
+      <link rel="dns-prefetch" href="//js.indexww.com">
+      <link rel="dns-prefetch" href="//as.casalemedia.com/">
+      <link rel="dns-prefetch" href="//c.amazon-adsystem.com">
+      <link rel="dns-prefetch" href="//fls-na.amazon-adsystem.com">
+      <link rel="dns-prefetch" href="//z-na.amazon-adsystem.com">
+      <link rel="dns-prefetch" href="//rcm-na.amazon-adsystem.com">
+      <link rel="dns-prefetch" href="//ecx.images-amazon.com">
+      <link rel="dns-prefetch" href="//aax.amazon-adsystem.com/">
+      <link rel="dns-prefetch" href="//ws-na.amazon-adsystem.com/">
+      <link rel="dns-prefetch" href="//z-na.amazon-adsystem.com">
+      <link rel="dns-prefetch" href="//ib.adnxs.com">
+      <link rel="dns-prefetch" href="//static.criteo.net">
+      <link rel="dns-prefetch" href="//bidder.criteo.com">
+      <link rel="dns-prefetch" href="//ap.lijit.com">
+      <link rel="dns-prefetch" href="//gslbeacon.lijit.com">
+      <link rel="dns-prefetch" href="//fastlane.rubiconproject.com">
+      <!--[if lt IE 9]>
+      <script type="text/javascript" src="/st/js/2238537/bq_old_ie.js"></script>
+      <![endif]-->
+      <meta name="description" content="Search Results at BrainyQuote.com.">
+      <meta name="googlebot" content="NOODP">
+      <meta property="ver" content="6.8.0:2238537">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="msapplication-config" content="none">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta property="ts" content="1494145839">
+      <meta property="og:site_name" content="BrainyQuote">
+      <meta property="og:title" content="Search Results">
+      <meta property="og:type" content="article">
+      <meta property="og:description" content="Search Results at BrainyQuote.com.">
+      <meta property="og:image" content="https://www.brainyquote.com/images/fbl.jpg">
+      <meta property="og:image:type" content="image/jpeg">
+      <meta property="og:image:width" content="200">
+      <meta property="og:image:height" content="200">
+      <meta property="og:url" content="https://www.brainyquote.com/search_results.html?q=gossip">
+      <link rel="canonical" href="https://www.brainyquote.com/search_results.html?q=gossip">
+      <meta name="apple-itunes-app" content="app-id=916307096">
+      <link rel="next" href="https://www.brainyquote.com/search_results.html?q=gossip&pg=2">
+      <link rel="icon" href="/favicon.ico?cbv=3" type="image/x-icon">
+      <link rel="shortcut icon" href="/favicon.ico?cbv=3" type="image/x-icon">
+      <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+      <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+      <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+      <link rel="manifest" href="/manifest.json">
+      <meta name="apple-mobile-web-app-title" content="BrainyQuote">
+      <meta name="application-name" content="BrainyQuote">
+      <meta name="msapplication-TileColor" content="#2b5797">
+      <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+      <meta name="msapplication-config" content="/browserconfig.xml">
+      <meta name="theme-color" content="#ffffff">
+      <title>Search Results</title>
+      <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script type="text/javascript">
+         CPAGE = 1;
+         LPAGE = 8;
+         ABGROUP='a';
+         VID='9abd9543a781227703dbfc781769eb15';
+      </script>
+      <script type="text/javascript" src="/st/js/2238537/angular_framework.js"></script>
+      <script type="text/javascript">
+         JsLOG = [];
+         BQ_MBL=0;
+         SHOW_MBR_ACTIONS = true;
+         BQ_LANG_C = "en";
+         BQ_ABClicks = true;
+         BQ_APP = angular.module('bqApp', ['ngAnimate', 'ngCookies', 'ui.bootstrap', 'toastr', 'bqServices','bqServerErrors']);
+         var cc = "NL";
+      </script>
+      <script type="text/javascript" src="/st/js/2238537/bq_first.js"></script>
+      <script type="text/javascript" src="/st/js/2238537/adframe.js"></script>
+      <script type="text/javascript" src="/js/bqpd.js"></script>
+      <link href="/st/css/2238537/toastr.css" media="screen, print" type="text/css" rel="stylesheet">
+      <script type="text/javascript">
+         try {
+         if (typeof REV ===  "undefined") {
+         REV=false;
+         }
+         RID = "2238537";
+         var uaStr = "win_other";
+         BQErrorLog.setupForBrowser(uaStr);
+         document.gaTimings = new BQGATimings(40);
+         document.jsErrSrc = "i-03635f5f7ebb32260";
+         document.jsErrVer = "6.8.0:2238537";
+         var ybotq = ybotq || [];
+         var visitType;
+         if (CookieUtil.isLI()) {
+         visitType = 'member';
+         }
+         else {
+         visitType = 'visitor';
+         }
+         //    Handle redirecting to HTTPS if not on our local box
+         BQRedirectToHTTPS.init();
+         }
+         catch (err) {
+         BQErrorLog.logError("scripts alpha init: ", err);
+         }
+      </script>
+      <script>
+         try {
+         window.googletag = window.googletag || {};
+         googletag.cmd = googletag.cmd || [];
+         var bqTargetCmd = bqTargetCmd || [];
+         var edata = {"v":["mbPerc","adxPerc","adxPerc_m","brealtime_bfp_m","brealtime_bfp_d","openx_bfp_m","openx_bfp_d","indexExchange_bfp_m","indexExchange_bfp_d","sovrn_bfp_m","sovrn_bfp_d"],"d":[240,60,150,150,55,70,60,45,40,180,110],"cNum":19,"cName":"c019"};
+         JsLOG.push('edata: ' + JSON.stringify(edata));
+         var evH = new BQEvHandler(edata);
+         document.bqContSeq = evH.getCName();
+         JsLOG.push('document.bqContSeq: ' + document.bqContSeq);
+         var bqPd = CookieUtil.getPageDepth();
+         new BQSimpleInit(BQ_MBL); // This call increments the page depth
+         var bqLastSc = CookieUtil.getLastScore();
+         var bqLastScStr = "none";
+         if (!(typeof bqLastSc === "undefined")) {
+         var score = bqRoundScore(bqLastSc);
+         bqLastScStr = score.toString();
+         }
+         var bqMbl = 'n';
+         if (BQ_MBL) {
+         bqMbl = 'y';
+         }
+         var bqVide = "" + bqPd;
+         var dtKey = currentDyTm();
+         var onlyB = "off";
+         var delayed = true;
+         var isMbl = 0;
+         var bqPv = new BQPageVars(evH,isMbl,uaStr,delayed);
+         bqPv.setVar("last_score",bqLastSc);
+         bqPv.setVar("last_score_str",bqLastScStr);
+         bqPv.setVar("pubfood_timeout",2500);
+         bqPv.setVar("rbFastlane",true);
+         bqPv.setVar("btrkp",20);
+         var drpP = 15;
+         bqPv.setVar("drpP",drpP);
+         bqPv.setVar("aolTag","/st/js/2238537/bq_pubtaglib_062.js");
+         var bqAdConfig = new BQAdConfig({"procfg":{"yieldbot":{"pubid":"ffd8"}},"placements":[{"bdrs":{"amazon":{},"indexExchange":{"tags":[{"tagName":"IE_Desktop_top_1","tagNum":1,"tagId":164175,"width":728,"height":90},{"tagName":"IE_Desktop_top_4","tagNum":4,"tagId":175236,"width":970,"height":250}],"uf":true,"bfp":0.9},"yieldbot":{"name":"BQ_ros_top_728x90"},"openx":{"uf":true,"bfp":0.8,"oxAdUnitId":538124061},"sovrn":{"tags":[{"tagName":"Header_BQ_ros_top_728x90","tagId":335424,"width":728,"height":90,"tier":1},{"tagName":"Header_BQ_ros_top_728x90_tier2","tagId":352610,"width":728,"height":90,"tier":2},{"tagName":"Header_BQ_ros_top_970x250","tagId":336450,"width":970,"height":250,"tier":1},{"tagName":"Header_BQ_ros_top_970x250_tier2","tagId":352619,"width":970,"height":250,"tier":2}],"bfp":2.0,"bfp2":0.2,"uf":true},"appnexus":{"plid":6524298,"uf":false,"bfp":0.0,"disc":0.06},"brealtime":{"plid":10955693,"uf":true,"bfp":1.2,"disc":0.09},"districtm":{"plid":7479619,"uf":false,"bfp":0.0,"disc":0.07},"defy":{"plid":9928556,"uf":true,"bfp":0.5,"disc":0.35},"criteo":{"zoneIds":[759529,759986],"uf":false,"disc":0.0},"rubicon":{"zone":455084,"sizekey":2,"pos":"btf","uf":true,"bfp":0.8,"disc":0.2}},"name":"/1008298/BQ_ros_top_728x90","sn":"d-bT","elementId":"div-gpt-ad-1418667263920-5","sizes":[[728,90],[970,250],[1,1]],"hbSizes":[[728,90],[970,250]],"reuseOk":false},{"bdrs":{"amazon":{},"indexExchange":{"tags":[{"tagName":"IE_Desktop_top_2","tagNum":2,"tagId":175234,"width":300,"height":250}],"uf":true,"bfp":0.9},"yieldbot":{"name":"BQ_ros_square_300x250"},"openx":{"uf":true,"bfp":0.8,"oxAdUnitId":538124062},"sovrn":{"tags":[{"tagName":"Header_BQ_ros_square_300x250","tagId":335425,"width":300,"height":250,"tier":1},{"tagName":"Header_BQ_ros_square_300x250_tier2","tagId":352611,"width":300,"height":250,"tier":2}],"bfp":2.0,"bfp2":0.2,"uf":true},"appnexus":{"plid":6524299,"uf":false,"bfp":0.0,"disc":0.06},"brealtime":{"plid":10955209,"uf":true,"bfp":1.2,"disc":0.09},"districtm":{"plid":7479623,"uf":false,"bfp":0.0,"disc":0.07},"defy":{"plid":9928566,"uf":true,"bfp":0.5,"disc":0.35},"rubicon":{"zone":457864,"sizekey":15,"pos":"atf","uf":true,"bfp":0.8,"disc":0.2},"criteo":{"zoneIds":[758850],"uf":false,"disc":0.0}},"name":"/1008298/BQ_ros_square_300x250","sn":"sqT","elementId":"div-gpt-ad-1418667263920-4","sizes":[[300,250],[1,1]],"hbSizes":[[300,250]],"reuseOk":true},{"bdrs":{"amazon":{},"indexExchange":{"tags":[{"tagName":"IE_Desktop_mid_5","tagNum":5,"tagId":175237,"width":300,"height":250}],"uf":true,"bfp":0.9},"yieldbot":{"name":"BQ_ros_middle_300x250"},"openx":{"uf":true,"bfp":0.8,"oxAdUnitId":538124063},"sovrn":{"tags":[{"tagName":"Header_BQ_ros_middle_300x250","tagId":335426,"width":300,"height":250,"tier":1},{"tagName":"Header_BQ_ros_middle_300x250_tier2","tagId":352612,"width":300,"height":250,"tier":2}],"bfp":2.0,"bfp2":0.2,"uf":true},"appnexus":{"plid":6524304,"uf":false,"bfp":0.0,"disc":0.06},"brealtime":{"plid":10955251,"uf":true,"bfp":1.2,"disc":0.09},"districtm":{"plid":7479627,"uf":false,"bfp":0.0,"disc":0.07},"defy":{"plid":9928569,"uf":true,"bfp":0.5,"disc":0.35},"rubicon":{"zone":457866,"sizekey":15,"pos":"btf","uf":true,"bfp":0.8,"disc":0.2},"criteo":{"zoneIds":[761242],"uf":false,"disc":0.0}},"name":"/1008298/BQ_ros_middle_300x250","sn":"sqM","elementId":"div-gpt-ad-1418667263920-3","sizes":[[300,250],[1,1]],"hbSizes":[[300,250]],"reuseOk":true},{"bdrs":{"amazon":{},"indexExchange":{"tags":[{"tagName":"IE_Desktop_center_6","tagNum":6,"tagId":175238,"width":300,"height":250},{"tagName":"IE_Desktop_center_sticky_3","tagNum":3,"tagId":175235,"width":300,"height":600}],"uf":true,"bfp":0.9},"yieldbot":{"name":"BQ_ros_center_300x250"},"openx":{"uf":true,"bfp":0.8,"oxAdUnitId":538124064},"sovrn":{"tags":[{"tagName":"Header_BQ_ros_center_300x250","tagId":335427,"width":300,"height":250,"tier":1},{"tagName":"Header_BQ_ros_center_300x250_tier2","tagId":352613,"width":300,"height":250,"tier":2},{"tagName":"Header_BQ_ros_center_300x600","tagId":336451,"width":300,"height":600,"tier":1},{"tagName":"Header_BQ_ros_center_300x600_tier2","tagId":352620,"width":300,"height":600,"tier":2}],"bfp":2.0,"bfp2":0.2,"uf":true},"appnexus":{"plid":6524307,"uf":false,"bfp":0.0,"disc":0.06},"brealtime":{"plid":10955290,"uf":true,"bfp":1.2,"disc":0.09},"districtm":{"plid":7479635,"uf":false,"bfp":0.0,"disc":0.07},"defy":{"plid":9928571,"uf":true,"bfp":0.5,"disc":0.35},"rubicon":{"zone":457868,"sizekey":15,"pos":"btf","uf":true,"bfp":0.8,"disc":0.2},"criteo":{"zoneIds":[761243,761248],"uf":false,"disc":0.0}},"name":"/1008298/BQ_ros_center_300x250","sn":"sqC","elementId":"div-gpt-ad-1418667263920-2","sizes":[[300,250],[300,600],[1,1]],"hbSizes":[[300,250],[300,600]],"reuseOk":true},{"bdrs":{"appnexus":{"plid":6524310,"uf":false,"bfp":0.0,"disc":0.06},"amazon":{},"indexExchange":{"tags":[{"tagName":"IE_Desktop_center_7","tagNum":7,"tagId":175239,"width":300,"height":250}],"uf":true,"bfp":0.9},"openx":{"uf":true,"bfp":0.8,"oxAdUnitId":538124065},"sovrn":{"tags":[{"tagName":"Header_BQ_ros_bottom_300x250","tagId":335428,"width":300,"height":250,"tier":1},{"tagName":"Header_BQ_ros_bottom_300x250_tier2","tagId":352614,"width":300,"height":250,"tier":2}],"bfp":2.0,"bfp2":0.2,"uf":true},"brealtime":{"plid":10955564,"uf":true,"bfp":1.2,"disc":0.09},"districtm":{"plid":7479638,"uf":false,"bfp":0.0,"disc":0.07},"defy":{"plid":9928578,"uf":true,"bfp":0.5,"disc":0.35},"rubicon":{"zone":457870,"sizekey":15,"pos":"btf","uf":true,"bfp":0.8,"disc":0.2},"criteo":{"zoneIds":[761246],"uf":false,"disc":0.0}},"name":"/1008298/BQ_ros_bottom_300x250","sn":"sqB","elementId":"div-gpt-ad-1418667263920-1","sizes":[[300,250],[1,1]],"hbSizes":[[300,250]],"reuseOk":true}],"curi":"/search_results.html?q=gossip"}, bqPv);
+         bqPv.setVar("rndOrder", false);
+         var pfTo = evH.getOvr('pfto', bqPv.getVar("pubfood_timeout"));
+         var pfBdTo = pfTo - 50;
+         bqAdConfig.set("timeout",pfBdTo);
+         bqAdConfig.set("auctionTimeout",pfTo);
+         bqAdConfig.set("test_group",'a');
+         bqAdConfig.set("logOn",false);
+         bqAdConfig.set("lang",BQ_LANG_C);
+         var unitLookup = {};
+         var slotInstances = [];
+         var footerInstances = [];
+         var sl;
+         sl = new BQSlotInstance(bqAdConfig,"main","/1008298/BQ_ros_square_300x250","div-gpt-ad-1418667263920-4",false);
+         slotInstances.push(sl);
+         unitLookup['/1008298/BQ_ros_square_300x250'] = 'div-gpt-ad-1418667263920-4';
+         sl = new BQSlotInstance(bqAdConfig,"main","/1008298/BQ_ros_middle_300x250","div-gpt-ad-1418667263920-3",false);
+         slotInstances.push(sl);
+         unitLookup['/1008298/BQ_ros_middle_300x250'] = 'div-gpt-ad-1418667263920-3';
+         sl = new BQSlotInstance(bqAdConfig,"main","/1008298/BQ_ros_center_300x250","div-gpt-ad-1418667263920-2",false);
+         slotInstances.push(sl);
+         unitLookup['/1008298/BQ_ros_center_300x250'] = 'div-gpt-ad-1418667263920-2';
+         sl = new BQSlotInstance(bqAdConfig,"main","/1008298/BQ_ros_bottom_300x250","div-gpt-ad-1418667263920-1",false);
+         slotInstances.push(sl);
+         unitLookup['/1008298/BQ_ros_bottom_300x250'] = 'div-gpt-ad-1418667263920-1';
+         sl = new BQSlotInstance(bqAdConfig,"footer","/1008298/BQ_ros_bottom_300x250","div-gpt-ad-1418667263920-1",false);
+         footerInstances.push(sl);
+         unitLookup['/1008298/BQ_ros_bottom_300x250'] = 'div-gpt-ad-1418667263920-1';
+         sl = new BQSlotInstance(bqAdConfig,"footer","/1008298/BQ_ros_top_728x90","div-gpt-ad-1418667263920-5",false);
+         footerInstances.push(sl);
+         unitLookup['/1008298/BQ_ros_top_728x90'] = 'div-gpt-ad-1418667263920-5';
+         var bqCl = bqCl_Latest;
+         var scData = undefined;
+         scData = bqLastScStr;
+         var smth = {
+         "default" : 4,
+         "bq_mbl" : 2,
+         "bq_lastsc": 2,
+         "bq_loc": 2
+         };
+         var cLu = {'US':null,'GB':null,'CA':null,'AU':null,'IN':null,'PH':null, 'NotSet':null};
+         var bqTgtLoc = 'Other';
+         if (cc in cLu) {
+         bqTgtLoc = cc;
+         }
+         var bqPreDt = {'bq_mbl':bqMbl,'bq_vide':bqVide,'bq_loc':bqTgtLoc,'bq_dytm':dtKey};
+         var serverMap = {};
+         serverMap = {"/1008298/BQ_ros_bottom_300x250":1.15,"/1008298/BQ_mobile_anchor":1.19,"/1008298/BQ_mobile_320x50":0.85,"/1008298/BQ_ros_square_300x250":1.26,"/1008298/BQ_ros_middle_300x250":0.98,"/1008298/BQ_ros_top_728x90":1.43,"/1008298/BQ_ros_center_300x250":1.1};
+         var bqpred = new BQPredFactory(bqAdConfig, unitLookup, bqCl, scData, smth, bqPreDt, serverMap);
+         var appVers = "6.8.0:2238537";
+         bqPv.setVar("version",appVers);
+         var trkAB = "a";
+         bqPv.setVar("abgrp",trkAB);
+         var lowRatio = 100;
+         var highRatio = 120;
+         var mbdPerc = 0;
+         mbdPerc = 175;
+         var ctTarg = {};
+         ctTarg["bq_ct"] = "search";
+         bqPv.setVar("visOffset",800);
+         if (bqAdConfig.get("logOn")) {
+         konsole.log("server map",serverMap);
+         }
+         var adCtrl = new BQAdCtrl(bqAdConfig,bqPv,bqpred,document.gaTimings,evH);
+         adCtrl.setupLogging();
+         adCtrl.configureBdrp();
+         var pf = adCtrl.createPubfood(slotInstances);
+         var adxNm = 'adxPerc';
+         if (isMbl) {
+         adxNm += "_m";
+         }
+         lowRatio = evH.getOvr(adxNm,lowRatio);
+         highRatio = evH.getOvr(adxNm,highRatio);
+         mbdPerc = evH.getOvr('mbPerc',mbdPerc);
+         var pfConfig = new BQPfConfig(lowRatio,highRatio,mbdPerc);
+         bqAuctionRan = false;
+         var auctCtrl = adCtrl.mainAuction;
+         auctCtrl.createSlots("main");
+         adCtrl.createAuction(evH,pfConfig);
+         adCtrl.configureBidders();
+         }
+         catch (err) {
+         BQErrorLog.logError("PubfoodAuction", err);
+         }
+      </script>
+      <script type="text/javascript">
+         IS_MBL=0;
+         CURL='/search_results?q=gossip';
+      </script>
+      <script type="text/javascript">
+         document.gaMgr = new BQGAMgr(BQ_LANG_C);
+         bqGALoaded = function () {
+         var secureSeg = ('https:' === document.location.protocol) ? 'https' : 'http';
+         var bqBdrp = CookieUtil.getBdrDrp();
+         document.gaMgr.initGA(visitType, 'a', secureSeg, bqBdrp, document.bqContSeq, REV, IS_MBL);
+         document.gaTimings.gaLoaded();
+         };
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+         m=s.getElementsByTagName(o)[0];
+         a.async=1;
+         a.onload=bqGALoaded;
+         a.src=g;
+         m.parentNode.insertBefore(a,m)
+         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      </script>
+      <script type="text/javascript">
+         if (window!=top){top.location.href=location.href;};
+      </script>
+      <script type="text/javascript">
+         GA_PG_TYPE="search";
+         PG_DM_ID="gossip";
+         BQCookieNotice.init(BQ_MBL,cc);
+         CookieUtil.createCookieWithMinExpiry("abg", ABGROUP, 30);
+      </script>
+      <meta name="robots" content="noindex">
+      <link href="/st/css/2238537/ws_core_msnry.css" media="screen, print" type="text/css" rel="stylesheet">
+      <!--[if IE 8]>
+      <style>
+         #bq-sm-nav-bar { display:none; }
+         .navbar-nav { margin: 0px !important; }
+         .navbar-form, .form-group { border: 0px !important; }
+         #wowslider-container1 .ws-title div .bq-slide-q-text { font-size: 16px; }
+      </style>
+      <![endif]-->
+      <!--[if lte IE 9]>
+      <script>BQ_OLD_IE = true;</script>
+      <![endif]-->
+      <link href="/st/css/2238537/exp.css" media="screen, print" type="text/css" rel="stylesheet">
+   </head>
+   <body class=" is-dsk">
+      <div id="ss-controller-id" data-ng-controller="ShowFavoritesCtrl" data-ng-init="initSFC(null)">
+         <script type="application/javascript">
+            $(function() {
+            $("#screenSize").text($(window).width());
+            $(window).resize(function (ev) {
+            $("#screenSize").text($(window).width());
+            return true;
+            }); // load everything else if the window is resized
+            });
+         </script>
+         <div data-ng-controller="NavBarCtrl">
+            <nav class="visible-xs bq-tnav navbar navbar-default">
+               <div class="container bq-full-width-sm" style="height:37px">
+                  <div class="navbar-header">
+                     <div style="position:relative;top:1px;text-align:center">
+                        <a href="/" class="brand" style="padding:0px 5px 0px 5px; color:white"><span class="bqDesktopLogo"></span></a>
+                        <button type="button" class="navbar-toggle bq-nav-dd-btn visible-xs" style="position:absolute;top:1px;right:3px" data-ng-show="showMemberActions()" data-ng-init="navBQCollapsed = true" data-ng-click="toggleNavBQCollapsed()">
+                        <span class="sr-only">Toggle My BrainyQuote</span>
+                        <i class="fa fa-user"></i><span class="caret"></span>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+               <div class="ng-cloak" data-ng-show="showMemberActions()" data-ng-class="myBQnavBarWrapperClass()">
+                  <div class="collapse data-ng-cloak navbar-collapse hidden-sm" style="margin-top:6px; padding-top:6px" data-ng-class="myBQnavBarClass()" data-ng-click="navBQCollapsed=true">
+                     <ul class="nav data-ng-cloak navbar-nav hidden-sm">
+                        <li class="bq-ni visible-xs" data-ng-show="showLogin()"><a href="/signup?utm_source=brainyquote&utm_medium=menubar&utm_campaign=membership" class="txnav">Sign Up</a></li>
+                        <li class="bq-ni visible-xs" data-ng-show="showLogin()"><a href="#" class="txnav" data-ng-click="loginClicked()">Login</a></li>
+                        <li class="bq-ni visible-xs" data-ng-show="!showLogin()"><a href="{{getMyFavoritesUrl()}}" class="txnav" rel="nofollow">Favorites</a></li>
+                        <li class="bq-ni visible-xs" data-ng-show="!showLogin()"><a href="{{getMyCollectionsUrl()}}" class="txnav" rel="nofollow">Collections</a></li>
+                        <li class="bq-ni visible-xs" data-ng-show="!showLogin()"><a href="/users/my/account" class="txnav" rel="nofollow">Settings</a></li>
+                        <li>
+                           <div class="visible-xs bq-tnav-divider" data-ng-show="!showLogin()"></div>
+                        </li>
+                        <li class="bq-ni visible-xs" data-ng-show="!showLogin()"><a href="#" class="txnav" data-ng-click="logoutClicked()">Logout</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </nav>
+            <nav id="bq-tn-id" class="bq-tnav navbar navbar-default bq-cookie-notice">
+               <div class="hidden-xs container bq-full-width-sm">
+                  <div class="navbar-header">
+                     <button type="button" class="navbar-toggle bq-nav-dd-btn visible-xs" data-ng-show="showMemberActions()" data-ng-init="navBQCollapsed = true" data-ng-click="toggleNavBQCollapsed()">
+                     <span class="sr-only">Toggle My BrainyQuote</span>
+                     <i class="fa fa-user"></i><span class="caret"></span>
+                     </button>
+                     <a class="bq-tnav-btn visible-xs" style="" href="/search.html"><span class="fa fa-search fa-fw"></span></a>
+                     <a href="/" class="brand" style="padding:0px 5px 0px 5px; color:white"><span class="bqDesktopLogo"></span></a>
+                  </div>
+                  <div class="ng-cloak" data-ng-show="showMemberActions()" data-ng-class="myBQnavBarWrapperClass()">
+                     <div class="collapse data-ng-cloak navbar-collapse hidden-sm" data-ng-class="myBQnavBarClass()" data-ng-click="navBQCollapsed=true">
+                        <ul class="nav data-ng-cloak navbar-nav hidden-sm">
+                           <li class="bq-ni visible-xs" data-ng-show="showLogin()"><a href="/signup?utm_source=brainyquote&utm_medium=menubar&utm_campaign=membership" class="txnav">Sign Up</a></li>
+                           <li class="bq-ni visible-xs" data-ng-show="showLogin()"><a href="#" class="txnav" data-ng-click="loginClicked()">Login</a></li>
+                           <li class="bq-ni visible-xs" data-ng-show="!showLogin()"><a href="{{getMyFavoritesUrl()}}" class="txnav" rel="nofollow">Favorites</a></li>
+                           <li class="bq-ni visible-xs" data-ng-show="!showLogin()"><a href="{{getMyCollectionsUrl()}}" class="txnav" rel="nofollow">Collections</a></li>
+                           <li class="bq-ni visible-xs" data-ng-show="!showLogin()"><a href="/users/my/account" class="txnav" rel="nofollow">Settings</a></li>
+                           <li>
+                              <div class="visible-xs bq-tnav-divider" data-ng-show="!showLogin()"></div>
+                           </li>
+                           <li class="bq-ni visible-xs" data-ng-show="!showLogin()"><a href="#" class="txnav" data-ng-click="logoutClicked()">Logout</a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="collapse data-ng-cloak navbar-collapse" data-ng-class="navBarClass()" data-ng-click="navCollapsed=true">
+                     <ul class="nav navbar-nav">
+                        <li class="bq-ni hidden-xs bq-nav-large" id="sl-bq-nav-home-t"><a href="/" class="txnav">Home</a></li>
+                        <li class="bq-ni"><a href="/quotes/favorites.html" class="txnav">Authors</a></li>
+                        <li class="bq-ni"><a href="/quotes/topics.html" class="txnav">Topics</a></li>
+                        <li class="bq-ni"><a href="/quotes_of_the_day.html" class="txnav">Quote Of The Day</a></li>
+                        <li class="bq-ni"><a href="/quotes/quote_pictures.html" class="txnav">Pictures</a></li>
+                     </ul>
+                     <ul class="nav data-ng-cloak navbar-nav navbar-right">
+                        <li class="bq-nav-small hidden-xs"><a href="/search.html"><span class="fa fa-search fa-fw"></span>
+                           </a>
+                        </li>
+                        <li data-ng-show="showMemberIfLoggedOut()" class="ng-cloak hidden-xs"><a href="/signup?utm_source=brainyquote&utm_medium=menubar&utm_campaign=membership">Sign Up</a></li>
+                        <li data-ng-show="showMemberIfLoggedOut()" class="ng-cloak hidden-xs" style="padding-right:10px">
+                           <p class="navbar-btn"><a type="submit" class="pointerCursor btn btn-default bq-navb-btn" data-ng-click="loginClicked()">Login</a></p>
+                        </li>
+                        <li class="dropdown ng-cloak hidden-xs" dropdown data-ng-show="showMemberIfLoggedIn()">
+                           <a rel="nofollow" href="{{getMyFavoritesUrl()}}" dropdown-toggle class="dropdown-toggle" data-ng-click="myBQMenuClicked()" data-toggle="dropdown" role="button" aria-expanded="false">
+                           <i class="bq-nav-small fa fa-user"></i>
+                           <span class="bq-nav-large">My BrainyQuote</span>
+                           <span class="caret"></span></a>
+                           <ul class="dropdown-menu" role="menu">
+                              <li><a rel="nofollow" href="{{getMyFavoritesUrl()}}"><i class="fa fa-heart"></i> Favorites</a></li>
+                              <li><a rel="nofollow" href="{{getMyCollectionsUrl()}}"><i class="fa fa-plus-square-o" style="display:inline-block; width:14px"></i> Collections</a></li>
+                              <li class="divider">&nbsp;</li>
+                              <li><a rel="nofollow" href="/users/my/account"><i class="fa fa-cog"></i> Account Settings</a></li>
+                              <li><a class="pointerCursor" data-ng-click="logoutClicked()"><i class="fa fa-sign-out"></i> Logout</a></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class=" s-nav-bar-blue">
+                  <table class="tbl_c" style="width:100%;">
+                     <tr>
+                        <td>
+                           <div>
+                              <form action="/search_results.html" style="margin-top:10px" class="form-search s-blue-form-xs">
+                                 <div class="bq-search">
+                                    <img src="/st/img/2238537/pin_ftr_r.png" alt="Favorite" class="bqSearchPinIcon">
+                                    <input type="text" id="qbluei" placeholder="Search for quotes" maxlength="120" name="q" class="s-fld input-medium search-query s-blue s-mwide" value="gossip"/>
+                                    <input type="submit" class="s-btn fa-input fa fa-search" style="left:auto; top:6px; right:5px" value="&#xf002;">
+                                 </div>
+                              </form>
+                           </div>
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+               <div class="bq-submenu visible-xs">
+                  <nav id="bq-submenu-nav" class="navbar navbar-default">
+                     <div style="padding-left:0px; padding-right:0px" class="container nav-mobile">
+                        <div>
+                           <ul id="bq-submenu-navbar-nav" class="nav navbar-nav navbar-left" style="float:none; margin: 0 auto; display: table; table-layout: fixed;">
+                              <li class="bq-ni"><a href="/quotes/favorites.html" class="subi txnav">Authors</a></li>
+                              <li class="bq-ni"><a href="/quotes/topics.html" class="subi txnav">Topics</a></li>
+                              <li class="bq-ni"><a href="/quotes/quote_pictures.html" class="subi txnav">Pictures</a></li>
+                              <li class="bq-ni"><a href="/quotes_of_the_day.html" class="subi txnav">Quote Of The Day</a></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </nav>
+               </div>
+            </nav>
+         </div>
+         <div class="visible-xs">
+            <div style="height:40px"></div>
+         </div>
+         <div class="visible-xs">
+            <div style="height:18px"></div>
+         </div>
+         <div class="ng-cloak hidden-xs" style="height:58px;"></div>
+         <noscript>
+            <div class="bqLn">
+               <table class="container" style="background-color: yellow">
+                  <tr>
+                     <td valign="top"><img src="/images/silk/exclamation.png" alt="!"></td>
+                     <td><b>Please enable Javascript</b><br>
+                        This site requires Javascript be enabled to provide you the best experience. Some features may not be available with
+                        Javascript disabled!
+                     </td>
+                     <td>&nbsp;</td>
+                  </tr>
+               </table>
+            </div>
+         </noscript>
+         <div class="bq_center" style="margin-left:-8px; margin-right:-8px;">
+            <div class="reflow_body bq_left">
+               <div class="reflow_container">
+                  <div class="masonry_hf">
+                     <div id="secondaryStickyNavAnchor"></div>
+                     <div class="container-fluid " id="secondaryStickyNav">
+                        <div class=" stickyNavContainerNoBio">
+                           <div class="row">
+                              <div class="clearfix">
+                                 <div class="pull-left" style="position:relative;top:-2px">
+                                    <h1 class="quoteListH1" style="padding-right:20px">Search Results
+                                       <span class="h2sub">in topic "<a href="/quotes/keywords/gossip.html">Gossip</a>"</span>
+                                    </h1>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="vertSep" style="margin-left:-20px; margin-right:-20px; height:1px; padding-bottom:2px; border-bottom:1px solid #e0e0e0"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div>
+                     <div class="bq_s" style="padding:10px 10px 8px 10px">
+                        <table>
+                           <tr>
+                              <td valign="top"><span style="display:inline-block; margin-top:7px;white-space: nowrap"> See also:&nbsp;&nbsp;</span></td>
+                              <td style="text-align:left">
+                                 <b>Topics:</b>
+                                 <a href="/quotes/keywords/gossip.html" class="srBoxAround">Gossip</a>
+                                 <a href="/quotes/keywords/gossips.html" class="srBoxAround">Gossips</a>
+                              </td>
+                           </tr>
+                        </table>
+                     </div>
+                     <div id="inf-load-prev" class="infLoading bq-hidden">
+                        <span class="fa fa-spinner fa-pulse fa-2x fa-fw"></span> &nbsp; <span class="infText">Loading...</span>
+                     </div>
+                     <div class="clearfix m_panel">
+                        <div id="quotesList" class="new-msnry-grid bqcpx" data-sai-includehighlight="true">
+                           <div id="qpos_1_2" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/d/donmiguelr182401.html" class="b-qt qt_182401 oncl_q" title="view quote">Be Impeccable With Your Word. Speak with integrity. Say only what you mean. Avoid using the word to speak against yourself or to gossip about others. Use the power of your word in the direction of truth and love.</a>
+                              <a href="/quotes/authors/d/don_miguel_ruiz.html" class="bq-aut qa_182401 oncl_a" title="view author">Don Miguel Ruiz</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/topics/topic_motivational.html" class="oncl_k" data-idx="0">Motivational</a>,
+                                 <a href="/quotes/topics/topic_love.html" class="oncl_k" data-idx="1">Love</a>,
+                                 <a href="/quotes/topics/topic_truth.html" class="oncl_k" data-idx="2">Truth</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/182401?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/182401?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_3" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/b/blakelivel695164.html" class="b-qt qt_695164 oncl_q" title="view quote">People gossip. People are insecure, so they talk about other people so that they won&#39;t be talked about. They point out flaws in other people to make them feel good about themselves. I think at any age or any social class, that&#39;s present.</a>
+                              <a href="/quotes/authors/b/blake_lively.html" class="bq-aut qa_695164 oncl_a" title="view author">Blake Lively</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/topics/topic_age.html" class="oncl_k" data-idx="0">Age</a>,
+                                 <a href="/quotes/topics/topic_good.html" class="oncl_k" data-idx="1">Good</a>,
+                                 <a href="/quotes/keywords/people.html" class="oncl_k" data-idx="2">People</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/695164?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/695164?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="m-ad-brick grid-item">
+                              <div id='div-gpt-ad-1418667263920-4_edge' class="mbl_qtbox">
+                                 <div id='div-gpt-ad-1418667263920-4' class="bq_ad_320x250_multi bqAdCollapse "></div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_5" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/v/vannabonta532630.html" class="b-qt qt_532630 oncl_q" title="view quote">It&#39;s weird how people who are the least close to me or who&#39;ve never even met me purport to be experts on the real me; and then, sadly, there are those who could be in touch with me but prefer to gossip with strangers about me instead.</a>
+                              <a href="/quotes/authors/v/vanna_bonta.html" class="bq-aut qa_532630 oncl_a" title="view author">Vanna Bonta</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/keywords/people.html" class="oncl_k" data-idx="0">People</a>,
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="1">Gossip</a>,
+                                 <a href="/quotes/keywords/me.html" class="oncl_k" data-idx="2">Me</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/532630?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/532630?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_6" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/v/vannabonta637665.html" class="b-qt qt_637665 oncl_q" title="view quote">Gossip can be entertaining: occasionally, I&#39;ve heard the most fascinating things about myself I never knew.</a>
+                              <a href="/quotes/authors/v/vanna_bonta.html" class="bq-aut qa_637665 oncl_a" title="view author">Vanna Bonta</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/keywords/myself.html" class="oncl_k" data-idx="0">Myself</a>,
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="1">Gossip</a>,
+                                 <a href="/quotes/keywords/never.html" class="oncl_k" data-idx="2">Never</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/637665?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/637665?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_7" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/j/josephgord447038.html" class="b-qt qt_447038 oncl_q" title="view quote">Supermarket tabloids and celebrity gossip shows are not just innocently shallow entertainment, but a fundamental part of a much larger movement that involves apathy, greed and hierarchy.</a>
+                              <a href="/quotes/authors/j/joseph_gordonlevitt.html" class="bq-aut qa_447038 oncl_a" title="view author">Joseph Gordon-Levitt</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/keywords/greed.html" class="oncl_k" data-idx="0">Greed</a>,
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="1">Gossip</a>,
+                                 <a href="/quotes/keywords/entertainment.html" class="oncl_k" data-idx="2">Entertainment</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/447038?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/447038?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_8" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/j/johnlydon526200.html" class="b-qt qt_526200 oncl_q" title="view quote">Gossip is a very dangerous tool. We should be more wary of the gossiper, and not the gossip they&#39;re trying to relay to you.</a>
+                              <a href="/quotes/authors/j/john_lydon.html" class="bq-aut qa_526200 oncl_a" title="view author">John Lydon</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="0">Gossip</a>,
+                                 <a href="/quotes/keywords/trying.html" class="oncl_k" data-idx="1">Trying</a>,
+                                 <a href="/quotes/keywords/you.html" class="oncl_k" data-idx="2">You</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/526200?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/526200?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_9" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/b/billygraha150653.html" class="b-qt qt_150653 oncl_q" title="view quote">A real Christian is a person who can give his pet parrot to the town gossip.</a>
+                              <a href="/quotes/authors/b/billy_graham.html" class="bq-aut qa_150653 oncl_a" title="view author">Billy Graham</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/topics/topic_pet.html" class="oncl_k" data-idx="0">Pet</a>,
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="1">Gossip</a>,
+                                 <a href="/quotes/keywords/christian.html" class="oncl_k" data-idx="2">Christian</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/150653?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/150653?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_10" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/j/janesmiley499189.html" class="b-qt qt_499189 oncl_q" title="view quote">Gossip. The more you talk about why people do things, the more ideas you have about how the world works.</a>
+                              <a href="/quotes/authors/j/jane_smiley.html" class="bq-aut qa_499189 oncl_a" title="view author">Jane Smiley</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/keywords/world.html" class="oncl_k" data-idx="0">World</a>,
+                                 <a href="/quotes/keywords/people.html" class="oncl_k" data-idx="1">People</a>,
+                                 <a href="/quotes/keywords/ideas.html" class="oncl_k" data-idx="2">Ideas</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/499189?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/499189?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_11" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/g/gregoryben731914.html" class="b-qt qt_731914 oncl_q" title="view quote">As fandom grew more variegated, genzines reflected a broadening of interests, carrying personal columns of humor and reflection, science articles, amateur fiction, stylish gossip, and inevitably, thoughtful pieces on the future of fandom.</a>
+                              <a href="/quotes/authors/g/gregory_benford.html" class="bq-aut qa_731914 oncl_a" title="view author">Gregory Benford</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/topics/topic_future.html" class="oncl_k" data-idx="0">Future</a>,
+                                 <a href="/quotes/topics/topic_science.html" class="oncl_k" data-idx="1">Science</a>,
+                                 <a href="/quotes/topics/topic_humor.html" class="oncl_k" data-idx="2">Humor</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/731914?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/731914?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="m-ad-brick grid-item">
+                              <div id='div-gpt-ad-1418667263920-3_edge' class="mbl_qtbox">
+                                 <div id='div-gpt-ad-1418667263920-3' class="bq_ad_320x250_multi bqAdCollapse "></div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_13" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/w/willrogers122648.html" class="b-qt qt_122648 oncl_q" title="view quote">The only time people dislike gossip is when you gossip about them.</a>
+                              <a href="/quotes/authors/w/will_rogers.html" class="bq-aut qa_122648 oncl_a" title="view author">Will Rogers</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/topics/topic_time.html" class="oncl_k" data-idx="0">Time</a>,
+                                 <a href="/quotes/keywords/people.html" class="oncl_k" data-idx="1">People</a>,
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="2">Gossip</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/122648?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/122648?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_14" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/p/paulscott256474.html" class="b-qt qt_256474 oncl_q" title="view quote">Ah, well, the truth is always one thing, but in a way it&#39;s the other thing, the gossip, that counts. It shows where people&#39;s hearts lie.</a>
+                              <a href="/quotes/authors/p/paul_scott.html" class="bq-aut qa_256474 oncl_a" title="view author">Paul Scott</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/topics/topic_truth.html" class="oncl_k" data-idx="0">Truth</a>,
+                                 <a href="/quotes/keywords/lie.html" class="oncl_k" data-idx="1">Lie</a>,
+                                 <a href="/quotes/keywords/people.html" class="oncl_k" data-idx="2">People</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/256474?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/256474?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_15" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/f/frankacla105416.html" class="b-qt qt_105416 oncl_q" title="view quote">Gossip needn&#39;t be false to be evil - there&#39;s a lot of truth that shouldn&#39;t be passed around.</a>
+                              <a href="/quotes/authors/f/frank_a_clark.html" class="bq-aut qa_105416 oncl_a" title="view author">Frank A. Clark</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/topics/topic_truth.html" class="oncl_k" data-idx="0">Truth</a>,
+                                 <a href="/quotes/keywords/evil.html" class="oncl_k" data-idx="1">Evil</a>,
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="2">Gossip</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/105416?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/105416?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_16" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/n/nikolajcos539906.html" class="b-qt qt_539906 oncl_q" title="view quote">I know nothing more annoying when people I don&#39;t know jump to conclusions on my person based on nothing but gossip or speculation.</a>
+                              <a href="/quotes/authors/n/nikolaj_costerwaldau.html" class="bq-aut qa_539906 oncl_a" title="view author">Nikolaj Coster-Waldau</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/keywords/people.html" class="oncl_k" data-idx="0">People</a>,
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="1">Gossip</a>,
+                                 <a href="/quotes/keywords/jump.html" class="oncl_k" data-idx="2">Jump</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/539906?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/539906?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_18" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/w/walterwinc112883.html" class="b-qt qt_112883 oncl_q" title="view quote">Today&#39;s gossip is tomorrow&#39;s headline.</a>
+                              <a href="/quotes/authors/w/walter_winchell.html" class="bq-aut qa_112883 oncl_a" title="view author">Walter Winchell</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/topics/topic_communication.html" class="oncl_k" data-idx="0">Communication</a>,
+                                 <a href="/quotes/keywords/today.html" class="oncl_k" data-idx="1">Today</a>,
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="2">Gossip</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/112883?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/112883?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_19" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/c/chuckpalah616594.html" class="b-qt qt_616594 oncl_q" title="view quote">Jack Palance was my distant uncle - that&#39;s the family gossip. Growing up, my family knew everything about his face getting burned and scarred in the military and how that mutilation led him to become such a famous &#39;heavy&#39; in films. I prayed for good scars of my own. Not just acne scars.</a>
+                              <a href="/quotes/authors/c/chuck_palahniuk.html" class="bq-aut qa_616594 oncl_a" title="view author">Chuck Palahniuk</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/topics/topic_family.html" class="oncl_k" data-idx="0">Family</a>,
+                                 <a href="/quotes/topics/topic_good.html" class="oncl_k" data-idx="1">Good</a>,
+                                 <a href="/quotes/keywords/face.html" class="oncl_k" data-idx="2">Face</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/616594?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/616594?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="m-ad-brick grid-item">
+                              <div id='div-gpt-ad-1418667263920-2_edge' class="mbl_qtbox">
+                                 <div id='div-gpt-ad-1418667263920-2' class="bq_ad_320x250_multi bqAdCollapse "></div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_21" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/w/walterwinc100009.html" class="b-qt qt_100009 oncl_q" title="view quote">Gossip is the art of saying nothing in a way that leaves practically nothing unsaid.</a>
+                              <a href="/quotes/authors/w/walter_winchell.html" class="bq-aut qa_100009 oncl_a" title="view author">Walter Winchell</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/topics/topic_art.html" class="oncl_k" data-idx="0">Art</a>,
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="1">Gossip</a>,
+                                 <a href="/quotes/keywords/saying.html" class="oncl_k" data-idx="2">Saying</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/100009?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/100009?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_22" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/g/garretthed488037.html" class="b-qt qt_488037 oncl_q" title="view quote">I grew up on a farm in a small town where you do or say one thing and everybody knows about it. You see it happen, there&#39;s always the town gossip - &#39;Oh did you hear about so and so, or did you hear what went on in this household?&#39; So I learned at a very young age just to keep my mouth shut.</a>
+                              <a href="/quotes/authors/g/garrett_hedlund.html" class="bq-aut qa_488037 oncl_a" title="view author">Garrett Hedlund</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/topics/topic_age.html" class="oncl_k" data-idx="0">Age</a>,
+                                 <a href="/quotes/keywords/small.html" class="oncl_k" data-idx="1">Small</a>,
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="2">Gossip</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/488037?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/488037?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_23" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/w/williamsha459194.html" class="b-qt qt_459194 oncl_q" title="view quote">I can&#39;t stand the gossip of celebrities&#39; lives, all the time! Every minute!</a>
+                              <a href="/quotes/authors/w/william_shatner.html" class="bq-aut qa_459194 oncl_a" title="view author">William Shatner</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/topics/topic_time.html" class="oncl_k" data-idx="0">Time</a>,
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="1">Gossip</a>,
+                                 <a href="/quotes/keywords/stand.html" class="oncl_k" data-idx="2">Stand</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/459194?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/459194?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_24" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/j/juliebowen455734.html" class="b-qt qt_455734 oncl_q" title="view quote">I&#39;m on a strict gossip diet. No gossip websites, no gossip magazines. Otherwise, I find it paralyzing to exist.</a>
+                              <a href="/quotes/authors/j/julie_bowen.html" class="bq-aut qa_455734 oncl_a" title="view author">Julie Bowen</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="0">Gossip</a>,
+                                 <a href="/quotes/topics/topic_diet.html" class="oncl_k" data-idx="1">Diet</a>,
+                                 <a href="/quotes/keywords/find.html" class="oncl_k" data-idx="2">Find</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/455734?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/455734?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_25" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/b/beverleymi208381.html" class="b-qt qt_208381 oncl_q" title="view quote">I think the hardest part about being a teenager is dealing with other teenagers - the criticism and the ridicule, the gossip and rumors.</a>
+                              <a href="/quotes/authors/b/beverley_mitchell.html" class="bq-aut qa_208381 oncl_a" title="view author">Beverley Mitchell</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="0">Gossip</a>,
+                                 <a href="/quotes/keywords/think.html" class="oncl_k" data-idx="1">Think</a>,
+                                 <a href="/quotes/keywords/criticism.html" class="oncl_k" data-idx="2">Criticism</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/208381?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/208381?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_26" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/t/trumancapo158559.html" class="b-qt qt_158559 oncl_q" title="view quote">All literature is gossip.</a>
+                              <a href="/quotes/authors/t/truman_capote.html" class="bq-aut qa_158559 oncl_a" title="view author">Truman Capote</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="0">Gossip</a>,
+                                 <a href="/quotes/keywords/literature.html" class="oncl_k" data-idx="1">Literature</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/158559?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/158559?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_27" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/p/pjorour166724.html" class="b-qt qt_166724 oncl_q" title="view quote">Gossip is what you say about the objects of flattery when they aren&#39;t present.</a>
+                              <a href="/quotes/authors/p/p_j_orourke.html" class="bq-aut qa_166724 oncl_a" title="view author">P. J. O'Rourke</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="0">Gossip</a>,
+                                 <a href="/quotes/keywords/present.html" class="oncl_k" data-idx="1">Present</a>,
+                                 <a href="/quotes/keywords/you.html" class="oncl_k" data-idx="2">You</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/166724?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/166724?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="m-ad-brick grid-item">
+                              <div id='div-gpt-ad-1418667263920-1_edge' class="mbl_qtbox">
+                                 <div id='div-gpt-ad-1418667263920-1' class="bq_ad_320x250 bqAdCollapse "></div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_29" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/j/johnnydepp391594.html" class="b-qt qt_391594 oncl_q" title="view quote">The only gossip I&#39;m interested in is things from the Weekly World News - &#39;Woman&#39;s bra bursts, 11 injured&#39;. That kind of thing.</a>
+                              <a href="/quotes/authors/j/johnny_depp.html" class="bq-aut qa_391594 oncl_a" title="view author">Johnny Depp</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/keywords/woman.html" class="oncl_k" data-idx="0">Woman</a>,
+                                 <a href="/quotes/keywords/world.html" class="oncl_k" data-idx="1">World</a>,
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="2">Gossip</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/391594?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/391594?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_30" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/t/tombergero456202.html" class="b-qt qt_456202 oncl_q" title="view quote">I tried to steer the student newspaper toward more pertinent information instead of the usual gossip and bull.</a>
+                              <a href="/quotes/authors/t/tom_bergeron.html" class="bq-aut qa_456202 oncl_a" title="view author">Tom Bergeron</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/keywords/information.html" class="oncl_k" data-idx="0">Information</a>,
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="1">Gossip</a>,
+                                 <a href="/quotes/keywords/student.html" class="oncl_k" data-idx="2">Student</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/456202?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/456202?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_31" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/b/billkeller505580.html" class="b-qt qt_505580 oncl_q" title="view quote">The queen of aggregation is, of course, Arianna Huffington, who has discovered that if you take celebrity gossip, adorable kitten videos, posts from unpaid bloggers and news reports from other publications, array them on your Web site and add a left-wing soundtrack, millions of people will come.</a>
+                              <a href="/quotes/authors/b/bill_keller.html" class="bq-aut qa_505580 oncl_a" title="view author">Bill Keller</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/keywords/queen.html" class="oncl_k" data-idx="0">Queen</a>,
+                                 <a href="/quotes/keywords/people.html" class="oncl_k" data-idx="1">People</a>,
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="2">Gossip</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/505580?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/505580?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="qpos_1_32" class="m-brick grid-item boxy bqQt">
+                              <a href="/quotes/quotes/k/katedmonso604995.html" class="b-qt qt_604995 oncl_q" title="view quote">Few things parallel the bonding that occurs post-performance when congratulatory remarks are awarded, regrets are confessed, and gossip is exchanged.</a>
+                              <a href="/quotes/authors/k/kat_edmonson.html" class="bq-aut qa_604995 oncl_a" title="view author">Kat Edmonson</a>
+                              <div class="kw-box">
+                                 <a href="/quotes/keywords/gossip.html" class="oncl_k" data-idx="0">Gossip</a>,
+                                 <a href="/quotes/keywords/regrets.html" class="oncl_k" data-idx="1">Regrets</a>,
+                                 <a href="/quotes/keywords/bonding.html" class="oncl_k" data-idx="2">Bonding</a>
+                              </div>
+                              <div class="qbn-box">
+                                 <div class="bqAddQuote bqAddQuoteLg" style="float:right">
+                                    <span class="fa favHeart bqMIcon fa-heart-o"></span><span class="fa favAddToCol bqMIcon fa-plus-square-o"></span>
+                                 </div>
+                                 <div class="sh-box">
+                                    <a href="/share/fb/604995?sr=ql" class="fa-stack fa-lg sh-fb" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                    <a href="/share/tw/604995?sr=ql&ti=Search+Results" class="fa-stack fa-lg sh-tw" rel="nofollow" target="_blank">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="hideInfScroll">
+                     <div class="masonry_hf">
+                        <div class="container-fluid" style="padding-bottom:15px">
+                           <div class="row paginationContainer">
+                              <div class="clearfix">
+                                 <div class="pull-left bq-vcenter-parent" style="height:30px;display:inline-block; width: 320px;">
+                                    <div class="bq-vcenter">
+                                       <nav style="height:29px; width:358px">
+                                          <ul class="pagination bqNPgn pagination-sm">
+                                             <li class="disabled"><a>Prev
+                                                </a>
+                                             </li>
+                                             <li class="active"><span>1</span></li>
+                                             <li><a href="/search_results.html?q=gossip&pg=2">2</a></li>
+                                             <li><a href="/search_results.html?q=gossip&pg=3">3</a></li>
+                                             <li><a href="/search_results.html?q=gossip&pg=4">4</a></li>
+                                             <li class="disabled"><span>..</span></li>
+                                             <li><a href="/search_results.html?q=gossip&pg=8">8</a></li>
+                                             <li><a href="/search_results.html?q=gossip&pg=2">
+                                                Next
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </nav>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div id="infScrollFooter">
+            <div class="container-fluid" style="max-width:1350px;margin-top:25px;margin-bottom:25px;">
+               <div class="row">
+                  <div class="col-sm-7 col-md-8 block-style">
+                     <div class="bq_s">
+                        <h2>Explore Topics</h2>
+                        <div class="bq_fl">
+                           <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 block-sm-holder">
+                              <a href="/quotes/topics/topic_inspirational.html" class="block-sm" onclick="topicCl('/quotes/topics/topic_inspirational',1,'Bottom')">
+                              <span class="link-name">Inspirational<br/>
+                              <span>Quotes</span>
+                              </span>
+                              </a>
+                           </div>
+                           <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 block-sm-holder">
+                              <a href="/quotes/topics/topic_motivational.html" class="block-sm" onclick="topicCl('/quotes/topics/topic_motivational',2,'Bottom')">
+                              <span class="link-name">Motivational<br/>
+                              <span>Quotes</span>
+                              </span>
+                              </a>
+                           </div>
+                           <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 block-sm-holder">
+                              <a href="/quotes/topics/topic_life.html" class="block-sm" onclick="topicCl('/quotes/topics/topic_life',3,'Bottom')">
+                              <span class="link-name">Life<br/>
+                              <span>Quotes</span>
+                              </span>
+                              </a>
+                           </div>
+                           <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 block-sm-holder">
+                              <a href="/quotes/topics/topic_friendship.html" class="block-sm" onclick="topicCl('/quotes/topics/topic_friendship',4,'Bottom')">
+                              <span class="link-name">Friendship<br/>
+                              <span>Quotes</span>
+                              </span>
+                              </a>
+                           </div>
+                           <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 block-sm-holder">
+                              <a href="/quotes/topics/topic_love.html" class="block-sm" onclick="topicCl('/quotes/topics/topic_love',5,'Bottom')">
+                              <span class="link-name">Love<br/>
+                              <span>Quotes</span>
+                              </span>
+                              </a>
+                           </div>
+                           <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 block-sm-holder">
+                              <a href="/quotes/topics/topic_funny.html" class="block-sm" onclick="topicCl('/quotes/topics/topic_funny',6,'Bottom')">
+                              <span class="link-name">Funny<br/>
+                              <span>Quotes</span>
+                              </span>
+                              </a>
+                           </div>
+                           <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 block-sm-holder">
+                              <a href="/quotes/topics/topic_positive.html" class="block-sm" onclick="topicCl('/quotes/topics/topic_positive',7,'Bottom')">
+                              <span class="link-name">Positive<br/>
+                              <span>Quotes</span>
+                              </span>
+                              </a>
+                           </div>
+                           <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 block-sm-holder">
+                              <a href="/quotes/topics/topic_smile.html" class="block-sm" onclick="topicCl('/quotes/topics/topic_smile',8,'Bottom')">
+                              <span class="link-name">Smile<br/>
+                              <span>Quotes</span>
+                              </span>
+                              </a>
+                           </div>
+                           <div style="clear:both;"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-sm-5 col-md-4 bottom-ad-holder">
+                     <div class="bq_s">
+                        <div class="bq-m-center-300-ad">
+                           <div id='div-gpt-ad-1418667263920-1-footer_edge' class="mbl_qtbox">
+                              <div id='div-gpt-ad-1418667263920-1-footer' class="bq_ad_320x250 bqAdCollapse "></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div style="height: 15px"></div>
+            <div align="center">
+               <div id='div-gpt-ad-1418667263920-5-footer_edge' class="mbl_qtbox">
+                  <div id='div-gpt-ad-1418667263920-5-footer' class="bq_ad_90min bqAdCollapse "></div>
+               </div>
+            </div>
+         </div>
+         <div id="bqBotNav" data-ng-controller="BottomNavCtrl">
+            <div class="bq_bot_nav bq-no-print" style="">
+               <div class="container-fluid" style="max-width: 900px">
+                  <div class="row">
+                     <div class="col-sm-3 col-md-3" style="position:relative;top:-20px;">
+                        <div style="float:left; position:absolute; top:-25px">
+                           <img src="/st/img/2238537/pinwheel.gif" alt="BrainyQuote">
+                        </div>
+                        <div style="height:75px"></div>
+                        <div class="bq_s">
+                           <div class="bqLn bodybold">BrainyQuote Desktop</div>
+                           <div class="bqLn chSiteLink"><a rel="nofollow" class="pointerCursor" data-ng-click="changeSite('m')">BrainyQuote Mobile</a></div>
+                        </div>
+                        <div class="bq_s">
+                           <ul class="footer-follow-icons">
+                              <li><a href="https://www.facebook.com/BrainyQuote" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                              <li><a href="https://twitter.com/brainyquote" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                              <li class="follow-padding-fix"><a href="https://plus.google.com/+brainyquotes" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                              <li class="follow-padding-fix"><a href="https://instagram.com/brainyquote" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                           </ul>
+                           <div style="clear:both"></div>
+                        </div>
+                     </div>
+                     <div class="col-sm-2 col-md-2">
+                        <div class="bq_s">
+                           <h3>Site</h3>
+                           <div class="bqLn"><a href="/">
+                              Home</a>
+                           </div>
+                           <div class="bqLn"><a href="/quotes/favorites.html">Authors</a></div>
+                           <div class="bqLn"><a href="/quotes/topics.html">Topics</a></div>
+                           <div class="bqLn"><a href="/quotes_of_the_day.html">Quote Of The Day</a></div>
+                           <div class="bqLn"><a href="/quotes/quote_pictures.html">Pictures</a></div>
+                           <div class="bqLn"><a href="/top_100_quotes">Top 100 Quotes</a></div>
+                           <div class="bqLn"><a href="/profession/">Professions</a></div>
+                           <div class="bqLn"><a href="/birthdays/">Birthdays</a></div>
+                        </div>
+                     </div>
+                     <div class="col-sm-2 col-md-2">
+                        <div class="bq_s">
+                           <h3>Social</h3>
+                           <div class="bqLn"><a href="https://www.facebook.com/BrainyQuote" target="_blank">BQ on Facebook</a></div>
+                           <div class="bqLn"><a href="https://twitter.com/brainyquote" target="_blank">BQ on Twitter</a></div>
+                           <div class="bqLn"><a href="https://pinterest.com/brainyquote" target="_blank">BQ on Pinterest</a></div>
+                           <div class="bqLn"><a href="https://google.com/+brainyquotes" target="_blank">BQ on Google+</a></div>
+                           <div class="bqLn"><a href="https://instagram.com/brainyquote" target="_blank">BQ on Instagram</a></div>
+                        </div>
+                        <div class="bq_s">
+                           <h3>Shop</h3>
+                           <div class="bqLn"><a href="https://shop.brainyquote.com/?utm_source=site&utm_campaign=footer_link&utm_medium=footer" target="_blank">BrainyQuote Store</a></div>
+                        </div>
+                     </div>
+                     <div class="col-sm-3 col-md-3">
+                        <div class="bq_s">
+                           <h3>Apps</h3>
+                           <div class="bqLn"><a href="/apps/">iPhone/iPad app</a></div>
+                           <br>
+                           <h3>Quote Of The Day Feeds</h3>
+                           <div class="bqLn"><a href="/link/index.html">Javascript and RSS feeds</a></div>
+                           <div class="bqLn"><a href="/link/wordpress_plugin.html">WordPress plugin</a></div>
+                           <div class="bqLn"><a href="/link/email.html">Quote of the Day Email</a></div>
+                        </div>
+                     </div>
+                     <div class="col-sm-2 col-md-2">
+                        <div class="bq_s">
+                           <h3>About</h3>
+                           <div class="bqLn"><a href="/about/">About Us</a></div>
+                           <div class="bqLn"><a href="/about/contact_us">Contact Us</a></div>
+                           <div class="bqLn"><a href="/about/submit_quote">Submit</a></div>
+                           <div class="bqLn"><a href="/about/privacy">Privacy</a></div>
+                           <div class="bqLn"><a href="/about/terms">Terms</a></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="copyLangFooter langSelLink">
+               <div class="container">
+                  <div class="row ">
+                     <div class="col-sm-5 col-md-5">
+                        <div class="ftr_nav" style="vertical-align:center"><a href="/about/copyright" style="vertical-align:top">Copyright</a> &#169; 2001 - 2017 BrainyQuote</div>
+                     </div>
+                     <div class="col-sm-7 col-md-7"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <script type="text/javascript" src="/st/js/2238537/bq_omega_masonry_des.js"></script>
+         <script>
+            BQNewMsnry.create(".new-msnry-grid");
+            var loadMargin = 1200;
+            var bish = new BQInfScrollHelper(loadMargin);
+            BQFavorites.init();
+         </script>
+         <script type="text/javascript">
+            new BQCopyPaste('Read more at:');
+            $(function() {
+            if (typeof adCtrl !== "undefined" && typeof adCtrl.start !== "undefined") {
+            adCtrl.addSlotInstances(slotInstances);
+            adCtrl.setFooterSlots(footerInstances);
+            var pageCtrl = new BQPageCtrl(bqPv,bqAdConfig,adCtrl,document.gaMgr,
+            false,
+            2,
+            7,
+            4);
+            pageCtrl.setupPageUpdates();
+            bqpred.getPred(function(predData) {
+            adCtrl.start();
+            });
+            }
+            });
+         </script>
+         <script src="//ap.lijit.com/www/sovrn_beacon_standalone/sovrn_standalone_beacon.js?iid=7128475&uid=brainyquote" id="sBeacon"> </script>
+         <script type="application/ld+json">
+            {
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            "url": "https://www.brainyquote.com/",
+            "name": "BrainyQuote",
+            "alternateName": "BrainyQuote - Famous Quotes",
+            "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.brainyquote.com/search_results?q={search_term}",
+            "query-input": "required name=search_term"
+            }
+            }
+         </script>
+      </div>
+      <div id="inf-load-next" class="infLoading bq-hidden">
+         <span class="fa fa-spinner fa-pulse fa-2x fa-fw"></span> &nbsp; <span class="infText">Loading...</span>
+      </div>
+      <div id="inf-load-btn" class="bq-hidden" style="text-align:center;margin-top:20px;margin-bottom:30px;">
+         <span class="inf-retry-btn btn btn-primary btn-lg">Load more quotes</span>
+      </div>
+   </body>
+</html>
+

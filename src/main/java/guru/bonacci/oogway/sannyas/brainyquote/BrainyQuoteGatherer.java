@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannyas.goodreads;
+package guru.bonacci.oogway.sannyas.brainyquote;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,11 +21,11 @@ import guru.bonacci.oogway.sannyas.filters.LengthFilter;
 import guru.bonacci.oogway.sannyas.steps.KeyPhraser;
 
 @Component
-public class GoodReadsSeeker implements Sannyasin {
+public class BrainyQuoteGatherer implements Sannyasin {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private static final String URL = "http://www.goodreads.com/quotes/tag/";
+	private static final String URL = "https://www.brainyquote.com/search_results.html?q=";
 
 	@Autowired
 	private KeyPhraser keyPhraser;
@@ -48,37 +47,25 @@ public class GoodReadsSeeker implements Sannyasin {
 	public List<String> seek(String tagsAsString) {
 		String[] tags = StringUtils.split(tagsAsString);
 		return Arrays.stream(tags)
-					.map(this::consult)
-					.flatMap(Elements::stream)
-					.map(this::cleanDiv)
-					.map(q -> q.text())
-					.map(this::strip)
-					.collect(Collectors.toList());
+				.map(this::consult)
+				.flatMap(Elements::stream)
+				.map(q -> q.text())
+				.collect(Collectors.toList());
 	}
 
 	public Elements consult(String searchStr) {
 		try {
-			Document doc = Jsoup.connect(URL + searchStr).get();
-			return doc.select("div.quoteText");
+			Document doc = Jsoup.connect(URL + searchStr).userAgent("Mozilla").get();
+			return doc.select("a[title='view quote']");
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 		}
 		return new Elements();
 	}
 
-	private Element cleanDiv(Element el) {
-		for (Element e : el.children()) 
-			e.remove();
-		return el;
-	}
-
-	private String strip(String str) {
-		return str.substring(str.indexOf("“") + 1, str.lastIndexOf("”"));
-	}
-
 	public static void main(String args[]) {
-		GoodReadsSeeker seeker = new GoodReadsSeeker();
-		List<String> quotes = seeker.seek(args[0]);
+		BrainyQuoteGatherer gatherer = new BrainyQuoteGatherer();
+		List<String> quotes = gatherer.seek(args[0]);
 		quotes.stream().forEach(System.out::println);
 	}
 }

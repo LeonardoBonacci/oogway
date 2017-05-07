@@ -14,7 +14,9 @@ public class Jewel {
 
 	public static final String ESSENCE = "essence";
 
-	@Id // elasticsearch only knows the concept of uniqueness on the key-field, and we want unique quotes..
+	@Id
+	private String id;
+	
 	@Field(type = String, store = true, analyzer = "english", searchAnalyzer = "english")
     private String essence;
 
@@ -23,6 +25,14 @@ public class Jewel {
 
 	public Jewel(String essence) {
 		this.essence = essence;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getEssence() {

@@ -74,7 +74,7 @@ public class AManager implements MessageListener {
 			Function<String, String> preprocessing = sannya.preproces().stream()
 																	   .reduce(Function.identity(), Function::andThen);
 			String preprocessedInput = preprocessing.apply(input);
-			logger.info("Preprocessed input: '" + input + "'");
+			logger.info(sannya.getClass() + "- Preprocessed input: '" + preprocessedInput + "'");
 
 			// acquire wisdom
 			List<String> found = sannya.seek(preprocessedInput);

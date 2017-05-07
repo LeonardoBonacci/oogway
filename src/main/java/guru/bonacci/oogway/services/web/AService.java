@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Random;
 
 import org.elasticsearch.index.query.QueryBuilders;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
@@ -18,18 +20,16 @@ import guru.bonacci.oogway.jms.SmokeSignal;
 @Service
 public class AService {
 	
-	private final ARepository repository;
-
-	private final JmsTemplate jmsTemplate;
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	public AService(ARepository repository, JmsTemplate jmsTemplate) {
-		this.repository = repository;
-		this.jmsTemplate = jmsTemplate;
-	}
-	
+	private ARepository repository;
+
+	@Autowired
+	private JmsTemplate jmsTemplate;
+
     public String index(String q) {
-        if (StringUtils.isEmpty(q))
+		if (StringUtils.isEmpty(q))
         	return "No question no answer..";
 
         // Send a message to the world...
@@ -41,7 +41,8 @@ public class AService {
     			  .withQuery(QueryBuilders.matchQuery(Jewel.ESSENCE, q))
     			  .build();
     	List<Jewel> result = repository.search(searchQuery).getContent();
-
+		result.stream().map(Jewel::getEssence).forEach(logger::debug);
+    	
     	return result.size() > 0 ? result.get(new Random().nextInt(result.size())).getEssence() 
     							 : "I'm speechless, are you sure?";
     }

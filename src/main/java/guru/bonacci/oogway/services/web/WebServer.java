@@ -34,16 +34,12 @@ public class WebServer {
 	@RestController
 	class AController {
 
-		private final AService service;
-
 		@Autowired
-		public AController(AService service) {
-			this.service = service;
-		}
+		private AService service;
 
 		@RequestMapping(path = "/", method = RequestMethod.GET)
 		public String index(@RequestParam("q") String q) {
-			logger.info("receiving request for a wise answer on: '" + q + "'");
+			logger.info("Receiving request for a wise answer on: '" + q + "'");
 			return service.index(q);
 		}
 	}

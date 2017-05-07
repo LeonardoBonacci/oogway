@@ -78,7 +78,7 @@ public class AManager implements MessageListener {
 
 			// acquire wisdom
 			List<String> found = sannya.seek(preprocessedInput);
-			found.stream().forEach(f -> logger.debug("Wisdom found: '" + found + "'"));
+			found.stream().forEach(f -> logger.debug("Wisdom found: '" + f + "'"));
 
 			// filter the wisdom..
 			Predicate<String> postFiltering = sannya.postfilters().stream()

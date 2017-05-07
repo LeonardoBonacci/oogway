@@ -35,12 +35,8 @@ public class SannyasServer {
 	@RestController
 	class AController {
 
-		private final AManager manager;
-
 		@Autowired
-		public AController(AManager manager) {
-			this.manager = manager;
-		}
+		private AManager manager;
 
 		@RequestMapping(path = "/backdoor", method = RequestMethod.POST)
 		public void index(@RequestBody String input) {

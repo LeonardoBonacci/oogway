@@ -30,7 +30,7 @@ s */
 @Component
 public class Lemmatizator implements PreProcesStep {
 
-  protected StanfordCoreNLP pipeline;
+  private StanfordCoreNLP pipeline;
 
   public Lemmatizator() {
     // Create StanfordCoreNLP object properties, with POS tagging

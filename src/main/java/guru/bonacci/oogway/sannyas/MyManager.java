@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import guru.bonacci.oogway.es.Jewel;
 import guru.bonacci.oogway.es.MyRepository;
 import guru.bonacci.oogway.jms.SmokeSignal;
+import guru.bonacci.oogway.sannyas.filters.ProfanityFilter;
 
 /**
  * A manager alone cannot perform all the tasks assigned to him. In order to
@@ -42,6 +43,9 @@ public class MyManager implements MessageListener {
 
 	@Autowired
 	private MessageConverter messageConverter;
+
+	@Autowired
+	private ProfanityFilter profanityFilter;
 
     @PostConstruct
     private void fill() {
@@ -85,7 +89,7 @@ public class MyManager implements MessageListener {
 																  .reduce(p -> true, Predicate::and);
 			found.stream()
 				 .filter(postFiltering)
-//				 .filter(profanityFilter) // always execute the profanity-filter
+				 .filter(profanityFilter) // always execute the profanity-filter
 				 .forEach(f -> {
 						logger.info("Indexing wisdom: '" + f + "'");
 						repository.index(new Jewel(f)); // ..and persist it

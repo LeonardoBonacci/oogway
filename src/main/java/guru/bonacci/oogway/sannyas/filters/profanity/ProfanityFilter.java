@@ -6,10 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.function.Predicate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProfanityFilter implements Predicate<String> {
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * Borrowed code
@@ -31,6 +35,9 @@ public class ProfanityFilter implements Predicate<String> {
 		for (int i = 0; i < input.length(); i++) {
 			searchAlongTree(input, i, root);
 		}
+		if (merdaFound) {
+			logger.info("Blocking indecent quote: " + input);
+		}	
 		return !merdaFound;
 	}
 
@@ -72,6 +79,7 @@ public class ProfanityFilter implements Predicate<String> {
 						classLoader.getResource(fileName).getFile()));
 			while ((line = in.readLine()) != null) {
 				// for each bad word
+				logger.info("Adding to profanity filter: '" + line + "'");
 				addToTree(line, 0, root);
 			}
 

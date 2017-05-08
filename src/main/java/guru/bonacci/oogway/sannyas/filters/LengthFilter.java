@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LengthFilter implements PostProcesFilter {
 
-	private static final Integer MAX_LENGTH = 200;
+	private static final Integer MAX_LENGTH = 1000;
 	
 	@Override
 	public boolean test(String input) {

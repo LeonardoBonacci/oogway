@@ -13,17 +13,17 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import guru.bonacci.oogway.es.ARepository;
+import guru.bonacci.oogway.es.MyRepository;
 import guru.bonacci.oogway.es.Jewel;
 import guru.bonacci.oogway.jms.SmokeSignal;
 
 @Service
-public class AService {
+public class MyService {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private ARepository repository;
+	private MyRepository repository;
 
 	@Autowired
 	private JmsTemplate jmsTemplate;
@@ -34,7 +34,6 @@ public class AService {
 
         // Send a message to the world...
 		jmsTemplate.send(session -> session.createObjectMessage(new SmokeSignal(q)));
-
         
         // Consult the oracle..
     	SearchQuery searchQuery = new NativeSearchQueryBuilder()

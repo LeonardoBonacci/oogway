@@ -17,7 +17,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.es.ARepository;
+import guru.bonacci.oogway.es.MyRepository;
 import guru.bonacci.oogway.es.Jewel;
 import guru.bonacci.oogway.jms.SmokeSignal;
 
@@ -30,7 +30,7 @@ import guru.bonacci.oogway.jms.SmokeSignal;
  * of powers to the subordinates in order to achieve effective results.
  */
 @Component
-public class AManager implements MessageListener {
+public class MyManager implements MessageListener {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -38,7 +38,7 @@ public class AManager implements MessageListener {
 	private ApplicationContext applicationContext;
 
 	@Autowired
-	private ARepository repository;
+	private MyRepository repository;
 
 	@Autowired
 	private MessageConverter messageConverter;

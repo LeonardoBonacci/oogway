@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import guru.bonacci.oogway.es.ESConfig;
 import guru.bonacci.oogway.jms.JMSConfig;
-import guru.bonacci.oogway.sannyas.AManager;
+import guru.bonacci.oogway.sannyas.MyManager;
 import guru.bonacci.oogway.sannyas.SannyasConfiguration;
 
 /**
@@ -36,7 +36,7 @@ public class SannyasServer {
 	class AController {
 
 		@Autowired
-		private AManager manager;
+		private MyManager manager;
 
 		@RequestMapping(path = "/backdoor", method = RequestMethod.POST)
 		public void index(@RequestBody String input) {

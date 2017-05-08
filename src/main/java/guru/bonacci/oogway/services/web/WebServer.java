@@ -35,7 +35,7 @@ public class WebServer {
 	class AController {
 
 		@Autowired
-		private AService service;
+		private MyService service;
 
 		@RequestMapping(path = "/", method = RequestMethod.GET)
 		public String index(@RequestParam("q") String q) {

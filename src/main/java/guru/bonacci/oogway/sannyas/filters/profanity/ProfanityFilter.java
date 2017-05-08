@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannyas.filters;
+package guru.bonacci.oogway.sannyas.filters.profanity;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -21,7 +21,7 @@ public class ProfanityFilter implements Predicate<String> {
 	private boolean merdaFound;
 
 	public ProfanityFilter() {
-		buildDictionaryTree("C:/badwords.txt");
+		buildDictionaryTree("badwords.txt");
 	}
 
 	@Override
@@ -66,7 +66,10 @@ public class ProfanityFilter implements Predicate<String> {
 		String line;
 		BufferedReader in = null;
 		try {
-			in = new BufferedReader(new FileReader(fileName));
+			ClassLoader classLoader = getClass().getClassLoader();
+			in = new BufferedReader(
+					new FileReader(
+						classLoader.getResource(fileName).getFile()));
 			while ((line = in.readLine()) != null) {
 				// for each bad word
 				addToTree(line, 0, root);
@@ -102,16 +105,4 @@ public class ProfanityFilter implements Predicate<String> {
 			}
 		}
 	}
-	
-	public static void main(String[] args) {
-		ProfanityFilter badWordsFilterHash = new ProfanityFilter();
-		String userInput = "where are you going hey you";
-		// show filtered bad words
-		System.out.println(badWordsFilterHash.test(userInput));
-
-		userInput = "where are you going hey you bitch";
-		// show filtered bad words
-		System.out.println(badWordsFilterHash.test(userInput));
-	}
-
 }

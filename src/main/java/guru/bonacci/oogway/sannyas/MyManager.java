@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 import guru.bonacci.oogway.es.Jewel;
 import guru.bonacci.oogway.es.MyRepository;
 import guru.bonacci.oogway.jms.SmokeSignal;
-import guru.bonacci.oogway.sannyas.filters.ProfanityFilter;
+import guru.bonacci.oogway.sannyas.filters.profanity.ProfanityFilter;
 
 /**
  * A manager alone cannot perform all the tasks assigned to him. In order to

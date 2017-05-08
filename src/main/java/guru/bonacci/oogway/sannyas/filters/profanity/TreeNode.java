@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannyas.filters;
+package guru.bonacci.oogway.sannyas.filters.profanity;
 
 import java.util.HashMap;
 

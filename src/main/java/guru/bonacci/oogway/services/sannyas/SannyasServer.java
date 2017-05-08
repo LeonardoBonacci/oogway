@@ -31,7 +31,7 @@ public class SannyasServer {
 		System.setProperty("spring.config.name", "sannyas-server");
 		SpringApplication.run(SannyasServer.class, args);
 	}
-	
+
 	@RestController
 	class AController {
 

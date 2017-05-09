@@ -82,7 +82,7 @@ public class GoodReadsSeeker implements Sannyasin {
 			// No results or one result: same search string without page
 			// Not enough results for a gap between the pagination numbers: same search string without page
 			// More than two results: page added
-			logger.error(e.getMessage());
+			e.printStackTrace();
 		}
 		return searchURL;
 	}

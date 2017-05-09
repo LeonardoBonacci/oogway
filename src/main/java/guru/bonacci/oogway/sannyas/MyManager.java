@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
 import javax.jms.JMSException;
@@ -82,19 +83,19 @@ public class MyManager implements MessageListener {
 
 			// acquire wisdom
 			List<String> found = sannya.seek(preprocessedInput);
-			found.stream().forEach(f -> logger.debug("Wisdom found: '" + f + "'"));
 
 			// filter the wisdom..
-			Predicate<String> postFiltering = sannya.postfilters().stream()
+			Predicate<String> postfiltering = sannya.postfilters().stream()
 																  .reduce(p -> true, Predicate::and);
-			found.stream()
-				 .filter(postFiltering)
+			Stream<Jewel> postfiltered = found.stream()
+				 .filter(postfiltering)
 				 .filter(profanityFilter) // always execute the profanity-filter
-				 .forEach(f -> {
-						logger.info("Indexing wisdom: '" + f + "'");
-						repository.index(new Jewel(f)); // ..and persist it
-				 });
-			; 
+				 .peek(f -> logger.info("Indexing wisdom: '" + f + "'")) 
+				 .map(f -> new Jewel(f));
+
+			// ..and bulk persist it
+			repository.save(postfiltered::iterator);
+			 
 		}
 	}
 }

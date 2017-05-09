@@ -3,6 +3,7 @@ package guru.bonacci.oogway.sannyas.goodreads;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -48,6 +49,7 @@ public class GoodReadsSeeker implements Sannyasin {
 	public List<String> seek(String tagsAsString) {
 		String[] tags = StringUtils.split(tagsAsString);
 		return Arrays.stream(tags)
+					.map(this::determinePagedURL)
 					.map(this::consult)
 					.flatMap(Elements::stream)
 					.map(this::cleanDiv)
@@ -56,14 +58,33 @@ public class GoodReadsSeeker implements Sannyasin {
 					.collect(Collectors.toList());
 	}
 
-	public Elements consult(String searchStr) {
+	public Elements consult(String searchURL) {
 		try {
-			Document doc = Jsoup.connect(URL + searchStr).get();
+			Document doc = Jsoup.connect(searchURL).get();
 			return doc.select("div.quoteText");
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 		}
 		return new Elements();
+	}
+
+	public String determinePagedURL(String searchStr) {
+		String searchURL = URL + searchStr;
+		try {
+			Document doc = Jsoup.connect(searchURL).get();
+			Elements elements = doc.select("span.gap");
+			int pageNr = Integer.valueOf(elements.first().nextElementSibling().nextElementSibling().text());
+			pageNr = new Random().nextInt(pageNr) + 1;
+			System.out.println(pageNr);
+			return searchURL + "?page=" + pageNr;
+		} catch (Exception e) { 
+			// Taking the easy way, catching all exceptions.
+			// No results or one result: same search string without page
+			// Not enough results for a gap between the pagination numbers: same search string without page
+			// More than two results: page added
+			logger.error(e.getMessage());
+		}
+		return searchURL;
 	}
 
 	private Element cleanDiv(Element el) {

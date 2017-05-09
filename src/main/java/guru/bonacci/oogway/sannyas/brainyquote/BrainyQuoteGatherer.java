@@ -69,8 +69,7 @@ public class BrainyQuoteGatherer implements Sannyasin {
 		String searchURL = URL.replaceAll("#tag#", searchStr);
 		Integer pageNr = 1;
 		try {
-			String searchURLFirstPage = searchURL.replaceAll("#page#", pageNr.toString());
-			Document doc = Jsoup.connect(searchURLFirstPage).userAgent("Mozilla").get();
+			Document doc = Jsoup.connect(searchURL.replaceAll("#page#", pageNr.toString())).userAgent("Mozilla").get();
 			Elements elements = doc.select("ul.pagination a");
 			pageNr = Integer.valueOf(elements.get(elements.size() - 2).text()); //last page is second last element
 			pageNr = new Random().nextInt(pageNr) + 1;

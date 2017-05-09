@@ -75,7 +75,6 @@ public class GoodReadsSeeker implements Sannyasin {
 			Elements elements = doc.select("span.gap");
 			int pageNr = Integer.valueOf(elements.first().nextElementSibling().nextElementSibling().text());
 			pageNr = new Random().nextInt(pageNr) + 1;
-			System.out.println(pageNr);
 			return searchURL + "?page=" + pageNr;
 		} catch (Exception e) { 
 			// Taking the easy way, catching all exceptions.

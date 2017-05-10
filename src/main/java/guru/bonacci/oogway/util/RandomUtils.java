@@ -4,11 +4,11 @@ import java.util.Random;
 
 public class RandomUtils {
 	
-    public static int fromZeroExclTo(int to) {
+    public static Integer fromZeroExclTo(Integer to) {
 		return new Random().nextInt(to);
     }
 
-    public static int fromOneInclTo(int to) {
+    public static Integer fromOneInclTo(Integer to) {
 		return fromZeroExclTo(to);
     }
 }

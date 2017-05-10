@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import guru.bonacci.oogway.sannyas.Sannyasin;
 import guru.bonacci.oogway.sannyas.filters.LengthFilter;
 import guru.bonacci.oogway.sannyas.steps.KeyPhraser;
+import guru.bonacci.oogway.util.RandomUtils;
 
 @Component
 public class GoodReadsSeeker implements Sannyasin {
@@ -60,6 +61,12 @@ public class GoodReadsSeeker implements Sannyasin {
 					.collect(Collectors.toList());
 	}
 
+	public String determinePagedURL(String searchStr) {
+		String searchURL = URL + searchStr;
+		Integer nrOfPages = pageCache.getNrOfPages(searchURL);
+		return searchURL + "?page=" + RandomUtils.fromOneInclTo(nrOfPages);
+	}
+
 	public Elements consult(String searchURL) {
 		try {
 			Document doc = Jsoup.connect(searchURL).get();
@@ -68,11 +75,6 @@ public class GoodReadsSeeker implements Sannyasin {
 			logger.error(e.getMessage());
 		}
 		return new Elements();
-	}
-
-	public String determinePagedURL(String searchStr) {
-		String searchURL = URL + searchStr;
-		return searchURL + "?page=" + pageCache.getPage(searchURL);
 	}
 
 	private Element cleanDiv(Element el) {

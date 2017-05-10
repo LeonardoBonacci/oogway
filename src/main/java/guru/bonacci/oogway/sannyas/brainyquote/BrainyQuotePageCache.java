@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannyas.goodreads;
+package guru.bonacci.oogway.sannyas.brainyquote;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -7,15 +7,15 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GoodReadsPageCache {
+public class BrainyQuotePageCache {
 
-    @Cacheable("goodreadsPages")
+    @Cacheable("brainyquotePages")
     public Integer getNrOfPages(String searchURL) {
-		int pageNr = 1;
+		Integer pageNr = 1;
 		try {
-			Document doc = Jsoup.connect(searchURL).get();
-			Elements elements = doc.select("span.gap");
-			pageNr = Integer.valueOf(elements.first().nextElementSibling().nextElementSibling().text());
+			Document doc = Jsoup.connect(searchURL).userAgent("Mozilla").get();
+			Elements elements = doc.select("ul.pagination a");
+			pageNr = Integer.valueOf(elements.get(elements.size() - 2).text()); //last page is second last element
 		} catch (Exception e) { 
 			// Taking the easy way, catching all exceptions.
 			// No results or one result: page 1
@@ -25,5 +25,4 @@ public class GoodReadsPageCache {
 		}
 		return pageNr;
     }
-
 }

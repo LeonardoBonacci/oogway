@@ -3,7 +3,6 @@ package guru.bonacci.oogway.sannyas.brainyquote;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -11,6 +10,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import guru.bonacci.oogway.sannyas.Sannyasin;
 import guru.bonacci.oogway.sannyas.filters.LengthFilter;
 import guru.bonacci.oogway.sannyas.steps.KeyPhraser;
+import guru.bonacci.oogway.util.RandomUtils;
 
 @Component
 public class BrainyQuoteGatherer implements Sannyasin {
@@ -33,6 +34,9 @@ public class BrainyQuoteGatherer implements Sannyasin {
 
 	@Autowired
 	private LengthFilter lengthFilter;
+
+	@Autowired
+	private BrainyQuotePageCache pageCache;
 
 	@Override
 	public List<Function<String, String>> preproces() {
@@ -51,8 +55,14 @@ public class BrainyQuoteGatherer implements Sannyasin {
 				.map(this::determinePagedURL)
 				.map(this::consult)
 				.flatMap(Elements::stream)
-				.map(q -> q.text())
+				.map(Element::text)
 				.collect(Collectors.toList());
+	}
+
+	public String determinePagedURL(String searchStr) {
+		String searchURL = URL.replace("#tag#", searchStr);
+		Integer nrOfPages = pageCache.getNrOfPages(searchURL.replace("#page#", "1"));
+		return searchURL.replace("#page#", RandomUtils.fromOneInclTo(nrOfPages).toString());
 	}
 
 	public Elements consult(String searchURL) {
@@ -63,29 +73,5 @@ public class BrainyQuoteGatherer implements Sannyasin {
 			logger.error(e.getMessage());
 		}
 		return new Elements();
-	}
-
-	public String determinePagedURL(String searchStr) {
-		String searchURL = URL.replaceAll("#tag#", searchStr);
-		Integer pageNr = 1;
-		try {
-			Document doc = Jsoup.connect(searchURL.replaceAll("#page#", pageNr.toString())).userAgent("Mozilla").get();
-			Elements elements = doc.select("ul.pagination a");
-			pageNr = Integer.valueOf(elements.get(elements.size() - 2).text()); //last page is second last element
-			pageNr = new Random().nextInt(pageNr) + 1;
-		} catch (Exception e) { 
-			// Taking the easy way, catching all exceptions.
-			// No results or one result: same search string without page
-			// Not enough results for a gap between the pagination numbers: same search string without page
-			// More than two results: page added
-			e.printStackTrace();
-		}
-		return searchURL.replaceAll("#page#", pageNr.toString());
-	}
-
-	public static void main(String args[]) {
-		BrainyQuoteGatherer gatherer = new BrainyQuoteGatherer();
-		List<String> quotes = gatherer.seek(args[0]);
-		quotes.stream().forEach(System.out::println);
 	}
 }

@@ -3,13 +3,14 @@ package guru.bonacci.oogway.sannyas.brainyquote;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
-@Component
-public class BrainyQuotePageCache {
+import guru.bonacci.oogway.sannyas.PageCache;
 
-    @Cacheable("brainyquotePages")
+@Component
+public class BrainyQuotePageCache implements PageCache {
+
+	@Override
     public Integer getNrOfPages(String searchURL) {
 		Integer pageNr = 1;
 		try {

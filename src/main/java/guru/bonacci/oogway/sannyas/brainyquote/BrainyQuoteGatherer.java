@@ -7,6 +7,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.sannyas.PageCache;
 import guru.bonacci.oogway.sannyas.Sannyasin;
 import guru.bonacci.oogway.sannyas.filters.LengthFilter;
 import guru.bonacci.oogway.sannyas.steps.KeyPhraser;
@@ -35,8 +38,8 @@ public class BrainyQuoteGatherer implements Sannyasin {
 	@Autowired
 	private LengthFilter lengthFilter;
 
-	@Autowired
-	private BrainyQuotePageCache pageCache;
+	@Resource(name = "brainyQuotePageCache")
+	private PageCache pageCache;
 
 	@Override
 	public List<Function<String, String>> preproces() {

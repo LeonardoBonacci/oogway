@@ -3,13 +3,14 @@ package guru.bonacci.oogway.sannyas.goodreads;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
-@Component
-public class GoodReadsPageCache {
+import guru.bonacci.oogway.sannyas.PageCache;
 
-    @Cacheable("goodreadsPages")
+@Component
+public class GoodReadsPageCache implements PageCache {
+
+	@Override
     public Integer getNrOfPages(String searchURL) {
 		int pageNr = 1;
 		try {

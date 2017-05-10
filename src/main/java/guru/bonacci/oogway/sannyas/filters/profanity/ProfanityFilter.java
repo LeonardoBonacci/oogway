@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import org.slf4j.Logger;
@@ -17,6 +18,7 @@ public class ProfanityFilter implements Predicate<String> {
 
 	/**
 	 * Borrowed code
+	 * 
 	 * @author thank you Lyen
 	 */
 	private TreeNode root = new TreeNode();
@@ -37,7 +39,7 @@ public class ProfanityFilter implements Predicate<String> {
 		}
 		if (merdaFound) {
 			logger.info("Blocking indecent quote: " + input);
-		}	
+		}
 		return !merdaFound;
 	}
 
@@ -74,9 +76,7 @@ public class ProfanityFilter implements Predicate<String> {
 		BufferedReader in = null;
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
-			in = new BufferedReader(
-					new FileReader(
-						classLoader.getResource(fileName).getFile()));
+			in = new BufferedReader(new FileReader(classLoader.getResource(fileName).getFile()));
 			while ((line = in.readLine()) != null) {
 				// for each bad word
 				logger.info("Adding to profanity filter: '" + line + "'");
@@ -111,6 +111,54 @@ public class ProfanityFilter implements Predicate<String> {
 				// add next letter
 				addToTree(badWordLine, characterIndex + 1, node);
 			}
+		}
+	}
+
+	/**
+	 * Borrowed code
+	 * 
+	 * @author thank you Lyen
+	 */
+	class TreeNode {
+
+		private HashMap<Character, TreeNode> node;
+
+		// Indicate that this letter is the end of a profanity word
+		private boolean isEnd;
+
+		public TreeNode() {
+			isEnd = false;
+			node = new HashMap<>();
+		}
+
+		public TreeNode(Character letter) {
+			this();
+		}
+
+		public boolean isEnd() {
+			return isEnd;
+		}
+
+		public void setEnd(boolean isEnd) {
+			this.isEnd = isEnd;
+		}
+
+		/**
+		 * @param letter: child's letter
+		 */
+		public void addChild(Character letter) {
+			TreeNode childNode = new TreeNode(letter);
+			node.put(letter, childNode);
+		}
+
+		public TreeNode getChildByLetter(Character letter) {
+			// Returns the value to which the specified key is mapped, or null
+			// if this map contains no mapping for the key.
+			return node.get(letter);
+		}
+
+		public boolean containsChild(Character letter) {
+			return node.containsKey(letter);
 		}
 	}
 }

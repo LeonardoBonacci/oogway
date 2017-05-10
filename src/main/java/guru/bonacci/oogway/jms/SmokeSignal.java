@@ -14,9 +14,6 @@ public class SmokeSignal implements Serializable {
 
 	private String message;
 
-	public SmokeSignal() {
-	}
-
 	public SmokeSignal(String message) {
 		this.message = message;
 	}

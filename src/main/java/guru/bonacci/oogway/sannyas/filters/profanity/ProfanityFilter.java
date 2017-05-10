@@ -144,7 +144,8 @@ public class ProfanityFilter implements Predicate<String> {
 		}
 
 		/**
-		 * @param letter: child's letter
+		 * @param letter:
+		 *            child's letter
 		 */
 		public void addChild(Character letter) {
 			TreeNode childNode = new TreeNode(letter);

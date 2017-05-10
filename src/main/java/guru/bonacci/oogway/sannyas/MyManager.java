@@ -91,7 +91,7 @@ public class MyManager implements MessageListener {
 				 .filter(postfiltering)
 				 .filter(profanityFilter) // always execute the profanity-filter
 				 .peek(f -> logger.info("Indexing wisdom: '" + f + "'")) 
-				 .map(f -> new Jewel(f));
+				 .map(Jewel::new);
 
 			// ..and bulk persist it
 			repository.save(postfiltered::iterator);

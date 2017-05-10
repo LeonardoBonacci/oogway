@@ -3,7 +3,6 @@ package guru.bonacci.oogway.sannyas.goodreads;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -35,6 +34,9 @@ public class GoodReadsSeeker implements Sannyasin {
 	@Autowired
 	private LengthFilter lengthFilter;
 
+	@Autowired
+	public GoodReadsPageCache pageCache;
+
 	@Override
 	public List<Function<String, String>> preproces() {
 		return Arrays.asList(keyPhraser::apply);
@@ -53,7 +55,7 @@ public class GoodReadsSeeker implements Sannyasin {
 					.map(this::consult)
 					.flatMap(Elements::stream)
 					.map(this::cleanDiv)
-					.map(q -> q.text())
+					.map(Element::text)
 					.map(this::strip)
 					.collect(Collectors.toList());
 	}
@@ -70,20 +72,7 @@ public class GoodReadsSeeker implements Sannyasin {
 
 	public String determinePagedURL(String searchStr) {
 		String searchURL = URL + searchStr;
-		try {
-			Document doc = Jsoup.connect(searchURL).get();
-			Elements elements = doc.select("span.gap");
-			int pageNr = Integer.valueOf(elements.first().nextElementSibling().nextElementSibling().text());
-			pageNr = new Random().nextInt(pageNr) + 1;
-			return searchURL + "?page=" + pageNr;
-		} catch (Exception e) { 
-			// Taking the easy way, catching all exceptions.
-			// No results or one result: same search string without page
-			// Not enough results for a gap between the pagination numbers: same search string without page
-			// More than two results: page added
-			e.printStackTrace();
-		}
-		return searchURL;
+		return searchURL + "?page=" + pageCache.getPage(searchURL);
 	}
 
 	private Element cleanDiv(Element el) {
@@ -94,11 +83,5 @@ public class GoodReadsSeeker implements Sannyasin {
 
 	private String strip(String str) {
 		return str.substring(str.indexOf("“") + 1, str.lastIndexOf("”"));
-	}
-
-	public static void main(String args[]) {
-		GoodReadsSeeker seeker = new GoodReadsSeeker();
-		List<String> quotes = seeker.seek(args[0]);
-		quotes.stream().forEach(System.out::println);
 	}
 }

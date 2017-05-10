@@ -1,7 +1,6 @@
 package guru.bonacci.oogway.services.web;
 
 import java.util.List;
-import java.util.Random;
 
 import org.elasticsearch.index.query.QueryBuilders;
 import org.slf4j.Logger;
@@ -13,9 +12,10 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import guru.bonacci.oogway.es.MyRepository;
 import guru.bonacci.oogway.es.Jewel;
+import guru.bonacci.oogway.es.MyRepository;
 import guru.bonacci.oogway.jms.SmokeSignal;
+import guru.bonacci.oogway.util.RandomUtils;
 
 @Service
 public class MyService {
@@ -42,7 +42,7 @@ public class MyService {
     	List<Jewel> result = repository.search(searchQuery).getContent();
 		result.stream().map(Jewel::getEssence).forEach(logger::debug);
     	
-    	return result.size() > 0 ? result.get(new Random().nextInt(result.size())).getEssence() 
+    	return result.size() > 0 ? result.get(RandomUtils.fromZeroExclTo(result.size())).getEssence() 
     							 : "I'm speechless, are you sure?";
     }
 }

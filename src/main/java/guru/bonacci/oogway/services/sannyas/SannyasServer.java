@@ -15,7 +15,7 @@ import guru.bonacci.oogway.sannyas.SannyasConfiguration;
  */
 @EnableAutoConfiguration
 @EnableDiscoveryClient
-@EnableCaching
+@EnableCaching(proxyTargetClass=true)
 @Import({JMSConfig.class, SannyasConfiguration.class, ESConfig.class})
 public class SannyasServer {
 

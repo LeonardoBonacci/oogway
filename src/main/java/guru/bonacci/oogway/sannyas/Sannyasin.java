@@ -9,9 +9,9 @@ import java.util.function.Predicate;
  */
 public interface Sannyasin {
 
-	List<Function<String,String>> preproces();
+	List<Function<String,String>> preprocessingSteps();
 
 	List<String> seek(String truth);
 
-	List<Predicate<String>> postfilters();
+	List<Predicate<String>> postfilteringStep();
 }

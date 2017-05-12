@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannyas.goodreads;
+package guru.bonacci.oogway.sannyas.brainyquote;
 
 
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import guru.bonacci.oogway.sannyas.filters.LengthFilter;
 import guru.bonacci.oogway.sannyas.steps.KeyPhraser;
 
 @Component
-public class GoodReadsSeeker implements Sannyasin {
+public class BrainyQuoteSeeker implements Sannyasin {
 
 	@Autowired
 	private KeyPhraser keyPhraser;
@@ -24,10 +24,10 @@ public class GoodReadsSeeker implements Sannyasin {
 	private LengthFilter lengthFilter;
 
 	@Autowired
-	private GoodReadsFinder finder;
+	private BrainyQuoteFinder finder;
 
 	@Override
-	public List<Function<String,String>> preprocessingSteps() {
+	public List<Function<String, String>> preprocessingSteps() {
 		return Arrays.asList(keyPhraser::apply);
 	}
 

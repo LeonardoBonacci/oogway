@@ -55,8 +55,8 @@ public class MyManager {
 
 		// Seeking consists of four steps
 		// pre-proces the input
-		Function<String, String> preprocessing = sannya.preproces().stream()
-																   .reduce(Function.identity(), Function::andThen);
+		Function<String,String> preprocessing = sannya.preprocessingSteps().stream()
+																		   .reduce(Function.identity(), Function::andThen);
 		String preprocessedInput = preprocessing.apply(input);
 		logger.info(sannya.getClass() + "- Preprocessed input: '" + preprocessedInput + "'");
 
@@ -64,8 +64,8 @@ public class MyManager {
 		List<String> found = sannya.seek(preprocessedInput);
 
 		// filter the wisdom..
-		Predicate<String> postfiltering = sannya.postfilters().stream()
-															  .reduce(p -> true, Predicate::and);
+		Predicate<String> postfiltering = sannya.postfilteringStep().stream()
+															  		.reduce(p -> true, Predicate::and);
 		Stream<Jewel> postfiltered = found.stream()
 			 .filter(postfiltering)
 			 .filter(profanityFilter) // always execute the profanity-filter

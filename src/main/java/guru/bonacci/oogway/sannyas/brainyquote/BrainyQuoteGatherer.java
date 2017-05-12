@@ -1,5 +1,6 @@
 package guru.bonacci.oogway.sannyas.brainyquote;
 
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -23,7 +25,6 @@ import guru.bonacci.oogway.sannyas.PageCache;
 import guru.bonacci.oogway.sannyas.Sannyasin;
 import guru.bonacci.oogway.sannyas.filters.LengthFilter;
 import guru.bonacci.oogway.sannyas.steps.KeyPhraser;
-import guru.bonacci.oogway.util.RandomUtils;
 
 @Component
 public class BrainyQuoteGatherer implements Sannyasin {
@@ -65,7 +66,7 @@ public class BrainyQuoteGatherer implements Sannyasin {
 	public String determinePagedURL(String searchStr) {
 		String searchURL = URL.replace("#tag#", searchStr);
 		Integer nrOfPages = pageCache.getNrOfPages(searchURL.replace("#page#", "1"));
-		return searchURL.replace("#page#", RandomUtils.fromOneInclTo(nrOfPages).toString());
+		return searchURL.replace("#page#", String.valueOf(RandomUtils.nextInt(1, nrOfPages + 1)));
 	}
 
 	public Elements consult(String searchURL) {

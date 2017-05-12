@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.lang3.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Component;
 import guru.bonacci.oogway.es.Jewel;
 import guru.bonacci.oogway.es.MyRepository;
 import guru.bonacci.oogway.sannyas.filters.profanity.ProfanityFilter;
-import guru.bonacci.oogway.util.RandomUtils;
 
 /**
  * A manager alone cannot perform all the tasks assigned to him. In order to
@@ -51,7 +51,7 @@ public class MyManager {
 
 		// We take a random Sannyasin
 		List<Sannyasin> sannyas = new ArrayList<>(applicationContext.getBeansOfType(Sannyasin.class).values());
-		Sannyasin sannya = sannyas.get(RandomUtils.fromZeroExclTo(sannyas.size()));
+		Sannyasin sannya = sannyas.get(RandomUtils.nextInt(0, sannyas.size()));
 
 		// Seeking consists of four steps
 		// pre-proces the input

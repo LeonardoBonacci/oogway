@@ -32,7 +32,7 @@ public class WebServer {
 	}
 
 	@RestController
-	class AController {
+	private class Controller {
 
 		@Autowired
 		private MyService service;

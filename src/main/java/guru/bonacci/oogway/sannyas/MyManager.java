@@ -7,20 +7,15 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.es.Jewel;
 import guru.bonacci.oogway.es.MyRepository;
-import guru.bonacci.oogway.jms.SmokeSignal;
 import guru.bonacci.oogway.sannyas.filters.profanity.ProfanityFilter;
 
 /**
@@ -32,7 +27,7 @@ import guru.bonacci.oogway.sannyas.filters.profanity.ProfanityFilter;
  * of powers to the subordinates in order to achieve effective results.
  */
 @Component
-public class MyManager implements MessageListener {
+public class MyManager {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -43,31 +38,12 @@ public class MyManager implements MessageListener {
 	private MyRepository repository;
 
 	@Autowired
-	private MessageConverter messageConverter;
-
-	@Autowired
 	private ProfanityFilter profanityFilter;
 
     @PostConstruct
     private void fill() {
     	repository.deleteAll();
     }
-
-	@Override
-	public void onMessage(Message message) {
-		try {
-			// The purposeful life of a manager:
-			// to receive an order..
-			String input = ((SmokeSignal) messageConverter.fromMessage(message)).getMessage();
-			logger.info("Received message <" + input + ">");
-
-			// and to then delegate..
-			delegate(input);
-		} catch (JMSException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	public void delegate(String input) {
 		logger.info("About to analyzer input: '" + input + "'");

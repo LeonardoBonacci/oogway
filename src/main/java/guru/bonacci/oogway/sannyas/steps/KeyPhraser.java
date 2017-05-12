@@ -1,6 +1,7 @@
 package guru.bonacci.oogway.sannyas.steps;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
@@ -12,7 +13,7 @@ import edu.stanford.nlp.simple.SentenceAlgorithms;
  * Determines the important words from a phrase
  */
 @Component
-public class KeyPhraser implements PreProcesStep {
+public class KeyPhraser implements Function<String,String> {
 
 	@Override
 	public String apply(String input) {

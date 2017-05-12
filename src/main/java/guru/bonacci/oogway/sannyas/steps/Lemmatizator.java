@@ -3,6 +3,7 @@ package guru.bonacci.oogway.sannyas.steps;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
@@ -28,7 +29,7 @@ import edu.stanford.nlp.util.CoreMap;
  * get in return a fully annotated object.
 s */
 @Component
-public class Lemmatizator implements PreProcesStep {
+public class Lemmatizator implements Function<String,String> {
 
   private StanfordCoreNLP pipeline;
 

@@ -19,6 +19,6 @@ Inspecting the project you will notice strange or at least uncommon words throug
 
 I am grateful to people who post informative code examples on GitHub, to the ones who write useful blog posts, those who help others to transcend their technical struggles through stackoverflow, and of course the whole community of anonymous beings working diligently on great and useful open source projects.
 
-If you have any ideas or suggestions for future improvements, please comment and I will try to add new features. In case you want to personally contribute to the code, that of course is possible too.
+If you have any ideas or suggestions for future improvements, or problems running this software, please comment and I will try to add new features. In case you want to personally contribute to the code, that of course is possible too.
 
 Thank you for reading this and have a nice day.

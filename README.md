@@ -4,6 +4,7 @@ Background music while you're reading: https://www.youtube.com/watch?v=7LHYBHUsn
 
 “For instance, on the planet Earth, man had always assumed that he was more intelligent than dolphins because he had achieved so much—the wheel, New York, wars and so on—whilst all the dolphins had ever done was muck about in the water having a good time. But conversely, the dolphins had always believed that they were far more intelligent than man—for precisely the same reasons.”
 ― Douglas Adams, The Hitchhiker's Guide to the Galaxy 
+
   
 In my conviction, each computer scientist with a basic sense of philosophy and a respect for the history of scientific understanding, must at least once in his lifetime read COMPUTING MACHINERY AND INTELLIGENCE on The Imitation Game (https://www.csee.umbc.edu/courses/471/papers/turing.pdf) and set out to build his/her own Turing Machine. Simple it may be; blended with ones personal taste of aesthetics, humor and technology you can rise above yourself and design your own artificial intelligence. For no particular reason, simply because you can.
 

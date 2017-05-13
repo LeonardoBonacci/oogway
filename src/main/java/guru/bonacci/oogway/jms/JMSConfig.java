@@ -16,7 +16,7 @@ import org.springframework.jms.listener.MessageListenerContainer;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.SimpleMessageConverter;
 
-import guru.bonacci.oogway.sannyas.SannyasController;
+import guru.bonacci.oogway.sannyas.SmokeSignalController;
 
 @Configuration
 @ComponentScan(basePackages="bonacci.oogway.jms")
@@ -27,7 +27,7 @@ public class JMSConfig {
 	private static final String QUEUE = "winnetou";
 	
 	@Autowired
-	private SannyasController messageReceiver;
+	private SmokeSignalController messageReceiver;
 	
 	@Bean
 	public ConnectionFactory connectionFactory(){

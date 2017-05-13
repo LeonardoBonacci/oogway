@@ -16,8 +16,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.es.Jewel;
-import guru.bonacci.oogway.es.MyRepository;
+import guru.bonacci.oogway.es.OracleRepository;
 import guru.bonacci.oogway.sannyas.filters.profanity.ProfanityFilter;
+import guru.bonacci.oogway.sannyas.general.Sannyasin;
 
 /**
  * A manager alone cannot perform all the tasks assigned to him. In order to
@@ -26,9 +27,16 @@ import guru.bonacci.oogway.sannyas.filters.profanity.ProfanityFilter;
  * subordinate. Delegation is about entrusting someone else to do parts of your
  * job. Delegation of authority can be defined as subdivision and sub-allocation
  * of powers to the subordinates in order to achieve effective results.
+ * 
+ * People who manage by a pitchfork are doing so with a heavy and often
+ * controlling hand: demanding progress, forcing accountability, prodding and
+ * pushing for results through the use of threats and fear tactics. This style
+ * of tough, ruthless management is painful for people who are put in a position
+ * where they are pushed to avoid consequences rather than pulled toward a
+ * desired goal.
  */
 @Component
-public class MyManager {
+public class PitchforkManager {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -36,11 +44,12 @@ public class MyManager {
 	private ApplicationContext applicationContext;
 
 	@Autowired
-	private MyRepository repository;
+	private OracleRepository repository;
 
 	@Autowired
 	private ProfanityFilter profanityFilter;
 
+	//TODO remove
     @PostConstruct
     private void fill() {
     	repository.deleteAll();

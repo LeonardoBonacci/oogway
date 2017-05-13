@@ -11,6 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+/**
+ * A swear filter, also known as a profanity filter or language filter is a
+ * software subsystem which modifies text to remove words deemed offensive by
+ * the administrator or community of an online forum. Swear filters are common
+ * in custom-programmed chat rooms and online video games.
+ */
 @Component
 public class ProfanityFilter implements Predicate<String> {
 

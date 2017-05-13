@@ -11,11 +11,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.sannyas.PageCache;
-import guru.bonacci.oogway.sannyas.WebFinder;
+import guru.bonacci.oogway.sannyas.general.PageCache;
+import guru.bonacci.oogway.sannyas.general.WebIlluminator;
 
+/**
+ * Quote of the day:
+ * “I want to do to you what spring does with the cherry trees.” ― Pablo Neruda
+ */
 @Component
-public class BrainyQuoteFinder extends WebFinder implements PageCache {
+public class BrainyQuoteIlluminator extends WebIlluminator implements PageCache {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

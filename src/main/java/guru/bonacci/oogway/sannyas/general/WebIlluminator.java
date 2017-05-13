@@ -1,14 +1,29 @@
-package guru.bonacci.oogway.sannyas;
+package guru.bonacci.oogway.sannyas.general;
+
 
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public abstract class WebFinder {
+import static java.util.stream.Collectors.toList;
+
+/**
+ * Abstract class with general functionality for accessing web pages and
+ * interpreting their content.
+ * 
+ * Illuminate: to supply or brighten with light; light up. to make lucid or
+ * clear; throw light on (a subject). to decorate with lights, as in
+ * celebration. to enlighten, as with knowledge. to make resplendent or
+ * illustrious: A smile illuminated her face. to decorate (a manuscript, book,
+ * etc.) with colors and gold or silver, as was often done in the Middle Ages.
+ * 
+ * Etymology: Late Middle English: from Latin illuminat- ‘illuminated’, from the
+ * verb illuminare, from in- ‘upon’ + lumen, lumin- ‘light’.
+ */
+public abstract class WebIlluminator {
 
 	public List<String> find(String... tags) {
 		return Arrays.stream(tags)
@@ -18,7 +33,7 @@ public abstract class WebFinder {
 					.map(this::procesElement)
 					.map(Element::text)
 					.map(this::procesText)
-					.collect(Collectors.toList());
+					.collect(toList());
 	}
 
 	/**

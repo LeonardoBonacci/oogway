@@ -12,11 +12,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.sannyas.WebFinder;
-import guru.bonacci.oogway.sannyas.PageCache;
+import guru.bonacci.oogway.sannyas.general.PageCache;
+import guru.bonacci.oogway.sannyas.general.WebIlluminator;
 
+/**
+ * Most popular quote:
+ * “Don't cry because it's over, smile because it happened.” ― Dr. Seuss
+ */
 @Component
-public class GoodReadsFinder extends WebFinder implements PageCache {
+public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

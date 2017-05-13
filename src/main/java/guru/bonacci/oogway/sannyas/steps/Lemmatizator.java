@@ -17,17 +17,23 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
 
 /*
+ * Lemmatisation (or lemmatization) in linguistics is the process of grouping together 
+ * the inflected forms of a word so they can be analysed as a single item, identified 
+ * by the word's lemma, or dictionary form.
+ * 
+ * In computational linguistics, lemmatisation is the algorithmic process of determining 
+ * the lemma of a word based on its intended meaning. Unlike stemming, lemmatisation 
+ * depends on correctly identifying the intended part of speech and meaning of a word 
+ * in a sentence, as well as within the larger context surrounding that sentence, such as 
+ * neighboring sentences or even an entire document.
+ * 
+ * 
  * This is a pipeline that takes in a string and returns various analyzed linguistic forms.
  * The String is tokenized via a tokenizer (such as PTBTokenizerAnnotator),
  * and then other sequence model style annotation can be used to add things like lemmas,
  * POS tags, and named entities. These are returned as a list of CoreLabels.
  * Other analysis components build and store parse trees, dependency graphs, etc.
- *
- * This class is designed to apply multiple Annotators to an Annotation.
- * The idea is that you first build up the pipeline by adding Annotators,
- * and then you take the objects you wish to annotate and pass them in and
- * get in return a fully annotated object.
-s */
+ */
 @Component
 public class Lemmatizator implements Function<String,String> {
 
@@ -59,7 +65,7 @@ public class Lemmatizator implements Function<String,String> {
     return lemmas.stream().collect(Collectors.joining(" "));
   }
 
-
+  //TODO use for testing
   public static void main(String[] args) {
     System.out.println("Starting Stanford Lemmatizer");
     String text = "How could you be seeing into my eyes like open doors? \n"+

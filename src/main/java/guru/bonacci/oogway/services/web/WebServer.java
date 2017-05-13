@@ -35,7 +35,7 @@ public class WebServer {
 	private class Controller {
 
 		@Autowired
-		private MyService service;
+		private FirstLineSupportService service;
 
 		@RequestMapping(path = "/", method = RequestMethod.GET)
 		public String index(@RequestParam("q") String q) {

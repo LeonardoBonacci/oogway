@@ -10,10 +10,13 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.sannyas.Sannyasin;
 import guru.bonacci.oogway.sannyas.filters.LengthFilter;
+import guru.bonacci.oogway.sannyas.general.Sannyasin;
 import guru.bonacci.oogway.sannyas.steps.KeyPhraser;
 
+/**
+ * I like GoodReads! It was the first Sannyasin.
+ */
 @Component
 public class GoodReadsSeeker implements Sannyasin {
 
@@ -24,7 +27,7 @@ public class GoodReadsSeeker implements Sannyasin {
 	private LengthFilter lengthFilter;
 
 	@Autowired
-	private GoodReadsFinder finder;
+	private GoodReadsIlluminator finder;
 
 	@Override
 	public List<Function<String,String>> preprocessingSteps() {

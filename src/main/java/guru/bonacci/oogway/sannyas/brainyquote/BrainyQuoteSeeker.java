@@ -10,10 +10,15 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.sannyas.Sannyasin;
 import guru.bonacci.oogway.sannyas.filters.LengthFilter;
+import guru.bonacci.oogway.sannyas.general.Sannyasin;
 import guru.bonacci.oogway.sannyas.steps.KeyPhraser;
 
+/**
+ * They say: Share our extensive collection of famous quotes by authors,
+ * celebrities, newsmakers, and more. Enjoy our Quotes of the Day on the web,
+ * Facebook, and blogs.
+ */
 @Component
 public class BrainyQuoteSeeker implements Sannyasin {
 
@@ -24,7 +29,7 @@ public class BrainyQuoteSeeker implements Sannyasin {
 	private LengthFilter lengthFilter;
 
 	@Autowired
-	private BrainyQuoteFinder finder;
+	private BrainyQuoteIlluminator finder;
 
 	@Override
 	public List<Function<String, String>> preprocessingSteps() {

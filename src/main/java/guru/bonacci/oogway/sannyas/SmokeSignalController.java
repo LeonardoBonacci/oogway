@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import guru.bonacci.oogway.jms.SmokeSignal;
 
 @Controller
-public class SannyasController implements MessageListener {
+public class SmokeSignalController implements MessageListener {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -25,7 +25,7 @@ public class SannyasController implements MessageListener {
 	private MessageConverter messageConverter;
 
 	@Autowired
-	private MyManager manager;
+	private PitchforkManager manager;
 
 	@Override
 	public void onMessage(Message message) {

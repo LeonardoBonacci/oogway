@@ -2,6 +2,7 @@ package guru.bonacci.oogway.sannyas.filters;
 
 import java.util.function.Predicate;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,10 +22,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class LengthFilter implements Predicate<String> {
 
-	private static final Integer MAX_LENGTH = 1000;
+	@Value("${filter.maxlength:1000}")
+	private Integer max_length;
 	
 	@Override
 	public boolean test(String input) {
-		return input.length() < MAX_LENGTH;
+		return input.length() < max_length;
 	}
 }

@@ -2,13 +2,16 @@ package guru.bonacci.oogway.sannyas.general;
 
 
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * Abstract class with general functionality for accessing web pages and
@@ -25,9 +28,16 @@ import static java.util.stream.Collectors.toList;
  */
 public abstract class WebIlluminator {
 
+	/**
+	 * To not overly access our dear wisdom suppliers we keep an administration
+	 * of already visited urls. 
+	 */
+	private Set<String> consultedWebPages = Collections.synchronizedSet(new HashSet<>());	
+	
 	public List<String> find(String... tags) {
 		return Arrays.stream(tags)
 					.map(this::determineURL)
+					.filter(consultedWebPages::add) //returns false when present in set
 					.map(this::consultWeb)
 					.flatMap(Elements::stream)
 					.map(this::procesElement)

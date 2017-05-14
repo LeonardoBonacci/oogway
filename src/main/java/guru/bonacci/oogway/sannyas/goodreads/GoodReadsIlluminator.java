@@ -10,6 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannyas.general.PageCache;
@@ -24,11 +25,12 @@ public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private static final String URL = "http://www.goodreads.com/quotes/tag/";
+	@Value("${web.url.goodreads:http://www.goodreads.com/quotes/tag/}")
+	private String url;
 
 	@Override
 	public String determineURL(String searchStr) {
-		String searchURL = URL + searchStr;
+		String searchURL = url + searchStr;
 		Integer nrOfPages = getNrOfPages(searchURL);
 		return searchURL + "?page=" + RandomUtils.nextInt(1, nrOfPages + 1);
 	}

@@ -7,11 +7,11 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 
 /**
- * A jewel is a cut and polished precious stone; gem. In this context: wisdom is
- * a gem of infinite value.
+ * A gem is a cut and polished precious stone or pearl fine enough for
+ * use in jewelry. In this context: wisdom is a gem of infinite value.
  */
 @Document(indexName = "oracle", type = "quote", shards = 1, replicas = 0, refreshInterval = "-1")
-public class Jewel {
+public class Gem {
 
 	public static final String ESSENCE = "essence";
 
@@ -21,7 +21,7 @@ public class Jewel {
 	@Field(type = String, store = true, analyzer = "english", searchAnalyzer = "english")
 	private String essence;
 
-	public Jewel() {
+	public Gem() {
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class Jewel {
 	 * we persist the quote in the _id field to allow uniqueness and in the
 	 * essence-field for full-text search
 	 */
-	public Jewel(String essence) {
+	public Gem(String essence) {
 		this.id = essence;
 		this.essence = essence;
 	}

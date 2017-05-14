@@ -13,7 +13,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import guru.bonacci.oogway.es.Jewel;
+import guru.bonacci.oogway.es.Gem;
 import guru.bonacci.oogway.es.OracleRepository;
 import guru.bonacci.oogway.jms.SmokeSignal;
 
@@ -47,10 +47,10 @@ public class FirstLineSupportService {
 		jmsTemplate.send(session -> session.createObjectMessage(new SmokeSignal(q)));
 
 		// Consult the oracle..
-		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchQuery(Jewel.ESSENCE, q))
+		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchQuery(Gem.ESSENCE, q))
 				.build();
-		List<Jewel> result = repository.search(searchQuery).getContent();
-		result.stream().map(Jewel::getEssence).forEach(logger::debug);
+		List<Gem> result = repository.search(searchQuery).getContent();
+		result.stream().map(Gem::getEssence).forEach(logger::debug);
 
 		return result.size() > 0 ? result.get(RandomUtils.nextInt(0, result.size())).getEssence()
 				: "I'm speechless, are you sure?";

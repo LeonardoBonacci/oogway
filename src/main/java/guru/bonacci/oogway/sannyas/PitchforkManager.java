@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.es.Jewel;
+import guru.bonacci.oogway.es.Gem;
 import guru.bonacci.oogway.es.OracleRepository;
 import guru.bonacci.oogway.sannyas.filters.profanity.ProfanityFilter;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
@@ -75,11 +75,11 @@ public class PitchforkManager {
 		// filter the wisdom..
 		Predicate<String> postfiltering = sannya.postfilteringStep().stream()
 															  		.reduce(p -> true, Predicate::and);
-		Stream<Jewel> postfiltered = found.stream()
+		Stream<Gem> postfiltered = found.stream()
 			 .filter(postfiltering)
 			 .filter(profanityFilter) // always execute the profanity-filter
 			 .peek(f -> logger.info("Indexing wisdom: '" + f + "'")) 
-			 .map(Jewel::new);
+			 .map(Gem::new);
 
 		// ..and bulk persist it
 		repository.save(postfiltered::iterator);

@@ -32,5 +32,13 @@ elasticsearch:
   port: 9300
   clustername: oogway-cluster
 
+# URLs of web pages we visit
+web:
+  url: 
+    goodreads: http://www.goodreads.com/quotes/tag/
+    brainyquote: https://www.brainyquote.com/quotes/keywords/#tag#_#page#.html?vm=l
 
+# Filter configs
+filter:
+  maxlength: 300 
 

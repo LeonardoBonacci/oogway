@@ -1,9 +1,8 @@
 Welcome GitHub user, to my personal project called oogway.
 -------------
 
-Background music while you're reading: https://www.youtube.com/watch?v=7LHYBHUsn2M
+*Background music while you're reading: https://www.youtube.com/watch?v=7LHYBHUsn2M*
 
-----------
 
 In my conviction, each computer scientist with a basic sense of philosophy and a respect for the history of scientific understanding, must at least once in his lifetime read COMPUTING MACHINERY AND INTELLIGENCE on The Imitation Game (https://www.csee.umbc.edu/courses/471/papers/turing.pdf) and set out to build his/her own Turing Machine. Simple it may be; blended with ones personal taste of aesthetics, humor and technology you can rise above yourself and design your own artificial intelligence. For no particular reason, simply because you can.
 
@@ -11,7 +10,8 @@ Not doing so is like a mathematician who, having the intellectual tool set to do
 
 Thus, engineers, computer scientists, software developers, programmers and hackers, please check out this code and run this modest Turing Machine. Modest, as it is bound to fail the original test. Yet, fortunately, it was good fun building it.
 
-###Installation guide
+Installation guide
+------------------
 
 Elastic is used to create a simple knowledge base with (borrowed) wisdom, referred to here as 'the Oracle'. Go here https://www.elastic.co/ and install Elastic(Search) on your computer. I'm using version 2.4.4 and it runs fine. Define a cluster named 'oogway-cluster'. To simply test it you can leave default values for all other configurations.
 
@@ -33,3 +33,5 @@ Enough for today. Thank you for reading this and have a nice day.
 ----------
 
 > *For instance, on the planet Earth, man had always assumed that he was more intelligent than dolphins because he had achieved so much—the wheel, New York, wars and so on—whilst all the dolphins had ever done was muck about in the water having a good time. But conversely, the dolphins had always believed that they were far more intelligent than man—for precisely the same reasons.* ― Douglas Adams, The Hitchhiker's Guide to the Galaxy
+
+

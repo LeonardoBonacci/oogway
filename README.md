@@ -17,7 +17,7 @@ Elastic is used to create a simple knowledge base with (borrowed) wisdom, referr
 
 Through ActiveMQ the different micro-services communicate. Go here http://activemq.apache.org/ and install ActiveMQ. Version 5.14.5. should do. No need to configure anything. Just run it.
 
-Now check out this code. It being a micro-services architecture, you first need to run the RegistrationServer before you can run SannyasinServer and WebServer.
+Now check out this code. It being a micro-services architecture, you first need to run the RegistrationServer before you can run SannyasinServer and WebServer. Run them by the known 'java -jar oogway-xxx.jar' command. Multiple instances of the SannyasinServer or of the WebServer are dealt with by the RegistrationServer. 
 
 *Disclaimer* :) 
 Inspecting the project you will notice strange or at least uncommon words throughout the code ('Sannyasin' instead of 'Worker', 'Manager' instead of 'WorkerEngine'). This being a hobby project, I have used the lack of supervision to take a few coding short cuts, and have been excessively creative in choosing class, method and variable names. Don't try this at home when you're creating real life production software (all though this code runs quite successfully in production too :) and please stick to the commonly used patterns and naming conventions to ease your colleagues' professional life.

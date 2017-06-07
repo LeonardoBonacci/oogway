@@ -82,6 +82,7 @@ public class PitchforkManager {
 			 .map(Gem::new);
 
 		// ..and bulk persist it
-		repository.save(postfiltered::iterator);
+		Iterable<Gem> it = postfiltered::iterator;
+		repository.save(it);
 	}
 }

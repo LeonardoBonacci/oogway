@@ -1,9 +1,5 @@
 package guru.bonacci.oogway.sannyas.filters.profanity;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
@@ -77,29 +73,35 @@ public class ProfanityFilter implements Predicate<String> {
 		}
 	}
 
-	public void buildDictionaryTree(String fileName) {
-		String line;
-		BufferedReader in = null;
-		try {
-			ClassLoader classLoader = getClass().getClassLoader();
-			in = new BufferedReader(new FileReader(classLoader.getResource(fileName).getFile()));
-			while ((line = in.readLine()) != null) {
-				// for each bad word
-				logger.info("Adding to profanity filter: '" + line + "'");
-				addToTree(line, 0, root);
-			}
+//	public void buildDictionaryTree(String fileName) {
+//		String line;
+//		BufferedReader in = null;
+//		try {
+//			ClassLoader classLoader = getClass().getClassLoader();
+//			in = new BufferedReader(new FileReader(classLoader.getResource(fileName).getFile()));
+//			while ((line = in.readLine()) != null) {
+//				// for each bad word
+//				logger.info("Adding to profanity filter: '" + line + "'");
+//				addToTree(line, 0, root);
+//			}
+//
+//		} catch (FileNotFoundException e) { // FileReader
+//			e.printStackTrace();
+//		} catch (IOException e) { // readLine
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				in.close();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
 
-		} catch (FileNotFoundException e) { // FileReader
-			e.printStackTrace();
-		} catch (IOException e) { // readLine
-			e.printStackTrace();
-		} finally {
-			try {
-				in.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+	public void buildDictionaryTree(String fileName) {
+		String line = "shit";
+		logger.info("Adding to profanity filter: '" + line + "'");
+		addToTree(line, 0, root);
 	}
 
 	private void addToTree(String badWordLine, int characterIndex, TreeNode node) {

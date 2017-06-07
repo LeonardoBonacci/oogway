@@ -1,8 +1,9 @@
 package guru.bonacci.oogway.sannyas.steps;
 
+import static java.util.stream.Collectors.joining;
+
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,6 @@ public class KeyPhraser implements Function<String,String> {
 		Sentence sentence = new Sentence(input);
 		SentenceAlgorithms algorithms = new SentenceAlgorithms(sentence);
 		List<String> output = algorithms.keyphrases();
-		return output.stream().collect(Collectors.joining(" "));
+		return output.stream().collect(joining(" "));
 	}
 }

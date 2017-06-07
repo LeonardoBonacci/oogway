@@ -1,12 +1,13 @@
 package guru.bonacci.oogway.sannyas.brainyquote;
 
 
-import java.util.Arrays;
+import static java.util.Arrays.asList;
+import static org.apache.commons.lang.StringUtils.split;
+
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,17 +34,17 @@ public class BrainyQuoteSeeker implements Sannyasin {
 
 	@Override
 	public List<Function<String, String>> preprocessingSteps() {
-		return Arrays.asList(keyPhraser::apply);
+		return asList(keyPhraser::apply);
 	}
 
 	@Override
 	public List<Predicate<String>> postfilteringStep() {
-		return Arrays.asList(lengthFilter);
+		return asList(lengthFilter);
 	}
 
 	@Override
 	public List<String> seek(String tagsAsString) {
-		String[] tags = StringUtils.split(tagsAsString);
+		String[] tags = split(tagsAsString);
 		return finder.find(tags);
 	}
 }

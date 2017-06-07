@@ -1,11 +1,12 @@
 package guru.bonacci.oogway.sannyas;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ import guru.bonacci.oogway.jms.SmokeSignal;
 @Controller
 public class SmokeSignalController implements MessageListener {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
 	private MessageConverter messageConverter;

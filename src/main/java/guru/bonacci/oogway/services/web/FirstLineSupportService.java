@@ -1,9 +1,12 @@
 package guru.bonacci.oogway.services.web;
 
+import static org.apache.commons.lang.StringUtils.isEmpty;
+import static org.apache.commons.lang3.RandomUtils.nextInt;
+import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
+import static org.slf4j.LoggerFactory.getLogger;
+
 import java.util.List;
 
-import org.apache.commons.lang3.RandomUtils;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,6 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import guru.bonacci.oogway.es.Gem;
 import guru.bonacci.oogway.es.OracleRepository;
@@ -31,7 +33,7 @@ import guru.bonacci.oogway.jms.SmokeSignal;
 @Service
 public class FirstLineSupportService {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
 	private OracleRepository repository;
@@ -39,20 +41,20 @@ public class FirstLineSupportService {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 
-	public String index(String q) {
-		if (StringUtils.isEmpty(q))
+	public String enquire(String q) {
+		if (isEmpty(q))
 			return "No question no answer..";
 
 		// Send a message to the world...
 		jmsTemplate.send(session -> session.createObjectMessage(new SmokeSignal(q)));
 
 		// Consult the oracle..
-		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchQuery(Gem.ESSENCE, q))
+		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchQuery(Gem.ESSENCE, q))
 				.build();
 		List<Gem> result = repository.search(searchQuery).getContent();
 		result.stream().map(Gem::getEssence).forEach(logger::debug);
 
-		return result.size() > 0 ? result.get(RandomUtils.nextInt(0, result.size())).getEssence()
+		return result.size() > 0 ? result.get(nextInt(0, result.size())).getEssence()
 				: "I'm speechless, are you sure?";
 	}
 }

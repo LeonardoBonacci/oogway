@@ -1,7 +1,5 @@
 package guru.bonacci.oogway.jms;
 
-import java.util.Arrays;
-
 import javax.jms.ConnectionFactory;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -18,6 +16,8 @@ import org.springframework.jms.support.converter.SimpleMessageConverter;
 
 import guru.bonacci.oogway.sannyas.SmokeSignalController;
 
+import static java.util.Arrays.asList;
+
 @Configuration
 @ComponentScan(basePackages="bonacci.oogway.jms")
 public class JMSConfig {
@@ -33,7 +33,7 @@ public class JMSConfig {
 	public ConnectionFactory connectionFactory(){
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
 		connectionFactory.setBrokerURL(DEFAULT_BROKER_URL);
-		connectionFactory.setTrustedPackages(Arrays.asList("guru.bonacci.oogway.jms"));
+		connectionFactory.setTrustedPackages(asList("guru.bonacci.oogway.jms"));
 		return connectionFactory;
 	}
 

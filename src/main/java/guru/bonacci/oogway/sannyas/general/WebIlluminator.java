@@ -2,10 +2,10 @@ package guru.bonacci.oogway.sannyas.general;
 
 
 
+import static java.util.Arrays.stream;
+import static java.util.Collections.synchronizedSet;
 import static java.util.stream.Collectors.toList;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,10 +32,10 @@ public abstract class WebIlluminator {
 	 * To not overly access our dear wisdom suppliers we keep an administration
 	 * of already visited urls. 
 	 */
-	private Set<String> consultedWebPages = Collections.synchronizedSet(new HashSet<>());	
+	private Set<String> consultedWebPages = synchronizedSet(new HashSet<>());	
 	
 	public List<String> find(String... tags) {
-		return Arrays.stream(tags)
+		return stream(tags)
 					.map(this::determineURL)
 					.filter(consultedWebPages::add) //returns false when present in set
 					.map(this::consultWeb)

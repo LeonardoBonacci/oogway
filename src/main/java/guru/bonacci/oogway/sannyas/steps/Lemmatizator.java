@@ -1,5 +1,7 @@
 package guru.bonacci.oogway.sannyas.steps;
 
+import static java.util.stream.Collectors.joining;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -62,7 +64,7 @@ public class Lemmatizator implements Function<String,String> {
         lemmas.add(token.get(LemmaAnnotation.class));
       }
     }
-    return lemmas.stream().collect(Collectors.joining(" "));
+    return lemmas.stream().collect(joining(" "));
   }
 
   //TODO use for testing

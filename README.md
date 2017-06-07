@@ -13,11 +13,11 @@ Thus, engineers, computer scientists, software developers, programmers and hacke
 Installation guide
 ------------------
 
-Elastic is used to create a simple knowledge base with (borrowed) wisdom, referred to here as 'the Oracle'. Go here https://www.elastic.co/ and install Elastic(Search) on your computer. I'm using version 2.4.4 and it runs fine. Define a cluster named 'oogway-cluster'. To simply test it you can leave default values for all other configurations.
+ElasticSearch is used to create a simple knowledge base with (borrowed) wisdom, referred to here as 'the Oracle'. Go here https://www.elastic.co/ and install ElasticSearch on your computer. I'm using version 2.4.4 and it runs fine. Define a cluster named 'oogway-cluster'. To simply test it you can leave default values for all other configurations.
 
 Through ActiveMQ the different micro-services communicate. Go here http://activemq.apache.org/ and install ActiveMQ. Version 5.14.5. should do. No need to configure anything. Just run it.
 
-Now check out this code. It being a micro-services architecture, you first need to run the RegistrationServer before you can run SannyasinServer and WebServer. Run them by the known 'java -jar oogway-xxx.jar' command. Multiple instances of the SannyasinServer or of the WebServer are dealt with by the RegistrationServer. 
+Now check out this code. It being a micro-services architecture, you first need to run the RegistrationServer before you can run SannyasinServer and WebServer. Run them by the known 'java -jar oogway-xxx.jar' command. Load balancing on multiple running instances of the SannyasinServer and/or of the WebServer are dealt with by the RegistrationServer. 
 
 *Disclaimer* :) 
 Inspecting the project you will notice strange or at least uncommon words throughout the code ('Sannyasin' instead of 'Worker', 'Manager' instead of 'WorkerEngine'). This being a hobby project, I have used the lack of supervision to take a few coding short cuts, and have been excessively creative in choosing class, method and variable names. Don't try this at home when you're creating real life production software (all though this code runs quite successfully in production too :) and please stick to the commonly used patterns and naming conventions to ease your colleagues' professional life.

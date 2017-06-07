@@ -1,5 +1,8 @@
 package guru.bonacci.oogway.sannyas;
 
+import static org.apache.commons.lang3.RandomUtils.nextInt;
+import static org.slf4j.LoggerFactory.getLogger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -8,9 +11,7 @@ import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.commons.lang3.RandomUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -38,7 +39,7 @@ import guru.bonacci.oogway.sannyas.general.Sannyasin;
 @Component
 public class PitchforkManager {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
 	private ApplicationContext applicationContext;
@@ -60,7 +61,7 @@ public class PitchforkManager {
 
 		// We take a random Sannyasin
 		List<Sannyasin> sannyas = new ArrayList<>(applicationContext.getBeansOfType(Sannyasin.class).values());
-		Sannyasin sannya = sannyas.get(RandomUtils.nextInt(0, sannyas.size()));
+		Sannyasin sannya = sannyas.get(nextInt(0, sannyas.size()));
 
 		// Seeking consists of four steps
 		// pre-proces the input

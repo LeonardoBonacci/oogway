@@ -1,14 +1,15 @@
 package guru.bonacci.oogway.sannyas.brainyquote;
 
 
+import static org.apache.commons.lang3.RandomUtils.nextInt;
+import static org.slf4j.LoggerFactory.getLogger;
+
 import java.io.IOException;
 
-import org.apache.commons.lang3.RandomUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +23,7 @@ import guru.bonacci.oogway.sannyas.general.WebIlluminator;
 @Component
 public class BrainyQuoteIlluminator extends WebIlluminator implements PageCache {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = getLogger(this.getClass());
 
 	@Value("${web.url.brainyquote:https://www.brainyquote.com/quotes/keywords/#tag#_#page#.html?vm=l}")
 	private String url;
@@ -31,7 +32,7 @@ public class BrainyQuoteIlluminator extends WebIlluminator implements PageCache 
 	protected String determineURL(String searchStr) {
 		String searchURL = url.replace("#tag#", searchStr);
 		Integer nrOfPages = getNrOfPages(searchURL.replace("#page#", "1"));
-		return searchURL.replace("#page#", String.valueOf(RandomUtils.nextInt(1, nrOfPages + 1)));
+		return searchURL.replace("#page#", String.valueOf(nextInt(1, nrOfPages + 1)));
 	}
 
 	@Override

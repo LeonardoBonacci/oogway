@@ -1,15 +1,16 @@
 package guru.bonacci.oogway.sannyas.goodreads;
 
 
+import static org.apache.commons.lang3.RandomUtils.nextInt;
+import static org.jsoup.Jsoup.connect;
+import static org.slf4j.LoggerFactory.getLogger;
+
 import java.io.IOException;
 
-import org.apache.commons.lang3.RandomUtils;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,7 @@ import guru.bonacci.oogway.sannyas.general.WebIlluminator;
 @Component
 public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = getLogger(this.getClass());
 
 	@Value("${web.url.goodreads:http://www.goodreads.com/quotes/tag/}")
 	private String url;
@@ -32,14 +33,14 @@ public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
 	public String determineURL(String searchStr) {
 		String searchURL = url + searchStr;
 		Integer nrOfPages = getNrOfPages(searchURL);
-		return searchURL + "?page=" + RandomUtils.nextInt(1, nrOfPages + 1);
+		return searchURL + "?page=" + nextInt(1, nrOfPages + 1);
 	}
 
 	@Override
     public Integer getNrOfPages(String searchURL) {
 		int pageNr = 1;
 		try {
-			Document doc = Jsoup.connect(searchURL).get();
+			Document doc = connect(searchURL).get();
 			Elements elements = doc.select("span.gap");
 			pageNr = Integer.valueOf(elements.first().nextElementSibling().nextElementSibling().text());
 		} catch (Exception e) { 
@@ -55,7 +56,7 @@ public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
 	@Override
 	public Elements consultWeb(String searchURL) {
 		try {
-			Document doc = Jsoup.connect(searchURL).get();
+			Document doc = connect(searchURL).get();
 			return doc.select("div.quoteText");
 		} catch (IOException e) {
 			logger.error(e.getMessage());

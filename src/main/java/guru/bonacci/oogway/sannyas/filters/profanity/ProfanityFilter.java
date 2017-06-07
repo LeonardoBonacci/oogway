@@ -1,5 +1,7 @@
 package guru.bonacci.oogway.sannyas.filters.profanity;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,7 +10,6 @@ import java.util.HashMap;
 import java.util.function.Predicate;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProfanityFilter implements Predicate<String> {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = getLogger(this.getClass());
 
 	/**
 	 * Borrowed code

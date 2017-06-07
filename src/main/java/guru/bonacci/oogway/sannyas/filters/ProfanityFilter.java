@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannyas.filters.profanity;
+package guru.bonacci.oogway.sannyas.filters;
 
 import static org.slf4j.LoggerFactory.getLogger;
 

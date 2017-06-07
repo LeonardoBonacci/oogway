@@ -35,7 +35,7 @@ public class KeyPhraserTest {
      }
      
      @Test
-     public void shouldLemmatize() {
+     public void shouldDeduceKeyPhrases() {
          assertThat(new KeyPhraser().apply(input), is(equalTo(output)));
      }
 }

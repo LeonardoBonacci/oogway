@@ -23,10 +23,10 @@ import org.springframework.stereotype.Component;
 public class LengthFilter implements Predicate<String> {
 
 	@Value("${filter.maxlength:1000}")
-	private Integer max_length;
+	private Integer maxLength;
 	
 	@Override
 	public boolean test(String input) {
-		return input.length() < max_length;
+		return input.length() < maxLength;
 	}
 }

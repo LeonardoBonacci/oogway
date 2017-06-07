@@ -1,10 +1,16 @@
 package guru.bonacci.oogway.sannyas.filters.profanity;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -73,35 +79,28 @@ public class ProfanityFilter implements Predicate<String> {
 		}
 	}
 
-//	public void buildDictionaryTree(String fileName) {
-//		String line;
-//		BufferedReader in = null;
-//		try {
-//			ClassLoader classLoader = getClass().getClassLoader();
-//			in = new BufferedReader(new FileReader(classLoader.getResource(fileName).getFile()));
-//			while ((line = in.readLine()) != null) {
-//				// for each bad word
-//				logger.info("Adding to profanity filter: '" + line + "'");
-//				addToTree(line, 0, root);
-//			}
-//
-//		} catch (FileNotFoundException e) { // FileReader
-//			e.printStackTrace();
-//		} catch (IOException e) { // readLine
-//			e.printStackTrace();
-//		} finally {
-//			try {
-//				in.close();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//	}
-
-	public void buildDictionaryTree(String fileName) {
-		String line = "shit";
-		logger.info("Adding to profanity filter: '" + line + "'");
-		addToTree(line, 0, root);
+	private void buildDictionaryTree(String fileName) {
+		String line;
+		BufferedReader in = null;
+		try {
+			Resource resource = new ClassPathResource(fileName);
+			in = new BufferedReader(new InputStreamReader(resource.getInputStream()));
+			while ((line = in.readLine()) != null) {
+				// for each bad word
+				logger.info("Adding to profanity filter: '" + line + "'");
+				addToTree(line, 0, root);
+			}
+		} catch (FileNotFoundException e) { // FileReader
+			e.printStackTrace();
+		} catch (IOException e) { // readLine
+			e.printStackTrace();
+		} finally {
+			try {
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void addToTree(String badWordLine, int characterIndex, TreeNode node) {

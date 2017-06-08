@@ -7,11 +7,9 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.sannyas.filters.LengthFilter;
-
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
 public class DuplicateRemoverTest {
 
     @InjectMocks

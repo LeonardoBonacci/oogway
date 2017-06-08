@@ -5,9 +5,6 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +13,7 @@ import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.es.Gem;
 import guru.bonacci.oogway.es.OracleRepository;
-import guru.bonacci.oogway.sannyas.filters.ProfanityFilter;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
-import guru.bonacci.oogway.sannyas.steps.DuplicateRemover;
 
 /**
  * A manager alone cannot perform all the tasks assigned to him. In order to
@@ -47,42 +42,23 @@ public class PitchforkManager {
 	private OracleRepository repository;
 
 	@Autowired
-	private DuplicateRemover duplicateRemover;
+	private PreProcessor preProcessor;
 
 	@Autowired
-	private ProfanityFilter profanityFilter;
+	private PostProcessor postProcessor;
 
 	public void delegate(String input) {
 		logger.info("About to analyzer input: '" + input + "'");
 
-		// We take a random Sannyasin
+		// We take one (random) Sannyasin at the time
 		List<Sannyasin> sannyas = new ArrayList<>(applicationContext.getBeansOfType(Sannyasin.class).values());
 		Sannyasin sannya = sannyas.get(nextInt(0, sannyas.size()));
 
-		// Seeking consists of four steps
-		// pre-proces the input
-		Function<String,String> preprocessing = sannya.preprocessingSteps().stream()
-																		   .reduce(Function.identity(), Function::andThen);
-		preprocessing.andThen(duplicateRemover);
-
-		String preprocessedInput = preprocessing.apply(input);
-		logger.info(sannya.getClass() + "- Preprocessed input: '" + preprocessedInput + "'");
-
-		// acquire wisdom
+		String preprocessedInput = preProcessor.goForIt(sannya, input);
+		
 		List<String> found = sannya.seek(preprocessedInput);
 
-		// filter the wisdom..
-		Predicate<String> postfiltering = sannya.postfilteringStep().stream()
-															  		.reduce(p -> true, Predicate::and);
-		postfiltering.and(profanityFilter);
-		
-		Stream<Gem> postfiltered = found.stream()
-			 .filter(postfiltering)
-			 .peek(f -> logger.info("Indexing wisdom: '" + f + "'")) 
-			 .map(Gem::new);
-
-		// ..and bulk persist it
-		Iterable<Gem> it = postfiltered::iterator;
+		Iterable<Gem> it = postProcessor.awayWithTheClutter(sannya, found);
 		repository.save(it);
 	}
 }

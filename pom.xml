@@ -5,15 +5,17 @@
 	<artifactId>oogway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.2.RELEASE</version>
 	</parent>
+
+	<properties>
+		<java.version>1.8</java.version>
+	    <lucene-version>5.5.2</lucene-version>
+	</properties>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -23,10 +25,29 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+
+			<!-- For language analysis -->
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-queryparser</artifactId>
+				<version>${lucene-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-analyzers-common</artifactId>
+				<version>${lucene-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-queries</artifactId>
+				<version>${lucene-version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<dependencies>
 
+	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
@@ -43,42 +64,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-activemq</artifactId>
 		</dependency>
- 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        
-		<!-- HTML parsing -->
 		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.9.1</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.5</version>
-		</dependency>
-
-		<!-- Language analysis -->
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-queryparser</artifactId>
-			<version>5.5.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-analyzers-common</artifactId>
-			<version>5.5.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-queries</artifactId>
-			<version>5.5.2</version>
 		</dependency>
 
 		<dependency>
@@ -108,13 +103,14 @@
 			<classifier>models</classifier>
 		</dependency>
 
-		<!-- Runtime, for Embedded Elasticsearch, comment this if connect to external elastic search server-->
-        <dependency>
-            <groupId>net.java.dev.jna</groupId>
-            <artifactId>jna</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        
+		<!-- Runtime, for Embedded Elasticsearch, comment this if connect to external 
+			elastic search server -->
+		<dependency>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>jna</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
 	</dependencies>
 
 </project>

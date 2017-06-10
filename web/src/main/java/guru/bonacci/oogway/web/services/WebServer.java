@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.services.web;
+package guru.bonacci.oogway.web.services;
 
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import guru.bonacci.oogway.es.ESConfig;
 import guru.bonacci.oogway.jms.JMSConfig;
-import guru.bonacci.oogway.sannyas.SannyasConfig;
 
 /**
  * Micro-service for the user to communicate with
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@Import({ JMSConfig.class, ESConfig.class, SannyasConfig.class })
+@Import({ JMSConfig.class, ESConfig.class })
 public class WebServer {
 
 	private final Logger logger = getLogger(this.getClass());

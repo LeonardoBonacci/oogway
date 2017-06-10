@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.services.sannyas;
+package guru.bonacci.oogway.sannyas.services;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

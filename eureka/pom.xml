@@ -11,17 +11,17 @@
 	<artifactId>eureka</artifactId>
 	<packaging>jar</packaging>
 
-	<dependencies>
-		<dependency>
-			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>sannya</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>web</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
+	<properties>
+		<start-class>guru.bonacci.oogway.registration.Main</start-class>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

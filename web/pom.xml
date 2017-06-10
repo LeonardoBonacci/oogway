@@ -11,6 +11,10 @@
 	<artifactId>web</artifactId>
 	<packaging>jar</packaging>
 
+	<properties>
+		<start-class>guru.bonacci.oogway.web.Main</start-class>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
@@ -22,11 +26,14 @@
 			<artifactId>oracle</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<dependency>
-			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>sannya</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>

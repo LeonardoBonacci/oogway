@@ -1,22 +1,17 @@
 package guru.bonacci.oogway.jms;
 
+import static java.util.Arrays.asList;
+
 import javax.jms.ConnectionFactory;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.listener.DefaultMessageListenerContainer;
-import org.springframework.jms.listener.MessageListenerContainer;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.SimpleMessageConverter;
-
-import guru.bonacci.oogway.sannyas.SmokeSignalController;
-
-import static java.util.Arrays.asList;
 
 @Configuration
 @ComponentScan(basePackages="bonacci.oogway.jms")
@@ -24,10 +19,7 @@ public class JMSConfig {
 
 	private static final String DEFAULT_BROKER_URL = "tcp://localhost:61616";
 	
-	private static final String QUEUE = "winnetou";
-	
-	@Autowired
-	private SmokeSignalController messageReceiver;
+	public static final String QUEUE = "winnetou";
 	
 	@Bean
 	public ConnectionFactory connectionFactory(){
@@ -44,18 +36,6 @@ public class JMSConfig {
 		connectionFactory.setSessionCacheSize(10);
 		return connectionFactory;
 	}
-	
-	/*
-	 * Message listener container, used for invoking messageReceiver.onMessage on message reception.
-	 */
-	@Bean
-	public MessageListenerContainer getContainer(){
-		DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
-		container.setConnectionFactory(connectionFactory());
-		container.setDestinationName(QUEUE);
-		container.setMessageListener(messageReceiver);
-		return container;
-	}
 
 	/*
 	 * Used here for Sending Messages.
@@ -67,7 +47,6 @@ public class JMSConfig {
 		template.setDefaultDestinationName(QUEUE);
 		return template;
 	}
-	
 	
 	@Bean 
 	MessageConverter converter(){

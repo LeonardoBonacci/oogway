@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.services.web;
+package guru.bonacci.oogway.web.services;
 
 import static org.apache.commons.lang.StringUtils.isEmpty;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.es.Gem;
 import guru.bonacci.oogway.es.OracleRepo;
-import guru.bonacci.oogway.jms.SmokeSignal;
 
 /**
  * Tier I is the initial support level responsible for basic customer issues. It
@@ -45,7 +44,7 @@ public class FirstLineSupportService {
 			return "No question no answer..";
 
 		// Send a message to the world...
-		jmsTemplate.send(session -> session.createObjectMessage(new SmokeSignal(q)));
+		jmsTemplate.send(session -> session.createObjectMessage(q));
 
 		// Consult the oracle..
 		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchQuery(Gem.ESSENCE, q))

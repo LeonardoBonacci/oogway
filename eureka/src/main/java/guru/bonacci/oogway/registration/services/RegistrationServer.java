@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.services.registration;
+package guru.bonacci.oogway.registration.services;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

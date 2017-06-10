@@ -11,6 +11,10 @@
 	<artifactId>sannya</artifactId>
 	<packaging>jar</packaging>
 
+	<properties>
+		<start-class>guru.bonacci.oogway.sannyas.Main</start-class>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
@@ -24,4 +28,12 @@
 		</dependency>
 	</dependencies>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>

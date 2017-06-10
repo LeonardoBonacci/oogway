@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>guru.bonacci.oogway</groupId>
-	<artifactId>the-master</artifactId>
+	<groupId>bonacci</groupId>
+	<artifactId>oogway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
 
 	<properties>
-		<start-class>guru.bonacci.oogway.services.Main</start-class>
 		<java.version>1.8</java.version>
 	</properties>
 
@@ -16,15 +14,6 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.2.RELEASE</version>
 	</parent>
-
-	<modules>
-		<module>eureka</module>
-		<module>oracle</module>
-		<module>web</module>
-    	<module>sannya</module>
-    	<module>messaging</module>
-	</modules>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -36,8 +25,8 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
@@ -54,12 +43,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-activemq</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
+ 		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
 		<!-- HTML parsing -->
 		<dependency>
 			<groupId>org.jsoup</groupId>
@@ -119,22 +108,13 @@
 			<classifier>models</classifier>
 		</dependency>
 
-		<!-- Runtime, for Embedded Elasticsearch, comment this if connect to external 
-			elastic search server -->
-		<dependency>
-			<groupId>net.java.dev.jna</groupId>
-			<artifactId>jna</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
+		<!-- Runtime, for Embedded Elasticsearch, comment this if connect to external elastic search server-->
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        
 	</dependencies>
 
-	<build>
-	    <plugins>
-	        <plugin>
-	            <groupId>org.springframework.boot</groupId>
-	            <artifactId>spring-boot-maven-plugin</artifactId>
-	        </plugin>
-	    </plugins>
-	</build>
 </project>

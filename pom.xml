@@ -4,6 +4,7 @@
 	<groupId>bonacci</groupId>
 	<artifactId>oogway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
 	<properties>
 		<start-class>guru.bonacci.oogway.services.Main</start-class>
@@ -15,6 +16,11 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.2.RELEASE</version>
 	</parent>
+
+	<modules>
+		<module>eureka</module>
+	</modules>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.services;
+package guru.bonacci.oogway;
 
 
 import guru.bonacci.oogway.services.registration.RegistrationServer;

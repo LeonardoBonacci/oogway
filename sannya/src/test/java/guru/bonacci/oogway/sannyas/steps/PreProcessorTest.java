@@ -12,24 +12,16 @@ import java.util.function.Function;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.TestConfig;
-import guru.bonacci.oogway.es.TestBootApplication;
 import guru.bonacci.oogway.sannyas.PreProcessor;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
-import guru.bonacci.oogway.sannyas.steps.DuplicateRemover;
 
-@SpringBootTest(classes = TestBootApplication.class)
-@TestPropertySource("classpath:/application-test.properties")
 @ContextConfiguration(classes = TestConfig.class)
 public class PreProcessorTest {
 

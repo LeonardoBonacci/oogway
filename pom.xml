@@ -22,7 +22,8 @@
 		<module>oracle</module>
 		<module>web</module>
     	<module>sannya</module>
-  </modules>
+    	<module>messaging</module>
+	</modules>
 
 	<dependencyManagement>
 		<dependencies>

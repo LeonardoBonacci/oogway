@@ -1,9 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>bonacci</groupId>
-	<artifactId>oogway</artifactId>
+	<groupId>guru.bonacci.oogway</groupId>
+	<artifactId>the-master</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -13,7 +14,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-	    <lucene-version>5.5.2</lucene-version>
+		<lucene-version>5.5.2</lucene-version>
 	</properties>
 
 	<dependencyManagement>
@@ -44,34 +45,19 @@
 				<artifactId>lucene-queries</artifactId>
 				<version>${lucene-version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.5</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.5</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.5</version>
-		</dependency>
-
-		<!-- Runtime, for Embedded Elasticsearch, comment this if connect to external 
-			elastic search server -->
-		<dependency>
-			<groupId>net.java.dev.jna</groupId>
-			<artifactId>jna</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
-	</dependencies>
 
 </project>

@@ -13,20 +13,40 @@
 
 	<properties>
 		<start-class>guru.bonacci.oogway.sannyas.Main</start-class>
+		<nlp-version>3.7.0</nlp-version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
 			<artifactId>messaging</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
 			<artifactId>oracle</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- remove after adding functionality to OracleRepo -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+		</dependency>
+		<!-- remove after changing JMS functionality -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-activemq</artifactId>
@@ -36,19 +56,16 @@
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-queryparser</artifactId>
-	    	<version>5.5.2</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-analyzers-common</artifactId>
-	    	<version>5.5.2</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-queries</artifactId>
-	    	<version>5.5.2</version>
 		</dependency>
 
 		<!-- HTML parsing -->
@@ -61,7 +78,7 @@
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
-			<version>3.7.0</version>
+			<version>${nlp-version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.apache.lucene</groupId>
@@ -81,10 +98,14 @@
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
-			<version>3.7.0</version>
+			<version>${nlp-version}</version>
 			<classifier>models</classifier>
 		</dependency>
 
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
 	</dependencies>
 
 

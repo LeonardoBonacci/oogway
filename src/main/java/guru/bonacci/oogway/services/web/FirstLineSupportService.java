@@ -15,7 +15,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.es.Gem;
-import guru.bonacci.oogway.es.OracleRepository;
+import guru.bonacci.oogway.es.OracleRepo;
 import guru.bonacci.oogway.jms.SmokeSignal;
 
 /**
@@ -35,7 +35,7 @@ public class FirstLineSupportService {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
-	private OracleRepository repository;
+	private OracleRepo repository;
 
 	@Autowired
 	private JmsTemplate jmsTemplate;

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
 
 import guru.bonacci.oogway.es.ESConfig;
 import guru.bonacci.oogway.jms.JMSConfig;
-import guru.bonacci.oogway.sannyas.SannyasConfiguration;
+import guru.bonacci.oogway.sannyas.SannyasConfig;
 
 /**
  * Micro-service for retrieval and indexing of wisdom
@@ -16,7 +16,7 @@ import guru.bonacci.oogway.sannyas.SannyasConfiguration;
 @EnableAutoConfiguration
 @EnableDiscoveryClient
 @EnableCaching(proxyTargetClass=true)
-@Import({JMSConfig.class, SannyasConfiguration.class, ESConfig.class})
+@Import({JMSConfig.class, ESConfig.class, SannyasConfig.class})
 public class SannyasServer {
 
 	public static void main(String[] args) {

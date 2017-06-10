@@ -15,7 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.es.Gem;
-import guru.bonacci.oogway.es.OracleRepository;
+import guru.bonacci.oogway.es.OracleRepo;
 import guru.bonacci.oogway.sannyas.filters.ProfanityFilter;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 import guru.bonacci.oogway.sannyas.steps.DuplicateRemover;
@@ -44,7 +44,7 @@ public class PitchforkManager {
 	private ApplicationContext applicationContext;
 
 	@Autowired
-	private OracleRepository repository;
+	private OracleRepo repository;
 
 	@Autowired
 	private DuplicateRemover duplicateRemover;

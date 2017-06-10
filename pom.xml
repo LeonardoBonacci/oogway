@@ -19,6 +19,7 @@
 
 	<modules>
 		<module>eureka</module>
+		<module>oracle</module>
 	</modules>
 
 	<dependencyManagement>

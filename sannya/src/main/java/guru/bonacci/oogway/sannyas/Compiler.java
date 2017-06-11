@@ -11,16 +11,19 @@ import org.springframework.stereotype.Component;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 import guru.bonacci.oogway.sannyas.steps.DuplicateRemover;
 
-//TODO some name
+/**
+ * [Middle English compilen, from Old French compiler, probably from Latin compilare, 
+ * to plunder : com-, com- + pīla, heap (of stones), pillar.]
+ */
 @Component
-public class PreProcessor {
+public class Compiler {
 
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
 	private DuplicateRemover duplicateRemover;
 
-	public String goForIt(Sannyasin sannya, String input) {
+	public String puzzle(Sannyasin sannya, String input) {
 		Function<String,String> preprocessing = sannya.preprocessingSteps().stream()
 																		   .reduce(Function.identity(), Function::andThen);
 		preprocessing.andThen(duplicateRemover);

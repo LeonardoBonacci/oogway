@@ -1,21 +1,15 @@
 package guru.bonacci.oogway.web.services;
 
 import static org.apache.commons.lang.StringUtils.isEmpty;
-import static org.apache.commons.lang3.RandomUtils.nextInt;
-import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
-import static org.slf4j.LoggerFactory.getLogger;
 
-import java.util.List;
+import java.util.Optional;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.es.Gem;
-import guru.bonacci.oogway.es.OracleRepo;
+import guru.bonacci.oogway.es.GemRepository;
 
 /**
  * Tier I is the initial support level responsible for basic customer issues. It
@@ -31,10 +25,8 @@ import guru.bonacci.oogway.es.OracleRepo;
 @Service
 public class FirstLineSupportService {
 
-	private final Logger logger = getLogger(this.getClass());
-
 	@Autowired
-	private OracleRepo repository;
+	private GemRepository gemRepository;
 
 	@Autowired
 	private JmsTemplate jmsTemplate;
@@ -47,12 +39,7 @@ public class FirstLineSupportService {
 		jmsTemplate.send(session -> session.createObjectMessage(q));
 
 		// Consult the oracle..
-		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchQuery(Gem.ESSENCE, q))
-				.build();
-		List<Gem> result = repository.search(searchQuery).getContent();
-		result.stream().map(Gem::getEssence).forEach(logger::debug);
-
-		return result.size() > 0 ? result.get(nextInt(0, result.size())).getEssence()
-				: "I'm speechless, are you sure?";
+		Optional<Gem> gem = gemRepository.searchForOne(q);
+		return gem.map(Gem::getEssence).orElse("I'm speechless, are you sure?");
 	}
 }

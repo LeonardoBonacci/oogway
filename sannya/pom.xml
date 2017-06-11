@@ -41,11 +41,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- remove after adding functionality to OracleRepo -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-		</dependency>
 		<!-- remove after changing JMS functionality -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -1,18 +1,15 @@
 package guru.bonacci.oogway.sannyas;
 
-import static org.apache.commons.lang3.RandomUtils.nextInt;
 import static org.slf4j.LoggerFactory.getLogger;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.es.Gem;
-import guru.bonacci.oogway.es.OracleRepo;
+import guru.bonacci.oogway.es.GemRepository;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 
 /**
@@ -36,29 +33,24 @@ public class PitchforkManager {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
-	private ApplicationContext applicationContext;
+	private SannyasPicker sannyasPicker;
 
 	@Autowired
-	private OracleRepo repository;
+	private Compiler compiler;
 
 	@Autowired
-	private PreProcessor preProcessor;
+	private CleaningAgent cleaningAgent;
 
 	@Autowired
-	private PostProcessor postProcessor;
+	private GemRepository repository;
 
 	public void delegate(String input) {
 		logger.info("About to analyzer input: '" + input + "'");
 
-		// We take one (random) Sannyasin at the time
-		List<Sannyasin> sannyas = new ArrayList<>(applicationContext.getBeansOfType(Sannyasin.class).values());
-		Sannyasin sannya = sannyas.get(nextInt(0, sannyas.size()));
-
-		String preprocessedInput = preProcessor.goForIt(sannya, input);
-		
+		Sannyasin sannya = sannyasPicker.pickOne();
+		String preprocessedInput = compiler.puzzle(sannya, input);
 		List<String> found = sannya.seek(preprocessedInput);
-
-		Iterable<Gem> it = postProcessor.awayWithTheClutter(sannya, found);
-		repository.save(it);
+		List<Gem> cleaned = cleaningAgent.noMoreClutter(sannya, found);
+		repository.saveTheNewOnly(cleaned);
 	}
 }

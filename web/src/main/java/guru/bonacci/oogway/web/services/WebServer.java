@@ -38,7 +38,7 @@ public class WebServer {
 		private FirstLineSupportService service;
 
 		@RequestMapping(path = "/", method = GET)
-		public String index(@RequestParam("q") String q) {
+		public String enquire(@RequestParam("q") String q) {
 			logger.info("Receiving request for a wise answer on: '" + q + "'");
 			return service.enquire(q);
 		}

@@ -10,14 +10,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TestBootApplication.class)
 @TestPropertySource("classpath:/application-test.properties")
-public class OracleRepoTest {
+public class GemRepositoryTest {
 
 	@Autowired
-	OracleRepo repo;
+	GemRepository repo;
 	
 	@Test
 	public void shouldGo() {
 		Gem g = new Gem("a");
 		repo.save(g);
 	}
+	
+
 }

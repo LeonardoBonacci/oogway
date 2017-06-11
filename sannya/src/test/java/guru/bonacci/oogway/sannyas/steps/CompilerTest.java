@@ -19,17 +19,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
 import guru.bonacci.oogway.TestConfig;
-import guru.bonacci.oogway.sannyas.PreProcessor;
+import guru.bonacci.oogway.sannyas.Compiler;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 
 @ContextConfiguration(classes = TestConfig.class)
-public class PreProcessorTest {
+public class CompilerTest {
 
 	private static final String INPUT = "some string without meaning";
 
 	@InjectMocks
 	@Autowired
-	private PreProcessor preProcessor;
+	private Compiler compiler;
 
 	@Mock
 	private Sannyasin sannya;
@@ -47,7 +47,7 @@ public class PreProcessorTest {
 		when(sannya.preprocessingSteps()).thenReturn(asList(Function.identity()));
 		when(duplicateRemover.apply(INPUT)).thenReturn(INPUT);
 
-		String preprocessedInput = preProcessor.goForIt(sannya, INPUT);
+		String preprocessedInput = compiler.puzzle(sannya, INPUT);
 		assertThat(preprocessedInput, is(equalTo(INPUT)));
 	}
 	
@@ -61,7 +61,7 @@ public class PreProcessorTest {
 		when(sannya.preprocessingSteps()).thenReturn(asList(f));
 		when(duplicateRemover.apply(inputReverse)).thenReturn(somethingElse);
 
-		String preprocessedInput = preProcessor.goForIt(sannya, INPUT);
+		String preprocessedInput = compiler.puzzle(sannya, INPUT);
 		assertThat(preprocessedInput, is(equalTo(somethingElse)));
 	}
 }

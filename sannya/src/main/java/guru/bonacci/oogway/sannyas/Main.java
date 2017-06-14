@@ -13,24 +13,12 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		switch (args.length) {
-		case 1:
+		if (args.length == 1) {
 			// Optionally set the HTTP port to listen on, overrides
 			// value in the <server-name>-server.yml file
 			System.setProperty("server.port", args[0]);
-			// Fall through into ..
-			break;
-
-		default:
-			usage();
-			return;
 		}
 
 		SannyasServer.main(args);
-	}
-
-	protected static void usage() {
-		System.out.println("Usage: java -jar ... [server-port]");
-		System.out.println("     where server-port > 1024");
 	}
 }

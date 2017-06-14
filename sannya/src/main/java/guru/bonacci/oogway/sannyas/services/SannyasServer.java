@@ -7,7 +7,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Import;
 
 import guru.bonacci.oogway.es.ESConfig;
-import guru.bonacci.oogway.jms.JMSConfig;
 import guru.bonacci.oogway.sannyas.SannyasConfig;
 
 /**
@@ -16,7 +15,7 @@ import guru.bonacci.oogway.sannyas.SannyasConfig;
 @EnableAutoConfiguration
 @EnableDiscoveryClient
 @EnableCaching(proxyTargetClass=true)
-@Import({JMSConfig.class, SannyasConfig.class, ESConfig.class})
+@Import({SannyasConfig.class, ESConfig.class})
 public class SannyasServer {
 
 	public static void main(String[] args) {

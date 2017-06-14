@@ -28,4 +28,3 @@ start cmd.exe /k "cd %web% & %maven-build% & java -jar target\\%web%-%version%.j
 
 rem and return to the scripts directory
 cd src\main\scripts
-pause

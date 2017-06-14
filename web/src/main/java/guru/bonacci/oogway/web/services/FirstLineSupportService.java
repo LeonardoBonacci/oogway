@@ -5,6 +5,7 @@ import static org.apache.commons.lang.StringUtils.isEmpty;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
@@ -31,12 +32,16 @@ public class FirstLineSupportService {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 
+	@Value("${spring.activemq.queue.name}")
+	private String queue;
+
+	
 	public String enquire(String q) {
 		if (isEmpty(q))
 			return "No question no answer..";
 
 		// Send a message to the world...
-		jmsTemplate.send(session -> session.createObjectMessage(q));
+		jmsTemplate.send(queue, session -> session.createTextMessage(q));
 
 		// Consult the oracle..
 		Optional<Gem> gem = gemRepository.searchForOne(q);

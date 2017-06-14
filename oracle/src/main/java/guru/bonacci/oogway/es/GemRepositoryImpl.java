@@ -32,8 +32,8 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 	@Override
 	public void saveTheNewOnly(Collection<Gem> entities) {
 		Stream<Gem> newOnes = entities.stream()
-									  .filter(e -> !gemRepository.exists(e.getId()))
-									  .peek(f -> logger.info("About to index wisdom: '" + f + "'"));
+									  .filter(gem -> !gemRepository.exists(gem.getId()))
+									  .peek(gem -> logger.info("About to index wisdom: '" + gem + "'"));
 		Iterable<Gem> it = newOnes::iterator;
 		gemRepository.save(it);
 	}

@@ -2,6 +2,7 @@ package guru.bonacci.oogway.es;
 
 import static org.springframework.data.elasticsearch.annotations.FieldType.String;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -52,5 +53,15 @@ public class Gem {
 
 	public void setEssence(String essence) {
 		this.essence = essence;
+	}
+	
+	@Override
+	public String toString() {
+	    return essence;
+	}	
+	
+	@Override
+	public int hashCode() {
+	    return HashCodeBuilder.reflectionHashCode(this);
 	}
 }

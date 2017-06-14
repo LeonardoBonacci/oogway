@@ -15,7 +15,7 @@ public class Main {
 
 		if (args.length == 1) {
 			// Optionally set the HTTP port to listen on, overrides
-			// value in the <server-name>-server.yml file
+			// value in the <server-name>-server.properties file
 			System.setProperty("server.port", args[0]);
 		}
 

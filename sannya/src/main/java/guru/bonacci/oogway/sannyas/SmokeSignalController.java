@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import guru.bonacci.oogway.jms.JMSConfig;
-
 @Controller
 public class SmokeSignalController {
 
@@ -21,7 +19,7 @@ public class SmokeSignalController {
 	@Autowired
 	private PitchforkManager manager;
 
-	@JmsListener(destination = JMSConfig.QUEUE)
+	@JmsListener(destination = "${spring.activemq.queue.name}")
 	public void onMessage(String input) {
 		logger.info("Received message <" + input + ">");
 		manager.delegate(input);

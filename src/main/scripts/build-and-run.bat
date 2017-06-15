@@ -4,7 +4,7 @@ echo Let's build oogway
 cd..\..\..
 echo Its home directory is %cd%
 
-set version="0.0.1-SNAPSHOT"
+set version="1.0.0-SNAPSHOT"
 set persistence="oracle"
 set registration="eureka"
 set crawler="sannya"
@@ -16,6 +16,9 @@ if "%skip-tests%" == "skip" (
 ) else (
     set maven-build=mvn clean install
 )
+
+rem quickly build the parent pom
+start /wait cmd.exe /c "mvn clean install"
     
 rem wait until the persistence library is built
 start /wait cmd.exe /c "cd %persistence% & %maven-build% & java -jar target\\%persistence%-%version%.jar"

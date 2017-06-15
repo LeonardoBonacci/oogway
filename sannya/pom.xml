@@ -5,8 +5,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>guru.bonacci.oogway</groupId>
-		<artifactId>the-master</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>sannya</artifactId>
 	<packaging>jar</packaging>
@@ -17,11 +17,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>messaging</artifactId>
-			<version>${project.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
 			<artifactId>oracle</artifactId>

@@ -1,5 +1,6 @@
 package guru.bonacci.oogway.es;
 
+import static guru.bonacci.oogway.util.MyListUtils.getRandom;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -13,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
-
-import guru.bonacci.oogway.util.MyListUtils;
 
 public class GemRepositoryImpl implements GemRepositoryCustom {
 
@@ -48,6 +47,6 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 		if (logger.isDebugEnabled()) 
 			result.stream().map(Gem::getEssence).forEach(logger::debug); 
 
-		return MyListUtils.getRandom(result);
+		return getRandom(result);
 	}
 }

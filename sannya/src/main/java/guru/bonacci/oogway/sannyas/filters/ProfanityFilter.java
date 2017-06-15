@@ -23,6 +23,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProfanityFilter implements Predicate<String> {
 
+	private static final String FILE_NAME = "badwords.txt";
+			
 	private final Logger logger = getLogger(this.getClass());
 
 	/**
@@ -36,7 +38,7 @@ public class ProfanityFilter implements Predicate<String> {
 	private boolean merdaFound;
 
 	public ProfanityFilter() {
-		buildDictionaryTree("badwords.txt");
+		buildDictionaryTree(FILE_NAME);
 	}
 
 	@Override

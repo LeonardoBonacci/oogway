@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.es.Gem;
 import guru.bonacci.oogway.es.GemRepository;
+import guru.bonacci.oogway.web.helpers.Postponer;
 
 /**
  * Tier I is the initial support level responsible for basic customer issues. It
@@ -30,6 +31,9 @@ public class FirstLineSupportService {
 	private GemRepository gemRepository;
 
 	@Autowired
+	private Postponer postponer;
+
+	@Autowired
 	private JmsTemplate jmsTemplate;
 
 	@Value("${spring.activemq.queue.name}")
@@ -45,6 +49,6 @@ public class FirstLineSupportService {
 
 		// Consult the oracle..
 		Optional<Gem> gem = gemRepository.searchForOne(q);
-		return gem.map(Gem::getEssence).orElse("I'm speechless, are you sure?");
+		return gem.map(Gem::getEssence).orElse(postponer.saySomething());
 	}
 }

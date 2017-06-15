@@ -47,7 +47,7 @@ public class BrainyQuoteIlluminator extends WebIlluminator implements PageCache 
 			// No results or one result: page 1
 			// Not enough results for a gap between the pagination numbers: page 1
 			// More than two results: page x
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 		return pageNr;
     }

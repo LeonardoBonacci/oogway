@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannyas;
+package guru.bonacci.oogway.sannyas.services;
 
 import static org.slf4j.LoggerFactory.getLogger;
 

@@ -19,8 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
 import guru.bonacci.oogway.TestConfig;
-import guru.bonacci.oogway.sannyas.Compiler;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
+import guru.bonacci.oogway.sannyas.services.ForePlayer;
 
 @ContextConfiguration(classes = TestConfig.class)
 public class CompilerTest {
@@ -29,7 +29,7 @@ public class CompilerTest {
 
 	@InjectMocks
 	@Autowired
-	private Compiler compiler;
+	private ForePlayer forePlayer;
 
 	@Mock
 	private Sannyasin sannya;
@@ -47,7 +47,7 @@ public class CompilerTest {
 		when(sannya.preprocessingSteps()).thenReturn(asList(Function.identity()));
 		when(duplicateRemover.apply(INPUT)).thenReturn(INPUT);
 
-		String preprocessedInput = compiler.puzzle(sannya, INPUT);
+		String preprocessedInput = forePlayer.puzzle(sannya, INPUT);
 		assertThat(preprocessedInput, is(equalTo(INPUT)));
 	}
 	
@@ -61,7 +61,7 @@ public class CompilerTest {
 		when(sannya.preprocessingSteps()).thenReturn(asList(f));
 		when(duplicateRemover.apply(inputReverse)).thenReturn(somethingElse);
 
-		String preprocessedInput = compiler.puzzle(sannya, INPUT);
+		String preprocessedInput = forePlayer.puzzle(sannya, INPUT);
 		assertThat(preprocessedInput, is(equalTo(somethingElse)));
 	}
 }

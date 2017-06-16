@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannyas;
+package guru.bonacci.oogway.sannyas.services;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -12,11 +12,9 @@ import guru.bonacci.oogway.sannyas.general.Sannyasin;
 import guru.bonacci.oogway.sannyas.steps.DuplicateRemover;
 
 /**
- * [Middle English compilen, from Old French compiler, probably from Latin compilare, 
- * to plunder : com-, com- + pīla, heap (of stones), pillar.]
  */
 @Component
-public class Compiler {
+public class ForePlayer {
 
 	private final Logger logger = getLogger(this.getClass());
 

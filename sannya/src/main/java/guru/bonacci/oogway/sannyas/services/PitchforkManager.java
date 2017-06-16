@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannyas;
+package guru.bonacci.oogway.sannyas.services;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -36,7 +36,7 @@ public class PitchforkManager {
 	private SannyasPicker sannyasPicker;
 
 	@Autowired
-	private Compiler compiler;
+	private ForePlayer forePlayer;
 
 	@Autowired
 	private CleaningAgent cleaningAgent;
@@ -48,7 +48,7 @@ public class PitchforkManager {
 		logger.info("About to analyzer input: '" + input + "'");
 
 		Sannyasin sannya = sannyasPicker.pickOne();
-		String preprocessedInput = compiler.puzzle(sannya, input);
+		String preprocessedInput = forePlayer.puzzle(sannya, input);
 		List<String> found = sannya.seek(preprocessedInput);
 		List<Gem> cleaned = cleaningAgent.noMoreClutter(sannya, found);
 		repository.saveTheNewOnly(cleaned);

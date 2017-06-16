@@ -1,14 +1,14 @@
 @echo off
 title Simple way to build and run oogway, enjoy a coffee while you're waiting...
-echo Let's build oogway
-cd..\..\..
-echo Its home directory is %cd%
+cd..\..\..\..
+echo Let's build oogway from directory %cd%
 
-set version="1.0.0-SNAPSHOT"
-set persistence="oracle"
-set registration="eureka"
-set crawler="sannya"
-set web="web"
+set version=1.0.0-SNAPSHOT
+set parent=parent
+set persistence=oracle
+set registration=eureka
+set crawler=sannya
+set web=web
 
 set skip-tests=%1
 if "%skip-tests%" == "skip" (
@@ -18,16 +18,11 @@ if "%skip-tests%" == "skip" (
 )
 
 rem quickly build the parent pom
-start /wait cmd.exe /c "mvn clean install"
-    
-rem wait until the persistence library is built
-start /wait cmd.exe /c "cd %persistence% & %maven-build% & java -jar target\\%persistence%-%version%.jar"
-rem to then build and run the eureka registration service
-start cmd.exe /k "cd %registration% & %maven-build% & java -jar target\\%registration%-%version%.jar"
-rem and the sannyas crawler service
-start cmd.exe /k "cd %crawler% & %maven-build% & java -jar target\\%crawler%-%version%.jar"
-rem and the web service
-start cmd.exe /k "cd %web% & %maven-build% & java -jar target\\%web%-%version%.jar"
+start /wait cmd.exe /c "%maven-build%"
+ 
+start cmd.exe /k "cd %parent%\%registration% & java -jar target\\%registration%-%version%.jar""
+start cmd.exe /k "cd %parent%\%crawler% & java -jar target\\%crawler%-%version%.jar""
+start cmd.exe /k "cd %parent%\%web% & java -jar target\\%web%-%version%.jar""
 
 rem and return to the scripts directory
-cd src\main\scripts
+cd parent\src\main\scripts

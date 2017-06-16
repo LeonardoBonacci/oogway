@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.util;
+package guru.bonacci.oogway.utils;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 
@@ -9,7 +9,9 @@ import java.util.Random;
 /**
  * This class does not belong here. 
  * In fact, it does not belong anywhere. 
- * It should not even exist.
+ * It should not even exist. 
+ * Someone else should have written a proper getRandom function in a famous library.
+ * However, I couldn't find one.
  * That why it is here.
  */
 public class MyListUtils {

@@ -1,8 +1,8 @@
 package guru.bonacci.oogway.web.helpers;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
-import static guru.bonacci.oogway.util.MyListUtils.getRandom;
-import static guru.bonacci.oogway.util.MyFileUtils.readToList;
+import static guru.bonacci.oogway.utils.MyFileUtils.readToList;
+import static guru.bonacci.oogway.utils.MyListUtils.getRandom;
 import static java.util.Collections.singletonList;
 import static org.slf4j.LoggerFactory.getLogger;
 

@@ -1,6 +1,6 @@
 package guru.bonacci.oogway.es;
 
-import static guru.bonacci.oogway.util.MyListUtils.getRandom;
+import static guru.bonacci.oogway.utils.MyListUtils.getRandom;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 import static org.slf4j.LoggerFactory.getLogger;
 

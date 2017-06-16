@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.es;
+package guru.bonacci.oogway.oracle;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

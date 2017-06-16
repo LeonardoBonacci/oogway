@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.es;
+package guru.bonacci.oogway.oracle;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

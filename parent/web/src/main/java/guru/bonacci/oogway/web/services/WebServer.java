@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Import;
 
-import guru.bonacci.oogway.OracleConfig;
+import guru.bonacci.oogway.oracle.OracleConfig;
 import guru.bonacci.oogway.web.WebConfig;
 
 /**

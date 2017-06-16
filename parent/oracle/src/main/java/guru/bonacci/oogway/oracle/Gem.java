@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.es;
+package guru.bonacci.oogway.oracle;
 
 import static org.springframework.data.elasticsearch.annotations.FieldType.String;
 

@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.es;
+package guru.bonacci.oogway.oracle;
 
 import static guru.bonacci.oogway.utils.MyListUtils.getRandom;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;

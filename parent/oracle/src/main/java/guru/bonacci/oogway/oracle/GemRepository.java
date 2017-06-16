@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.es;
+package guru.bonacci.oogway.oracle;
 
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;

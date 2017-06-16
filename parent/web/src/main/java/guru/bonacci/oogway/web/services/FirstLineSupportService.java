@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
-import guru.bonacci.oogway.es.Gem;
-import guru.bonacci.oogway.es.GemRepository;
+import guru.bonacci.oogway.oracle.Gem;
+import guru.bonacci.oogway.oracle.GemRepository;
 import guru.bonacci.oogway.web.helpers.Postponer;
 
 /**

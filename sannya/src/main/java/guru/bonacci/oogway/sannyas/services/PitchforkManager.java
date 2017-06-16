@@ -48,7 +48,7 @@ public class PitchforkManager {
 		logger.info("About to analyzer input: '" + input + "'");
 
 		Sannyasin sannya = sannyasPicker.pickOne();
-		String preprocessedInput = forePlayer.puzzle(sannya, input);
+		String preprocessedInput = forePlayer.play(sannya, input);
 		List<String> found = sannya.seek(preprocessedInput);
 		List<Gem> cleaned = cleaningAgent.noMoreClutter(sannya, found);
 		repository.saveTheNewOnly(cleaned);

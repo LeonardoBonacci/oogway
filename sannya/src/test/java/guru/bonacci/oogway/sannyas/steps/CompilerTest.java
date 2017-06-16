@@ -47,7 +47,7 @@ public class CompilerTest {
 		when(sannya.preprocessingSteps()).thenReturn(asList(Function.identity()));
 		when(duplicateRemover.apply(INPUT)).thenReturn(INPUT);
 
-		String preprocessedInput = forePlayer.puzzle(sannya, INPUT);
+		String preprocessedInput = forePlayer.play(sannya, INPUT);
 		assertThat(preprocessedInput, is(equalTo(INPUT)));
 	}
 	
@@ -61,7 +61,7 @@ public class CompilerTest {
 		when(sannya.preprocessingSteps()).thenReturn(asList(f));
 		when(duplicateRemover.apply(inputReverse)).thenReturn(somethingElse);
 
-		String preprocessedInput = forePlayer.puzzle(sannya, INPUT);
+		String preprocessedInput = forePlayer.play(sannya, INPUT);
 		assertThat(preprocessedInput, is(equalTo(somethingElse)));
 	}
 }

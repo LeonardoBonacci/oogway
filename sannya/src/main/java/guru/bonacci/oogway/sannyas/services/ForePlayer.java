@@ -12,6 +12,8 @@ import guru.bonacci.oogway.sannyas.general.Sannyasin;
 import guru.bonacci.oogway.sannyas.steps.DuplicateRemover;
 
 /**
+ * “Rationalization is foreplay with one's conscience.” 
+ * ― Doug Cooper
  */
 @Component
 public class ForePlayer {
@@ -21,7 +23,7 @@ public class ForePlayer {
 	@Autowired
 	private DuplicateRemover duplicateRemover;
 
-	public String puzzle(Sannyasin sannya, String input) {
+	public String play(Sannyasin sannya, String input) {
 		Function<String,String> preprocessing = sannya.preprocessingSteps().stream()
 																		   .reduce(Function.identity(), Function::andThen);
 		preprocessing.andThen(duplicateRemover);

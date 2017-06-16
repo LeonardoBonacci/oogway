@@ -11,6 +11,12 @@ import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 
+/**
+ * urbandictionary.com 
+ * pick - adj: to comb your afro 
+ * Brotha pick yo' fro cause its flat on one side.
+ * by cipher August 06, 2003
+ */
 @Component
 public class SannyasPicker {
 

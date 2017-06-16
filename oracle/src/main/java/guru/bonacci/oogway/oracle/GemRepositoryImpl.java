@@ -15,18 +15,23 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 
+/**
+ * Following the spring data naming convention we implement 'custom
+ * functionality' in a class called ...RepositoryImpl
+ */
 public class GemRepositoryImpl implements GemRepositoryCustom {
 
 	private final Logger logger = getLogger(this.getClass());
 
-	@Lazy //resolves circular dependency
-	@Autowired 
+	@Lazy // resolves circular dependency
+	@Autowired
 	private GemRepository gemRepository;
 
 	/**
-	 * ElasticSearch is not a writer. Like most of us, it reads better than it writes.
-	 * A simple repo.save() will perform an unnecessary update when the document already exists.
-	 * Therefore, this slight cumbersome workaround for when numbers get large. 
+	 * ElasticSearch is not a writer. Like most of us, it reads better than it
+	 * writes. A simple repo.save() will perform an unnecessary update when the
+	 * document already exists. Therefore, this slight cumbersome workaround for
+	 * when numbers get large.
 	 */
 	@Override
 	public void saveTheNewOnly(Collection<Gem> entities) {
@@ -36,16 +41,15 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 		Iterable<Gem> it = newOnes::iterator;
 		gemRepository.save(it);
 	}
-	
+
 	@Override
-	public Optional<Gem> searchForOne(String searchString) {
-		// Consult the oracle..
-		SearchQuery searchQuery = new NativeSearchQueryBuilder()
-										.withQuery(matchQuery(Gem.ESSENCE, searchString)).build();
+	public Optional<Gem> consultTheOracle(String searchString) {
+		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchQuery(Gem.ESSENCE, searchString))
+				.build();
 		List<Gem> result = gemRepository.search(searchQuery).getContent();
-		
-		if (logger.isDebugEnabled()) 
-			result.stream().map(Gem::getEssence).forEach(logger::debug); 
+
+		if (logger.isDebugEnabled())
+			result.stream().map(Gem::getEssence).forEach(logger::debug);
 
 		return getRandom(result);
 	}

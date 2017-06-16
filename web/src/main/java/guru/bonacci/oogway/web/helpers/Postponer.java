@@ -14,7 +14,10 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-
+/**
+ * Postponer - someone who postpones work (especially out of laziness or
+ * habitual carelessness)
+ */
 @Component
 public class Postponer {
 	

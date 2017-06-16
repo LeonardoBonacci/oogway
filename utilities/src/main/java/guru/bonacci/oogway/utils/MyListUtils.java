@@ -12,7 +12,7 @@ import java.util.Random;
  * It should not even exist. 
  * Someone else should have written a proper getRandom function in a famous library.
  * However, I couldn't find one.
- * That why it is here.
+ * That's why it is here.
  */
 public class MyListUtils {
 

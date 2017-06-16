@@ -11,6 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * The smoke signal is one of the oldest forms of long-distance communication.
+ * It is a form of visual communication used over long distance. In general
+ * smoke signals are used to transmit news, signal danger, or gather people to a
+ * common area.
+ * 
+ * It is here that the service receives its messages.
+ */
 @Controller
 public class SmokeSignalController {
 

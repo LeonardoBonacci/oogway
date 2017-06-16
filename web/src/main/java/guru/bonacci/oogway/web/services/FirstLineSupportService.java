@@ -48,7 +48,7 @@ public class FirstLineSupportService {
 		jmsTemplate.send(queue, session -> session.createTextMessage(q));
 
 		// Consult the oracle..
-		Optional<Gem> gem = gemRepository.searchForOne(q);
+		Optional<Gem> gem = gemRepository.consultTheOracle(q);
 		return gem.map(Gem::getEssence).orElse(postponer.saySomething());
 	}
 }

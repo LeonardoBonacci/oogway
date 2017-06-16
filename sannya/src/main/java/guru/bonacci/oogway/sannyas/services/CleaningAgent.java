@@ -12,6 +12,11 @@ import guru.bonacci.oogway.oracle.Gem;
 import guru.bonacci.oogway.sannyas.filters.ProfanityFilter;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 
+/**
+ * “Every aspect of your life is anchored energetically in your living space, so
+ * clearing clutter can completely transform your entire existence.” 
+ * - Karen Kingston
+ */
 @Component
 public class CleaningAgent {
 

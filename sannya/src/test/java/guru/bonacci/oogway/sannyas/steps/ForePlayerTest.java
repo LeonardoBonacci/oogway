@@ -9,39 +9,33 @@ import static org.mockito.Mockito.when;
 
 import java.util.function.Function;
 
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.InjectMocks;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.TestConfig;
+import guru.bonacci.oogway.sannyas.SannyasTestConfig;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 import guru.bonacci.oogway.sannyas.services.ForePlayer;
 
-@ContextConfiguration(classes = TestConfig.class)
-public class CompilerTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = SannyasTestConfig.class)
+public class ForePlayerTest {
 
 	private static final String INPUT = "some string without meaning";
 
-	@InjectMocks
 	@Autowired
-	private ForePlayer forePlayer;
+	ForePlayer forePlayer;
 
 	@Mock
-	private Sannyasin sannya;
+	Sannyasin sannya;
 	
 	@Mock
-	private DuplicateRemover duplicateRemover;
+	DuplicateRemover duplicateRemover;
 
-	@Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-    }
-	
 	@Test
     public void shouldGoForItSimple() {
 		when(sannya.preprocessingSteps()).thenReturn(asList(Function.identity()));

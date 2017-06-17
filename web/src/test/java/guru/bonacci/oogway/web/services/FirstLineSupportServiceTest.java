@@ -14,9 +14,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.Gem;
@@ -25,7 +25,7 @@ import guru.bonacci.oogway.web.WebTestConfig;
 import guru.bonacci.oogway.web.helpers.Postponer;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {WebTestConfig.class})
+@SpringBootTest(classes = {WebTestConfig.class})
 public class FirstLineSupportServiceTest {
 
 	@InjectMocks

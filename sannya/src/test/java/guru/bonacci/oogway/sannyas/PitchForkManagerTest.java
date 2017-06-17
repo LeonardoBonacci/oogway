@@ -1,13 +1,10 @@
 package guru.bonacci.oogway.sannyas;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.GemRepository;
@@ -17,29 +14,23 @@ import guru.bonacci.oogway.sannyas.services.PitchforkManager;
 import guru.bonacci.oogway.sannyas.services.SannyasPicker;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {SannyasTestConfig.class})
-public class PitchForkManagerTest {
+@SpringBootTest(classes = SannyasTestConfig.class)
+public class PitchforkManagerTest {
 
-	@InjectMocks
 	@Autowired
 	PitchforkManager manager;
 
 	@Mock
-	private SannyasPicker sannyasPicker;
+	SannyasPicker sannyasPicker;
 
 	@Mock
-	private ForePlayer forePlayer;
+	ForePlayer forePlayer;
 
 	@Mock
-	private CleaningAgent cleaningAgent;
+	CleaningAgent cleaningAgent;
 
 	@Mock
-	private GemRepository repository;
-
-	@Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-    }
+	GemRepository repository;
 
 	@Test
 	public void shouldGiveEmptyStringAnswer() {

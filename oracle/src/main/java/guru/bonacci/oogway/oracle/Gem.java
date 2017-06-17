@@ -2,6 +2,7 @@ package guru.bonacci.oogway.oracle;
 
 import static org.springframework.data.elasticsearch.annotations.FieldType.String;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -59,6 +60,11 @@ public class Gem {
 	public String toString() {
 	    return essence;
 	}	
+
+	@Override
+	public boolean equals(Object o) {
+	    return EqualsBuilder.reflectionEquals(this, o);
+	}
 	
 	@Override
 	public int hashCode() {

@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.web;
+package guru.bonacci.oogway.sannyas;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ import guru.bonacci.oogway.oracle.OracleTestConfig;
 @Configuration
 @ComponentScan
 @Import(OracleTestConfig.class)
-@PropertySource("classpath:/web-test.properties")
-public class WebTestConfig {
+@PropertySource("classpath:/sannyas-test.properties")
+public class SannyasTestConfig {
 
 }

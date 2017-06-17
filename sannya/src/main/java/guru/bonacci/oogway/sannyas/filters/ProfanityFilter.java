@@ -9,7 +9,10 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -23,8 +26,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProfanityFilter implements Predicate<String> {
 
-	private static final String FILE_NAME = "badwords.txt";
-			
+	@Value("${file.name.profanity.filter}")
+	private String fileName;
+
 	private final Logger logger = getLogger(this.getClass());
 
 	/**
@@ -37,8 +41,9 @@ public class ProfanityFilter implements Predicate<String> {
 	private boolean isSuspicionFound;
 	private boolean merdaFound;
 
-	public ProfanityFilter() {
-		buildDictionaryTree(FILE_NAME);
+	@PostConstruct
+	public void setup() {
+		buildDictionaryTree(fileName);
 	}
 
 	@Override

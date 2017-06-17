@@ -1,13 +1,13 @@
 package guru.bonacci.oogway.oracle;
 
 import static guru.bonacci.oogway.utils.MyListUtils.getRandom;
+import static java.util.stream.Collectors.toList;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +35,13 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 	 */
 	@Override
 	public void saveTheNewOnly(Collection<Gem> entities) {
-		Stream<Gem> newOnes = entities.stream()
+		List<Gem> newOnes = entities.stream()
 									  .filter(gem -> !gemRepository.exists(gem.getId()))
-									  .peek(gem -> logger.info("About to index wisdom: '" + gem + "'"));
-		Iterable<Gem> it = newOnes::iterator;
-		gemRepository.save(it);
+									  .peek(gem -> logger.info("About to index wisdom: '" + gem + "'"))
+									  .collect(toList());
+		// strangely enough spring data or elasticsearch cannot deal with empty iterables
+		if (!newOnes.isEmpty())
+			gemRepository.save(newOnes);
 	}
 
 	@Override

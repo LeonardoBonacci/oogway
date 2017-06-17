@@ -26,7 +26,7 @@ public class MyListUtils {
 		return getRandom(collection, RANDOM);
 	}
 
-	public static <E> Optional<E> getRandom(final List<E> list, Random random) {
+	private static <E> Optional<E> getRandom(final List<E> list, Random random) {
 		return Optional.ofNullable(
 							isEmpty(list) ? null : list.get(random.nextInt(list.size())));
 	}

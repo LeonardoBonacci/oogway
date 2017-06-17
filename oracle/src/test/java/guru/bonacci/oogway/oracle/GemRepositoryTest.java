@@ -83,7 +83,7 @@ public class GemRepositoryTest {
 		repo.save(gem);
 		
 		Optional<Gem> result = repo.consultTheOracle("something completely different");
-		assertThat(gem, is(not(result.isPresent())));
+		assertThat(true, is(not(result.isPresent())));
 	}
 
 }

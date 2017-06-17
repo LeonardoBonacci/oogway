@@ -12,6 +12,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,18 +22,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class Postponer {
 	
-	private static final String FILE_NAME = "answers-to-win-time.txt";
+	@Value("${file.name.answers.to.win.time}")
+	private String fileName;
 
 	private final Logger logger = getLogger(this.getClass());
 
 	private List<String> answers;
-	
+
 	@PostConstruct
 	public void setup() {
 		try {
-			answers = readToList(FILE_NAME);
+			answers = readToList(fileName);
 		} catch (IOException e) {
-			logger.error("Can't read file: " + FILE_NAME);
+			logger.error("Can't read file: " + fileName);
 		} finally {
 			if (isEmpty(answers))
 				answers = singletonList("I'm speechless, are you sure?");

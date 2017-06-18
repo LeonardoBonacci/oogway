@@ -18,20 +18,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.oracle.GemRepository;
-import guru.bonacci.oogway.sannyas.SannyasTestConfig;
+import guru.bonacci.oogway.sannyas.SannyasTestApplication;
 import guru.bonacci.oogway.sannyas.goodreads.GoodReadsSeeker;
-import guru.bonacci.oogway.sannyas.services.ForePlayer;
 import guru.bonacci.oogway.sannyas.steps.DuplicateRemover;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SannyasTestConfig.class)
+@SpringBootTest(classes = SannyasTestApplication.class)
 public class ForePlayerTest {
 
 	private static final String INPUT = "some string without meaning";
 
 	@Autowired
-	ForePlayer forePlayer;
+	ForePlayer player;
 
 	@MockBean
 	GoodReadsSeeker sannyasin;
@@ -39,15 +37,12 @@ public class ForePlayerTest {
 	@MockBean
 	DuplicateRemover duplicateRemover;
 
-	@MockBean //TODO remove
-	GemRepository gemRepo;
-
 	@Test
     public void shouldGoForItSimple() {
 		when(sannyasin.preprocessingSteps()).thenReturn(asList(identity()));
 		when(duplicateRemover.apply(INPUT)).thenReturn(INPUT);
 
-		String preprocessedInput = forePlayer.play(sannyasin, INPUT);
+		String preprocessedInput = player.play(sannyasin, INPUT);
 		assertThat(preprocessedInput, is(equalTo(INPUT)));
 	}
 
@@ -61,7 +56,7 @@ public class ForePlayerTest {
 		when(sannyasin.preprocessingSteps()).thenReturn(asList(f));
 		when(duplicateRemover.apply(inputReverse)).thenReturn(somethingElse);
 
-		String preprocessedInput = forePlayer.play(sannyasin, INPUT);
+		String preprocessedInput = player.play(sannyasin, INPUT);
 		assertThat(preprocessedInput, is(equalTo(somethingElse)));
 	}
 }

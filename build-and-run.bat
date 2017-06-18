@@ -24,4 +24,4 @@ start cmd.exe /k "cd %crawler% & java -jar target\\%crawler%-%version%.jar""
 start cmd.exe /k "cd %web% & java -jar target\\%web%-%version%.jar""
 
 rem and return to the scripts directory
-gem cd parent\src\main\scripts
+rem cd parent\src\main\scripts

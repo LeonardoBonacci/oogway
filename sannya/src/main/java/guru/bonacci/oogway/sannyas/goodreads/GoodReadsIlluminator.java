@@ -56,6 +56,7 @@ public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
 	@Override
 	public Elements consultWeb(String searchURL) {
 		try {
+			logger.info("firing request " + searchURL);
 			Document doc = connect(searchURL).get();
 			return doc.select("div.quoteText");
 		} catch (IOException e) {

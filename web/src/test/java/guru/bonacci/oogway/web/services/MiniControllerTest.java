@@ -17,11 +17,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import guru.bonacci.oogway.web.WebTestConfig;
+import guru.bonacci.oogway.web.WebTestApplication;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
-@SpringBootTest(classes = {WebTestConfig.class})
+@SpringBootTest(classes = WebTestApplication.class)
 public class MiniControllerTest {
 
 	MockMvc mvc;

@@ -18,11 +18,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.Gem;
 import guru.bonacci.oogway.oracle.GemRepository;
-import guru.bonacci.oogway.web.WebTestConfig;
+import guru.bonacci.oogway.web.WebTestApplication;
 import guru.bonacci.oogway.web.helpers.Postponer;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {WebTestConfig.class})
+@SpringBootTest(classes = WebTestApplication.class)
 public class FirstLineSupportServiceTest {
 
 	@Autowired

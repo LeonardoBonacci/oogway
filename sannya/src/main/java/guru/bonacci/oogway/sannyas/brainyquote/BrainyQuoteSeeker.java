@@ -34,7 +34,7 @@ public class BrainyQuoteSeeker implements Sannyasin {
 
 	@Override
 	public List<Function<String, String>> preprocessingSteps() {
-		return asList(keyPhraser::apply);
+		return asList(keyPhraser);
 	}
 
 	@Override

@@ -16,11 +16,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.Gem;
 import guru.bonacci.oogway.oracle.GemRepository;
-import guru.bonacci.oogway.sannyas.SannyasTestConfig;
+import guru.bonacci.oogway.sannyas.SannyasTestApplication;
 import guru.bonacci.oogway.sannyas.goodreads.GoodReadsSeeker;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SannyasTestConfig.class)
+@SpringBootTest(classes = SannyasTestApplication.class)
 public class PitchforkManagerTest {
 
 	@Autowired

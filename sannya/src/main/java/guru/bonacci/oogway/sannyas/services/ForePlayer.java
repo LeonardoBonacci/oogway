@@ -1,5 +1,6 @@
 package guru.bonacci.oogway.sannyas.services;
 
+import static java.util.function.Function.identity;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.function.Function;
@@ -23,9 +24,19 @@ public class ForePlayer {
 	@Autowired
 	private DuplicateRemover duplicateRemover;
 
+	public String play(Sannyasin sannya, String input, DuplicateRemover duplicateRemover) {
+		Function<String,String> preprocessing = sannya.preprocessingSteps().stream()
+																		   .reduce(identity(), Function::andThen);
+		preprocessing.andThen(duplicateRemover);
+
+		String preprocessedInput = preprocessing.apply(input);
+		logger.info(sannya.getClass() + "- Preprocessed input: '" + preprocessedInput + "'");
+		return preprocessedInput;
+	}	
+	
 	public String play(Sannyasin sannya, String input) {
 		Function<String,String> preprocessing = sannya.preprocessingSteps().stream()
-																		   .reduce(Function.identity(), Function::andThen);
+																		   .reduce(identity(), Function::andThen);
 		preprocessing.andThen(duplicateRemover);
 
 		String preprocessedInput = preprocessing.apply(input);

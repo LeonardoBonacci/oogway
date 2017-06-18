@@ -24,13 +24,14 @@ import guru.bonacci.oogway.web.WebTestConfig;
 @SpringBootTest(classes = {WebTestConfig.class})
 public class MiniControllerTest {
 
+	MockMvc mvc;
+
 	@Autowired
 	WebApplicationContext wac;
 
-	MockMvc mvc;
-
 	@MockBean
 	FirstLineSupportService service;
+
 	
 	@Before
 	public void setup() {

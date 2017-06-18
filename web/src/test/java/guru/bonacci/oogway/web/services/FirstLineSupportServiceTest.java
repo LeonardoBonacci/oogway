@@ -6,15 +6,12 @@ import static org.junit.Assert.assertThat;
 
 import java.util.Optional;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -28,23 +25,17 @@ import guru.bonacci.oogway.web.helpers.Postponer;
 @SpringBootTest(classes = {WebTestConfig.class})
 public class FirstLineSupportServiceTest {
 
-	@InjectMocks
 	@Autowired
 	FirstLineSupportService service;
 
-	@Mock
+	@MockBean
 	GemRepository gemRepo;
 
-	@Mock
+	@MockBean
 	JmsTemplate jms;
 
-	@Mock
+	@MockBean
 	Postponer postponer;
-
-	@Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-    }
 
 	@Test
 	public void shouldGiveEmptyStringAnswer() {

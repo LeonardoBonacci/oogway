@@ -40,7 +40,7 @@ public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
     public Integer getNrOfPages(String searchURL) {
 		int pageNr = 1;
 		try {
-			Document doc = connect(searchURL).get();
+			Document doc = get(searchURL);
 			Elements elements = doc.select("span.gap");
 			pageNr = Integer.valueOf(elements.first().nextElementSibling().nextElementSibling().text());
 		} catch (Exception e) { 
@@ -48,7 +48,7 @@ public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
 			// No results or one result: page 1
 			// Not enough results for a gap between the pagination numbers: page 1
 			// More than two results: page x
-			logger.error(e.getMessage());
+			logger.error("Not too many pages, return 1: " + e.getMessage());
 		}
 		return pageNr;
     }
@@ -56,13 +56,20 @@ public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
 	@Override
 	public Elements consultWeb(String searchURL) {
 		try {
-			logger.info("firing request " + searchURL);
-			Document doc = connect(searchURL).get();
+			logger.info("Firing request " + searchURL);
+			Document doc = get(searchURL);
 			return doc.select("div.quoteText");
 		} catch (IOException e) {
-			logger.error(e.getMessage());
+			logger.error("Something went wrong. No stress, it does not need to be serieus: " + e.getMessage());
 		}
 		return new Elements();
+	}
+
+	/**
+	 * Method to facilitate testing
+	 */
+	public Document get(String searchURL) throws IOException {
+		return connect(searchURL).get();
 	}
 
 	@Override

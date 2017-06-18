@@ -2,11 +2,11 @@ package guru.bonacci.oogway.sannyas.brainyquote;
 
 
 import static org.apache.commons.lang3.RandomUtils.nextInt;
+import static org.jsoup.Jsoup.connect;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.io.IOException;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
@@ -39,7 +39,7 @@ public class BrainyQuoteIlluminator extends WebIlluminator implements PageCache 
 	public Integer getNrOfPages(String searchURL) {
 		Integer pageNr = 1;
 		try {
-			Document doc = Jsoup.connect(searchURL).userAgent("Mozilla").get();
+			Document doc = get(searchURL);
 			Elements elements = doc.select("ul.pagination a");
 			pageNr = Integer.valueOf(elements.get(elements.size() - 2).text()); //last page is second last element
 		} catch (Exception e) { 
@@ -47,7 +47,7 @@ public class BrainyQuoteIlluminator extends WebIlluminator implements PageCache 
 			// No results or one result: page 1
 			// Not enough results for a gap between the pagination numbers: page 1
 			// More than two results: page x
-			logger.error(e.getMessage());
+			logger.error("Not too many pages, return 1: " + e.getMessage());
 		}
 		return pageNr;
     }
@@ -56,11 +56,18 @@ public class BrainyQuoteIlluminator extends WebIlluminator implements PageCache 
 	protected Elements consultWeb(String searchURL) {
 		try {
 			logger.info("firing request " + searchURL);
-			Document doc = Jsoup.connect(searchURL).userAgent("Mozilla").get();
+			Document doc = get(searchURL);
 			return doc.select("a[title='view quote']");
 		} catch (IOException e) {
-			logger.error(e.getMessage());
+			logger.error("Something went wrong. No stress, it does not need to be serieus: " + e.getMessage());
 		}
 		return new Elements();
+	}
+	
+	/**
+	 * Method to facilitate testing
+	 */
+	public Document get(String searchURL) throws IOException {
+		return connect(searchURL).userAgent("Mozilla").get();
 	}
 }

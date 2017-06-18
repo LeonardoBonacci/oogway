@@ -1,10 +1,12 @@
 package guru.bonacci.oogway.sannyas.steps;
 
 import static java.util.stream.Collectors.joining;
+import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.List;
 import java.util.function.Function;
 
+import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import edu.stanford.nlp.simple.Sentence;
@@ -21,11 +23,18 @@ import edu.stanford.nlp.simple.SentenceAlgorithms;
 @Component
 public class KeyPhraser implements Function<String,String> {
 
+	private final Logger logger = getLogger(this.getClass());
+
 	@Override
 	public String apply(String input) {
+		logger.debug("in: " + input);
+
 		Sentence sentence = new Sentence(input);
 		SentenceAlgorithms algorithms = new SentenceAlgorithms(sentence);
-		List<String> output = algorithms.keyphrases();
-		return output.stream().collect(joining(" "));
+		List<String> keyphrases = algorithms.keyphrases();
+		String output = keyphrases.stream().collect(joining(" "));
+		
+		logger.debug("out: " + output);
+		return output;
 	}
 }

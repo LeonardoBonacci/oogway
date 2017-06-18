@@ -1,12 +1,14 @@
 package guru.bonacci.oogway.sannyas.steps;
 
 import static java.util.stream.Collectors.joining;
+import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import java.util.function.Function;
 
+import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
@@ -36,33 +38,41 @@ import edu.stanford.nlp.util.CoreMap;
  * Other analysis components build and store parse trees, dependency graphs, etc.
  */
 @Component
-public class Lemmatizator implements Function<String,String> {
+public class Lemmatizator implements Function<String, String> {
 
-  private StanfordCoreNLP pipeline;
+	private final Logger logger = getLogger(this.getClass());
 
-  public Lemmatizator() {
-    // Create StanfordCoreNLP object properties, with POS tagging
-    Properties props= new Properties();
-    props.put("annotators", "tokenize, ssplit, pos, lemma");
-    this.pipeline = new StanfordCoreNLP(props);
-  }
+	private StanfordCoreNLP pipeline;
 
-  @Override
-  public String apply(String documentText) {
-    List<String> lemmas = new LinkedList<>();
-    // Create an empty Annotation just with the given text
-    Annotation document = new Annotation(documentText);
-    // run all Annotators on this text
-    this.pipeline.annotate(document);
-    // Iterate over all of the sentences found
-    List<CoreMap> sentences = document.get(SentencesAnnotation.class);
-    for(CoreMap sentence: sentences) {
-      // Iterate over all tokens in a sentence
-      for (CoreLabel token: sentence.get(TokensAnnotation.class)) {
-        // Retrieve and add the lemma for each word into the list of lemmas
-        lemmas.add(token.get(LemmaAnnotation.class));
-      }
-    }
-    return lemmas.stream().collect(joining(" "));
-  }
+	public Lemmatizator() {
+		// Create StanfordCoreNLP object properties, with POS tagging
+		Properties props = new Properties();
+		props.put("annotators", "tokenize, ssplit, pos, lemma");
+		this.pipeline = new StanfordCoreNLP(props);
+	}
+
+	@Override
+	public String apply(String documentText) {
+		logger.debug("in: " + documentText);
+
+		List<String> lemmas = new LinkedList<>();
+		// Create an empty Annotation just with the given text
+		Annotation document = new Annotation(documentText);
+		// run all Annotators on this text
+		this.pipeline.annotate(document);
+		// Iterate over all of the sentences found
+		List<CoreMap> sentences = document.get(SentencesAnnotation.class);
+		for (CoreMap sentence : sentences) {
+			// Iterate over all tokens in a sentence
+			for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
+				// Retrieve and add the lemma for each word into the list of
+				// lemmas
+				lemmas.add(token.get(LemmaAnnotation.class));
+			}
+		}
+		String output = lemmas.stream().collect(joining(" "));
+
+		logger.debug("out: " + output);
+		return output;
+	}
 }

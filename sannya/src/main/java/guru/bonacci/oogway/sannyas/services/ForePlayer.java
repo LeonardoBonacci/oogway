@@ -22,23 +22,12 @@ public class ForePlayer {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
-	private DuplicateRemover duplicateRemover;
+	public DuplicateRemover duplicateRemover;
 
-	public String play(Sannyasin sannya, String input, DuplicateRemover duplicateRemover) {
-		Function<String,String> preprocessing = sannya.preprocessingSteps().stream()
-																		   .reduce(identity(), Function::andThen);
-		preprocessing.andThen(duplicateRemover);
-
-		String preprocessedInput = preprocessing.apply(input);
-		logger.info(sannya.getClass() + "- Preprocessed input: '" + preprocessedInput + "'");
-		return preprocessedInput;
-	}	
-	
 	public String play(Sannyasin sannya, String input) {
 		Function<String,String> preprocessing = sannya.preprocessingSteps().stream()
 																		   .reduce(identity(), Function::andThen);
-		preprocessing.andThen(duplicateRemover);
-
+		preprocessing = preprocessing.andThen(duplicateRemover);
 		String preprocessedInput = preprocessing.apply(input);
 		logger.info(sannya.getClass() + "- Preprocessed input: '" + preprocessedInput + "'");
 		return preprocessedInput;

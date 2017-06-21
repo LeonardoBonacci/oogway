@@ -46,17 +46,17 @@ public class ForePlayerTest {
 		assertThat(preprocessedInput, is(equalTo(INPUT)));
 	}
 
-	@Ignore //TODO something's wrong with the duplicateRemover
 	@Test
     public void shouldGoForItComplicated() {
 		String inputReverse = "gninaem tuohtiw gnirts emos";
 		String somethingElse = "something else";
 		
 		Function<String,String> f = str -> reverse(str);
-		when(sannyasin.preprocessingSteps()).thenReturn(asList(f));
+		when(sannyasin.preprocessingSteps()).thenReturn(asList(f, f, f));
 		when(duplicateRemover.apply(inputReverse)).thenReturn(somethingElse);
 
 		String preprocessedInput = player.play(sannyasin, INPUT);
+		System.out.println(preprocessedInput);
 		assertThat(preprocessedInput, is(equalTo(somethingElse)));
 	}
 }

@@ -1,5 +1,6 @@
 package guru.bonacci.oogway.oracle;
 
+import static java.lang.String.format;
 import static org.springframework.data.elasticsearch.annotations.FieldType.String;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -57,10 +58,10 @@ public class Gem {
 	}
 	
 	@Override
-	public String toString() {
-	    return essence;
-	}	
-
+    public String toString() {
+        return format("Gem[essence='%s']", essence);
+    }
+	
 	@Override
 	public boolean equals(Object o) {
 	    return EqualsBuilder.reflectionEquals(this, o);

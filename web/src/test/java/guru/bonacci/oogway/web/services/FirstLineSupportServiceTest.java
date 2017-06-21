@@ -3,13 +3,16 @@ package guru.bonacci.oogway.web.services;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -45,8 +48,8 @@ public class FirstLineSupportServiceTest {
 	@Test
 	public void shouldGiveAnswer() {
 		Gem expected = new Gem("some answer");
-		Mockito.doNothing().when(jms).send(Mockito.anyString(), Mockito.any(MessageCreator.class));
-		Mockito.when(gemRepo.consultTheOracle(Mockito.anyString())).thenReturn(Optional.of(expected));
+		doNothing().when(jms).send(anyString(), any(MessageCreator.class));
+		when(gemRepo.consultTheOracle(anyString())).thenReturn(Optional.of(expected));
 
 		assertThat(service.enquire("some input"), is(equalTo(expected.getEssence())));
 	}
@@ -54,9 +57,9 @@ public class FirstLineSupportServiceTest {
 	@Test
 	public void shouldGivePostponingAnswer() {
 		String postponingAnswer = "wait a second..";
-		Mockito.doNothing().when(jms).send(Mockito.anyString(), Mockito.any(MessageCreator.class));
-		Mockito.when(gemRepo.consultTheOracle(Mockito.anyString())).thenReturn(Optional.empty());
-		Mockito.when(postponer.saySomething()).thenReturn(postponingAnswer);
+		doNothing().when(jms).send(anyString(), any(MessageCreator.class));
+		when(gemRepo.consultTheOracle(anyString())).thenReturn(Optional.empty());
+		when(postponer.saySomething()).thenReturn(postponingAnswer);
 
 		assertThat(service.enquire("some input"), is(equalTo(postponingAnswer)));
 	}

@@ -1,7 +1,5 @@
 package guru.bonacci.oogway.sannyas.general;
 
-import org.springframework.cache.annotation.Cacheable;
-
 /**
  * To avoid excessive web communication, store the max. page for each 'site +
  * tag' search request.
@@ -15,6 +13,5 @@ import org.springframework.cache.annotation.Cacheable;
  */
 public interface PageCache {
 
-    @Cacheable("pages")
 	Integer getNrOfPages(String searchURL);
 }

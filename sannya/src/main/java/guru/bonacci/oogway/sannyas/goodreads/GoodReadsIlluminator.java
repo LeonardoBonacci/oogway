@@ -12,6 +12,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannyas.general.PageCache;
@@ -37,7 +38,8 @@ public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
 	}
 
 	@Override
-    public Integer getNrOfPages(String searchURL) {
+    @Cacheable("pages")
+	public Integer getNrOfPages(String searchURL) {
 		int pageNr = 1;
 		try {
 			Document doc = get(searchURL);

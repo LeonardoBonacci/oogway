@@ -9,6 +9,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,17 +17,15 @@ import java.util.List;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.sannyas.SannyasTestApplication;
-
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SannyasTestApplication.class)
+@SpringBootTest(webEnvironment = NONE)
 public class BrainyQuoteIlluminatorTest {
 
-	@Spy
+	@SpyBean
 	BrainyQuoteIlluminator finder;
 
 	@Test

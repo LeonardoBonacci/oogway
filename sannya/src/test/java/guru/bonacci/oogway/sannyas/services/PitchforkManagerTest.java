@@ -4,6 +4,7 @@ import static java.util.Arrays.asList;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 import java.util.List;
 
@@ -16,11 +17,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.Gem;
 import guru.bonacci.oogway.oracle.GemRepository;
-import guru.bonacci.oogway.sannyas.SannyasTestApplication;
 import guru.bonacci.oogway.sannyas.goodreads.GoodReadsSeeker;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SannyasTestApplication.class)
+@SpringBootTest(webEnvironment = NONE)
 public class PitchforkManagerTest {
 
 	@Autowired

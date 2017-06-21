@@ -7,10 +7,10 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 import java.util.function.Function;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +18,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.sannyas.SannyasTestApplication;
 import guru.bonacci.oogway.sannyas.goodreads.GoodReadsSeeker;
 import guru.bonacci.oogway.sannyas.steps.DuplicateRemover;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SannyasTestApplication.class)
+@SpringBootTest(webEnvironment = NONE)
 public class ForePlayerTest {
 
 	private static final String INPUT = "some string without meaning";

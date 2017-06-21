@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 import java.util.List;
 
@@ -15,12 +16,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.sannyas.SannyasTestApplication;
 import guru.bonacci.oogway.sannyas.filters.LengthFilter;
 import guru.bonacci.oogway.sannyas.steps.KeyPhraser;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SannyasTestApplication.class)
+@SpringBootTest(webEnvironment = NONE)
 public class BrainyQuoteSeekerTest {
 
 	@Autowired

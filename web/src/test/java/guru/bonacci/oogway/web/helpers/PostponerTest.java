@@ -3,6 +3,7 @@ package guru.bonacci.oogway.web.helpers;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertThat;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 import java.util.List;
 
@@ -12,10 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.web.WebTestConfig;
-
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = WebTestConfig.class)
+@SpringBootTest(webEnvironment = NONE)
 public class PostponerTest {
 
 	@Autowired

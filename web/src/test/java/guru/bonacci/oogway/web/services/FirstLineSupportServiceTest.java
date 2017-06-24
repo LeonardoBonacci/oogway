@@ -3,9 +3,7 @@ package guru.bonacci.oogway.web.services;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
@@ -16,8 +14,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.Gem;
@@ -35,9 +31,6 @@ public class FirstLineSupportServiceTest {
 	GemRepository gemRepo;
 
 	@MockBean
-	JmsTemplate jms;
-
-	@MockBean
 	Postponer postponer;
 
 	@Test
@@ -48,7 +41,6 @@ public class FirstLineSupportServiceTest {
 	@Test
 	public void shouldGiveAnswer() {
 		Gem expected = new Gem("some answer");
-		doNothing().when(jms).send(anyString(), any(MessageCreator.class));
 		when(gemRepo.consultTheOracle(anyString())).thenReturn(Optional.of(expected));
 
 		assertThat(service.enquire("some input"), is(equalTo(expected.getEssence())));
@@ -57,7 +49,6 @@ public class FirstLineSupportServiceTest {
 	@Test
 	public void shouldGivePostponingAnswer() {
 		String postponingAnswer = "wait a second..";
-		doNothing().when(jms).send(anyString(), any(MessageCreator.class));
 		when(gemRepo.consultTheOracle(anyString())).thenReturn(Optional.empty());
 		when(postponer.saySomething()).thenReturn(postponingAnswer);
 

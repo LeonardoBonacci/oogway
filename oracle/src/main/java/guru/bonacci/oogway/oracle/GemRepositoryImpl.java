@@ -15,6 +15,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 
+import guru.bonacci.oogway.oracle.broadcast.WatchMe;
+
 /**
  * Following the spring data naming convention we implement 'custom
  * functionality' in a class called ...RepositoryImpl
@@ -44,6 +46,7 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 			gemRepository.save(newOnes);
 	}
 
+	@WatchMe // as spring data offers no proper hook to intercept search queries we do it the traditional way...
 	@Override
 	public Optional<Gem> consultTheOracle(String searchString) {
 		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchQuery(Gem.ESSENCE, searchString))

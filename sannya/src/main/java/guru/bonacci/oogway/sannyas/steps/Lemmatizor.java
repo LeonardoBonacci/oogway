@@ -5,10 +5,10 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Properties;
 import java.util.function.Function;
 
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
@@ -38,18 +38,12 @@ import edu.stanford.nlp.util.CoreMap;
  * Other analysis components build and store parse trees, dependency graphs, etc.
  */
 @Component
-public class Lemmatizator implements Function<String, String> {
+public class Lemmatizor implements Function<String, String> {
 
 	private final Logger logger = getLogger(this.getClass());
 
+	@Autowired
 	private StanfordCoreNLP pipeline;
-
-	public Lemmatizator() {
-		// Create StanfordCoreNLP object properties, with POS tagging
-		Properties props = new Properties();
-		props.put("annotators", "tokenize, ssplit, pos, lemma");
-		this.pipeline = new StanfordCoreNLP(props);
-	}
 
 	@Override
 	public String apply(String documentText) {

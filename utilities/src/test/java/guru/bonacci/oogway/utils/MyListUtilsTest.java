@@ -1,6 +1,7 @@
 package guru.bonacci.oogway.utils;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.not;
@@ -34,7 +35,7 @@ public class MyListUtilsTest {
 	
 	@Test
 	public void shouldReturnNoElementForEmptyCollection() {
-		List<String> input = Collections.emptyList();
+		List<String> input = emptyList();
 		Optional<String> result = MyListUtils.getRandom(input);
 		assertThat(true, is(not(result.isPresent())));
 	}

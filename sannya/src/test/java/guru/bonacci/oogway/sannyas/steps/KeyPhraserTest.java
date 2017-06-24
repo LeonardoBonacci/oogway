@@ -7,13 +7,26 @@ import static org.junit.Assert.assertThat;
 
 import java.util.Collection;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestContextManager;
+
+import guru.bonacci.oogway.sannyas.SannyasTestApplication;
 
 @RunWith(value = Parameterized.class)
+@ContextConfiguration(classes = SannyasTestApplication.class)
 public class KeyPhraserTest {
+
+	@Autowired
+	KeyPhraser keyPhraser;
+	
+	// Manually config for spring to use Parameterised
+    private TestContextManager testContextManager;
 
 	private String input;
 	private String output;
@@ -34,8 +47,15 @@ public class KeyPhraserTest {
          });
      }
      
+
+     @Before 
+     public void setUp() throws Exception {
+          this.testContextManager = new TestContextManager(getClass());
+          this.testContextManager.prepareTestInstance(this);
+     }
+
      @Test
      public void shouldDeduceKeyPhrases() {
-         assertThat(new KeyPhraser().apply(input), is(equalTo(output)));
+         assertThat(keyPhraser.apply(input), is(equalTo(output)));
      }
 }

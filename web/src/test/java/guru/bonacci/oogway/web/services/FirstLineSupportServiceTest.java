@@ -16,8 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.oracle.Gem;
-import guru.bonacci.oogway.oracle.GemRepository;
+import guru.bonacci.oogway.commons.Gem;
 import guru.bonacci.oogway.web.helpers.Postponer;
 
 @RunWith(SpringRunner.class)
@@ -28,7 +27,7 @@ public class FirstLineSupportServiceTest {
 	FirstLineSupportService service;
 
 	@MockBean
-	GemRepository gemRepo;
+	WebOracleService oracleService;
 
 	@MockBean
 	Postponer postponer;
@@ -41,7 +40,7 @@ public class FirstLineSupportServiceTest {
 	@Test
 	public void shouldGiveAnswer() {
 		Gem expected = new Gem("some answer");
-		when(gemRepo.consultTheOracle(anyString())).thenReturn(Optional.of(expected));
+		when(oracleService.consult(anyString())).thenReturn(Optional.of(expected));
 
 		assertThat(service.enquire("some input"), is(equalTo(expected.getEssence())));
 	}
@@ -49,7 +48,7 @@ public class FirstLineSupportServiceTest {
 	@Test
 	public void shouldGivePostponingAnswer() {
 		String postponingAnswer = "wait a second..";
-		when(gemRepo.consultTheOracle(anyString())).thenReturn(Optional.empty());
+		when(oracleService.consult(anyString())).thenReturn(Optional.empty());
 		when(postponer.saySomething()).thenReturn(postponingAnswer);
 
 		assertThat(service.enquire("some input"), is(equalTo(postponingAnswer)));

@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.oracle.Gem;
+import guru.bonacci.oogway.commons.Gem;
 import guru.bonacci.oogway.oracle.GemRepository;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 

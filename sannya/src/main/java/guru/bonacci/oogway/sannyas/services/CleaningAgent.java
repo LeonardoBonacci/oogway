@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.oracle.Gem;
+import guru.bonacci.oogway.commons.Gem;
 import guru.bonacci.oogway.sannyas.filters.ProfanityFilter;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 

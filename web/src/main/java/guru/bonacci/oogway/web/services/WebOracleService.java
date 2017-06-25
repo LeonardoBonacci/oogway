@@ -4,8 +4,6 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -36,26 +34,10 @@ public class WebOracleService {
 
 	protected String serviceUrl =  "http://oracle-service";
 
-	public WebOracleService(RestTemplate t) {
-		this.restTemplate = t;
-	}
-	/**
-	 * The RestTemplate works because it uses a custom request-factory that uses
-	 * Ribbon to look-up the service to use. This method simply exists to show
-	 * this.
-	 */
-	@PostConstruct
-	public void demoOnly() {
-		// Can't do this in the constructor because the RestTemplate injection
-		// happens afterwards.
-		logger.warn("The RestTemplate request factory is "
-				+ restTemplate.getRequestFactory().getClass());
-	}
-	
 	public Optional<Gem> consult(String searchString) {
 		logger.info("consult() invoked: for " + searchString);
 
-		Gem gem = restTemplate.getForObject(serviceUrl + "/gems/{query}", Gem.class, searchString);
+		Gem gem = restTemplate.getForObject(serviceUrl + "/gems?q={searchString}", Gem.class, searchString);
 		return Optional.ofNullable(gem);
 	}
 }

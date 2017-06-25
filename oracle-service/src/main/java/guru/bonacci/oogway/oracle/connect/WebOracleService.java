@@ -16,12 +16,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.oracle.api.IGem;
+import guru.bonacci.oogway.oracle.api.JMSGem;
 
 @Service
 public class WebOracleService {
 
 	private final Logger logger = getLogger(this.getClass());
 
+	@Autowired
+	private JmsTemplate jmsTemplate;
+
+	public void save(List<String> wiseWords) {
+		wiseWords.forEach(wiseword -> {
+			logger.info("sending: " + wiseWords.size());
+			jmsTemplate.convertAndSend("wisewords", new JMSGem(wiseword));	
+		});
+	}
+	
+	
+	
 	@Autowired
 	@LoadBalanced
 	protected RestTemplate restTemplate;
@@ -32,36 +45,22 @@ public class WebOracleService {
 	public Optional<IGem> consult(String searchString) {
 		logger.info("consult() invoked: for " + searchString);
 
-		// needs to be a Gem.class
-		IGem gem = restTemplate.getForObject(SERVICE_URL + "/gems?q={searchString}", Gem.class, searchString);
+		// getForObject needs an implementation of IGem
+		IGem gem = restTemplate.getForObject(SERVICE_URL + "/gems?q={searchString}", RESTGem.class, searchString);
 		return Optional.ofNullable(gem);
-	}
-	
-
-	@Autowired
-	private JmsTemplate jmsTemplate;
-
-	public void save(List<String> wiseWords) {
-		logger.info("save() invoked: for " + wiseWords.size());
-	
-		//TODO for now it's hardcoded
-		wiseWords.forEach(wiseword -> {
-			System.out.println("sending " + wiseword);
-			jmsTemplate.send("wisewords", session -> session.createTextMessage(wiseword));	
-		});
 	}
 	
 	/**
 	 * Until jigsaw allows us to hide a class from those who use this library this does the work...
 	 */
-	static class Gem implements IGem {
+	static class RESTGem implements IGem {
 
 		private String essence;
 
-		public Gem() {
+		public RESTGem() {
 		}
 
-		public Gem(String essence) {
+		public RESTGem(String essence) {
 			this.essence = essence;
 		}
 
@@ -77,7 +76,7 @@ public class WebOracleService {
 		
 		@Override
 	    public String toString() {
-	        return format("Gem[essence='%s']", essence);
+	        return format("JMSGem[essence='%s']", essence);
 	    }
 		
 		@Override

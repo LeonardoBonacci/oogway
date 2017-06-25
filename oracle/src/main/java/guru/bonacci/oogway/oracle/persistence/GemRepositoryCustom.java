@@ -1,6 +1,5 @@
 package guru.bonacci.oogway.oracle.persistence;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GemRepositoryCustom {
 	
-	void saveTheNewOnly(Collection<Gem> gems);
+	void saveTheNewOnly(PersistedGem... persistedGems);
 	
-	Optional<Gem> consultTheOracle(String searchString);
+	Optional<PersistedGem> consultTheOracle(String searchString);
 }

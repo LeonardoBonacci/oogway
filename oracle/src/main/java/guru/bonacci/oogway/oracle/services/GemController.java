@@ -1,6 +1,5 @@
 package guru.bonacci.oogway.oracle.services;
 
-import static java.util.Collections.singletonList;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -12,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import guru.bonacci.oogway.oracle.persistence.Gem;
+import guru.bonacci.oogway.oracle.api.JMSGem;
 import guru.bonacci.oogway.oracle.persistence.GemRepository;
+import guru.bonacci.oogway.oracle.persistence.PersistedGem;
 
 @Controller
 public class GemController {
@@ -31,21 +31,21 @@ public class GemController {
 //	</dependency>  
 // @ResponseBody
 //	@RequestMapping(path = "/givemeagem", method = GET)
-//	public Optional<Gem> enquire(@RequestParam("q") String q) {
+//	public Optional<JMSGem> enquire(@RequestParam("q") String q) {
 //		logger.info("Receiving request for a wise answer on: '" + q + "'");
 //		return repo.consultTheOracle(q);
 //	}
 
 	@ResponseBody
 	@RequestMapping(path = "/gems", method = GET)
-	public Gem enquire(@RequestParam("q") String q) {
+	public PersistedGem enquire(@RequestParam("q") String q) {
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
-		return repo.consultTheOracle(q).orElse(new Gem("blabla"));
+		return repo.consultTheOracle(q).orElse(new PersistedGem("blabla"));
 	}	
 
 	@JmsListener(destination = "wisewords")
-	public void onMessage(String wiseWords) {
-		logger.info("Receiving extra knowledge: '" + wiseWords + "'");
-		repo.saveTheNewOnly(singletonList(new Gem(wiseWords)));
+	public void onMessage(JMSGem wiseWords) {
+		logger.info("Receiving an extra bit of knowledge: '" + wiseWords + "'");
+		repo.saveTheNewOnly(new PersistedGem(wiseWords.getEssence()));
 	}
 }

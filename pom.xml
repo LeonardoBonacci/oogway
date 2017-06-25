@@ -18,8 +18,8 @@
 	</properties>
 
 	<modules>
-	    <module>core</module>
 		<module>utilities</module>
+	    <module>oracle-api</module>
 		<module>oracle</module>
 		<module>eureka</module>
 		<module>sannya</module>

@@ -23,9 +23,6 @@ public class WebServer {
 		SpringApplication.run(WebServer.class, args);
 	}
 	
-	/**
-	 * A customized RestTemplate that has the ribbon load balancer build in.
-	 */
 	@LoadBalanced
 	@Bean
 	RestTemplate restTemplate() {

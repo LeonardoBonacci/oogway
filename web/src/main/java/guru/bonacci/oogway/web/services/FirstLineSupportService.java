@@ -7,7 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import guru.bonacci.oogway.core.Gem;
+import guru.bonacci.oogway.oracle.api.IGem;
+import guru.bonacci.oogway.oracle.api.WebOracleService;
 import guru.bonacci.oogway.web.helpers.Postponer;
 
 /**
@@ -35,7 +36,7 @@ public class FirstLineSupportService {
 		if (isEmpty(q))
 			return "No question no answer..";
 
-		Optional<Gem> gem = oracleService.consult(q);
-		return gem.map(Gem::getEssence).orElse(postponer.saySomething());
+		Optional<IGem> gem = oracleService.consult(q);
+		return gem.map(IGem::getEssence).orElse(postponer.saySomething());
 	}
 }

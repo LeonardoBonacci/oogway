@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 
-import guru.bonacci.oogway.core.Gem;
 import guru.bonacci.oogway.oracle.broadcast.WatchMe;
 
 /**

@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import guru.bonacci.oogway.core.Gem;
-
 /**
  * Following the spring data naming convention we define a 'custom interface'
  * called ...RepositoryCustom

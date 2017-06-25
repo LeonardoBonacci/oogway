@@ -19,12 +19,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>core</artifactId>
+			<artifactId>utilities</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>utilities</artifactId>
+			<artifactId>oracle-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		
@@ -40,10 +40,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-activemq</artifactId>
 		</dependency>
 
 		<!-- For language analysis -->

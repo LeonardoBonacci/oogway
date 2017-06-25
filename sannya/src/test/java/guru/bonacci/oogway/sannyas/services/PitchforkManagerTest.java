@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.core.Gem;
 import guru.bonacci.oogway.sannyas.goodreads.GoodReadsSeeker;
 
 @RunWith(SpringRunner.class)
@@ -43,7 +42,7 @@ public class PitchforkManagerTest {
 		String input = "yet another beautiful day today";
 		String preprocessedInput = "another beautiful day";
 		List<String> found = asList("that", "is true", "beautiful stranger");
-		List<Gem> clutterless = asList(new Gem("that"), new Gem("true"), new Gem("stranger"));
+		List<String> clutterless = asList("that", "true", "stranger");
 		
 		when(sannyasPicker.pickOne()).thenReturn(sannyasin);
 		when(forePlayer.play(sannyasin, input)).thenReturn(preprocessedInput);

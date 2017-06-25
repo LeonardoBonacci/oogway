@@ -5,11 +5,14 @@ import java.util.Properties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import guru.bonacci.oogway.oracle.api.OracleAPIConfig;
 
 @Configuration
 @ComponentScan
+@Import(OracleAPIConfig.class)
 public class SannyasConfig {
 
 	@Bean

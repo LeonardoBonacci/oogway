@@ -1,6 +1,6 @@
 <configuration>
 
-	<property name="LOG_HOME" value="C:\\logs\\oogway\\web" />
+	<property name="LOG_HOME" value="C:\\logs\\oogway\\oracle" />
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>

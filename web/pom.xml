@@ -18,12 +18,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>core</artifactId>
+			<artifactId>utilities</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>utilities</artifactId>
+			<artifactId>oracle-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
     

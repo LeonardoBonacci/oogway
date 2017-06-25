@@ -9,12 +9,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 
+import guru.bonacci.oogway.oracle.api.IGem;
+
 /**
  * A gem is a cut and polished precious stone or pearl fine enough for
  * use in jewelry. In this context: wisdom is a gem of infinite value.
  */
 @Document(indexName = "oracle", type = "quote", shards = 1, replicas = 0, refreshInterval = "-1")
-public class Gem {
+public class Gem implements IGem {
 
 	public static final String ESSENCE = "essence";
 
@@ -49,10 +51,12 @@ public class Gem {
 		this.id = id;
 	}
 
+	@Override
 	public String getEssence() {
 		return essence;
 	}
 
+	@Override
 	public void setEssence(String essence) {
 		this.essence = essence;
 	}

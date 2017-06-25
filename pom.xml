@@ -19,12 +19,13 @@
 
 	<modules>
 		<module>utilities</module>
-	    <module>oracle-api</module>
+	    <module>oracle-service</module>
 		<module>oracle</module>
 		<module>eureka</module>
 		<module>sannya</module>
 		<module>web</module>
-  </modules>
+		<module>oracleapi</module>
+	</modules>
 
 	<dependencyManagement>
 		<dependencies>

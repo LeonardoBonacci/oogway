@@ -20,7 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.commons.Gem;
+import guru.bonacci.oogway.core.Gem;
+import guru.bonacci.oogway.oracle.persistence.GemRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)

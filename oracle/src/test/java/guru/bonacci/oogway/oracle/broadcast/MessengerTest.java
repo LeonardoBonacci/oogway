@@ -15,7 +15,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.oracle.GemRepository;
+import guru.bonacci.oogway.oracle.persistence.GemRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)

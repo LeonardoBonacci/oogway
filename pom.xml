@@ -18,12 +18,12 @@
 	</properties>
 
 	<modules>
+	    <module>core</module>
 		<module>utilities</module>
 		<module>oracle</module>
 		<module>eureka</module>
 		<module>sannya</module>
 		<module>web</module>
-    <module>commons</module>
   </modules>
 
 	<dependencyManagement>

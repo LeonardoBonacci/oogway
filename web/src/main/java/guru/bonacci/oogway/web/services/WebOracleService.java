@@ -12,7 +12,7 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import guru.bonacci.oogway.commons.Gem;
+import guru.bonacci.oogway.core.Gem;
 
 /**
  * Tier I is the initial support level responsible for basic customer issues. It
@@ -34,8 +34,11 @@ public class WebOracleService {
 	@LoadBalanced
 	protected RestTemplate restTemplate;
 
-	protected String serviceUrl =  "http://oracle";
+	protected String serviceUrl =  "http://oracle-service";
 
+	public WebOracleService(RestTemplate t) {
+		this.restTemplate = t;
+	}
 	/**
 	 * The RestTemplate works because it uses a custom request-factory that uses
 	 * Ribbon to look-up the service to use. This method simply exists to show

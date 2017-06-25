@@ -19,20 +19,13 @@
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
+			<artifactId>core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>guru.bonacci.oogway</groupId>
 			<artifactId>utilities</artifactId>
 			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>oracle</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>oracle</artifactId>
-			<version>${project.version}</version>
-	      <type>test-jar</type>
-	      <scope>test</scope>
 		</dependency>
 		
 		<dependency>

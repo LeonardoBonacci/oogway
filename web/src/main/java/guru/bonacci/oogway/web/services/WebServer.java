@@ -31,4 +31,9 @@ public class WebServer {
 	RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
+	
+	@Bean
+	public WebOracleService webOracleService() {
+		return new WebOracleService(restTemplate());
+}
 }

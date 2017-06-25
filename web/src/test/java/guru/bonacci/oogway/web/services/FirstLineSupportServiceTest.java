@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.commons.Gem;
+import guru.bonacci.oogway.core.Gem;
 import guru.bonacci.oogway.web.helpers.Postponer;
 
 @RunWith(SpringRunner.class)

@@ -1,13 +1,13 @@
 package guru.bonacci.oogway.web.services;
 
-import static org.apache.commons.lang.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import guru.bonacci.oogway.commons.Gem;
+import guru.bonacci.oogway.core.Gem;
 import guru.bonacci.oogway.web.helpers.Postponer;
 
 /**

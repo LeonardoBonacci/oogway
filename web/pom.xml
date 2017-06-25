@@ -18,7 +18,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>commons</artifactId>
+			<artifactId>core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

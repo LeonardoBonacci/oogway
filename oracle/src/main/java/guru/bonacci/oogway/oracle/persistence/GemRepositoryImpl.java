@@ -36,8 +36,8 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 	 * when numbers get large.
 	 */
 	@Override
-	public void saveTheNewOnly(PersistedGem... entities) {
-		List<PersistedGem> newOnes = stream(entities)
+	public void saveTheNewOnly(Gem... entities) {
+		List<Gem> newOnes = stream(entities)
 									  .filter(gem -> !gemRepository.exists(gem.getId()))
 									  .peek(gem -> logger.info("About to index wisdom: '" + gem + "'"))
 									  .collect(toList());
@@ -48,13 +48,13 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 
 	@WatchMe // as spring data offers no proper hook to intercept search queries we do it the traditional way...
 	@Override
-	public Optional<PersistedGem> consultTheOracle(String searchString) {
-		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchQuery(PersistedGem.ESSENCE, searchString))
+	public Optional<Gem> consultTheOracle(String searchString) {
+		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchQuery(Gem.ESSENCE, searchString))
 				.build();
-		List<PersistedGem> result = gemRepository.search(searchQuery).getContent();
+		List<Gem> result = gemRepository.search(searchQuery).getContent();
 
 		if (logger.isDebugEnabled())
-			result.stream().map(PersistedGem::getEssence).forEach(logger::debug);
+			result.stream().map(Gem::getEssence).forEach(logger::debug);
 
 		return getRandom(result);
 	}

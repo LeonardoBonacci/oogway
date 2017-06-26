@@ -24,7 +24,7 @@
 		</dependency>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>oracle-service</artifactId>
+			<artifactId>oracle-client</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		

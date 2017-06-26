@@ -20,7 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.persistence.GemRepository;
-import guru.bonacci.oogway.oracle.persistence.PersistedGem;
+import guru.bonacci.oogway.oracle.persistence.Gem;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
@@ -38,40 +38,40 @@ public class GemRepositoryTest {
 	public void shouldSaveAUnique() {
 		assertThat(repo.count(), is(equalTo(0L)));
 
-		repo.saveTheNewOnly(new PersistedGem("a"));
+		repo.saveTheNewOnly(new Gem("a"));
 		assertThat(repo.count(), is(equalTo(1L)));
 	}
 
 	@Test
 	public void shouldNotSaveAnExisting() {
-		repo.saveTheNewOnly(new PersistedGem("a"));
-		repo.saveTheNewOnly(new PersistedGem("a"));
+		repo.saveTheNewOnly(new Gem("a"));
+		repo.saveTheNewOnly(new Gem("a"));
 		assertThat(repo.count(), is(equalTo(1L)));
 	}
 
 	@Test
 	public void shouldSaveTheNewOnly() {
-		repo.saveTheNewOnly(new PersistedGem("a"));
-		repo.saveTheNewOnly(new PersistedGem("a"), new PersistedGem("b"));
+		repo.saveTheNewOnly(new Gem("a"));
+		repo.saveTheNewOnly(new Gem("a"), new Gem("b"));
 		assertThat(repo.count(), is(equalTo(2L)));
 	}
 
 	@Test
 	public void shouldFindSimilarGem() {
-		PersistedGem persistedGem = new PersistedGem("how are you I am fine");
-		repo.save(persistedGem);
+		Gem gem = new Gem("how are you I am fine");
+		repo.save(gem);
 		
-		Optional<PersistedGem> result = repo.consultTheOracle("hello how are you");
-		assertThat(persistedGem, is(equalTo(result.get())));
+		Optional<Gem> result = repo.consultTheOracle("hello how are you");
+		assertThat(gem, is(equalTo(result.get())));
 	}
 
 	@Test
 	public void shouldFindSimilarGemMultipleTimes() {
-		PersistedGem gem1 = new PersistedGem("how are you I am fine");
-		PersistedGem gem2 = new PersistedGem("how are you I am not fine");
+		Gem gem1 = new Gem("how are you I am fine");
+		Gem gem2 = new Gem("how are you I am not fine");
 		repo.save(asList(gem1, gem2));
 		
-		Set<PersistedGem> results = new HashSet<>();
+		Set<Gem> results = new HashSet<>();
 		for (int i=0; i<10; i++) 
 			results.add(repo.consultTheOracle("hello how are you").get());
 
@@ -80,10 +80,10 @@ public class GemRepositoryTest {
 
 	@Test
 	public void shouldNotFindDifferentGem() {
-		PersistedGem persistedGem = new PersistedGem("how are you I am fine");
-		repo.save(persistedGem);
+		Gem gem = new Gem("how are you I am fine");
+		repo.save(gem);
 		
-		Optional<PersistedGem> result = repo.consultTheOracle("something completely different");
+		Optional<Gem> result = repo.consultTheOracle("something completely different");
 		assertThat(true, is(not(result.isPresent())));
 	}
 }

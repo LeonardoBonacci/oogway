@@ -3,7 +3,6 @@ package guru.bonacci.oogway.oracle.connect;
 import static java.lang.String.format;
 import static org.slf4j.LoggerFactory.getLogger;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -11,35 +10,21 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.oracle.api.IGem;
-import guru.bonacci.oogway.oracle.api.JMSGem;
 
 @Service
-public class WebOracleService {
+public class OracleRESTClient {
 
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
-	private JmsTemplate jmsTemplate;
-
-	public void save(List<String> wiseWords) {
-		wiseWords.forEach(wiseword -> {
-			logger.info("sending: " + wiseWords.size());
-			jmsTemplate.convertAndSend("wisewords", new JMSGem(wiseword));	
-		});
-	}
-	
-	
-	
-	@Autowired
 	@LoadBalanced
 	protected RestTemplate restTemplate;
 
-	//TODO for now it's hardcoded
+	//TODO make property
 	private final static String SERVICE_URL =  "http://oracle-service";
 
 	public Optional<IGem> consult(String searchString) {

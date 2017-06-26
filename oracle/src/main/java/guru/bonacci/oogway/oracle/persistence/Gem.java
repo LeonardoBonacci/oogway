@@ -16,7 +16,7 @@ import guru.bonacci.oogway.oracle.api.IGem;
  * use in jewelry. In this context: wisdom is a gem of infinite value.
  */
 @Document(indexName = "oracle", type = "quote", shards = 1, replicas = 0, refreshInterval = "-1")
-public class PersistedGem implements IGem {
+public class Gem implements IGem {
 
 	public static final String ESSENCE = "essence";
 
@@ -26,7 +26,7 @@ public class PersistedGem implements IGem {
 	@Field(type = String, store = true, analyzer = "english", searchAnalyzer = "english")
 	private String essence;
 
-	public PersistedGem() {
+	public Gem() {
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class PersistedGem implements IGem {
 	 * we persist the quote in the _id field to allow uniqueness and in the
 	 * essence-field for full-text search
 	 */
-	public PersistedGem(String essence) {
+	public Gem(String essence) {
 		this.id = essence;
 		this.essence = essence;
 	}

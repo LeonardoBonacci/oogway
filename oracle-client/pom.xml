@@ -8,7 +8,7 @@
 		<artifactId>parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>oracle-service</artifactId>
+	<artifactId>oracle-client</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -19,7 +19,7 @@
 		</dependency>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>oracleapi</artifactId>
+			<artifactId>oracle-interface</artifactId>
 			<version>${project.version}</version>
 		</dependency>
     

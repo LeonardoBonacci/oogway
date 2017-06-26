@@ -25,7 +25,7 @@ public class MessengerTest {
 	GemRepository repo;
 
 	@Autowired
-	Messenger messenger;
+	EnquiryInterceptor enquiryInterceptor;
 
 	@MockBean
 	JmsTemplate jms;

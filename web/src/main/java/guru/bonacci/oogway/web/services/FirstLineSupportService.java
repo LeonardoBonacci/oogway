@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.oracle.api.IGem;
-import guru.bonacci.oogway.oracle.connect.WebOracleService;
+import guru.bonacci.oogway.oracle.connect.OracleRESTClient;
 import guru.bonacci.oogway.web.helpers.Postponer;
 
 /**
@@ -26,7 +26,7 @@ import guru.bonacci.oogway.web.helpers.Postponer;
 public class FirstLineSupportService {
 
 	@Autowired
-	private WebOracleService oracleService;
+	private OracleRESTClient oracleService;
 	
 	@Autowired
 	private Postponer postponer;

@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * called ...Repository
  */
 @Repository
-public interface GemRepository extends ElasticsearchRepository<PersistedGem, String>, GemRepositoryCustom {
+public interface GemRepository extends ElasticsearchRepository<Gem, String>, GemRepositoryCustom {
 }

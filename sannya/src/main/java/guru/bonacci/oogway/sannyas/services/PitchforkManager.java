@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.oracle.connect.WebOracleService;
+import guru.bonacci.oogway.oracle.connect.GemMessageProducer;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 
 /**
@@ -41,7 +41,7 @@ public class PitchforkManager {
 	private CleaningAgent cleaningAgent;
 
 	@Autowired
-	private WebOracleService oracleService;
+	private GemMessageProducer messageProducer;
 
 	public void delegate(String input) {
 		logger.info("About to analyzer input: '" + input + "'");
@@ -50,6 +50,6 @@ public class PitchforkManager {
 		String preprocessedInput = forePlayer.play(sannya, input);
 		List<String> found = sannya.seek(preprocessedInput);
 		List<String> cleaned = cleaningAgent.noMoreClutter(sannya, found);
-		oracleService.save(cleaned);
+		messageProducer.save(cleaned);
 	}
 }

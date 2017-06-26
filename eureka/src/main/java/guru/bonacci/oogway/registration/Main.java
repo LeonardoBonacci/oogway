@@ -1,7 +1,7 @@
 package guru.bonacci.oogway.registration;
 
 
-import guru.bonacci.oogway.registration.services.RegistrationServer;
+import guru.bonacci.oogway.registration.services.Brahman;
 
 /**
  * Allow the servers to be invoked from the command-line. The jar is built with
@@ -19,6 +19,6 @@ public class Main {
 			System.setProperty("server.port", args[0]);
 		}
 
-		RegistrationServer.main(args);
+		Brahman.main(args);
 	}
 }

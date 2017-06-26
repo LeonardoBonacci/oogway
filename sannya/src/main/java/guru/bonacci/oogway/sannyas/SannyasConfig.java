@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import guru.bonacci.oogway.oracle.connect.OracleAPIConfig;
+import guru.bonacci.oogway.oracle.connect.OracleInterfaceConfig;
 
 @Configuration
 @ComponentScan
-@Import(OracleAPIConfig.class)
+@Import(OracleInterfaceConfig.class)
 public class SannyasConfig {
 
 	@Bean

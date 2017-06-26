@@ -9,10 +9,10 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
  */
 @SpringBootApplication
 @EnableEurekaServer
-public class RegistrationServer {
+public class Brahman {
 
 	public static void main(String[] args) {
-		System.setProperty("spring.config.name", "registration-server");
-		SpringApplication.run(RegistrationServer.class, args);
+		System.setProperty("spring.config.name", "brahman");
+		SpringApplication.run(Brahman.class, args);
 	}
 }

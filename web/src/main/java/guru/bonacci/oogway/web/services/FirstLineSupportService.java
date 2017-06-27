@@ -26,7 +26,7 @@ import guru.bonacci.oogway.web.helpers.Postponer;
 public class FirstLineSupportService {
 
 	@Autowired
-	private OracleRESTClient oracleService;
+	private OracleRESTClient oracleClient;
 	
 	@Autowired
 	private Postponer postponer;
@@ -36,7 +36,7 @@ public class FirstLineSupportService {
 		if (isEmpty(q))
 			return "No question no answer..";
 
-		Optional<IGem> gem = oracleService.consult(q);
+		Optional<IGem> gem = oracleClient.consult(q);
 		return gem.map(IGem::getEssence).orElse(postponer.saySomething());
 	}
 }

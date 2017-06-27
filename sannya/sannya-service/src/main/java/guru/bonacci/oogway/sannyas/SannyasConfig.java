@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import guru.bonacci.oogway.oracle.connect.OracleInterfaceConfig;
+import guru.bonacci.oogway.oracle.connect.OracleClientConfig;
 
 @Configuration
 @ComponentScan
-@Import(OracleInterfaceConfig.class)
+@Import(OracleClientConfig.class)
 @PropertySource("classpath:sannyas.properties")
 public class SannyasConfig {
 

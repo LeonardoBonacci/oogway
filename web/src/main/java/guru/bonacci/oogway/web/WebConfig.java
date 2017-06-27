@@ -5,11 +5,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
-import guru.bonacci.oogway.oracle.connect.OracleInterfaceConfig;
+import guru.bonacci.oogway.oracle.connect.OracleClientConfig;
 
 @Configuration
 @ComponentScan
-@Import(OracleInterfaceConfig.class)
+@Import(OracleClientConfig.class)
 @PropertySource("classpath:web.properties")
 public class WebConfig {
 

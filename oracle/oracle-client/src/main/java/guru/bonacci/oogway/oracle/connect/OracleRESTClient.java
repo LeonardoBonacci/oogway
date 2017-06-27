@@ -10,12 +10,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.oracle.api.IGem;
 
-@Service
+@Component
 public class OracleRESTClient {
 
 	private final Logger logger = getLogger(this.getClass());

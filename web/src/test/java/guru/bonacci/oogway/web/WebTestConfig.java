@@ -6,7 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @ComponentScan
-@PropertySource("classpath:/web-test.properties")
+@PropertySource("classpath:web-test.properties")
 public class WebTestConfig {
 
 }

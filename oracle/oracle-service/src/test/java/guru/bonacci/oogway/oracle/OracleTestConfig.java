@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @ComponentScan
 @EnableAspectJAutoProxy 
-@PropertySource("classpath:/oracle-test.properties")
+@PropertySource("classpath:oracle-test.properties")
 public class OracleTestConfig {
 	
 }

@@ -11,7 +11,7 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 
 @Configuration
 @ComponentScan
-@PropertySource("classpath:/sannyas-test.properties")
+@PropertySource("classpath:sannyas-test.properties")
 public class SannyasTestConfig {
 
 	@Bean

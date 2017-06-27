@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.sannya.client.SannyaMessageProducer;
+
 @Aspect
 @Component
 public class EnquiryInterceptor {

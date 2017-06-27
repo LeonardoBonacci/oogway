@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import guru.bonacci.oogway.oracle.connect.OracleClientConfig;
+import guru.bonacci.oogway.oracle.client.OracleClientConfig;
 
 @Configuration
 @ComponentScan

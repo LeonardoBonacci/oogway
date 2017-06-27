@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.oracle.connect;
+package guru.bonacci.oogway.oracle.client;
 
 import static java.lang.String.format;
 import static org.slf4j.LoggerFactory.getLogger;

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
-import guru.bonacci.oogway.oracle.connect.OracleClientConfig;
+import guru.bonacci.oogway.oracle.client.OracleClientConfig;
 
 @Configuration
 @ComponentScan

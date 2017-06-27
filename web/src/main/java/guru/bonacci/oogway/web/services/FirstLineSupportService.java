@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.oracle.api.IGem;
-import guru.bonacci.oogway.oracle.connect.OracleRESTClient;
+import guru.bonacci.oogway.oracle.client.OracleRESTClient;
 import guru.bonacci.oogway.web.helpers.Postponer;
 
 /**

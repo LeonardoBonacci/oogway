@@ -26,6 +26,11 @@
 			<artifactId>oracle-interface</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>guru.bonacci.oogway</groupId>
+			<artifactId>sannya-client</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

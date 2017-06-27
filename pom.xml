@@ -21,7 +21,7 @@
 		<module>utilities</module>
 		<module>oracle-interface</module>
 	    <module>oracle-client</module>
-		<module>oracle</module>
+		<module>oracle-service</module>
 		<module>eureka</module>
 		<module>sannya</module>
 		<module>web</module>

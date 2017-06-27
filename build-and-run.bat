@@ -7,7 +7,7 @@ set version=1.0.0-SNAPSHOT
 set persistence=oracle
 set registration=eureka
 set oracle=oracle-service
-set sannya=sannya
+set sannya=sannya-service
 set web=web
 
 set skip-tests=%1
@@ -22,6 +22,6 @@ start /wait cmd.exe /c "%maven-build%"
  
 start cmd.exe /k "cd %registration% & java -jar target\\%registration%-%version%.jar""
 start cmd.exe /k "cd oracle\\%oracle% & java -jar target\\%oracle%-%version%.jar""
-start cmd.exe /k "cd %sannya% & java -jar target\\%sannya%-%version%.jar""
+start cmd.exe /k "cd sannya\\%sannya% & java -jar target\\%sannya%-%version%.jar""
 start cmd.exe /k "cd %web% & java -jar target\\%web%-%version%.jar""
 

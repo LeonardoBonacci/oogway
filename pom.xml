@@ -14,7 +14,6 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<lucene-version>5.5.2</lucene-version>
 	</properties>
 
 	<modules>
@@ -33,25 +32,6 @@
 				<version>Dalston.SR1</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
-
-			<!-- For language analysis -->
-			<dependency>
-				<groupId>org.apache.lucene</groupId>
-				<artifactId>lucene-queryparser</artifactId>
-				<version>${lucene-version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.lucene</groupId>
-				<artifactId>lucene-analyzers-common</artifactId>
-				<version>${lucene-version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.lucene</groupId>
-				<artifactId>lucene-queries</artifactId>
-				<version>${lucene-version}</version>
 			</dependency>
 
 			<dependency>

@@ -10,7 +10,7 @@
 	</parent>
 	<artifactId>sannya</artifactId>
 	<packaging>pom</packaging>
-	
+
 	<modules>
 		<module>sannya-service</module>
 	</modules>

@@ -1,6 +1,5 @@
 package guru.bonacci.oogway.sannya.client;
 
-import static java.lang.String.format;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import org.slf4j.Logger;
@@ -21,7 +20,7 @@ public class SannyaMessageProducer {
 	private String queue;
 
 	public void send(String searchString) {
-		logger.info(format("Spread the news: '%s'", searchString));
+		logger.info("Spread the news: '" + searchString + "'");
 		jmsTemplate.send(queue, session -> session.createTextMessage(searchString));
 	}
 }

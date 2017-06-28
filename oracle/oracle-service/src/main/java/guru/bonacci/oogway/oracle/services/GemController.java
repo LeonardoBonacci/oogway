@@ -34,7 +34,7 @@ public class GemController {
 
 	@RequestMapping(path = "/backdoor", method = POST)
 	public void index(@RequestBody String input) {
-		logger.info("receiving backdoor index request for: '" + input + "'");
+		logger.info("Receiving secret request to index: '" + input + "'");
 		repo.saveTheNewOnly(new Gem(input));
 	}
 }

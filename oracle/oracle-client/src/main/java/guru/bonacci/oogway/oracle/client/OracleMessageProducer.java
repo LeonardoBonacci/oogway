@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
+/**
+ * Talks to the Oracle via messaging
+ */
 @Component
 public class OracleMessageProducer {
 
@@ -21,10 +24,10 @@ public class OracleMessageProducer {
 	@Value("${spring.activemq.queue.to-oracle}")
 	private String queue;
 
-	public void save(List<String> wiseWords) {
-		wiseWords.forEach(wiseword -> {
-			logger.info("sending: " + wiseword);
-			jmsTemplate.send(queue, session -> session.createTextMessage(wiseword));
+	public void save(List<String> wiseSayings) {
+		wiseSayings.forEach(wisewords -> {
+			logger.info("Sending to the Oracle '" + wisewords + "'");
+			jmsTemplate.send(queue, session -> session.createTextMessage(wisewords));
 		});
 	}
 }

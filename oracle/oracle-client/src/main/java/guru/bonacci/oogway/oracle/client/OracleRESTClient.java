@@ -16,6 +16,9 @@ import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.oracle.api.IGem;
 
+/**
+ * Talks to the Oracle via REST
+ */
 @Component
 public class OracleRESTClient {
 
@@ -32,7 +35,7 @@ public class OracleRESTClient {
 	}
 	
 	public Optional<IGem> consult(String searchString) {
-		logger.info("consult() invoked: for " + searchString);
+		logger.info("Oracle consultation:  '" + searchString + "'");
 
 		// getForObject needs an implementation of IGem
 		IGem gem = restTemplate.getForObject(serviceUrl + "/gems?q={searchString}", RESTGem.class, searchString);

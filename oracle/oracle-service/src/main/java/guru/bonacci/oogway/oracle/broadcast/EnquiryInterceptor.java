@@ -1,6 +1,5 @@
 package guru.bonacci.oogway.oracle.broadcast;
 
-import static java.lang.String.format;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import org.aspectj.lang.JoinPoint;
@@ -23,7 +22,7 @@ public class EnquiryInterceptor {
 
 	@Before("@annotation(WatchMe) && args(searchString)")
 	public void spreadTheNews(JoinPoint joinPoint, String searchString) {
-		logger.info(format("Spread the news: '%s'", searchString));
+		logger.info("Someone has asked you '" + searchString + "'");
 		messageProducer.send(searchString);
 	}
 }

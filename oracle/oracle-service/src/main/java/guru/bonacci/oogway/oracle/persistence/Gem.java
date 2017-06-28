@@ -3,11 +3,15 @@ package guru.bonacci.oogway.oracle.persistence;
 import static java.lang.String.format;
 import static org.springframework.data.elasticsearch.annotations.FieldType.String;
 
+import java.time.LocalDateTime;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import guru.bonacci.oogway.oracle.api.IGem;
 
@@ -25,6 +29,10 @@ public class Gem implements IGem {
 
 	@Field(type = String, store = true, analyzer = "english", searchAnalyzer = "english")
 	private String essence;
+
+	//spring data's @CreatedDate doesn't work on elasticsearch
+	@JsonIgnore
+	private LocalDateTime creation;
 
 	public Gem() {
 	}
@@ -61,6 +69,14 @@ public class Gem implements IGem {
 		this.essence = essence;
 	}
 	
+	public LocalDateTime getCreation() {
+		return creation;
+	}
+
+	public void setCreation(LocalDateTime creation) {
+		this.creation = creation;
+	}
+
 	@Override
     public String toString() {
         return format("JMSGem[essence='%s']", essence);

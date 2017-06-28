@@ -57,7 +57,7 @@ public class BrainyQuoteIlluminator extends WebIlluminator implements PageCache 
 	@Override
 	protected Elements consultWeb(String searchURL) {
 		try {
-			logger.info("firing request " + searchURL);
+			logger.debug("Firing request " + searchURL);
 			Document doc = get(searchURL);
 			return doc.select("a[title='view quote']");
 		} catch (IOException e) {

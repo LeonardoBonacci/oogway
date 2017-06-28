@@ -1,8 +1,7 @@
 package guru.bonacci.oogway.oracle.api;
 
 /**
- * A gem is a cut and polished precious stone or pearl fine enough for
- * use in jewelry. In this context: wisdom is a gem of infinite value.
+ * The most primal Gem is pure essence.
  */
 public interface IGem {
 

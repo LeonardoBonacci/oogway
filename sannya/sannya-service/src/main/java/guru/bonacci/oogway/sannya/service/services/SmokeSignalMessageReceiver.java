@@ -25,7 +25,7 @@ public class SmokeSignalMessageReceiver {
 
 	@JmsListener(destination = "${spring.activemq.queue.to-sannya}")
 	public void onMessage(String input) {
-		logger.info("Received message <" + input + ">");
+		logger.info("An opportunity to learn... '" + input + "'");
 		manager.delegate(input);
 	}
 }

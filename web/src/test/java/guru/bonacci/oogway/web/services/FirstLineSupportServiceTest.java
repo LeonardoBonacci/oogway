@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.api.IGem;
 import guru.bonacci.oogway.oracle.client.OracleRESTClient;
-import guru.bonacci.oogway.web.helpers.Postponer;
+import guru.bonacci.oogway.web.cheaters.Postponer;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)

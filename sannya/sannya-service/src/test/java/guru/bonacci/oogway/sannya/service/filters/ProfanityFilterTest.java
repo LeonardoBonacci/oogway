@@ -15,7 +15,7 @@ import guru.bonacci.oogway.sannya.service.filters.ProfanityFilter;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE, properties = {
-	"file.name.profanity.filter=badwords-test.txt"		
+	"filter.profanity.file.name=badwords-test.txt"		
 })
 public class ProfanityFilterTest {
 

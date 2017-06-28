@@ -12,7 +12,7 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<start-class>guru.bonacci.oogway.oracle.Main</start-class>
+		<start-class>guru.bonacci.oogway.oracle.service.Main</start-class>
 	</properties>
 
 	<dependencies>

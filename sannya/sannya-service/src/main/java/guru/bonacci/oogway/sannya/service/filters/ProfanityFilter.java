@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProfanityFilter implements Predicate<String> {
 
-	@Value("${file.name.profanity.filter}")
+	@Value("${filter.profanity.file.name}")
 	private String fileName;
 
 	private final Logger logger = getLogger(this.getClass());

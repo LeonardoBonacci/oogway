@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.oracle.api.IGem;
 import guru.bonacci.oogway.oracle.client.OracleRESTClient;
-import guru.bonacci.oogway.web.helpers.Postponer;
+import guru.bonacci.oogway.web.cheaters.Postponer;
 
 /**
  * Tier I is the initial support level responsible for basic customer issues. It

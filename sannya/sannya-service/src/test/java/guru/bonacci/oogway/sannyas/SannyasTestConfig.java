@@ -5,13 +5,14 @@ import java.util.Properties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Import;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import guru.bonacci.oogway.oracle.client.OracleClientTestConfig;
 
 @Configuration
 @ComponentScan
-@PropertySource("classpath:sannyas-test.properties")
+@Import(OracleClientTestConfig.class)
 public class SannyasTestConfig {
 
 	@Bean

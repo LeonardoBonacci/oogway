@@ -13,7 +13,7 @@ import guru.bonacci.oogway.web.WebConfig;
 /**
  * Micro-service for the user to communicate with
  */
-//@SpringBootApplication
+@SpringBootApplication
 @EnableDiscoveryClient
 @Import(WebConfig.class)
 public class WebServer {

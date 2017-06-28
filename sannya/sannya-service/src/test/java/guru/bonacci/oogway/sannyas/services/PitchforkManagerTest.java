@@ -1,6 +1,8 @@
 package guru.bonacci.oogway.sannyas.services;
 
 import static java.util.Arrays.asList;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
@@ -13,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.oracle.client.OracleMessageProducer;
 import guru.bonacci.oogway.sannyas.goodreads.GoodReadsSeeker;
 
 @RunWith(SpringRunner.class)
@@ -34,8 +37,8 @@ public class PitchforkManagerTest {
 	@MockBean
 	CleaningAgent cleaningAgent;
 
-//	@MockBean
-//TODO	GemRepository gemRepo;
+	@MockBean
+	OracleMessageProducer messageProducer;
 
 	@Test
 	public void shouldJustRunThroughAllTheseMockCallsInThisNonMeaningfulTest() {
@@ -50,6 +53,6 @@ public class PitchforkManagerTest {
 		when(cleaningAgent.noMoreClutter(sannyasin, found)).thenReturn(clutterless);
 		
 		manager.delegate(input);
-//		verify(gemRepo, times(1)).saveTheNewOnly(clutterless);
+		verify(messageProducer, times(1)).save(clutterless);
 	}
 }

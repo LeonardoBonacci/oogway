@@ -1,5 +1,6 @@
 package guru.bonacci.oogway.web.helpers;
 
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertThat;
@@ -9,14 +10,13 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.web.WebTestConfig;
-
-@RunWith(SpringJUnit4ClassRunner.class)
-//@SpringBootTest(webEnvironment = NONE)
-@ContextConfiguration(classes = WebTestConfig.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = NONE, properties = {
+	"file.name.answers.to.win.time:answers-to-win-time-test.txt" 
+})
 public class PostponerTest {
 
 	@Autowired

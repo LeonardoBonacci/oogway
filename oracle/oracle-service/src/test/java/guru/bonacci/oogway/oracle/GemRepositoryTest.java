@@ -13,22 +13,31 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.persistence.GemRepository;
 import guru.bonacci.oogway.oracle.persistence.Gem;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = NONE)
+@SpringBootTest(webEnvironment = NONE, properties = {
+	"spring.data.elasticsearch.properties.path.home:foo/embedded"
+})
+@Ignore //TODO reads wrong properties through OracleServer
 public class GemRepositoryTest {
 
 	@Autowired
 	GemRepository repo;
 	
+	@MockBean
+	JmsTemplate jms;
+
 	@Before
 	public void setup() {
 		repo.deleteAll();

@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.oracle.client.GemMessageProducer;
+import guru.bonacci.oogway.oracle.client.OracleMessageProducer;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 
 /**
@@ -41,7 +41,7 @@ public class PitchforkManager {
 	private CleaningAgent cleaningAgent;
 
 	@Autowired
-	private GemMessageProducer messageProducer;
+	private OracleMessageProducer messageProducer;
 
 	public void delegate(String input) {
 		logger.info("About to analyzer input: '" + input + "'");

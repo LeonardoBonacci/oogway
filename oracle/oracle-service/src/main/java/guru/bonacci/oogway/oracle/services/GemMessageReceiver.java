@@ -18,7 +18,7 @@ public class GemMessageReceiver {
 	@Autowired
 	private GemRepository repo;
 
-	@JmsListener(destination = "wisewords")
+	@JmsListener(destination = "${spring.activemq.queue.to-oracle:to-oracle}")
 	public void onMessage(String input) {
 		logger.info("Receiving an extra bit of knowledge: '" + input + "'");
 		repo.saveTheNewOnly(new Gem(input));

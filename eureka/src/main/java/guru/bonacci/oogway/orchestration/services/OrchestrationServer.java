@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.registration.services;
+package guru.bonacci.oogway.orchestration.services;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,10 +9,10 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
  */
 @SpringBootApplication
 @EnableEurekaServer
-public class Brahman {
+public class OrchestrationServer {
 
 	public static void main(String[] args) {
-		System.setProperty("spring.config.name", "brahman");
-		SpringApplication.run(Brahman.class, args);
+		System.setProperty("spring.config.name", "orchestration");
+		SpringApplication.run(OrchestrationServer.class, args);
 	}
 }

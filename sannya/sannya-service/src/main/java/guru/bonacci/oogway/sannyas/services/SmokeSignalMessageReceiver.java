@@ -16,14 +16,14 @@ import org.springframework.stereotype.Controller;
  * It is here that the service receives its messages.
  */
 @Controller
-public class SmokeSignalController {
+public class SmokeSignalMessageReceiver {
 
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
 	private PitchforkManager manager;
 
-	@JmsListener(destination = "${spring.activemq.queue.name}")
+	@JmsListener(destination = "${spring.activemq.queue.to-sannya:to-sannya}")
 	public void onMessage(String input) {
 		logger.info("Received message <" + input + ">");
 		manager.delegate(input);

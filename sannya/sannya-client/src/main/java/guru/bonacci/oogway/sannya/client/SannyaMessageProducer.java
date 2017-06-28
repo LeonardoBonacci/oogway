@@ -17,7 +17,7 @@ public class SannyaMessageProducer {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 
-	@Value("${spring.activemq.queue.name}")
+	@Value("${spring.activemq.queue.to-sannya:to-sannya}")
 	private String queue;
 
 	public void send(String searchString) {

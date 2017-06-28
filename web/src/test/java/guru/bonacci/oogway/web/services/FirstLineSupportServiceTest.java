@@ -1,5 +1,6 @@
 package guru.bonacci.oogway.web.services;
 
+import static java.lang.String.format;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -9,6 +10,8 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +43,10 @@ public class FirstLineSupportServiceTest {
 
 	@Test
 	public void shouldGiveAnswer() {
-		//TODO IGem expected = new IGem("some answer");
-//		when(oracleService.consult(anyString())).thenReturn(Optional.of(expected));
-//
-//		assertThat(service.enquire("some input"), is(equalTo(expected.getEssence())));
+		IGem expected = new TestGem("some answer");
+		when(oracleService.consult(anyString())).thenReturn(Optional.of(expected));
+
+		assertThat(service.enquire("some input"), is(equalTo(expected.getEssence())));
 	}
 
 	@Test
@@ -54,5 +57,26 @@ public class FirstLineSupportServiceTest {
 
 		assertThat(service.enquire("some input"), is(equalTo(postponingAnswer)));
 	}
+	
+	static class TestGem implements IGem {
 
+		private String essence;
+
+		public TestGem() {
+		}
+
+		public TestGem(String essence) {
+			this.essence = essence;
+		}
+
+		@Override
+		public String getEssence() {
+			return essence;
+		}
+
+		@Override
+		public void setEssence(String essence) {
+			this.essence = essence;
+		}
+	}
 }

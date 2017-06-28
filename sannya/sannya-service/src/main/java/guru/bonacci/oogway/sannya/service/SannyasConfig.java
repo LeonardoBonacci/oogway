@@ -13,7 +13,7 @@ import guru.bonacci.oogway.oracle.client.OracleClientConfig;
 
 @Configuration
 @ComponentScan
-@Import(OracleClientConfig.class) //TODO make  testconfig
+@Import(OracleClientConfig.class) 
 @PropertySource("classpath:sannyas.properties")
 public class SannyasConfig {
 

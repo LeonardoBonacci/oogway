@@ -9,6 +9,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -24,14 +25,17 @@ public class OracleRESTClient {
 	@LoadBalanced
 	protected RestTemplate restTemplate;
 
-	//TODO make property
-	private final static String SERVICE_URL =  "http://oracle-service";
+	private final String serviceUrl;
 
+	public OracleRESTClient(@Value("${oracle.service.application.name}") String serviceUrl) {
+		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
+	}
+	
 	public Optional<IGem> consult(String searchString) {
 		logger.info("consult() invoked: for " + searchString);
 
 		// getForObject needs an implementation of IGem
-		IGem gem = restTemplate.getForObject(SERVICE_URL + "/gems?q={searchString}", RESTGem.class, searchString);
+		IGem gem = restTemplate.getForObject(serviceUrl + "/gems?q={searchString}", RESTGem.class, searchString);
 		return Optional.ofNullable(gem);
 	}
 	

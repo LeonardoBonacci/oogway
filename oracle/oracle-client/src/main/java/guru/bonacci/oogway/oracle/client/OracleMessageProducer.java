@@ -18,7 +18,7 @@ public class OracleMessageProducer {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 
-	@Value("${spring.activemq.queue.to-oracle:to-oracle}")
+	@Value("${spring.activemq.queue.to-oracle}")
 	private String queue;
 
 	public void save(List<String> wiseWords) {

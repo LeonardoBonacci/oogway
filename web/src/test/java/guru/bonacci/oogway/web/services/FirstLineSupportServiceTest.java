@@ -1,6 +1,5 @@
 package guru.bonacci.oogway.web.services;
 
-import static java.lang.String.format;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -10,8 +9,6 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import java.util.Optional;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

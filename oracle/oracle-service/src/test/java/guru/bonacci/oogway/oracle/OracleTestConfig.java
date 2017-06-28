@@ -6,13 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 
-import guru.bonacci.oogway.sannya.client.SannyaClientConfig;
+import guru.bonacci.oogway.sannya.client.SannyaClientTestConfig;
 
 @Configuration
 @ComponentScan
 @EnableAspectJAutoProxy 
-//TODO@Import(SannyaClientTestConfig.class)
-@Import(SannyaClientConfig.class)
+@Import(SannyaClientTestConfig.class)
 public class OracleTestConfig {
 	
 }

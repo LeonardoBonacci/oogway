@@ -12,7 +12,7 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<start-class>guru.bonacci.oogway.sannyas.Main</start-class>
+		<start-class>guru.bonacci.oogway.sannya.service.Main</start-class>
 		<nlp-version>3.7.0</nlp-version>
 		<lucene-version>5.5.2</lucene-version>
 	</properties>

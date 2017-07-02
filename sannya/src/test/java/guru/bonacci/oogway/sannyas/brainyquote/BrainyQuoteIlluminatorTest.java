@@ -42,6 +42,15 @@ public class BrainyQuoteIlluminatorTest {
 	}
 
 	@Test
+	public void shouldFindNumerOfPagesWhenMany() throws IOException {
+		Document doc = parse(readToString("brainyquote/brainyquote-mock-faith.txt"));
+		doReturn(doc).when(finder).get(anyString());
+
+		Integer nrOfPages = finder.getNrOfPages("the faith url");
+		assertThat(nrOfPages, is(equalTo(39)));
+	}
+
+	@Test
 	public void shouldReturnOneWhenNoPages() throws IOException {
 		Document doc = parse(readToString("brainyquote/brainyquote-mock-aaaaa.txt"));
 		doReturn(doc).when(finder).get(anyString());

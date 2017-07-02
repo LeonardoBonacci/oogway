@@ -5,11 +5,14 @@ package guru.bonacci.oogway.sannyas.general;
 import static java.util.Arrays.stream;
 import static java.util.Collections.synchronizedSet;
 import static java.util.stream.Collectors.toList;
+import static org.jsoup.Jsoup.connect;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -78,5 +81,12 @@ public abstract class WebIlluminator {
 	 */
 	protected String procesText(String str) {
 		return str;
+	}
+	
+	/**
+	 * Method to facilitate testing
+	 */
+	public Document get(String searchURL) throws IOException {
+		return connect(searchURL).userAgent("Mozilla").get();
 	}
 }

@@ -2,7 +2,6 @@ package guru.bonacci.oogway.sannyas.goodreads;
 
 
 import static org.apache.commons.lang3.RandomUtils.nextInt;
-import static org.jsoup.Jsoup.connect;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.io.IOException;
@@ -43,8 +42,14 @@ public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
 		int pageNr = 1;
 		try {
 			Document doc = get(searchURL);
-			Elements elements = doc.select("span.gap");
-			pageNr = Integer.valueOf(elements.first().nextElementSibling().nextElementSibling().text());
+			Element element = doc.select("span.previous_page").first();
+			while (element != null) {
+				try {
+					pageNr = Integer.parseInt(element.text());
+			    } catch (NumberFormatException ignore) {}
+
+				element = element.nextElementSibling();
+			}
 		} catch (Exception e) { 
 			// Taking the easy way, catching all exceptions.
 			// No results or one result: page 1
@@ -65,13 +70,6 @@ public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
 			logger.error("Something went wrong. No stress, it does not need to be serieus: " + e.getMessage());
 		}
 		return new Elements();
-	}
-
-	/**
-	 * Method to facilitate testing
-	 */
-	public Document get(String searchURL) throws IOException {
-		return connect(searchURL).get();
 	}
 
 	@Override

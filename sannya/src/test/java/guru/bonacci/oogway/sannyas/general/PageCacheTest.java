@@ -8,11 +8,27 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.sannyas.SannyasTestConfig;
 import guru.bonacci.oogway.sannyas.general.PageTestCaches.PageTestCache1;
 import guru.bonacci.oogway.sannyas.general.PageTestCaches.PageTestCache2;
+
+
+@SpringBootApplication
+@EnableCaching(proxyTargetClass=true)
+@Import(SannyasTestConfig.class)
+class SannyasCachedTestApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SannyasCachedTestApplication.class, args);
+	}
+}
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SannyasCachedTestApplication.class, webEnvironment = NONE)

@@ -1,10 +1,3 @@
-Goeiemorgen Dave,
-
-Mocht je dit lezen en wat code willen schrijven, gebruik dan de volgende files: the-html.html, the-css.css en the-js.js
-Dan zou het direct moeten werken. Verderop in deze readme staat hoe je het geheel kunt draaien. Middels build-and-run.bat kun je bouwen en runnen in een handomdraai. De web-server waartegen je praat is per default toegankelijk op localhost:3333 (dit mapt op the-html.html), en de 'vraag service' is zo te benaderen: 'http://localhost:3333/consult?q=wife'. Mocht je de java-file willen zien dat is dat MiniController.java. 
-
-Succes, veel plezier en tot maandag!
-
 Welcome GitHub user, to my personal project called oogway.
 -------------
 

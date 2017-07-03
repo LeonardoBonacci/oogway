@@ -1,14 +1,36 @@
 <!DOCTYPE HTML>
-<html>
-<head>
-    <title>Hello Dave, change this page at will...</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-	<script type="text/javascript" src="js/the-js.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/the-css.css">
-	
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Oracle interface</title>
+    <script src="../js/jquery-1.7.1.min.js"></script>
+    <script src="../js/jquery.mousewheel-min.js"></script>
+    <script src="../js/jquery.terminal.js"></script>
+    <link href="../css/jquery.terminal.css" rel="stylesheet"/>
+    <link href="../css/custom.terminal.css" rel="stylesheet"/>
+    <script>
+        jQuery(document).ready(function ($) {
+            $('body').terminal(function (command, term) {
+                term.pause();
+                $.ajax({
+                  url: "consult",
+                  type: "get",
+                  data: {
+                    q: command
+                  },
+                  success: function(response) {
+                      term.resume();
+                      term.echo('[[;;;response]' + response + ']');
+                      //or just display as raw: term.echo(response, {raw:true});
+                  },
+                  error: function(xhr) {
+                      term.resume();
+                      term.echo('[[;;;response]' + xhr + ']');
+                  }
+                });
+            }, {prompt: '> ', greetings: 'Ask the Oracle a question:\n\r'});
+        });
+    </script>
+  </head>
 <body>
-    <p>If this page is blue the css is imported correctly</p>
 </body>
-</html>

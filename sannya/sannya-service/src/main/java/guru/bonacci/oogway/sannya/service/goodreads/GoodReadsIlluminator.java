@@ -73,14 +73,14 @@ public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
 	}
 
 	@Override
-	public Element procesElement(Element el) {
+	public Element processElement(Element el) {
 		for (Element e : el.children()) 
 			e.remove();
 		return el;
 	}
 
 	@Override
-	public String procesText(String str) {
+	public String processText(String str) {
 		return str.substring(str.indexOf("“") + 1, str.lastIndexOf("”"));
 	}
 }

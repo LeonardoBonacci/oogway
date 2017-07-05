@@ -43,9 +43,9 @@ public abstract class WebIlluminator {
 					.filter(consultedWebPages::add) //returns false when present in set
 					.map(this::consultWeb)
 					.flatMap(Elements::stream)
-					.map(this::procesElement)
+					.map(this::processElement)
 					.map(Element::text)
-					.map(this::procesText)
+					.map(this::processText)
 					.collect(toList());
 	}
 
@@ -69,7 +69,7 @@ public abstract class WebIlluminator {
 	 * @param el
 	 * @return
 	 */
-	protected Element procesElement(Element el) {
+	protected Element processElement(Element el) {
 		return el;
 	}
 
@@ -79,7 +79,7 @@ public abstract class WebIlluminator {
 	 * @param str
 	 * @return
 	 */
-	protected String procesText(String str) {
+	protected String processText(String str) {
 		return str;
 	}
 	

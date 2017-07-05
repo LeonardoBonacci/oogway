@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>guru.bonacci.oogway</groupId>
 		<artifactId>sannya</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.0</version>
 	</parent>
 	<artifactId>sannya-client</artifactId>
 	<packaging>jar</packaging>

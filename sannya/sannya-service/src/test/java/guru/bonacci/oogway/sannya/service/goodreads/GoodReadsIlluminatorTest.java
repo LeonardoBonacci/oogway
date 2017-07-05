@@ -56,7 +56,7 @@ public class GoodReadsIlluminatorTest {
 		doReturn(doc).when(finder).get(anyString());
 
 		Integer nrOfPages = finder.getNrOfPages("the romance url");
-		assertThat(nrOfPages, is(equalTo(1)));
+		assertThat(nrOfPages, is(equalTo(2)));
 	}
 	
 	@Test

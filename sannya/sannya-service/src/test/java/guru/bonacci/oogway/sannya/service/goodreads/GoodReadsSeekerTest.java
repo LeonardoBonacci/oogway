@@ -17,9 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.sannya.service.filters.LengthFilter;
-import guru.bonacci.oogway.sannya.service.goodreads.GoodReadsIlluminator;
-import guru.bonacci.oogway.sannya.service.goodreads.GoodReadsSeeker;
-import guru.bonacci.oogway.sannya.service.steps.KeyPhraser;
+import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
@@ -29,8 +27,8 @@ public class GoodReadsSeekerTest {
 	GoodReadsSeeker seeker;
 	
 	@MockBean
-	KeyPhraser keyPhraser;
-
+	CharacterGuardian characterGuardian;
+	
 	@MockBean
 	LengthFilter lengthFilter;
 
@@ -42,7 +40,7 @@ public class GoodReadsSeekerTest {
 		String in = "some input";
 		String out = "some output";
 		
-		when(keyPhraser.apply(in)).thenReturn(out);
+		when(characterGuardian.apply(in)).thenReturn(out);
 		assertThat(seeker.preprocessingSteps().get(0).apply(in), is(equalTo(out)));
 	}
 	

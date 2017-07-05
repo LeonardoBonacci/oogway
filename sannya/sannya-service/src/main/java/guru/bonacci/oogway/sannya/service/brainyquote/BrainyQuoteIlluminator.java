@@ -2,7 +2,6 @@ package guru.bonacci.oogway.sannya.service.brainyquote;
 
 
 import static org.apache.commons.lang3.RandomUtils.nextInt;
-import static org.jsoup.Jsoup.connect;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.io.IOException;
@@ -42,8 +41,13 @@ public class BrainyQuoteIlluminator extends WebIlluminator implements PageCache 
 		Integer pageNr = 1;
 		try {
 			Document doc = get(searchURL);
-			Elements elements = doc.select("ul.pagination a");
-			pageNr = Integer.valueOf(elements.get(elements.size() - 2).text()); //last page is second last element
+			Elements elements = doc.select("ul.pagination");
+			elements = elements.first().getElementsByAttribute("href");
+			for (int i=0; i<elements.size(); i++) {
+				try {
+					pageNr = Integer.parseInt(elements.get(i).text());
+			    } catch (NumberFormatException ignore) {}
+			}
 		} catch (Exception e) { 
 			// Taking the easy way, catching all exceptions.
 			// No results or one result: page 1
@@ -64,12 +68,5 @@ public class BrainyQuoteIlluminator extends WebIlluminator implements PageCache 
 			logger.error("Something went wrong. No stress, it does not need to be serieus: " + e.getMessage());
 		}
 		return new Elements();
-	}
-	
-	/**
-	 * Method to facilitate testing
-	 */
-	public Document get(String searchURL) throws IOException {
-		return connect(searchURL).userAgent("Mozilla").get();
 	}
 }

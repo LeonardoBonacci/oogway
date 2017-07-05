@@ -1,40 +1,15 @@
 package guru.bonacci.oogway.sannya.service.steps;
 
 import static java.util.Arrays.asList;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 import java.util.Collection;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestContextManager;
 
-import guru.bonacci.oogway.sannya.service.SannyasTestApplication;
-import guru.bonacci.oogway.sannya.service.steps.Lemmatizor;
-
-@RunWith(value = Parameterized.class)
-@ContextConfiguration(classes = SannyasTestApplication.class)
-public class LemmatizorTest {
-
-	@Autowired
-	Lemmatizor lemmatizor;
-	
-	// Manually config for spring to use Parameterised
-    private TestContextManager testContextManager;
-
-	private String input;
-	private String output;
+public class LemmatizorTest extends AbstractStepTest<Lemmatizor> {
 
     public LemmatizorTest(String in, String out) {
-        this.input = in;
-        this.output = out;
+        super(in, out, Lemmatizor.class);
     }
 
      @Parameters
@@ -59,16 +34,5 @@ public class LemmatizorTest {
 	         {"I've been living a lie, there's nothing inside", "I have be live a lie , there be nothing inside"},
 	         {"You were bringing me to life", "you be bring I to life"}
          });
-     }
-
-     @Before 
-     public void setUp() throws Exception {
-          this.testContextManager = new TestContextManager(getClass());
-          this.testContextManager.prepareTestInstance(this);
-     }
-     
-     @Test
-     public void shouldLemmatize() {
-         assertThat(lemmatizor.apply(input), is(equalTo(output)));
      }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.filters.LengthFilter;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
+import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
 import guru.bonacci.oogway.sannya.service.steps.KeyPhraser;
 
 /**
@@ -20,6 +21,9 @@ import guru.bonacci.oogway.sannya.service.steps.KeyPhraser;
  */
 @Component
 public class GoodReadsSeeker implements Sannyasin {
+
+	@Autowired
+	private CharacterGuardian characterGuardian;
 
 	@Autowired
 	private KeyPhraser keyPhraser;
@@ -32,7 +36,7 @@ public class GoodReadsSeeker implements Sannyasin {
 
 	@Override
 	public List<Function<String,String>> preprocessingSteps() {
-		return asList(keyPhraser);
+		return asList(characterGuardian, keyPhraser);
 	}
 
 	@Override

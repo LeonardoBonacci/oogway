@@ -14,7 +14,9 @@
 	</parent>
 
 	<scm>
-		<developerConnection>scm:git:git://github.com/LeonardoBonacci/oogway/</developerConnection>
+		<url>https://github.com/LeonardoBonacci/oogway</url>
+		<connection>scm:git:git://github.com/LeonardoBonacci/oogway.git</connection>
+		<developerConnection>scm:git:git@github.com:LeonardoBonacci/oogway.git</developerConnection>
 	</scm>
 
 	<properties>

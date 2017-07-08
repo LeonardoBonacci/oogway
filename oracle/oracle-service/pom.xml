@@ -65,6 +65,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
 		<!-- For Embedded Elasticsearch -->
 		<dependency>
 			<groupId>net.java.dev.jna</groupId>

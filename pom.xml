@@ -14,9 +14,8 @@
 	</parent>
 
 	<scm>
-		<url>https://github.com/LeonardoBonacci/oogway</url>
-		<connection>scm:git:git://github.com/LeonardoBonacci/oogway.git</connection>
 		<developerConnection>scm:git:git@github.com:LeonardoBonacci/oogway.git</developerConnection>
+		<tag>HEAD</tag>
 	</scm>
 
 	<properties>
@@ -54,6 +53,14 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Because maven demands</name>
+			<url>file://${project.build.directory}/mvn-repo</url>
+		</repository>
+	</distributionManagement>
 
 	<build>
 		<resources>

@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>guru.bonacci.oogway</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>sannya</artifactId>
 	<packaging>pom</packaging>

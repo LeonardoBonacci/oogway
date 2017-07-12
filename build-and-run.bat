@@ -8,6 +8,7 @@ set registration=eureka
 set oracle=oracle-service
 set sannya=sannya-service
 set web=web
+set geo=geo-service
 
 set skip-tests=%1
 if "%skip-tests%" == "skip" (
@@ -23,4 +24,5 @@ start cmd.exe /k "cd %registration% & java -jar target\\%registration%-%version%
 start cmd.exe /k "cd oracle\\%oracle% & java -jar target\\%oracle%-%version%.jar""
 start cmd.exe /k "cd sannya\\%sannya% & java -jar target\\%sannya%-%version%.jar""
 start cmd.exe /k "cd %web% & java -jar target\\%web%-%version%.jar""
+start cmd.exe /k "cd spectre\\geo\\%geo% & java -jar target\\%geo%-%version%.jar""
 

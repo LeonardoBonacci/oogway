@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import guru.bonacci.oogway.oracle.api.IGem;
 import guru.bonacci.oogway.oracle.client.OracleRESTClient;
 import guru.bonacci.oogway.web.cheaters.Postponer;
+import guru.bonacci.oogway.web.intercept.WatchMe;
 
 /**
  * Tier I is the initial support level responsible for basic customer issues. It
@@ -31,7 +32,7 @@ public class FirstLineSupportService {
 	@Autowired
 	private Postponer postponer;
 
-
+	@WatchMe
 	public String enquire(String q) {
 		if (isEmpty(q))
 			return "No question no answer..";

@@ -27,7 +27,8 @@
 		<module>eureka</module>
 		<module>sannya</module>
 		<module>web</module>
-	</modules>
+    <module>spectre</module>
+  </modules>
 
 	<dependencyManagement>
 		<dependencies>

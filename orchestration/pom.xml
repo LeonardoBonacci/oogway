@@ -6,7 +6,7 @@
 		<artifactId>parent</artifactId>
 		<version>1.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>eureka</artifactId>
+	<artifactId>orchestration</artifactId>
 	<packaging>jar</packaging>
 
 	<properties>

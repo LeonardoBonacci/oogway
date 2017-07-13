@@ -24,10 +24,10 @@
 	<modules>
 		<module>utilities</module>
 		<module>oracle</module>
-		<module>eureka</module>
+		<module>orchestration</module>
 		<module>sannya</module>
 		<module>web</module>
-    <module>spectre</module>
+   		<module>spectre</module>
   </modules>
 
 	<dependencyManagement>

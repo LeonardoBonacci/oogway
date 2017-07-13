@@ -11,7 +11,7 @@ import guru.bonacci.oogway.oracle.service.persistence.Gem;
 import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
 
 @Component
-public class GemMessageReceiver {
+public class OracleMessageReceiver {
 
 	private final Logger logger = getLogger(this.getClass());
 

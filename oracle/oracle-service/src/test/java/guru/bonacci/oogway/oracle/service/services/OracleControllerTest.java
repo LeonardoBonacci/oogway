@@ -1,9 +1,12 @@
-package guru.bonacci.oogway.web.services;
+package guru.bonacci.oogway.oracle.service.services;
 
+import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,28 +17,35 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import guru.bonacci.oogway.oracle.service.persistence.Gem;
+import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MiniControllerTest {
+public class OracleControllerTest {
 
 	@Autowired
 	MockMvc mvc;
 
 	@MockBean
-	FirstLineSupportService service;
-
-	@Test
-	public void shouldReceive200OnHome() throws Exception {
-		this.mvc.perform(get("/")).andExpect(status().isOk());
-	}
+	GemRepository gemRepo;
 	
 	@Test
-	public void shouldReceive200OnConsult() throws Exception {
-		given(service.enquire("tell me the truth")).willReturn("why should I?");
+	public void shouldReturnNullOnConsult() throws Exception {
+		given(gemRepo.consultTheOracle("tell me the truth")).willReturn(Optional.empty());
 
-		mvc.perform(get("/consult?q=tell me the truth"))
+		mvc.perform(get("/gems?q=tell me the truth"))
 			.andExpect(status().isOk())
-			.andExpect(content().string("why should I?"));
+			.andExpect(content().string(isEmptyOrNullString()));
+	}
+
+	@Test
+	public void shouldRecieveMessageOnConsult() throws Exception {
+		given(gemRepo.consultTheOracle("tell me the truth")).willReturn(Optional.of(new Gem("why should I?")));
+
+		mvc.perform(get("/gems?q=tell me the truth"))
+			.andExpect(status().isOk())
+			.andExpect(content().json("{'essence':'why should I?'}")); 
 	}
 }

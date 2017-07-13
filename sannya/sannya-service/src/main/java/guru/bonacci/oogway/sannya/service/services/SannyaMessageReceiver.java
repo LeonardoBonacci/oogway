@@ -9,16 +9,8 @@ import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.processing.PitchforkManager;
 
-/**
- * Previously called: SmokeSignalMessageReceiver:
- * 
- * The smoke signal is one of the oldest forms of long-distance communication.
- * It is a form of visual communication used over long distance. In general
- * smoke signals are used to transmit news, signal danger, or gather people to a
- * common area.
- */
 @Component
-public class OurFirstMessageReceiver {
+public class SannyaMessageReceiver {
 
 	private final Logger logger = getLogger(this.getClass());
 

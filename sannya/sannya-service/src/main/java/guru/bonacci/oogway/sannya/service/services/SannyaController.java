@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import guru.bonacci.oogway.sannya.service.processing.PitchforkManager;
 
 @RestController
-public class OurLatestController {
+public class SannyaController {
 
 	private final Logger logger = getLogger(this.getClass());
 

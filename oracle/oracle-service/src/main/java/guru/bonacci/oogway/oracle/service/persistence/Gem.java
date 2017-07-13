@@ -79,7 +79,7 @@ public class Gem implements IGem {
 
 	@Override
     public String toString() {
-        return format("JMSGem[essence='%s']", essence);
+        return format("Gem[essence='%s']", essence);
     }
 	
 	@Override

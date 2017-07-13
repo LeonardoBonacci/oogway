@@ -11,12 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * The outermost layer is known as the annamaya kosha. Anna means 'food' or
- * 'physical matter' and maya means 'made of.'
- */
 @Controller
-public class AnnamayaController {
+public class WebController {
 
 	private final Logger logger = getLogger(this.getClass());
 

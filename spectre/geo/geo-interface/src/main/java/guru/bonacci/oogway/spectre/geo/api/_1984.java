@@ -1,5 +1,7 @@
 package guru.bonacci.oogway.spectre.geo.api;
 
+import static java.lang.String.format;
+
 import java.io.Serializable;
 
 /**
@@ -34,4 +36,9 @@ public class _1984 implements Serializable {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	
+	@Override
+    public String toString() {
+        return format("1984[ip='%s', message='%s']", ip, message);
+    }
 }

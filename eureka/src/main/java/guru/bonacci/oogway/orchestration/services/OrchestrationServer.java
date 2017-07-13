@@ -12,7 +12,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 public class OrchestrationServer {
 
 	public static void main(String[] args) {
-		System.setProperty("spring.config.name", "orchestration");
+		System.setProperty("spring.config.name", "orchestration-server");
 		SpringApplication.run(OrchestrationServer.class, args);
 	}
 }

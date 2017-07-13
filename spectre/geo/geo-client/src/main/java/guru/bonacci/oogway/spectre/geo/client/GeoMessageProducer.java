@@ -14,7 +14,7 @@ import guru.bonacci.oogway.spectre.geo.api._1984;
  * Talks to Geo via messaging
  */
 @Component
-public class Nineteen84MessageProducer {
+public class GeoMessageProducer {
 
 	private final Logger logger = getLogger(this.getClass());
 

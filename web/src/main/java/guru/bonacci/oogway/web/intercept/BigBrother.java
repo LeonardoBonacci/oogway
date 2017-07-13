@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.spectre.geo.client.Nineteen84MessageProducer;
+import guru.bonacci.oogway.spectre.geo.client.GeoMessageProducer;
 import guru.bonacci.oogway.web.utils.Catch22;
 
 @Aspect
@@ -22,7 +22,7 @@ public class BigBrother {
 	public Catch22 catch22;
 
 	@Autowired
-	private Nineteen84MessageProducer messageProducer;
+	private GeoMessageProducer messageProducer;
 
 	@Before("@annotation(WatchMe) && args(searchString)")
 	public void spreadTheNews(JoinPoint joinPoint, String searchString) {

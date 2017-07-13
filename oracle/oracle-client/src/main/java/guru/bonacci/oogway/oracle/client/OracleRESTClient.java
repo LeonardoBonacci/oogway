@@ -68,7 +68,7 @@ public class OracleRESTClient {
 		
 		@Override
 	    public String toString() {
-	        return format("JMSGem[essence='%s']", essence);
+	        return format("RestGem[essence='%s']", essence);
 	    }
 		
 		@Override

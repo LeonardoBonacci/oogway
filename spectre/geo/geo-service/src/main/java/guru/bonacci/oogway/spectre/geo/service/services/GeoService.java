@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import guru.bonacci.oogway.spectre.geo.service.ip.IPologist;
+import guru.bonacci.oogway.spectre.geo.service.ip.IIPologist;
 
 @Service
 public class GeoService {
@@ -14,7 +14,7 @@ public class GeoService {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
-	private IPologist ipologist;
+	private IIPologist ipologist;
 	
 	public void index(String ip, String message) {
 		logger.info(ipologist.checkUp(ip) + " " + message);

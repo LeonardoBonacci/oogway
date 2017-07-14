@@ -1,11 +1,13 @@
 package guru.bonacci.oogway.sannya.service.general;
 
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.general.PageCache;
 
 @Component
+@Profile("cache-test")
 public class PageTestCaches {
 
 	@Component

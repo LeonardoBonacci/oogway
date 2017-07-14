@@ -1,19 +1,21 @@
 package guru.bonacci.oogway.spectre.geo.service.ip;
 
+import static java.util.Arrays.asList;
 import static org.slf4j.LoggerFactory.getLogger;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.utils.MyListUtils;
 
 @Component
-public class IPologist {
+@Profile("dev")
+public class IPologist implements IIPologist {
 
 	private final Logger logger = getLogger(this.getClass());
 
@@ -23,7 +25,7 @@ public class IPologist {
 
 	@PostConstruct
 	private void fill() {
-		randomIPs = Arrays.asList(
+		randomIPs = asList(
 		    "b44a:d399:1a82:fdd4:336d:8a4f:6251:2219",
 		    "98c4:7deb:f8e9:9a95:2b32:6355:327:a63f",
 		    "adff:f46e:c9e2:92a3:468d:acf8:3a22:8375",
@@ -38,10 +40,10 @@ public class IPologist {
 		    "5367:e613:cea:7102:81e3:37ac:6569:439f");
 	}	
 
+	@Override
 	public String checkUp(String ipIn) {
 		String ipOut = LOCAL_IP.equals(ipIn) ? MyListUtils.getRandom(randomIPs).get() : ipIn;
 		logger.debug(ipIn + " becomes " + ipOut);
 		return ipOut;
 	}
-
 }

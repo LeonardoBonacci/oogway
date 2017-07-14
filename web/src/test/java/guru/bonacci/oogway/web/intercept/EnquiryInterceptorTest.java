@@ -13,7 +13,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.web.services.FirstLineSupportService;
-import guru.bonacci.oogway.web.utils.Catch22;
+import guru.bonacci.oogway.web.utils.IPCatcher;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
@@ -30,13 +30,13 @@ public class EnquiryInterceptorTest {
 	BigBrother bigBrother;
 
 	@MockBean
-	Catch22 catch22;
+	IPCatcher iPCatcher;
 
 	@Test
 	public void shouldInterceptTheConsultMethod() {
 		String searchString = "something completely different";
 		service.enquire(searchString);
 
-		verify(catch22, times(1)).getClientIp();
+		verify(iPCatcher, times(1)).getClientIp();
 	}
 }

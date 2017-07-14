@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.spectre.geo.client.GeoMessageProducer;
-import guru.bonacci.oogway.web.utils.Catch22;
+import guru.bonacci.oogway.web.utils.IPCatcher;
 
 @Aspect
 @Component
@@ -19,14 +19,14 @@ public class BigBrother {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
-	public Catch22 catch22;
+	public IPCatcher iPCatcher;
 
 	@Autowired
 	private GeoMessageProducer messageProducer;
 
 	@Before("@annotation(WatchMe) && args(searchString)")
 	public void spreadTheNews(JoinPoint joinPoint, String searchString) {
-		String ip = catch22.getClientIp();
+		String ip = iPCatcher.getClientIp();
 		logger.info(ip + " said '" + searchString + "'");
 		messageProducer.send(ip, searchString);
 	}

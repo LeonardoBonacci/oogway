@@ -12,17 +12,19 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Profile;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.sannya.service.SannyasTestConfig;
 import guru.bonacci.oogway.sannya.service.general.PageTestCaches.PageTestCache1;
 import guru.bonacci.oogway.sannya.service.general.PageTestCaches.PageTestCache2;
 
 
 @SpringBootApplication
 @EnableCaching(proxyTargetClass=true)
-@Import(SannyasTestConfig.class)
+@ComponentScan
+@Profile("cache-test")
 class SannyasCachedTestApplication {
 
 	public static void main(String[] args) {
@@ -32,6 +34,7 @@ class SannyasCachedTestApplication {
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SannyasCachedTestApplication.class, webEnvironment = NONE)
+@ActiveProfiles("cache-test")
 public class PageCacheTest {
 
 	@Autowired 

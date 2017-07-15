@@ -17,6 +17,6 @@ public class GeoService {
 	private IIPologist ipologist;
 	
 	public void index(String ip, String message) {
-		logger.info(ipologist.checkUp(ip) + " " + message);
+		logger.error(ipologist.checkUp(ip) + " " + message);
 	}
 }

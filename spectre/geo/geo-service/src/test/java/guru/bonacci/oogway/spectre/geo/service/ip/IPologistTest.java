@@ -5,7 +5,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
-import static guru.bonacci.oogway.spectre.geo.service.ip.IPologist.LOCAL_IP;
+import static guru.bonacci.oogway.spectre.geo.service.ip.IPologist.LOCAL_IP_1;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +24,7 @@ public class IPologistTest {
 
     @Test
     public void shouldReturnRandomIpWhenLocal() {
-    	assertThat(ipologist.checkUp(LOCAL_IP), is(not(equalTo(LOCAL_IP))));
+    	assertThat(ipologist.checkUp(LOCAL_IP_1), is(not(equalTo(LOCAL_IP_1))));
     }
 
     @Test

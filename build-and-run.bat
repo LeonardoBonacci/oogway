@@ -21,9 +21,9 @@ if "%skip-tests%" == "skip" (
 rem quickly build the parent pom
 start /wait cmd.exe /c "%maven-build%"
  
-start cmd.exe /k "cd %orchestration% & java -jar target\\%orchestration%-%version%.jar""
-start cmd.exe /k "cd oracle\\%oracle% & java -jar target\\%oracle%-%version%.jar""
-start cmd.exe /k "cd sannya\\%sannya% & java -jar target\\%sannya%-%version%.jar""
-start cmd.exe /k "cd %web% & java -jar target\\%web%-%version%.jar""
-start cmd.exe /k "cd spectre\\geo\\%geo% & java -jar target\\%geo%-%version%.jar""
+start cmd.exe /k "cd %orchestration% & java -jar target\%orchestration%-%version%.jar""
+start cmd.exe /k "cd oracle\%oracle% & java -jar target\%oracle%-%version%.jar""
+start cmd.exe /k "cd sannya\%sannya% & java -jar target\%sannya%-%version%.jar""
+start cmd.exe /k "cd %web% & java -jar target\%web%-%version%.jar""
+start cmd.exe /k "cd spectre\geo\%geo% & java -jar target\%geo%-%version%.jar""
 

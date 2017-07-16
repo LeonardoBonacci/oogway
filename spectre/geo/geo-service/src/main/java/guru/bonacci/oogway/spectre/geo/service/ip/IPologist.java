@@ -31,7 +31,7 @@ public class IPologist implements IIPologist {
 
 	@Override
 	public String checkUp(String ipIn) {
-		String ipOut = LOCAL_IP_1.equals(ipIn) || LOCAL_IP_2.equals(ipIn) ? getRandom(randomIPs).get() : ipIn;
+		String ipOut = ipIn == null || LOCAL_IP_1.equals(ipIn) || LOCAL_IP_2.equals(ipIn) ? getRandom(randomIPs).get() : ipIn;
 		logger.debug(ipIn + " becomes " + ipOut);
 		return ipOut;
 	}

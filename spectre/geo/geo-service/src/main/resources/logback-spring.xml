@@ -2,15 +2,22 @@
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/base.xml" />
 
-	<logger name="guru.bonacci.oogway.spectre.geo" level="error"
+	<appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<destination>127.0.0.1:4560</destination>
+
+		<!-- encoder is required -->
+		<encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+	</appender>
+
+	<logger name="guru.bonacci.oogway.spectre.geo.service.services.GeoService" level="info"
 		additivity="false">
-		<appender-ref ref="FILE" />
+		<appender-ref ref="stash" />
 	</logger>
 	<logger name="org.springframework" level="info" additivity="false">
 		<appender-ref ref="CONSOLE" />
 	</logger>
 
-	<root level="error">
+	<root level="warn">
 		<appender-ref ref="CONSOLE" />
 	</root>
 

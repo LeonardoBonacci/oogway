@@ -2,7 +2,7 @@
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/base.xml" />
 
-	<appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+	<appender name="STASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
 		<destination>127.0.0.1:4560</destination>
 
 		<!-- encoder is required -->
@@ -11,7 +11,8 @@
 
 	<logger name="guru.bonacci.oogway.spectre.geo.service.services.GeoService" level="info"
 		additivity="false">
-		<appender-ref ref="stash" />
+		<appender-ref ref="STASH" />
+		<appender-ref ref="FILE" />
 	</logger>
 	<logger name="org.springframework" level="info" additivity="false">
 		<appender-ref ref="CONSOLE" />

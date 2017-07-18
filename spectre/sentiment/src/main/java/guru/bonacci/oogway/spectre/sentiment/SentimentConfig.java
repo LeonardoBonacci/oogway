@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.spectre.localtimer;
+package guru.bonacci.oogway.spectre.sentiment;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -6,6 +6,6 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @ComponentScan
-@PropertySource("classpath:localtimer.properties")
-public class LocalTimerConfig {
+@PropertySource("classpath:sentiment.properties")
+public class SentimentConfig {
 }

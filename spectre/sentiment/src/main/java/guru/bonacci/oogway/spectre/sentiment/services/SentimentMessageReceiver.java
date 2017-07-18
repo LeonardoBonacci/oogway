@@ -1,20 +1,12 @@
-package guru.bonacci.oogway.spectre.localtimer.services;
+package guru.bonacci.oogway.spectre.sentiment.services;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LocalTimerMessageReceiver {
-
-	@Autowired
-	SpecRepository repo;
-
-	@Autowired
-	ElasticsearchTemplate template;
+public class SentimentMessageReceiver {
 
 	String previousInput;
 
@@ -39,7 +31,7 @@ public class LocalTimerMessageReceiver {
 	 * @param input
 	 * @throws IOException
 	 */
-	@JmsListener(destination = "Consumer.LocalTimer.VirtualTopic.first-topic")
+	@JmsListener(destination = "Consumer.Sentiment.VirtualTopic.first-topic")
 	public void onMessage(String input) throws IOException {
 		// it hurts my heart to see this, but for now it prevents double
 		// processing
@@ -49,18 +41,5 @@ public class LocalTimerMessageReceiver {
 			previousInput = input;
 
 		System.out.println(input);
-//		Spec s = repo.findOne(input);
-
-		// UpdateRequest updateRequest = new UpdateRequest();
-		// updateRequest.index("logstash-spectre");
-		// updateRequest.type("logs");
-		// updateRequest.id(s.getId());
-		// updateRequest.doc(jsonBuilder().startObject().field("title", "new
-		// title").endObject());
-		// UpdateQuery updateQuery = new
-		// UpdateQueryBuilder().withId(s.getId()).withClass(Spec.class).withUpdateRequest(updateRequest).build();
-		// template.update(updateQuery);
-		//
-		// repo.save(s);
 	}
 }

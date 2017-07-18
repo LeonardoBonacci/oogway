@@ -12,5 +12,6 @@
 	<modules>
 		<module>geo</module>
     <module>local-timer</module>
+    <module>sentiment</module>
   </modules>
 </project>

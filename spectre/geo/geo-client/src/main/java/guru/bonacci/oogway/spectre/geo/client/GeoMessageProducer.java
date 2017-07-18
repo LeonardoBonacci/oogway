@@ -27,7 +27,5 @@ public class GeoMessageProducer {
 	public void send(String ip, String message) {
 		logger.info(queue);
 		jmsTemplate.send(queue, session -> session.createObjectMessage(new _1984(ip, message)));
-//		jmsTemplate.send(queue, session -> session.createTextMessage("from web"));
-
 	}
 }

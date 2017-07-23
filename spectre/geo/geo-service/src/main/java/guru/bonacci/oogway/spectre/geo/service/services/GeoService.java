@@ -30,7 +30,7 @@ public class GeoService {
 		try {
 			Thread.sleep(3000);
 			jmsTemplate.setPubSubDomain(true);
-			jmsTemplate.send("VirtualTopic.first-topic", session -> session.createTextMessage(uuid.toString()));
+			jmsTemplate.send("first-topic", session -> session.createTextMessage(uuid.toString()));
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

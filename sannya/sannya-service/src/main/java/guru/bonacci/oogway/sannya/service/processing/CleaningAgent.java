@@ -27,8 +27,8 @@ public class CleaningAgent {
 		Predicate<String> postfiltering = sannya.postfilteringStep().stream()
 															  		.reduce(p -> true, Predicate::and);		
 		return found.stream()
-			 .filter(gem -> postfiltering.test(gem.getSaid()))
-			 .filter(gem -> profanityFilter.test(gem.getSaid()))
+			 .filter(gem -> postfiltering.test(gem.getSaying()))
+			 .filter(gem -> profanityFilter.test(gem.getSaying()))
 			 .collect(toList());
 	}
 }

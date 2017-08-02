@@ -41,15 +41,15 @@ public class FirstLineSupportServiceTest {
 	@Test
 	public void shouldGiveAnswer() {
 		IGem expected = new TestGem("some answer");
-		when(oracleService.consult(anyString())).thenReturn(Optional.of(expected));
+		when(oracleService.consult(anyString(), anyString())).thenReturn(Optional.of(expected));
 
-		assertThat(service.enquire("some input"), is(equalTo(expected.getSaid())));
+		assertThat(service.enquire("some input"), is(equalTo(expected.getSaying())));
 	}
 
 	@Test
 	public void shouldGivePostponingAnswer() {
 		String postponingAnswer = "wait a second..";
-		when(oracleService.consult(anyString())).thenReturn(Optional.empty());
+		when(oracleService.consult(anyString(), anyString())).thenReturn(Optional.empty());
 		when(postponer.saySomething()).thenReturn(postponingAnswer);
 
 		assertThat(service.enquire("some input"), is(equalTo(postponingAnswer)));
@@ -57,35 +57,35 @@ public class FirstLineSupportServiceTest {
 
 	static class TestGem implements IGem {
 
-		private String said;
+		private String saying;
 
-		private String by;
+		private String author;
 
 		public TestGem() {
 		}
 
-		public TestGem(String said) {
-			this.said = said;
+		public TestGem(String saying) {
+			this.saying = saying;
 		}
 
 		@Override
-		public String getSaid() {
-			return said;
+		public String getSaying() {
+			return saying;
 		}
 
 		@Override
-		public void setSaid(String said) {
-			this.said = said;
+		public void setSaying(String saying) {
+			this.saying = saying;
 		}
 
 		@Override
-		public String getBy() {
-			return by;
+		public String getAuthor() {
+			return author;
 		}
 
 		@Override
-		public void setBy(String by) {
-			this.by = by;
+		public void setAuthor(String author) {
+			this.author = author;
 		}
 	}
 }

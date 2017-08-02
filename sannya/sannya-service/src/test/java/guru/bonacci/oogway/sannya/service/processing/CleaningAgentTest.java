@@ -42,7 +42,7 @@ public class CleaningAgentTest {
 
 		List<GemDataCarrier> result = agent.noMoreClutter(sannyasin, asList(new GemDataCarrier("one"), new GemDataCarrier("two"), new GemDataCarrier("three")));
 		assertThat(result, hasSize(1));
-		assertThat(result.get(0).getSaid(), is(equalTo("one")));
+		assertThat(result.get(0).getSaying(), is(equalTo("one")));
 	}
 	
 	@Test

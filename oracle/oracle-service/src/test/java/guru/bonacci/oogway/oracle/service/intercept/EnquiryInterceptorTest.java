@@ -37,10 +37,20 @@ public class EnquiryInterceptorTest {
 	JmsTemplate jms;
 
 	@Test
-	public void shouldInterceptTheConsultMethod() {
+	public void shouldInterceptTheConsultMethodWithoutAuthor() {
 		String searchString = "something completely different";
-		repo.consultTheOracle(searchString);
+		repo.consultTheOracle(searchString, null);
 
 		verify(jms, times(1)).send(anyString(), any(MessageCreator.class));
 	}
+
+	@Test
+	public void shouldInterceptTheConsultMethodWithAuthor() {
+		String searchString = "something completely different";
+		String author = "author";
+		repo.consultTheOracle(searchString, author);
+
+		verify(jms, times(1)).send(anyString(), any(MessageCreator.class));
+	}
+
 }

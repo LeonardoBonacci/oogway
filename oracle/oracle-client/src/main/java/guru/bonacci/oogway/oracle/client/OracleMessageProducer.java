@@ -27,7 +27,7 @@ public class OracleMessageProducer {
 	public void toTheClouds(List<GemDataCarrier> wiseSayings) {
 		wiseSayings.forEach(wisewords -> {
 			logger.info("Sending to the Oracle '" + wisewords + "'");
-			jmsTemplate.send(queue, session -> session.createTextMessage(wisewords.getSaid()));
+			jmsTemplate.send(queue, session -> session.createTextMessage(wisewords.getSaying()));
 		});
 	}
 }

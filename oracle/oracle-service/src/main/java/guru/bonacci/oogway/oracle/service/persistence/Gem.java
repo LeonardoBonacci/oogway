@@ -1,6 +1,7 @@
 package guru.bonacci.oogway.oracle.service.persistence;
 
 import static java.lang.String.format;
+import static org.springframework.data.elasticsearch.annotations.FieldIndex.not_analyzed;
 import static org.springframework.data.elasticsearch.annotations.FieldType.String;
 
 import java.time.LocalDateTime;
@@ -23,19 +24,20 @@ import guru.bonacci.oogway.oracle.api.IGem;
 @Document(indexName = "oracle", type = "quote", shards = 1, replicas = 0, refreshInterval = "-1")
 public class Gem implements IGem {
 
-	public static final String SAID = "said";
+	public static final String SAID = "saying";
 	public static final String BY = "by";
 	public static final String ON = "on";
 	public static final String SOURCE = "source";
 
 	@Id
+	@JsonIgnore
 	private String id;
 
 	@Field(type = String, store = true, analyzer = "english", searchAnalyzer = "english")
-	private String said;
+	private String saying;
 
-	@Field(type = String)
-	private String by;
+	@Field(type = String, index = not_analyzed)
+	private String author;
 
 	//TODO write timeobjectmapper for time conversion
 	@JsonIgnore
@@ -53,16 +55,16 @@ public class Gem implements IGem {
 	 * ES documentation states that full-text search on an _id field is
 	 * possible. Testing proves this wrong. Therefore, as a (temporary) solution
 	 * we persist the quote in the _id field to allow uniqueness and in the
-	 * said-field for full-text search
+	 * saying-field for full-text search
 	 */
-	public Gem(String said) {
-		this.id = said;
-		this.said = said;
+	public Gem(String saying) {
+		this.id = saying;
+		this.saying = saying;
 	}
 
-	public Gem(String said, String by) {
-		this(said);
-		this.by = by;
+	public Gem(String saying, String author) {
+		this(saying);
+		this.author = author;
 	}
 
 	public String getId() {
@@ -74,23 +76,23 @@ public class Gem implements IGem {
 	}
 
 	@Override
-	public String getSaid() {
-		return said;
+	public String getSaying() {
+		return saying;
 	}
 
 	@Override
-	public void setSaid(String said) {
-		this.said = said;
+	public void setSaying(String saying) {
+		this.saying = saying;
 	}
 
 	@Override
-	public String getBy() {
-		return by;
+	public String getAuthor() {
+		return author;
 	}
 
 	@Override
-	public void setBy(String by) {
-		this.by = by;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	public LocalDateTime getCreation() {
@@ -103,7 +105,7 @@ public class Gem implements IGem {
 
 	@Override
     public String toString() {
-        return format("Gem[said='%s', by='%s']", said, by);
+        return format("Gem[saying='%s', author='%s']", saying, author);
     }
 	
 	@Override

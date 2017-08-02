@@ -6,6 +6,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertFalse;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 import java.time.LocalDateTime;
@@ -45,16 +46,16 @@ public class GemRepositoryTest {
 	@Test
 	public void shouldSaveAllFields1() {
 		String said = "the said";
-		String by = "the by";
+		String author = "the by";
 		LocalDateTime creation = LocalDateTime.now();
-		Gem input = new Gem(said, by);
+		Gem input = new Gem(said, author);
 		input.setCreation(creation);
 		repo.save(input);
 
 		Gem result = repo.findOne(input.getId());
 
-		assertThat(result.getSaid(), is(equalTo(said)));
-		assertThat(result.getBy(), is(equalTo(by)));
+		assertThat(result.getSaying(), is(equalTo(said)));
+		assertThat(result.getAuthor(), is(equalTo(author)));
 		//TODO write timeobjectmapper for time conversion
 		//assertThat(result.getCreation(), is(equalTo(creation)));
 	}
@@ -62,14 +63,14 @@ public class GemRepositoryTest {
 	@Test
 	public void shouldSaveAllFields2() {
 		String said = "the said";
-		String by = "the by";
-		Gem g = new Gem(said, by);
-		repo.saveTheNewOnly(g);
+		String author = "TODO my by";
+		Gem input = new Gem(said, author);
+		repo.saveTheNewOnly(input);
 
-		Gem result = repo.consultTheOracle("the said").get();
+		Gem result = repo.consultTheOracle("the said", null).get();
 
-		assertThat(result.getSaid(), is(equalTo(said)));
-		assertThat(result.getBy(), is(equalTo(by)));
+		assertThat(result.getSaying(), is(equalTo(said)));
+		assertThat(result.getAuthor(), is(equalTo(author)));
 		//TODO write timeobjectmapper for time conversion
 		//assertThat(result.getCreation(), is(equalTo(creation)));
 	}
@@ -101,7 +102,7 @@ public class GemRepositoryTest {
 		Gem gem = new Gem("how are you I am fine");
 		repo.save(gem);
 		
-		Optional<Gem> result = repo.consultTheOracle("hello how are you");
+		Optional<Gem> result = repo.consultTheOracle("hello how are you", null);
 		assertThat(gem, is(equalTo(result.get())));
 	}
 
@@ -113,7 +114,7 @@ public class GemRepositoryTest {
 		
 		Set<Gem> results = new HashSet<>();
 		for (int i=0; i<10; i++) 
-			results.add(repo.consultTheOracle("hello how are you").get());
+			results.add(repo.consultTheOracle("hello how are you", null).get());
 
 		assertThat(results.size(), greaterThan(1));
 	}
@@ -123,7 +124,25 @@ public class GemRepositoryTest {
 		Gem gem = new Gem("how are you I am fine");
 		repo.save(gem);
 		
-		Optional<Gem> result = repo.consultTheOracle("something completely different");
+		Optional<Gem> result = repo.consultTheOracle("something completely different", null);
 		assertThat(true, is(not(result.isPresent())));
+	}
+	
+	@Test
+	public void shouldFilterByAuthor() {
+		Gem gem = new Gem("hello", "Harry");
+		repo.save(gem);
+		
+		Optional<Gem> result = repo.consultTheOracle("hello", "Harry");
+		assertThat(gem, is(equalTo(result.get())));
+	}
+
+	@Test
+	public void shouldFilterOutByAuthor() {
+		Gem gem = new Gem("hello", "Harry");
+		repo.save(gem);
+		
+		Optional<Gem> result = repo.consultTheOracle("hello", "Harr");
+		assertFalse(result.isPresent());
 	}
 }

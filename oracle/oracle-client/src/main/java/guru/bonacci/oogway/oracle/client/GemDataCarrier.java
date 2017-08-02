@@ -12,45 +12,45 @@ import guru.bonacci.oogway.oracle.api.IGem;
  */
 public class GemDataCarrier implements IGem {
 
-	private String said;
+	private String saying;
 
-	private String by;
+	private String author;
 
 	public GemDataCarrier() {
 	}
 
-	public GemDataCarrier(String said) {
-		this.said = said;
+	public GemDataCarrier(String saying) {
+		this.saying = saying;
 	}
 
-	public GemDataCarrier(String said, String by) {
-		this(said);
-		this.by = by;
-	}
-
-	@Override
-	public String getSaid() {
-		return said;
+	public GemDataCarrier(String saying, String author) {
+		this(saying);
+		this.author = author;
 	}
 
 	@Override
-	public void setSaid(String said) {
-		this.said = said;
+	public String getSaying() {
+		return saying;
 	}
 
 	@Override
-	public String getBy() {
-		return by;
+	public void setSaying(String saying) {
+		this.saying = saying;
 	}
 
 	@Override
-	public void setBy(String by) {
-		this.by = by;
+	public String getAuthor() {
+		return author;
+	}
+
+	@Override
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	@Override
 	public String toString() {
-		return format("GemDataCarrier[said='%s', by='%s']", said, by);
+		return format("GemDataCarrier[saying='%s', author='%s']", saying, author);
 	}
 
 	@Override

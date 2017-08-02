@@ -37,7 +37,7 @@ public class GRCrawlerTest {
 		doReturn(doc).when(finder).get(anyString());
 
 		List<GemDataCarrier> found = finder.find("romance");
-		List<String> quotes = found.stream().map(GemDataCarrier::getSaid).collect(toList());
+		List<String> quotes = found.stream().map(GemDataCarrier::getSaying).collect(toList());
 
 		List<String> expected = readToList("gr/gr-quotes-romance.txt");
 
@@ -50,7 +50,7 @@ public class GRCrawlerTest {
 		doReturn(doc).when(finder).get(anyString());
 
 		List<GemDataCarrier> found = finder.find("romance");
-		assertThat(found.get(0).getBy(), is(equalTo("Stephenie Meyer")));
+		assertThat(found.get(0).getAuthor(), is(equalTo("Stephenie Meyer")));
 	}
 
 	@Test

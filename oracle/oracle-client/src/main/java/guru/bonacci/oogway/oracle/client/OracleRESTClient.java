@@ -31,11 +31,10 @@ public class OracleRESTClient {
 		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
 	}
 	
-	public Optional<IGem> consult(String searchString) {
+	public Optional<IGem> consult(String searchString, String by) {
 		logger.info("Oracle consultation:  '" + searchString + "'");
 
-		// getForObject needs an implementation of IGem
-		IGem gem = restTemplate.getForObject(serviceUrl + "/gems?q={searchString}", GemDataCarrier.class, searchString);
+		IGem gem = restTemplate.getForObject(serviceUrl + "/gems?q={searchString}&by={by}", GemDataCarrier.class, searchString, by);
 		return Optional.ofNullable(gem);
 	}
 }

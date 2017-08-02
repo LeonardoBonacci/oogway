@@ -33,12 +33,24 @@ public class OracleRestClientTest {
 	RestTemplate rest;
 
 	@Test
-	public void shouldAnswerConsult() {
+	public void shouldAnswerQ() {
 		String question = "how much do you charge per hour?";
 		String answer = "it's free";
 		doReturn(new GemDataCarrier(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}", GemDataCarrier.class, question);
 
-		Optional<IGem> gem = client.consult(question);
-		assertThat(gem.get().getSaid(), is(equalTo(answer)));
+		Optional<IGem> gem = client.consult(question, answer);
+		assertThat(gem.get().getSaying(), is(equalTo(answer)));
 	}
+	
+	@Test
+	public void shouldAnswerQAndBy() {
+		String question = "how much do you charge per hour?";
+		String by = "whom";
+		String answer = "it's free";
+		doReturn(new GemDataCarrier(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}&?by={by}", GemDataCarrier.class, question, by);
+
+		Optional<IGem> gem = client.consult(question, answer);
+		assertThat(gem.get().getSaying(), is(equalTo(answer)));
+	}
+
 }

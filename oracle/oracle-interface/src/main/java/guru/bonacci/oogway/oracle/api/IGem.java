@@ -2,11 +2,11 @@ package guru.bonacci.oogway.oracle.api;
 
 public interface IGem {
 
-	public String getSaid();
+	public String getSaying();
 
-	public void setSaid(String said);
+	public void setSaying(String said);
 	
-	public String getBy();
+	public String getAuthor();
 	
-	public void setBy(String by);
+	public void setAuthor(String author);
 }

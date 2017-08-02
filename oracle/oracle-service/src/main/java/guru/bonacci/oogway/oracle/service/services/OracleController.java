@@ -27,9 +27,10 @@ public class OracleController {
 	private GemRepository repo;
 
 	@RequestMapping(path = "/gems", method = GET)
-	public IGem search(@RequestParam("q") String q) {
+	public IGem search(@RequestParam("q") String q, @RequestParam(value = "by", required = false) String author) {
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
-		Optional<Gem> gem = repo.consultTheOracle(q); 
+		logger.info("Only answers of '" + author + "' are wanted");
+		Optional<Gem> gem = repo.consultTheOracle(q, author); 
 		return gem.isPresent() ? (IGem) gem.get() : null;
 	}	
 

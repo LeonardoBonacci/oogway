@@ -24,7 +24,7 @@ public class OracleMessageProducer {
 	@Value("${spring.activemq.queue.to-oracle}")
 	private String queue;
 
-	public void save(List<String> wiseSayings) {
+	public void saveInTheCloud(List<String> wiseSayings) {
 		wiseSayings.forEach(wisewords -> {
 			logger.info("Sending to the Oracle '" + wisewords + "'");
 			jmsTemplate.send(queue, session -> session.createTextMessage(wisewords));

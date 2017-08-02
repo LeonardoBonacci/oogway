@@ -45,7 +45,10 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 		List<Gem> newOnes = stream(entities)
 									  .filter(gem -> !gemRepository.exists(gem.getId()))
 									  .peek(gem -> gem.setCreation(now))
-									  .peek(gem -> logger.info("About to gain wisdom: '" + gem.getEssence() + "'"))
+									  .peek(gem -> logger.info("About to gain wisdom: '" + gem.getSaid() + "'"))
+									  .peek(gem -> gem.setBy("my by"))
+									  .peek(gem -> gem.setOn("my on"))
+									  .peek(gem -> gem.setSource("my source"))
 									  .collect(toList());
 		// strangely enough spring data or elasticsearch cannot deal with empty iterables
 		if (!newOnes.isEmpty())
@@ -55,12 +58,12 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 	@WatchMe // as spring data offers no proper hook to intercept search queries we do it the traditional way...
 	@Override
 	public Optional<Gem> consultTheOracle(String searchString) {
-		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchQuery(Gem.ESSENCE, searchString))
+		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchQuery(Gem.SAID, searchString))
 				.build();
 		List<Gem> result = gemRepository.search(searchQuery).getContent();
 
 		if (logger.isDebugEnabled())
-			result.stream().map(Gem::getEssence).forEach(logger::debug);
+			result.stream().map(Gem::getSaid).forEach(logger::debug);
 
 		return getRandom(result);
 	}

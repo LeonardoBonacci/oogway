@@ -10,6 +10,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,16 +23,30 @@ import guru.bonacci.oogway.oracle.api.IGem;
 @Document(indexName = "oracle", type = "quote", shards = 1, replicas = 0, refreshInterval = "-1")
 public class Gem implements IGem {
 
-	public static final String ESSENCE = "essence";
+	public static final String SAID = "said";
+	public static final String BY = "by";
+	public static final String ON = "on";
+	public static final String SOURCE = "source";
 
 	@Id
 	private String id;
 
 	@Field(type = String, store = true, analyzer = "english", searchAnalyzer = "english")
-	private String essence;
+	private String said;
 
-	//spring data's @CreatedDate doesn't work on elasticsearch
+	@Field(type = String)
+	private String by;
+
+	@Field(type = String)
+	private String on;
+
+	@Field(type = String)
+	private String source;
+
+	//TODO write timeobjectmapper for time conversion
 	@JsonIgnore
+	//spring data's @CreatedDate doesn't work on elasticsearch, therefore we set our own timestamp
+	@Field(type = FieldType.Date)
 	private LocalDateTime creation;
 
 	public Gem() {
@@ -44,11 +59,19 @@ public class Gem implements IGem {
 	 * ES documentation states that full-text search on an _id field is
 	 * possible. Testing proves this wrong. Therefore, as a (temporary) solution
 	 * we persist the quote in the _id field to allow uniqueness and in the
-	 * essence-field for full-text search
+	 * said-field for full-text search
 	 */
-	public Gem(String essence) {
-		this.id = essence;
-		this.essence = essence;
+	public Gem(String said) {
+		this.id = said;
+		this.said = said;
+	}
+
+	public Gem(String said, String by, String on, String source) {
+		this.id = said;
+		this.said = said;
+		this.by = by;
+		this.on = on;
+		this.source = source;
 	}
 
 	public String getId() {
@@ -60,15 +83,45 @@ public class Gem implements IGem {
 	}
 
 	@Override
-	public String getEssence() {
-		return essence;
+	public String getSaid() {
+		return said;
 	}
 
 	@Override
-	public void setEssence(String essence) {
-		this.essence = essence;
+	public void setSaid(String said) {
+		this.said = said;
 	}
-	
+
+	@Override
+	public String getBy() {
+		return by;
+	}
+
+	@Override
+	public void setBy(String by) {
+		this.by = by;
+	}
+
+	@Override
+	public String getOn() {
+		return on;
+	}
+
+	@Override
+	public void setOn(String on) {
+		this.on = on;
+	}
+
+	@Override
+	public String getSource() {
+		return source;
+	}
+
+	@Override
+	public void setSource(String source) {
+		this.source = source;
+	}
+
 	public LocalDateTime getCreation() {
 		return creation;
 	}
@@ -79,7 +132,7 @@ public class Gem implements IGem {
 
 	@Override
     public String toString() {
-        return format("Gem[essence='%s']", essence);
+        return format("Gem[said='%s', by='%s', on='%s']", said, by, on);
     }
 	
 	@Override

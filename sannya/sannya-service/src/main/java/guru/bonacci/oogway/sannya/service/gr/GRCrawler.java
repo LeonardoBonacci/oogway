@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannya.service.brainyquote;
+package guru.bonacci.oogway.sannya.service.gr;
 
 
 import static org.apache.commons.lang3.RandomUtils.nextInt;
@@ -7,6 +7,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 import java.io.IOException;
 
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,39 +15,40 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.general.PageCache;
-import guru.bonacci.oogway.sannya.service.general.WebIlluminator;
+import guru.bonacci.oogway.sannya.service.general.WebCrawler;
 
 /**
- * Quote of the day:
- * “I want to do to you what spring does with the cherry trees.” ― Pablo Neruda
+ * Most popular quote:
+ * “Don't cry because it's over, smile because it happened.” ― Dr. Seuss
  */
 @Component
-public class BrainyQuoteIlluminator extends WebIlluminator implements PageCache {
+public class GRCrawler extends WebCrawler implements PageCache {
 
 	private final Logger logger = getLogger(this.getClass());
 
-	@Value("${web.url.brainyquote:https://www.brainyquote.com/quotes/keywords/#tag#_#page#.html?vm=l}")
+	@Value("${web.url.gr:http://www.goodreads.com/quotes/tag/}")
 	private String url;
-	
+
 	@Override
-	protected String determineURL(String searchStr) {
-		String searchURL = url.replace("#tag#", searchStr);
-		Integer nrOfPages = getNrOfPages(searchURL.replace("#page#", "1"));
-		return searchURL.replace("#page#", String.valueOf(nextInt(1, nrOfPages + 1)));
+	public String determineURL(String searchStr) {
+		String searchURL = url + searchStr;
+		Integer nrOfPages = getNrOfPages(searchURL);
+		return searchURL + "?page=" + nextInt(1, nrOfPages + 1);
 	}
 
 	@Override
     @Cacheable("pages")
 	public Integer getNrOfPages(String searchURL) {
-		Integer pageNr = 1;
+		int pageNr = 1;
 		try {
 			Document doc = get(searchURL);
-			Elements elements = doc.select("ul.pagination");
-			elements = elements.first().getElementsByAttribute("href");
-			for (int i=0; i<elements.size(); i++) {
+			Element element = doc.select("span.previous_page").first();
+			while (element != null) {
 				try {
-					pageNr = Integer.parseInt(elements.get(i).text());
+					pageNr = Integer.parseInt(element.text());
 			    } catch (NumberFormatException ignore) {}
+
+				element = element.nextElementSibling();
 			}
 		} catch (Exception e) { 
 			// Taking the easy way, catching all exceptions.
@@ -59,14 +61,26 @@ public class BrainyQuoteIlluminator extends WebIlluminator implements PageCache 
     }
 
 	@Override
-	protected Elements consultWeb(String searchURL) {
+	public Elements consultWeb(String searchURL) {
 		try {
 			logger.debug("Firing request " + searchURL);
 			Document doc = get(searchURL);
-			return doc.select("a[title='view quote']");
+			return doc.select("div.quoteText");
 		} catch (IOException e) {
 			logger.error("Something went wrong. No stress, it does not need to be serieus: " + e.getMessage());
 		}
 		return new Elements();
+	}
+
+	@Override
+	public Element processElement(Element el) {
+		for (Element e : el.children()) 
+			e.remove();
+		return el;
+	}
+
+	@Override
+	public String processText(String str) {
+		return str.substring(str.indexOf("“") + 1, str.lastIndexOf("”"));
 	}
 }

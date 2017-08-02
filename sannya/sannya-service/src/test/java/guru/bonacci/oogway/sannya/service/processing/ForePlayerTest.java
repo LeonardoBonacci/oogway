@@ -18,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.sannya.service.goodreads.GoodReadsSeeker;
+import guru.bonacci.oogway.sannya.service.gr.GRSeeker;
 import guru.bonacci.oogway.sannya.service.processing.ForePlayer;
 import guru.bonacci.oogway.sannya.service.steps.DuplicateRemover;
 
@@ -32,7 +32,7 @@ public class ForePlayerTest {
 	ForePlayer player;
 
 	@MockBean
-	GoodReadsSeeker sannyasin;
+	GRSeeker sannyasin;
 	
 	@MockBean
 	DuplicateRemover duplicateRemover;

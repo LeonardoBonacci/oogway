@@ -46,6 +46,6 @@ public class OracleControllerTest {
 
 		mvc.perform(get("/gems?q=tell me the truth"))
 			.andExpect(status().isOk())
-			.andExpect(content().json("{'essence':'why should I?'}")); 
+			.andExpect(content().json("{'said':'why should I?'}")); 
 	}
 }

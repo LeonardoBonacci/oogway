@@ -8,6 +8,7 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -21,9 +22,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import guru.bonacci.oogway.oracle.service.persistence.Gem;
-import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
@@ -42,6 +40,46 @@ public class GemRepositoryTest {
 	@Before
 	public void setup() {
 		repo.deleteAll();
+	}
+
+	@Test
+	public void shouldSaveAllFields1() {
+		String said = "the said";
+		String by = "the by";
+		String on = "the on";
+		String source = "the source";
+		LocalDateTime creation = LocalDateTime.now();
+		Gem input = new Gem(said, by, on, source);
+		input.setCreation(creation);
+		repo.save(input);
+
+		Gem result = repo.findOne(input.getId());
+
+		assertThat(result.getSaid(), is(equalTo(said)));
+		assertThat(result.getBy(), is(equalTo(by)));
+		assertThat(result.getOn(), is(equalTo(on)));
+		assertThat(result.getSource(), is(equalTo(source)));
+		//TODO write timeobjectmapper for time conversion
+		//assertThat(result.getCreation(), is(equalTo(creation)));
+	}
+
+	@Test
+	public void shouldSaveAllFields2() {
+		String said = "the said";
+		String by = "the by";
+		String on = "the on";
+		String source = "the source";
+		Gem g = new Gem(said, by, on, source);
+		repo.saveTheNewOnly(g);
+
+		Gem result = repo.consultTheOracle("the said").get();
+
+		assertThat(result.getSaid(), is(equalTo(said)));
+		assertThat(result.getBy(), is(equalTo(by)));
+		assertThat(result.getOn(), is(equalTo(on)));
+		assertThat(result.getSource(), is(equalTo(source)));
+		//TODO write timeobjectmapper for time conversion
+		//assertThat(result.getCreation(), is(equalTo(creation)));
 	}
 
 	@Test

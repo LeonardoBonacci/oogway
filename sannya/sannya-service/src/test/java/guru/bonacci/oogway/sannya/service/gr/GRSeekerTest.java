@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannya.service.brainyquote;
+package guru.bonacci.oogway.sannya.service.gr;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.equalTo;
@@ -17,23 +17,25 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.sannya.service.filters.LengthFilter;
+import guru.bonacci.oogway.sannya.service.gr.GRCrawler;
+import guru.bonacci.oogway.sannya.service.gr.GRSeeker;
 import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
-public class BrainyQuoteSeekerTest {
+public class GRSeekerTest {
 
 	@Autowired
-	BrainyQuoteSeeker seeker;
+	GRSeeker seeker;
 	
 	@MockBean
 	CharacterGuardian characterGuardian;
-
+	
 	@MockBean
 	LengthFilter lengthFilter;
 
 	@MockBean
-	BrainyQuoteIlluminator finder;
+	GRCrawler finder;
 
 	@Test
 	public void shouldPreProcess() {

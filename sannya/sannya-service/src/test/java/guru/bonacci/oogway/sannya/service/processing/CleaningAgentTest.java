@@ -19,7 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.sannya.service.filters.ProfanityFilter;
-import guru.bonacci.oogway.sannya.service.goodreads.GoodReadsSeeker;
+import guru.bonacci.oogway.sannya.service.gr.GRSeeker;
 import guru.bonacci.oogway.sannya.service.processing.CleaningAgent;
 
 @RunWith(SpringRunner.class)
@@ -33,7 +33,7 @@ public class CleaningAgentTest {
 	ProfanityFilter profanityFilter;
 
 	@MockBean 
-	GoodReadsSeeker sannyasin;
+	GRSeeker sannyasin;
 
 	@Test
     public void shouldCleanSimple() {

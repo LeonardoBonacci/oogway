@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannya.service.goodreads;
+package guru.bonacci.oogway.sannya.service.bq;
 
 
 import static org.apache.commons.lang3.RandomUtils.nextInt;
@@ -7,7 +7,6 @@ import static org.slf4j.LoggerFactory.getLogger;
 import java.io.IOException;
 
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,40 +14,39 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.general.PageCache;
-import guru.bonacci.oogway.sannya.service.general.WebIlluminator;
+import guru.bonacci.oogway.sannya.service.general.WebCrawler;
 
 /**
- * Most popular quote:
- * “Don't cry because it's over, smile because it happened.” ― Dr. Seuss
+ * Quote of the day today:
+ * “I want to do to you what spring does with the cherry trees.” ― Pablo Neruda
  */
 @Component
-public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
+public class BQCrawler extends WebCrawler implements PageCache {
 
 	private final Logger logger = getLogger(this.getClass());
 
-	@Value("${web.url.goodreads:http://www.goodreads.com/quotes/tag/}")
+	@Value("${web.url.brainyquote:https://www.brainyquote.com/quotes/keywords/#tag#_#page#.html?vm=l}")
 	private String url;
-
+	
 	@Override
-	public String determineURL(String searchStr) {
-		String searchURL = url + searchStr;
-		Integer nrOfPages = getNrOfPages(searchURL);
-		return searchURL + "?page=" + nextInt(1, nrOfPages + 1);
+	protected String determineURL(String searchStr) {
+		String searchURL = url.replace("#tag#", searchStr);
+		Integer nrOfPages = getNrOfPages(searchURL.replace("#page#", "1"));
+		return searchURL.replace("#page#", String.valueOf(nextInt(1, nrOfPages + 1)));
 	}
 
 	@Override
     @Cacheable("pages")
 	public Integer getNrOfPages(String searchURL) {
-		int pageNr = 1;
+		Integer pageNr = 1;
 		try {
 			Document doc = get(searchURL);
-			Element element = doc.select("span.previous_page").first();
-			while (element != null) {
+			Elements elements = doc.select("ul.pagination");
+			elements = elements.first().getElementsByAttribute("href");
+			for (int i=0; i<elements.size(); i++) {
 				try {
-					pageNr = Integer.parseInt(element.text());
+					pageNr = Integer.parseInt(elements.get(i).text());
 			    } catch (NumberFormatException ignore) {}
-
-				element = element.nextElementSibling();
 			}
 		} catch (Exception e) { 
 			// Taking the easy way, catching all exceptions.
@@ -61,26 +59,14 @@ public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
     }
 
 	@Override
-	public Elements consultWeb(String searchURL) {
+	protected Elements consultWeb(String searchURL) {
 		try {
 			logger.debug("Firing request " + searchURL);
 			Document doc = get(searchURL);
-			return doc.select("div.quoteText");
+			return doc.select("a[title='view quote']");
 		} catch (IOException e) {
 			logger.error("Something went wrong. No stress, it does not need to be serieus: " + e.getMessage());
 		}
 		return new Elements();
-	}
-
-	@Override
-	public Element processElement(Element el) {
-		for (Element e : el.children()) 
-			e.remove();
-		return el;
-	}
-
-	@Override
-	public String processText(String str) {
-		return str.substring(str.indexOf("“") + 1, str.lastIndexOf("”"));
 	}
 }

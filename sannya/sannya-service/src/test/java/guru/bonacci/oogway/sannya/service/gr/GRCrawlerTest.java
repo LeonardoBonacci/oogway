@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannya.service.brainyquote;
+package guru.bonacci.oogway.sannya.service.gr;
 
 import static guru.bonacci.oogway.utils.MyFileUtils.readToList;
 import static guru.bonacci.oogway.utils.MyFileUtils.readToString;
@@ -21,44 +21,50 @@ import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.sannya.service.brainyquote.BrainyQuoteIlluminator;
+import guru.bonacci.oogway.sannya.service.gr.GRCrawler;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
-public class BrainyQuoteIlluminatorTest {
+public class GRCrawlerTest {
 
 	@Spy
-	BrainyQuoteIlluminator finder;
-
+	GRCrawler finder;
+	
 	@Test
 	public void shouldRetrieveQuotes() throws IOException {
-		Document doc = parse(readToString("brainyquote/brainyquote-mock-faith.txt"));
-		doReturn("does not matter").when(finder).determineURL(anyString());
+		Document doc = parse(readToString("gr/gr-mock-romance.txt"));
 		doReturn(doc).when(finder).get(anyString());
 
-		List<String> found = finder.find("faith");
-		found.forEach(System.out::println);
-		List<String> result = readToList("brainyquote/brainyquote-quotes-faith.txt");
+		List<String> found = finder.find("romance");
+		List<String> result = readToList("gr/gr-quotes-romance.txt");
 
 		assertEquals(result, found);
 	}
-
+	
 	@Test
 	public void shouldFindNumerOfPagesWhenMany() throws IOException {
-		Document doc = parse(readToString("brainyquote/brainyquote-mock-faith.txt"));
+		Document doc = parse(readToString("gr/gr-mock-romance.txt"));
 		doReturn(doc).when(finder).get(anyString());
 
-		Integer nrOfPages = finder.getNrOfPages("the faith url");
-		assertThat(nrOfPages, is(equalTo(39)));
+		Integer nrOfPages = finder.getNrOfPages("the romance url");
+		assertThat(nrOfPages, is(equalTo(100)));
 	}
 
 	@Test
+	public void shouldFindNumberWhenFew() throws IOException {
+		Document doc = parse(readToString("gr/gr-mock-some.txt"));
+		doReturn(doc).when(finder).get(anyString());
+
+		Integer nrOfPages = finder.getNrOfPages("the romance url");
+		assertThat(nrOfPages, is(equalTo(2)));
+	}
+	
+	@Test
 	public void shouldReturnOneWhenNoPages() throws IOException {
-		Document doc = parse(readToString("brainyquote/brainyquote-mock-aaaaa.txt"));
+		Document doc = parse(readToString("gr/gr-mock-aaaaa.txt"));
 		doReturn(doc).when(finder).get(anyString());
 
 		Integer nrOfPages = finder.getNrOfPages("the aaaaa url");
 		assertThat(nrOfPages, is(equalTo(1)));
 	}
-
 }

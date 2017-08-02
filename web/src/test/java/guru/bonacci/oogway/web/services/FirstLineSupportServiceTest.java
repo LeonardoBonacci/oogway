@@ -43,7 +43,7 @@ public class FirstLineSupportServiceTest {
 		IGem expected = new TestGem("some answer");
 		when(oracleService.consult(anyString())).thenReturn(Optional.of(expected));
 
-		assertThat(service.enquire("some input"), is(equalTo(expected.getEssence())));
+		assertThat(service.enquire("some input"), is(equalTo(expected.getSaid())));
 	}
 
 	@Test
@@ -57,23 +57,59 @@ public class FirstLineSupportServiceTest {
 	
 	static class TestGem implements IGem {
 
-		private String essence;
+		private String said;
+
+		private String by;
+
+		private String on;
+
+		private String source;
 
 		public TestGem() {
 		}
 
-		public TestGem(String essence) {
-			this.essence = essence;
+		public TestGem(String said) {
+			this.said = said;
 		}
 
 		@Override
-		public String getEssence() {
-			return essence;
+		public String getSaid() {
+			return said;
 		}
 
 		@Override
-		public void setEssence(String essence) {
-			this.essence = essence;
+		public void setSaid(String said) {
+			this.said = said;
+		}
+		
+		@Override
+		public String getBy() {
+			return by;
+		}
+
+		@Override
+		public void setBy(String by) {
+			this.by = by;
+		}
+
+		@Override
+		public String getOn() {
+			return on;
+		}
+
+		@Override
+		public void setOn(String on) {
+			this.on = on;
+		}
+
+		@Override
+		public String getSource() {
+			return source;
+		}
+
+		@Override
+		public void setSource(String source) {
+			this.source = source;
 		}
 	}
 }

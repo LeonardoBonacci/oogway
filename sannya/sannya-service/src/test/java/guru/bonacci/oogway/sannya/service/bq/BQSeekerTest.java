@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannya.service.goodreads;
+package guru.bonacci.oogway.sannya.service.bq;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.equalTo;
@@ -16,24 +16,26 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.sannya.service.bq.BQCrawler;
+import guru.bonacci.oogway.sannya.service.bq.BQSeeker;
 import guru.bonacci.oogway.sannya.service.filters.LengthFilter;
 import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
-public class GoodReadsSeekerTest {
+public class BQSeekerTest {
 
 	@Autowired
-	GoodReadsSeeker seeker;
+	BQSeeker seeker;
 	
 	@MockBean
 	CharacterGuardian characterGuardian;
-	
+
 	@MockBean
 	LengthFilter lengthFilter;
 
 	@MockBean
-	GoodReadsIlluminator finder;
+	BQCrawler finder;
 
 	@Test
 	public void shouldPreProcess() {

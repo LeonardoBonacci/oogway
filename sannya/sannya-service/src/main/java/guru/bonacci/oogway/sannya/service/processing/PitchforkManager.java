@@ -50,6 +50,6 @@ public class PitchforkManager {
 		String preprocessedInput = forePlayer.play(sannya, input);
 		List<String> found = sannya.seek(preprocessedInput);
 		List<String> cleaned = cleaningAgent.noMoreClutter(sannya, found);
-		messageProducer.save(cleaned);
+		messageProducer.saveInTheCloud(cleaned);
 	}
 }

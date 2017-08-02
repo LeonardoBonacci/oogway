@@ -16,7 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.client.OracleMessageProducer;
-import guru.bonacci.oogway.sannya.service.goodreads.GoodReadsSeeker;
+import guru.bonacci.oogway.sannya.service.gr.GRSeeker;
 import guru.bonacci.oogway.sannya.service.processing.CleaningAgent;
 import guru.bonacci.oogway.sannya.service.processing.ForePlayer;
 import guru.bonacci.oogway.sannya.service.processing.PitchforkManager;
@@ -33,7 +33,7 @@ public class PitchforkManagerTest {
 	SannyasPicker sannyasPicker;
 
 	@MockBean
-	GoodReadsSeeker sannyasin;
+	GRSeeker sannyasin;
 
 	@MockBean
 	ForePlayer forePlayer;
@@ -57,6 +57,6 @@ public class PitchforkManagerTest {
 		when(cleaningAgent.noMoreClutter(sannyasin, found)).thenReturn(clutterless);
 		
 		manager.delegate(input);
-		verify(messageProducer, times(1)).save(clutterless);
+		verify(messageProducer, times(1)).saveInTheCloud(clutterless);
 	}
 }

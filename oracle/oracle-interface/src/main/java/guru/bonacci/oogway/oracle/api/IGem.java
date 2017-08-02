@@ -1,11 +1,20 @@
 package guru.bonacci.oogway.oracle.api;
 
-/**
- * The most primal Gem is pure essence.
- */
 public interface IGem {
 
-	public String getEssence();
+	public String getSaid();
 
-	public void setEssence(String essence);
+	public void setSaid(String said);
+	
+	public String getBy();
+	
+	public void setBy(String by);
+
+	public String getOn();
+
+	public void setOn(String on);
+
+	public String getSource();
+
+	public void setSource(String source);
 }

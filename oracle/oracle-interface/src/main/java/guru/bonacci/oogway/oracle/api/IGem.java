@@ -9,12 +9,4 @@ public interface IGem {
 	public String getBy();
 	
 	public void setBy(String by);
-
-	public String getOn();
-
-	public void setOn(String on);
-
-	public String getSource();
-
-	public void setSource(String source);
 }

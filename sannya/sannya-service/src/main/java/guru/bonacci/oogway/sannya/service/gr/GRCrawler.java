@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.oracle.client.GemDataCarrier;
 import guru.bonacci.oogway.sannya.service.general.PageCache;
 import guru.bonacci.oogway.sannya.service.general.WebCrawler;
 
@@ -73,14 +74,17 @@ public class GRCrawler extends WebCrawler implements PageCache {
 	}
 
 	@Override
-	public Element processElement(Element el) {
-		for (Element e : el.children()) 
-			e.remove();
-		return el;
+	public GemDataCarrier toGem(Element el) {
+		String quote = stripText(el.ownText());
+
+		Elements els = el.select("a.authorOrTitle");
+		String author = els.size() > 0 ? els.first().ownText() : null;
+		
+		return new GemDataCarrier(quote, author);
 	}
 
-	@Override
-	public String processText(String str) {
+	private String stripText(String str) {
+		str = str.replace(" ― ,", "");
 		return str.substring(str.indexOf("“") + 1, str.lastIndexOf("”"));
 	}
 }

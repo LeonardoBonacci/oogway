@@ -37,12 +37,6 @@ public class Gem implements IGem {
 	@Field(type = String)
 	private String by;
 
-	@Field(type = String)
-	private String on;
-
-	@Field(type = String)
-	private String source;
-
 	//TODO write timeobjectmapper for time conversion
 	@JsonIgnore
 	//spring data's @CreatedDate doesn't work on elasticsearch, therefore we set our own timestamp
@@ -66,12 +60,9 @@ public class Gem implements IGem {
 		this.said = said;
 	}
 
-	public Gem(String said, String by, String on, String source) {
-		this.id = said;
-		this.said = said;
+	public Gem(String said, String by) {
+		this(said);
 		this.by = by;
-		this.on = on;
-		this.source = source;
 	}
 
 	public String getId() {
@@ -102,26 +93,6 @@ public class Gem implements IGem {
 		this.by = by;
 	}
 
-	@Override
-	public String getOn() {
-		return on;
-	}
-
-	@Override
-	public void setOn(String on) {
-		this.on = on;
-	}
-
-	@Override
-	public String getSource() {
-		return source;
-	}
-
-	@Override
-	public void setSource(String source) {
-		this.source = source;
-	}
-
 	public LocalDateTime getCreation() {
 		return creation;
 	}
@@ -132,7 +103,7 @@ public class Gem implements IGem {
 
 	@Override
     public String toString() {
-        return format("Gem[said='%s', by='%s', on='%s']", said, by, on);
+        return format("Gem[said='%s', by='%s']", said, by);
     }
 	
 	@Override

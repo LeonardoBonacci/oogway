@@ -54,16 +54,12 @@ public class FirstLineSupportServiceTest {
 
 		assertThat(service.enquire("some input"), is(equalTo(postponingAnswer)));
 	}
-	
+
 	static class TestGem implements IGem {
 
 		private String said;
 
 		private String by;
-
-		private String on;
-
-		private String source;
 
 		public TestGem() {
 		}
@@ -81,7 +77,7 @@ public class FirstLineSupportServiceTest {
 		public void setSaid(String said) {
 			this.said = said;
 		}
-		
+
 		@Override
 		public String getBy() {
 			return by;
@@ -90,26 +86,6 @@ public class FirstLineSupportServiceTest {
 		@Override
 		public void setBy(String by) {
 			this.by = by;
-		}
-
-		@Override
-		public String getOn() {
-			return on;
-		}
-
-		@Override
-		public void setOn(String on) {
-			this.on = on;
-		}
-
-		@Override
-		public String getSource() {
-			return source;
-		}
-
-		@Override
-		public void setSource(String source) {
-			this.source = source;
 		}
 	}
 }

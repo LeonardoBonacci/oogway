@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.oracle.client.GemDataCarrier;
 import guru.bonacci.oogway.oracle.client.OracleMessageProducer;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
 
@@ -48,8 +49,8 @@ public class PitchforkManager {
 
 		Sannyasin sannya = sannyasPicker.pickOne();
 		String preprocessedInput = forePlayer.play(sannya, input);
-		List<String> found = sannya.seek(preprocessedInput);
-		List<String> cleaned = cleaningAgent.noMoreClutter(sannya, found);
-		messageProducer.saveInTheCloud(cleaned);
+		List<GemDataCarrier> found = sannya.seek(preprocessedInput);
+		List<GemDataCarrier> cleaned = cleaningAgent.noMoreClutter(sannya, found);
+		messageProducer.toTheClouds(cleaned);
 	}
 }

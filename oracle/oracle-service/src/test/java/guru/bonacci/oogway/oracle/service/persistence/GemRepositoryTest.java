@@ -46,10 +46,8 @@ public class GemRepositoryTest {
 	public void shouldSaveAllFields1() {
 		String said = "the said";
 		String by = "the by";
-		String on = "the on";
-		String source = "the source";
 		LocalDateTime creation = LocalDateTime.now();
-		Gem input = new Gem(said, by, on, source);
+		Gem input = new Gem(said, by);
 		input.setCreation(creation);
 		repo.save(input);
 
@@ -57,8 +55,6 @@ public class GemRepositoryTest {
 
 		assertThat(result.getSaid(), is(equalTo(said)));
 		assertThat(result.getBy(), is(equalTo(by)));
-		assertThat(result.getOn(), is(equalTo(on)));
-		assertThat(result.getSource(), is(equalTo(source)));
 		//TODO write timeobjectmapper for time conversion
 		//assertThat(result.getCreation(), is(equalTo(creation)));
 	}
@@ -67,17 +63,13 @@ public class GemRepositoryTest {
 	public void shouldSaveAllFields2() {
 		String said = "the said";
 		String by = "the by";
-		String on = "the on";
-		String source = "the source";
-		Gem g = new Gem(said, by, on, source);
+		Gem g = new Gem(said, by);
 		repo.saveTheNewOnly(g);
 
 		Gem result = repo.consultTheOracle("the said").get();
 
 		assertThat(result.getSaid(), is(equalTo(said)));
 		assertThat(result.getBy(), is(equalTo(by)));
-		assertThat(result.getOn(), is(equalTo(on)));
-		assertThat(result.getSource(), is(equalTo(source)));
 		//TODO write timeobjectmapper for time conversion
 		//assertThat(result.getCreation(), is(equalTo(creation)));
 	}

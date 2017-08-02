@@ -2,6 +2,7 @@ package guru.bonacci.oogway.sannya.service.bq;
 
 import static guru.bonacci.oogway.utils.MyFileUtils.readToList;
 import static guru.bonacci.oogway.utils.MyFileUtils.readToString;
+import static java.util.stream.Collectors.toList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.jsoup.Jsoup.parse;
@@ -21,7 +22,7 @@ import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.sannya.service.bq.BQCrawler;
+import guru.bonacci.oogway.oracle.client.GemDataCarrier;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
@@ -36,11 +37,21 @@ public class BQCrawlerTest {
 		doReturn("does not matter").when(finder).determineURL(anyString());
 		doReturn(doc).when(finder).get(anyString());
 
-		List<String> found = finder.find("faith");
-		found.forEach(System.out::println);
-		List<String> result = readToList("bq/bq-quotes-faith.txt");
+		List<GemDataCarrier> found = finder.find("faith");
+		List<String> quotes = found.stream().map(GemDataCarrier::getSaid).collect(toList());
 
-		assertEquals(result, found);
+		List<String> expected = readToList("bq/bq-quotes-faith.txt");
+		assertEquals(expected, quotes);
+	}
+
+	@Test
+	public void shouldRetrieveAuthors() throws IOException {
+		Document doc = parse(readToString("bq/bq-mock-faith.txt"));
+		doReturn("does not matter").when(finder).determineURL(anyString());
+		doReturn(doc).when(finder).get(anyString());
+
+		List<GemDataCarrier> found = finder.find("faith");
+		assertThat(found.get(0).getBy(), is(equalTo("Helen Keller")));
 	}
 
 	@Test

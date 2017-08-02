@@ -18,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.oracle.api.IGem;
-import guru.bonacci.oogway.oracle.client.OracleRESTClient.RestGem;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE, properties = {
@@ -37,7 +36,7 @@ public class OracleRestClientTest {
 	public void shouldAnswerConsult() {
 		String question = "how much do you charge per hour?";
 		String answer = "it's free";
-		doReturn(new RestGem(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}", RestGem.class, question);
+		doReturn(new GemDataCarrier(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}", GemDataCarrier.class, question);
 
 		Optional<IGem> gem = client.consult(question);
 		assertThat(gem.get().getSaid(), is(equalTo(answer)));

@@ -7,12 +7,14 @@ import static org.slf4j.LoggerFactory.getLogger;
 import java.io.IOException;
 
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.oracle.client.GemDataCarrier;
 import guru.bonacci.oogway.sannya.service.general.PageCache;
 import guru.bonacci.oogway.sannya.service.general.WebCrawler;
 
@@ -63,10 +65,20 @@ public class BQCrawler extends WebCrawler implements PageCache {
 		try {
 			logger.debug("Firing request " + searchURL);
 			Document doc = get(searchURL);
-			return doc.select("a[title='view quote']");
+			return doc.select("div.bq_list_i");
 		} catch (IOException e) {
 			logger.error("Something went wrong. No stress, it does not need to be serieus: " + e.getMessage());
 		}
 		return new Elements();
+	}
+	
+	@Override
+	public GemDataCarrier toGem(Element el) {
+		String quote = el.select("a[title='view quote']").first().ownText();
+		
+		Elements els = el.select("a[title='view author']");
+		String author = els.size() > 0 ? els.first().ownText() : null;
+
+		return new GemDataCarrier(quote, author);
 	}
 }

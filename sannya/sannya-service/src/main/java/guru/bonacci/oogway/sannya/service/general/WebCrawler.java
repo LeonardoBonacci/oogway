@@ -16,9 +16,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import guru.bonacci.oogway.oracle.client.GemDataCarrier;
+
 /**
  * Abstract class with general functionality for accessing web pages and
  * interpreting their content.
+ * 
+ * 'oogway's ugly looking code is in my subclasses'
  */
 public abstract class WebCrawler {
 
@@ -28,15 +32,13 @@ public abstract class WebCrawler {
 	 */
 	private Set<String> consultedWebPages = synchronizedSet(new HashSet<>());	
 	
-	public List<String> find(String... tags) {
+	public List<GemDataCarrier> find(String... tags) {
 		return stream(tags)
 					.map(this::determineURL)
 					.filter(consultedWebPages::add) //returns false when present in set
 					.map(this::consultWeb)
 					.flatMap(Elements::stream)
-					.map(this::processElement)
-					.map(Element::text)
-					.map(this::processText)
+					.map(this::toGem)
 					.collect(toList());
 	}
 
@@ -55,25 +57,12 @@ public abstract class WebCrawler {
 	protected abstract Elements consultWeb(String searchURL);
 
 	/**
-	 * Pre-process before retrieving text from the element
-	 * Override for specific processing behavior
+	 * Retrieving info from element
 	 * @param el
 	 * @return
 	 */
-	protected Element processElement(Element el) {
-		return el;
-	}
+	protected abstract GemDataCarrier toGem(Element el);
 
-	/**
-	 * Post-process after retrieving text from the element
-	 * Override for specific processing behavior
-	 * @param str
-	 * @return
-	 */
-	protected String processText(String str) {
-		return str;
-	}
-	
 	/**
 	 * Method to facilitate testing
 	 */

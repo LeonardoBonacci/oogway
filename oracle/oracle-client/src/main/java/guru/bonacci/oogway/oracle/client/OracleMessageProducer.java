@@ -24,9 +24,10 @@ public class OracleMessageProducer {
 	@Value("${spring.activemq.queue.to-oracle}")
 	private String queue;
 
-	public void toTheClouds(List<GemDataCarrier> wiseSayings) {
+	public void toTheClouds(List<GemDTO> wiseSayings) {
 		wiseSayings.forEach(wisewords -> {
 			logger.info("Sending to the Oracle '" + wisewords + "'");
+			//TODO send Gems
 			jmsTemplate.send(queue, session -> session.createTextMessage(wisewords.getSaying()));
 		});
 	}

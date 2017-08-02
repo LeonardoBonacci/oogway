@@ -27,9 +27,10 @@ public class OracleController {
 	private GemRepository repo;
 
 	@RequestMapping(path = "/gems", method = GET)
-	public IGem search(@RequestParam("q") String q, @RequestParam(value = "by", required = false) String author) {
+	public IGem search(	@RequestParam("q") String q, 
+						@RequestParam(value = "by", required = false) Optional<String> author) {
+		
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
-		logger.info("Only answers of '" + author + "' are wanted");
 		Optional<Gem> gem = repo.consultTheOracle(q, author); 
 		return gem.isPresent() ? (IGem) gem.get() : null;
 	}	
@@ -37,7 +38,7 @@ public class OracleController {
 	@RequestMapping(path = "/backdoor", method = POST)
 	public void index(@RequestBody String input) {
 		logger.info("Receiving secret request to index: '" + input + "'");
-		repo.saveTheNewOnly(new Gem(input));
+		repo.saveTheNewOnly(new Gem(input, "anonymous"));
 	}
 	
 	@RequestMapping(path = "/version", method = GET)

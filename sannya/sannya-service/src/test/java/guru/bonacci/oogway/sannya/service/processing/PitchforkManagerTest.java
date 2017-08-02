@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.oracle.client.GemDataCarrier;
+import guru.bonacci.oogway.oracle.client.GemDTO;
 import guru.bonacci.oogway.oracle.client.OracleMessageProducer;
 import guru.bonacci.oogway.sannya.service.gr.GRSeeker;
 
@@ -45,8 +45,8 @@ public class PitchforkManagerTest {
 	public void shouldJustRunThroughAllTheseMockCallsInThisNonMeaningfulTest() {
 		String input = "yet another beautiful day today";
 		String preprocessedInput = "another beautiful day";
-		List<GemDataCarrier> found = asList(new GemDataCarrier("that"), new GemDataCarrier("is true"), new GemDataCarrier("beautiful stranger"));
-		List<GemDataCarrier> clutterless = asList(new GemDataCarrier("that"), new GemDataCarrier("true"), new GemDataCarrier("stranger"));
+		List<GemDTO> found = asList(new GemDTO("that"), new GemDTO("is true"), new GemDTO("beautiful stranger"));
+		List<GemDTO> clutterless = asList(new GemDTO("that"), new GemDTO("true"), new GemDTO("stranger"));
 		
 		when(sannyasPicker.pickOne()).thenReturn(sannyasin);
 		when(forePlayer.play(sannyasin, input)).thenReturn(preprocessedInput);

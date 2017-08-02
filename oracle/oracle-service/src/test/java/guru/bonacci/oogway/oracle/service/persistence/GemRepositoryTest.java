@@ -133,7 +133,7 @@ public class GemRepositoryTest {
 		Gem gem = new Gem("hello", "Harry");
 		repo.save(gem);
 		
-		Optional<Gem> result = repo.consultTheOracle("hello", "Harry");
+		Optional<Gem> result = repo.consultTheOracle("hello", Optional.of("Harry"));
 		assertThat(gem, is(equalTo(result.get())));
 	}
 
@@ -142,7 +142,7 @@ public class GemRepositoryTest {
 		Gem gem = new Gem("hello", "Harry");
 		repo.save(gem);
 		
-		Optional<Gem> result = repo.consultTheOracle("hello", "Harr");
+		Optional<Gem> result = repo.consultTheOracle("hello", Optional.of("Harr"));
 		assertFalse(result.isPresent());
 	}
 }

@@ -10,20 +10,20 @@ import guru.bonacci.oogway.oracle.api.IGem;
 /**
  * Data donkey
  */
-public class GemDataCarrier implements IGem {
+public class GemDTO implements IGem {
 
 	private String saying;
 
 	private String author;
 
-	public GemDataCarrier() {
+	public GemDTO() {
 	}
 
-	public GemDataCarrier(String saying) {
+	public GemDTO(String saying) {
 		this.saying = saying;
 	}
 
-	public GemDataCarrier(String saying, String author) {
+	public GemDTO(String saying, String author) {
 		this(saying);
 		this.author = author;
 	}
@@ -50,7 +50,7 @@ public class GemDataCarrier implements IGem {
 
 	@Override
 	public String toString() {
-		return format("GemDataCarrier[saying='%s', author='%s']", saying, author);
+		return format("GemDTO[saying='%s', author='%s']", saying, author);
 	}
 
 	@Override

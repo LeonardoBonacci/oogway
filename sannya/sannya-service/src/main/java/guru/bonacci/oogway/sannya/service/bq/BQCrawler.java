@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.oracle.client.GemDataCarrier;
+import guru.bonacci.oogway.oracle.client.GemDTO;
 import guru.bonacci.oogway.sannya.service.general.PageCache;
 import guru.bonacci.oogway.sannya.service.general.WebCrawler;
 
@@ -73,12 +73,12 @@ public class BQCrawler extends WebCrawler implements PageCache {
 	}
 	
 	@Override
-	public GemDataCarrier toGem(Element el) {
+	public GemDTO toGem(Element el) {
 		String quote = el.select("a[title='view quote']").first().ownText();
 		
 		Elements els = el.select("a[title='view author']");
 		String author = els.size() > 0 ? els.first().ownText() : null;
 
-		return new GemDataCarrier(quote, author);
+		return new GemDTO(quote, author);
 	}
 }

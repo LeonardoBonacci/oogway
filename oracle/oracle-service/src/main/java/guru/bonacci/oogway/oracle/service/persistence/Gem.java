@@ -25,9 +25,7 @@ import guru.bonacci.oogway.oracle.api.IGem;
 public class Gem implements IGem {
 
 	public static final String SAID = "saying";
-	public static final String BY = "by";
-	public static final String ON = "on";
-	public static final String SOURCE = "source";
+	public static final String AUTHOR = "author";
 
 	@Id
 	@JsonIgnore

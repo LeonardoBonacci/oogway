@@ -36,7 +36,7 @@ public class OracleRestClientTest {
 	public void shouldAnswerQ() {
 		String question = "how much do you charge per hour?";
 		String answer = "it's free";
-		doReturn(new GemDataCarrier(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}", GemDataCarrier.class, question);
+		doReturn(new GemDTO(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}", GemDTO.class, question);
 
 		Optional<IGem> gem = client.consult(question, answer);
 		assertThat(gem.get().getSaying(), is(equalTo(answer)));
@@ -47,10 +47,9 @@ public class OracleRestClientTest {
 		String question = "how much do you charge per hour?";
 		String by = "whom";
 		String answer = "it's free";
-		doReturn(new GemDataCarrier(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}&?by={by}", GemDataCarrier.class, question, by);
+		doReturn(new GemDTO(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}&?by={by}", GemDTO.class, question, by);
 
 		Optional<IGem> gem = client.consult(question, answer);
 		assertThat(gem.get().getSaying(), is(equalTo(answer)));
 	}
-
 }

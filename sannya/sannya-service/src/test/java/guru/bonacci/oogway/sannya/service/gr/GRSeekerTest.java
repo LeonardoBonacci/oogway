@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.oracle.client.GemDataCarrier;
+import guru.bonacci.oogway.oracle.client.GemDTO;
 import guru.bonacci.oogway.sannya.service.filters.LengthFilter;
 import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
 
@@ -56,7 +56,7 @@ public class GRSeekerTest {
 
 	@Test
 	public void shouldSeek() {
-		List<GemDataCarrier> out = asList(new GemDataCarrier("a"), new GemDataCarrier("b"));
+		List<GemDTO> out = asList(new GemDTO("a"), new GemDTO("b"));
 		
 		when(finder.find("a", "b")).thenReturn(out);
 		assertThat(seeker.seek("a b"), is(equalTo(out)));

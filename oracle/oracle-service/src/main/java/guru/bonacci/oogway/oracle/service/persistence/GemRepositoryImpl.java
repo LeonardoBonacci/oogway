@@ -3,7 +3,6 @@ package guru.bonacci.oogway.oracle.service.persistence;
 import static guru.bonacci.oogway.utils.MyListUtils.getRandom;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
-import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -57,7 +56,7 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 
 	@WatchMe // as spring data offers no proper hook to intercept search queries we do it the traditional way...
 	@Override
-	public Optional<Gem> consultTheOracle(String searchString, String author) {
+	public Optional<Gem> consultTheOracle(String searchString, Optional<String> author) {
 		SearchQuery searchQuery = createQuery(searchString, author);
 		List<Gem> result = gemRepository.search(searchQuery).getContent();
 
@@ -67,11 +66,9 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 		return getRandom(result);
 	}
 	
-	private SearchQuery createQuery(String searchString, String author) {
+	private SearchQuery createQuery(String searchString, Optional<String> authorOpt) {
 		NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder().withQuery(matchQuery(Gem.SAID, searchString));
-		if (isNotBlank(author))
-			queryBuilder.withFilter(termQuery("author", author));
-
+		authorOpt.ifPresent(author -> queryBuilder.withFilter(termQuery(Gem.AUTHOR, author)));
 		return queryBuilder.build();
 	}
 }

@@ -30,11 +30,19 @@ public class OracleRESTClient {
 	public OracleRESTClient(@Value("${oracle.service.application.name}") String serviceUrl) {
 		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
 	}
-	
+
+	public Optional<IGem> consult(String searchString) {
+		return consult(searchString, null);
+	}
+
 	public Optional<IGem> consult(String searchString, String by) {
 		logger.info("Oracle consultation:  '" + searchString + "'");
 
-		IGem gem = restTemplate.getForObject(serviceUrl + "/gems?q={searchString}&by={by}", GemDataCarrier.class, searchString, by);
+		String params = "?q={searchString}";
+		if (by != null)
+			params += "&by={by}";
+		
+		IGem gem = restTemplate.getForObject(serviceUrl + "/gems" + params, GemDTO.class, searchString, by);
 		return Optional.ofNullable(gem);
 	}
 }

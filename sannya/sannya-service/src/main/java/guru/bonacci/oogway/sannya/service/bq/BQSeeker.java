@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.oracle.client.GemDataCarrier;
+import guru.bonacci.oogway.oracle.client.GemDTO;
 import guru.bonacci.oogway.sannya.service.filters.LengthFilter;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
 import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
@@ -52,7 +52,7 @@ public class BQSeeker implements Sannyasin {
 	}
 
 	@Override
-	public List<GemDataCarrier> seek(String tagsAsString) {
+	public List<GemDTO> seek(String tagsAsString) {
 		String[] tags = split(tagsAsString);
 		return finder.find(tags);
 	}

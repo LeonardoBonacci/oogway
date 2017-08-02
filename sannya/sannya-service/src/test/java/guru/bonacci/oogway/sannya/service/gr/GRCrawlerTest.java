@@ -6,7 +6,6 @@ import static java.util.stream.Collectors.toList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.jsoup.Jsoup.parse;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -22,7 +21,7 @@ import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.oracle.client.GemDataCarrier;
+import guru.bonacci.oogway.oracle.client.GemDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
@@ -36,8 +35,8 @@ public class GRCrawlerTest {
 		Document doc = parse(readToString("gr/gr-mock-romance.txt"));
 		doReturn(doc).when(finder).get(anyString());
 
-		List<GemDataCarrier> found = finder.find("romance");
-		List<String> quotes = found.stream().map(GemDataCarrier::getSaying).collect(toList());
+		List<GemDTO> found = finder.find("romance");
+		List<String> quotes = found.stream().map(GemDTO::getSaying).collect(toList());
 
 		List<String> expected = readToList("gr/gr-quotes-romance.txt");
 
@@ -49,7 +48,7 @@ public class GRCrawlerTest {
 		Document doc = parse(readToString("gr/gr-mock-romance.txt"));
 		doReturn(doc).when(finder).get(anyString());
 
-		List<GemDataCarrier> found = finder.find("romance");
+		List<GemDTO> found = finder.find("romance");
 		assertThat(found.get(0).getAuthor(), is(equalTo("Stephenie Meyer")));
 	}
 

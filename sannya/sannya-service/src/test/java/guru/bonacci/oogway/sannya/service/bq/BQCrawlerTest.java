@@ -23,7 +23,7 @@ import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.oracle.client.GemDataCarrier;
+import guru.bonacci.oogway.oracle.client.GemDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
@@ -53,8 +53,8 @@ public class BQCrawlerTest {
 		doReturn("does not matter").when(finder).determineURL(anyString());
 		doReturn(doc).when(finder).get(anyString());
 
-		List<GemDataCarrier> found = finder.find("faith");
-		List<String> quotes = found.stream().map(GemDataCarrier::getSaying).collect(toList());
+		List<GemDTO> found = finder.find("faith");
+		List<String> quotes = found.stream().map(GemDTO::getSaying).collect(toList());
 
 		List<String> expected = readToList("bq/bq-quotes-faith.txt");
 		assertEquals(expected, quotes);
@@ -66,7 +66,7 @@ public class BQCrawlerTest {
 		doReturn("does not matter").when(finder).determineURL(anyString());
 		doReturn(doc).when(finder).get(anyString());
 
-		List<GemDataCarrier> found = finder.find("faith");
+		List<GemDTO> found = finder.find("faith");
 		assertThat(found.get(0).getAuthor(), is(equalTo("Helen Keller")));
 	}
 

@@ -16,7 +16,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import guru.bonacci.oogway.oracle.client.GemDataCarrier;
+import guru.bonacci.oogway.oracle.client.GemDTO;
 
 /**
  * Abstract class with general functionality for accessing web pages and
@@ -32,7 +32,7 @@ public abstract class WebCrawler {
 	 */
 	private Set<String> consultedWebPages = synchronizedSet(new HashSet<>());	
 	
-	public List<GemDataCarrier> find(String... tags) {
+	public List<GemDTO> find(String... tags) {
 		return stream(tags)
 					.map(this::determineURL)
 					.filter(consultedWebPages::add) //returns false when present in set
@@ -61,7 +61,7 @@ public abstract class WebCrawler {
 	 * @param el
 	 * @return
 	 */
-	protected abstract GemDataCarrier toGem(Element el);
+	protected abstract GemDTO toGem(Element el);
 
 	/**
 	 * Method to facilitate testing

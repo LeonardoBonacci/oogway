@@ -12,10 +12,9 @@ public class GeoMessageReceiver {
 	@Autowired
 	private GeoService service;
 	
-    @StreamListener(SpectreSink.CHANNEL_NAME)
+    @StreamListener(SpectreProcessor.CHANNEL_NAME)
 	public void onMessage(_1984 _1984) {
 		System.out.println(_1984.getMessage());
-    	//	service.index(_1984.getIP(), _1984.getMessage());
+    	service.index(_1984.getIP(), _1984.getMessage());
     }
-
 }

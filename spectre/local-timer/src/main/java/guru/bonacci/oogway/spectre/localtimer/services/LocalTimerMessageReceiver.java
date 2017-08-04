@@ -1,10 +1,8 @@
 package guru.bonacci.oogway.spectre.localtimer.services;
 
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,9 +14,10 @@ public class LocalTimerMessageReceiver {
 	@Autowired
 	ElasticsearchTemplate template;
 
-	@JmsListener(destination = "first-topic")
-	public void onMessage(String input) throws IOException {
-		System.out.println(input);
+    @StreamListener(LocalTimerSink.ENRICHMENT)
+	public void onMessage(Wrapper input) {
+		System.out.println("localtimer " + input.getUuid());
+
 //		Spec s = repo.findOne(input);
 
 		// UpdateRequest updateRequest = new UpdateRequest();

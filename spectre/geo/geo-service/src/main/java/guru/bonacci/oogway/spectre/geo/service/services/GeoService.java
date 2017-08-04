@@ -16,8 +16,8 @@ public class GeoService {
 
 	private final Logger logger = getLogger(this.getClass());
 
-//	@Autowired
-//	private JmsTemplate jmsTemplate;
+	@Autowired
+    private EnrichmentGateway gateway;
 
 	@Autowired
 	private IIPologist ipologist;
@@ -28,10 +28,8 @@ public class GeoService {
 
 		try {
 			Thread.sleep(3000);
-//			jmsTemplate.setPubSubDomain(true);
-//			jmsTemplate.send("first-topic", session -> session.createTextMessage(uuid.toString()));
+			gateway.enrich(new Wrapper(uuid.toString()));
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

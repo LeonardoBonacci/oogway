@@ -32,7 +32,7 @@ public class PitchforkManager {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
-	private SannyasPicker sannyasPicker;
+	private SannyasinPicker sannyasinPicker;
 
 	@Autowired
 	private ForePlayer forePlayer;
@@ -46,7 +46,7 @@ public class PitchforkManager {
 	public void delegate(String input) {
 		logger.info("About to analyzer input: '" + input + "'");
 
-		Sannyasin sannya = sannyasPicker.pickOne();
+		Sannyasin sannya = sannyasinPicker.pickOne();
 		String preprocessedInput = forePlayer.play(sannya, input);
 		List<String> found = sannya.seek(preprocessedInput);
 		List<String> cleaned = cleaningAgent.noMoreClutter(sannya, found);

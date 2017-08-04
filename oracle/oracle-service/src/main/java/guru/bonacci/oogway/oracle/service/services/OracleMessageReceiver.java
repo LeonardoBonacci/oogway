@@ -4,7 +4,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.annotation.JmsListener;
+import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.oracle.service.persistence.Gem;
@@ -18,9 +18,9 @@ public class OracleMessageReceiver {
 	@Autowired
 	private GemRepository repo;
 
-	@JmsListener(destination = "${spring.activemq.queue.to-oracle}")
-	public void onMessage(String input) {
+    @StreamListener(OracleSink.CHANNEL_NAME)
+	public void onMessage(Wrapper input) {
 		logger.info("Receiving an extra bit of knowledge: '" + input + "'");
-		repo.saveTheNewOnly(new Gem(input));
+		repo.saveTheNewOnly(new Gem(input.getContent()));
 	}
 }

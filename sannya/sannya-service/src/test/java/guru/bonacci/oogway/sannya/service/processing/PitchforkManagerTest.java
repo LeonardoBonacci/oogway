@@ -20,7 +20,7 @@ import guru.bonacci.oogway.sannya.service.goodreads.GoodReadsSeeker;
 import guru.bonacci.oogway.sannya.service.processing.CleaningAgent;
 import guru.bonacci.oogway.sannya.service.processing.ForePlayer;
 import guru.bonacci.oogway.sannya.service.processing.PitchforkManager;
-import guru.bonacci.oogway.sannya.service.processing.SannyasPicker;
+import guru.bonacci.oogway.sannya.service.processing.SannyasinPicker;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
@@ -30,7 +30,7 @@ public class PitchforkManagerTest {
 	PitchforkManager manager;
 
 	@MockBean
-	SannyasPicker sannyasPicker;
+	SannyasinPicker sannyasinPicker;
 
 	@MockBean
 	GoodReadsSeeker sannyasin;
@@ -51,7 +51,7 @@ public class PitchforkManagerTest {
 		List<String> found = asList("that", "is true", "beautiful stranger");
 		List<String> clutterless = asList("that", "true", "stranger");
 		
-		when(sannyasPicker.pickOne()).thenReturn(sannyasin);
+		when(sannyasinPicker.pickOne()).thenReturn(sannyasin);
 		when(forePlayer.play(sannyasin, input)).thenReturn(preprocessedInput);
 		when(sannyasin.seek(preprocessedInput)).thenReturn(found);
 		when(cleaningAgent.noMoreClutter(sannyasin, found)).thenReturn(clutterless);

@@ -14,14 +14,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
-import guru.bonacci.oogway.sannya.service.processing.SannyasPicker;
+import guru.bonacci.oogway.sannya.service.processing.SannyasinPicker;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
 public class SannyasPickerTest {
 
 	@Autowired
-	SannyasPicker picker;
+	SannyasinPicker picker;
 
 	@Test
     public void shouldPickDifferentOnes() {

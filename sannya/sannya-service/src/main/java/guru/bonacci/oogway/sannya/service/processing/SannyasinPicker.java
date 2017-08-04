@@ -18,7 +18,7 @@ import guru.bonacci.oogway.sannya.service.general.Sannyasin;
  * by cipher August 06, 2003
  */
 @Component
-public class SannyasPicker {
+public class SannyasinPicker {
 
 	@Autowired
 	private ApplicationContext applicationContext;

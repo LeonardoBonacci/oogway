@@ -5,11 +5,13 @@ import static guru.bonacci.oogway.spectre.sentiment.events.SentimentEventChannel
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.secretdomain.GenericEvent;
+
 @Component
 public class SentimentRabbitEar {
 
     @StreamListener(ENRICHMENT)
-	public void onMessage(Wrapper input) {
-		System.out.println("sentiment " + input.getUuid());
+	public void onMessage(GenericEvent event) {
+		System.out.println("sentiment " + event.getContent());
     }
 }

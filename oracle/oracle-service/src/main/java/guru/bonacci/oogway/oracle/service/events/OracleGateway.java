@@ -5,9 +5,11 @@ import static guru.bonacci.oogway.oracle.service.events.OracleEventChannels.ORAC
 import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.MessagingGateway;
 
+import guru.bonacci.oogway.secretdomain.GenericEvent;
+
 @MessagingGateway
 public interface OracleGateway {
 	
 	@Gateway(requestChannel = ORACLE)
-	void send(Wrapper wrapper);
+	void send(GenericEvent event);
 }

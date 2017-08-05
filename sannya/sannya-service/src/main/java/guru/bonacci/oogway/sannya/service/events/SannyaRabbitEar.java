@@ -9,6 +9,7 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.processing.PitchforkManager;
+import guru.bonacci.oogway.secretdomain.GenericEvent;
 
 @Component
 public class SannyaRabbitEar {
@@ -19,8 +20,8 @@ public class SannyaRabbitEar {
 	private PitchforkManager manager;
 
     @StreamListener(ORACLE)
-	public void onMessage(Wrapper input) {
-		logger.info("An opportunity to learn... '" + input.getContent() + "'");
-		manager.delegate(input.getContent());
+	public void onMessage(GenericEvent event) {
+		logger.info("An opportunity to learn... '" + event.getContent() + "'");
+		manager.delegate(event.getContent());
 	}
 }

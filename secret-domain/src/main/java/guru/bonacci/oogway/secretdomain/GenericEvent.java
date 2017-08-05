@@ -1,16 +1,16 @@
-package guru.bonacci.oogway.oracle.service.events;
+package guru.bonacci.oogway.secretdomain;
 
 import java.io.Serializable;
 
-public class Wrapper implements Serializable {
+public class GenericEvent implements Serializable {
 
 	private static final long serialVersionUID = -241744111039377832L;
 
 	private String content;
 
-	public Wrapper() {}
+	public GenericEvent() {}
 
-	public Wrapper(String content) {
+	public GenericEvent(String content) {
 		this.content = content;
 	}
 	

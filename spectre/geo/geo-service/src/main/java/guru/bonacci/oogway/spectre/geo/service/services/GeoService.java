@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import guru.bonacci.oogway.secretdomain.GenericEvent;
 import guru.bonacci.oogway.spectre.geo.service.event.EnrichmentGateway;
-import guru.bonacci.oogway.spectre.geo.service.event.Wrapper;
 import guru.bonacci.oogway.spectre.geo.service.ip.IIPologist;
 
 @Service
@@ -30,7 +30,7 @@ public class GeoService {
 
 		try {
 			Thread.sleep(3000);
-			gateway.send(new Wrapper(uuid.toString()));
+			gateway.send(new GenericEvent(uuid.toString()));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

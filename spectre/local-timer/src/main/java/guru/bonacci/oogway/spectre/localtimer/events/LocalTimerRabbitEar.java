@@ -7,6 +7,7 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.secretdomain.GenericEvent;
 import guru.bonacci.oogway.spectre.localtimer.services.SpecRepository;
 
 @Component
@@ -19,8 +20,8 @@ public class LocalTimerRabbitEar {
 	ElasticsearchTemplate template;
 
     @StreamListener(ENRICHMENT)
-	public void onMessage(Wrapper input) {
-		System.out.println("localtimer " + input.getUuid());
+	public void onMessage(GenericEvent event) {
+		System.out.println("localtimer " + event.getContent());
 
 //		Spec s = repo.findOne(input);
 

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.oracle.service.events.OracleGateway;
-import guru.bonacci.oogway.oracle.service.events.Wrapper;
+import guru.bonacci.oogway.secretdomain.GenericEvent;
 
 @Aspect
 @Component
@@ -24,6 +24,6 @@ public class EnquiryInterceptor {
 	@Before("@annotation(WatchMe) && args(searchString,..)")
 	public void spreadTheNews(JoinPoint joinPoint, String searchString) {
 		logger.info("Someone asked '" + searchString + "'");
-		gateway.send(new Wrapper(searchString));
+		gateway.send(new GenericEvent(searchString));
 	}
 }

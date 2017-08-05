@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.events.SannyaGateway;
-import guru.bonacci.oogway.sannya.service.events.Wrapper;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
 import guru.bonacci.oogway.secretdomain.GemDTO;
+import guru.bonacci.oogway.secretdomain.GenericEvent;
 
 /**
  * A manager alone cannot perform all the tasks assigned to him. In order to
@@ -55,7 +55,7 @@ public class PitchforkManager {
 		cleaned.forEach(wisewords -> {
 			//TODO send GEMs
 			logger.info("Sharing my words '" + wisewords + "'");
-			gateway.send(new Wrapper(wisewords.getSaying()));
+			gateway.send(new GenericEvent(wisewords.getSaying()));
 		});
 	}
 }

@@ -21,6 +21,11 @@
 		</dependency>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
+			<artifactId>secret-domain</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>guru.bonacci.oogway</groupId>
 			<artifactId>geo-interface</artifactId>
 			<version>${project.version}</version>
 		</dependency>

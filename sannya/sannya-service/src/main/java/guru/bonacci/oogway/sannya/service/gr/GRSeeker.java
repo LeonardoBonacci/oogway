@@ -33,7 +33,7 @@ public class GRSeeker implements Sannyasin {
 	private LengthFilter lengthFilter;
 
 	@Autowired
-	private GRCrawler crawler;
+	private GRScraper scraper;
 
 	@Override
 	public List<Function<String,String>> preprocessingSteps() {
@@ -48,6 +48,6 @@ public class GRSeeker implements Sannyasin {
 	@Override
 	public List<GemDTO> seek(String tagsAsString) {
 		String[] tags = split(tagsAsString);
-		return crawler.find(tags);
+		return scraper.find(tags);
 	}
 }

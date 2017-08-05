@@ -43,7 +43,12 @@ public class OracleClient {
 		if (by != null)
 			params += "&by={by}";
 		
-		IGem gem = restTemplate.getForObject(serviceUrl + "/gems" + params, GemDTO.class, searchString, by);
+		IGem gem = null; 
+		try {
+			gem = restTemplate.getForObject(serviceUrl + "/gems" + params, GemDTO.class, searchString, by);
+		} catch(java.lang.IllegalStateException ise) {
+			logger.error("Help!!! Can't reach the oracle...", ise);	
+		}
 		return Optional.ofNullable(gem);
 	}
 }

@@ -39,7 +39,7 @@ public class BQSeeker implements Sannyasin {
 	private LengthFilter lengthFilter;
 
 	@Autowired
-	private BQCrawler finder;
+	private BQScraper scraper;
 
 	@Override
 	public List<Function<String, String>> preprocessingSteps() {
@@ -54,6 +54,6 @@ public class BQSeeker implements Sannyasin {
 	@Override
 	public List<GemDTO> seek(String tagsAsString) {
 		String[] tags = split(tagsAsString);
-		return finder.find(tags);
+		return scraper.find(tags);
 	}
 }

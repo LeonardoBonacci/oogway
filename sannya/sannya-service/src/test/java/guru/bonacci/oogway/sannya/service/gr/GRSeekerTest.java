@@ -34,7 +34,7 @@ public class GRSeekerTest {
 	LengthFilter lengthFilter;
 
 	@MockBean
-	GRCrawler finder;
+	GRScraper finder;
 
 	@Test
 	public void shouldPreProcess() {

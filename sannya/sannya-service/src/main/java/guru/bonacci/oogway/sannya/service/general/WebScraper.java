@@ -24,7 +24,7 @@ import guru.bonacci.oogway.secretdomain.GemDTO;
  * 
  * 'oogway's ugly looking code is in my subclasses'
  */
-public abstract class WebCrawler {
+public abstract class WebScraper {
 
 	/**
 	 * To not overly access our dear wisdom suppliers we keep an administration

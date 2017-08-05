@@ -15,7 +15,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.general.PageCache;
-import guru.bonacci.oogway.sannya.service.general.WebCrawler;
+import guru.bonacci.oogway.sannya.service.general.WebScraper;
 import guru.bonacci.oogway.secretdomain.GemDTO;
 
 /**
@@ -23,7 +23,7 @@ import guru.bonacci.oogway.secretdomain.GemDTO;
  * “I want to do to you what spring does with the cherry trees.” ― Pablo Neruda
  */
 @Component
-public class BQCrawler extends WebCrawler implements PageCache {
+public class BQScraper extends WebScraper implements PageCache {
 
 	private final Logger logger = getLogger(this.getClass());
 

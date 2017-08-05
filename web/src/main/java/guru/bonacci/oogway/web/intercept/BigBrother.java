@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.spectre.geo.api._1984;
+import guru.bonacci.oogway.secretdomain.COMINT;
 import guru.bonacci.oogway.web.events.SpectreGateway;
 import guru.bonacci.oogway.web.utils.IPCatcher;
 
@@ -29,6 +29,6 @@ public class BigBrother {
 	public void spreadTheNews(JoinPoint joinPoint, String searchString) {
 		String ip = iPCatcher.getClientIp();
 		logger.info(ip + " said '" + searchString + "'");
-		gateway.send(new _1984(ip, searchString));
+		gateway.send(new COMINT(ip, searchString));
 	}
 }

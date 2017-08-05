@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import guru.bonacci.oogway.spectre.geo.api._1984;
+import guru.bonacci.oogway.secretdomain.COMINT;
 
 @RestController
 public class GeoController {
@@ -22,9 +22,9 @@ public class GeoController {
 	private GeoService service;
 	
 	@RequestMapping(path = "/backdoor", method = POST)
-	public void log(@RequestBody _1984 _1984) {
-		logger.info("Receiving secret request to process: '" + _1984 + "'");
-		service.index(_1984.getIP(), _1984.getMessage());
+	public void log(@RequestBody COMINT comint) {
+		logger.info("Receiving secret request to process: '" + comint + "'");
+		service.index(comint.getIP(), comint.getMessage());
 	}
 
 	@RequestMapping(path = "/version", method = GET)

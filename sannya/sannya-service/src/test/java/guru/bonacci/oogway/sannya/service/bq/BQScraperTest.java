@@ -27,10 +27,10 @@ import guru.bonacci.oogway.secretdomain.GemDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
-public class BQCrawlerTest {
+public class BQScraperTest {
 
 	@Spy
-	BQCrawler finder;
+	BQScraper finder;
 
 	@Test
 	public void shouldRetrieveQuotes() throws IOException {

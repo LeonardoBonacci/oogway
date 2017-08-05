@@ -34,7 +34,7 @@ public class BQSeekerTest {
 	LengthFilter lengthFilter;
 
 	@MockBean
-	BQCrawler finder;
+	BQScraper finder;
 
 	@Test
 	public void shouldPreProcess() {

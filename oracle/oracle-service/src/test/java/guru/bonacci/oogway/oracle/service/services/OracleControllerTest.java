@@ -33,7 +33,7 @@ public class OracleControllerTest {
 	
 	@Test
 	public void shouldReturnNullOnConsult() throws Exception {
-		given(gemRepo.consultTheOracle("tell me the truth", null)).willReturn(Optional.empty());
+		given(gemRepo.consultTheOracle("tell me the truth", Optional.empty())).willReturn(Optional.empty());
 
 		mvc.perform(get("/gems?q=tell me the truth"))
 			.andExpect(status().isOk())

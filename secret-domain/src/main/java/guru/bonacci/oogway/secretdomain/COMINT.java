@@ -1,22 +1,23 @@
-package guru.bonacci.oogway.spectre.geo.api;
+package guru.bonacci.oogway.secretdomain;
 
 import static java.lang.String.format;
 
 import java.io.Serializable;
 
 /**
- * Dearest George...
+ * COMINT
+ * All intelligence gathered from intercepted communications
  */
-public class _1984 implements Serializable {
+public class COMINT implements Serializable {
 
 	private static final long serialVersionUID = -241744111039377832L;
 
 	private String ip;
 	private String message;
 	
-	public _1984() {}
+	public COMINT() {}
 
-	public _1984(String ip, String message) {
+	public COMINT(String ip, String message) {
 		this.ip = ip;
 		this.message = message;
 	}

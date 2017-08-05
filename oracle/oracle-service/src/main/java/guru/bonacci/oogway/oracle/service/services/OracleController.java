@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import guru.bonacci.oogway.oracle.service.persistence.Gem;
 import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
+import guru.bonacci.oogway.secretdomain.GemDTO;
 import guru.bonacci.oogway.secretdomain.IGem;
 
 @RestController
@@ -32,13 +33,13 @@ public class OracleController {
 		
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
 		Optional<Gem> gem = repo.consultTheOracle(q, author); 
-		return gem.isPresent() ? (IGem) gem.get() : null;
+		return (IGem)gem.orElse(null);
 	}	
 
 	@RequestMapping(path = "/backdoor", method = POST)
-	public void index(@RequestBody String input) {
-		logger.info("Receiving secret request to index: '" + input + "'");
-		repo.saveTheNewOnly(new Gem(input, "anonymous"));
+	public void index(@RequestBody GemDTO gem) {
+		logger.info("Receiving secret request to index: '" + gem + "'");
+		repo.saveTheNewOnly(new Gem(gem.getSaying(), gem.getAuthor()));
 	}
 	
 	@RequestMapping(path = "/version", method = GET)

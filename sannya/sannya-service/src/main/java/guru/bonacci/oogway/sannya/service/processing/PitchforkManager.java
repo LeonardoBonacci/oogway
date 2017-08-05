@@ -8,10 +8,10 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.oracle.client.GemDTO;
 import guru.bonacci.oogway.sannya.service.events.SannyaGateway;
 import guru.bonacci.oogway.sannya.service.events.Wrapper;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
+import guru.bonacci.oogway.secretdomain.GemDTO;
 
 /**
  * A manager alone cannot perform all the tasks assigned to him. In order to

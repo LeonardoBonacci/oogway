@@ -21,7 +21,7 @@
 		</dependency>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>oracle-interface</artifactId>
+			<artifactId>secret-domain</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

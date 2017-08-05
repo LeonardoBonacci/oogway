@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import guru.bonacci.oogway.oracle.api.IGem;
 import guru.bonacci.oogway.oracle.service.persistence.Gem;
 import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
+import guru.bonacci.oogway.secretdomain.IGem;
 
 @RestController
 public class OracleController {

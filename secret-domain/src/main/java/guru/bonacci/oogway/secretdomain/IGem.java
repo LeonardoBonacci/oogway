@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.oracle.api;
+package guru.bonacci.oogway.secretdomain;
 
 public interface IGem {
 

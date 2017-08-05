@@ -28,6 +28,7 @@
 		<module>sannya</module>
 		<module>web</module>
    		<module>spectre</module>
+    <module>secret-domain</module>
   </modules>
 
 	<dependencyManagement>

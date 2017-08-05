@@ -11,12 +11,12 @@ import java.util.function.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.oracle.client.GemDTO;
 import guru.bonacci.oogway.sannya.service.filters.LengthFilter;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
 import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
 import guru.bonacci.oogway.sannya.service.steps.KeyPhraser;
 import guru.bonacci.oogway.sannya.service.steps.Lemmatizor;
+import guru.bonacci.oogway.secretdomain.GemDTO;
 
 /**
  * They say: Share our extensive collection of famous quotes by authors,

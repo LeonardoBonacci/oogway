@@ -18,7 +18,8 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
-import guru.bonacci.oogway.oracle.api.IGem;
+import guru.bonacci.oogway.secretdomain.GemDTO;
+import guru.bonacci.oogway.secretdomain.IGem;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE, properties = {

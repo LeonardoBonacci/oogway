@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import guru.bonacci.oogway.oracle.client.GemDTO;
+import guru.bonacci.oogway.secretdomain.GemDTO;
 
 /**
  * Sannyasin: Seeker for Truth (is basically a Worker).

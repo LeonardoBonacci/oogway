@@ -16,9 +16,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.oracle.client.GemDTO;
 import guru.bonacci.oogway.sannya.service.filters.LengthFilter;
 import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
+import guru.bonacci.oogway.secretdomain.GemDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)

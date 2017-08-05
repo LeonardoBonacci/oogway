@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.oracle.client.GemDTO;
 import guru.bonacci.oogway.sannya.service.general.PageCache;
 import guru.bonacci.oogway.sannya.service.general.WebCrawler;
+import guru.bonacci.oogway.secretdomain.GemDTO;
 
 /**
  * Most popular quote:

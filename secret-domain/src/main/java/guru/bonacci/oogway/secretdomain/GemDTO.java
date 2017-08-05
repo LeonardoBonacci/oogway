@@ -1,11 +1,9 @@
-package guru.bonacci.oogway.oracle.client;
+package guru.bonacci.oogway.secretdomain;
 
 import static java.lang.String.format;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import guru.bonacci.oogway.oracle.api.IGem;
 
 /**
  * Data donkey

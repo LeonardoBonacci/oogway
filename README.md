@@ -15,7 +15,7 @@ Installation guide
 
 ElasticSearch is used to create a simple knowledge base with (borrowed) wisdom, referred to here as 'the Oracle'. Go here https://www.elastic.co/ and install ElasticSearch on your computer. I'm using version 2.4.4 and it runs fine. Define a cluster named 'delphi'. To simply test it you can leave default values for all other configurations.
 
-Through ActiveMQ the different micro-services communicate. Go here http://activemq.apache.org/ and install ActiveMQ. Version 5.14.5. should do. No need to configure anything. Just run it.
+Through RabbitMQ the different micro-services communicate. Go here https://www.rabbitmq.com/ and install RabbitMQ. Version 3.6.10. should do. No need to configure anything. Just run it.
 
 At last, for playing with logs also install logstash. Adapt and run run-env.bat to start up the just mentioned tooling in one go.
 

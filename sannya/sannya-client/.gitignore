@@ -1,9 +1,0 @@
-/target/
-/data/
-/foo/embedded
-/foo/data
-/foo/bar
-/.settings/
-.classpath
-.project
-/bin/

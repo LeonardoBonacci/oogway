@@ -10,7 +10,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>geo-client</module>
 		<module>geo-service</module>
 	    <module>geo-interface</module>
   </modules>

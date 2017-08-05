@@ -2,18 +2,23 @@ package guru.bonacci.oogway.sannya.service;
 
 import java.util.Properties;
 
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.integration.annotation.IntegrationComponentScan;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import guru.bonacci.oogway.oracle.client.OracleClientConfig;
+import guru.bonacci.oogway.sannya.service.events.SannyaEventChannels;
 
 @Configuration
 @ComponentScan
 @Import(OracleClientConfig.class) 
+@EnableBinding(SannyaEventChannels.class)
+@IntegrationComponentScan
 @PropertySource("classpath:sannyas.properties")
 public class SannyaConfig {
 

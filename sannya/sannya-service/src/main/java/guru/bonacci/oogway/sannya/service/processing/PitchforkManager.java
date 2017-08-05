@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.oracle.client.GemDTO;
-import guru.bonacci.oogway.oracle.client.OracleMessageProducer;
+import guru.bonacci.oogway.sannya.service.events.SannyaGateway;
+import guru.bonacci.oogway.sannya.service.events.Wrapper;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
 
 /**
@@ -33,7 +34,7 @@ public class PitchforkManager {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
-	private SannyasPicker sannyasPicker;
+	private SannyasinPicker sannyasinPicker;
 
 	@Autowired
 	private ForePlayer forePlayer;
@@ -42,15 +43,19 @@ public class PitchforkManager {
 	private CleaningAgent cleaningAgent;
 
 	@Autowired
-	private OracleMessageProducer messageProducer;
+    private SannyaGateway gateway;
 
 	public void delegate(String input) {
 		logger.info("About to analyzer input: '" + input + "'");
 
-		Sannyasin sannya = sannyasPicker.pickOne();
+		Sannyasin sannya = sannyasinPicker.pickOne();
 		String preprocessedInput = forePlayer.play(sannya, input);
 		List<GemDTO> found = sannya.seek(preprocessedInput);
 		List<GemDTO> cleaned = cleaningAgent.noMoreClutter(sannya, found);
-		messageProducer.toTheClouds(cleaned);
+		cleaned.forEach(wisewords -> {
+			//TODO send GEMs
+			logger.info("Sharing my words '" + wisewords + "'");
+			gateway.send(new Wrapper(wisewords.getSaying()));
+		});
 	}
 }

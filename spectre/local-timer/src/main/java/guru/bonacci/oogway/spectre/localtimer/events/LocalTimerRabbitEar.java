@@ -1,12 +1,16 @@
-package guru.bonacci.oogway.spectre.localtimer.services;
+package guru.bonacci.oogway.spectre.localtimer.events;
+
+import static guru.bonacci.oogway.spectre.localtimer.events.LocalTimerEventChannels.ENRICHMENT;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.spectre.localtimer.services.SpecRepository;
+
 @Component
-public class LocalTimerMessageReceiver {
+public class LocalTimerRabbitEar {
 
 	@Autowired
 	SpecRepository repo;
@@ -14,7 +18,7 @@ public class LocalTimerMessageReceiver {
 	@Autowired
 	ElasticsearchTemplate template;
 
-    @StreamListener(LocalTimerSink.ENRICHMENT)
+    @StreamListener(ENRICHMENT)
 	public void onMessage(Wrapper input) {
 		System.out.println("localtimer " + input.getUuid());
 

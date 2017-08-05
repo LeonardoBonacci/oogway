@@ -1,20 +1,20 @@
-package guru.bonacci.oogway.spectre.geo.service.services;
+package guru.bonacci.oogway.spectre.geo.service.event;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 
-public interface SpectreProcessor {
+public interface GeoEventChannels {
 
-	String CHANNEL_NAME = "worksChannel";
+	String SPECTRE = "spectre";
 
-    @Input
-    SubscribableChannel worksChannel();
+	@Input(SPECTRE)
+    SubscribableChannel spectreChannel();
     
     
 	String ENRICHMENT = "enrichment";
 
-	@Output
-	MessageChannel enrichment();
+	@Output(ENRICHMENT)
+	MessageChannel enrichmentChannel();
 }

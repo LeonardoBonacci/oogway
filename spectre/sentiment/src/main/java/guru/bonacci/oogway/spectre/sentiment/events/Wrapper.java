@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.spectre.localtimer.services;
+package guru.bonacci.oogway.spectre.sentiment.events;
 
 import java.io.Serializable;
 

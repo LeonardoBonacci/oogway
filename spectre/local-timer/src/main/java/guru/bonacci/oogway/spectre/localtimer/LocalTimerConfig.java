@@ -5,11 +5,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import guru.bonacci.oogway.spectre.localtimer.services.LocalTimerSink;
+import guru.bonacci.oogway.spectre.localtimer.events.LocalTimerEventChannels;
 
 @Configuration
 @ComponentScan
-@EnableBinding(LocalTimerSink.class)
+@EnableBinding(LocalTimerEventChannels.class)
 @PropertySource("classpath:localtimer.properties")
 public class LocalTimerConfig {
 }

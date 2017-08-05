@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.spectre.geo.service.services;
+package guru.bonacci.oogway.spectre.localtimer.events;
 
 import java.io.Serializable;
 
@@ -9,7 +9,7 @@ public class Wrapper implements Serializable {
 	private String uuid;
 
 	public Wrapper() {}
-
+	
 	public Wrapper(String uuid) {
 		this.uuid = uuid;
 	}

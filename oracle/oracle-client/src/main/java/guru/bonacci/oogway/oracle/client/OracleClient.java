@@ -20,7 +20,7 @@ import guru.bonacci.oogway.oracle.api.IGem;
  * Talks to the Oracle via REST
  */
 @Component
-public class OracleRESTClient {
+public class OracleClient {
 
 	private final Logger logger = getLogger(this.getClass());
 
@@ -30,7 +30,7 @@ public class OracleRESTClient {
 
 	private final String serviceUrl;
 
-	public OracleRESTClient(@Value("${oracle.service.application.name}") String serviceUrl) {
+	public OracleClient(@Value("${oracle.service.application.name}") String serviceUrl) {
 		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
 	}
 	

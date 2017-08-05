@@ -8,7 +8,8 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.oracle.client.OracleMessageProducer;
+import guru.bonacci.oogway.sannya.service.events.SannyaGateway;
+import guru.bonacci.oogway.sannya.service.events.Wrapper;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
 
 /**
@@ -41,7 +42,7 @@ public class PitchforkManager {
 	private CleaningAgent cleaningAgent;
 
 	@Autowired
-	private OracleMessageProducer messageProducer;
+    private SannyaGateway gateway;
 
 	public void delegate(String input) {
 		logger.info("About to analyzer input: '" + input + "'");
@@ -50,6 +51,11 @@ public class PitchforkManager {
 		String preprocessedInput = forePlayer.play(sannya, input);
 		List<String> found = sannya.seek(preprocessedInput);
 		List<String> cleaned = cleaningAgent.noMoreClutter(sannya, found);
-		messageProducer.save(cleaned);
+
+		cleaned.forEach(wisewords -> {
+			logger.info("Sharing my words '" + wisewords + "'");
+			gateway.send(new Wrapper(wisewords));
+		});
+
 	}
 }

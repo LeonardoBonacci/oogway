@@ -9,5 +9,5 @@ import org.springframework.integration.annotation.MessagingGateway;
 public interface EnrichmentGateway {
 	
 	@Gateway(requestChannel = ENRICHMENT)
-	void enrich(Wrapper uuid);
+	void send(Wrapper uuid);
 }

@@ -1,5 +1,6 @@
-package guru.bonacci.oogway.sannya.service.services;
+package guru.bonacci.oogway.sannya.service.events;
 
+import static guru.bonacci.oogway.sannya.service.events.SannyaEventChannels.ORACLE;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import org.slf4j.Logger;
@@ -10,14 +11,14 @@ import org.springframework.stereotype.Component;
 import guru.bonacci.oogway.sannya.service.processing.PitchforkManager;
 
 @Component
-public class SannyaMessageReceiver {
+public class SannyaRabbitEar {
 
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
 	private PitchforkManager manager;
 
-    @StreamListener(SannyaSink.CHANNEL_NAME)
+    @StreamListener(ORACLE)
 	public void onMessage(Wrapper input) {
 		logger.info("An opportunity to learn... '" + input.getContent() + "'");
 		manager.delegate(input.getContent());

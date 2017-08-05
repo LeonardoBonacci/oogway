@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.oracle.api.IGem;
-import guru.bonacci.oogway.oracle.client.OracleRESTClient.RESTGem;
+import guru.bonacci.oogway.oracle.client.OracleClient.RESTGem;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE, properties = {
@@ -27,7 +27,7 @@ import guru.bonacci.oogway.oracle.client.OracleRESTClient.RESTGem;
 public class OracleRestClientTest {
 
 	@Autowired
-	OracleRESTClient client;
+	OracleClient client;
 	
 	@LoadBalanced
 	@MockBean

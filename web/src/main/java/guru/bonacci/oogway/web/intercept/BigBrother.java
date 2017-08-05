@@ -29,6 +29,6 @@ public class BigBrother {
 	public void spreadTheNews(JoinPoint joinPoint, String searchString) {
 		String ip = iPCatcher.getClientIp();
 		logger.info(ip + " said '" + searchString + "'");
-		gateway.generate(new _1984(ip, searchString));
+		gateway.send(new _1984(ip, searchString));
 	}
 }

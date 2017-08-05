@@ -1,5 +1,6 @@
-package guru.bonacci.oogway.oracle.service.services;
+package guru.bonacci.oogway.oracle.service.events;
 
+import static guru.bonacci.oogway.oracle.service.events.OracleEventChannels.SANNYA;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import org.slf4j.Logger;
@@ -11,14 +12,14 @@ import guru.bonacci.oogway.oracle.service.persistence.Gem;
 import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
 
 @Component
-public class OracleMessageReceiver {
+public class OracleRabbitEar {
 
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
 	private GemRepository repo;
 
-    @StreamListener(OracleSink.CHANNEL_NAME)
+    @StreamListener(SANNYA)
 	public void onMessage(Wrapper input) {
 		logger.info("Receiving an extra bit of knowledge: '" + input + "'");
 		repo.saveTheNewOnly(new Gem(input.getContent()));

@@ -11,5 +11,5 @@ import guru.bonacci.oogway.spectre.geo.api._1984;
 public interface SpectreGateway {
 	
 	@Gateway(requestChannel = SPECTRE)
-	void generate(_1984 _1984);
+	void send(_1984 _1984);
 }

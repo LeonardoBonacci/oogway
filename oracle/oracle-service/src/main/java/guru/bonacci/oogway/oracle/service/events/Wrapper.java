@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.oracle.client;
+package guru.bonacci.oogway.oracle.service.events;
 
 import java.io.Serializable;
 

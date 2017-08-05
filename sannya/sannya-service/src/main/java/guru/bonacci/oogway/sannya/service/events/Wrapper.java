@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannya.service.services;
+package guru.bonacci.oogway.sannya.service.events;
 
 import java.io.Serializable;
 

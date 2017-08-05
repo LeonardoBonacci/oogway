@@ -11,6 +11,5 @@
 
 	<modules>
 		<module>sannya-service</module>
-	    <module>sannya-client</module>
   </modules>
 </project>

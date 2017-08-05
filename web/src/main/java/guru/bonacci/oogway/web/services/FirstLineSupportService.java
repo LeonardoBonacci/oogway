@@ -38,6 +38,6 @@ public class FirstLineSupportService {
 			return "No question no answer..";
 
 		Optional<IGem> gem = oracleClient.consult(q);
-		return gem.map(IGem::getEssence).orElse(postponer.saySomething());
+		return gem.map(IGem::getSaying).orElse(postponer.saySomething());
 	}
 }

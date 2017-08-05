@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannya.service.brainyquote;
+package guru.bonacci.oogway.sannya.service.bq;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.equalTo;
@@ -16,15 +16,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.oracle.client.GemDTO;
 import guru.bonacci.oogway.sannya.service.filters.LengthFilter;
 import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
-public class BrainyQuoteSeekerTest {
+public class BQSeekerTest {
 
 	@Autowired
-	BrainyQuoteSeeker seeker;
+	BQSeeker seeker;
 	
 	@MockBean
 	CharacterGuardian characterGuardian;
@@ -33,7 +34,7 @@ public class BrainyQuoteSeekerTest {
 	LengthFilter lengthFilter;
 
 	@MockBean
-	BrainyQuoteIlluminator finder;
+	BQCrawler finder;
 
 	@Test
 	public void shouldPreProcess() {
@@ -55,7 +56,7 @@ public class BrainyQuoteSeekerTest {
 
 	@Test
 	public void shouldSeek() {
-		List<String> out = asList("a", "b");
+		List<GemDTO> out = asList(new GemDTO("a"), new GemDTO("b"));
 		
 		when(finder.find("a", "b")).thenReturn(out);
 		assertThat(seeker.seek("a b"), is(equalTo(out)));

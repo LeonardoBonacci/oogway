@@ -17,7 +17,9 @@ ElasticSearch is used to create a simple knowledge base with (borrowed) wisdom, 
 
 Through ActiveMQ the different micro-services communicate. Go here http://activemq.apache.org/ and install ActiveMQ. Version 5.14.5. should do. No need to configure anything. Just run it.
 
-Now check out this code. It being a micro-services architecture, you need to run RegistrationServer, SannyasServer and WebServer. Easiest, for Windows users at least, is to run the script build-and-run.bat. It does what the title suggests. Load balancing on multiple running instances of the SannyasServer and/or of the WebServer are dealt with by the RegistrationServer. 
+At last, for playing with logs also install logstash. Adapt and run run-env.bat to start up the just mentioned tooling in one go.
+
+Now check out this code. It being a micro-services architecture, you need to run OrchestrationServer, SannyasServer and WebServer. Easiest, for Windows users at least, is to run the script build-and-run.bat. It does what the title suggests. Load balancing on multiple running instances of the SannyasServer and/or of the WebServer are dealt with by the OrchestrationServer. 
 
 *Disclaimer* :) 
 Inspecting the project you will notice strange or at least uncommon words throughout the code ('Sannyasin' instead of 'Worker', 'Manager' instead of 'WorkerEngine'). This being a hobby project, I have used the lack of supervision to take a few coding short cuts, and have been excessively creative in choosing class, method and variable names. Don't try this at home when you're creating real life production software (all though this code runs quite successfully in production too :) and please stick to the commonly used patterns and naming conventions to ease your colleagues' professional life.

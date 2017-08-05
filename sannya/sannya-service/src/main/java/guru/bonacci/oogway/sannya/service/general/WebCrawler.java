@@ -16,20 +16,15 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import guru.bonacci.oogway.oracle.client.GemDTO;
+
 /**
  * Abstract class with general functionality for accessing web pages and
  * interpreting their content.
  * 
- * Illuminate: to supply or brighten with light; light up. to make lucid or
- * clear; throw light on (a subject). to decorate with lights, as in
- * celebration. to enlighten, as with knowledge. to make resplendent or
- * illustrious: A smile illuminated her face. to decorate (a manuscript, book,
- * etc.) with colors and gold or silver, as was often done in the Middle Ages.
- * 
- * Etymology: Late Middle English: from Latin illuminat- ‘illuminated’, from the
- * verb illuminare, from in- ‘upon’ + lumen, lumin- ‘light’.
+ * 'oogway's ugly looking code is in my subclasses'
  */
-public abstract class WebIlluminator {
+public abstract class WebCrawler {
 
 	/**
 	 * To not overly access our dear wisdom suppliers we keep an administration
@@ -37,15 +32,13 @@ public abstract class WebIlluminator {
 	 */
 	private Set<String> consultedWebPages = synchronizedSet(new HashSet<>());	
 	
-	public List<String> find(String... tags) {
+	public List<GemDTO> find(String... tags) {
 		return stream(tags)
 					.map(this::determineURL)
 					.filter(consultedWebPages::add) //returns false when present in set
 					.map(this::consultWeb)
 					.flatMap(Elements::stream)
-					.map(this::processElement)
-					.map(Element::text)
-					.map(this::processText)
+					.map(this::toGem)
 					.collect(toList());
 	}
 
@@ -64,25 +57,12 @@ public abstract class WebIlluminator {
 	protected abstract Elements consultWeb(String searchURL);
 
 	/**
-	 * Pre-process before retrieving text from the element
-	 * Override for specific processing behavior
+	 * Retrieving info from element
 	 * @param el
 	 * @return
 	 */
-	protected Element processElement(Element el) {
-		return el;
-	}
+	protected abstract GemDTO toGem(Element el);
 
-	/**
-	 * Post-process after retrieving text from the element
-	 * Override for specific processing behavior
-	 * @param str
-	 * @return
-	 */
-	protected String processText(String str) {
-		return str;
-	}
-	
 	/**
 	 * Method to facilitate testing
 	 */

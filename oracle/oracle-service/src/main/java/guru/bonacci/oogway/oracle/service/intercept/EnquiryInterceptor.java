@@ -20,9 +20,9 @@ public class EnquiryInterceptor {
 	@Autowired
 	private SannyaMessageProducer messageProducer;
 
-	@Before("@annotation(WatchMe) && args(searchString)")
+	@Before("@annotation(WatchMe) && args(searchString,..)")
 	public void spreadTheNews(JoinPoint joinPoint, String searchString) {
-		logger.info("Someone has asked you '" + searchString + "'");
+		logger.info("Someone asked '" + searchString + "'");
 		messageProducer.send(searchString);
 	}
 }

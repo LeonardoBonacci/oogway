@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.oracle.client.GemDTO;
 import guru.bonacci.oogway.sannya.service.filters.ProfanityFilter;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
 
@@ -22,12 +23,12 @@ public class CleaningAgent {
 	@Autowired
 	private ProfanityFilter profanityFilter;
 
-	public List<String> noMoreClutter(Sannyasin sannya, List<String> found) {
+	public List<GemDTO> noMoreClutter(Sannyasin sannya, List<GemDTO> found) {
 		Predicate<String> postfiltering = sannya.postfilteringStep().stream()
 															  		.reduce(p -> true, Predicate::and);		
 		return found.stream()
-			 .filter(postfiltering)
-			 .filter(profanityFilter)
+			 .filter(gem -> postfiltering.test(gem.getSaying()))
+			 .filter(gem -> profanityFilter.test(gem.getSaying()))
 			 .collect(toList());
 	}
 }

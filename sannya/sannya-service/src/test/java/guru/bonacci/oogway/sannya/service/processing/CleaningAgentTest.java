@@ -18,9 +18,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.oracle.client.GemDTO;
 import guru.bonacci.oogway.sannya.service.filters.ProfanityFilter;
-import guru.bonacci.oogway.sannya.service.goodreads.GoodReadsSeeker;
-import guru.bonacci.oogway.sannya.service.processing.CleaningAgent;
+import guru.bonacci.oogway.sannya.service.gr.GRSeeker;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
@@ -33,16 +33,16 @@ public class CleaningAgentTest {
 	ProfanityFilter profanityFilter;
 
 	@MockBean 
-	GoodReadsSeeker sannyasin;
+	GRSeeker sannyasin;
 
 	@Test
     public void shouldCleanSimple() {
 		when(sannyasin.postfilteringStep()).thenReturn(asList(i -> true));
 		when(profanityFilter.test("one")).thenReturn(true);
 
-		List<String> result = agent.noMoreClutter(sannyasin, asList("one" ,"two", "three"));
+		List<GemDTO> result = agent.noMoreClutter(sannyasin, asList(new GemDTO("one"), new GemDTO("two"), new GemDTO("three")));
 		assertThat(result, hasSize(1));
-		assertThat(result.get(0), is(equalTo("one")));
+		assertThat(result.get(0).getSaying(), is(equalTo("one")));
 	}
 	
 	@Test
@@ -50,7 +50,7 @@ public class CleaningAgentTest {
 		when(sannyasin.postfilteringStep()).thenReturn(asList(i -> i.equals("one") || i.equals("more than one") || i.equals("two"), i -> true));
 		when(profanityFilter.test(contains("one"))).thenReturn(true);
 
-		List<String> result = agent.noMoreClutter(sannyasin, asList("one", "more than one", "two", "three"));
+		List<GemDTO> result = agent.noMoreClutter(sannyasin, asList(new GemDTO("one"), new GemDTO("more than one"), new GemDTO("two"), new GemDTO("three")));
 		assertThat(result, hasSize(2));
 	}
 

@@ -41,39 +41,51 @@ public class FirstLineSupportServiceTest {
 	@Test
 	public void shouldGiveAnswer() {
 		IGem expected = new TestGem("some answer");
-		when(oracleService.consult(anyString())).thenReturn(Optional.of(expected));
+		when(oracleService.consult(anyString(), anyString())).thenReturn(Optional.of(expected));
 
-		assertThat(service.enquire("some input"), is(equalTo(expected.getEssence())));
+		assertThat(service.enquire("some input"), is(equalTo(expected.getSaying())));
 	}
 
 	@Test
 	public void shouldGivePostponingAnswer() {
 		String postponingAnswer = "wait a second..";
-		when(oracleService.consult(anyString())).thenReturn(Optional.empty());
+		when(oracleService.consult(anyString(), anyString())).thenReturn(Optional.empty());
 		when(postponer.saySomething()).thenReturn(postponingAnswer);
 
 		assertThat(service.enquire("some input"), is(equalTo(postponingAnswer)));
 	}
-	
+
 	static class TestGem implements IGem {
 
-		private String essence;
+		private String saying;
+
+		private String author;
 
 		public TestGem() {
 		}
 
-		public TestGem(String essence) {
-			this.essence = essence;
+		public TestGem(String saying) {
+			this.saying = saying;
 		}
 
 		@Override
-		public String getEssence() {
-			return essence;
+		public String getSaying() {
+			return saying;
 		}
 
 		@Override
-		public void setEssence(String essence) {
-			this.essence = essence;
+		public void setSaying(String saying) {
+			this.saying = saying;
+		}
+
+		@Override
+		public String getAuthor() {
+			return author;
+		}
+
+		@Override
+		public void setAuthor(String author) {
+			this.author = author;
 		}
 	}
 }

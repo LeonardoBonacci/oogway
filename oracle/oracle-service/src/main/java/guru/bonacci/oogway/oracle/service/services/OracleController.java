@@ -27,16 +27,18 @@ public class OracleController {
 	private GemRepository repo;
 
 	@RequestMapping(path = "/gems", method = GET)
-	public IGem search(@RequestParam("q") String q) {
+	public IGem search(	@RequestParam("q") String q, 
+						@RequestParam(value = "by", required = false) Optional<String> author) {
+		
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
-		Optional<Gem> gem = repo.consultTheOracle(q); 
+		Optional<Gem> gem = repo.consultTheOracle(q, author); 
 		return gem.isPresent() ? (IGem) gem.get() : null;
 	}	
 
 	@RequestMapping(path = "/backdoor", method = POST)
 	public void index(@RequestBody String input) {
 		logger.info("Receiving secret request to index: '" + input + "'");
-		repo.saveTheNewOnly(new Gem(input));
+		repo.saveTheNewOnly(new Gem(input, "anonymous"));
 	}
 	
 	@RequestMapping(path = "/version", method = GET)

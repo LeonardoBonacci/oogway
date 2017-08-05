@@ -15,12 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.oracle.client.GemDTO;
 import guru.bonacci.oogway.oracle.client.OracleMessageProducer;
-import guru.bonacci.oogway.sannya.service.goodreads.GoodReadsSeeker;
-import guru.bonacci.oogway.sannya.service.processing.CleaningAgent;
-import guru.bonacci.oogway.sannya.service.processing.ForePlayer;
-import guru.bonacci.oogway.sannya.service.processing.PitchforkManager;
-import guru.bonacci.oogway.sannya.service.processing.SannyasPicker;
+import guru.bonacci.oogway.sannya.service.gr.GRSeeker;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
@@ -33,7 +30,7 @@ public class PitchforkManagerTest {
 	SannyasPicker sannyasPicker;
 
 	@MockBean
-	GoodReadsSeeker sannyasin;
+	GRSeeker sannyasin;
 
 	@MockBean
 	ForePlayer forePlayer;
@@ -48,8 +45,8 @@ public class PitchforkManagerTest {
 	public void shouldJustRunThroughAllTheseMockCallsInThisNonMeaningfulTest() {
 		String input = "yet another beautiful day today";
 		String preprocessedInput = "another beautiful day";
-		List<String> found = asList("that", "is true", "beautiful stranger");
-		List<String> clutterless = asList("that", "true", "stranger");
+		List<GemDTO> found = asList(new GemDTO("that"), new GemDTO("is true"), new GemDTO("beautiful stranger"));
+		List<GemDTO> clutterless = asList(new GemDTO("that"), new GemDTO("true"), new GemDTO("stranger"));
 		
 		when(sannyasPicker.pickOne()).thenReturn(sannyasin);
 		when(forePlayer.play(sannyasin, input)).thenReturn(preprocessedInput);
@@ -57,6 +54,6 @@ public class PitchforkManagerTest {
 		when(cleaningAgent.noMoreClutter(sannyasin, found)).thenReturn(clutterless);
 		
 		manager.delegate(input);
-		verify(messageProducer, times(1)).save(clutterless);
+		verify(messageProducer, times(1)).toTheClouds(clutterless);
 	}
 }

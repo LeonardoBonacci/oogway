@@ -4,6 +4,7 @@ import static guru.bonacci.oogway.utils.MyListUtils.getRandom;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
+import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.time.LocalDateTime;
@@ -45,7 +46,8 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 		List<Gem> newOnes = stream(entities)
 									  .filter(gem -> !gemRepository.exists(gem.getId()))
 									  .peek(gem -> gem.setCreation(now))
-									  .peek(gem -> logger.info("About to gain wisdom: '" + gem.getEssence() + "'"))
+									  .peek(gem -> logger.info("About to gain wisdom: '" + gem.getSaying() + "'"))
+									  .peek(gem -> gem.setAuthor("TODO my by"))
 									  .collect(toList());
 		// strangely enough spring data or elasticsearch cannot deal with empty iterables
 		if (!newOnes.isEmpty())
@@ -54,14 +56,19 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 
 	@WatchMe // as spring data offers no proper hook to intercept search queries we do it the traditional way...
 	@Override
-	public Optional<Gem> consultTheOracle(String searchString) {
-		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchQuery(Gem.ESSENCE, searchString))
-				.build();
+	public Optional<Gem> consultTheOracle(String searchString, Optional<String> author) {
+		SearchQuery searchQuery = createQuery(searchString, author);
 		List<Gem> result = gemRepository.search(searchQuery).getContent();
 
 		if (logger.isDebugEnabled())
-			result.stream().map(Gem::getEssence).forEach(logger::debug);
+			result.stream().map(Gem::getSaying).forEach(logger::debug);
 
 		return getRandom(result);
+	}
+	
+	private SearchQuery createQuery(String searchString, Optional<String> authorOpt) {
+		NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder().withQuery(matchQuery(Gem.SAID, searchString));
+		authorOpt.ifPresent(author -> queryBuilder.withFilter(termQuery(Gem.AUTHOR, author)));
+		return queryBuilder.build();
 	}
 }

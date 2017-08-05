@@ -33,7 +33,7 @@ public class OracleControllerTest {
 	
 	@Test
 	public void shouldReturnNullOnConsult() throws Exception {
-		given(gemRepo.consultTheOracle("tell me the truth")).willReturn(Optional.empty());
+		given(gemRepo.consultTheOracle("tell me the truth", null)).willReturn(Optional.empty());
 
 		mvc.perform(get("/gems?q=tell me the truth"))
 			.andExpect(status().isOk())
@@ -41,11 +41,23 @@ public class OracleControllerTest {
 	}
 
 	@Test
-	public void shouldRecieveMessageOnConsult() throws Exception {
-		given(gemRepo.consultTheOracle("tell me the truth")).willReturn(Optional.of(new Gem("why should I?")));
+	public void shouldRecieveMessageOnQ() throws Exception {
+		given(gemRepo.consultTheOracle("tell me the truth", Optional.of("dummy")))
+			.willReturn(Optional.of(new Gem("why should I?", "dumb")));
 
-		mvc.perform(get("/gems?q=tell me the truth"))
+		mvc.perform(get("/gems?q=tell me the truth&by=dummy"))
 			.andExpect(status().isOk())
-			.andExpect(content().json("{'essence':'why should I?'}")); 
+			.andExpect(content().json("{'saying':'why should I?', 'author':'dumb'}")); 
 	}
+	
+	@Test
+	public void shouldRecieveMessageOnQAndBy() throws Exception {
+		given(gemRepo.consultTheOracle("tell me the truth", Optional.of("dummy")))
+			.willReturn(Optional.of(new Gem("why should I?", "dumb")));
+
+		mvc.perform(get("/gems?q=tell me the truth&by=dummy"))
+			.andExpect(status().isOk())
+			.andExpect(content().json("{'saying':'why should I?', 'author':'dumb'}")); 
+	}
+
 }

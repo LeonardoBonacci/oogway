@@ -6,6 +6,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +39,19 @@ public class EnquiryInterceptorTest {
 	JmsTemplate jms;
 
 	@Test
-	public void shouldInterceptTheConsultMethod() {
+	public void shouldInterceptTheConsultMethodWithoutAuthor() {
 		String searchString = "something completely different";
-		repo.consultTheOracle(searchString);
+		repo.consultTheOracle(searchString, null);
 
 		verify(jms, times(1)).send(anyString(), any(MessageCreator.class));
 	}
+
+	@Test
+	public void shouldInterceptTheConsultMethodWithAuthor() {
+		String searchString = "something completely different";
+		repo.consultTheOracle(searchString, Optional.of("author"));
+
+		verify(jms, times(1)).send(anyString(), any(MessageCreator.class));
+	}
+
 }

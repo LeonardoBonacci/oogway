@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannya.service.goodreads;
+package guru.bonacci.oogway.sannya.service.bq;
 
 
 import static java.util.Arrays.asList;
@@ -11,16 +11,20 @@ import java.util.function.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.oracle.client.GemDTO;
 import guru.bonacci.oogway.sannya.service.filters.LengthFilter;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
 import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
 import guru.bonacci.oogway.sannya.service.steps.KeyPhraser;
+import guru.bonacci.oogway.sannya.service.steps.Lemmatizor;
 
 /**
- * I like GoodReads! It was the first Sannyasin.
+ * They say: Share our extensive collection of famous quotes by authors,
+ * celebrities, newsmakers, and more. Enjoy our Quotes of the Day on the web,
+ * Facebook, and blogs.
  */
 @Component
-public class GoodReadsSeeker implements Sannyasin {
+public class BQSeeker implements Sannyasin {
 
 	@Autowired
 	private CharacterGuardian characterGuardian;
@@ -29,14 +33,17 @@ public class GoodReadsSeeker implements Sannyasin {
 	private KeyPhraser keyPhraser;
 
 	@Autowired
+	private Lemmatizor lemmatizor;
+
+	@Autowired
 	private LengthFilter lengthFilter;
 
 	@Autowired
-	private GoodReadsIlluminator finder;
+	private BQCrawler finder;
 
 	@Override
-	public List<Function<String,String>> preprocessingSteps() {
-		return asList(characterGuardian, keyPhraser);
+	public List<Function<String, String>> preprocessingSteps() {
+		return asList(characterGuardian, keyPhraser, lemmatizor);
 	}
 
 	@Override
@@ -45,7 +52,7 @@ public class GoodReadsSeeker implements Sannyasin {
 	}
 
 	@Override
-	public List<String> seek(String tagsAsString) {
+	public List<GemDTO> seek(String tagsAsString) {
 		String[] tags = split(tagsAsString);
 		return finder.find(tags);
 	}

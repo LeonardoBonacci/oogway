@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannya.service.goodreads;
+package guru.bonacci.oogway.sannya.service.gr;
 
 
 import static org.apache.commons.lang3.RandomUtils.nextInt;
@@ -14,19 +14,20 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.oracle.client.GemDTO;
 import guru.bonacci.oogway.sannya.service.general.PageCache;
-import guru.bonacci.oogway.sannya.service.general.WebIlluminator;
+import guru.bonacci.oogway.sannya.service.general.WebCrawler;
 
 /**
  * Most popular quote:
  * “Don't cry because it's over, smile because it happened.” ― Dr. Seuss
  */
 @Component
-public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
+public class GRCrawler extends WebCrawler implements PageCache {
 
 	private final Logger logger = getLogger(this.getClass());
 
-	@Value("${web.url.goodreads:http://www.goodreads.com/quotes/tag/}")
+	@Value("${web.url.gr:http://www.goodreads.com/quotes/tag/}")
 	private String url;
 
 	@Override
@@ -73,14 +74,17 @@ public class GoodReadsIlluminator extends WebIlluminator implements PageCache {
 	}
 
 	@Override
-	public Element processElement(Element el) {
-		for (Element e : el.children()) 
-			e.remove();
-		return el;
+	public GemDTO toGem(Element el) {
+		String quote = stripText(el.ownText());
+
+		Elements els = el.select("a.authorOrTitle");
+		String author = els.size() > 0 ? els.first().ownText() : null;
+		
+		return new GemDTO(quote, author);
 	}
 
-	@Override
-	public String processText(String str) {
+	private String stripText(String str) {
+		str = str.replace(" ― ,", "");
 		return str.substring(str.indexOf("“") + 1, str.lastIndexOf("”"));
 	}
 }

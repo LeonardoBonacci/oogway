@@ -21,7 +21,7 @@ import guru.bonacci.oogway.web.utils.IPCatcher;
 // The test resource property overrides some of the web.properties that is
 // read by the default configuration WebConfig
 @TestPropertySource("classpath:web-test.properties")
-public class EnquiryInterceptorTest {
+public class BigBrotherTest {
 
 	@Autowired
 	FirstLineSupportService service;

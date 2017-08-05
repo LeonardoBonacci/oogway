@@ -24,7 +24,7 @@ import guru.bonacci.oogway.oracle.client.OracleClient.RESTGem;
 @SpringBootTest(webEnvironment = NONE, properties = {
 	"oracle.service.application.name:not-used"
 })
-public class OracleRestClientTest {
+public class OracleClientTest {
 
 	@Autowired
 	OracleClient client;

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import guru.bonacci.oogway.sannya.service.events.SannyaGateway;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
 import guru.bonacci.oogway.secretdomain.GemDTO;
-import guru.bonacci.oogway.secretdomain.GenericEvent;
 
 /**
  * A manager alone cannot perform all the tasks assigned to him. In order to
@@ -52,10 +51,9 @@ public class PitchforkManager {
 		String preprocessedInput = forePlayer.play(sannya, input);
 		List<GemDTO> found = sannya.seek(preprocessedInput);
 		List<GemDTO> cleaned = cleaningAgent.noMoreClutter(sannya, found);
-		cleaned.forEach(wisewords -> {
-			//TODO send GEMs
-			logger.info("Sharing my words '" + wisewords + "'");
-			gateway.send(new GenericEvent(wisewords.getSaying()));
+		cleaned.forEach(gem -> {
+			logger.info("Sharing my newly acquired wisdom '" + gem + "'");
+			gateway.send(gem);
 		});
 	}
 }

@@ -5,11 +5,11 @@ import static guru.bonacci.oogway.sannya.service.events.SannyaEventChannels.SANN
 import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.MessagingGateway;
 
-import guru.bonacci.oogway.secretdomain.GenericEvent;
+import guru.bonacci.oogway.secretdomain.GemDTO;
 
 @MessagingGateway
 public interface SannyaGateway {
 	
 	@Gateway(requestChannel = SANNYA)
-	void send(GenericEvent event);
+	void send(GemDTO event);
 }

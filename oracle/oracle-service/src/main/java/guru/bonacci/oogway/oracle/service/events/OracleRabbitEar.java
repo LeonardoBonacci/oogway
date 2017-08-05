@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.oracle.service.persistence.Gem;
 import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
-import guru.bonacci.oogway.secretdomain.GenericEvent;
+import guru.bonacci.oogway.secretdomain.GemDTO;
 
 @Component
 public class OracleRabbitEar {
@@ -21,8 +21,8 @@ public class OracleRabbitEar {
 	private GemRepository repo;
 
     @StreamListener(SANNYA)
-	public void onMessage(GenericEvent event) {
+	public void onMessage(GemDTO event) {
 		logger.info("Receiving an extra bit of knowledge: '" + event + "'");
-		repo.saveTheNewOnly(new Gem(event.getContent()));
+		repo.saveTheNewOnly(new Gem(event.getSaying(), event.getAuthor()));
 	}
 }

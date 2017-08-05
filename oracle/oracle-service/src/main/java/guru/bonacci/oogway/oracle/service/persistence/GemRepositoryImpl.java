@@ -47,7 +47,6 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 									  .filter(gem -> !gemRepository.exists(gem.getId()))
 									  .peek(gem -> gem.setCreation(now))
 									  .peek(gem -> logger.info("About to gain wisdom: '" + gem.getSaying() + "'"))
-									  .peek(gem -> gem.setAuthor("TODO my by"))
 									  .collect(toList());
 		// strangely enough spring data or elasticsearch cannot deal with empty iterables
 		if (!newOnes.isEmpty())

@@ -38,9 +38,10 @@ public class OracleClientTest {
 	public void shouldAnswerQ() {
 		String question = "how much do you charge per hour?";
 		String answer = "it's free";
-		doReturn(new GemDTO(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}", GemDTO.class, question);
+		
+		doReturn(new GemDTO(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}", GemDTO.class, question, null);
 
-		Optional<IGem> gem = client.consult(question, answer);
+		Optional<IGem> gem = client.consult(question);
 		assertThat(gem.get().getSaying(), is(equalTo(answer)));
 	}
 	
@@ -49,9 +50,10 @@ public class OracleClientTest {
 		String question = "how much do you charge per hour?";
 		String by = "whom";
 		String answer = "it's free";
-		doReturn(new GemDTO(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}&?by={by}", GemDTO.class, question, by);
 
-		Optional<IGem> gem = client.consult(question, answer);
+		doReturn(new GemDTO(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}&by={by}", GemDTO.class, question, by);
+
+		Optional<IGem> gem = client.consult(question, by);
 		assertThat(gem.get().getSaying(), is(equalTo(answer)));
 	}
 }

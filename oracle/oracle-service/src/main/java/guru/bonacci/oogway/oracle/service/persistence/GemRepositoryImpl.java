@@ -34,7 +34,7 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 	/**
 	 * ElasticSearch is not a writer. Like most of us, it reads better than it
 	 * writes. A simple repo.save() will perform an unnecessary update when the
-	 * document already exists. Therefore, this slight cumbersome workaround for
+	 * document already exists. Therefore, this slightly cumbersome workaround for
 	 * when numbers get large.
 	 */
 	@Override

@@ -87,5 +87,4 @@ public class BQScraperTest {
 		Integer nrOfPages = finder.getNrOfPages("the aaaaa url");
 		assertThat(nrOfPages, is(equalTo(1)));
 	}
-
 }

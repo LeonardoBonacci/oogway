@@ -9,6 +9,8 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.client.OracleClient;
+import guru.bonacci.oogway.shareddomain.GemDTO;
 import guru.bonacci.oogway.shareddomain.IGem;
 import guru.bonacci.oogway.web.cheaters.Postponer;
 
@@ -33,6 +36,9 @@ public class FirstLineSupportServiceTest {
 	@MockBean
 	Postponer postponer;
 
+	@MockBean
+	HttpServletRequest request;
+	
 	@Test
 	public void shouldGiveEmptyStringAnswer() {
 		assertThat(service.enquire(""), is(equalTo("No question no answer..")));
@@ -40,8 +46,8 @@ public class FirstLineSupportServiceTest {
 
 	@Test
 	public void shouldGiveAnswer() {
-		IGem expected = new TestGem("some answer");
-		when(oracleService.consult(anyString(), anyString())).thenReturn(Optional.of(expected));
+		IGem expected = new GemDTO("some answer");
+		when(oracleService.consult(anyString())).thenReturn(Optional.of(expected));
 
 		assertThat(service.enquire("some input"), is(equalTo(expected.getSaying())));
 	}
@@ -49,43 +55,9 @@ public class FirstLineSupportServiceTest {
 	@Test
 	public void shouldGivePostponingAnswer() {
 		String postponingAnswer = "wait a second..";
-		when(oracleService.consult(anyString(), anyString())).thenReturn(Optional.empty());
+		when(oracleService.consult(anyString())).thenReturn(Optional.empty());
 		when(postponer.saySomething()).thenReturn(postponingAnswer);
 
 		assertThat(service.enquire("some input"), is(equalTo(postponingAnswer)));
-	}
-
-	static class TestGem implements IGem {
-
-		private String saying;
-
-		private String author;
-
-		public TestGem() {
-		}
-
-		public TestGem(String saying) {
-			this.saying = saying;
-		}
-
-		@Override
-		public String getSaying() {
-			return saying;
-		}
-
-		@Override
-		public void setSaying(String saying) {
-			this.saying = saying;
-		}
-
-		@Override
-		public String getAuthor() {
-			return author;
-		}
-
-		@Override
-		public void setAuthor(String author) {
-			this.author = author;
-		}
 	}
 }

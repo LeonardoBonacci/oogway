@@ -52,7 +52,6 @@ public class SentimentIntegrationTest {
 	
 	@SpringBootApplication
 	public static class TestApp {
-
 		public static void main(String[] args) {
 			SpringApplication.run(TestApp.class, args);
 		}

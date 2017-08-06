@@ -11,12 +11,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.spectre.geo.service.ip.IPologist;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
+@ActiveProfiles("dev")
 public class IPologistTest {
 
     @Autowired

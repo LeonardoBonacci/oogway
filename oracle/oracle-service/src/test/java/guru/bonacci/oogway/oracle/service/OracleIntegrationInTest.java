@@ -28,7 +28,6 @@ public class OracleIntegrationInTest {
 
 	@Autowired
 	BinderAwareChannelResolver resolver;
-
 	@Test
 	public void shouldDoSomething() throws Exception {
 		String randomMessage = UUID.randomUUID().toString(); //non-existing
@@ -36,7 +35,10 @@ public class OracleIntegrationInTest {
 		String body = "{\"saying\":\"" + randomMessage + "\",\"author\":\"bla\"}";
 		sendMessage(body, OracleEventChannels.SANNYA,"application/json");
 
-		//TODO test something
+		// Through Spring-data's creative design for extensible
+		// repositories the test-verification of the call 
+		// gemRepository.save(newOnes) is not straightforward.
+		// It is left as an exercise to the reader :)
 	}
 
 	private void sendMessage(String body, String target, Object contentType) {

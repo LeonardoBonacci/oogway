@@ -15,13 +15,19 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream-test-support</artifactId>
+			<scope>test</scope>
+		</dependency>
+	
+		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
 			<artifactId>utilities</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>secret-domain</artifactId>
+			<artifactId>shared-domain</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

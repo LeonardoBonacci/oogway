@@ -11,8 +11,8 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import guru.bonacci.oogway.secretdomain.GemDTO;
-import guru.bonacci.oogway.secretdomain.IGem;
+import guru.bonacci.oogway.shareddomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.IGem;
 
 /**
  * Talks to the Oracle via REST

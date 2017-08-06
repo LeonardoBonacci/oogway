@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.oracle.service.persistence.Gem;
 import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
-import guru.bonacci.oogway.secretdomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemDTO;
 
 @Component
 public class OracleRabbitEar {

@@ -16,7 +16,7 @@ import guru.bonacci.oogway.sannya.service.general.Sannyasin;
 import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
 import guru.bonacci.oogway.sannya.service.steps.KeyPhraser;
 import guru.bonacci.oogway.sannya.service.steps.Lemmatizor;
-import guru.bonacci.oogway.secretdomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemDTO;
 
 /**
  * They say: Share our extensive collection of famous quotes by authors,

@@ -5,7 +5,7 @@ import static guru.bonacci.oogway.sannya.service.events.SannyaEventChannels.SANN
 import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.MessagingGateway;
 
-import guru.bonacci.oogway.secretdomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemDTO;
 
 @MessagingGateway
 public interface SannyaGateway {

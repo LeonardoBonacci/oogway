@@ -16,7 +16,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>secret-domain</artifactId>
+			<artifactId>shared-domain</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

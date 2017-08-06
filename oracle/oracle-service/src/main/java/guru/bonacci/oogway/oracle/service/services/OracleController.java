@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import guru.bonacci.oogway.oracle.service.persistence.Gem;
 import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
-import guru.bonacci.oogway.secretdomain.GemDTO;
-import guru.bonacci.oogway.secretdomain.IGem;
+import guru.bonacci.oogway.shareddomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.IGem;
 
 @RestController
 public class OracleController {

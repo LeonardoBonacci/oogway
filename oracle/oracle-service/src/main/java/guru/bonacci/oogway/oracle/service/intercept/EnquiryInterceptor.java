@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.oracle.service.events.OracleGateway;
-import guru.bonacci.oogway.secretdomain.GenericEvent;
+import guru.bonacci.oogway.shareddomain.GenericEvent;
 
 @Aspect
 @Component

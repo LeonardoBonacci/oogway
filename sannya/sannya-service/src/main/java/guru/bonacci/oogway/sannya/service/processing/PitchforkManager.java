@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.events.SannyaGateway;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
-import guru.bonacci.oogway.secretdomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemDTO;
 
 /**
  * A manager alone cannot perform all the tasks assigned to him. In order to

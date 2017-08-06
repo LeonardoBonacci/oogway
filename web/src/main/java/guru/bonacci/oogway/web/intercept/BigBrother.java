@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.secretdomain.COMINT;
+import guru.bonacci.oogway.shareddomain.COMINT;
 import guru.bonacci.oogway.web.events.SpectreGateway;
 import guru.bonacci.oogway.web.utils.IPCatcher;
 

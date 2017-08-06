@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.general.PageCache;
 import guru.bonacci.oogway.sannya.service.general.WebScraper;
-import guru.bonacci.oogway.secretdomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemDTO;
 
 /**
  * Most popular quote:

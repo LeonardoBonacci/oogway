@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import guru.bonacci.oogway.secretdomain.GenericEvent;
+import guru.bonacci.oogway.shareddomain.GenericEvent;
 import guru.bonacci.oogway.spectre.geo.service.event.EnrichmentGateway;
 import guru.bonacci.oogway.spectre.geo.service.ip.IIPologist;
 

@@ -9,7 +9,7 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.processing.PitchforkManager;
-import guru.bonacci.oogway.secretdomain.GenericEvent;
+import guru.bonacci.oogway.shareddomain.GenericEvent;
 
 @Component
 public class SannyaRabbitEar {

@@ -15,7 +15,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import guru.bonacci.oogway.secretdomain.IGem;
+import guru.bonacci.oogway.shareddomain.IGem;
 
 /**
  * A gem is a cut and polished precious stone or pearl fine enough for

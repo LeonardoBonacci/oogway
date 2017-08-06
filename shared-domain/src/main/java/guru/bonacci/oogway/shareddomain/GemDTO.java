@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.secretdomain;
+package guru.bonacci.oogway.shareddomain;
 
 import static java.lang.String.format;
 

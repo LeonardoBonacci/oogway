@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import guru.bonacci.oogway.secretdomain.COMINT;
+import guru.bonacci.oogway.shareddomain.COMINT;
 
 @RestController
 public class GeoController {

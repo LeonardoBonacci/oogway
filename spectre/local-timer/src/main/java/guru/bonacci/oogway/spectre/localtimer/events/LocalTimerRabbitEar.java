@@ -7,7 +7,7 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.secretdomain.GenericEvent;
+import guru.bonacci.oogway.shareddomain.GenericEvent;
 import guru.bonacci.oogway.spectre.localtimer.services.SpecRepository;
 
 @Component

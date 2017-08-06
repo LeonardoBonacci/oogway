@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.filters.ProfanityFilter;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
-import guru.bonacci.oogway.secretdomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemDTO;
 
 /**
  * “Every aspect of your life is anchored energetically in your living space, so

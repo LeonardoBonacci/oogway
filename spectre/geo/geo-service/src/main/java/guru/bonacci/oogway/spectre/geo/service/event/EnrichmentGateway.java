@@ -5,7 +5,7 @@ import static guru.bonacci.oogway.spectre.geo.service.event.GeoEventChannels.ENR
 import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.MessagingGateway;
 
-import guru.bonacci.oogway.secretdomain.GenericEvent;
+import guru.bonacci.oogway.shareddomain.GenericEvent;
 
 @MessagingGateway
 public interface EnrichmentGateway {

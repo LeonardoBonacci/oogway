@@ -5,7 +5,7 @@ import static guru.bonacci.oogway.web.events.WebEventChannels.SPECTRE;
 import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.MessagingGateway;
 
-import guru.bonacci.oogway.secretdomain.COMINT;
+import guru.bonacci.oogway.shareddomain.COMINT;
 
 
 @MessagingGateway

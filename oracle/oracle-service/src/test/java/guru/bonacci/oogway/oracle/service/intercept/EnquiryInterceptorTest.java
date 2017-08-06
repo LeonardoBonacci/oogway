@@ -1,14 +1,27 @@
 package guru.bonacci.oogway.oracle.service.intercept;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
+import java.util.Optional;
+
+import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.oracle.service.events.OracleGateway;
 import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
+import guru.bonacci.oogway.shareddomain.GenericEvent;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
@@ -21,25 +34,27 @@ public class EnquiryInterceptorTest {
 	@Autowired
 	GemRepository repo;
 
-	@Autowired
-	EnquiryInterceptor enquiryInterceptor;
+	@MockBean
+	OracleGateway gateway;
 
-//	@MockBean
-//TODO	JmsTemplate jms;
+	@Captor
+	ArgumentCaptor<GenericEvent> captor;
+	
+	@Test
+	public void shouldInterceptTheConsultMethodWithoutAuthor() {
+		String searchString = "something completely different";
+		repo.consultTheOracle(searchString, Optional.empty());
 
-//	@Test
-//	public void shouldInterceptTheConsultMethodWithoutAuthor() {
-//		String searchString = "something completely different";
-//		repo.consultTheOracle(searchString, null);
-//
-//		verify(jms, times(1)).send(anyString(), any(MessageCreator.class));
-//	}
-//
-//	@Test
-//	public void shouldInterceptTheConsultMethodWithAuthor() {
-//		String searchString = "something completely different";
-//		repo.consultTheOracle(searchString, Optional.of("author"));
-//
-//		verify(jms, times(1)).send(anyString(), any(MessageCreator.class));
-//	}
+		verify(gateway, times(1)).send(captor.capture());
+		assertThat(captor.getValue().getContent(), is(equalTo(searchString)));
+	}
+
+	@Test
+	public void shouldInterceptTheConsultMethodWithAuthor() {
+		String searchString = "something completely different";
+		repo.consultTheOracle(searchString, Optional.of("some author"));
+
+		verify(gateway, times(1)).send(captor.capture());
+		assertThat(captor.getValue().getContent(), is(equalTo(searchString)));
+	}
 }

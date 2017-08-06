@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.web;
+package guru.bonacci.oogway.oracle.service;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -12,21 +12,23 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.messaging.Message;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import guru.bonacci.oogway.web.events.WebEventChannels;
+import guru.bonacci.oogway.oracle.service.events.OracleEventChannels;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
+@TestPropertySource("classpath:oracle-test.properties")
 @AutoConfigureMockMvc
-public class WebIntegrationTest {
+public class OracleIntegrationOutTest {
 
 	@Autowired
 	MockMvc mvc;
 
 	@Autowired
-    WebEventChannels channels;
+    OracleEventChannels channels;
 	
 	@Autowired
 	MessageCollector messageCollector;
@@ -34,11 +36,10 @@ public class WebIntegrationTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void shouldSendMessageAfterInterception() throws Exception {
-		String localIP = "127.0.0.1";
-		String input = "The art of living is more like wrestling than dancing.";
-		mvc.perform(get("/consult?q=" + input));
+		String q = "The art of living is more like wrestling than dancing.";
+		mvc.perform(get("/gems?q=" + q));
 		
-		Message<String> received = (Message<String>) messageCollector.forChannel(channels.spectreChannel()).poll();
-		assertThat(received.getPayload(), equalTo("{\"ip\":\"" + localIP + "\",\"message\":\"" + input + "\"}"));
+		Message<String> received = (Message<String>) messageCollector.forChannel(channels.oracleChannel()).poll();
+		assertThat(received.getPayload(), equalTo("{\"content\":\"" + q + "\"}"));
 	}
 }

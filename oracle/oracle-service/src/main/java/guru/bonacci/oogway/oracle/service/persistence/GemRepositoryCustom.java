@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GemRepositoryCustom {
 	
-	void saveTheNewOnly(Gem... persistedGems);
+	void saveTheNewOnly(Gem... gems);
 	
 	Optional<Gem> consultTheOracle(String searchString, Optional<String> author);
 }

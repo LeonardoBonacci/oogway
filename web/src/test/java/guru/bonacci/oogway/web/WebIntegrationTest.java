@@ -26,7 +26,7 @@ public class WebIntegrationTest {
 	MockMvc mvc;
 
 	@Autowired
-    WebEventChannels channel;
+    WebEventChannels channels;
 	
 	@Autowired
 	MessageCollector messageCollector;
@@ -38,7 +38,7 @@ public class WebIntegrationTest {
 		String input = "The art of living is more like wrestling than dancing.";
 		mvc.perform(get("/consult?q=" + input));
 		
-		Message<String> received = (Message<String>) messageCollector.forChannel(channel.spectreChannel()).poll();
+		Message<String> received = (Message<String>) messageCollector.forChannel(channels.spectreChannel()).poll();
 		assertThat(received.getPayload(), equalTo("{\"ip\":\"" + localIP + "\",\"message\":\"" + input + "\"}"));
 	}
 }

@@ -30,7 +30,7 @@ public class GeoService {
 
 		try {
 			Thread.sleep(3000);
-			gateway.send(new GenericEvent(uuid.toString()));
+//			gateway.send(new GenericEvent(uuid.toString()));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

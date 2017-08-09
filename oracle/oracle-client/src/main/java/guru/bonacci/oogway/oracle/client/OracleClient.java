@@ -46,7 +46,7 @@ public class OracleClient {
 		IGem gem = null; 
 		try {
 			gem = restTemplate.getForObject(serviceUrl + "/gems" + params, GemDTO.class, searchString, by);
-		} catch(java.lang.IllegalStateException ise) {
+		} catch(Exception ise) {
 			logger.error("Help!!! Can't reach the oracle...", ise);	
 		}
 		return Optional.ofNullable(gem);

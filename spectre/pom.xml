@@ -10,8 +10,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>geo</module>
-    <module>local-timer</module>
-    <module>sentiment</module>
-  </modules>
+		<module>local-timer</module>
+		<module>sentiment</module>
+  	</modules>
 </project>

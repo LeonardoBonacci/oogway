@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.shareddomain.COMINT;
 import guru.bonacci.oogway.web.events.SpectreGateway;
+import guru.bonacci.oogway.web.ip.IIPologist;
 import guru.bonacci.oogway.web.utils.IPCatcher;
 
 @Aspect
@@ -23,11 +24,15 @@ public class BigBrother {
 	public IPCatcher iPCatcher;
 
 	@Autowired
+	private IIPologist ipologist;
+
+	@Autowired
     private SpectreGateway gateway;
 
 	@Before("@annotation(WatchMe) && args(searchString)")
 	public void spreadTheNews(JoinPoint joinPoint, String searchString) {
-		String ip = iPCatcher.getClientIp();
+		String ip = ipologist.checkUp(iPCatcher.getClientIp());
+		
 		logger.info(ip + " said '" + searchString + "'");
 		gateway.send(new COMINT(ip, searchString));
 	}

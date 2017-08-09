@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.spectre.geo.service.ip;
+package guru.bonacci.oogway.web.ip;
 
 public interface IIPologist {
 

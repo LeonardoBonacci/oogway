@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.spectre.geo.service.ip;
+package guru.bonacci.oogway.web.ip;
 
 import static java.util.Arrays.asList;
 import static org.slf4j.LoggerFactory.getLogger;

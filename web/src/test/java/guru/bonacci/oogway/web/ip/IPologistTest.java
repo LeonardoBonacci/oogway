@@ -1,20 +1,21 @@
-package guru.bonacci.oogway.spectre.geo.service.ip;
+package guru.bonacci.oogway.web.ip;
 
+import static guru.bonacci.oogway.web.ip.IPologist.LOCAL_IP_1;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
-import static guru.bonacci.oogway.spectre.geo.service.ip.IPologist.LOCAL_IP_1;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import guru.bonacci.oogway.spectre.geo.service.ip.IPologist;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
@@ -23,6 +24,9 @@ public class IPologistTest {
 
     @Autowired
     IPologist ipologist;
+
+	@MockBean
+	HttpServletRequest request;
 
     @Test
     public void shouldReturnRandomIpWhenLocal() {

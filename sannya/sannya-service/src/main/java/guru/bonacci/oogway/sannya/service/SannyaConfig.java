@@ -20,8 +20,7 @@ import guru.bonacci.oogway.sannya.service.events.SannyaEventChannels;
 public class SannyaConfig {
 
 	@Bean
-	public StanfordCoreNLP LemmatizatorPipeline() {
-		// Create StanfordCoreNLP object properties, with POS tagging
+	public StanfordCoreNLP lemmatizatorPipeline() {
 		Properties props = new Properties();
 		props.put("annotators", "tokenize, ssplit, pos, lemma");
 		return new StanfordCoreNLP(props);

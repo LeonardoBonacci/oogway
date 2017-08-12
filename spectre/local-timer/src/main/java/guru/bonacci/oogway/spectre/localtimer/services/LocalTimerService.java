@@ -32,14 +32,13 @@ public class LocalTimerService {
 	private String username;
 	
 	public void enrich(String id) {
-		Spec spec = repo.findOne(id);
-
 		try {
+			// Too lazy for refined error handling today...
+			Spec spec = repo.findOne(id);
 			String q = searchQuery.replace("#lat#", String.valueOf(spec.geoip.latitude))
 								  .replace("#lng#", String.valueOf(spec.geoip.longitude))
 								  .replace("#username#", username);
 
-			// ...and gross exception handling
 			@SuppressWarnings("unchecked")
 			Map<String,Object> enrichmentData = restTemplate.getForObject(serviceURL + q, Map.class);
 			logger.debug(enrichmentData.toString());

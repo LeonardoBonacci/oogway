@@ -16,6 +16,9 @@ public class Spec {
 	@Id
 	public String id;
 
+	@Field(type = FieldType.String)
+	public String message;
+
 	@Field(type = FieldType.Nested)
 	public Geoip geoip;
 
@@ -35,5 +38,4 @@ public class Spec {
 		@Field(type = FieldType.Double)
 		public Double longitude;
 	}
-
 }

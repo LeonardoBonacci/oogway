@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannya.service;
+package guru.bonacci.oogway.spectre.sentiment;
 
 import java.util.Properties;
 
@@ -10,12 +10,12 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 
 @Configuration
 @ComponentScan
-public class SannyasTestConfig {
+public class SentimentTestConfig {
 
 	@Bean
-	public StanfordCoreNLP lemmatizatorPipeline() {
+	public StanfordCoreNLP sentimentPipeline() {
 		Properties props = new Properties();
-		props.put("annotators", "tokenize, ssplit, pos, lemma");
+		props.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
 		return new StanfordCoreNLP(props);
 	}
 }

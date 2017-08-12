@@ -2,6 +2,9 @@ package guru.bonacci.oogway.spectre.localtimer;
 
 
 import static java.util.Collections.singletonMap;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.messaging.MessageHeaders.CONTENT_TYPE;
@@ -10,9 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import org.elasticsearch.client.Client;
-import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,40 +28,38 @@ import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.spectre.localtimer.events.LocalTimerEventChannels;
-import guru.bonacci.oogway.spectre.secretpersistence.Spec;
-import guru.bonacci.oogway.spectre.secretpersistence.SpecRepository;
+import guru.bonacci.oogway.spectre.secretpersistence.LocalTimerSpec;
+import guru.bonacci.oogway.spectre.secretpersistence.LocalTimerSpecRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT, properties = {
-	"geo.name.username=voldemort"		
+	"geo.name.username=voldemort",		
+	"spring.data.elasticsearch.properties.path.home=foo/embedded",		
+	"spring.data.elasticsearch.cluster-name=",
+	"spring.data.elasticsearch.cluster-nodes="
 })
-//A little hack to avoid creating profiles at this moment :)
-//The test resource property overrides some of the secret-persistence.properties that is
-//read by the default configuration SecretPersistenceConfig
-@TestPropertySource("classpath:secret-persistence-test.properties")
 public class LocalTimerIntegrationTest {
 
-	String uuid;
-	
 	@Autowired
 	BinderAwareChannelResolver resolver;
 
 	@Autowired 
-	SpecRepository repo;
+	LocalTimerSpecRepository repo;
 
 	@MockBean
 	RestTemplate rest;
+
+	String uuid;
 
 	@Before
 	public void init() {
 		uuid = UUID.randomUUID().toString();
 		
-		Spec spec = new Spec();
+		LocalTimerSpec spec = new LocalTimerSpec();
 		spec.id = uuid;
 		spec.geoip = spec.new Geoip(1.1, 2.2);
 		repo.save(spec);
@@ -83,7 +81,8 @@ public class LocalTimerIntegrationTest {
 		String body = "{\"content\":\"" + uuid + "\"}";
 		sendMessage(body, LocalTimerEventChannels.ENRICHMENT, "application/json");
 
-		//TODO retrieve and check value
+		LocalTimerSpec persisted = repo.findOne(uuid);
+		assertThat(persisted.localtimer.get("a"), is(equalTo("is not b")));
 	}
 
 	private void sendMessage(String body, String target, Object contentType) {

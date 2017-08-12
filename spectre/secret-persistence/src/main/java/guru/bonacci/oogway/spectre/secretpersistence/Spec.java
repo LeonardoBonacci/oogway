@@ -20,18 +20,13 @@ public class Spec {
 	public String message;
 
 	@Field(type = FieldType.Nested)
-	public Geoip geoip;
+	public Geoip geoip = new Geoip();
 
 	// Define what you need...
-	public class Geoip {
+	public static class Geoip {
 
 		public Geoip() {}
 
-		public Geoip(Double lat, Double lon) {
-			latitude = lat;
-			longitude = lon;
-		}
-		
 		@Field(type = FieldType.Double)
 		public Double latitude;
 

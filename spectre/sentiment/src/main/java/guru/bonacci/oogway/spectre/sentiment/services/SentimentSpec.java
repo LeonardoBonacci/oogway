@@ -5,6 +5,9 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import guru.bonacci.oogway.spectre.secretpersistence.Spec;
 
+/**
+ * Specific fields for sentiment
+ */
 public class SentimentSpec extends Spec {
 
 	@Field(type = FieldType.String)

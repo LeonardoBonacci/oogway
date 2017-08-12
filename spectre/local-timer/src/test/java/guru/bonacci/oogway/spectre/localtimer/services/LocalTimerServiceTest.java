@@ -29,9 +29,6 @@ import guru.bonacci.oogway.spectre.secretpersistence.SpecRepository;
 @SpringBootTest(webEnvironment = NONE, properties = {
 	"geo.name.username=voldemort"		
 })
-//A little hack to avoid creating profiles at this moment :)
-//The test resource property overrides some of the secret-persisence.properties that is
-//read by the default configuration SecretPersistenceConfig
 @TestPropertySource("classpath:secret-persistence-test.properties")
 public class LocalTimerServiceTest {
 
@@ -48,7 +45,8 @@ public class LocalTimerServiceTest {
 	public void shouldAddData() throws Exception {
 		Spec spec = new Spec();
 		spec.id = "ID";
-		spec.geoip = spec.new Geoip(1.1, 2.2);
+		spec.geoip.latitude = 1.1;
+		spec.geoip.longitude = 2.2;
 		when(repo.findOne(spec.id)).thenReturn(spec);
 
 		Map<String,Object> enrichmentData = new HashMap<>();

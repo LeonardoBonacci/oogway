@@ -54,6 +54,14 @@
 			<artifactId>stanford-corenlp</artifactId>
 			<classifier>models</classifier>
 		</dependency>
+		
+		<dependency>
+			<groupId>guru.bonacci.oogway</groupId>
+			<artifactId>secret-persistence</artifactId>
+			<type>test-jar</type>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

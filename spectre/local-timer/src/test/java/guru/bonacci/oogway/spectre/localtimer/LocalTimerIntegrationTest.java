@@ -24,24 +24,24 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.stream.binding.BinderAwareChannelResolver;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.spectre.localtimer.events.LocalTimerEventChannels;
-import guru.bonacci.oogway.spectre.secretpersistence.LocalTimerSpec;
-import guru.bonacci.oogway.spectre.secretpersistence.LocalTimerSpecRepository;
+import guru.bonacci.oogway.spectre.localtimer.services.LocalTimerSpec;
+import guru.bonacci.oogway.spectre.localtimer.services.LocalTimerSpecRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT, properties = {
-	"geo.name.username=voldemort",		
-	"spring.data.elasticsearch.properties.path.home=foo/embedded",		
-	"spring.data.elasticsearch.cluster-name=",
-	"spring.data.elasticsearch.cluster-nodes="
+	"geo.name.username=voldemort"		
 })
+@TestPropertySource("classpath:secret-persistence-test.properties")
 public class LocalTimerIntegrationTest {
 
 	@Autowired
@@ -61,7 +61,8 @@ public class LocalTimerIntegrationTest {
 		
 		LocalTimerSpec spec = new LocalTimerSpec();
 		spec.id = uuid;
-		spec.geoip = spec.new Geoip(1.1, 2.2);
+		spec.geoip.latitude=1.1;
+		spec.geoip.longitude=2.2;
 		repo.save(spec);
 	}
 
@@ -96,6 +97,7 @@ public class LocalTimerIntegrationTest {
 	}
 
 	@SpringBootApplication
+	@EnableElasticsearchRepositories("guru.bonacci.oogway.spectre.localtimer.services")
 	public static class TestApp {
 
 		public static void main(String[] args) {

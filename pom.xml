@@ -106,8 +106,9 @@
 
 	<distributionManagement>
 		<repository>
-			<id>bintray</id>
-			<url>https://api.bintray.com/maven/leonardobonacci/cloud/oogway</url>
+			<id>internal.repo</id>
+			<name>Because maven demands</name>
+			<url>file://${project.build.directory}/mvn-repo</url>
 		</repository>
 	</distributionManagement>
 

@@ -12,5 +12,6 @@
 	<modules>
 		<module>local-timer</module>
 		<module>sentiment</module>
-  	</modules>
+	    <module>secret-persistence</module>
+  </modules>
 </project>

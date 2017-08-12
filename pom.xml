@@ -107,9 +107,8 @@
 
 	<distributionManagement>
 		<repository>
-			<id>internal.repo</id>
-			<name>Because maven demands</name>
-			<url>file://${project.build.directory}/mvn-repo</url>
+			<id>bintray</id>
+			<url>https://api.bintray.com/maven/leonardobonacci/cloud/oogway</url>
 		</repository>
 	</distributionManagement>
 
@@ -126,6 +125,11 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.5.3</version>
+				<configuration>
+					<useReleaseProfile>false</useReleaseProfile>
+					<releaseProfiles>release</releaseProfiles>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+				</configuration>
 			</plugin>
 		</plugins>
 

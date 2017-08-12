@@ -18,7 +18,7 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
-import guru.bonacci.oogway.shareddomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.shareddomain.IGem;
 
 @RunWith(SpringRunner.class)
@@ -39,7 +39,7 @@ public class OracleClientTest {
 		String question = "how much do you charge per hour?";
 		String answer = "it's free";
 		
-		doReturn(new GemDTO(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}", GemDTO.class, question, null);
+		doReturn(new GemCarrier(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}", GemCarrier.class, question, null);
 
 		Optional<IGem> gem = client.consult(question);
 		assertThat(gem.get().getSaying(), is(equalTo(answer)));
@@ -51,7 +51,7 @@ public class OracleClientTest {
 		String by = "whom";
 		String answer = "it's free";
 
-		doReturn(new GemDTO(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}&by={by}", GemDTO.class, question, by);
+		doReturn(new GemCarrier(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}&by={by}", GemCarrier.class, question, by);
 
 		Optional<IGem> gem = client.consult(question, by);
 		assertThat(gem.get().getSaying(), is(equalTo(answer)));

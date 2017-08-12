@@ -19,7 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.client.OracleClient;
-import guru.bonacci.oogway.shareddomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.shareddomain.IGem;
 import guru.bonacci.oogway.web.cheaters.Postponer;
 
@@ -46,7 +46,7 @@ public class FirstLineSupportServiceTest {
 
 	@Test
 	public void shouldGiveAnswer() {
-		IGem expected = new GemDTO("some answer");
+		IGem expected = new GemCarrier("some answer");
 		when(oracleService.consult(anyString())).thenReturn(Optional.of(expected));
 
 		assertThat(service.enquire("some input"), is(equalTo(expected.getSaying())));

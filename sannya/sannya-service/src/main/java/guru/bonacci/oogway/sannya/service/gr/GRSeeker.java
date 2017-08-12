@@ -15,7 +15,7 @@ import guru.bonacci.oogway.sannya.service.filters.LengthFilter;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
 import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
 import guru.bonacci.oogway.sannya.service.steps.KeyPhraser;
-import guru.bonacci.oogway.shareddomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 /**
  * I like GoodReads! It was the first Sannyasin.
@@ -46,7 +46,7 @@ public class GRSeeker implements Sannyasin {
 	}
 
 	@Override
-	public List<GemDTO> seek(String tagsAsString) {
+	public List<GemCarrier> seek(String tagsAsString) {
 		String[] tags = split(tagsAsString);
 		return scraper.find(tags);
 	}

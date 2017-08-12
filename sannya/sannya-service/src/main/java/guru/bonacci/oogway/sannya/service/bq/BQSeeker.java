@@ -16,7 +16,7 @@ import guru.bonacci.oogway.sannya.service.general.Sannyasin;
 import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
 import guru.bonacci.oogway.sannya.service.steps.KeyPhraser;
 import guru.bonacci.oogway.sannya.service.steps.Lemmatizor;
-import guru.bonacci.oogway.shareddomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 /**
  * They say: Share our extensive collection of famous quotes by authors,
@@ -52,7 +52,7 @@ public class BQSeeker implements Sannyasin {
 	}
 
 	@Override
-	public List<GemDTO> seek(String tagsAsString) {
+	public List<GemCarrier> seek(String tagsAsString) {
 		String[] tags = split(tagsAsString);
 		return scraper.find(tags);
 	}

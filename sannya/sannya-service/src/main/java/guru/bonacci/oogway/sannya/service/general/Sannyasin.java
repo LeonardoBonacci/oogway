@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import guru.bonacci.oogway.shareddomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 /**
  * Sannyasin: Seeker for Truth (is basically a Worker).
@@ -19,7 +19,7 @@ public interface Sannyasin {
 
 	List<Function<String,String>> preprocessingSteps();
 
-	List<GemDTO> seek(String truth);
+	List<GemCarrier> seek(String truth);
 
 	List<Predicate<String>> postfilteringStep();
 }

@@ -27,7 +27,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import guru.bonacci.oogway.sannya.service.events.SannyaEventChannels;
 import guru.bonacci.oogway.sannya.service.gr.GRSeeker;
 import guru.bonacci.oogway.sannya.service.processing.SannyasinPicker;
-import guru.bonacci.oogway.shareddomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
@@ -51,7 +51,7 @@ public class SannyaIntegrationTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void shouldDoSomething() throws Exception {
-		GemDTO hit = new GemDTO("does not matter", "dear");
+		GemCarrier hit = new GemCarrier("does not matter", "dear");
 
 		// DON'T SEEK!
 		doReturn(sannyasin).when(picker).pickOne();

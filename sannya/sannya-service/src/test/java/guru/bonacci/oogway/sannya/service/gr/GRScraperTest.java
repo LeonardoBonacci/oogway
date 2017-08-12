@@ -21,7 +21,7 @@ import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.shareddomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
@@ -35,8 +35,8 @@ public class GRScraperTest {
 		Document doc = parse(readToString("gr/gr-mock-romance.txt"));
 		doReturn(doc).when(finder).get(anyString());
 
-		List<GemDTO> found = finder.find("romance");
-		List<String> quotes = found.stream().map(GemDTO::getSaying).collect(toList());
+		List<GemCarrier> found = finder.find("romance");
+		List<String> quotes = found.stream().map(GemCarrier::getSaying).collect(toList());
 
 		List<String> expected = readToList("gr/gr-quotes-romance.txt");
 
@@ -48,7 +48,7 @@ public class GRScraperTest {
 		Document doc = parse(readToString("gr/gr-mock-romance.txt"));
 		doReturn(doc).when(finder).get(anyString());
 
-		List<GemDTO> found = finder.find("romance");
+		List<GemCarrier> found = finder.find("romance");
 		assertThat(found.get(0).getAuthor(), is(equalTo("Stephenie Meyer")));
 	}
 

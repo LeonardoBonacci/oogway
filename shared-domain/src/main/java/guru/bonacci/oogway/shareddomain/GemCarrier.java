@@ -6,22 +6,24 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
- * Data donkey
+ * https://rlogiacco.wordpress.com/2010/05/25/five-reasons-to-hate-dtos/
+ * I personally don't hate DTO's, but I also don't like them.
+ * Therefore an IDTO: Incognito-DTO.
  */
-public class GemDTO implements IGem {
+public class GemCarrier implements IGem {
 
 	private String saying;
 
 	private String author;
 
-	public GemDTO() {
+	public GemCarrier() {
 	}
 
-	public GemDTO(String saying) {
+	public GemCarrier(String saying) {
 		this.saying = saying;
 	}
 
-	public GemDTO(String saying, String author) {
+	public GemCarrier(String saying, String author) {
 		this(saying);
 		this.author = author;
 	}
@@ -48,7 +50,7 @@ public class GemDTO implements IGem {
 
 	@Override
 	public String toString() {
-		return format("GemDTO[saying='%s', author='%s']", saying, author);
+		return format("GemCarrier[saying='%s', author='%s']", saying, author);
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.shareddomain.GenericEvent;
+import guru.bonacci.oogway.spectre.localtimer.services.Spec;
 import guru.bonacci.oogway.spectre.localtimer.services.SpecRepository;
 
 @Component
@@ -23,7 +24,8 @@ public class LocalTimerRabbitEar {
 	public void onMessage(GenericEvent event) {
 		System.out.println("localtimer " + event.getContent());
 
-//		Spec s = repo.findOne(input);
+		Spec s = repo.findOne(event.getContent());
+		System.out.println(s.getId());
 
 		// UpdateRequest updateRequest = new UpdateRequest();
 		// updateRequest.index("logstash-spectre");

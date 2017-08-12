@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import guru.bonacci.oogway.oracle.service.persistence.Gem;
 import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
-import guru.bonacci.oogway.shareddomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.shareddomain.IGem;
 
 @RestController
@@ -37,7 +37,7 @@ public class OracleController {
 	}	
 
 	@RequestMapping(path = "/backdoor", method = POST)
-	public void index(@RequestBody GemDTO gem) {
+	public void index(@RequestBody GemCarrier gem) {
 		logger.info("Receiving secret request to index: '" + gem + "'");
 		repo.saveTheNewOnly(new Gem(gem.getSaying(), gem.getAuthor()));
 	}

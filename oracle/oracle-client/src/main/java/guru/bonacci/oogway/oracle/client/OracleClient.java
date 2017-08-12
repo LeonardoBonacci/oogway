@@ -11,7 +11,7 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import guru.bonacci.oogway.shareddomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.shareddomain.IGem;
 
 /**
@@ -45,7 +45,7 @@ public class OracleClient {
 		
 		IGem gem = null; 
 		try {
-			gem = restTemplate.getForObject(serviceUrl + "/gems" + params, GemDTO.class, searchString, by);
+			gem = restTemplate.getForObject(serviceUrl + "/gems" + params, GemCarrier.class, searchString, by);
 		} catch(Exception ise) {
 			logger.error("Help!!! Can't reach the oracle...", ise);	
 		}

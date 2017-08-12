@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.events.SannyaGateway;
 import guru.bonacci.oogway.sannya.service.general.Sannyasin;
-import guru.bonacci.oogway.shareddomain.GemDTO;
+import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 /**
  * A manager alone cannot perform all the tasks assigned to him. In order to
@@ -49,8 +49,8 @@ public class PitchforkManager {
 
 		Sannyasin sannya = sannyasinPicker.pickOne();
 		String preprocessedInput = forePlayer.play(sannya, input);
-		List<GemDTO> found = sannya.seek(preprocessedInput);
-		List<GemDTO> cleaned = cleaningAgent.noMoreClutter(sannya, found);
+		List<GemCarrier> found = sannya.seek(preprocessedInput);
+		List<GemCarrier> cleaned = cleaningAgent.noMoreClutter(sannya, found);
 		cleaned.forEach(gem -> {
 			logger.info("Sharing my newly acquired wisdom '" + gem + "'");
 			gateway.send(gem);

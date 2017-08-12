@@ -11,7 +11,6 @@
 
 	<properties>
 		<start-class>guru.bonacci.oogway.sannya.service.Main</start-class>
-		<nlp-version>3.7.0</nlp-version>
 		<lucene-version>5.5.2</lucene-version>
 	</properties>
 
@@ -80,26 +79,10 @@
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
-			<version>${nlp-version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.lucene</groupId>
-					<artifactId>lucene-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.lucene</groupId>
-					<artifactId>query-parser</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.lucene</groupId>
-					<artifactId>queries</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
-			<version>${nlp-version}</version>
 			<classifier>models</classifier>
 		</dependency>
 

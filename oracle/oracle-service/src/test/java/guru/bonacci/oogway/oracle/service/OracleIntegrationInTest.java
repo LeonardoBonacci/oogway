@@ -28,6 +28,7 @@ public class OracleIntegrationInTest {
 
 	@Autowired
 	BinderAwareChannelResolver resolver;
+	
 	@Test
 	public void shouldDoSomething() throws Exception {
 		String randomMessage = UUID.randomUUID().toString(); //non-existing

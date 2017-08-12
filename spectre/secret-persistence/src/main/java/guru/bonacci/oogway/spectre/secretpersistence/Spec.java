@@ -12,34 +12,23 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "logstash-spectre", type = "logs", shards = 1, replicas = 0, refreshInterval = "-1")
 public class Spec {
 
+	// even too lazy for getters and setters today...
 	@Id
-	private String id;
+	public String id;
 
-	public Spec() {
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-	
 	@Field(type = FieldType.Nested)
-	private Geoip geoip;
+	public Geoip geoip;
 
-	public Geoip getGeoip() {
-		return geoip;
-	}
-
-	public void setGeoip(Geoip geoip) {
-		this.geoip = geoip;
-	}
-	
 	// Define what you need...
 	public class Geoip {
 
+		public Geoip() {}
+
+		public Geoip(Double lat, Double lon) {
+			latitude = lat;
+			longitude = lon;
+		}
+		
 		@Field(type = FieldType.Double)
 		public Double latitude;
 

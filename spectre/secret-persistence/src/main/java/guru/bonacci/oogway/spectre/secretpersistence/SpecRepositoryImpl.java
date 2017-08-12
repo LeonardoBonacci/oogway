@@ -22,9 +22,9 @@ public class SpecRepositoryImpl implements SpecRepositoryCustom {
 		UpdateRequest updateRequest = new UpdateRequest();
 		updateRequest.index(INDEX);
 		updateRequest.type(TYPE);
-		updateRequest.id(s.getId());
+		updateRequest.id(s.id);
 		updateRequest.doc(jsonBuilder().startObject().field(key, nestedObject).endObject());
-		UpdateQuery updateQuery = new UpdateQueryBuilder().withId(s.getId())
+		UpdateQuery updateQuery = new UpdateQueryBuilder().withId(s.id)
 														  .withClass(Spec.class)
 														  .withUpdateRequest(updateRequest)
 														  .build();

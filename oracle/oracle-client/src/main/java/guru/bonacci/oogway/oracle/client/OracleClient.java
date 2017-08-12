@@ -24,7 +24,7 @@ public class OracleClient {
 
 	@Autowired
 	@LoadBalanced
-	protected RestTemplate restTemplate;
+	private RestTemplate restTemplate;
 
 	private final String serviceUrl;
 

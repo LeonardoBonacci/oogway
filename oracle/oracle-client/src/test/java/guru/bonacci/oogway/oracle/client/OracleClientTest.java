@@ -22,7 +22,7 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.shareddomain.IGem;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = NONE, properties = {
+@SpringBootTest(classes=OracleClientTestApp.class, webEnvironment = NONE, properties = {
 	"oracle.service.application.name:not-used"
 })
 public class OracleClientTest {

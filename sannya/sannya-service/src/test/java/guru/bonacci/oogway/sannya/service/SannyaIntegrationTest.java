@@ -89,9 +89,9 @@ public class SannyaIntegrationTest {
 											value = {SannyasServer.class}))
 	@EnableBinding(SannyaEventChannels.class)
 	@IntegrationComponentScan
-	public static class SannyaIntegrationTestApp {
+	static class SannyaIntegrationTestApp {
 
-		public static void main(String[] args) {
+		static void main(String[] args) {
 			SpringApplication.run(SannyaIntegrationTestApp.class, args);
 		}
 	}

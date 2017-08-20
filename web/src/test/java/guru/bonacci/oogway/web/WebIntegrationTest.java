@@ -56,9 +56,9 @@ public class WebIntegrationTest {
 											value = {WebServer.class}))
 	@EnableBinding(WebEventChannels.class)
 	@IntegrationComponentScan
-	public static class WebIntegrationTestApp {
+	static class WebIntegrationTestApp {
 
-		public static void main(String[] args) {
+		static void main(String[] args) {
 			SpringApplication.run(WebIntegrationTestApp.class, args);
 		}
 	}

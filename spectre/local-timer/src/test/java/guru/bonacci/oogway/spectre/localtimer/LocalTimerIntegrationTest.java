@@ -22,9 +22,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.binding.BinderAwareChannelResolver;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
@@ -36,6 +42,7 @@ import org.springframework.web.client.RestTemplate;
 import guru.bonacci.oogway.spectre.localtimer.events.LocalTimerEventChannels;
 import guru.bonacci.oogway.spectre.localtimer.services.LocalTimerSpec;
 import guru.bonacci.oogway.spectre.localtimer.services.LocalTimerSpecRepository;
+import guru.bonacci.oogway.spectre.secretpersistence.SecretPersistenceTestConfig;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT, properties = {
@@ -97,11 +104,16 @@ public class LocalTimerIntegrationTest {
 	}
 
 	@SpringBootApplication
-	@EnableElasticsearchRepositories("guru.bonacci.oogway.spectre.localtimer.services")
-	public static class TestApp {
+	@ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, 
+											value = {LocalTimerServer.class}))
+	@EnableBinding(LocalTimerEventChannels.class)
+	@IntegrationComponentScan
+	@EnableElasticsearchRepositories
+	@Import(SecretPersistenceTestConfig.class)
+	static class LocalTimerIntegrationTestApp {
 
 		public static void main(String[] args) {
-			SpringApplication.run(TestApp.class, args);
+			SpringApplication.run(LocalTimerIntegrationTestApp.class, args);
 		}
 	}
 }

@@ -18,9 +18,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.binding.BinderAwareChannelResolver;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
@@ -28,6 +34,7 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.spectre.secretpersistence.SecretPersistenceTestConfig;
 import guru.bonacci.oogway.spectre.sentiment.events.SentimentEventChannels;
 import guru.bonacci.oogway.spectre.sentiment.services.SentimentSpec;
 import guru.bonacci.oogway.spectre.sentiment.services.SentimentSpecRepository;
@@ -82,10 +89,16 @@ public class SentimentIntegrationTest {
 	}
 	
 	@SpringBootApplication
-	@EnableElasticsearchRepositories("guru.bonacci.oogway.spectre.sentiment.services")
-	public static class TestApp {
+	@ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, 
+											value = {SentimentServer.class}))
+	@EnableBinding(SentimentEventChannels.class)
+	@IntegrationComponentScan
+	@EnableElasticsearchRepositories
+	@Import(SecretPersistenceTestConfig.class)
+	static class SentimentIntegrationTestApp {
+
 		public static void main(String[] args) {
-			SpringApplication.run(TestApp.class, args);
+			SpringApplication.run(SentimentIntegrationTestApp.class, args);
 		}
 	}
 }

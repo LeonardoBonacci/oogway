@@ -22,11 +22,12 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
+import guru.bonacci.oogway.spectre.localtimer.LocalTimerTestApp;
 import guru.bonacci.oogway.spectre.secretpersistence.Spec;
 import guru.bonacci.oogway.spectre.secretpersistence.SpecRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = NONE, properties = {
+@SpringBootTest(classes=LocalTimerTestApp.class, webEnvironment = NONE, properties = {
 	"geo.name.username=voldemort"		
 })
 @TestPropertySource("classpath:secret-persistence-test.properties")

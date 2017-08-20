@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Postponer {
 	
-	@Value("${file.name.answers.to.win.time}")
+	@Value("${file.name.answers.to.win.time:}")
 	private String fileName;
 
 	private final Logger logger = getLogger(this.getClass());

@@ -37,7 +37,7 @@ import guru.bonacci.oogway.sannya.service.processing.SannyasinPicker;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=SannyasTestApp.class, webEnvironment = RANDOM_PORT)
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 public class SannyaIntegrationTest {
 
 	@Autowired

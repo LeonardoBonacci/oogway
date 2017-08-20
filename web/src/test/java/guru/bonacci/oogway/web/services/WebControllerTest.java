@@ -1,6 +1,7 @@
 package guru.bonacci.oogway.web.services;
 
 import static org.mockito.BDDMockito.given;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -14,8 +15,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import guru.bonacci.oogway.web.WebTestApp;
+
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes=WebTestApp.class, webEnvironment=RANDOM_PORT)
 @AutoConfigureMockMvc
 public class WebControllerTest {
 

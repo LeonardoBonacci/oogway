@@ -8,17 +8,25 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.messaging.Message;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import guru.bonacci.oogway.shareddomain.COMINT;
 import guru.bonacci.oogway.web.events.WebEventChannels;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT)
+@SpringBootTest(webEnvironment=RANDOM_PORT)
 @AutoConfigureMockMvc
 public class WebIntegrationTest {
 
@@ -38,7 +46,20 @@ public class WebIntegrationTest {
 		String input = "The art of living is more like wrestling than dancing.";
 		mvc.perform(get("/consult?q=" + input));
 		
-		Message<String> received = (Message<String>) messageCollector.forChannel(channels.spectreChannel()).poll();
-		assertThat(received.getPayload(), equalTo("{\"ip\":\"" + localIP + "\",\"message\":\"" + input + "\"}"));
+		Message<COMINT> received = (Message<COMINT>) messageCollector.forChannel(channels.spectreChannel()).poll();
+		assertThat(received.getPayload(), equalTo(new COMINT(localIP, input)));
+	}
+	
+	
+	@SpringBootApplication
+	@ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, 
+											value = {WebServer.class}))
+	@EnableBinding(WebEventChannels.class)
+	@IntegrationComponentScan
+	public static class WebIntegrationTestApp {
+
+		public static void main(String[] args) {
+			SpringApplication.run(WebIntegrationTestApp.class, args);
+		}
 	}
 }

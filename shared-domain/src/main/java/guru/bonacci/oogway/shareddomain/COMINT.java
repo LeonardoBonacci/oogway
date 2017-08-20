@@ -4,6 +4,9 @@ import static java.lang.String.format;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * COMINT
  * All intelligence gathered from intercepted communications
@@ -42,4 +45,14 @@ public class COMINT implements Serializable {
     public String toString() {
         return format("1984[ip='%s', message='%s']", ip, message);
     }
+	
+	@Override
+	public boolean equals(Object o) {
+		return EqualsBuilder.reflectionEquals(this, o);
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
 }

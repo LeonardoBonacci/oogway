@@ -21,10 +21,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import guru.bonacci.oogway.oracle.client.OracleClient;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.shareddomain.IGem;
+import guru.bonacci.oogway.web.WebTestApp;
 import guru.bonacci.oogway.web.cheaters.Postponer;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = NONE)
+@SpringBootTest(classes=WebTestApp.class, webEnvironment=NONE)
 public class FirstLineSupportServiceTest {
 
 	@Autowired

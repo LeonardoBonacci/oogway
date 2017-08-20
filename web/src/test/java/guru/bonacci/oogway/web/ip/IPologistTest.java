@@ -17,9 +17,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.web.WebTestApp;
+
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = NONE)
-@ActiveProfiles("dev")
+@SpringBootTest(classes=WebTestApp.class, webEnvironment=NONE)
+@ActiveProfiles("dev") //test the dev bean
 public class IPologistTest {
 
     @Autowired

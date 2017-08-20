@@ -83,7 +83,6 @@ public class SannyaIntegrationTest {
 		return new DirectChannel();
 	}
 
-	
 	@SpringBootApplication
 	@ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, 
 											value = {SannyasServer.class}))

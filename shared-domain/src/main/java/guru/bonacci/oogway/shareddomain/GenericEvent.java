@@ -1,6 +1,11 @@
 package guru.bonacci.oogway.shareddomain;
 
+import static java.lang.String.format;
+
 import java.io.Serializable;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class GenericEvent implements Serializable {
 
@@ -20,5 +25,20 @@ public class GenericEvent implements Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	@Override
+	public String toString() {
+		return format("Event[content='%s']", content);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		return EqualsBuilder.reflectionEquals(this, o);
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 }

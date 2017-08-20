@@ -43,7 +43,7 @@ public class COMINT implements Serializable {
 	
 	@Override
     public String toString() {
-        return format("1984[ip='%s', message='%s']", ip, message);
+        return format("COMINT[ip='%s', message='%s']", ip, message);
     }
 	
 	@Override

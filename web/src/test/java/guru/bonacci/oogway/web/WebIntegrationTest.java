@@ -50,7 +50,6 @@ public class WebIntegrationTest {
 		assertThat(received.getPayload(), equalTo(new COMINT(localIP, input)));
 	}
 	
-	
 	@SpringBootApplication
 	@ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, 
 											value = {WebServer.class}))

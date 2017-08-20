@@ -22,8 +22,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.oracle.service.OracleTestApp;
+
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = NONE)
+@SpringBootTest(classes=OracleTestApp.class, webEnvironment=NONE)
 //A little hack to avoid creating profiles at this moment :)
 //The test resource property overrides some of the oracle.properties that is
 //read by the default configuration OracleConfig
@@ -33,9 +35,6 @@ public class GemRepositoryTest {
 	@Autowired
 	GemRepository repo;
 	
-//	@MockBean
-//	JmsTemplate jms;
-
 	@Before
 	public void setup() {
 		repo.deleteAll();

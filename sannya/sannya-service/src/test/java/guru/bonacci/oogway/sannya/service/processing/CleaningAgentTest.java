@@ -18,12 +18,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.sannya.service.SannyasTestApp;
 import guru.bonacci.oogway.sannya.service.filters.ProfanityFilter;
 import guru.bonacci.oogway.sannya.service.gr.GRSeeker;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = NONE)
+@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
 public class CleaningAgentTest {
 
 	@Autowired

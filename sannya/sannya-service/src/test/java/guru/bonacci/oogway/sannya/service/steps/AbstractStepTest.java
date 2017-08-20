@@ -15,7 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestContextManager;
 
-import guru.bonacci.oogway.sannya.service.SannyasTestApplication;
+import guru.bonacci.oogway.sannya.service.SannyasTestApp;
 
 /**
  * 
@@ -24,7 +24,7 @@ import guru.bonacci.oogway.sannya.service.SannyasTestApplication;
  * public static Collection<Object[]> data() {}
  */
 @RunWith(value = Parameterized.class)
-@ContextConfiguration(classes = SannyasTestApplication.class)
+@ContextConfiguration(classes = SannyasTestApp.class)
 public abstract class AbstractStepTest<F extends Function<String,String>> {
 
 	@Autowired

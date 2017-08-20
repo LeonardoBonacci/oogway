@@ -21,12 +21,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.sannya.service.SannyasTestApp;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = NONE)
+@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
 public class BQScraperTest {
 
 	@Spy
@@ -43,11 +45,10 @@ public class BQScraperTest {
 		
 		int fromBy = in.indexOf("'") + 1;
 		int closeBy = in.indexOf("'", fromBy);
-		String by = in.substring(fromBy, closeBy);
+		in.substring(fromBy, closeBy);
 	
 		int fromQuestion = in.indexOf(":") + 1;
-		String question = StringUtils.trim(in.substring(fromQuestion));
-
+		StringUtils.trim(in.substring(fromQuestion));
 		
 		Document doc = parse(readToString("bq/bq-mock-faith.txt"));
 		doReturn("does not matter").when(finder).determineURL(anyString());

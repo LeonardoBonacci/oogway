@@ -21,10 +21,11 @@ import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.sannya.service.SannyasTestApp;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = NONE)
+@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
 public class GRScraperTest {
 
 	@Spy

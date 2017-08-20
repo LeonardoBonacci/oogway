@@ -12,11 +12,18 @@ import static org.springframework.messaging.MessageHeaders.CONTENT_TYPE;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.binding.BinderAwareChannelResolver;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
@@ -30,7 +37,7 @@ import guru.bonacci.oogway.sannya.service.processing.SannyasinPicker;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT)
+@SpringBootTest(classes=SannyasTestApp.class, webEnvironment = RANDOM_PORT)
 public class SannyaIntegrationTest {
 
 	@Autowired
@@ -62,8 +69,8 @@ public class SannyaIntegrationTest {
 		sendMessage(body, SannyaEventChannels.ORACLE,"application/json");
 
 		//..and, after processing, receive published event
-		Message<String> received = (Message<String>) messageCollector.forChannel(channels.sannyaChannel()).poll();
-		assertThat(received.getPayload(), equalTo("{\"saying\":\"" + hit.getSaying() + "\",\"author\":\"" + hit.getAuthor() + "\"}"));
+		Message<GemCarrier> received = (Message<GemCarrier>) messageCollector.forChannel(channels.sannyaChannel()).poll();
+		assertThat(received.getPayload(), equalTo(hit));
 	}
 
 	private void sendMessage(String body, String target, Object contentType) {
@@ -74,5 +81,18 @@ public class SannyaIntegrationTest {
 	@Bean
 	public MessageChannel routerChannel() {
 		return new DirectChannel();
+	}
+
+	
+	@SpringBootApplication
+	@ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, 
+											value = {SannyasServer.class}))
+	@EnableBinding(SannyaEventChannels.class)
+	@IntegrationComponentScan
+	public static class SannyaIntegrationTestApp {
+
+		public static void main(String[] args) {
+			SpringApplication.run(SannyaIntegrationTestApp.class, args);
+		}
 	}
 }

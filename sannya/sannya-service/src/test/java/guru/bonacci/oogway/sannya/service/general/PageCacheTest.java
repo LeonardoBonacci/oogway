@@ -20,20 +20,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import guru.bonacci.oogway.sannya.service.general.PageTestCaches.PageTestCache1;
 import guru.bonacci.oogway.sannya.service.general.PageTestCaches.PageTestCache2;
 
-
-@SpringBootApplication
-@EnableCaching(proxyTargetClass=true)
-@ComponentScan
-@Profile("cache-test")
-class SannyasCachedTestApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(SannyasCachedTestApplication.class, args);
-	}
-}
-
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SannyasCachedTestApplication.class, webEnvironment = NONE)
+@SpringBootTest(webEnvironment = NONE)
 @ActiveProfiles("cache-test")
 public class PageCacheTest {
 
@@ -56,5 +44,16 @@ public class PageCacheTest {
 
 		nr = pageCache2.getNrOfPages("first call");
 		assertThat(nr, is(equalTo(1))); //first call is cached by the other bean
+	}
+	
+	@SpringBootApplication
+	@EnableCaching(proxyTargetClass=true)
+	@ComponentScan
+	@Profile("cache-test")
+	static class PageCacheTestApp {
+
+		static void main(String[] args) {
+			SpringApplication.run(PageCacheTestApp.class, args);
+		}
 	}
 }

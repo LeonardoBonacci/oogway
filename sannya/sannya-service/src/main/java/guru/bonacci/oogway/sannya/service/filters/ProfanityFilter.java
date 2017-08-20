@@ -11,6 +11,7 @@ import java.util.function.Predicate;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
@@ -26,7 +27,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProfanityFilter implements Predicate<String> {
 
-	@Value("${filter.profanity.file.name}")
+	@Value("${filter.profanity.file.name:}")
 	private String fileName;
 
 	private final Logger logger = getLogger(this.getClass());
@@ -43,7 +44,8 @@ public class ProfanityFilter implements Predicate<String> {
 
 	@PostConstruct
 	public void setup() {
-		buildDictionaryTree(fileName);
+		if (StringUtils.isNotBlank(fileName))
+			buildDictionaryTree(fileName);
 	}
 
 	@Override

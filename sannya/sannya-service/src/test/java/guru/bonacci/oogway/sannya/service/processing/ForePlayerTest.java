@@ -18,12 +18,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.sannya.service.SannyasTestApp;
 import guru.bonacci.oogway.sannya.service.gr.GRSeeker;
 import guru.bonacci.oogway.sannya.service.processing.ForePlayer;
 import guru.bonacci.oogway.sannya.service.steps.DuplicateRemover;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = NONE)
+@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
 public class ForePlayerTest {
 
 	private static final String INPUT = "some string without meaning";

@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.sannya.service.filters.ProfanityFilter;
+import guru.bonacci.oogway.sannya.service.SannyasTestApp;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = NONE, properties = {
+@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE, properties={
 	"filter.profanity.file.name=badwords-test.txt"		
 })
 public class ProfanityFilterTest {
@@ -27,5 +27,4 @@ public class ProfanityFilterTest {
 		assertThat(true, is(not(filter.test("word1"))));
 		assertThat(true, is(filter.test("aa")));
 	}
-
 }

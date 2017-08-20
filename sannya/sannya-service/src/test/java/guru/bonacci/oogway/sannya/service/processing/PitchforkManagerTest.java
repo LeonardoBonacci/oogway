@@ -13,11 +13,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.sannya.service.SannyasTestApp;
 import guru.bonacci.oogway.sannya.service.gr.GRSeeker;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = NONE)
+@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
 public class PitchforkManagerTest {
 
 	@Autowired
@@ -35,11 +36,8 @@ public class PitchforkManagerTest {
 	@MockBean
 	CleaningAgent cleaningAgent;
 
-//TODO	@MockBean
-//	OracleMessageProducer messageProducer;
-
 	@Test
-	public void shouldJustRunThroughAllTheseMockCallsInThisNonMeaningfulTest() {
+	public void shouldJustRunThroughAllTheseMockCallsInThisMeaninglessTest() {
 		String input = "yet another beautiful day today";
 		String preprocessedInput = "another beautiful day";
 		List<GemCarrier> found = asList(new GemCarrier("that"), new GemCarrier("is true"), new GemCarrier("beautiful stranger"));
@@ -51,6 +49,6 @@ public class PitchforkManagerTest {
 		when(cleaningAgent.noMoreClutter(sannyasin, found)).thenReturn(clutterless);
 		
 		manager.delegate(input);
-		//		verify(messageProducer, times(1)).save(clutterless);
+		//TODO verify something
 	}
 }

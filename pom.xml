@@ -30,7 +30,8 @@
 		<module>web</module>
 		<module>spectre</module>
 		<module>shared-domain</module>
-	</modules>
+	    <module>jobs</module>
+  </modules>
 
 	<dependencyManagement>
 		<dependencies>

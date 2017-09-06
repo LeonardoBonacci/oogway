@@ -1,14 +1,7 @@
 package guru.bonacci.oogway.jobs.twitter;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -16,28 +9,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduledTask {
 
-	Logger logger = LoggerFactory.getLogger(this.getClass());
-
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-
 	@Autowired
-	private JobLauncher jobLauncher;
+	TwitterTemplateCreator templateCreator;
 
-	@Autowired
-	private Job job;
+	// @Scheduled(cron = "0 26 8 * * *")
+	@Scheduled(cron = "0 * * * * *")
+	public void reportCurrentTime() {
+		String a = "The time is now " + LocalDateTime.now();
+		System.out.println(a);
 
-
-//    @Scheduled(cron = "0 26 8 * * *")
-    @Scheduled(cron = "0 * 8 * * *")
-    public void reportCurrentTime() {
-        System.out.println("The time is now " + dateFormat.format(new Date()));
 		try {
-//			JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis())
-//					.toJobParameters();
-			JobParameters jobParameters = new JobParametersBuilder().toJobParameters();
-			jobLauncher.run(job, jobParameters);
-		} catch (Exception e) {
-			logger.info(e.getMessage());
+			templateCreator.getTwitterTemplate().timelineOperations().updateStatus(a);
+		} catch (RuntimeException ex) {
+			System.out.println("It wasn't ment to be. Unable to tweet" + a);
 		}
-    }
+	}
 }

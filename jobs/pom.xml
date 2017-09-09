@@ -9,6 +9,10 @@
 	<artifactId>jobs</artifactId>
 	<packaging>jar</packaging>
 
+	<properties>
+		<start-class>guru.bonacci.oogway.jobs.Main</start-class>
+	</properties>
+
 	<dependencies>
 <!-- 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>

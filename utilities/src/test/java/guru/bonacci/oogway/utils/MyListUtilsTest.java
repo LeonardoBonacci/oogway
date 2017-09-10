@@ -27,7 +27,7 @@ public class MyListUtilsTest {
 
 		Set<String> results = new HashSet<>();
 		for (int i=0; i<10; i++) 
-			results.add(MyListUtils.getRandom(asList(s1, s2, s3)).get());
+			results.add(MyListUtils.random(asList(s1, s2, s3)).get());
 
 		assertThat(results.size(), greaterThan(1));
 	}
@@ -35,13 +35,13 @@ public class MyListUtilsTest {
 	@Test
 	public void shouldReturnNoElementForEmptyCollection() {
 		List<String> input = emptyList();
-		Optional<String> result = MyListUtils.getRandom(input);
+		Optional<String> result = MyListUtils.random(input);
 		assertThat(true, is(not(result.isPresent())));
 	}
 
 	@Test
 	public void shouldReturnNoElementForNull() {
-		Optional<String> result = MyListUtils.getRandom(null);
+		Optional<String> result = MyListUtils.random(null);
 		assertThat(true, is(not(result.isPresent())));
 	}
 }

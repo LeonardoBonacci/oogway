@@ -5,11 +5,10 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -44,17 +43,13 @@ public class GemRepositoryTest {
 	public void shouldSaveAllFields1() {
 		String said = "the said";
 		String author = "the by";
-		LocalDateTime creation = LocalDateTime.now();
 		Gem input = new Gem(said, author);
-		input.setCreation(creation);
 		repo.save(input);
 
 		Gem result = repo.findOne(input.getId());
 
 		assertThat(result.getSaying(), is(equalTo(said)));
 		assertThat(result.getAuthor(), is(equalTo(author)));
-		//TODO write timeobjectmapper for time conversion
-		//assertThat(result.getCreation(), is(equalTo(creation)));
 	}
 
 	@Test
@@ -68,8 +63,6 @@ public class GemRepositoryTest {
 
 		assertThat(result.getSaying(), is(equalTo(said)));
 		assertThat(result.getAuthor(), is(equalTo(author)));
-		//TODO write timeobjectmapper for time conversion
-		//assertThat(result.getCreation(), is(equalTo(creation)));
 	}
 
 	@Test
@@ -141,5 +134,19 @@ public class GemRepositoryTest {
 		
 		Optional<Gem> result = repo.consultTheOracle("hello", Optional.of("Harr"));
 		assertFalse(result.isPresent());
+	}
+	
+	@Test
+	public void shouldRandomize() {
+		repo.save(new Gem("one", "A"));
+		repo.save(new Gem("two", "B"));
+		repo.save(new Gem("three", "C"));
+		repo.save(new Gem("four", "D"));
+		repo.save(new Gem("five", "E"));
+
+		Set<Gem> results = new HashSet<>();
+		for (int i = 0; i<5; i++)
+			results.add(repo.findRandom().get());
+		assertThat(results.size(), is(not(equalTo(5))));
 	}
 }

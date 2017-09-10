@@ -4,14 +4,11 @@ import static java.lang.String.format;
 import static org.springframework.data.elasticsearch.annotations.FieldIndex.not_analyzed;
 import static org.springframework.data.elasticsearch.annotations.FieldType.String;
 
-import java.time.LocalDateTime;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -36,12 +33,6 @@ public class Gem implements IGem {
 
 	@Field(type = String, index = not_analyzed)
 	private String author;
-
-	//TODO write timeobjectmapper for time conversion
-	@JsonIgnore
-	//spring data's @CreatedDate doesn't work on elasticsearch, therefore we set our own timestamp
-	@Field(type = FieldType.Date)
-	private LocalDateTime creation;
 
 	public Gem() {
 	}
@@ -91,14 +82,6 @@ public class Gem implements IGem {
 	@Override
 	public void setAuthor(String author) {
 		this.author = author;
-	}
-
-	public LocalDateTime getCreation() {
-		return creation;
-	}
-
-	public void setCreation(LocalDateTime creation) {
-		this.creation = creation;
 	}
 
 	@Override

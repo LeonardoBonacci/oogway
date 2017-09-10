@@ -1,27 +1,40 @@
 package guru.bonacci.oogway.jobs.twitter;
 
+import static org.slf4j.LoggerFactory.getLogger;
+import static java.lang.Math.min;
+
 import java.time.LocalDateTime;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.oracle.client.OracleClient;
+import guru.bonacci.oogway.shareddomain.IGem;
+
 @Component
 public class Tweeter {
 
+	private final Logger logger = getLogger(this.getClass());
+
 	@Autowired
-	Twitter twitterTemplate;
+	private OracleClient oracleClient;
+
+	@Autowired
+	private Twitter twitterTemplate;
 
 	@Scheduled(cron = "${twitter.cron}")
 	public void runForestRun() {
-		String a = "The time is now " + LocalDateTime.now();
-		System.out.println(a);
+		IGem random = oracleClient.findRandom();
+		String tweet = random != null ? random.getSaying() : "Now is " + LocalDateTime.now();
+		logger.info("tweet: " + tweet);
 
 		try {
-			twitterTemplate.timelineOperations().updateStatus(a);
+			twitterTemplate.timelineOperations().updateStatus(tweet.substring(0, min(tweet.length(), 139)));
 		} catch (RuntimeException ex) {
-			System.out.println("It wasn't ment to be. Unable to tweet" + a);
+			logger.error("It wasn't meant to be. Unable to tweet: " + tweet, ex);
 		}
 	}
 }

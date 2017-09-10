@@ -1,16 +1,18 @@
 package guru.bonacci.oogway.oracle.service.persistence;
 
-import static guru.bonacci.oogway.utils.MyListUtils.getRandom;
+import static guru.bonacci.oogway.utils.MyListUtils.random;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
+import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 import static org.slf4j.LoggerFactory.getLogger;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
+import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -39,13 +41,8 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 	 */
 	@Override
 	public void saveTheNewOnly(Gem... entities) {
-		// until spring data's @CreatedDate works on elasticsearch we're doomed
-		// to perform some manual labor
-		LocalDateTime now = LocalDateTime.now();
-
 		List<Gem> newOnes = stream(entities)
 									  .filter(gem -> !gemRepository.exists(gem.getId()))
-									  .peek(gem -> gem.setCreation(now))
 									  .peek(gem -> logger.info("About to gain wisdom: '" + gem.getSaying() + "'"))
 									  .collect(toList());
 		// strangely enough spring data or elasticsearch cannot deal with empty iterables
@@ -62,12 +59,19 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 		if (logger.isDebugEnabled())
 			result.stream().map(Gem::getSaying).forEach(logger::debug);
 
-		return getRandom(result);
+		return random(result);
 	}
 	
 	private SearchQuery createQuery(String searchString, Optional<String> authorOpt) {
 		NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder().withQuery(matchQuery(Gem.SAID, searchString));
 		authorOpt.ifPresent(author -> queryBuilder.withFilter(termQuery(Gem.AUTHOR, author)));
 		return queryBuilder.build();
+	}
+
+	@Override
+	public Optional<Gem> findRandom() {
+		FunctionScoreQueryBuilder fsqb = new FunctionScoreQueryBuilder(matchAllQuery());
+		fsqb.add(ScoreFunctionBuilders.randomFunction(System.currentTimeMillis()));
+		return Optional.ofNullable(gemRepository.search(fsqb).iterator().next());
 	}
 }

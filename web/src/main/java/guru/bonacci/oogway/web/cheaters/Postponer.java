@@ -2,7 +2,7 @@ package guru.bonacci.oogway.web.cheaters;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 import static guru.bonacci.oogway.utils.MyFileUtils.readToList;
-import static guru.bonacci.oogway.utils.MyListUtils.getRandom;
+import static guru.bonacci.oogway.utils.MyListUtils.random;
 import static java.util.Collections.singletonList;
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -42,6 +42,6 @@ public class Postponer {
 	}
 	
 	public String saySomething() {
-		return getRandom(answers).get();
+		return random(answers).get();
 	}
 }

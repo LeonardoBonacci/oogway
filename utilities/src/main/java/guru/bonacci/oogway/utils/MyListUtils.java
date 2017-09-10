@@ -22,12 +22,11 @@ public class MyListUtils {
 	 */
 	private static final Random RANDOM = new Random();
 
-	public static <E> Optional<E> getRandom(final List<E> collection) {
-		return getRandom(collection, RANDOM);
+	public static <E> Optional<E> random(final List<E> collection) {
+		return random(collection, RANDOM);
 	}
 
-	private static <E> Optional<E> getRandom(final List<E> list, Random random) {
-		return Optional.ofNullable(
-							isEmpty(list) ? null : list.get(random.nextInt(list.size())));
+	private static <E> Optional<E> random(final List<E> list, Random random) {
+		return Optional.ofNullable(isEmpty(list) ? null : list.get(random.nextInt(list.size())));
 	}
 }

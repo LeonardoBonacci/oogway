@@ -36,6 +36,13 @@ public class OracleController {
 		return (IGem)gem.orElse(null);
 	}	
 
+	@RequestMapping(path = "/gems/random", method = GET)
+	public IGem random() {
+		logger.info("Please find me a random gem");
+		Optional<Gem> gem = repo.findRandom(); 
+		return (IGem)gem.orElse(null);
+	}	
+
 	@RequestMapping(path = "/backdoor", method = POST)
 	public void index(@RequestBody GemCarrier gem) {
 		logger.info("Receiving secret request to index: '" + gem + "'");

@@ -2,7 +2,7 @@ package guru.bonacci.oogway.web.ip;
 
 import static java.util.Arrays.asList;
 import static org.slf4j.LoggerFactory.getLogger;
-import static guru.bonacci.oogway.utils.MyListUtils.getRandom;
+import static guru.bonacci.oogway.utils.MyListUtils.random;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class IPologist implements IIPologist {
 
 	@Override
 	public String checkUp(String ipIn) {
-		String ipOut = ipIn == null || LOCAL_IP_1.equals(ipIn) || LOCAL_IP_2.equals(ipIn) ? getRandom(randomIPs).get() : ipIn;
+		String ipOut = ipIn == null || LOCAL_IP_1.equals(ipIn) || LOCAL_IP_2.equals(ipIn) ? random(randomIPs).get() : ipIn;
 		logger.debug(ipIn + " becomes " + ipOut);
 		return ipOut;
 	}

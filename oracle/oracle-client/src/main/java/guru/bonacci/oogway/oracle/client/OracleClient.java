@@ -51,4 +51,16 @@ public class OracleClient {
 		}
 		return Optional.ofNullable(gem);
 	}
+	
+	public IGem findRandom() {
+		logger.info("find me a random Gem");
+
+		IGem gem = null; 
+		try {
+			gem = restTemplate.getForObject(serviceUrl + "/gems/random", GemCarrier.class);
+		} catch(Exception ise) {
+			logger.error("Help!!! Can't reach the oracle...", ise);	
+		}
+		return gem;
+	}
 }

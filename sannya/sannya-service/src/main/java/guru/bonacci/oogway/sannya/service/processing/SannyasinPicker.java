@@ -1,6 +1,6 @@
 package guru.bonacci.oogway.sannya.service.processing;
 
-import static guru.bonacci.oogway.utils.MyListUtils.getRandom;
+import static guru.bonacci.oogway.utils.MyListUtils.random;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +25,6 @@ public class SannyasinPicker {
 
 	public Sannyasin pickOne() {
 		List<Sannyasin> sannyas = new ArrayList<>(applicationContext.getBeansOfType(Sannyasin.class).values());
-		return getRandom(sannyas).get();
+		return random(sannyas).get();
 	}
 }

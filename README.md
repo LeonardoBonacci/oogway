@@ -1,4 +1,4 @@
-Welcome GitHub user, to my personal project called oogway.
+Welcome to oogway.
 -------------
 
 *Background music while you're reading: https://www.youtube.com/watch?v=7LHYBHUsn2M*

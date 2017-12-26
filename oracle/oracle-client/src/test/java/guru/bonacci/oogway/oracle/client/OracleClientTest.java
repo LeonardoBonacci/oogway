@@ -19,7 +19,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
-import guru.bonacci.oogway.shareddomain.IGem;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=OracleClientTestApp.class, webEnvironment = NONE, properties = {
@@ -41,7 +40,7 @@ public class OracleClientTest {
 		
 		doReturn(new GemCarrier(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}", GemCarrier.class, question, null);
 
-		Optional<IGem> gem = client.consult(question);
+		Optional<GemCarrier> gem = client.consult(question);
 		assertThat(gem.get().getSaying(), is(equalTo(answer)));
 	}
 	
@@ -53,7 +52,7 @@ public class OracleClientTest {
 
 		doReturn(new GemCarrier(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}&by={by}", GemCarrier.class, question, by);
 
-		Optional<IGem> gem = client.consult(question, by);
+		Optional<GemCarrier> gem = client.consult(question, by);
 		assertThat(gem.get().getSaying(), is(equalTo(answer)));
 	}
 }

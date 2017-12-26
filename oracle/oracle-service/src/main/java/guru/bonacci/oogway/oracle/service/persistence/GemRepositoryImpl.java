@@ -52,7 +52,13 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 
 	@WatchMe // as spring data offers no proper hook to intercept search queries we do it the traditional way...
 	@Override
-	public Optional<Gem> consultTheOracle(String searchString, Optional<String> author) {
+	public Optional<Gem> consultTheOracle(String searchString) {
+		return consultTheOracle(searchString, null);
+	}
+
+	@WatchMe // as spring data offers no proper hook to intercept search queries we do it the traditional way...
+	@Override
+	public Optional<Gem> consultTheOracle(String searchString, String author) {
 		SearchQuery searchQuery = createQuery(searchString, author);
 		List<Gem> result = gemRepository.search(searchQuery).getContent();
 
@@ -61,10 +67,11 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 
 		return random(result);
 	}
-	
-	private SearchQuery createQuery(String searchString, Optional<String> authorOpt) {
-		NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder().withQuery(matchQuery(Gem.SAID, searchString));
-		authorOpt.ifPresent(author -> queryBuilder.withFilter(termQuery(Gem.AUTHOR, author)));
+
+	private SearchQuery createQuery(String searchString, String author) {
+		NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder().withQuery(matchQuery(Gem.SAYING, searchString));
+		if (author != null)
+			queryBuilder.withFilter(termQuery(Gem.AUTHOR, author));
 		return queryBuilder.build();
 	}
 

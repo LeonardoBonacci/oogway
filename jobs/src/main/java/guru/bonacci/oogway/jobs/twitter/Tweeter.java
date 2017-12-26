@@ -1,7 +1,7 @@
 package guru.bonacci.oogway.jobs.twitter;
 
-import static org.slf4j.LoggerFactory.getLogger;
 import static java.lang.Math.min;
+import static org.slf4j.LoggerFactory.getLogger;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +12,7 @@ import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.oracle.client.OracleClient;
-import guru.bonacci.oogway.shareddomain.IGem;
+import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @Component
 public class Tweeter {
@@ -27,7 +27,7 @@ public class Tweeter {
 
 	@Scheduled(cron = "${twitter.cron}")
 	public void runForestRun() {
-		IGem random = oracleClient.findRandom();
+		GemCarrier random = oracleClient.findRandom();
 		String tweet = random != null ? random.getSaying() : "Now is " + LocalDateTime.now();
 		logger.info("tweet: " + tweet);
 

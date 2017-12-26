@@ -13,7 +13,9 @@ public interface GemRepositoryCustom {
 	
 	void saveTheNewOnly(Gem... gems);
 	
-	Optional<Gem> consultTheOracle(String searchString, Optional<String> author);
+	Optional<Gem> consultTheOracle(String searchString);
+
+	Optional<Gem> consultTheOracle(String searchString, String author);
 	
 	Optional<Gem> findRandom();
 }

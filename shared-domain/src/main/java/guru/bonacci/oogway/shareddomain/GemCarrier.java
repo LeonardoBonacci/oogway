@@ -10,7 +10,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  * I personally don't hate DTO's, but I also don't like them.
  * Therefore an IDTO: Incognito-DTO.
  */
-public class GemCarrier implements IGem {
+public class GemCarrier {
 
 	private String saying;
 
@@ -28,22 +28,18 @@ public class GemCarrier implements IGem {
 		this.author = author;
 	}
 
-	@Override
 	public String getSaying() {
 		return saying;
 	}
 
-	@Override
 	public void setSaying(String saying) {
 		this.saying = saying;
 	}
 
-	@Override
 	public String getAuthor() {
 		return author;
 	}
 
-	@Override
 	public void setAuthor(String author) {
 		this.author = author;
 	}

@@ -35,7 +35,7 @@ public class OracleControllerTest {
 	
 	@Test
 	public void shouldReturnNullOnConsult() throws Exception {
-		given(gemRepo.consultTheOracle("tell me the truth", Optional.empty())).willReturn(Optional.empty());
+		given(gemRepo.consultTheOracle("tell me the truth", null)).willReturn(Optional.empty());
 
 		mvc.perform(get("/gems?q=tell me the truth"))
 			.andExpect(status().isOk())
@@ -43,8 +43,8 @@ public class OracleControllerTest {
 	}
 
 	@Test
-	public void shouldRecieveMessageOnQ() throws Exception {
-		given(gemRepo.consultTheOracle("tell me the truth", Optional.of("dummy")))
+	public void shouldReceiveMessageOnQ() throws Exception {
+		given(gemRepo.consultTheOracle("tell me the truth", "dummy"))
 			.willReturn(Optional.of(new Gem("why should I?", "dumb")));
 
 		mvc.perform(get("/gems?q=tell me the truth&by=dummy"))
@@ -53,8 +53,8 @@ public class OracleControllerTest {
 	}
 	
 	@Test
-	public void shouldRecieveMessageOnQAndBy() throws Exception {
-		given(gemRepo.consultTheOracle("tell me the truth", Optional.of("dummy")))
+	public void shouldReceiveMessageOnQAndBy() throws Exception {
+		given(gemRepo.consultTheOracle("tell me the truth", "dummy"))
 			.willReturn(Optional.of(new Gem("why should I?", "dumb")));
 
 		mvc.perform(get("/gems?q=tell me the truth&by=dummy"))

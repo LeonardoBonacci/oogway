@@ -12,16 +12,14 @@ import org.springframework.data.elasticsearch.annotations.Field;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import guru.bonacci.oogway.shareddomain.IGem;
-
 /**
  * A gem is a cut and polished precious stone or pearl fine enough for
  * use in jewelry. In this context: wisdom is a gem of infinite value.
  */
 @Document(indexName = "oracle", type = "quote", shards = 1, replicas = 0, refreshInterval = "-1")
-public class Gem implements IGem {
+public class Gem {
 
-	public static final String SAID = "saying";
+	public static final String SAYING = "saying";
 	public static final String AUTHOR = "author";
 
 	@Id
@@ -64,22 +62,18 @@ public class Gem implements IGem {
 		this.id = id;
 	}
 
-	@Override
 	public String getSaying() {
 		return saying;
 	}
 
-	@Override
 	public void setSaying(String saying) {
 		this.saying = saying;
 	}
 
-	@Override
 	public String getAuthor() {
 		return author;
 	}
 
-	@Override
 	public void setAuthor(String author) {
 		this.author = author;
 	}

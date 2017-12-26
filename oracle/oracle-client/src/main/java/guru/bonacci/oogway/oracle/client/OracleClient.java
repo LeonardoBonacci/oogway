@@ -54,7 +54,7 @@ public class OracleClient {
 	public GemCarrier findRandom() {
 		logger.info("find me a random Gem");
 
-		GemCarrier gem = null; 
+		GemCarrier gem = new GemCarrier("Good artists copy, great artists steal.", "Leonardo Bonacci"); 
 		try {
 			gem = restTemplate.getForObject(serviceUrl + "/gems/random", GemCarrier.class);
 		} catch(Exception ise) {

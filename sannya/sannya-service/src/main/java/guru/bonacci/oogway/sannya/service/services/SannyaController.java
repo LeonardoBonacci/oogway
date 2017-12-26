@@ -21,13 +21,13 @@ public class SannyaController {
 	@Autowired
 	private PitchforkManager manager;
 
-	@RequestMapping(path = "/backdoor", method = POST)
+	@RequestMapping(path="/backdoor", method=POST)
 	public void index(@RequestBody String input) {
 		logger.info("Receiving secret request to process: '" + input + "'");
 		manager.delegate(input);
 	}
 
-	@RequestMapping(path = "/version", method = GET)
+	@RequestMapping(path="/version", method=GET)
 	public String version(@Value("${build.version}") String buildVersion) {
 		return buildVersion;
 	}	

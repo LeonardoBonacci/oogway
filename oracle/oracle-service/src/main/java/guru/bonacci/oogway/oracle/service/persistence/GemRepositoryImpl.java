@@ -50,7 +50,9 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 			gemRepository.save(newOnes);
 	}
 
-	@WatchMe // as spring data offers no proper hook to intercept search queries we do it the traditional way...
+	@WatchMe 
+	// don't ask me why, but the @WachtMe annotation is needed here to intercept
+	// these overloaded methods...
 	@Override
 	public Optional<Gem> consultTheOracle(String searchString) {
 		return consultTheOracle(searchString, null);

@@ -59,7 +59,7 @@ public class IPerable implements Iterable<String> {
 				if (currentIndex >= ipList.size()) {
 					try {
 						ipList = IPCrawler.crawl(bufferSize);
-					} catch (IOException e) {
+					} catch (Exception e) {
 						e.printStackTrace();
 						ipList = asList("119.168.33.192", 
 										"23.125.246.164", 
@@ -96,7 +96,8 @@ public class IPerable implements Iterable<String> {
 		}
 		
 		static List<String> crawl(int count) throws IOException {
-	        Response response = 
+			//TODO they changed their html...
+			Response response = 
 	                Jsoup.connect(serviceURL)
 	                .userAgent("Mozilla")
 	                .method(Method.POST)

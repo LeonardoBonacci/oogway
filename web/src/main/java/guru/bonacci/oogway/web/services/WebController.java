@@ -25,16 +25,15 @@ public class WebController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(path = "/consult", method = GET)
+	@RequestMapping(path="/consult", method=GET)
 	public String enquire(@RequestParam("q") String q) {
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
 		return service.enquire(q);
 	}
 	
 	@ResponseBody
-	@RequestMapping(path = "/version", method = GET)
+	@RequestMapping(path="/version", method=GET)
 	public String version(@Value("${build.version}") String buildVersion) {
 		return buildVersion;
 	}	
-
 }

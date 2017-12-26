@@ -27,29 +27,30 @@ public class OracleController {
 	@Autowired
 	private GemRepository repo;
 
-	@RequestMapping(path = "/gems", method = GET)
-	public GemCarrier search(	@RequestParam("q") String q, 
-						@RequestParam(value = "by", required = false) Optional<String> author) {
+	@RequestMapping(path="/gems", method=GET)
+	public Optional<GemCarrier> search(@RequestParam("q") String q, 
+							 		   @RequestParam(value="by", required=false) Optional<String> author) {
 		
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
-		Optional<Gem> gem = repo.consultTheOracle(q, author.orElse(null)); //TODO 
-		return gem.map(GemMapper.MAPPER::fromGem).orElse(null);
+		Optional<Gem> gem = author.map(a -> repo.consultTheOracle(q, a))
+								  .orElse(repo.consultTheOracle(q));
+		return gem.map(GemMapper.MAPPER::fromGem);
 	}	
 
-	@RequestMapping(path = "/gems/random", method = GET)
-	public GemCarrier random() {
+	@RequestMapping(path = "/gems/random", method=GET)
+	public Optional<GemCarrier> random() {
 		logger.info("Please find me a random gem");
 		Optional<Gem> gem = repo.findRandom(); 
-		return gem.map(GemMapper.MAPPER::fromGem).orElse(null);
+		return gem.map(GemMapper.MAPPER::fromGem);
 	}	
 
-	@RequestMapping(path = "/backdoor", method = POST)
+	@RequestMapping(path = "/backdoor", method=POST)
 	public void index(@RequestBody GemCarrier carrier) {
 		logger.info("Receiving secret request to index: '" + carrier + "'");
 		repo.saveTheNewOnly(GemMapper.MAPPER.toGem(carrier));
 	}
 	
-	@RequestMapping(path = "/version", method = GET)
+	@RequestMapping(path = "/version", method=GET)
 	public String version(@Value("${build.version}") String buildVersion) {
 		return buildVersion;
 	}	

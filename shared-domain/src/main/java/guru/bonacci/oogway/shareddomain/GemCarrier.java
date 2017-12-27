@@ -1,9 +1,12 @@
 package guru.bonacci.oogway.shareddomain;
 
+
 import static java.lang.String.format;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * https://rlogiacco.wordpress.com/2010/05/25/five-reasons-to-hate-dtos/
@@ -12,8 +15,10 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 public class GemCarrier {
 
+	@ApiModelProperty(notes = "What was once said", required = true)
 	private String saying;
 
+	@ApiModelProperty(notes = "By whom it was said")
 	private String author;
 
 	public GemCarrier() {

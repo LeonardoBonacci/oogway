@@ -18,39 +18,49 @@ import guru.bonacci.oogway.oracle.service.beanmapping.GemMapper;
 import guru.bonacci.oogway.oracle.service.persistence.Gem;
 import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
-public class OracleController {
+@RequestMapping("/gems")
+@Api(value = "gemming", description = "Made for Gem Mining")
+public class GemController {
 
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
 	private GemRepository repo;
 
-	@RequestMapping(path="/gems", method=GET)
+	@ApiOperation(value = "Search for a gem", response = GemCarrier.class)
+	@RequestMapping(method = GET)
 	public Optional<GemCarrier> search(@RequestParam("q") String q, 
 							 		   @RequestParam(value="by", required=false) Optional<String> author) {
-		
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
+		
 		Optional<Gem> gem = author.map(a -> repo.consultTheOracle(q, a))
 								  .orElse(repo.consultTheOracle(q));
 		return gem.map(GemMapper.MAPPER::fromGem);
 	}	
 
-	@RequestMapping(path = "/gems/random", method=GET)
+	@ApiOperation(value = "Pick a random gem", response = GemCarrier.class)
+	@RequestMapping(path = "/random", method = GET)
 	public Optional<GemCarrier> random() {
 		logger.info("Please find me a random gem");
+		
 		Optional<Gem> gem = repo.findRandom(); 
 		return gem.map(GemMapper.MAPPER::fromGem);
 	}	
 
-	@RequestMapping(path = "/backdoor", method=POST)
+	@ApiOperation(value = "Add a gem")
+	@RequestMapping(path = "/backdoor", method = POST)
 	public void index(@RequestBody GemCarrier carrier) {
 		logger.info("Receiving secret request to index: '" + carrier + "'");
+		
 		repo.saveTheNewOnly(GemMapper.MAPPER.toGem(carrier));
 	}
 	
-	@RequestMapping(path = "/version", method=GET)
+	@ApiOperation(value = "What's the version again?")
+	@RequestMapping(path = "/version", method = GET)
 	public String version(@Value("${build.version}") String buildVersion) {
 		return buildVersion;
 	}	

@@ -21,7 +21,8 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<nlp-version>3.7.0</nlp-version>
-		<org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
+		<mapstruct.version>1.2.0.Final</mapstruct.version>
+		<swagger.version>2.6.1</swagger.version>
 	</properties>
 
 	<modules>
@@ -45,9 +46,28 @@
 			</dependency>
 
 			<dependency>
+			    <groupId>io.springfox</groupId>
+			    <artifactId>springfox-swagger2</artifactId>
+			    <version>${swagger.version}</version>
+			    <scope>compile</scope>
+			    <exclusions>
+	    		    <exclusion>
+						<groupId>org.mapstruct</groupId>
+						<artifactId>mapstruct</artifactId>
+		    	    </exclusion>
+			    </exclusions>
+			</dependency>
+			<dependency>
+			    <groupId>io.springfox</groupId>
+			    <artifactId>springfox-swagger-ui</artifactId>
+			    <version>${swagger.version}</version>
+			    <scope>compile</scope>
+			</dependency>
+		
+			<dependency>
 				<groupId>org.mapstruct</groupId>
 				<artifactId>mapstruct-jdk8</artifactId>
-				<version>${org.mapstruct.version}</version>
+				<version>${mapstruct.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-io</groupId>
@@ -145,23 +165,6 @@
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.mapstruct</groupId>
-							<artifactId>mapstruct-processor</artifactId>
-							<version>${org.mapstruct.version}</version>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
 		</plugins>
 
 		<pluginManagement>
@@ -177,6 +180,22 @@
 							</goals>
 						</execution>
 					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.5.1</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>org.mapstruct</groupId>
+								<artifactId>mapstruct-processor</artifactId>
+								<version>${mapstruct.version}</version>
+							</path>
+						</annotationProcessorPaths>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>

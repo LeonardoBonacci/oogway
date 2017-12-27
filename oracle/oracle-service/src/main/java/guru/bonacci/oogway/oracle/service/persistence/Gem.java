@@ -26,10 +26,10 @@ public class Gem {
 	@JsonIgnore
 	private String id;
 
-	@Field(type=String, store=true, analyzer="english", searchAnalyzer="english")
+	@Field(type = String, store = true, analyzer = "english", searchAnalyzer = "english")
 	private String saying;
 
-	@Field(type=String, index=not_analyzed)
+	@Field(type = String, index = not_analyzed)
 	private String author;
 
 	public Gem() {

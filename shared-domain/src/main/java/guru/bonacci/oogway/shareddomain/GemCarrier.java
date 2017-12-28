@@ -1,19 +1,26 @@
 package guru.bonacci.oogway.shareddomain;
 
+
 import static java.lang.String.format;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.validator.constraints.NotBlank;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * https://rlogiacco.wordpress.com/2010/05/25/five-reasons-to-hate-dtos/
  * I personally don't hate DTO's, but I also don't like them.
  * Therefore an IDTO: Incognito-DTO.
  */
-public class GemCarrier implements IGem {
+public class GemCarrier {
 
+	@ApiModelProperty(notes = "Once said", required = true)
+	@NotBlank
 	private String saying;
 
+	@ApiModelProperty(notes = "By a certain individual")
 	private String author;
 
 	public GemCarrier() {
@@ -28,22 +35,18 @@ public class GemCarrier implements IGem {
 		this.author = author;
 	}
 
-	@Override
 	public String getSaying() {
 		return saying;
 	}
 
-	@Override
 	public void setSaying(String saying) {
 		this.saying = saying;
 	}
 
-	@Override
 	public String getAuthor() {
 		return author;
 	}
 
-	@Override
 	public void setAuthor(String author) {
 		this.author = author;
 	}

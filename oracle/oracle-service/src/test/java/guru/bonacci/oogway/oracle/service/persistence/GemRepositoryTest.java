@@ -59,7 +59,7 @@ public class GemRepositoryTest {
 		Gem input = new Gem(said, author);
 		repo.saveTheNewOnly(input);
 
-		Gem result = repo.consultTheOracle("the said", Optional.empty()).get();
+		Gem result = repo.consultTheOracle("the said").get();
 
 		assertThat(result.getSaying(), is(equalTo(said)));
 		assertThat(result.getAuthor(), is(equalTo(author)));
@@ -92,7 +92,7 @@ public class GemRepositoryTest {
 		Gem gem = new Gem("how are you I am fine");
 		repo.save(gem);
 		
-		Optional<Gem> result = repo.consultTheOracle("hello how are you", Optional.empty());
+		Optional<Gem> result = repo.consultTheOracle("hello how are you");
 		assertThat(gem, is(equalTo(result.get())));
 	}
 
@@ -104,7 +104,7 @@ public class GemRepositoryTest {
 		
 		Set<Gem> results = new HashSet<>();
 		for (int i=0; i<10; i++) 
-			results.add(repo.consultTheOracle("hello how are you", Optional.empty()).get());
+			results.add(repo.consultTheOracle("hello how are you").get());
 
 		assertThat(results.size(), greaterThan(1));
 	}
@@ -114,7 +114,7 @@ public class GemRepositoryTest {
 		Gem gem = new Gem("how are you I am fine");
 		repo.save(gem);
 		
-		Optional<Gem> result = repo.consultTheOracle("something completely different", Optional.empty());
+		Optional<Gem> result = repo.consultTheOracle("something completely different");
 		assertThat(true, is(not(result.isPresent())));
 	}
 	
@@ -123,7 +123,7 @@ public class GemRepositoryTest {
 		Gem gem = new Gem("hello", "Harry");
 		repo.save(gem);
 		
-		Optional<Gem> result = repo.consultTheOracle("hello", Optional.of("Harry"));
+		Optional<Gem> result = repo.consultTheOracle("hello", "Harry");
 		assertThat(gem, is(equalTo(result.get())));
 	}
 
@@ -132,7 +132,7 @@ public class GemRepositoryTest {
 		Gem gem = new Gem("hello", "Harry");
 		repo.save(gem);
 		
-		Optional<Gem> result = repo.consultTheOracle("hello", Optional.of("Harr"));
+		Optional<Gem> result = repo.consultTheOracle("hello", "Harr");
 		assertFalse(result.isPresent());
 	}
 	

@@ -12,16 +12,14 @@ import org.springframework.data.elasticsearch.annotations.Field;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import guru.bonacci.oogway.shareddomain.IGem;
-
 /**
  * A gem is a cut and polished precious stone or pearl fine enough for
  * use in jewelry. In this context: wisdom is a gem of infinite value.
  */
-@Document(indexName = "oracle", type = "quote", shards = 1, replicas = 0, refreshInterval = "-1")
-public class Gem implements IGem {
+@Document(indexName="oracle", type="quote", shards=1, replicas=0, refreshInterval="-1")
+public class Gem {
 
-	public static final String SAID = "saying";
+	public static final String SAYING = "saying";
 	public static final String AUTHOR = "author";
 
 	@Id
@@ -64,22 +62,31 @@ public class Gem implements IGem {
 		this.id = id;
 	}
 
-	@Override
 	public String getSaying() {
 		return saying;
 	}
 
-	@Override
 	public void setSaying(String saying) {
 		this.saying = saying;
 	}
 
-	@Override
+	/*
+	 * I had a dream... 
+	 * 
+	 * What is said to work for hibernate/jpa does not work for spring-data-elasticsearch: return Optional<String>
+	 * 
+	 * 'If we are using field-based access persistence, 
+	 * then the underlying entity attribute can be mapped using the actual persisted type, 
+	 * while the getter method can use an Optional instead.'
+	 * 
+	 * ES demands the instance variable and its corresponding getter to be of both the same name AND the same type :(
+	 * 
+	 * Then the GemMapper would include a custom mapper for optional strings to the normal strings equivalent in the dto.
+	 */
 	public String getAuthor() {
 		return author;
 	}
 
-	@Override
 	public void setAuthor(String author) {
 		this.author = author;
 	}

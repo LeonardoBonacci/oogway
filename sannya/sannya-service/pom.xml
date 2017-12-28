@@ -48,8 +48,8 @@
 			<artifactId>spring-cloud-stream-test-support</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
 
+		
 		<!-- For language analysis -->
 		<dependency>
 			<groupId>org.apache.lucene</groupId>

@@ -28,6 +28,7 @@ public class WebController {
 	@RequestMapping(path = "/consult", method = GET)
 	public String enquire(@RequestParam("q") String q) {
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
+
 		return service.enquire(q);
 	}
 	
@@ -36,5 +37,4 @@ public class WebController {
 	public String version(@Value("${build.version}") String buildVersion) {
 		return buildVersion;
 	}	
-
 }

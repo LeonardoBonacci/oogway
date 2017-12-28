@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
-import guru.bonacci.oogway.shareddomain.IGem;
 
 /**
  * Talks to the Oracle via REST
@@ -32,18 +31,18 @@ public class OracleClient {
 		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
 	}
 
-	public Optional<IGem> consult(String searchString) {
+	public Optional<GemCarrier> consult(String searchString) {
 		return consult(searchString, null);
 	}
 
-	public Optional<IGem> consult(String searchString, String by) {
+	public Optional<GemCarrier> consult(String searchString, String by) {
 		logger.info("Oracle consultation:  '" + searchString + "'");
 
 		String params = "?q={searchString}";
 		if (by != null)
 			params += "&by={by}";
 		
-		IGem gem = null; 
+		GemCarrier gem = null; 
 		try {
 			gem = restTemplate.getForObject(serviceUrl + "/gems" + params, GemCarrier.class, searchString, by);
 		} catch(Exception ise) {
@@ -52,10 +51,10 @@ public class OracleClient {
 		return Optional.ofNullable(gem);
 	}
 	
-	public IGem findRandom() {
+	public GemCarrier findRandom() {
 		logger.info("find me a random Gem");
 
-		IGem gem = null; 
+		GemCarrier gem = new GemCarrier("Good artists copy, great artists steal.", "Leonardo Bonacci"); 
 		try {
 			gem = restTemplate.getForObject(serviceUrl + "/gems/random", GemCarrier.class);
 		} catch(Exception ise) {

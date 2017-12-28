@@ -24,6 +24,7 @@ public class SannyaController {
 	@RequestMapping(path = "/backdoor", method = POST)
 	public void index(@RequestBody String input) {
 		logger.info("Receiving secret request to process: '" + input + "'");
+
 		manager.delegate(input);
 	}
 

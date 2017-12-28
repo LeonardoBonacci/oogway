@@ -7,8 +7,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
-import java.util.Optional;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -44,7 +42,7 @@ public class EnquiryInterceptorTest {
 	@Test
 	public void shouldInterceptTheConsultMethodWithoutAuthor() {
 		String searchString = "something completely different";
-		repo.consultTheOracle(searchString, Optional.empty());
+		repo.consultTheOracle(searchString);
 
 		verify(gateway, times(1)).send(captor.capture());
 		assertThat(captor.getValue().getContent(), is(equalTo(searchString)));
@@ -53,7 +51,7 @@ public class EnquiryInterceptorTest {
 	@Test
 	public void shouldInterceptTheConsultMethodWithAuthor() {
 		String searchString = "something completely different";
-		repo.consultTheOracle(searchString, Optional.of("some author"));
+		repo.consultTheOracle(searchString, "some author");
 
 		verify(gateway, times(1)).send(captor.capture());
 		assertThat(captor.getValue().getContent(), is(equalTo(searchString)));

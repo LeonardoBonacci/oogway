@@ -10,11 +10,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.jsoup.Jsoup;
 import org.jsoup.Connection.Method;
 import org.jsoup.Connection.Response;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -24,9 +23,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Profile("dev")
 public class IPerable implements Iterable<String> {
-
-	@Autowired
-	private IPCrawler crawler;
 
 	private int bufferSize = 10;
 	private List<String> ipList = new ArrayList<>();
@@ -62,8 +58,8 @@ public class IPerable implements Iterable<String> {
 			public String next() {
 				if (currentIndex >= ipList.size()) {
 					try {
-						ipList = crawler.crawl(bufferSize);
-					} catch (IOException e) {
+						ipList = IPCrawler.crawl(bufferSize);
+					} catch (Exception e) {
 						e.printStackTrace();
 						ipList = asList("119.168.33.192", 
 										"23.125.246.164", 
@@ -89,19 +85,19 @@ public class IPerable implements Iterable<String> {
 		return ips;
 	}
 	
-	@Component
-	public class IPCrawler {
+	static class IPCrawler {
 
 		public static final String serviceURL = "http://sqa.fyicenter.com/Online_Test_Tools/Test_IP_Address_Generator.php";
 
 		private static final int DEFAULT_SIZE = 12;
 
-		public List<String> crawl() throws IOException {
+		static List<String> crawl() throws IOException {
 			return crawl(DEFAULT_SIZE);
 		}
 		
-		public List<String> crawl(int count) throws IOException {
-	        Response response = 
+		static List<String> crawl(int count) throws IOException {
+			//TODO they changed their html...
+			Response response = 
 	                Jsoup.connect(serviceURL)
 	                .userAgent("Mozilla")
 	                .method(Method.POST)

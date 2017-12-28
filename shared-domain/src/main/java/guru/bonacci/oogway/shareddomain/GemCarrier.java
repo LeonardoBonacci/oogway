@@ -5,6 +5,7 @@ import static java.lang.String.format;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.validator.constraints.NotBlank;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -15,10 +16,11 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class GemCarrier {
 
-	@ApiModelProperty(notes = "What was once said", required = true)
+	@ApiModelProperty(notes = "Once said", required = true)
+	@NotBlank
 	private String saying;
 
-	@ApiModelProperty(notes = "By whom it was said")
+	@ApiModelProperty(notes = "By a certain individual")
 	private String author;
 
 	public GemCarrier() {

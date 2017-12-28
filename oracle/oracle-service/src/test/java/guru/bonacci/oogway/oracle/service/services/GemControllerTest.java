@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -16,17 +17,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import guru.bonacci.oogway.oracle.service.OracleTestApp;
 import guru.bonacci.oogway.oracle.service.persistence.Gem;
 import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
+import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=OracleTestApp.class, webEnvironment=RANDOM_PORT)
 @AutoConfigureMockMvc
-public class OracleControllerTest {
+public class GemControllerTest {
 
 	@Autowired
 	MockMvc mvc;
@@ -66,4 +71,30 @@ public class OracleControllerTest {
 			.andExpect(content().json("{'saying':'why should I?', 'author':'dumb'}")); 
 	}
 
+	@Autowired
+	ObjectMapper objectMapper;
+
+	@Test
+	public void shouldInsertThroughBackdoor() throws Exception {
+		mvc.perform(post("/gems/backdoor")
+					.contentType(MediaType.APPLICATION_JSON)
+					.content(objectMapper.writeValueAsString(new GemCarrier("a","b"))))
+			.andExpect(status().isOk()); 
+	}
+
+	@Test
+	public void shouldBlockInvalidInputThroughBackdoor() throws Exception {
+		mvc.perform(post("/gems/backdoor")
+					.contentType(MediaType.APPLICATION_JSON)
+					.content(objectMapper.writeValueAsString(new GemCarrier("I cannot be inserted","b"))))
+			.andExpect(status().isBadRequest()); 
+	}
+
+	@Test
+	public void shouldBlockEmptySayingThroughBackdoor() throws Exception {
+		mvc.perform(post("/gems/backdoor")
+					.contentType(MediaType.APPLICATION_JSON)
+					.content(objectMapper.writeValueAsString(new GemCarrier("","b"))))
+			.andExpect(status().isBadRequest()); 
+	}
 }

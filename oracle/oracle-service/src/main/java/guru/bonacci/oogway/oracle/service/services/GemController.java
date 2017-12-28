@@ -6,9 +6,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +34,11 @@ public class GemController {
 
 	@Autowired
 	private GemRepository repo;
+
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.addValidators(new GemValidator());
+	}
 
 	@ApiOperation(value = "Search for a gem", response = GemCarrier.class)
 	@RequestMapping(method = GET)
@@ -53,7 +62,7 @@ public class GemController {
 
 	@ApiOperation(value = "Add a gem")
 	@RequestMapping(path = "/backdoor", method = POST)
-	public void index(@RequestBody GemCarrier carrier) {
+	public void index(@Valid @RequestBody GemCarrier carrier) {
 		logger.info("Receiving secret request to index: '" + carrier + "'");
 		
 		repo.saveTheNewOnly(GemMapper.MAPPER.toGem(carrier));

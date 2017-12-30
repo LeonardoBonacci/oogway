@@ -15,6 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.web.WebTestApp;
 
 @RunWith(SpringRunner.class)
@@ -35,10 +36,10 @@ public class WebControllerTest {
 	
 	@Test
 	public void shouldReceive200OnConsult() throws Exception {
-		given(service.enquire("tell me the truth")).willReturn("why should I?");
-
+		given(service.enquire("tell me the truth")).willReturn(new GemCarrier("why should I?", "oogway"));
+		
 		mvc.perform(get("/consult?q=tell me the truth"))
 			.andExpect(status().isOk())
-			.andExpect(content().string("why should I?"));
-	}
+			.andExpect(content().json("{\"saying\":\"why should I?\", \"author\":\"oogway\"}"));
+		}
 }

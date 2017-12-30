@@ -41,15 +41,15 @@ public class FirstLineSupportServiceTest {
 	
 	@Test
 	public void shouldGiveEmptyStringAnswer() {
-		assertThat(service.enquire(""), is(equalTo("No question no answer..")));
+		assertThat(service.enquire(""), is(equalTo(new GemCarrier("No question no answer..", "oogway"))));
 	}
 
 	@Test
 	public void shouldGiveAnswer() {
-		GemCarrier expected = new GemCarrier("some answer");
+		GemCarrier expected = new GemCarrier("some answer", "some person");
 		when(oracleService.consult(anyString())).thenReturn(Optional.of(expected));
 
-		assertThat(service.enquire("some input"), is(equalTo(expected.getSaying())));
+		assertThat(service.enquire("some input"), is(equalTo(expected)));
 	}
 
 	@Test
@@ -58,6 +58,6 @@ public class FirstLineSupportServiceTest {
 		when(oracleService.consult(anyString())).thenReturn(Optional.empty());
 		when(postponer.saySomething()).thenReturn(postponingAnswer);
 
-		assertThat(service.enquire("some input"), is(equalTo(postponingAnswer)));
+		assertThat(service.enquire("some input").getSaying(), is(equalTo(postponingAnswer)));
 	}
 }

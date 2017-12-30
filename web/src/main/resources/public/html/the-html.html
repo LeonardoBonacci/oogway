@@ -20,8 +20,14 @@
                   },
                   success: function(response) {
                       term.resume();
-                      term.echo('[[;;;response]' + response + ']');
-                      //or just display as raw: term.echo(response, {raw:true});
+                      term.echo('[[;;;response]' + response.saying + ']');
+                      
+                      //term.echo('[[;;;response]' + response.saying + ' (' + response.author + ')' + ']');
+					  //or just display as raw: term.echo(response, {raw:true});
+					  
+					  //TODO https://css-tricks.com/snippets/css/typewriter-effect/
+					  //TODO https://www.w3schools.com/bootstrap/bootstrap_tooltip.asp
+					  //TODO https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API	                      
                   },
                   error: function(xhr) {
                       term.resume();

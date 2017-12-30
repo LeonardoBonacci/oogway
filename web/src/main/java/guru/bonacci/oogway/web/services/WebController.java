@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import guru.bonacci.oogway.shareddomain.GemCarrier;
+
 @Controller
 public class WebController {
 
@@ -26,7 +28,7 @@ public class WebController {
 	
 	@ResponseBody
 	@RequestMapping(path = "/consult", method = GET)
-	public String enquire(@RequestParam("q") String q) {
+	public GemCarrier enquire(@RequestParam("q") String q) {
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
 
 		return service.enquire(q);

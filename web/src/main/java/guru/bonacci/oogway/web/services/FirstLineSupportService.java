@@ -33,11 +33,11 @@ public class FirstLineSupportService {
 	private Postponer postponer;
 
 	@WatchMe
-	public String enquire(String q) {
+	public GemCarrier enquire(String q) {
 		if (isEmpty(q))
-			return "No question no answer..";
+			return new GemCarrier("No question no answer..", "oogway");
 
 		Optional<GemCarrier> gem = oracleClient.consult(q);
-		return gem.map(GemCarrier::getSaying).orElse(postponer.saySomething());
+		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
 	}
 }

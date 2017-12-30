@@ -96,17 +96,16 @@ public class IPerable implements Iterable<String> {
 		}
 		
 		static List<String> crawl(int count) throws IOException {
-			//TODO they changed their html...
 			Response response = 
 	                Jsoup.connect(serviceURL)
 	                .userAgent("Mozilla")
 	                .method(Method.POST)
 	                .data("Count", Integer.toString(count))
-	                .data("Submit", "Start")
+	                .data("Submit", "Generate")
 	                .execute();
 	        
-			Element textarea = response.parse().select("textarea").first();
-			return Stream.of(textarea.text().split("\n")).collect(toList());
+			Element ips = response.parse().select("pre").first();
+			return Stream.of(ips.text().split("\n")).collect(toList());
 		}
 	}
 }

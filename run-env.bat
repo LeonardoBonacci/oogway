@@ -11,3 +11,6 @@ rem set KIBANA_HOME=C:\Tools\kibana-4.6.3-windows-x86
 start cmd.exe /k "cd %ES_HOME% & bin\elasticsearch"
 start cmd.exe /k "cd %RABBIT_HOME% & rabbitmq_server-3.6.12\sbin\rabbitmq-server.bat"
 rem start cmd.exe /k "cd %KIBANA_HOME% & bin\kibana"
+
+
+call spectre\run-env.bat

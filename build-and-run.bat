@@ -10,7 +10,10 @@ if "%skip-tests%" == "skip" (
     set maven-build=mvn clean install
 )
 
-rem quickly build the parent pom
+rem  build the parent pom
 start /wait cmd.exe /c "%maven-build%"
 
 call just-run.bat 
+
+cd spectre rem run spectre from its own directory
+call just-run.bat

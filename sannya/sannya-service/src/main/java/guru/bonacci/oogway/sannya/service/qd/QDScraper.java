@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannya.service.bq;
+package guru.bonacci.oogway.sannya.service.qd;
 
 
 import static org.apache.commons.lang3.RandomUtils.nextInt;
@@ -6,6 +6,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 import java.io.IOException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -19,17 +20,17 @@ import guru.bonacci.oogway.sannya.service.general.WebScraper;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 /**
- * Quote of the day today:
- * “I want to do to you what spring does with the cherry trees.” ― Pablo Neruda
+ * Most popular quote:
+ * “Don't cry because it's over, smile because it happened.” ― Dr. Seuss
  */
 @Component
-public class BQScraper extends WebScraper implements PageCache {
+public class QDScraper extends WebScraper implements PageCache {
 
 	private final Logger logger = getLogger(this.getClass());
 
-    @Value("${web.url.bq:https://www.brainyquote.com/topics/#tag#_#page#?vm=l}")
+	@Value("${web.url.qd:https://www.quotesdaddy.com/find/tag/#tag#/#page#}")
 	private String url;
-	
+
 	@Override
 	protected String determineURL(String searchStr) {
 		String searchURL = url.replace("#tag#", searchStr);
@@ -40,15 +41,17 @@ public class BQScraper extends WebScraper implements PageCache {
 	@Override
     @Cacheable("pages")
 	public Integer getNrOfPages(String searchURL) {
-		Integer pageNr = 1;
+		int pageNr = 1;
 		try {
 			Document doc = get(searchURL);
-			Elements elements = doc.select("ul.pagination");
-			elements = elements.first().getElementsByAttribute("href");
-			for (int i=0; i<elements.size(); i++) {
+			Element element = doc.select("div.topPager").select("a").first();
+			while (element != null) {
 				try {
-					pageNr = Integer.parseInt(elements.get(i).text());
-			    } catch (NumberFormatException ignore) {}
+					String href = element.attr("href");
+					pageNr = Integer.parseInt(StringUtils.substringAfterLast(href, "/"));
+			    } catch (Exception ignore) {}
+
+				element = element.nextElementSibling();
 			}
 		} catch (Exception e) { 
 			// Taking the easy way, catching all exceptions.
@@ -61,24 +64,25 @@ public class BQScraper extends WebScraper implements PageCache {
     }
 
 	@Override
-	protected Elements consultWeb(String searchURL) {
+	public Elements consultWeb(String searchURL) {
 		try {
 			logger.debug("Firing request " + searchURL);
 			Document doc = get(searchURL);
-			return doc.select("div[id='quotesList']").select("div.bqQt");
+			return doc.select("div.quoteObject");
 		} catch (IOException e) {
 			logger.error("Something went wrong. No stress, it does not need to be serieus: " + e.getMessage());
 		}
 		return new Elements();
 	}
-	
+
 	@Override
 	public GemCarrier toGem(Element el) {
-		String quote = el.select("a[title='view quote']").first().ownText();
-		
-		Elements els = el.select("a[title='view author']");
-		String author = els.size() > 0 ? els.first().ownText() : null;
-
+		String quote = stripText(el.select("div.quoteText").select("a").first().ownText());
+		String author = stripText(el.select("p.authorName").select("a").first().ownText());
 		return new GemCarrier(quote, author);
+	}
+
+	private String stripText(String str) {
+		return str.replace("“", "").replace("”", "");
 	}
 }

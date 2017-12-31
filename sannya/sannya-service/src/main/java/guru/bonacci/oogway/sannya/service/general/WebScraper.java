@@ -24,14 +24,15 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
  * 
  * 'oogway's ugly looking code is in my subclasses'
  */
-public abstract class WebScraper {
+public abstract class WebScraper implements Scraper {
 
 	/**
 	 * To not overly access our dear wisdom suppliers we keep an administration
 	 * of already visited urls. 
 	 */
 	private Set<String> consultedWebPages = synchronizedSet(new HashSet<>());	
-	
+
+	@Override
 	public List<GemCarrier> find(String... tags) {
 		return stream(tags)
 					.map(this::determineURL)

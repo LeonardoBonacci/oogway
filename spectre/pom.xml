@@ -11,9 +11,9 @@
 
 	<modules>
 		<module>local-timer</module>
-		<module>sentiment</module>
-		<module>weather</module>
-	    <module>spectre-shared</module>
 	    <module>money</module>
+		<module>sentiment</module>
+	    <module>spectre-shared</module>
+		<module>weather</module>
 	</modules>
 </project>

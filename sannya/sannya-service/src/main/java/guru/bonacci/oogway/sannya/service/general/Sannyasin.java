@@ -1,5 +1,7 @@
 package guru.bonacci.oogway.sannya.service.general;
 
+import static org.apache.commons.lang.StringUtils.split;
+
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -19,7 +21,12 @@ public interface Sannyasin {
 
 	List<Function<String,String>> preprocessingSteps();
 
-	List<GemCarrier> seek(String truth);
+	default List<GemCarrier> seek(String tagsAsString) {
+		String[] tags = split(tagsAsString);
+		return getScraper().find(tags);
+	}
+
+	Scraper getScraper();
 
 	List<Predicate<String>> postfilteringStep();
 }

@@ -26,13 +26,13 @@
 	</properties>
 
 	<modules>
-		<module>utilities</module>
+		<module>jobs</module>
 		<module>oracle</module>
 		<module>orchestration</module>
 		<module>sannya</module>
-		<module>web</module>
 		<module>shared-domain</module>
-		<module>jobs</module>
+		<module>spectre</module>
+		<module>web</module>
 	</modules>
 
 	<dependencyManagement>

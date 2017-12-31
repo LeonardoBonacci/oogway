@@ -10,10 +10,14 @@ if "%skip-tests%" == "skip" (
     set maven-build=mvn clean install
 )
 
-rem  build the parent pom
+rem build the parent pom
 start /wait cmd.exe /c "%maven-build%"
 
+rem and run oogway
 call just-run.bat 
 
-cd spectre rem run spectre from its own directory
+rem run spectre from its own directory
+cd spectre 
 call just-run.bat
+
+cd .. 

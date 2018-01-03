@@ -19,8 +19,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.spectre.money.MoneyTestApp;
-import guru.bonacci.spectreshared.persistence.Spec;
-import guru.bonacci.spectreshared.persistence.SpecRepository;
+import guru.bonacci.spectre.spectreshared.persistence.Spec;
+import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=MoneyTestApp.class, webEnvironment = NONE)

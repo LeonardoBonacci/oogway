@@ -41,8 +41,8 @@ import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.spectre.weather.services.WeatherSpec;
 import guru.bonacci.spectre.weather.services.WeatherSpecRepository;
-import guru.bonacci.spectreshared.events.SpectreEventChannels;
-import guru.bonacci.spectreshared.persistence.PersistenceTestConfig;
+import guru.bonacci.spectre.spectreshared.events.SpectreEventChannels;
+import guru.bonacci.spectre.spectreshared.persistence.PersistenceTestConfig;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT, properties = {

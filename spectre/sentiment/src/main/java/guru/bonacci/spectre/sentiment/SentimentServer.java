@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import guru.bonacci.spectreshared.events.SpectreEventChannels;
-import guru.bonacci.spectreshared.persistence.PersistenceConfig;
+import guru.bonacci.spectre.spectreshared.events.SpectreEventChannels;
+import guru.bonacci.spectre.spectreshared.persistence.PersistenceConfig;
 
 @SpringBootApplication
 @EnableDiscoveryClient

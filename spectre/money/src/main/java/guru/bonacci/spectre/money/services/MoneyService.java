@@ -6,9 +6,9 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import guru.bonacci.spectreshared.enrichment.SpectreService;
-import guru.bonacci.spectreshared.persistence.Spec;
-import guru.bonacci.spectreshared.persistence.SpecRepository;
+import guru.bonacci.spectre.spectreshared.enrichment.SpectreService;
+import guru.bonacci.spectre.spectreshared.persistence.Spec;
+import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 
 @Service
 public class MoneyService implements SpectreService {

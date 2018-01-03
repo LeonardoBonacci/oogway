@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.spectre.money.services.MoneyService;
-import guru.bonacci.spectreshared.events.SpectreRabbitEar;
+import guru.bonacci.spectre.spectreshared.events.SpectreRabbitEar;
 
 @Component
 public class MoneyRabbitEar extends SpectreRabbitEar {

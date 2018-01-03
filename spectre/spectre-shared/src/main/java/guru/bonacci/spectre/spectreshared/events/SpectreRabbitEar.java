@@ -1,13 +1,13 @@
-package guru.bonacci.spectreshared.events;
+package guru.bonacci.spectre.spectreshared.events;
 
-import static guru.bonacci.spectreshared.events.SpectreEventChannels.ENRICHMENT;
+import static guru.bonacci.spectre.spectreshared.events.SpectreEventChannels.ENRICHMENT;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import org.slf4j.Logger;
 import org.springframework.cloud.stream.annotation.StreamListener;
 
 import guru.bonacci.oogway.shareddomain.GenericEvent;
-import guru.bonacci.spectreshared.enrichment.SpectreService;
+import guru.bonacci.spectre.spectreshared.enrichment.SpectreService;
 
 public abstract class SpectreRabbitEar {
 

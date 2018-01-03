@@ -24,8 +24,8 @@ import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.spectre.localtimer.LocalTimerTestApp;
 import guru.bonacci.spectre.localtimer.services.LocalTimerService;
-import guru.bonacci.spectreshared.persistence.Spec;
-import guru.bonacci.spectreshared.persistence.SpecRepository;
+import guru.bonacci.spectre.spectreshared.persistence.Spec;
+import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=LocalTimerTestApp.class, webEnvironment = NONE, properties = {

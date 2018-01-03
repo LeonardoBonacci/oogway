@@ -1,4 +1,4 @@
-package guru.bonacci.spectreshared.persistence;
+package guru.bonacci.spectre.spectreshared.persistence;
 
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;

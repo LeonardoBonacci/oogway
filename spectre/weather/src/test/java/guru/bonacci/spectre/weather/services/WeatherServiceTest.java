@@ -23,8 +23,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.spectre.weather.WeatherTestApp;
-import guru.bonacci.spectreshared.persistence.Spec;
-import guru.bonacci.spectreshared.persistence.SpecRepository;
+import guru.bonacci.spectre.spectreshared.persistence.Spec;
+import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=WeatherTestApp.class, webEnvironment = NONE, properties = {

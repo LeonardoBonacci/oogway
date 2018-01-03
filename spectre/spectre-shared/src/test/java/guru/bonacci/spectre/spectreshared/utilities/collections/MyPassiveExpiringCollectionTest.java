@@ -1,4 +1,4 @@
-package guru.bonacci.spectreshared.utilities.collections;
+package guru.bonacci.spectre.spectreshared.utilities.collections;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
@@ -10,6 +10,8 @@ import static java.util.stream.Stream.of;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import guru.bonacci.spectre.spectreshared.utilities.collections.MyPassiveExpiringCollection;
 
 
 @RunWith(SpringRunner.class)

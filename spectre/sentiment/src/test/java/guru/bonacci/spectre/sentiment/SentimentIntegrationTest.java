@@ -36,8 +36,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.spectre.sentiment.services.SentimentSpec;
 import guru.bonacci.spectre.sentiment.services.SentimentSpecRepository;
-import guru.bonacci.spectreshared.events.SpectreEventChannels;
-import guru.bonacci.spectreshared.persistence.PersistenceTestConfig;
+import guru.bonacci.spectre.spectreshared.events.SpectreEventChannels;
+import guru.bonacci.spectre.spectreshared.persistence.PersistenceTestConfig;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)

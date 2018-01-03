@@ -1,4 +1,4 @@
-package guru.bonacci.spectreshared.utilities.collections;
+package guru.bonacci.spectre.spectreshared.utilities.collections;
 
 public class TooEnthusiasticWebserviceUsageException extends Exception {
 

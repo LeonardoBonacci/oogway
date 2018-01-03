@@ -13,9 +13,9 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.sentiment.SentimentCoreAnnotations;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.util.CoreMap;
-import guru.bonacci.spectreshared.enrichment.SpectreService;
-import guru.bonacci.spectreshared.persistence.Spec;
-import guru.bonacci.spectreshared.persistence.SpecRepository;
+import guru.bonacci.spectre.spectreshared.enrichment.SpectreService;
+import guru.bonacci.spectre.spectreshared.persistence.Spec;
+import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 
 @Service
 public class SentimentService implements SpectreService {

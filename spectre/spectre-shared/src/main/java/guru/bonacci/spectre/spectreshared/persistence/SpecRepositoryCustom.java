@@ -1,4 +1,4 @@
-package guru.bonacci.spectreshared.persistence;
+package guru.bonacci.spectre.spectreshared.persistence;
 
 import java.io.IOException;
 

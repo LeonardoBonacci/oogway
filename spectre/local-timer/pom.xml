@@ -15,12 +15,12 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>guru.bonacci.spectre</groupId>
+			<groupId>guru.bonacci.oogway</groupId>
 			<artifactId>spectre-shared</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>guru.bonacci.spectre</groupId>
+			<groupId>guru.bonacci.oogway</groupId>
 			<artifactId>spectre-shared</artifactId>
 			<type>test-jar</type>
 			<version>${project.version}</version>

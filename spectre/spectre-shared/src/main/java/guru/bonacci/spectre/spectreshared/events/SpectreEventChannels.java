@@ -1,4 +1,4 @@
-package guru.bonacci.spectreshared.events;
+package guru.bonacci.spectre.spectreshared.events;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;

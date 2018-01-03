@@ -1,4 +1,4 @@
-package guru.bonacci.spectreshared.enrichment;
+package guru.bonacci.spectre.spectreshared.enrichment;
 
 public interface SpectreService {
 

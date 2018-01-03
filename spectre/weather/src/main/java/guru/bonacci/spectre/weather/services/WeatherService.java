@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import guru.bonacci.spectreshared.enrichment.SpectreService;
-import guru.bonacci.spectreshared.persistence.Spec;
-import guru.bonacci.spectreshared.persistence.SpecRepository;
+import guru.bonacci.spectre.spectreshared.enrichment.SpectreService;
+import guru.bonacci.spectre.spectreshared.persistence.Spec;
+import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 
 @Service
 public class WeatherService implements SpectreService {

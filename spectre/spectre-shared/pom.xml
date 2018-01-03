@@ -13,7 +13,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>shared-domain</artifactId>
+			<artifactId>spectre-shared</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

@@ -32,6 +32,7 @@
 		<module>sannya</module>
 		<module>shared-domain</module>
 		<module>spectre</module>
+		<module>utilities</module>
 		<module>web</module>
 	</modules>
 

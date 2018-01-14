@@ -11,6 +11,8 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 /**
@@ -31,10 +33,7 @@ public class OracleClient {
 		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
 	}
 
-	public Optional<GemCarrier> consult(String searchString) {
-		return consult(searchString, null);
-	}
-
+	@HystrixCommand(fallbackMethod = "fallback")
 	public Optional<GemCarrier> consult(String searchString, String by) {
 		logger.info("Oracle consultation:  '" + searchString + "'");
 
@@ -42,16 +41,16 @@ public class OracleClient {
 		if (by != null)
 			params += "&by={by}";
 		
-		GemCarrier gem = null; 
-		try {
-			gem = restTemplate.getForObject(serviceUrl + "/gems" + params, GemCarrier.class, searchString, by);
-		} catch(Exception ise) {
-			logger.error("Help!!! Can't reach the oracle...", ise);	
-		}
+		GemCarrier gem = restTemplate.getForObject(serviceUrl + "/gems" + params, GemCarrier.class, searchString, by);
 		return Optional.ofNullable(gem);
 	}
-	
-	public GemCarrier findRandom() {
+
+    public Optional<GemCarrier> fallback(String searchString, String by) {
+        logger.error("Help!!! Can't reach the oracle...");    
+        return Optional.empty();
+    }
+
+    public GemCarrier findRandom() {
 		logger.info("find me a random Gem");
 
 		GemCarrier gem = new GemCarrier("Good artists copy, great artists steal.", "Leonardo Bonacci"); 

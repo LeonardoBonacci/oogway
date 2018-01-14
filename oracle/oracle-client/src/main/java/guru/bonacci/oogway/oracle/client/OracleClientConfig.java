@@ -17,4 +17,4 @@ public class OracleClientConfig {
 	RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
-}
+}	

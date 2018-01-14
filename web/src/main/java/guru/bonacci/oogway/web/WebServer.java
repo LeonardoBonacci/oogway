@@ -2,6 +2,7 @@ package guru.bonacci.oogway.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Import;
@@ -15,6 +16,7 @@ import guru.bonacci.oogway.web.events.WebEventChannels;
  * Micro-service for the user to communicate with
  */
 @SpringBootApplication
+@EnableCircuitBreaker
 @EnableDiscoveryClient
 @EnableBinding(WebEventChannels.class)
 @IntegrationComponentScan

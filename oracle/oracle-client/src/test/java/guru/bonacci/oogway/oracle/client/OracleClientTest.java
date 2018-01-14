@@ -1,58 +1,80 @@
 package guru.bonacci.oogway.oracle.client;
 
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.doReturn;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-import java.util.Optional;
-
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=OracleClientTestApp.class, webEnvironment = NONE, properties = {
-	"oracle.service.application.name:not-used"
+@SpringBootTest(classes=OracleClientTestApp.class, webEnvironment=NONE, properties = {
+		"oracle.service.application.name:not-used"
 })
 public class OracleClientTest {
 
-	@Autowired
-	OracleClient client;
-	
-	@LoadBalanced
-	@MockBean
-	RestTemplate rest;
+    MockRestServiceServer server;
 
-	@Test
+    @Autowired
+    RestTemplate rest;
+
+    @Autowired
+    OracleClient client;
+    
+    @Before
+    public void setup() {
+        this.server = MockRestServiceServer.createServer(rest);
+    }
+
+    @After
+    public void teardown() {
+        this.server = null;
+    }
+
+    @Test
 	public void shouldAnswerQ() {
-		String question = "how much do you charge per hour?";
-		String answer = "it's free";
-		
-		doReturn(new GemCarrier(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}", GemCarrier.class, question, null);
+        this.server.expect(requestTo("http://not-used/gems?q=something"))
+			        .andExpect(method(HttpMethod.GET))
+			        .andRespond(withSuccess("{\"saying\":\"bla\"}", MediaType.APPLICATION_JSON));
 
-		Optional<GemCarrier> gem = client.consult(question);
-		assertThat(gem.get().getSaying(), is(equalTo(answer)));
-	}
-	
-	@Test
-	public void shouldAnswerQAndBy() {
-		String question = "how much do you charge per hour?";
-		String by = "whom";
-		String answer = "it's free";
+		GemCarrier gem = client.consult("something", null).get();
+		assertThat(gem).isEqualTo(new GemCarrier("bla"));
+    }
+    
+    @Test
+    public void shouldAnswerQAndBy() {
+        this.server.expect(requestTo("http://not-used/gems?q=something&by=someone"))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess("{\"saying\":\"bla\", \"author\":\"bloe\"}", MediaType.APPLICATION_JSON));
+        
+        GemCarrier gem = client.consult("something", "someone").get();
+        assertThat(gem).isEqualTo(new GemCarrier("bla", "bloe"));
+    }
 
-		doReturn(new GemCarrier(answer)).when(rest).getForObject("http://not-used" + "/gems?q={searchString}&by={by}", GemCarrier.class, question, by);
+    @Test
+    public void shouldFallback() {
+    	this.server.expect(requestTo("http://not-used/gems?q=something&by=someone"))
+        		.andExpect(method(HttpMethod.GET))
+        		.andRespond(withServerError());
+        
+        GemCarrier gem = client.consult("something", "someone").get();
+        assertThat(gem).isEqualTo(new GemCarrier("Fall Back Hello world"));
+    }
 
-		Optional<GemCarrier> gem = client.consult(question, by);
-		assertThat(gem.get().getSaying(), is(equalTo(answer)));
-	}
+    
 }

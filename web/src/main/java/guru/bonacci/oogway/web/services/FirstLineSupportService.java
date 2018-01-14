@@ -37,7 +37,7 @@ public class FirstLineSupportService {
 		if (isEmpty(q))
 			return new GemCarrier("No question no answer..", "oogway");
 
-		Optional<GemCarrier> gem = oracleClient.consult(q);
+		Optional<GemCarrier> gem = oracleClient.consult(q, null);
 		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
 	}
 }

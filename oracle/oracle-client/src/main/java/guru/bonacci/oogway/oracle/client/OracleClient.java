@@ -33,7 +33,7 @@ public class OracleClient {
 		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
 	}
 
-	@HystrixCommand(fallbackMethod = "fallback")
+	@HystrixCommand(fallbackMethod = "fallbackConsult")
 	public Optional<GemCarrier> consult(String searchString, String by) {
 		logger.info("Oracle consultation:  '" + searchString + "'");
 
@@ -45,20 +45,26 @@ public class OracleClient {
 		return Optional.ofNullable(gem);
 	}
 
-    public Optional<GemCarrier> fallback(String searchString, String by) {
-        logger.error("Help!!! Can't reach the oracle...");    
-        return Optional.empty();
+	public Optional<GemCarrier> fallbackConsult(String searchString, String by, Throwable t) {
+        return fallback(t);
     }
 
-    public GemCarrier findRandom() {
+	@HystrixCommand(fallbackMethod = "fallback")
+    public Optional<GemCarrier> random() {
 		logger.info("find me a random Gem");
 
-		GemCarrier gem = new GemCarrier("Good artists copy, great artists steal.", "Leonardo Bonacci"); 
-		try {
-			gem = restTemplate.getForObject(serviceUrl + "/gems/random", GemCarrier.class);
-		} catch(Exception ise) {
-			logger.error("Help!!! Can't reach the oracle...", ise);	
-		}
-		return gem;
+//TODO		GemCarrier gem = new GemCarrier("Good artists copy, great artists steal.", "Leonardo Bonacci"); 
+		GemCarrier gem = restTemplate.getForObject(serviceUrl + "/gems/random", GemCarrier.class);
+		return Optional.ofNullable(gem);
 	}
+	
+    /**
+     * General fallback method
+     * @param t
+     * @return
+     */
+    public Optional<GemCarrier> fallback(Throwable t) {
+        logger.error("Help!!! Can't reach the oracle...", t);    
+        return Optional.empty();
+    }
 }

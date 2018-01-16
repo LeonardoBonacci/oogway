@@ -27,7 +27,7 @@ public class Tweeter {
 
 	@Scheduled(cron = "${twitter.cron}")
 	public void runForestRun() {
-		GemCarrier random = oracleClient.findRandom();
+		GemCarrier random = oracleClient.random();
 		String tweet = random != null ? random.getSaying() : "Now is " + LocalDateTime.now();
 		logger.info("tweet: " + tweet);
 

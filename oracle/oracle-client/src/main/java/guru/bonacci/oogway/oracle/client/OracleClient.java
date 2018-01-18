@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
@@ -49,11 +50,13 @@ public class OracleClient {
         return fallback(t);
     }
 
-	@HystrixCommand(fallbackMethod = "fallback")
-    public Optional<GemCarrier> random() {
+	@HystrixCommand(fallbackMethod = "fallback",
+					commandProperties = {
+							@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "500")
+					})
+	public Optional<GemCarrier> random() {
 		logger.info("find me a random Gem");
 
-//TODO		GemCarrier gem = new GemCarrier("Good artists copy, great artists steal.", "Leonardo Bonacci"); 
 		GemCarrier gem = restTemplate.getForObject(serviceUrl + "/gems/random", GemCarrier.class);
 		return Optional.ofNullable(gem);
 	}

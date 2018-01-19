@@ -9,3 +9,4 @@ start cmd.exe /k "cd sannya\sannya-service & java -jar target\sannya-service-%ve
 start cmd.exe /k "cd web & java -jar target\web-%version%.jar""
 start cmd.exe /k "cd jobs & java -jar target\jobs-%version%.jar""
 
+start cmd.exe /k "cd monitoring & mvn spring-boot:run"

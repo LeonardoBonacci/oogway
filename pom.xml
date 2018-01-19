@@ -33,7 +33,7 @@
 		<module>spectre</module>
 		<module>utilities</module>
 		<module>web</module>
-    <module>monitoring</module>
+	    <module>monitoring</module>
   </modules>
 
 	<dependencyManagement>

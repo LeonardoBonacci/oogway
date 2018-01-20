@@ -20,7 +20,7 @@ public interface MyClient {
 
 
 	@RequestMapping(value = "/gems", method = RequestMethod.GET)
-	GemCarrier search(@RequestParam("q") String q, @RequestParam(value="by", required=false) Optional<String> author);
+	GemCarrier search(@RequestParam("q") String q, @RequestParam(value="by") String author);
 
 	@RequestMapping(method = RequestMethod.GET, value = "/gems/random")
     GemCarrier random();
@@ -36,7 +36,7 @@ public interface MyClient {
 			return new MyClient() {
 
 				@Override
-				public GemCarrier search(String q, Optional<String> author) {
+				public GemCarrier search(String q, String author) {
 			        logger.error("Help!!! Can't reach the oracle...", cause);    
 					return null;
 				}

@@ -5,69 +5,55 @@ import static org.slf4j.LoggerFactory.getLogger;
 import java.util.Optional;
 
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
-
+import feign.hystrix.FallbackFactory;
+import guru.bonacci.oogway.oracle.client.OracleClient.HystrixClientFallbackFactory;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 /**
  * Talks to the Oracle via REST
  */
-@Component
-public class OracleClient {
+@FeignClient(name = "oracle-service", fallbackFactory = HystrixClientFallbackFactory.class)
+public interface OracleClient {
 
-	private final Logger logger = getLogger(this.getClass());
+	@RequestMapping(value = "/gems", method = RequestMethod.GET)
+	Optional<GemCarrier> consult(@RequestParam("q") String q, @RequestParam(value="by") String author);
 
-	@Autowired
-	@LoadBalanced
-	private RestTemplate restTemplate;
+	@RequestMapping(method = RequestMethod.GET, value = "/gems/random")
+    Optional<GemCarrier> random();
 
-	private final String serviceUrl;
+	@Component
+	static class HystrixClientFallbackFactory implements FallbackFactory<OracleClient> {
 
-	public OracleClient(@Value("${oracle.service.application.name}") String serviceUrl) {
-		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
-	}
-
-	@HystrixCommand(fallbackMethod = "fallbackConsult")
-	public Optional<GemCarrier> consult(String searchString, String by) {
-		logger.info("Oracle consultation:  '" + searchString + "'");
-
-		String params = "?q={searchString}";
-		if (by != null)
-			params += "&by={by}";
+		private final Logger logger = getLogger(this.getClass());
 		
-		GemCarrier gem = restTemplate.getForObject(serviceUrl + "/gems" + params, GemCarrier.class, searchString, by);
-		return Optional.ofNullable(gem);
+		@Override
+		public OracleClient create(Throwable cause) {
+			return new OracleClient() {
+
+				@Override
+				public Optional<GemCarrier> consult(String q, String author) {
+					sos();    
+					return Optional.empty();
+				}
+
+				@Override
+				public Optional<GemCarrier> random() {
+					sos();    
+					return Optional.empty();
+				}
+				
+				private void sos() {
+			        logger.error("Help!!! Can't reach the oracle...", cause);    
+				}
+
+			};
+		}
 	}
-
-	public Optional<GemCarrier> fallbackConsult(String searchString, String by, Throwable t) {
-        return fallback(t);
-    }
-
-	@HystrixCommand(fallbackMethod = "fallback",
-					commandProperties = {
-							@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "500")
-					})
-	public Optional<GemCarrier> random() {
-		logger.info("find me a random Gem");
-
-		GemCarrier gem = restTemplate.getForObject(serviceUrl + "/gems/random", GemCarrier.class);
-		return Optional.ofNullable(gem);
-	}
-	
-    /**
-     * General fallback method
-     * @param t
-     * @return
-     */
-    public Optional<GemCarrier> fallback(Throwable t) {
-        logger.error("Help!!! Can't reach the oracle...", t);    
-        return Optional.empty();
-    }
 }
+

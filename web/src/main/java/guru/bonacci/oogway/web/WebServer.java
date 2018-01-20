@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 
-import guru.bonacci.oogway.oracle.client.MyClient;
+import guru.bonacci.oogway.oracle.client.OracleClient;
 import guru.bonacci.oogway.oracle.client.OracleClientConfig;
 import guru.bonacci.oogway.web.events.WebEventChannels;
 
@@ -17,7 +17,7 @@ import guru.bonacci.oogway.web.events.WebEventChannels;
  * Micro-service for the user to communicate with
  */
 @SpringBootApplication
-@EnableFeignClients(basePackageClasses = MyClient.class)
+@EnableFeignClients(basePackageClasses = OracleClient.class)
 @EnableDiscoveryClient
 @EnableBinding(WebEventChannels.class)
 @IntegrationComponentScan

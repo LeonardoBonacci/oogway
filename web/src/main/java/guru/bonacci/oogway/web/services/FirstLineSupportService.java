@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import guru.bonacci.oogway.oracle.client.OracleClient;
+import guru.bonacci.oogway.oracle.client.MyClient;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.web.cheaters.Postponer;
 import guru.bonacci.oogway.web.intercept.WatchMe;
@@ -27,8 +27,8 @@ import guru.bonacci.oogway.web.intercept.WatchMe;
 public class FirstLineSupportService {
 
 	@Autowired
-	private OracleClient oracleClient;
-	
+	private MyClient myClient;
+
 	@Autowired
 	private Postponer postponer;
 
@@ -37,7 +37,7 @@ public class FirstLineSupportService {
 		if (isEmpty(q))
 			return new GemCarrier("No question no answer..", "oogway");
 
-		Optional<GemCarrier> gem = oracleClient.consult(q, null);
+		Optional<GemCarrier> gem = Optional.ofNullable(myClient.search(q, null));
 		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
 	}
 }

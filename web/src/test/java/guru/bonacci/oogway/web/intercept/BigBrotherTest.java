@@ -1,7 +1,10 @@
 package guru.bonacci.oogway.web.intercept;
 
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
+
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import guru.bonacci.oogway.oracle.client.OracleClient;
 import guru.bonacci.oogway.web.WebTestApp;
 import guru.bonacci.oogway.web.events.SpectreGateway;
 import guru.bonacci.oogway.web.services.FirstLineSupportService;
@@ -31,6 +35,9 @@ public class BigBrotherTest {
 	BigBrother bigBrother;
 
 	@MockBean
+	OracleClient oracleClient;
+
+	@MockBean
 	IPCatcher iPCatcher;
 
 	@MockBean
@@ -39,6 +46,8 @@ public class BigBrotherTest {
 	@Test
 	public void shouldInterceptTheConsultMethod() {
 		String searchString = "something completely different";
+		when(oracleClient.consult(anyString(), anyString())).thenReturn(Optional.empty());
+
 		service.enquire(searchString);
 
 		when(iPCatcher.getClientIp()).thenReturn("123");

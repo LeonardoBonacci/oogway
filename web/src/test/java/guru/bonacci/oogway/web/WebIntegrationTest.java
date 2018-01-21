@@ -2,8 +2,12 @@ package guru.bonacci.oogway.web;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +16,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.context.annotation.ComponentScan;
@@ -41,9 +45,14 @@ public class WebIntegrationTest {
 	@Autowired
 	MessageCollector messageCollector;
 
+	@MockBean
+	OracleClient oracleClient;
+
 	@SuppressWarnings("unchecked")
 	@Test
 	public void shouldSendMessageAfterInterception() throws Exception {
+		when(oracleClient.consult(anyString(), anyString())).thenReturn(Optional.empty());
+
 		String localIP = "127.0.0.1";
 		String input = "The art of living is more like wrestling than dancing.";
 		mvc.perform(get("/consult?q=" + input));

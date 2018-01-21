@@ -5,16 +5,13 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import guru.bonacci.oogway.oracle.client.OracleClient;
 import guru.bonacci.oogway.oracle.client.OracleClientConfig;
 
 @SpringBootApplication
-@EnableFeignClients(basePackageClasses = OracleClient.class)
 @EnableDiscoveryClient
 @EnableScheduling
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})

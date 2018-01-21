@@ -31,7 +31,7 @@ public class FirstLineSupportServiceTest {
 	FirstLineSupportService service;
 
 	@MockBean
-	OracleClient oracleService;
+	OracleClient oracleClient;
 
 	@MockBean
 	Postponer postponer;
@@ -47,7 +47,7 @@ public class FirstLineSupportServiceTest {
 	@Test
 	public void shouldGiveAnswer() {
 		GemCarrier expected = new GemCarrier("some answer", "some person");
-		when(oracleService.consult(anyString(), anyString())).thenReturn(Optional.of(expected));
+		when(oracleClient.consult(anyString(), anyString())).thenReturn(Optional.of(expected));
 
 		assertThat(service.enquire("some input"), is(equalTo(expected)));
 	}
@@ -55,7 +55,7 @@ public class FirstLineSupportServiceTest {
 	@Test
 	public void shouldGivePostponingAnswer() {
 		String postponingAnswer = "wait a second..";
-		when(oracleService.consult(anyString(), anyString())).thenReturn(Optional.empty());
+		when(oracleClient.consult(anyString(), anyString())).thenReturn(Optional.empty());
 		when(postponer.saySomething()).thenReturn(postponingAnswer);
 
 		assertThat(service.enquire("some input").getSaying(), is(equalTo(postponingAnswer)));

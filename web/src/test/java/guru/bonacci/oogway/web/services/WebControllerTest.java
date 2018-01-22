@@ -15,6 +15,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.web.WebTestApp;
 
@@ -29,6 +31,9 @@ public class WebControllerTest {
 	@MockBean
 	FirstLineSupportService service;
 
+	@Autowired
+	ObjectMapper objectMapper;
+
 	@Test
 	public void shouldReceive200OnHome() throws Exception {
 		this.mvc.perform(get("/")).andExpect(status().isOk());
@@ -36,10 +41,11 @@ public class WebControllerTest {
 	
 	@Test
 	public void shouldReceive200OnConsult() throws Exception {
-		given(service.enquire("tell me the truth")).willReturn(new GemCarrier("why should I?", "oogway"));
+		GemCarrier gem = new GemCarrier("why should I?", "oogway");
+		given(service.enquire("tell me the truth")).willReturn(gem);
 		
 		mvc.perform(get("/consult?q=tell me the truth"))
 			.andExpect(status().isOk())
-			.andExpect(content().json("{\"saying\":\"why should I?\", \"author\":\"oogway\"}"));
+			.andExpect(content().json(objectMapper.writeValueAsString(gem)));
 		}
 }

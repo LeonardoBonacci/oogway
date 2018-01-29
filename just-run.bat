@@ -1,7 +1,7 @@
 @echo off
 title Run oogway...
 
-set version=2.2
+set version=2.3-SNAPSHOT
 
 start cmd.exe /k "cd orchestration & java -jar target\orchestration-%version%.jar"
 start cmd.exe /k "cd oracle\oracle-service & java -jar target\oracle-service-%version%.jar"

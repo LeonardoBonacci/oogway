@@ -1,7 +1,7 @@
 @echo off
 title Run spectre...
 
-set version=2.2-SNAPSHOT
+set version=2.2
 
 start cmd.exe /k "cd local-timer & java -jar target\local-timer-%version%.jar"
 start cmd.exe /k "cd sentiment & java -jar target\sentiment-%version%.jar"

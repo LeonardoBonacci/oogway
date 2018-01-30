@@ -6,9 +6,9 @@ import java.util.Collection;
 
 import org.junit.runners.Parameterized.Parameters;
 
-public class DuplicateRemoverTest extends AbstractStepTest<DuplicateRemover>{
+public class DuplicateRemoverTests extends AbstractStepTest<DuplicateRemover>{
 
-	public DuplicateRemoverTest(String in, String out) {
+	public DuplicateRemoverTests(String in, String out) {
 		super(in, out, DuplicateRemover.class);
 	}
 

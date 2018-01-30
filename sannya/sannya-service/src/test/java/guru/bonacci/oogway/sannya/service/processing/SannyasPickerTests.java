@@ -18,8 +18,8 @@ import guru.bonacci.oogway.sannya.service.general.Sannyasin;
 import guru.bonacci.oogway.sannya.service.processing.SannyasinPicker;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
-public class SannyasPickerTest {
+@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE, properties = {"proxy.enabled=false"})
+public class SannyasPickerTests {
 
 	@Autowired
 	SannyasinPicker picker;

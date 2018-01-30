@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannya.service.gr;
+package guru.bonacci.oogway.sannya.service.qd;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.equalTo;
@@ -22,11 +22,11 @@ import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
-public class GRSeekerTest {
+@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE, properties= {"proxy.enabled=false"})
+public class QDSeekerTests {
 
 	@Autowired
-	GRSeeker seeker;
+	QDSeeker seeker;
 	
 	@MockBean
 	CharacterGuardian characterGuardian;
@@ -35,7 +35,7 @@ public class GRSeekerTest {
 	LengthFilter lengthFilter;
 
 	@MockBean
-	GRScraper finder;
+	QDScraper finder;
 
 	@Test
 	public void shouldPreProcess() {

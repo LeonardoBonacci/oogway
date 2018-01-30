@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 
-public class LemmatizorTest extends AbstractStepTest<Lemmatizor> {
+public class LemmatizorTests extends AbstractStepTest<Lemmatizor> {
 
-	public LemmatizorTest(String in, String out) {
+	public LemmatizorTests(String in, String out) {
 		super(in, out, Lemmatizor.class);
 	}
 

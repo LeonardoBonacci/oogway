@@ -27,7 +27,7 @@ public class GRScraper extends WebScraper implements PageCache {
 
 	private final Logger logger = getLogger(this.getClass());
 
-	@Value("${web.url.gr:http://www.goodreads.com/quotes/tag/}")
+	@Value("${web.url.gr:https://www.goodreads.com/quotes/tag/}")
 	private String url;
 
 	@Override

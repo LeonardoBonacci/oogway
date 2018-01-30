@@ -5,17 +5,21 @@ package guru.bonacci.oogway.sannya.service.general;
 import static java.util.Arrays.stream;
 import static java.util.Collections.synchronizedSet;
 import static java.util.stream.Collectors.toList;
-import static org.jsoup.Jsoup.connect;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import guru.bonacci.oogway.sannya.service.http.IConnectionProvider;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 /**
@@ -26,6 +30,9 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
  */
 public abstract class WebScraper implements Scraper {
 
+	@Autowired
+	private IConnectionProvider connectionProvider;
+	
 	/**
 	 * To not overly access our dear wisdom suppliers we keep an administration
 	 * of already visited urls. 
@@ -65,9 +72,12 @@ public abstract class WebScraper implements Scraper {
 	protected abstract GemCarrier toGem(Element el);
 
 	/**
-	 * Method to facilitate testing
+	 * Execute get request
 	 */
 	public Document get(String searchURL) throws IOException {
-		return connect(searchURL).userAgent("Mozilla").get();
+		HttpURLConnection conn = connectionProvider.provideConnection(new URL(searchURL));
+		conn.setRequestProperty("User-Agent", "Mozilla");
+		conn.setRequestMethod("GET");
+		return Jsoup.parse(conn.getInputStream(), null, "not-needed");
 	}
 }

@@ -15,8 +15,8 @@ import guru.bonacci.oogway.sannya.service.SannyasTestApp;
 import guru.bonacci.oogway.sannya.service.filters.LengthFilter;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
-public class LengthFilterTest {
+@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE, properties = {"proxy.enabled=false"})
+public class LengthFilterTests {
 
    	private final static String LEO_SAID = "Study without desire spoils the memory, and it retains nothing that it takes in";
 

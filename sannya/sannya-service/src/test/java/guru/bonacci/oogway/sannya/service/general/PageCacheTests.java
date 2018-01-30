@@ -23,7 +23,7 @@ import guru.bonacci.oogway.sannya.service.general.PageTestCaches.PageTestCache2;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE)
 @ActiveProfiles("cache-test")
-public class PageCacheTest {
+public class PageCacheTests {
 
 	@Autowired 
 	PageTestCache1 pageCache;

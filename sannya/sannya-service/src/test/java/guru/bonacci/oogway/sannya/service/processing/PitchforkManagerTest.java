@@ -18,7 +18,7 @@ import guru.bonacci.oogway.sannya.service.gr.GRSeeker;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
+@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE, properties= {"proxy.enabled=false"})
 public class PitchforkManagerTest {
 
 	@Autowired

@@ -25,7 +25,7 @@ import guru.bonacci.oogway.sannya.service.steps.DuplicateRemover;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE, properties = {"proxy.enabled=false"})
-public class ForePlayerTest {
+public class ForePlayerTests {
 
 	private static final String INPUT = "some string without meaning";
 

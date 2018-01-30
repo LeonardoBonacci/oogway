@@ -27,7 +27,7 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE, properties = {"proxy.enabled=false"})
-public class BQScraperTest {
+public class BQScraperTests {
 
 	@Spy
 	BQScraper finder;

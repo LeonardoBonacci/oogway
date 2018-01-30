@@ -6,9 +6,9 @@ import java.util.Collection;
 
 import org.junit.runners.Parameterized.Parameters;
 
-public class KeyPhraserTest extends AbstractStepTest<KeyPhraser> {
+public class KeyPhraserTests extends AbstractStepTest<KeyPhraser> {
 
-    public KeyPhraserTest(String in, String out) {
+    public KeyPhraserTests(String in, String out) {
     	super(in, out, KeyPhraser.class);
     }
     

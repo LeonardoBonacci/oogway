@@ -6,9 +6,9 @@ import java.util.Collection;
 
 import org.junit.runners.Parameterized.Parameters;
 
-public class CharacterGuardianTest extends AbstractStepTest<CharacterGuardian>{
+public class CharacterGuardianTests extends AbstractStepTest<CharacterGuardian>{
 
-	public CharacterGuardianTest(String in, String out) {
+	public CharacterGuardianTests(String in, String out) {
 		super(in, out, CharacterGuardian.class);
 	}
 

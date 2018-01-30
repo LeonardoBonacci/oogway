@@ -18,7 +18,7 @@ import guru.bonacci.oogway.sannya.service.SannyasTestApp;
 	"filter.profanity.file.name=badwords-test.txt",
 	"proxy.enabled=false"
 })
-public class ProfanityFilterTest {
+public class ProfanityFilterTests {
 
 	@Autowired
 	ProfanityFilter filter;

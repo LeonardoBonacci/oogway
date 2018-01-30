@@ -38,7 +38,7 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT, properties = {"proxy.enabled=false"})
-public class SannyaIntegrationTest {
+public class SannyaIntegrationTests {
 
 	@Autowired
 	BinderAwareChannelResolver resolver;

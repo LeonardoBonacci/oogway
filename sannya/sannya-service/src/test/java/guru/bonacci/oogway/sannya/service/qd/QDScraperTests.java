@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.sannya.service.gr;
+package guru.bonacci.oogway.sannya.service.qd;
 
 import static guru.bonacci.oogway.utils.MyFileUtils.readToList;
 import static guru.bonacci.oogway.utils.MyFileUtils.readToString;
@@ -25,55 +25,56 @@ import guru.bonacci.oogway.sannya.service.SannyasTestApp;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE, properties = {"proxy.enabled=false"})
-public class GRScraperTest {
+@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE, properties= {"proxy.enabled=false"})
+public class QDScraperTests {
 
 	@Spy
-	GRScraper finder;
+	QDScraper finder;
 	
 	@Test
 	public void shouldRetrieveQuotes() throws IOException {
-		Document doc = parse(readToString("gr/gr-mock-romance.txt"));
+		Document doc = parse(readToString("qd/qd-mock-baby.txt"));
+		doReturn("does not matter").when(finder).determineURL(anyString());
 		doReturn(doc).when(finder).get(anyString());
 
-		List<GemCarrier> found = finder.find("romance");
+		List<GemCarrier> found = finder.find("baby");
 		List<String> quotes = found.stream().map(GemCarrier::getSaying).collect(toList());
-
-		List<String> expected = readToList("gr/gr-quotes-romance.txt");
+		List<String> expected = readToList("qd/qd-quotes-baby.txt");
 
 		//TODO assertEquals(expected, quotes);
 	}
 
 	@Test
 	public void shouldRetrieveAuthors() throws IOException {
-		Document doc = parse(readToString("gr/gr-mock-romance.txt"));
+		Document doc = parse(readToString("qd/qd-mock-baby.txt"));
+		doReturn("does not matter").when(finder).determineURL(anyString());
 		doReturn(doc).when(finder).get(anyString());
 
-		List<GemCarrier> found = finder.find("romance");
-		assertThat(found.get(0).getAuthor(), is(equalTo("Stephenie Meyer")));
+		List<GemCarrier> found = finder.find("baby");
+		assertThat(found.get(0).getAuthor(), is(equalTo("Amy Heckerling")));
 	}
 
 	@Test
 	public void shouldFindNumerOfPagesWhenMany() throws IOException {
-		Document doc = parse(readToString("gr/gr-mock-romance.txt"));
+		Document doc = parse(readToString("qd/qd-mock-baby.txt"));
 		doReturn(doc).when(finder).get(anyString());
 
-		Integer nrOfPages = finder.getNrOfPages("the romance url");
-		assertThat(nrOfPages, is(equalTo(100)));
+		Integer nrOfPages = finder.getNrOfPages("the baby url");
+		assertThat(nrOfPages, is(equalTo(109)));
 	}
 
 	@Test
 	public void shouldFindNumberWhenFew() throws IOException {
-		Document doc = parse(readToString("gr/gr-mock-some.txt"));
+		Document doc = parse(readToString("qd/qd-mock-unimaginable.txt"));
 		doReturn(doc).when(finder).get(anyString());
 
-		Integer nrOfPages = finder.getNrOfPages("the romance url");
+		Integer nrOfPages = finder.getNrOfPages("the baby url");
 		assertThat(nrOfPages, is(equalTo(2)));
 	}
 	
 	@Test
 	public void shouldReturnOneWhenNoPages() throws IOException {
-		Document doc = parse(readToString("gr/gr-mock-aaaaa.txt"));
+		Document doc = parse(readToString("qd/qd-mock-aaaaa.txt"));
 		doReturn(doc).when(finder).get(anyString());
 
 		Integer nrOfPages = finder.getNrOfPages("the aaaaa url");

@@ -47,19 +47,6 @@ public abstract class AbstractStepTest<F extends Function<String,String>> {
 		this.input = in;
 		this.output = out;
 	}
-
-	//if @TestPropertySource("proxy.enabled=false") would work on a contextConfiguration 
-	//this hack would not be needed
-	@BeforeClass
-	public static void beforeClass() {
-        System.setProperty("proxy.enabled", "false");
-    }
-
-	@AfterClass
-	public static void afterClass() {
-	    System.clearProperty("some.property");
-	}
-	
 	@Before
 	public void setUp() throws Exception {
 		this.testContextManager = new TestContextManager(getClass());

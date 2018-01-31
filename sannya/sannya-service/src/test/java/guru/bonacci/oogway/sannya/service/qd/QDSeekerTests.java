@@ -22,7 +22,7 @@ import guru.bonacci.oogway.sannya.service.steps.CharacterGuardian;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE, properties= {"proxy.enabled=false"})
+@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
 public class QDSeekerTests {
 
 	@Autowired

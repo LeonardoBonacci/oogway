@@ -10,7 +10,6 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -67,10 +66,4 @@ public class GemController {
 		
 		repo.saveTheNewOnly(GemMapper.MAPPER.toGem(carrier));
 	}
-	
-	@ApiOperation(value = "What's the version again?")
-	@RequestMapping(path = "/version", method = GET)
-	public String version(@Value("${build.version}") String buildVersion) {
-		return buildVersion;
-	}	
 }

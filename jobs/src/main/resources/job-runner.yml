@@ -1,0 +1,33 @@
+# Spring properties
+spring: 
+  application: 
+    name: job-runner
+  freemarker: 
+    enabled: false
+
+eureka: 
+  instance: 
+    leaseRenewalIntervalInSeconds: 5
+  client: 
+    serviceUrl: 
+      defaultZone: http://localhost:1111/eureka/
+
+# HTTP Server
+server: 
+  port: 8888
+
+#maven info
+build: 
+  version: "@project.version@"
+
+#logging
+logging: 
+  level: 
+    root: WARN
+    org: 
+      springframework: INFO
+    guru: 
+      bonacci: 
+        oogway: 
+          jobs: INFO
+  file: C:\\logs\\oogway\\jobs.log

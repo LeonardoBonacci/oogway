@@ -1,0 +1,30 @@
+# Spring properties
+spring: 
+  application: 
+    name: oracle-service
+
+# HTTP Server
+server: 
+  port: 4444
+
+eureka: 
+  client: 
+    serviceUrl: 
+      defaultZone: http://localhost:1111/eureka/
+    instance: leaseRenewalIntervalInSeconds=5
+
+#maven info
+build: 
+  version: "@project.version@"
+
+#logging
+logging: 
+  level: 
+    root: WARN
+    org: 
+      springframework: INFO
+    guru: 
+      bonacci: 
+        oogway: 
+          oracle: INFO
+  file: C:\\logs\\oogway\\oracle.log

@@ -1,0 +1,31 @@
+# Spring properties
+spring: 
+  application: 
+    name: weather-service
+
+# HTTP Server
+server: 
+  port: 9999
+
+eureka: 
+  client: 
+    serviceUrl: 
+      defaultZone: http://localhost:1111/eureka/
+    instance: 
+      leaseRenewalIntervalInSeconds: 5
+
+#maven info
+build: 
+  version: "@project.version@"
+
+#logging
+logging: 
+  level: 
+    root: WARN
+    org: 
+      springframework: INFO
+    guru: 
+      bonacci: 
+        spectre: 
+          weather: INFO
+  file: C:\\logs\\spectre\\weather.log

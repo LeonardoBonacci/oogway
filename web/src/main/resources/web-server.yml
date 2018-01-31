@@ -1,0 +1,35 @@
+# Spring properties
+spring: 
+  application: 
+    name: web-service
+  freemarker: 
+    enabled: false
+  profiles: 
+    active: dev
+
+eureka: 
+  instance: 
+    leaseRenewalIntervalInSeconds: 5
+  client: 
+    serviceUrl: 
+      defaultZone: http://localhost:1111/eureka/
+
+# HTTP Server
+server: 
+  port: 3333
+
+#maven info
+build: 
+  version: "@project.version@"
+
+#logging
+logging: 
+  level: 
+    root: WARN
+    org: 
+      springframework: INFO
+    guru: 
+      bonacci: 
+        oogway: 
+          web: INFO
+  file: C:\\logs\\oogway\\web.log

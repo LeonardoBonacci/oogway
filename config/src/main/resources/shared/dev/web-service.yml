@@ -9,12 +9,8 @@ build:
 logging: 
   level: 
     root: WARN
-    org: 
-      springframework: INFO
-    guru: 
-      bonacci: 
-        oogway: 
-          web: INFO
+    org.springframework: INFO
+    guru.bonacci.oogway.web: INFO
   file: C:\\logs\\oogway\\web.log
   
   

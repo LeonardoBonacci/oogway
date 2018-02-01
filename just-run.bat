@@ -3,7 +3,7 @@ title Run oogway...
 
 set version=2.3-SNAPSHOT
 
-start cmd.exe /k "cd config & java -jar target\config-%version%.jar"
+start cmd.exe /k "cd config & java -jar target\config.jar"
 
 TIMEOUT /T 5
 

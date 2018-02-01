@@ -1,0 +1,6 @@
+eureka: 
+  instance: 
+    leaseRenewalIntervalInSeconds: 5
+  client: 
+    serviceUrl: 
+      defaultZone: http://localhost:1111/eureka/

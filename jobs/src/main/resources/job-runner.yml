@@ -14,7 +14,7 @@ eureka:
 
 # HTTP Server
 server: 
-  port: 8888
+  port: 8765
 
 #maven info
 build: 

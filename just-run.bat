@@ -3,6 +3,10 @@ title Run oogway...
 
 set version=2.3-SNAPSHOT
 
+start cmd.exe /k "cd config & java -jar target\config-%version%.jar"
+
+TIMEOUT /T 5
+
 start cmd.exe /k "cd orchestration & java -jar target\orchestration-%version%.jar"
 start cmd.exe /k "cd oracle\oracle-service & java -jar target\oracle-service-%version%.jar"
 start cmd.exe /k "cd sannya\sannya-service & java -jar target\sannya-service-%version%.jar 2223"

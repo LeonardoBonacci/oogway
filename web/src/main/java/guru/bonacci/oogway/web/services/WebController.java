@@ -6,6 +6,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @Controller
+@RefreshScope
 public class WebController {
 
 	private final Logger logger = getLogger(this.getClass());

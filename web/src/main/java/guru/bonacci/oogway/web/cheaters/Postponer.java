@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Component;
  * habitual carelessness)
  */
 @Component
+@RefreshScope
 public class Postponer {
 	
 	@Value("${file.name.answers.to.win.time:}")

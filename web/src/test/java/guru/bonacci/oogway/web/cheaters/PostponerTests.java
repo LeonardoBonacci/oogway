@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = NONE, properties = {
 	"file.name.answers.to.win.time:answers-to-win-time-test.txt" 
 })
-public class PostponerTest {
+public class PostponerTests {
 
 	@Autowired
 	Postponer postponer;

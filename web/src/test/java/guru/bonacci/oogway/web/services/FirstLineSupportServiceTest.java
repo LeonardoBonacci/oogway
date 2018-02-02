@@ -24,7 +24,7 @@ import guru.bonacci.oogway.web.WebTestApp;
 import guru.bonacci.oogway.web.cheaters.Postponer;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=WebTestApp.class, webEnvironment=NONE)
+@SpringBootTest(classes = WebTestApp.class, webEnvironment = NONE)
 public class FirstLineSupportServiceTest {
 
 	@Autowired

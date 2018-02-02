@@ -21,7 +21,7 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.web.WebTestApp;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=WebTestApp.class, webEnvironment=RANDOM_PORT)
+@SpringBootTest(classes = WebTestApp.class, webEnvironment = RANDOM_PORT)
 @AutoConfigureMockMvc
 public class WebControllerTest {
 

@@ -20,9 +20,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import guru.bonacci.oogway.web.WebTestApp;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=WebTestApp.class, webEnvironment=NONE)
+@SpringBootTest(classes = WebTestApp.class, webEnvironment = NONE)
 @ActiveProfiles("dev") //test the dev bean
-public class IPologistTest {
+public class IPologistTests {
 
     @Autowired
     IPologist ipologist;

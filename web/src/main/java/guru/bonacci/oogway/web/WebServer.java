@@ -19,7 +19,7 @@ import guru.bonacci.oogway.web.events.WebEventChannels;
 @EnableBinding(WebEventChannels.class)
 @IntegrationComponentScan
 @Import(OracleClientConfig.class)
-@PropertySource("classpath:web.properties")
+@PropertySource("classpath:web.yml")
 public class WebServer {
 
 	public static void main(String[] args) {

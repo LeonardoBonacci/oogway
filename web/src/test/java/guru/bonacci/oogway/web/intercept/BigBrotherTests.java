@@ -21,12 +21,9 @@ import guru.bonacci.oogway.web.services.FirstLineSupportService;
 import guru.bonacci.oogway.web.utils.IPCatcher;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=WebTestApp.class, webEnvironment=NONE)
-//A little hack to avoid creating profiles at this moment :)
-//The test resource property overrides some of the web.properties that is
-//read by the default configuration WebConfig
-@TestPropertySource("classpath:web-test.properties")
-public class BigBrotherTest {
+@SpringBootTest(classes = WebTestApp.class, webEnvironment = NONE)
+@TestPropertySource("classpath:web-test.yml")
+public class BigBrotherTests {
 
 	@Autowired
 	FirstLineSupportService service;

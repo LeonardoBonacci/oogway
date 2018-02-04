@@ -1,6 +1,6 @@
 spring:
   application:
-    name: web-service
+    name: web
   cloud:
     config:
       uri: http://localhost:8888

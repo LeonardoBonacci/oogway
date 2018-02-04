@@ -25,4 +25,14 @@ public class WebServer {
 	public static void main(String[] args) {
 		SpringApplication.run(WebServer.class, args);
 	}
+
+//	//spring-boot doesn't support yml files
+//	@Bean
+//	public static PropertySourcesPlaceholderConfigurer properties() {
+//      PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
+//      YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
+//      yaml.setResources(new ClassPathResource("web.yml"));
+//      propertySourcesPlaceholderConfigurer.setProperties(yaml.getObject());
+//      return propertySourcesPlaceholderConfigurer;
+//  }
 }

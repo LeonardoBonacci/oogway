@@ -22,7 +22,7 @@ import guru.bonacci.oogway.web.utils.IPCatcher;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = WebTestApp.class, webEnvironment = NONE)
-@TestPropertySource("classpath:web-test.yml")
+@TestPropertySource("classpath:web-test.properties")
 public class BigBrotherTests {
 
 	@Autowired

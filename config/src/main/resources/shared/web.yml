@@ -1,12 +1,22 @@
 server: 
   port: 3333
 
+spring:
+  cloud:
+    stream:
+      rabbit:
+        bindings:
+          spectre:
+            producer:
+              exchangeType: direct
+              routingKeyExpression: '''eavesdrop'''
+
 build: 
   version: "@project.version@"
 
 logging: 
-  level: 
-    root: WARN
-    org.springframework: INFO
-    guru.bonacci.oogway.web: INFO
+  level.guru.bonacci.oogway.web: INFO
   file: C:\\logs\\oogway\\web.log
+  
+file.name.answers.to.win.time: answers-to-win-time.txt
+  

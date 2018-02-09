@@ -1,8 +1,0 @@
-spring.cloud.stream.default.contentType: application/json
-spring.cloud.stream.default.binder: rabbit
-
-spring.cloud.stream.rabbit.bindings.spectre.producer.exchangeType: direct
-# quotes are a must for the routingKeyExpression
-spring.cloud.stream.rabbit.bindings.spectre.producer.routingKeyExpression: 'eavesdrop'
-
-file.name.answers.to.win.time: answers-to-win-time.txt

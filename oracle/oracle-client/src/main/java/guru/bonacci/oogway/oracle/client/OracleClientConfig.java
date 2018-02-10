@@ -10,6 +10,6 @@ import org.springframework.context.annotation.PropertySource;
 @ComponentScan
 @EnableFeignClients(basePackageClasses = OracleClient.class)
 @EnableCircuitBreaker
-@PropertySource("classpath:oracle-client.properties")
+@PropertySource("classpath:oracle-client.yml")
 public class OracleClientConfig {
 }	

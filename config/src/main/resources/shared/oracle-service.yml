@@ -1,0 +1,20 @@
+server: 
+  port: 4444
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        sannya: 
+          group: oracle
+  data:
+    elasticsearch:
+      cluster-name: delphi
+    cluster-nodes: localhost:9300
+
+build: 
+  version: "@project.version@"
+
+logging: 
+  level.guru.bonacci.oogway.oracle: INFO
+  file: C:\\logs\\oogway\\oracle.log

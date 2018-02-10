@@ -18,18 +18,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.service.OracleTestApp;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=OracleTestApp.class, webEnvironment=NONE)
-//A little hack to avoid creating profiles at this moment :)
-//The test resource property overrides some of the oracle.properties that is
-//read by the default configuration OracleConfig
-@TestPropertySource("classpath:oracle-test.properties")
-public class GemRepositoryTest {
+public class GemRepositoryTests {
 	
 	@Autowired
 	GemRepository repo;

@@ -23,15 +23,13 @@ import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.service.events.OracleEventChannels;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-@TestPropertySource("classpath:oracle-test.properties")
-public class OracleIntegrationInTest {
+public class OracleIntegrationInTests {
 
 	@Autowired
 	BinderAwareChannelResolver resolver;

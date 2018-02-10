@@ -31,7 +31,7 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=OracleTestApp.class, webEnvironment=RANDOM_PORT)
 @AutoConfigureMockMvc
-public class GemControllerTest {
+public class GemControllerTests {
 
 	@Autowired
 	MockMvc mvc;

@@ -9,7 +9,7 @@ import org.junit.Test;
 import guru.bonacci.oogway.oracle.service.persistence.Gem;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
-public class GemMapperTest {
+public class GemMapperTests {
 
     @Test
     public void shouldConvertToGem() {

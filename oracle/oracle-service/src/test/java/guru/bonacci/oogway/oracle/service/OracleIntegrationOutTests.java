@@ -19,7 +19,6 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.messaging.Message;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -28,9 +27,8 @@ import guru.bonacci.oogway.shareddomain.GenericEvent;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-@TestPropertySource("classpath:oracle-test.properties")
 @AutoConfigureMockMvc
-public class OracleIntegrationOutTest {
+public class OracleIntegrationOutTests {
 
 	@Autowired
 	MockMvc mvc;

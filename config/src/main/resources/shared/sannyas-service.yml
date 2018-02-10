@@ -7,10 +7,6 @@ spring:
       bindings:
         oracle:
           group: sannya
-  data:
-    elasticsearch:
-      cluster-name: delphi
-      cluster-nodes: localhost:9300
 
 build:
   version: "@project.version@"

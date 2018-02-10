@@ -1,0 +1,19 @@
+server: 
+  port: 11111
+
+spring:
+  cloud:
+    stream:
+# no content-type:json here. the message is sent from logstash where headers cannot be set
+      default:
+        contentType: null
+      bindings:
+        enrichment:
+          group: money
+
+build: 
+  version: "@project.version@"
+
+logging: 
+  level.guru.bonacci.spectre.money: INFO
+  file: C:\\logs\\spectre\\money.log

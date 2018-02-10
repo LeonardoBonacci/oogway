@@ -11,6 +11,10 @@ spring:
       default:
         contentType: application/json
         binder: rabbit
+  data:
+   elasticsearch:
+    cluster-name: delphi
+    cluster-nodes: localhost:9300
 
 logging: 
   level: 

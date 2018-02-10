@@ -1,0 +1,19 @@
+server: 
+  port: 7777
+
+spring:
+  cloud:
+    stream:
+# no content-type:json here. the message is sent from logstash where headers cannot be set
+      default:
+        contentType: null
+      bindings:
+        enrichment:
+          group: sentiment
+
+build: 
+  version: "@project.version@"
+
+logging: 
+  level.guru.bonacci.spectre.sentiment: INFO
+  file: C:\\logs\\spectre\\sentiment.log

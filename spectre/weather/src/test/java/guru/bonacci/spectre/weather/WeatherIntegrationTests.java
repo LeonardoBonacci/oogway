@@ -1,4 +1,4 @@
-package guru.bonacci.spectre.money;
+package guru.bonacci.spectre.weather;
 
 
 import static java.util.Collections.singletonMap;
@@ -9,6 +9,8 @@ import static org.mockito.Mockito.doReturn;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.messaging.MessageHeaders.CONTENT_TYPE;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.junit.After;
@@ -35,26 +37,28 @@ import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestTemplate;
 
-import guru.bonacci.spectre.money.services.MoneyCache;
-import guru.bonacci.spectre.money.services.MoneySpec;
-import guru.bonacci.spectre.money.services.MoneySpecRepository;
+import guru.bonacci.spectre.weather.services.WeatherSpec;
+import guru.bonacci.spectre.weather.services.WeatherSpecRepository;
 import guru.bonacci.spectre.spectreshared.events.SpectreEventChannels;
 import guru.bonacci.spectre.spectreshared.persistence.PersistenceTestConfig;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT)
+@SpringBootTest(webEnvironment = RANDOM_PORT, properties = {
+	"openweathermap.apikey=1234567890"		
+})
 @TestPropertySource("classpath:persistence-test.properties")
-public class MoneyIntegrationTest {
+public class WeatherIntegrationTests {
 
 	@Autowired
 	BinderAwareChannelResolver resolver;
 
 	@Autowired 
-	MoneySpecRepository repo;
+	WeatherSpecRepository repo;
 
 	@MockBean
-	MoneyCache cache;
+	RestTemplate rest;
 
 	String uuid;
 
@@ -62,9 +66,10 @@ public class MoneyIntegrationTest {
 	public void init() {
 		uuid = UUID.randomUUID().toString();
 		
-		MoneySpec spec = new MoneySpec();
+		WeatherSpec spec = new WeatherSpec();
 		spec.id = uuid;
-		spec.geoip.country_code2="NZ";
+		spec.geoip.latitude=1.1;
+		spec.geoip.longitude=2.2;
 		repo.save(spec);
 	}
 
@@ -77,14 +82,15 @@ public class MoneyIntegrationTest {
 
 	@Test
 	public void shouldEventuallyAddData() {
-		String enrichmentData = "aaaaa lot";
-		doReturn(enrichmentData).when(cache).get("NZ");
+		Map<String,Object> enrichmentData = new HashMap<>();
+		enrichmentData.put("a", "is not b");
+		doReturn(enrichmentData).when(rest).getForObject("http://api.openweathermap.org/data/2.5/weather?lat=1.1&lon=2.2&appid=1234567890", Map.class);
 		
 		String body = "{\"content\":\"" + uuid + "\"}";
 		sendMessage(body, SpectreEventChannels.ENRICHMENT, "application/json");
 
-		MoneySpec persisted = repo.findOne(uuid);
-		assertThat(persisted.income, is(equalTo("aaaaa lot")));
+		WeatherSpec persisted = repo.findOne(uuid);
+		assertThat(persisted.weather.get("a"), is(equalTo("is not b")));
 	}
 
 	private void sendMessage(String body, String target, Object contentType) {
@@ -99,15 +105,15 @@ public class MoneyIntegrationTest {
 
 	@SpringBootApplication
 	@ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, 
-											value = {MoneyServer.class}))
+											value = {WeatherServer.class}))
 	@EnableBinding(SpectreEventChannels.class)
 	@IntegrationComponentScan
 	@EnableElasticsearchRepositories
 	@Import(PersistenceTestConfig.class)
-	static class MoneyIntegrationTestApp {
+	static class WeatherIntegrationTestApp {
 
 		public static void main(String[] args) {
-			SpringApplication.run(MoneyIntegrationTestApp.class, args);
+			SpringApplication.run(WeatherIntegrationTestApp.class, args);
 		}
 	}
 }

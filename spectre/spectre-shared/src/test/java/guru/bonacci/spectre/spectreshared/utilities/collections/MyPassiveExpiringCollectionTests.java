@@ -15,7 +15,7 @@ import guru.bonacci.spectre.spectreshared.utilities.collections.MyPassiveExpirin
 
 
 @RunWith(SpringRunner.class)
-public class MyPassiveExpiringCollectionTest {
+public class MyPassiveExpiringCollectionTests {
 
 	@Test
 	public void shouldBeEmpty() {

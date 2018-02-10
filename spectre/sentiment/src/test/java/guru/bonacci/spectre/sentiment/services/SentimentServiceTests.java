@@ -18,7 +18,7 @@ import guru.bonacci.spectre.sentiment.services.SentimentService;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=SentimentTestApp.class, webEnvironment=NONE)
 @TestPropertySource("classpath:persistence-test.properties")
-public class SentimentServiceTest {
+public class SentimentServiceTests {
 
 	@Autowired
 	SentimentService service;

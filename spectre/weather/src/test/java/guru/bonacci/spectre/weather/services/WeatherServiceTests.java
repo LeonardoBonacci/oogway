@@ -1,4 +1,4 @@
-package guru.bonacci.spectre.localtimer.services;
+package guru.bonacci.spectre.weather.services;
 
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -22,20 +22,19 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
-import guru.bonacci.spectre.localtimer.LocalTimerTestApp;
-import guru.bonacci.spectre.localtimer.services.LocalTimerService;
+import guru.bonacci.spectre.weather.WeatherTestApp;
 import guru.bonacci.spectre.spectreshared.persistence.Spec;
 import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=LocalTimerTestApp.class, webEnvironment = NONE, properties = {
-	"geo.name.username=voldemort"		
+@SpringBootTest(classes=WeatherTestApp.class, webEnvironment = NONE, properties = {
+	"openweathermap.apikey=1234567890"		
 })
 @TestPropertySource("classpath:persistence-test.properties")
-public class LocalTimerServiceTest {
+public class WeatherServiceTests {
 
 	@Autowired
-	LocalTimerService service;
+	WeatherService service;
 	
 	@MockBean
 	SpecRepository repo;
@@ -53,7 +52,7 @@ public class LocalTimerServiceTest {
 
 		Map<String,Object> enrichmentData = new HashMap<>();
 		enrichmentData.put("a", "is not b");
-		doReturn(enrichmentData).when(rest).getForObject("http://api.geonames.org/timezoneJSON?lat=1.1&lng=2.2&username=voldemort", Map.class);
+		doReturn(enrichmentData).when(rest).getForObject("http://api.openweathermap.org/data/2.5/weather?lat=1.1&lon=2.2&appid=1234567890", Map.class);
 
 		service.enrich(spec.id);
 
@@ -62,7 +61,7 @@ public class LocalTimerServiceTest {
 		ArgumentCaptor<Spec> arg3 = ArgumentCaptor.forClass(Spec.class);
 		verify(repo).addData(arg1.capture(), arg2.capture(), arg3.capture());
 
-		assertThat(arg1.getValue(), is(equalTo("localtimer")));
+		assertThat(arg1.getValue(), is(equalTo("weather")));
 		assertThat(arg2.getValue(), is(equalTo(enrichmentData)));
 		assertThat(arg3.getValue(), is(equalTo(spec)));
 	}

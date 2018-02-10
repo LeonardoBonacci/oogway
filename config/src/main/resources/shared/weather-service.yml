@@ -1,0 +1,21 @@
+server: 
+  port: 9999
+
+spring:
+  cloud:
+    stream:
+# no content-type:json here. the message is sent from logstash where headers cannot be set
+      default:
+        contentType: null
+      bindings:
+        enrichment:
+          group: weather
+
+build: 
+  version: "@project.version@"
+
+logging: 
+  level.guru.bonacci.spectre.weather: INFO
+  file: C:\\logs\\spectre\\weather.log
+  
+openweathermap.apikey: 9c721267a69a906658d20d673c73b1a9

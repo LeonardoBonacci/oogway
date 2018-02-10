@@ -1,13 +1,16 @@
-package guru.bonacci.spectre.sentiment;
+package guru.bonacci.spectre.localtimer;
 
 
 import static java.util.Collections.singletonMap;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.doReturn;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.messaging.MessageHeaders.CONTENT_TYPE;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.junit.After;
@@ -18,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.binding.BinderAwareChannelResolver;
 import org.springframework.context.annotation.Bean;
@@ -33,32 +37,39 @@ import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestTemplate;
 
-import guru.bonacci.spectre.sentiment.services.SentimentSpec;
-import guru.bonacci.spectre.sentiment.services.SentimentSpecRepository;
+import guru.bonacci.spectre.localtimer.services.LocalTimerSpec;
+import guru.bonacci.spectre.localtimer.services.LocalTimerSpecRepository;
 import guru.bonacci.spectre.spectreshared.events.SpectreEventChannels;
 import guru.bonacci.spectre.spectreshared.persistence.PersistenceTestConfig;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT)
+@SpringBootTest(webEnvironment = RANDOM_PORT, properties = {
+	"geo.name.username=voldemort"		
+})
 @TestPropertySource("classpath:persistence-test.properties")
-public class SentimentIntegrationTest {
+public class LocalTimerIntegrationTests {
 
 	@Autowired
 	BinderAwareChannelResolver resolver;
 
-	String uuid;
-
 	@Autowired 
-	SentimentSpecRepository repo;
+	LocalTimerSpecRepository repo;
+
+	@MockBean
+	RestTemplate rest;
+
+	String uuid;
 
 	@Before
 	public void init() {
 		uuid = UUID.randomUUID().toString();
 		
-		SentimentSpec spec = new SentimentSpec();
+		LocalTimerSpec spec = new LocalTimerSpec();
 		spec.id = uuid;
-		spec.message = "what a wonderful wonderful life";
+		spec.geoip.latitude=1.1;
+		spec.geoip.longitude=2.2;
 		repo.save(spec);
 	}
 
@@ -71,11 +82,15 @@ public class SentimentIntegrationTest {
 
 	@Test
 	public void shouldEventuallyAddData() {
+		Map<String,Object> enrichmentData = new HashMap<>();
+		enrichmentData.put("a", "is not b");
+		doReturn(enrichmentData).when(rest).getForObject("http://api.geonames.org/timezoneJSON?lat=1.1&lng=2.2&username=voldemort", Map.class);
+		
 		String body = "{\"content\":\"" + uuid + "\"}";
-		sendMessage(body, SpectreEventChannels.ENRICHMENT,"application/json");
+		sendMessage(body, SpectreEventChannels.ENRICHMENT, "application/json");
 
-		SentimentSpec persisted = repo.findOne(uuid);
-		assertThat(persisted.message, is(equalTo("what a wonderful wonderful life")));
+		LocalTimerSpec persisted = repo.findOne(uuid);
+		assertThat(persisted.localtimer.get("a"), is(equalTo("is not b")));
 	}
 
 	private void sendMessage(String body, String target, Object contentType) {
@@ -87,18 +102,18 @@ public class SentimentIntegrationTest {
 	public MessageChannel routerChannel() {
 		return new DirectChannel();
 	}
-	
+
 	@SpringBootApplication
 	@ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, 
-											value = {SentimentServer.class}))
+											value = {LocalTimerServer.class}))
 	@EnableBinding(SpectreEventChannels.class)
 	@IntegrationComponentScan
 	@EnableElasticsearchRepositories
 	@Import(PersistenceTestConfig.class)
-	static class SentimentIntegrationTestApp {
+	static class LocalTimerIntegrationTestApp {
 
 		public static void main(String[] args) {
-			SpringApplication.run(SentimentIntegrationTestApp.class, args);
+			SpringApplication.run(LocalTimerIntegrationTestApp.class, args);
 		}
 	}
 }

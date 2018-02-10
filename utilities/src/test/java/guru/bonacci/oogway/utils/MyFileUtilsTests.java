@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-public class MyFileUtilsTest {
+public class MyFileUtilsTests {
 
 	@Test
 	public void shouldReadFileToList() throws IOException {

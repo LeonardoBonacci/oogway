@@ -6,7 +6,7 @@
 		<artifactId>sannya</artifactId>
 		<version>2.3-SNAPSHOT</version>
 	</parent>
-	<artifactId>sannya-service</artifactId>
+	<artifactId>sannyas-service</artifactId>
 	<packaging>jar</packaging>
 
 	<properties>

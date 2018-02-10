@@ -1,0 +1,21 @@
+server: 
+  port: 6666
+
+spring:
+  cloud:
+    stream:
+# no content-type:json here. the message is sent from logstash where headers cannot be set
+      default:
+        contentType: null
+      bindings:
+        enrichment:
+          group: localtimer
+
+build: 
+  version: "@project.version@"
+
+logging: 
+  level.guru.bonacci.spectre.localtimer: INFO
+  file: C:\\logs\\spectre\\localtimer.log
+  
+geo.name.username: leonardobonacci

@@ -18,6 +18,6 @@ call just-run.bat
 
 rem run spectre from its own directory
 cd spectre 
-rem call just-run.bat
+call just-run.bat
 
 cd .. 

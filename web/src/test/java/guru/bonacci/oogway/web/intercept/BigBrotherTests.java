@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.client.OracleClient;
@@ -22,7 +21,6 @@ import guru.bonacci.oogway.web.utils.IPCatcher;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = WebTestApp.class, webEnvironment = NONE)
-@TestPropertySource("classpath:web-test.properties")
 public class BigBrotherTests {
 
 	@Autowired

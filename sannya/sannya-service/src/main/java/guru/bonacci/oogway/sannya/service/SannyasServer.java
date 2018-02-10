@@ -24,11 +24,9 @@ import guru.bonacci.oogway.sannya.service.events.SannyaEventChannels;
 @EnableCaching(proxyTargetClass=true)
 @EnableBinding(SannyaEventChannels.class)
 @IntegrationComponentScan
-@PropertySource("classpath:sannyas.properties")
 public class SannyasServer {
 
 	public static void main(String[] args) {
-		System.setProperty("spring.config.name", "sannyas-server");
 		SpringApplication.run(SannyasServer.class, args);
 	}
 	

@@ -1,0 +1,9 @@
+server: 
+  port: 8765
+
+build: 
+  version: "@project.version@"
+
+logging: 
+  level.guru.bonacci.oogway.jobs: INFO
+  file: C:\\logs\\oogway\\jobs.log

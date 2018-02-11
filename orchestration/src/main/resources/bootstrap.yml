@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: the-orchestrator
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: true
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false

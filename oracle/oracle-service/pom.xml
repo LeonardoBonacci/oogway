@@ -9,10 +9,6 @@
 	<artifactId>oracle-service</artifactId>
 	<packaging>jar</packaging>
 
-	<properties>
-		<start-class>guru.bonacci.oogway.oracle.service.Main</start-class>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>

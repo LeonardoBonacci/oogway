@@ -11,7 +11,7 @@ import guru.bonacci.oogway.oracle.client.OracleClientConfig;
 import guru.bonacci.oogway.web.events.WebEventChannels;
 
 /**
- * Micro-service for the user to communicate with
+ * Service for the user to communicate with
  */
 @SpringBootApplication
 @EnableDiscoveryClient

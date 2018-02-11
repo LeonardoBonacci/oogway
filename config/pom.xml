@@ -10,10 +10,6 @@
 	<artifactId>config</artifactId>
 	<packaging>jar</packaging>
 
-	<properties>
-		<start-class>guru.bonacci.oogway.config.ConfigServer</start-class>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>

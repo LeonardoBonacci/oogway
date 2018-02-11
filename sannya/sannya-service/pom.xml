@@ -10,7 +10,6 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<start-class>guru.bonacci.oogway.sannya.service.Main</start-class>
 		<lucene-version>5.5.2</lucene-version>
 	</properties>
 

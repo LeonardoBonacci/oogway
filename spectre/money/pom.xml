@@ -9,10 +9,6 @@
 	<artifactId>money</artifactId>
 	<packaging>jar</packaging>
 
-	<properties>
-		<start-class>guru.bonacci.spectre.money.Main</start-class>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>

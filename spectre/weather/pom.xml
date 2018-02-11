@@ -9,10 +9,6 @@
 	<artifactId>weather</artifactId>
 	<packaging>jar</packaging>
 
-	<properties>
-		<start-class>guru.bonacci.spectre.weather.Main</start-class>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>

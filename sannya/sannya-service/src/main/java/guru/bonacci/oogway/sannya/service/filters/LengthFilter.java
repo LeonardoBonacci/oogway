@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Component;
  * systems of measurement, the unit of length is a base unit, from which other
  * units are defined.
  */
+@RefreshScope
 @Component
 public class LengthFilter implements Predicate<String> {
 

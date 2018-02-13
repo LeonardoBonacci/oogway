@@ -12,6 +12,7 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.general.PageCache;
@@ -22,6 +23,7 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
  * Most popular quote:
  * “Don't cry because it's over, smile because it happened.” ― Dr. Seuss
  */
+@RefreshScope
 @Component
 public class GRScraper extends WebScraper implements PageCache {
 

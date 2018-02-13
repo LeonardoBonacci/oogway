@@ -20,8 +20,8 @@ import org.springframework.stereotype.Component;
  * Postponer - someone who postpones work (especially out of laziness or
  * habitual carelessness)
  */
-@Component
 @RefreshScope
+@Component
 public class Postponer {
 	
 	@Value("${file.name.answers.to.win.time:}")

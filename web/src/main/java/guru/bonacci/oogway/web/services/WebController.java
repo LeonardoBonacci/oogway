@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
-@Controller
 @RefreshScope
+@Controller
 public class WebController {
 
 	private final Logger logger = getLogger(this.getClass());
@@ -41,4 +41,14 @@ public class WebController {
 	public String version(@Value("${build.version}") String buildVersion) {
 		return buildVersion;
 	}	
+
+
+	@Value("${demo.message:Demo effect, no config read..}")
+    private String message;
+
+	@ResponseBody
+    @RequestMapping("/demo")
+    String getMessage() {
+        return this.message;
+    }
 }

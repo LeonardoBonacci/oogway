@@ -8,8 +8,10 @@ import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
+@RefreshScope
 @Component
 @ConditionalOnProperty(name = "proxy.enabled", havingValue = "true")
 public class ProxyConnectionProvider implements IConnectionProvider {

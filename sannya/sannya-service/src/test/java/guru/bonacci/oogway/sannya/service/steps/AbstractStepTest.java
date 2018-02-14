@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestContextManager;
+import org.springframework.test.context.TestPropertySource;
 
 import guru.bonacci.oogway.sannya.service.SannyasTestApp;
 
@@ -27,6 +28,7 @@ import guru.bonacci.oogway.sannya.service.SannyasTestApp;
  */
 @RunWith(value = Parameterized.class)
 @ContextConfiguration(classes = SannyasTestApp.class)
+@TestPropertySource("classpath:application.yml")
 public abstract class AbstractStepTest<F extends Function<String,String>> {
 
 	@Autowired

@@ -6,6 +6,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
+@RefreshScope
 @Controller
 public class WebController {
 
@@ -39,4 +41,14 @@ public class WebController {
 	public String version(@Value("${build.version}") String buildVersion) {
 		return buildVersion;
 	}	
+
+
+	@Value("${demo.message:Demo effect, no config read..}")
+    private String message;
+
+	@ResponseBody
+    @RequestMapping("/demo")
+    String getMessage() {
+        return this.message;
+    }
 }

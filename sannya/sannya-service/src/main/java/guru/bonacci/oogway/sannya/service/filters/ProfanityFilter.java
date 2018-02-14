@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Component;
  * the administrator or community of an online forum. Swear filters are common
  * in custom-programmed chat rooms and online video games.
  */
+@RefreshScope
 @Component
 public class ProfanityFilter implements Predicate<String> {
 

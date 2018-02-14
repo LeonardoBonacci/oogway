@@ -9,10 +9,6 @@
 	<artifactId>web</artifactId>
 	<packaging>jar</packaging>
 
-	<properties>
-		<start-class>guru.bonacci.oogway.web.Main</start-class>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
@@ -40,6 +36,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -84,6 +84,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<finalName>web</finalName>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

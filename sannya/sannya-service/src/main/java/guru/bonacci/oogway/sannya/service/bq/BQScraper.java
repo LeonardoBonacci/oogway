@@ -12,6 +12,7 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannya.service.general.PageCache;
@@ -22,6 +23,7 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
  * Quote of the day today:
  * “I want to do to you what spring does with the cherry trees.” ― Pablo Neruda
  */
+@RefreshScope
 @Component
 public class BQScraper extends WebScraper implements PageCache {
 

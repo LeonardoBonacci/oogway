@@ -13,12 +13,14 @@ import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
 /**
  * Postponer - someone who postpones work (especially out of laziness or
  * habitual carelessness)
  */
+@RefreshScope
 @Component
 public class Postponer {
 	

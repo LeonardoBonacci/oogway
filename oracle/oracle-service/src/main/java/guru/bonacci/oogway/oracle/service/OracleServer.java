@@ -9,7 +9,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 
@@ -30,11 +29,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableAspectJAutoProxy 
 @IntegrationComponentScan
 @EnableBinding(OracleEventChannels.class)
-@PropertySource("classpath:oracle.properties")
 public class OracleServer {
 
 	public static void main(String[] args) {
-		System.setProperty("spring.config.name", "oracle-server");
 		SpringApplication.run(OracleServer.class, args);
 	}
 	

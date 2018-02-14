@@ -34,6 +34,7 @@
 		<module>utilities</module>
 		<module>web</module>
 	    <module>monitoring</module>
+	    <module>config</module>
   </modules>
 
 	<dependencyManagement>

@@ -9,10 +9,6 @@
 	<artifactId>money</artifactId>
 	<packaging>jar</packaging>
 
-	<properties>
-		<start-class>guru.bonacci.spectre.money.Main</start-class>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
@@ -38,6 +34,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- For Embedded Elasticsearch -->
+		<dependency>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>jna</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -45,6 +48,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<finalName>money</finalName>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

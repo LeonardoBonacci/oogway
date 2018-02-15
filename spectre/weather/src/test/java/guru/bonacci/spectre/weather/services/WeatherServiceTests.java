@@ -18,19 +18,17 @@ import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
-import guru.bonacci.spectre.weather.WeatherTestApp;
 import guru.bonacci.spectre.spectreshared.persistence.Spec;
 import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
+import guru.bonacci.spectre.weather.WeatherTestApp;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=WeatherTestApp.class, webEnvironment = NONE, properties = {
 	"openweathermap.apikey=1234567890"		
 })
-@TestPropertySource("classpath:persistence-test.properties")
 public class WeatherServiceTests {
 
 	@Autowired

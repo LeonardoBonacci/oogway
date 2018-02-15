@@ -18,12 +18,10 @@ import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.spectre.localtimer.LocalTimerTestApp;
-import guru.bonacci.spectre.localtimer.services.LocalTimerService;
 import guru.bonacci.spectre.spectreshared.persistence.Spec;
 import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 
@@ -31,7 +29,6 @@ import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 @SpringBootTest(classes=LocalTimerTestApp.class, webEnvironment = NONE, properties = {
 	"geo.name.username=voldemort"		
 })
-@TestPropertySource("classpath:persistence-test.properties")
 public class LocalTimerServiceTests {
 
 	@Autowired

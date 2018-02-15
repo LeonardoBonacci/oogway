@@ -9,15 +9,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.spectre.sentiment.SentimentTestApp;
-import guru.bonacci.spectre.sentiment.services.SentimentService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=SentimentTestApp.class, webEnvironment=NONE)
-@TestPropertySource("classpath:persistence-test.properties")
 public class SentimentServiceTests {
 
 	@Autowired

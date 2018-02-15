@@ -33,7 +33,6 @@ import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.spectre.money.services.MoneyCache;
@@ -44,7 +43,6 @@ import guru.bonacci.spectre.spectreshared.persistence.PersistenceTestConfig;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-@TestPropertySource("classpath:persistence-test.properties")
 public class MoneyIntegrationTests {
 
 	@Autowired

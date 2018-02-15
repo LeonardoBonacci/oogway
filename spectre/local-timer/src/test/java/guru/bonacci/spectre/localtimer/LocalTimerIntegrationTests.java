@@ -35,7 +35,6 @@ import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
@@ -48,7 +47,6 @@ import guru.bonacci.spectre.spectreshared.persistence.PersistenceTestConfig;
 @SpringBootTest(webEnvironment = RANDOM_PORT, properties = {
 	"geo.name.username=voldemort"		
 })
-@TestPropertySource("classpath:persistence-test.properties")
 public class LocalTimerIntegrationTests {
 
 	@Autowired

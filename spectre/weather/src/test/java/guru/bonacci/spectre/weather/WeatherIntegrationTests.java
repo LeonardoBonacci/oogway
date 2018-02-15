@@ -35,20 +35,18 @@ import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
-import guru.bonacci.spectre.weather.services.WeatherSpec;
-import guru.bonacci.spectre.weather.services.WeatherSpecRepository;
 import guru.bonacci.spectre.spectreshared.events.SpectreEventChannels;
 import guru.bonacci.spectre.spectreshared.persistence.PersistenceTestConfig;
+import guru.bonacci.spectre.weather.services.WeatherSpec;
+import guru.bonacci.spectre.weather.services.WeatherSpecRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT, properties = {
 	"openweathermap.apikey=1234567890"		
 })
-@TestPropertySource("classpath:persistence-test.properties")
 public class WeatherIntegrationTests {
 
 	@Autowired

@@ -6,7 +6,6 @@ import static springfox.documentation.builders.RequestHandlerSelectors.basePacka
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -56,9 +55,4 @@ public class OracleServer {
                 "http://www.insidefortlauderdale.com/1500/Operating-without-a-License");
         return apiInfo;
     }
-	
-	@Bean
-	public AlwaysSampler defaultSampler() {
-	  return new AlwaysSampler();
-	}
 }

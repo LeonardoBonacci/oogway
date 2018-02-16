@@ -11,5 +11,5 @@ start cmd.exe /k "cd sannya\sannya-service & java -jar target\sannya-service.jar
 start cmd.exe /k "cd web & java -jar target\web.jar"
 
 start cmd.exe /k "cd zipkin & java -jar target\zipkin.jar"
-#start cmd.exe /k "cd jobs & java -jar target\jobs.jar"
-#start cmd.exe /k "cd monitoring & java -jar target\monitoring.jar"
+start cmd.exe /k "cd jobs & java -jar target\jobs.jar"
+start cmd.exe /k "cd monitoring & java -jar target\monitoring.jar"

@@ -35,6 +35,7 @@
 		<module>web</module>
 	    <module>monitoring</module>
 	    <module>config</module>
+    <module>zipkin</module>
   </modules>
 
 	<dependencyManagement>

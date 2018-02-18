@@ -14,4 +14,7 @@ start cmd.exe /k "cd %RABBIT_HOME% & rabbitmq_server-3.6.12\sbin\rabbitmq-server
 rem start cmd.exe /k "cd %KIBANA_HOME% & bin\kibana"
 rem start cmd.exe /k "cd %TOR_HOME% & tor.exe"
 
-call spectre\run-env.bat
+rem run spectre from its own directory
+cd spectre 
+call run-env.bat
+cd.. 

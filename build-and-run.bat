@@ -22,6 +22,5 @@ if "%run-spectre%" == "spectre" (
 	rem run spectre from its own directory
 	cd spectre 
 	call just-run.bat
-
-	cd .. 
+	cd.. 
 )

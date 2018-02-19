@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
 		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread,
-				%X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %-5level %logger{36} - %msg%n
-			</pattern>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
 		</encoder>
 	</appender>
 
@@ -24,7 +27,7 @@
 				<pattern>
 					<pattern>
 						{
-						"serviceName": "web-service"
+						"serviceName": "localtimer-service"
 						}
 					</pattern>
 				</pattern>
@@ -34,10 +37,10 @@
 				<logstashMarkers />
 				<stackTrace />
 			</providers>
-</encoder>
+		</encoder>
 	</appender>
 
-	<root level="DEBUG">
+	<root level="info">
 		<appender-ref ref="stdout" />
 		<appender-ref ref="stash" />
 	</root>

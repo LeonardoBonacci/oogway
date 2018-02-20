@@ -9,4 +9,7 @@ spring:
     enabled: false
   profiles: 
     active: dev
-      
+    
+logstash:
+  host: localhost
+  port: 5000    

@@ -4,4 +4,5 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
+      label: logback-is-back
       fail-fast: true      

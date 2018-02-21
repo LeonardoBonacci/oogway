@@ -4,12 +4,9 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
+      label: logback-is-back
       fail-fast: true
   freemarker: 
     enabled: false
   profiles: 
     active: dev
-    
-logstash:
-  host: localhost
-  port: 5000    

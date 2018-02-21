@@ -12,6 +12,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
+			<artifactId>shared-base</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>guru.bonacci.oogway</groupId>
 			<artifactId>spectre-shared</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -60,7 +65,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>weather</finalName>
+					<finalName>weather-service</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

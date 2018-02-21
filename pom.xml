@@ -25,18 +25,19 @@
 	</properties>
 
 	<modules>
+	    <module>config</module>
 		<module>jobs</module>
+	    <module>monitoring</module>
 		<module>oracle</module>
 		<module>orchestration</module>
-		<module>sannya</module>
+		<module>sannyas</module>
+    	<module>shared-base</module>
 		<module>shared-domain</module>
 		<module>spectre</module>
 		<module>utilities</module>
 		<module>web</module>
-	    <module>monitoring</module>
-	    <module>config</module>
     	<module>zipkin</module>
-  </modules>
+	</modules>
 
 	<dependencyManagement>
 		<dependencies>

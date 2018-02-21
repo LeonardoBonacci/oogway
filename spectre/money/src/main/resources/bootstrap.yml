@@ -1,31 +1,7 @@
-# Spring properties
-spring: 
-  application: 
+spring:
+  application:
     name: money-service
-
-# HTTP Server
-server: 
-  port: 11111
-
-eureka: 
-  client: 
-    serviceUrl: 
-      defaultZone: http://localhost:1111/eureka/
-    instance: 
-      leaseRenewalIntervalInSeconds: 5
-
-#maven info
-build: 
-  version: "@project.version@"
-
-#logging
-logging: 
-  level: 
-    root: WARN
-    org: 
-      springframework: INFO
-    guru: 
-      bonacci: 
-        spectre: 
-          money: INFO
-  file: C:\\logs\\spectre\\money.log
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: true

@@ -10,7 +10,12 @@
 	<packaging>jar</packaging>
 
 	<dependencies>
- 		<dependency>
+		<dependency>
+			<groupId>guru.bonacci.oogway</groupId>
+			<artifactId>shared-base</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
 			<artifactId>oracle-client</artifactId>
 			<version>${project.version}</version>
@@ -57,7 +62,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>jobs</finalName>
+					<finalName>job-service</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

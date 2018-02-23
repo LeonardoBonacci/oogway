@@ -4,4 +4,5 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
+      label: ${CLOUD_CONFIG_FIND_LABEL:master}
       fail-fast: true

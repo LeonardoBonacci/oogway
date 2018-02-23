@@ -1,11 +1,15 @@
 @echo off
 title Run oogway...
 
+rem set github configuration branch name as environment variable
+rem no value defaults to master branch 
+set CLOUD_CONFIG_FIND_LABEL=master
+
 start cmd.exe /k "cd config & java -jar target\config.jar"
 
 TIMEOUT /T 15
 
-start cmd.exe /k "cd monitoring & java -jar target\monitoring.jar"
+rem start cmd.exe /k "cd monitoring & java -jar target\monitoring.jar"
 
 start cmd.exe /k "cd orchestration & java -jar target\orchestration-service.jar"
 start cmd.exe /k "cd oracle\oracle-service & java -jar target\oracle-service.jar"

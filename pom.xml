@@ -25,17 +25,19 @@
 	</properties>
 
 	<modules>
+	    <module>config</module>
 		<module>jobs</module>
+	    <module>monitoring</module>
 		<module>oracle</module>
 		<module>orchestration</module>
-		<module>sannya</module>
+		<module>sannyas</module>
+    	<module>shared-base</module>
 		<module>shared-domain</module>
 		<module>spectre</module>
 		<module>utilities</module>
 		<module>web</module>
-	    <module>monitoring</module>
-	    <module>config</module>
-  </modules>
+    	<module>zipkin</module>
+	</modules>
 
 	<dependencyManagement>
 		<dependencies>
@@ -45,6 +47,12 @@
 				<version>Dalston.SR2</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>net.logstash.logback</groupId>
+				<artifactId>logstash-logback-encoder</artifactId>
+				<version>4.11</version>
 			</dependency>
 
 			<dependency>

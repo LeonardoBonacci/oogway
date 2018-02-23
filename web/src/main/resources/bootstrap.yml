@@ -1,12 +1,12 @@
 spring:
   application:
-    name: web
+    name: web-service
   cloud:
     config:
       uri: http://localhost:8888
+      label: logback-is-back
       fail-fast: true
   freemarker: 
     enabled: false
   profiles: 
     active: dev
-      

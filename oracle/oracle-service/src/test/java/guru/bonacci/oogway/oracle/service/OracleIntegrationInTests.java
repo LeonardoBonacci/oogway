@@ -39,7 +39,7 @@ public class OracleIntegrationInTests {
 		String randomMessage = UUID.randomUUID().toString(); //non-existing
 		
 		String body = "{\"saying\":\"" + randomMessage + "\",\"author\":\"bla\"}";
-		sendMessage(body, OracleEventChannels.SANNYA,"application/json");
+		sendMessage(body, OracleEventChannels.SANNYAS,"application/json");
 
 		// Through Spring-data's creative design for extensible
 		// repositories the test-verification of the call 

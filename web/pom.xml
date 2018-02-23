@@ -13,6 +13,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
+			<artifactId>shared-base</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>guru.bonacci.oogway</groupId>
 			<artifactId>utilities</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -74,6 +79,15 @@
 		</dependency>
 
 		<dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>
@@ -94,7 +108,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>web</finalName>
+					<finalName>web-service</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

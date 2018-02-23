@@ -1,6 +1,6 @@
 package guru.bonacci.oogway.oracle.service.events;
 
-import static guru.bonacci.oogway.oracle.service.events.OracleEventChannels.SANNYA;
+import static guru.bonacci.oogway.oracle.service.events.OracleEventChannels.SANNYAS;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ public class OracleRabbitEar {
 	@Autowired
 	private GemRepository repo;
 
-    @StreamListener(SANNYA)
+    @StreamListener(SANNYAS)
 	public void onMessage(GemCarrier event) {
 		logger.info("Receiving an extra bit of knowledge: '" + event + "'");
 		repo.saveTheNewOnly(GemMapper.MAPPER.toGem(event));

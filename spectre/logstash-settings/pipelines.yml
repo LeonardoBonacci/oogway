@@ -16,9 +16,9 @@
 #
 
 - pipeline.id: spectre
-  path.config: "C:\\Users\\Leo\\git\\oogway\\spectre\\spectre-pipeline.conf"
-- pipeline.id: test
-  path.config: "C:\\Users\\Leo\\git\\oogway\\spectre\\test.conf"
+  path.config: "C:\\Users\\Leo\\git\\oogway\\spectre\\logstash-settings\\spectre-pipeline.conf"
+- pipeline.id: log-collector
+  path.config: "C:\\Users\\Leo\\git\\oogway\\spectre\\logstash-settings\\log-collector.conf"
 
 # Available options:
 #

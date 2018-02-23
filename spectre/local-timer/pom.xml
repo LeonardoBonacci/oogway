@@ -12,6 +12,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
+			<artifactId>shared-base</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>guru.bonacci.oogway</groupId>
 			<artifactId>spectre-shared</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -37,6 +42,15 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+		</dependency>
+		
 		<!-- For Embedded Elasticsearch -->
 		<dependency>
 			<groupId>net.java.dev.jna</groupId>
@@ -51,7 +65,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>local-timer</finalName>
+					<finalName>localtimer-service</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

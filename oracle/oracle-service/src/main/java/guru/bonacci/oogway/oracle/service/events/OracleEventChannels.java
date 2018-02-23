@@ -13,9 +13,9 @@ public interface OracleEventChannels {
     MessageChannel oracleChannel();
     
     
-	String SANNYA = "sannya";
+	String SANNYAS = "sannyas";
 
-    @Input(SANNYA)
-    SubscribableChannel sannyaChannel();
+    @Input(SANNYAS)
+    SubscribableChannel sannyasChannel();
 
 }

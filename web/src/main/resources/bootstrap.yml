@@ -4,7 +4,7 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
-      label: ${CLOUD_CONFIG_FIND_LABEL:master}
+      label: ${cloud.config.find.label:master}
       fail-fast: true
   freemarker: 
     enabled: false

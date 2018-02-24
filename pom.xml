@@ -25,6 +25,7 @@
 	</properties>
 
 	<modules>
+	    <module>auth</module>
 	    <module>config</module>
 		<module>jobs</module>
 	    <module>monitoring</module>
@@ -37,7 +38,7 @@
 		<module>utilities</module>
 		<module>web</module>
     	<module>zipkin</module>
-	</modules>
+  </modules>
 
 	<dependencyManagement>
 		<dependencies>

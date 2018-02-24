@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.integration.annotation.IntegrationComponentScan;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 import guru.bonacci.oogway.oracle.service.events.OracleEventChannels;
 import springfox.documentation.service.ApiInfo;
@@ -29,6 +30,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableAspectJAutoProxy 
 @IntegrationComponentScan
 @EnableBinding(OracleEventChannels.class)
+@EnableResourceServer
 public class OracleServer {
 
 	public static void main(String[] args) {

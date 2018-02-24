@@ -20,6 +20,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 
 import guru.bonacci.oogway.oracle.service.events.OracleEventChannels;
+import guru.bonacci.oogway.oracle.service.security.CustomUserInfoTokenServices;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -50,13 +51,6 @@ public class OracleServer extends ResourceServerConfigurerAdapter {
 	@Bean
 	public ResourceServerTokenServices tokenServices() {
 		return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
-	}
-
-	@Override
-	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers("/" , "/demo").permitAll()
-				.anyRequest().authenticated();
 	}
 
 	@Bean

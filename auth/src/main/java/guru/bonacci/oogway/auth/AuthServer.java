@@ -26,6 +26,4 @@ public class AuthServer {
         logger.debug("user info: " + user.toString());
         return user;
     }
-
-
 }

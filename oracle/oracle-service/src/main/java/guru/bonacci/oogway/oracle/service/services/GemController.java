@@ -53,6 +53,7 @@ public class GemController {
 	}	
 
 	@ApiOperation(value = "Pick a random gem", response = GemCarrier.class)
+	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
 	@RequestMapping(path = "/random", method = GET)
 	public Optional<GemCarrier> random() {
 		logger.info("Please find me a random gem");

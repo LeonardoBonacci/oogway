@@ -4,6 +4,7 @@ import static java.lang.Math.min;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class Tweeter {
 	@Scheduled(cron = "${twitter.cron}")
 	public void runForestRun() {
 		Optional<GemCarrier> random = oracleClient.random();
-		String tweet = random.map(g -> g.getSaying()).orElse("Good artists copy, great artists steal.");
+		String tweet = random.map(g -> g.getSaying()).orElse(UUID.randomUUID().toString());
 		logger.info("tweet: " + tweet);
 
 		try {

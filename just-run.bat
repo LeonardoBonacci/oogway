@@ -12,6 +12,9 @@ TIMEOUT /T 15
 rem start cmd.exe /k "cd monitoring & java -jar target\monitoring.jar"
 
 start cmd.exe /k "cd orchestration & java -jar target\orchestration-service.jar"
+
+start cmd.exe /k "cd auth & java -jar target\auth-service.jar"
+
 start cmd.exe /k "cd oracle\oracle-service & java -jar target\oracle-service.jar"
 start cmd.exe /k "cd sannyas\sannyas-service & java -jar target\sannyas-service.jar"
 start cmd.exe /k "cd web & java -jar target\web-service.jar"

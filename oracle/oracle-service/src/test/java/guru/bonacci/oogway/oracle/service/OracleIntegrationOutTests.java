@@ -26,7 +26,9 @@ import guru.bonacci.oogway.oracle.service.events.OracleEventChannels;
 import guru.bonacci.oogway.shareddomain.GenericEvent;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT)
+@SpringBootTest(properties = {
+        "security.basic.enabled=false"
+}, webEnvironment = RANDOM_PORT)
 @AutoConfigureMockMvc
 public class OracleIntegrationOutTests {
 

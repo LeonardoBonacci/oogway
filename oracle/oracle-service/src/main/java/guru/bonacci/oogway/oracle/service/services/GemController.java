@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,6 +41,7 @@ public class GemController {
 	}
 
 	@ApiOperation(value = "Search for a gem", response = GemCarrier.class)
+	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
 	@RequestMapping(method = GET)
 	public Optional<GemCarrier> search(@RequestParam("q") String q, 
 							 		   @RequestParam(value="by", required=false) Optional<String> author) {
@@ -51,6 +53,7 @@ public class GemController {
 	}	
 
 	@ApiOperation(value = "Pick a random gem", response = GemCarrier.class)
+	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
 	@RequestMapping(path = "/random", method = GET)
 	public Optional<GemCarrier> random() {
 		logger.info("Please find me a random gem");

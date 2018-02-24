@@ -2,7 +2,7 @@
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
 	<springProperty name="LOGSTASH_HOST" source="logstash.host" defaultValue="127.0.0.1"/>
-	<springProperty name="LOGSTASH_PORT" source="logstash.port" defaultValue="5000"/>
+	<springProperty name="LOGSTASH_PORT" source="logstash.port" defaultValue="4560"/>
 	<springProperty name="APPLICATION_NAME" source="spring.application.name"/>
 	
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">

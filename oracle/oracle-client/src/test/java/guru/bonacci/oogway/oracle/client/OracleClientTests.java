@@ -23,6 +23,7 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.ribbon.StaticServerList;
 import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -39,6 +40,7 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
         "feign.hystrix.enabled=true"
 })
 @ContextConfiguration(classes = {OracleClientTests.LocalRibbonClientConfiguration.class})
+@ActiveProfiles("unit-test")
 public class OracleClientTests {
 
     @ClassRule

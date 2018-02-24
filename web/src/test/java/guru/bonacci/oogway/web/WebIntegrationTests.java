@@ -32,7 +32,9 @@ import guru.bonacci.oogway.shareddomain.COMINT;
 import guru.bonacci.oogway.web.events.WebEventChannels;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT)
+@SpringBootTest(properties = {
+        "security.basic.enabled=false"
+}, webEnvironment = RANDOM_PORT)
 @AutoConfigureMockMvc
 public class WebIntegrationTests {
 

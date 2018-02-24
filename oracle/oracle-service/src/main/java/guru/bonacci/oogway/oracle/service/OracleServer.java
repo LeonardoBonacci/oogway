@@ -3,15 +3,21 @@ package guru.bonacci.oogway.oracle.service;
 import static springfox.documentation.builders.PathSelectors.regex;
 import static springfox.documentation.builders.RequestHandlerSelectors.basePackage;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.integration.annotation.IntegrationComponentScan;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 
 import guru.bonacci.oogway.oracle.service.events.OracleEventChannels;
 import springfox.documentation.service.ApiInfo;
@@ -30,13 +36,29 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableAspectJAutoProxy 
 @IntegrationComponentScan
 @EnableBinding(OracleEventChannels.class)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableResourceServer
-public class OracleServer {
+public class OracleServer extends ResourceServerConfigurerAdapter {
+
+	@Autowired
+	private ResourceServerProperties sso;
 
 	public static void main(String[] args) {
 		SpringApplication.run(OracleServer.class, args);
 	}
 	
+	@Bean
+	public ResourceServerTokenServices tokenServices() {
+		return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
+	}
+
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+				.antMatchers("/" , "/demo").permitAll()
+				.anyRequest().authenticated();
+	}
+
 	@Bean
     public Docket gemApi() {
         return new Docket(DocumentationType.SWAGGER_2)

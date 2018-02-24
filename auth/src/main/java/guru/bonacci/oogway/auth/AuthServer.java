@@ -1,7 +1,8 @@
 package guru.bonacci.oogway.auth;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import static org.slf4j.LoggerFactory.getLogger;
+
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,7 +25,7 @@ import java.security.Principal;
 @EnableResourceServer
 public class AuthServer {
 
-	private static final Log logger = LogFactory.getLog(AuthServer.class);
+	private final Logger logger = getLogger(this.getClass());
 
 	public static void main(String[] args) {
         SpringApplication.run(AuthServer.class, args);

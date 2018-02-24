@@ -6,6 +6,8 @@ spring:
       uri: http://localhost:8888
       label: ${cloud.config.find.label:master}
       fail-fast: true
+      password: ${config.service.password}
+      username: user
 
 eureka:
   instance:

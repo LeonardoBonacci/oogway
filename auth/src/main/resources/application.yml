@@ -1,7 +1,7 @@
-server.contextPath: /auth
+server:
+  contextPath: /auth
+  port: 5000
 
 logging:
  level:
    org.springframework.security: DEBUG
-server:
- port: 8080

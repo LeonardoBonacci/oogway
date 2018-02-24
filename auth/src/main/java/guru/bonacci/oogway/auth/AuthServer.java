@@ -14,11 +14,12 @@ import java.security.Principal;
 @RestController
 @EnableResourceServer
 public class AuthServer {
-    public static void main(String[] args) {
+
+	private static final Log logger = LogFactory.getLog(AuthServer.class);
+
+	public static void main(String[] args) {
         SpringApplication.run(AuthServer.class, args);
     }
-
-    private static final Log logger = LogFactory.getLog(AuthServer.class);
 
     @RequestMapping("/user")
     public Principal user(Principal user) {

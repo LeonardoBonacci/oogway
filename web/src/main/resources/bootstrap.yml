@@ -10,14 +10,3 @@ spring:
     enabled: false
   profiles: 
     active: dev
-    
-security.ignored: /**
-
-security:
-  oauth2:
-    client:
-      clientId: service-account-1
-      clientSecret: service-account-1-secret
-      accessTokenUri: http://localhost:8080/auth/oauth/token
-      grant-type: client_credentials
-      scope: resource-server-read

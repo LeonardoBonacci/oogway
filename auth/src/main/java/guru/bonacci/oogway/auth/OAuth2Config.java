@@ -20,12 +20,14 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
         endpoints.authenticationManager(authenticationManager);
     }
 
-
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("service-account-1")
-                .secret("service-account-1-secret")
+    	//TODO .secret(env.getProperty("WEB_SERVICE_PASSWORD"))
+    	// 		@Autowired private Environment env;
+
+    	clients.inMemory()
+                .withClient("web-service")
+                .secret("web-service-secret")
                 .authorizedGrantTypes("client_credentials")
                 .scopes("resource-server-read", "resource-server-write");
     }

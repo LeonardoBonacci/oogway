@@ -7,6 +7,7 @@ import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequest
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
@@ -21,6 +22,7 @@ import feign.RequestInterceptor;
 @EnableCircuitBreaker
 @PropertySource("classpath:oracle-client.yml")
 @EnableOAuth2Client
+@Profile("!unit-test") //hack :)
 public class OracleClientConfig {
 	
 	/**

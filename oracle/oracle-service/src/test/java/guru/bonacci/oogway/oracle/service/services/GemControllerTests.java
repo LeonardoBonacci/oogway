@@ -29,7 +29,9 @@ import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=OracleTestApp.class, webEnvironment=RANDOM_PORT)
+@SpringBootTest(classes = OracleTestApp.class, properties = {
+        "security.basic.enabled=false"
+}, webEnvironment = RANDOM_PORT)
 @AutoConfigureMockMvc
 public class GemControllerTests {
 

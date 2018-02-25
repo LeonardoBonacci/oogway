@@ -2,7 +2,6 @@ package guru.bonacci.spectre.localtimer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -12,7 +11,6 @@ import guru.bonacci.spectre.spectreshared.events.SpectreEventChannels;
 import guru.bonacci.spectre.spectreshared.persistence.PersistenceConfig;
 
 @SpringBootApplication
-@EnableDiscoveryClient
 @EnableBinding(SpectreEventChannels.class)
 @Import(PersistenceConfig.class)
 public class LocalTimerServer {

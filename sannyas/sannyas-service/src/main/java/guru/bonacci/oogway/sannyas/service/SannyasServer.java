@@ -6,7 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.annotation.IntegrationComponentScan;
@@ -19,7 +18,6 @@ import guru.bonacci.oogway.sannyas.service.events.SannyasEventChannels;
  */
 @SpringBootApplication
 @EnableAutoConfiguration
-@EnableDiscoveryClient
 @EnableCaching(proxyTargetClass=true)
 @EnableBinding(SannyasEventChannels.class)
 @IntegrationComponentScan

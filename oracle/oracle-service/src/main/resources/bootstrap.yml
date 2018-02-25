@@ -8,4 +8,5 @@ spring:
       fail-fast: true
       password: ${config.service.password}
       username: user
-      
+
+spring.sleuth.sampler.percentage: 1.0

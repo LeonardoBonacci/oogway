@@ -12,7 +12,6 @@ import guru.bonacci.spectre.spectreshared.events.SpectreEventChannels;
 import guru.bonacci.spectre.spectreshared.persistence.PersistenceConfig;
 
 @SpringBootApplication
-@EnableDiscoveryClient
 @EnableBinding(SpectreEventChannels.class)
 @Import(PersistenceConfig.class)
 public class WeatherServer {

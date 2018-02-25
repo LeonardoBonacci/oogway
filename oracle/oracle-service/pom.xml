@@ -12,11 +12,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>shared-base</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>guru.bonacci.oogway</groupId>
 			<artifactId>utilities</artifactId>
 			<version>${project.version}</version>
 		</dependency>

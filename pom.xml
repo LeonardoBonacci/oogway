@@ -29,7 +29,6 @@
 		<module>auth</module>
 		<module>config</module>
 		<module>jobs</module>
-		<module>monitoring</module>
 		<module>oracle</module>
 		<module>orchestration</module>
 		<module>sannyas</module>

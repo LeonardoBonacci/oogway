@@ -7,5 +7,4 @@ spring:
       label: ${cloud.config.find.label:master}
       fail-fast: true
       password: ${config.service.password}
-      username: user
-      
+      username: user      

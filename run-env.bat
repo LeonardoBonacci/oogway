@@ -11,7 +11,7 @@ set TOR_HOME=C:\Tools\Tor Browser\Browser\TorBrowser\Tor
 
 start cmd.exe /k "cd %ES_HOME% & bin\elasticsearch"
 start cmd.exe /k "cd %RABBIT_HOME% & rabbitmq_server-3.6.12\sbin\rabbitmq-server.bat"
-start cmd.exe /k "cd %KIBANA_HOME% & bin\kibana"
+rem start cmd.exe /k "cd %KIBANA_HOME% & bin\kibana"
 rem start cmd.exe /k "cd %TOR_HOME% & tor.exe"
 
 rem run spectre from its own directory

@@ -3,7 +3,7 @@ title Run oogway...
 
 rem set github configuration branch name as environment variable
 rem no value defaults to master branch 
-set CLOUD_CONFIG_FIND_LABEL=logback
+set CLOUD_CONFIG_FIND_LABEL=master
 
 start cmd.exe /k "cd config & java -jar target\config.jar"
 

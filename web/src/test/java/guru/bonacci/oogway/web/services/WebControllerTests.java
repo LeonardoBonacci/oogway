@@ -37,11 +37,6 @@ public class WebControllerTests {
 	ObjectMapper objectMapper;
 
 	@Test
-	public void shouldReceive200OnHome() throws Exception {
-		this.mvc.perform(get("/")).andExpect(status().isOk());
-	}
-	
-	@Test
 	public void shouldReceive200OnConsult() throws Exception {
 		GemCarrier gem = new GemCarrier("why should I?", "oogway");
 		given(service.enquire("tell me the truth")).willReturn(gem);

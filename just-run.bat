@@ -9,8 +9,6 @@ start cmd.exe /k "cd config & java -jar target\config.jar"
 
 TIMEOUT /T 15
 
-rem start cmd.exe /k "cd monitoring & java -jar target\monitoring.jar"
-
 start cmd.exe /k "cd orchestration & java -jar target\orchestration-service.jar"
 
 start cmd.exe /k "cd auth & java -jar target\auth-service.jar"
@@ -20,6 +18,8 @@ start cmd.exe /k "cd sannyas\sannyas-service & java -jar target\sannyas-service.
 start cmd.exe /k "cd web & java -jar target\web-service.jar"
 
 start cmd.exe /k "cd jobs & java -jar target\job-service.jar"
+
+start cmd.exe /k "cd heimdall & java -jar target\heimdall.jar"
 
 TIMEOUT /T 30
 

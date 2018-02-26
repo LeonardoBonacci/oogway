@@ -26,11 +26,11 @@ import feign.RequestInterceptor;
 public class OracleClientConfig {
 	
 	/**
-	 * A few small things are needed to a secured service..
+	 * A few small things are needed to secure a service..
 	 * 
 	 * The command line can pretend to be web-service:
 	 * curl web-service:web-service-secret@localhost:5000/auth/oauth/token -d grant_type=client_credentials
-	 * curl -H "Authorization: Bearer f8f016c2-184c-432f-8ee6-6613e7dbfdfd" -v http://localhost:4444/gems?q=abc
+	 * curl -H "Authorization: Bearer f8f016c2-184c-432f-8ee6-6613e7dbfdfd" -v http://localhost:4444/oracle/gems?q=abc
 	 */
 	@Bean
 	public OAuth2RestTemplate clientCredentialsRestTemplate() {

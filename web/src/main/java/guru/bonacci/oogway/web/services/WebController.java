@@ -23,11 +23,6 @@ public class WebController {
 	@Autowired
 	private FirstLineSupportService service;
 
-	@RequestMapping("/")
-	public String ourOneAndOnlyPage() {
-	    return "html/the-html.html";
-	}
-	
 	@ResponseBody
 	@RequestMapping(path = "/consult", method = GET)
 	public GemCarrier enquire(@RequestParam("q") String q) {

@@ -15,7 +15,7 @@ zuul:
 
   routes:
     web-service:
-        path: /webs/**
+        path: /webby/**
         serviceId: web-service
         stripPrefix: false
         sensitiveHeaders:

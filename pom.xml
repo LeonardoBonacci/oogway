@@ -36,7 +36,7 @@
 		<module>utilities</module>
 		<module>web</module>
 		<module>zipkin</module>
-	    <module>zuul-server</module>
+	    <module>heimdall</module>
   </modules>
 
 	<dependencyManagement>

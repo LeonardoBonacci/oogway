@@ -37,7 +37,6 @@
 		<module>web</module>
 		<module>zipkin</module>
 	    <module>customer-service</module>
-	    <module>spring-cloud-eureka-example</module>
 	    <module>zuul-service</module>
   </modules>
 

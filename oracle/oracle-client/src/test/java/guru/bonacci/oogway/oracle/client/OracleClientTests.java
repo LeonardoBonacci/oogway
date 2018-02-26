@@ -55,7 +55,7 @@ public class OracleClientTests {
     @Test
 	public void shouldAnswerQ() throws JsonProcessingException {
     	GemCarrier gem = new GemCarrier("bla");
-        stubFor(get(urlEqualTo("/gems?q=something"))
+        stubFor(get(urlEqualTo("/oracle/gems?q=something"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
@@ -67,7 +67,7 @@ public class OracleClientTests {
     @Test
     public void shouldAnswerQAndBy() throws JsonProcessingException {
     	GemCarrier gem = new GemCarrier("bla", "bloe");
-        stubFor(get(urlEqualTo("/gems?q=something&by=someone"))
+        stubFor(get(urlEqualTo("/oracle/gems?q=something&by=someone"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
@@ -78,7 +78,7 @@ public class OracleClientTests {
     
     @Test
     public void shouldFallbackConsult() {
-    	stubFor(get(urlEqualTo("/gems?q=something&by=someone"))
+    	stubFor(get(urlEqualTo("/oracle/gems?q=something&by=someone"))
                 .willReturn(aResponse()
                         .withStatus(500)));
         
@@ -89,7 +89,7 @@ public class OracleClientTests {
     @Test
     public void shouldFindRandom() throws JsonProcessingException {
     	GemCarrier gem = new GemCarrier("bla", "bloe");
-        stubFor(get(urlEqualTo("/gems/random"))
+        stubFor(get(urlEqualTo("/oracle/gems/random"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
@@ -100,7 +100,7 @@ public class OracleClientTests {
 
     @Test
     public void shouldFallbackRandom() {
-        stubFor(get(urlEqualTo("/gems/random"))
+        stubFor(get(urlEqualTo("/oracle/gems/random"))
                 .willReturn(aResponse()
                         .withStatus(500)));
         

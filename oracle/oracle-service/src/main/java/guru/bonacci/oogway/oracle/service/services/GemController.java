@@ -44,7 +44,7 @@ public class GemController {
 	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
 	@RequestMapping(method = GET)
 	public Optional<GemCarrier> search(@RequestParam("q") String q, 
-							 		   @RequestParam(value="by", required=false) Optional<String> author) {
+							 		   @RequestParam(value="by", required = false) Optional<String> author) {
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
 		
 		Optional<Gem> gem = author.map(a -> repo.consultTheOracle(q, a))

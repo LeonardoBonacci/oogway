@@ -7,7 +7,7 @@ set CLOUD_CONFIG_FIND_LABEL=zuul
 
 start cmd.exe /k "cd config & java -jar target\config.jar"
 
-TIMEOUT /T 5
+TIMEOUT /T 10
 
 start cmd.exe /k "cd orchestration & java -jar target\orchestration-service.jar"
 

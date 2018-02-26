@@ -11,24 +11,14 @@ spring:
     name: zuul-server
     
 zuul:
-  #Service will be mapped under the /api URI
-  prefix: /api
-#  Uncomment to disable auto-registering all services read from Eureka
-#  ignoredServices: '*'
+  ignoredServices: '*'
+
   routes:
     web-service:
         path: /webs/**
         serviceId: web-service
         stripPrefix: false
         sensitiveHeaders:
-
-    customer-by-address:
-      path: /customer-by-address/**
-      url: http://localhost:9098
-
-    customer-by-service:
-      path: /customer-by-service/**
-      serviceId: CUSTOMER-SERVICE
 
     static:
       path: /static/**

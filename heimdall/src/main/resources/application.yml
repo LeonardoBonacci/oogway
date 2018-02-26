@@ -1,3 +1,15 @@
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
 server:
   port: 9090
 
@@ -14,11 +26,21 @@ zuul:
   ignoredServices: '*'
 
   routes:
+    auth-service:
+      path: /auth/**
+      url: http://auth-service:5000
+      stripPrefix: false
+      sensitiveHeaders:
+  
     web-service:
-        path: /webby/**
-        serviceId: web-service
-        stripPrefix: false
-        sensitiveHeaders:
+      path: /webby/**
+      serviceId: web-service
+      stripPrefix: false
+      sensitiveHeaders:
 
-    static:
-      path: /static/**
+    sannyas-service:
+      path: /sannyas/**
+      serviceId: sannyas-service
+      stripPrefix: false
+      sensitiveHeaders:
+        

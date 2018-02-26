@@ -22,9 +22,9 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
 public interface OracleClient {
 
 	@RequestMapping(value = "/gems", method = GET)
-	Optional<GemCarrier> consult(@RequestParam("q") String q, @RequestParam(value="by") String author);
+	Optional<GemCarrier> consult(@RequestParam("q") String q, @RequestParam(value = "by") String author);
 
-	@RequestMapping(value = "/gems/random", method = GET)
+	@RequestMapping(value = "/oracle/random", method = GET)
     Optional<GemCarrier> random();
 
 	@Component

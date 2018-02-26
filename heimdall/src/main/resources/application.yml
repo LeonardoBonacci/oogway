@@ -27,20 +27,26 @@ zuul:
 
   routes:
     auth-service:
-      path: /auth/**
-      url: http://auth-service:5000
-      stripPrefix: false
-      sensitiveHeaders:
+        path: /auth/**
+        url: http://auth-service:5000
+        stripPrefix: false
+        sensitiveHeaders:
   
     web-service:
-      path: /webby/**
-      serviceId: web-service
-      stripPrefix: false
-      sensitiveHeaders:
+        path: /webby/**
+        serviceId: web-service
+        stripPrefix: false
+        sensitiveHeaders:
+
+    oracle-service:
+        path: /oracle/**
+        serviceId: oracle-service
+        stripPrefix: false
+        sensitiveHeaders:
 
     sannyas-service:
-      path: /sannyas/**
-      serviceId: sannyas-service
-      stripPrefix: false
-      sensitiveHeaders:
+        path: /sannyas/**
+        serviceId: sannyas-service
+        stripPrefix: false
+        sensitiveHeaders:
         

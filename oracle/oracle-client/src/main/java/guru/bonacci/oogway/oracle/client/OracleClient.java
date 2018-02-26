@@ -21,10 +21,10 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
 @FeignClient(name = "oracle-service", fallbackFactory = HystrixClientFallbackFactory.class)
 public interface OracleClient {
 
-	@RequestMapping(value = "/gems", method = GET)
+	@RequestMapping(value = "/oracle/gems", method = GET)
 	Optional<GemCarrier> consult(@RequestParam("q") String q, @RequestParam(value = "by") String author);
 
-	@RequestMapping(value = "/oracle/random", method = GET)
+	@RequestMapping(value = "/oracle/gems/random", method = GET)
     Optional<GemCarrier> random();
 
 	@Component

@@ -1,14 +1,13 @@
-package org.exampledriven.zuul.eureka.customer.shared.server.server.rest;
-
-import org.exampledriven.zuul.eureka.customer.shared.server.server.domain.Customer;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+package guru.bonacci.oogway.web.customer;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CustomerController {

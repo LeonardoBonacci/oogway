@@ -36,8 +36,7 @@
 		<module>utilities</module>
 		<module>web</module>
 		<module>zipkin</module>
-	    <module>customer-service</module>
-	    <module>zuul-service</module>
+	    <module>zuul-server</module>
   </modules>
 
 	<dependencyManagement>

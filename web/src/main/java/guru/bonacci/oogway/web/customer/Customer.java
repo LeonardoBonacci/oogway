@@ -1,4 +1,4 @@
-package org.exampledriven.zuul.eureka.customer.shared.server.server.domain;
+package guru.bonacci.oogway.web.customer;
 
 /**
  * Created by Peter_Szanto on 6/13/2016.

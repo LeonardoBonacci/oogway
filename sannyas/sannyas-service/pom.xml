@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>guru.bonacci.oogway</groupId>
 		<artifactId>sannyas</artifactId>
-		<version>3.0</version>
+		<version>3.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>sannyas-service</artifactId>
 	<packaging>jar</packaging>

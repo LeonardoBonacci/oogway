@@ -1,11 +1,14 @@
 package guru.bonacci.oogway.oracle.service.services;
 
+import static guru.bonacci.oogway.utils.MyFileUtils.readToList;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.io.IOException;
 import java.util.Optional;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -35,11 +38,26 @@ public class GemController {
 	@Autowired
 	private GemRepository repo;
 
+	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		binder.addValidators(new GemValidator());
 	}
 
+
+	@PostConstruct
+	public void afterPropertiesSet() {
+     try {
+			Gem[] friedrichsBest = readToList("nietzsche.txt").stream()
+																.map(quote -> new Gem(quote, "Friedrich Nietzsche"))
+																.toArray(Gem[]::new);
+			repo.saveTheNewOnly(friedrichsBest);
+		} catch (IOException e) {
+			logger.error("Nietzsche!!", e);
+		}
+	}	
+
+	
 	@ApiOperation(value = "Search for a gem", response = GemCarrier.class)
 	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
 	@RequestMapping(method = GET)

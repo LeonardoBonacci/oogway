@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * A gem is a cut and polished precious stone or pearl fine enough for
  * use in jewelry. In this context: wisdom is a gem of infinite value.
  */
-@Document(indexName="oracle", type="quote", shards=1, replicas=0, refreshInterval="-1")
+@Document(indexName = "oracle", type = "quote", shards = 1, replicas = 0, refreshInterval = "-1")
 public class Gem {
 
 	public static final String SAYING = "saying";

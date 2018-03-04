@@ -8,10 +8,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import java.io.IOException;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.WebDataBinder;
@@ -31,7 +31,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/gems")
 @Api(value = "gemming", description = "Made for Gem Mining")
-public class GemController {
+public class GemController implements InitializingBean {
 
 	private final Logger logger = getLogger(this.getClass());
 
@@ -45,7 +45,7 @@ public class GemController {
 	}
 
 
-	@PostConstruct
+	@Override
 	public void afterPropertiesSet() {
      try {
 			Gem[] friedrichsBest = readToList("nietzsche.txt").stream()

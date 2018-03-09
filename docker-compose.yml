@@ -25,8 +25,12 @@ services:
   logstash: 
     image: leonardobonacci/pruning-logstash:1.0
     volumes:  
-      - "C:/Users/Leo/git/oogway/logstash/pipeline/:/usr/share/logstash/pipeline/" 
-      - "C:/Users/Leo/git/oogway/logstash/config/pipelines.yml:/usr/share/logstash/config/pipelines.yml"  
+      - type: bind
+        source: ./logstash/pipeline
+        target: /usr/share/logstash/pipeline/ 
+      - type: bind
+        source: ./logstash/config/pipelines.yml
+        target: /usr/share/logstash/config/pipelines.yml
     ports: 
       - 4560:4560
     depends_on:

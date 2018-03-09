@@ -1,0 +1,39 @@
+version: '3.5'
+services:
+
+  es:
+    image: elasticsearch:2.4
+    ports:
+      - 9200:9200
+      - 9300:9300
+  
+  rabbit:
+    image: rabbitmq:3.6-management
+    ports:
+      - 4369:4369 
+      - 5672:5672 
+      - 15672:15672 
+      - 25672:25672 
+      
+  kibana:
+    image: kibana:4.6
+    ports:
+      - 5601:5601
+    depends_on:
+      - es      
+
+  logstash: 
+    image: leonardobonacci/pruning-logstash:1.0
+    volumes:  
+      - "C:/Users/Leo/git/oogway/logstash/pipeline/:/usr/share/logstash/pipeline/" 
+      - "C:/Users/Leo/git/oogway/logstash/config/pipelines.yml:/usr/share/logstash/config/pipelines.yml"  
+    ports: 
+      - 4560:4560
+    depends_on:
+      - es
+      - rabbit
+      
+#  tor: 
+#    image: osminogin/tor-simple
+#    ports:
+#      - 127.0.0.1:9050:9050 

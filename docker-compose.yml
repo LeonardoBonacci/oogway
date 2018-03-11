@@ -69,19 +69,18 @@ services:
     ports:
       - 9090:9090
       
-#
-#  auth-service:
-#    environment:
-#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-#      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-#    image: auth-service
-#    restart: always
-#    depends_on:
-#      config:
-#        condition: service_healthy
-#    ports:
-#      - 5000:5000
-#
+  auth-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+    image: auth-service
+    restart: always
+    depends_on:
+      config:
+        condition: service_healthy
+    ports:
+      - 5000:5000
+
   web-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD

@@ -1,22 +1,27 @@
-version: '3.5'
+version: '2.1'
 services:
 
   es:
     image: elasticsearch:2.4
+    restart: always
     ports:
       - 9200:9200
       - 9300:9300
-  
+
   rabbit:
     image: rabbitmq:3.6-management
+    restart: always
     ports:
       - 4369:4369 
       - 5672:5672 
       - 15672:15672 
       - 25672:25672 
-      
+
   kibana:
+    environment:
+      ELASTICSEARCH_URL: http://es:9200
     image: kibana:4.6
+    restart: always
     ports:
       - 5601:5601
     depends_on:
@@ -24,18 +29,73 @@ services:
 
   logstash: 
     image: leonardobonacci/pruning-logstash:1.0
-    volumes:  
-      - type: bind
-        source: ./logstash/pipeline
-        target: /usr/share/logstash/pipeline/ 
-      - type: bind
-        source: ./logstash/config/pipelines.yml
-        target: /usr/share/logstash/config/pipelines.yml
+    restart: always
+    volumes: 
+      - ./logstash/pipeline:/usr/share/logstash/pipeline/:ro 
+      - ./logstash/config/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
     ports: 
       - 4560:4560
     depends_on:
       - es
       - rabbit
+
+#  config:
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#    image: config
+#    deploy:
+#      replicas: 1
+#      restart_policy:
+#        condition: on-failure
+#    networks:
+#      - webnet
+
+#  orchestration-service:
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+#    image: orchestration-service
+#    deploy:
+#      replicas: 1
+#      restart_policy:
+#        condition: on-failure
+#        delay: 5s
+#        max_attempts: 100
+#    depends_on:
+#      - config
+#    ports:
+#      - 1111:1111
+#    networks:
+#      - webnet
+
+#  auth-service:
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+#    image: auth-service
+#    deploy:
+#      replicas: 1
+#      restart_policy:
+#        condition: on-failure
+#    depends_on:
+#      - config
+#      - orchestration-service
+#    ports:
+#      - 5000:5000
+
+#  oracle-service:
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+#    image: oracle-service
+#    restart: always
+#    depends_on:
+#      - es
+#      - config:
+#          condition: service_healthy
+#      - orchestration-service
+#    ports:
+#      - 4444:4444
       
 #  tor: 
 #    image: osminogin/tor-simple

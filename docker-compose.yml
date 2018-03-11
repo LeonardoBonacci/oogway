@@ -88,10 +88,42 @@ services:
     image: web-service
     restart: always
     depends_on:
+      rabbit:
+        condition: service_started
       config:
         condition: service_healthy
     ports:
       - 3333:3333
+
+  oracle-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+    image: oracle-service
+    restart: always
+    depends_on:
+      rabbit:
+        condition: service_started
+      es:
+        condition: service_started
+      config:
+        condition: service_healthy
+    ports:
+      - 4444:4444
+
+  sannyas-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+    image: sannyas-service
+    restart: always
+    depends_on:
+      rabbit:
+        condition: service_started
+      config:
+        condition: service_healthy
+    ports:
+      - 2222:2222
       
 #  tor: 
 #    image: osminogin/tor-simple

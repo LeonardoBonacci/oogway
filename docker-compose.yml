@@ -4,6 +4,8 @@ services:
   es:
     image: elasticsearch:2.4
     restart: always
+    volumes: 
+      - ${ES_PATH_DATA}:/usr/share/elasticsearch/data 
     ports:
       - 9200:9200
       - 9300:9300

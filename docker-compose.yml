@@ -127,6 +127,46 @@ services:
     ports:
       - 2222:2222
 
+#  job-service:
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+#    image: job-service
+#    restart: always
+#    depends_on:
+#      config:
+#        condition: service_healthy
+#    ports:
+#      - 8765:8765
+
+  localtimer-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+    image: localtimer-service
+    restart: always
+    depends_on:
+      rabbit:
+        condition: service_started
+      config:
+        condition: service_healthy
+    ports:
+      - 6666:6666
+
+  money-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+    image: money-service
+    restart: always
+    depends_on:
+      rabbit:
+        condition: service_started
+      config:
+        condition: service_healthy
+    ports:
+      - 11111:11111
+
   sentiment-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
@@ -140,6 +180,20 @@ services:
         condition: service_healthy
     ports:
       - 7777:7777
+
+  weather-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+    image: weather-service
+    restart: always
+    depends_on:
+      rabbit:
+        condition: service_started
+      config:
+        condition: service_healthy
+    ports:
+      - 9999:9999
       
 #  tor: 
 #    image: osminogin/tor-simple

@@ -4,8 +4,8 @@ services:
   es:
     image: elasticsearch:2.4
     restart: always
-    volumes: 
-      - ${ES_PATH_DATA}:/usr/share/elasticsearch/data 
+#    volumes: 
+#      - ${ES_PATH_DATA}:/usr/share/elasticsearch/data 
     ports:
       - 9200:9200
       - 9300:9300
@@ -126,6 +126,20 @@ services:
         condition: service_healthy
     ports:
       - 2222:2222
+
+  sentiment-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+    image: sentiment-service
+    restart: always
+    depends_on:
+      rabbit:
+        condition: service_started
+      config:
+        condition: service_healthy
+    ports:
+      - 7777:7777
       
 #  tor: 
 #    image: osminogin/tor-simple

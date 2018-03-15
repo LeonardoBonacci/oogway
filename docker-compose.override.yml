@@ -3,7 +3,7 @@ services:
 
   config:
     build: config
-
+    
   orchestration-service:
     build: orchestration
       
@@ -17,22 +17,23 @@ services:
     build: web
 
   oracle-service:
-    build: oracle\oracle-service
+    build: oracle/oracle-service
 
   sannyas-service:
-    build: sannyas\sannyas-service
+    build: sannyas/sannyas-service
 
   job-service:
     build: jobs
 
   localtimer-service:
-    build: spectre\local-timer
+    build: spectre/local-timer
 
   money-service:
-    build: spectre\money
+    build: spectre/money
 
   sentiment-service:
-    build: spectre\sentiment
+    build: spectre/sentiment
 
   weather-service:
-    build: spectre\weather
+    build: spectre/weather
+    

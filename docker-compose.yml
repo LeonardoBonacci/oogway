@@ -59,11 +59,11 @@ services:
     ports:
       - 1111:1111
       
-  heimdall:
+  heimdall-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-    image: heimdall
+    image: heimdall-service
     restart: always
     depends_on:
       config:
@@ -196,7 +196,7 @@ services:
       - 9999:9999
 
   zipkin:
-    image: openzipkin/zipkin
+    image: openzipkin/zipkin:2.5
     restart: always
     ports:
       - 9411:9411

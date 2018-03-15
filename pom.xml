@@ -27,6 +27,7 @@
 	<modules>
 		<module>auth</module>
 		<module>config</module>
+	    <module>heimdall</module>
 		<module>jobs</module>
 		<module>oracle</module>
 		<module>orchestration</module>
@@ -35,8 +36,6 @@
 		<module>spectre</module>
 		<module>utilities</module>
 		<module>web</module>
-		<module>zipkin</module>
-	    <module>heimdall</module>
   </modules>
 
 	<dependencyManagement>

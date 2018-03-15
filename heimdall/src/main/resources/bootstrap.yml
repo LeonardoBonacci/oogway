@@ -1,9 +1,9 @@
 spring:
   application:
-    name: heimdall
+    name: heimdall-service
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://config:8888
       label: ${cloud.config.find.label:master}
       fail-fast: true
       password: ${config.service.password}

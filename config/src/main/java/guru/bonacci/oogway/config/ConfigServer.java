@@ -26,6 +26,7 @@ public class ConfigServer {
 			http
 				.authorizeRequests()
 					.antMatchers("/**/logback-spring.xml").permitAll()
+					.antMatchers("/health").permitAll()
 					.anyRequest().authenticated()
 			.and()
 				.httpBasic()

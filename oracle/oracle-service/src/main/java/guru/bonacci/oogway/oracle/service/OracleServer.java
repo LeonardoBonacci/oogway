@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -29,6 +30,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * Micro-service for the user to communicate with
  */
 @SpringBootApplication
+@EnableEurekaClient
 @EnableSwagger2
 @EnableElasticsearchRepositories
 @EnableAspectJAutoProxy 

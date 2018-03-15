@@ -196,6 +196,9 @@ services:
       - 9999:9999
 
   zipkin:
+    environment:
+      STORAGE_TYPE: elasticsearch
+      ES_HOSTS: es
     image: openzipkin/zipkin:2.5
     restart: always
     ports:

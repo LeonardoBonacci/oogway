@@ -14,10 +14,7 @@ services:
     image: rabbitmq:3.6-management
     restart: always
     ports:
-      - 4369:4369 
-      - 5672:5672 
       - 15672:15672 
-      - 25672:25672 
 
   kibana:
     environment:
@@ -69,7 +66,7 @@ services:
       config:
         condition: service_healthy
     ports:
-      - 9090:9090
+      - 80:9090
       
   auth-service:
     environment:
@@ -172,7 +169,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-    image: leonardobonacci/oogway-money-service:1.0
+    image: leonardobonacci/oogway-sentiment-service:1.0
     restart: always
     depends_on:
       rabbit:

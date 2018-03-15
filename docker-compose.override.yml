@@ -1,5 +1,8 @@
 version: '2.1'
 services:
+  rabbit:
+    ports:
+      - 5672:5672
 
   config:
     build: config

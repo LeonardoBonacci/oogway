@@ -9,7 +9,9 @@ services:
 before_install:
   - chmod +x mvnw
 
-install: mvn clean install -DskipTests
+install:
+  - mvn -N io.takari:maven:wrapper
+  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 env:
   global:

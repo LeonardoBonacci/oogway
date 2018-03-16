@@ -13,6 +13,7 @@ env:
   global:
     - secure: i3h/CNnXfDSG2rolOLufbmJyZNRUUiiTyHhT+fqEM3VEQcPb4p8zxymnpstLGwR4BC7QOSmxyl3bkOEvARupEX1Gp1LLkjY+8auB3cmPlhGkVsrZPMC47umN8M5W+97Mg9LhpUQerUihEMufvXoyTtpyiXyYh1W7cG6AqEGc3K6jqYlIGxYY/NrwPek2EOmy+kScz4U6gsAZnzvMOIpDWpDydQkrYGHomlrNyY8eV/9hBgeSX/w6RNbv2I6nUp/ubRIxgQv/kbxaH4zEnqI510yUDsiWq78lNEhDDzlto3rrZztniEMvTR1+5TMiO8/xFoD+s/Sgy2zUNCeBocexuLIc6WWUOHtQof2EyMTitEizYi7442d9UmdbFWFT6+hhWUOx6ldGVKmjBrVGtjq5inyuUcyjV6JqHALBO2ZQytKuGEK4lgKxleRXbLcHBSkQS/E1CxfzdPs9PlSa01OOR3rmkuoYLAgUFTZPaOlk45APkpbrJqlSRIhYHJ+XSWYl2w9AxmHdOu+nj08RjaM+aBx0DqvwGnut9faiH1B4JX5zl03LtiTBReD7yh574RU+9LZsln77LWwuWQDUpeOxOa2I6PUqcyOJoDt3R8tIp6ZjLk54hViETRpwRV+Oh+yQN03eEcIsF1l1V4zfB+ZES0N4MY4N5x69LAxmfnSCfuQ=
     - secure: TVmEroz3S+6VRDyGL4Lqw13DBX1k+79TXTO8N1AaxpxzTu/D96f1mgl/P+V0rqClPGASieqxDchI+8I1l/S/4SbBSRAd0RG6zNAiUdwJdy4yiR7l/D+lokSaotWDLukEak0aozuWheTElphw7YXKTNSCuNAhU1B7/9m0T8fZp81atQoSB+6h37a37Qk49Usc3DWLkPo2whdLjPB8CFcSlxvwGHa9iwgq3PUftqWYUTNSb6LkmRTnV+sl1wWRB+4PP2EmEV/jPv8ekMk363ZRfTIOMtbysZVaLlIMxT0JOeO8HHo/2hiFZI3Qu28nYuENE4KrgO4EVofvk8r8gcve8XXX4VkQNX6961LOejs7eqCmK9tXwKsRm2dpjr8ofNxU1JuLxGOt2wN8W6FXMPLPBqXlRSm/13NCse+cv1Fj9GTLeYQwJuK03tnmo/P1YVpADh2UmyZ4MQRoieYZRMFQRa+70q5cMW4lipPX0Yul46UcXgpj24iPk6wmzgPHIy3l7Y9Y7KW5BUusY1X420xJydWFwr9em1g9xIlR9aQzpzuS2irSI0jIMvvo885YWMy36I6JzIVO+wQ5rDMj/4gkwDz6GnMQgz6Sr2qysxjFUjG3I0MNYuVnIqrfTDz++UxRDx0xOtLdPAe31FuTKMftSGSQp3ChCROgQZ6paq2sPds=
+    - COMMIT=${TRAVIS_COMMIT::7}
 
 after_success:
   #!/bin/bash
@@ -23,8 +24,8 @@ after_success:
 
   # CONFIG SERVICE
   - export CONFIG=leonardobonacci/oogway-config
-  - docker build -t config ./config
-  - docker tag config $CONFIG:$TAG
+  - docker build -t $CONFIG:$COMMIT ./config
+  - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
   - docker push $CONFIG
   
   

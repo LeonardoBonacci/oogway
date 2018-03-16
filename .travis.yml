@@ -22,10 +22,14 @@ after_success:
   #!/bin/bash
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
+  #TAG
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+
   # CONFIG SERVICE
+  - export CONFIG=leonardobonacci/oogway-config
   - docker build -t config ./config
-  - docker tag config leonardobonacci/oogway-config:test
-  - docker push leonardobonacci/oogway-config:test
+  - docker tag config $CONFIG:test
+  - docker push $CONFIG:test
   
   
   

@@ -10,7 +10,6 @@ env:
   -global:
     - secure: 0LExc/WZjiS2XJrWT61Ji5lE89Ybdr6+4VH9aQq95GszQANR3K45FXmo4FO64KQmvo7lg0YGz7ZLOwTSsSurdD5e7RgPowL4uXWdn6IjQWKdW8SGDxsvtxkYPg2+2GZXGPGJMV6TSQ51wex7UO8Ej/0dcBguHi4SiXRWZEkrjU64HURdmEIZzOo7NnHLKDGvotckAVeXQ/YeZOuIorS6TpZXW4jq+9C8Lwr4R4Q4uHNdbv3IlxE4iPm9fuMql1JI75odoyBqcOkbQ4T0kWEUWZCAWArLw2YdGxlmHn/+48OUp5X6/uxmaEH9Kr/u4RoEK4PJx7dmhQggh8mmYqWVAzcrb/YiHcOfzi6GVzkNiJ1PwZBR9jaOem7O2ooxpkJtPREkObKZNA62tJF2GR1WmRtjHnWyi1hJ70uzKHlaQyFMIVzshmnPxWaAlVZjQVaj6mDb/TeumkFFCvf5aG0DFPnLAdX1Xtvoop6cxYV1zayJqyI95e7KU57dDQmGx0m2XcMfpzMJWID+U72kE1W+UTygJhved+QYHotlOiiio7CiQ8BhzYDVBrmwPgrG9cHy0O2UgndCukDnvguQvBbNHifxp1XXqh2Vyj1HyHHfeGh+9iBOpDYY4GF2ZcTdwr4Vo3mjpUA5gaSgEvsL//8Ow4eXwfezx+2X/8bouJsLguw= #DOCKER_USER
     - secure: 0BCVERIGI4lMF/yuKM5Pq+wWEgigjLAKZ9b9zVztRo5JdG8SnUrpGryN9DgpCYflKqrdqG77FgAwnFhbEo0FfK4ZeAbRMdq2Ibn63ebcTCRxXAUp7PJVZ/gG2UcILoYawFBjCAJrrZKlDe0l3eNmpMqxm3sxHQMneDO8SP3gi3tbFUMus9MncH18q8EZbW5cyOTWwH043Sx+AS2uRM1mLSynyVxwwnqdhZkv0DkrRxTYN5AtUAlIAndS7+3BrKn+JnK3Cc7rXOfiaT8sNuIM3zyf7ZwHM50R3pWJu1tfrNhdwpGQIfCl7bGmIhXXEPKr9hjxio5oOd/LRM6fmebyW8MIRq1c71bzIwT2xn80GsQX3zbd/T3Moj5vfxk822yPcLOFn3LSD8hX+szfVEPnwLHIrUxf8sNkrsK74qooLu/vvoUzm9xNEpwUeVxmIT+2yULvLcKJpb+E7JZpP0Bqww/nSG63sCO5x03SLUHrQU/53HXo0eN2rlHUQ3yqZtX7hCEUQYMfurpcmLfy3CQumX081K1OwyAKy+LOQJnHhhAh2TntlsfwXuDWkJYxIXqQTTJzwnIGmi251D/FXwpCIOjR4cu61ge8P12LxzX/9pAXHf25oEGEUsQOFiyw65DZPBrVEz6OSGbYBtMUxhNhuaynte/JYOHapugDRMOKFA0= #DOCKER_PASSWORD
-    - COMMIT=${TRAVIS_COMMIT::7}
 
 before_install:
   - chmod +x mvnw
@@ -18,13 +17,9 @@ before_install:
 after_success:
   - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
 
-  #TAG
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  
   # CONFIG SERVICE
-  - export CONFIG=leonardobonacci/oogway-config
-  - docker build -t $CONFIG:$COMMIT ./config
-  - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
-  - docker push $CONFIG
+  - docker build -t config ./config
+  - docker tag config leonardobonacci/oogway-config:test
+  - docker push leonardobonacci/oogway-config:test
   
   

@@ -9,10 +9,6 @@ services:
 before_install:
   - chmod +x mvnw
 
-install:
-  - mvn -N io.takari:maven:wrapper
-  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-
 env:
   global:
     - secure: i3h/CNnXfDSG2rolOLufbmJyZNRUUiiTyHhT+fqEM3VEQcPb4p8zxymnpstLGwR4BC7QOSmxyl3bkOEvARupEX1Gp1LLkjY+8auB3cmPlhGkVsrZPMC47umN8M5W+97Mg9LhpUQerUihEMufvXoyTtpyiXyYh1W7cG6AqEGc3K6jqYlIGxYY/NrwPek2EOmy+kScz4U6gsAZnzvMOIpDWpDydQkrYGHomlrNyY8eV/9hBgeSX/w6RNbv2I6nUp/ubRIxgQv/kbxaH4zEnqI510yUDsiWq78lNEhDDzlto3rrZztniEMvTR1+5TMiO8/xFoD+s/Sgy2zUNCeBocexuLIc6WWUOHtQof2EyMTitEizYi7442d9UmdbFWFT6+hhWUOx6ldGVKmjBrVGtjq5inyuUcyjV6JqHALBO2ZQytKuGEK4lgKxleRXbLcHBSkQS/E1CxfzdPs9PlSa01OOR3rmkuoYLAgUFTZPaOlk45APkpbrJqlSRIhYHJ+XSWYl2w9AxmHdOu+nj08RjaM+aBx0DqvwGnut9faiH1B4JX5zl03LtiTBReD7yh574RU+9LZsln77LWwuWQDUpeOxOa2I6PUqcyOJoDt3R8tIp6ZjLk54hViETRpwRV+Oh+yQN03eEcIsF1l1V4zfB+ZES0N4MY4N5x69LAxmfnSCfuQ=
@@ -28,7 +24,7 @@ after_success:
   # CONFIG SERVICE
   - export CONFIG=leonardobonacci/oogway-config
   - docker build -t config ./config
-  - docker tag config $CONFIG:test
+  - docker tag config $CONFIG:$TAG
   - docker push $CONFIG:test
   
   

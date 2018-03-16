@@ -22,11 +22,17 @@ after_success:
   #TAG
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 
-  # CONFIG SERVICE
+  # CONFIG
   - export CONFIG=leonardobonacci/oogway-config
   - docker build -t $CONFIG:$COMMIT ./config
   - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
   - docker push $CONFIG
+
+  # AUTH SERVICE
+  - export AUTH=leonardobonacci/oogway-auth-service
+  - docker build -t $REGISTRY:$COMMIT ./auth
+  - docker tag $AUTH:$COMMIT $AUTH:$TAG
+  - docker push $AUTH
   
   
   

@@ -28,11 +28,69 @@ after_success:
   - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
   - docker push $CONFIG
 
+  # ORCHESTRATION SERVICE
+  - export ORCHESTRATION=$DOCKER_USERNAME/oogway-orchestration-service
+  - docker build -t $ORCHESTRATION:$COMMIT ./orchestration
+  - docker tag $ORCHESTRATION:$COMMIT $ORCHESTRATION:$TAG
+  - docker push $ORCHESTRATION
+
+  # HEIMDALL SERVICE
+  - export HEIMDALL=$DOCKER_USERNAME/oogway-heimdall-service
+  - docker build -t $HEIMDALL:$COMMIT ./heimdall
+  - docker tag $HEIMDALL:$COMMIT $HEIMDALL:$TAG
+  - docker push $HEIMDALL
+
   # AUTH SERVICE
-  - export AUTH=leonardobonacci/oogway-auth-service
+  - export AUTH=$DOCKER_USERNAME/oogway-auth-service
   - docker build -t $AUTH:$COMMIT ./auth
   - docker tag $AUTH:$COMMIT $AUTH:$TAG
   - docker push $AUTH
   
+  # WEB SERVICE
+  - export WEB=$DOCKER_USERNAME/oogway-web-service
+  - docker build -t $WEB:$COMMIT ./web
+  - docker tag $WEB:$COMMIT $WEB:$TAG
+  - docker push $WEB
   
+  # ORACLE SERVICE
+  - export ORACLE=$DOCKER_USERNAME/oogway-oracle-service
+  - docker build -t $ORACLE:$COMMIT ./oracle/oracle-service
+  - docker tag $ORACLE:$COMMIT $ORACLE:$TAG
+  - docker push $ORACLE
+  
+  # SANNYAS SERVICE
+  - export SANNYAS=$DOCKER_USERNAME/oogway-sannyas-service
+  - docker build -t $SANNYAS:$COMMIT ./sannyas/sannyas-service
+  - docker tag $SANNYAS:$COMMIT $SANNYAS:$TAG
+  - docker push $SANNYAS
+  
+  # JOB SERVICE
+  - export JOBS=$DOCKER_USERNAME/oogway-job-service
+  - docker build -t $JOBS:$COMMIT ./jobs
+  - docker tag $JOBS:$COMMIT $JOBS:$TAG
+  - docker push $JOBS
+  
+  # LOCALTIMER SERVICE
+  - export LOCALTIMER=$DOCKER_USERNAME/oogway-localtimer-service
+  - docker build -t $LOCALTIMER:$COMMIT ./spectre/localtimer
+  - docker tag $LOCALTIMER:$COMMIT $LOCALTIMER:$TAG
+  - docker push $LOCALTIMER
+  
+  # LOCALTIMER SERVICE
+  - export MONEY=$DOCKER_USERNAME/oogway-money-service
+  - docker build -t $MONEY:$COMMIT ./spectre/money
+  - docker tag $MONEY:$COMMIT $MONEY:$TAG
+  - docker push $MONEY
+  
+  # SENTIMENT SERVICE
+  - export SENTIMENT=$DOCKER_USERNAME/oogway-sentiment-service
+  - docker build -t $SENTIMENT:$COMMIT ./spectre/sentiment
+  - docker tag $SENTIMENT:$COMMIT $SENTIMENT:$TAG
+  - docker push $SENTIMENT
+
+  # WEATHER SERVICE
+  - export WEATHER=$DOCKER_USERNAME/oogway-weather-service
+  - docker build -t $WEATHER:$COMMIT ./spectre/weather
+  - docker tag $WEATHER:$COMMIT $WEATHER:$TAG
+  - docker push $WEATHER
   

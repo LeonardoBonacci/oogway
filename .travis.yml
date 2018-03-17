@@ -72,7 +72,7 @@ after_success:
   
   # LOCALTIMER SERVICE
   - export LOCALTIMER=$DOCKER_USERNAME/oogway-localtimer-service
-  - docker build -t $LOCALTIMER:$COMMIT ./spectre/localtimer
+  - docker build -t $LOCALTIMER:$COMMIT ./spectre/local-timer
   - docker tag $LOCALTIMER:$COMMIT $LOCALTIMER:$TAG
   - docker push $LOCALTIMER
   

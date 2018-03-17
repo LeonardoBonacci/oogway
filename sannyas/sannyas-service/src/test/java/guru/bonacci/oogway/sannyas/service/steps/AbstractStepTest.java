@@ -26,7 +26,10 @@ import guru.bonacci.oogway.sannyas.service.SannyasTestApp;
  */
 @RunWith(value = Parameterized.class)
 @ContextConfiguration(classes = SannyasTestApp.class)
-@TestPropertySource("classpath:application.yml")
+@TestPropertySource(properties = {
+		"proxy.enabled=false",
+		"eureka.client.enabled=false"}
+)
 public abstract class AbstractStepTest<F extends Function<String,String>> {
 
 	@Autowired
@@ -36,7 +39,7 @@ public abstract class AbstractStepTest<F extends Function<String,String>> {
 	F step;
 
 	
-	// Manually config for spring to use Parameterised
+	// Manually config for spring to use Parameterized
 	private TestContextManager testContextManager;
 
 	private String input;

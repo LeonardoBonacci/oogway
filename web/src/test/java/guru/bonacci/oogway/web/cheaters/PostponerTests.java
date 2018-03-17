@@ -17,13 +17,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = NONE, properties = {
-	"file.name.answers.to.win.time:answers-to-win-time-test.txt" 
+	"file.name.answers.to.win.time=answers-to-win-time-test.txt"
 })
 public class PostponerTests {
 
 	@Autowired
 	Postponer postponer;
-	
+
 	@Test
 	public void shouldGiveOneOfTheExpectedAnswers() {
 		List<String> answers = asList("answer one", "answer two", "answer three");

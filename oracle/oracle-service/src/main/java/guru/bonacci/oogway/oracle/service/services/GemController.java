@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -44,17 +45,22 @@ public class GemController implements InitializingBean {
 		binder.addValidators(new GemValidator());
 	}
 
-
+	@Autowired
+	Environment env;
+	
 	@Override
 	public void afterPropertiesSet() {
-     try {
-			Gem[] friedrichsBest = readToList("nietzsche.txt").stream()
-																.map(quote -> new Gem(quote, "Friedrich Nietzsche"))
-																.toArray(Gem[]::new);
-			repo.saveTheNewOnly(friedrichsBest);
-		} catch (IOException e) {
-			logger.error("Nietzsche!!", e);
-		}
+		// creative exclusion, is it not?
+		if (env.acceptsProfiles("!unit-test")) {
+			try {
+				Gem[] friedrichsBest = readToList("nietzsche.txt").stream()
+																	.map(quote -> new Gem(quote, "Friedrich Nietzsche"))
+																	.toArray(Gem[]::new);
+				repo.saveTheNewOnly(friedrichsBest);
+			} catch (IOException e) {
+				logger.error("Nietzsche!!", e);
+			}
+		}	
 	}	
 
 	

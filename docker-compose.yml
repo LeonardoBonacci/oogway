@@ -41,14 +41,14 @@ services:
   config:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: leonardobonacci/oogway-config:1.0
+    image: leonardobonacci/oogway-config
     restart: always
 
   orchestration-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-    image: leonardobonacci/oogway-orchestration-service:1.0
+    image: leonardobonacci/oogway-orchestration-service
     restart: always
     depends_on:
       config:
@@ -60,7 +60,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-    image: leonardobonacci/oogway-heimdall-service:1.0
+    image: leonardobonacci/oogway-heimdall-service
     restart: always
     depends_on:
       config:
@@ -72,7 +72,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-    image: leonardobonacci/oogway-auth-service:1.0
+    image: leonardobonacci/oogway-auth-service
     restart: always
     depends_on:
       config:
@@ -84,7 +84,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-    image: leonardobonacci/oogway-web-service:1.0
+    image: leonardobonacci/oogway-web-service
     restart: always
     depends_on:
       rabbit:
@@ -99,7 +99,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-    image: leonardobonacci/oogway-oracle-service:1.0
+    image: leonardobonacci/oogway-oracle-service
     restart: always
     depends_on:
       rabbit:
@@ -115,7 +115,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-    image: leonardobonacci/oogway-sannyas-service:1.0
+    image: leonardobonacci/oogway-sannyas-service
     restart: always
     depends_on:
       rabbit:
@@ -129,7 +129,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-    image: leonardobonacci/oogway-job-service:1.0
+    image: leonardobonacci/oogway-job-service
     restart: always
     depends_on:
       config:
@@ -141,7 +141,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-    image: leonardobonacci/oogway-localtimer-service:1.0
+    image: leonardobonacci/oogway-localtimer-service
     restart: always
     depends_on:
       rabbit:
@@ -155,7 +155,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-    image: leonardobonacci/oogway-money-service:1.0
+    image: leonardobonacci/oogway-money-service
     restart: always
     depends_on:
       rabbit:
@@ -169,7 +169,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-    image: leonardobonacci/oogway-sentiment-service:1.0
+    image: leonardobonacci/oogway-sentiment-service
     restart: always
     depends_on:
       rabbit:
@@ -183,7 +183,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-    image: leonardobonacci/oogway-weather-service:1.0
+    image: leonardobonacci/oogway-weather-service
     restart: always
     depends_on:
       rabbit:

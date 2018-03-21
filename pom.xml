@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>guru.bonacci.oogway</groupId>
 	<artifactId>parent</artifactId>
@@ -27,7 +28,7 @@
 	<modules>
 		<module>auth</module>
 		<module>config</module>
-	    <module>heimdall</module>
+		<module>heimdall</module>
 		<module>jobs</module>
 		<module>oracle</module>
 		<module>orchestration</module>
@@ -36,17 +37,33 @@
 		<module>spectre</module>
 		<module>utilities</module>
 		<module>web</module>
-  </modules>
+		<module>integration-test</module>
+	</modules>
+
+	<repositories>
+		<repository>
+			<id>Bintray</id>
+			<name>For now</name>
+			<url>https://dl.bintray.com/palantir/releases</url>
+		</repository>
+	</repositories>
 
 	<dependencyManagement>
-	    <dependencies>
-	        <dependency>
-	            <groupId>org.springframework.cloud</groupId>
-	            <artifactId>spring-cloud-dependencies</artifactId>
-	            <version>Edgware.SR2</version>
-	            <type>pom</type>
-	            <scope>import</scope>
-	        </dependency>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Edgware.SR2</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.palantir.docker.compose</groupId>
+				<artifactId>docker-compose-rule-junit4</artifactId>
+				<version>0.33.0</version>
+				<scope>test</scope>
+			</dependency>
 
 			<dependency>
 				<groupId>net.logstash.logback</groupId>

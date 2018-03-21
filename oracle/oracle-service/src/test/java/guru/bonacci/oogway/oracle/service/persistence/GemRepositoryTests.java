@@ -23,7 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import guru.bonacci.oogway.oracle.service.OracleTestApp;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=OracleTestApp.class, webEnvironment=NONE)
+@SpringBootTest(classes = OracleTestApp.class, webEnvironment = NONE)
 public class GemRepositoryTests {
 	
 	@Autowired

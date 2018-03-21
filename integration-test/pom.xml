@@ -6,31 +6,19 @@
 		<artifactId>parent</artifactId>
 		<version>3.2-SNAPSHOT</version>
 	</parent>
-	<artifactId>web</artifactId>
+	<artifactId>integration-test</artifactId>
 	<packaging>jar</packaging>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>utilities</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>shared-domain</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>oracle-client</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>oracle-client</artifactId>
-			<type>test-jar</type>
-			<version>${project.version}</version>
-			<scope>test</scope>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-oauth2</artifactId>
 		</dependency>
 
 		<dependency>
@@ -104,7 +92,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>web-service</finalName>
+					<finalName>integration-service</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -20,7 +20,7 @@ import com.palantir.docker.compose.connection.waiting.HealthChecks;
 	"spring.cloud.config.enabled=false",
 	"eureka.client.enabled=false"
 })
-public class SomeControllerIT {
+public class SomeControllerTests {
 
 	private TestRestTemplate template = new TestRestTemplate();
 	

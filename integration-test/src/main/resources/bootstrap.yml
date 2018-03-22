@@ -8,14 +8,3 @@ spring:
       fail-fast: true
       password: ${config.service.password}
       username: user
-      
----
-spring:
-  profiles: it
-  cloud:
-    config:
-      enabled: false
-      
-eureka:
-  client:
-    enabled: false

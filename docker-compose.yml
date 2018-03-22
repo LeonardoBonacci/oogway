@@ -48,6 +48,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
     image: leonardobonacci/oogway-orchestration-service
     restart: always
     depends_on:
@@ -60,6 +61,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
     image: leonardobonacci/oogway-heimdall-service
     restart: always
     depends_on:
@@ -72,6 +74,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
     image: leonardobonacci/oogway-auth-service
     restart: always
     depends_on:
@@ -84,6 +87,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
     image: leonardobonacci/oogway-web-service
     restart: always
     depends_on:
@@ -99,6 +103,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
     image: leonardobonacci/oogway-oracle-service
     restart: always
     depends_on:
@@ -115,6 +120,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
     image: leonardobonacci/oogway-sannyas-service
     restart: always
     depends_on:
@@ -129,6 +135,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
     image: leonardobonacci/oogway-job-service
     restart: always
     depends_on:
@@ -141,6 +148,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
     image: leonardobonacci/oogway-localtimer-service
     restart: always
     depends_on:
@@ -155,6 +163,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
     image: leonardobonacci/oogway-money-service
     restart: always
     depends_on:
@@ -169,6 +178,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
     image: leonardobonacci/oogway-sentiment-service
     restart: always
     depends_on:
@@ -183,6 +193,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
     image: leonardobonacci/oogway-weather-service
     restart: always
     depends_on:

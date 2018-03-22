@@ -18,6 +18,7 @@ env:
 
 before_install:
   - mvn clean install -DskipTests
+  - docker build config/ -t config
   - docker build spectre/sentiment/ -t sentiment-service
 
 install: skip

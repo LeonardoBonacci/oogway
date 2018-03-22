@@ -16,7 +16,10 @@ import com.palantir.docker.compose.connection.DockerPort;
 import com.palantir.docker.compose.connection.waiting.HealthChecks;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SentimentTestApp.class)
+@SpringBootTest(properties = {
+	"spring.cloud.config.enabled=false",
+	"eureka.client.enabled=false"
+})
 public class SentimentControllerTests {
 
 	private TestRestTemplate template = new TestRestTemplate();

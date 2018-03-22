@@ -13,18 +13,18 @@ import guru.bonacci.spectre.spectreshared.events.SpectreEventChannels;
 import guru.bonacci.spectre.spectreshared.persistence.PersistenceConfig;
 
 @SpringBootApplication
-//@EnableBinding(SpectreEventChannels.class)
-//@Import(PersistenceConfig.class)
+@EnableBinding(SpectreEventChannels.class)
+@Import(PersistenceConfig.class)
 public class SentimentServer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SentimentServer.class, args);
 	}
 
-//	@Bean
-//	public StanfordCoreNLP sentimentPipeline() {
-//		Properties props = new Properties();
-//		props.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
-//		return new StanfordCoreNLP(props);
-//	}
+	@Bean
+	public StanfordCoreNLP sentimentPipeline() {
+		Properties props = new Properties();
+		props.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
+		return new StanfordCoreNLP(props);
+	}
 }

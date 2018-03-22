@@ -5,6 +5,6 @@ services:
   sentiment-service:
     environment:
       SPRING_PROFILES_ACTIVE: it
-    image: integration-service #avoid pulling from docker hub by defining local name
+    image: sentiment-service #avoid pulling from docker hub by defining local name
     ports:
       - 7777:8080

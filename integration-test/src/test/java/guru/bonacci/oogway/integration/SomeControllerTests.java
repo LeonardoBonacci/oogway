@@ -46,6 +46,6 @@ public class SomeControllerTests {
     @Test
     public void insertOne() throws Exception {
         String endpoint = String.format("http://%s:%s", dockerPort.getIp(), dockerPort.getExternalPort());
-        assertThat(this.template.getForObject(endpoint + "/", String.class)).contains("Hello World");
+        assertThat(this.template.getForObject(endpoint, String.class)).contains("Hello World");
     }
 }

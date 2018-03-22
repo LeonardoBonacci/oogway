@@ -11,7 +11,7 @@ services:
   - docker
 
 before_install:
-- chmod +x mvnw
+  - chmod +x mvnw
 
 env:
   global:

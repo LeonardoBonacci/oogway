@@ -21,7 +21,7 @@ before_install:
   - ./mvnw clean install -DskipTests
   - docker build spectre/sentiment/ -t sentiment-service
 
-install: skip
+install: mvn -Dtest=SentimentControllerTests test -pl spectre/sentiment
 
 after_success:
   #!/bin/bash

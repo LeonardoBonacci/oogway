@@ -17,7 +17,7 @@ import com.palantir.docker.compose.connection.waiting.HealthChecks;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SentimentTestApp.class)
-public class SentimentControllerIT {
+public class SentimentControllerTests {
 
 	private TestRestTemplate template = new TestRestTemplate();
 	

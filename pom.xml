@@ -37,7 +37,6 @@
 		<module>spectre</module>
 		<module>utilities</module>
 		<module>web</module>
-		<module>integration-test</module>
 	</modules>
 
 	<repositories>

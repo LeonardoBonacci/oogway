@@ -18,7 +18,7 @@ env:
 
 before_install:
   - chmod +x mvnw
-  - ./mvnw clean install -pl spectre/sentiment -DskipTests 
+  - ./mvnw clean install -DskipTests 
   - docker build spectre/sentiment/ -t sentiment-service
 
 install: ./mvnw -Dtest=SentimentControllerTests test -pl spectre/sentiment

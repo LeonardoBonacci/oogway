@@ -19,7 +19,6 @@ env:
 before_install:
   - chmod +x mvnw
   - ./mvnw clean install -DskipTests
-  - docker build config/ -t config
   - docker build spectre/sentiment/ -t sentiment-service
 
 install: skip

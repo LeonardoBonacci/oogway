@@ -16,10 +16,7 @@ import com.palantir.docker.compose.connection.DockerPort;
 import com.palantir.docker.compose.connection.waiting.HealthChecks;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(properties = {
-	"spring.cloud.config.enabled=false",
-	"eureka.client.enabled=false"
-})
+@SpringBootTest
 public class SomeControllerTests {
 
 	private TestRestTemplate template = new TestRestTemplate();
@@ -46,6 +43,6 @@ public class SomeControllerTests {
     @Test
     public void insertOne() throws Exception {
         String endpoint = String.format("http://%s:%s", dockerPort.getIp(), dockerPort.getExternalPort());
-        assertThat(this.template.getForObject(endpoint, String.class)).contains("Hello World");
+        assertThat(this.template.getForObject(endpoint + "/", String.class)).contains("Hello World");
     }
 }

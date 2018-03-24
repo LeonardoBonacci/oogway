@@ -20,8 +20,11 @@ before_install:
   - chmod +x mvnw
   - ./mvnw clean install -DskipTests 
   - docker build integration-test/ -t integration-service
+  - docker build heimdall/ -t heimdall-service
 
-install: ./mvnw -Dtest=SomeControllerTests test -pl integration-test
+install: 
+  - ./mvnw -Dtest=SomeControllerTests test -pl integration-test
+  - ./mvnw -Dtest=GateControllerTests test -pl heimdall
 
 after_success:
   #!/bin/bash

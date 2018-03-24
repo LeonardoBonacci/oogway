@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.integration;
+package guru.bonacci.oogway.integration.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,6 +14,8 @@ import com.palantir.docker.compose.DockerComposeRule;
 import com.palantir.docker.compose.configuration.ProjectName;
 import com.palantir.docker.compose.connection.DockerPort;
 import com.palantir.docker.compose.connection.waiting.HealthChecks;
+
+import guru.bonacci.oogway.integration.SomeTestApp;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SomeTestApp.class, properties = {

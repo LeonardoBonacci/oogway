@@ -15,8 +15,6 @@ import com.palantir.docker.compose.configuration.ProjectName;
 import com.palantir.docker.compose.connection.DockerPort;
 import com.palantir.docker.compose.connection.waiting.HealthChecks;
 
-import guru.bonacci.oogway.web.WebTestApp;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SomeTestApp.class, properties = {
 	"spring.cloud.config.enabled=false",

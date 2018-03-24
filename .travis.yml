@@ -19,9 +19,9 @@ env:
 before_install:
   - chmod +x mvnw
   - ./mvnw clean install -DskipTests 
-  - docker build integration-tests/ -t integration-service
+  - docker build integration-test/ -t integration-service
 
-install: ./mvnw -Dtest=SomeControllerTests test -pl integration-tests
+install: ./mvnw -Dtest=SomeControllerTests test -pl integration-test
 
 after_success:
   #!/bin/bash

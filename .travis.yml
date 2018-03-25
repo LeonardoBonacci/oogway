@@ -7,11 +7,6 @@ cache:
 language: java
 jdk: oraclejdk8
 
-addons:
-  apt:
-    packages:
-      - lynx
-      
 services:
   - docker
 
@@ -22,6 +17,7 @@ env:
     - COMMIT=${TRAVIS_COMMIT::7}
 
 before_install:
+  - echo 'beginning before install'
   - chmod +x mvnw
 #  - ./mvnw clean install -pl integration-test -DskipTests 
 #  - docker build integration-test/ -t integration-service
@@ -31,10 +27,10 @@ before_install:
 install: 
 #  - ./mvnw -Dtest=SomeControllerTests test -pl integration-test
   - ./mvnw -Dtest=GateControllerTests test -pl heimdall
-  - echo hello $TRAVIS_TEST_RESULT
+  - echo 'end install'
 
 after_failure: 
-  - echo hello $TRAVIS_TEST_RESULT
+  - echo 'begin after failure'
   - cat /home/travis/build/LeonardoBonacci/oogway/heimdall/build/dockerLogs/GateControllerTests/heimdall-service.log
 
 after_success:

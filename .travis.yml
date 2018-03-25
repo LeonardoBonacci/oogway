@@ -23,6 +23,7 @@ before_install:
 
 before_script:
   - docker build heimdall/ -t heimdall-service
+  - docker build integration-test/ -t integration-service
 
 #script: ./mvnw -Dtest=GateControllerTests test -pl heimdall
   

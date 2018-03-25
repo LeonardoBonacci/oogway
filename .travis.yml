@@ -23,18 +23,18 @@ before_install:
 #  - docker build integration-test/ -t integration-service
   - ./mvnw clean install -pl heimdall -DskipTests 
   - docker build heimdall/ -t heimdall-service
-
-install: 
-#  - ./mvnw -Dtest=SomeControllerTests test -pl integration-test
   - ./mvnw -Dtest=GateControllerTests test -pl heimdall
-  - echo 'end install'
+
+install: skip
+#  - ./mvnw -Dtest=SomeControllerTests test -pl integration-test
 
 after_failure: 
-  - echo 'begin after failure'
-  - cat /home/travis/build/LeonardoBonacci/oogway/heimdall/build/dockerLogs/GateControllerTests/heimdall-service.log
 
 after_success:
   #!/bin/bash
+  - echo 'after success'
+  - cat /home/travis/build/LeonardoBonacci/oogway/heimdall/build/dockerLogs/GateControllerTests/heimdall-service.log
+
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
   #TAG

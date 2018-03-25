@@ -17,24 +17,19 @@ env:
     - COMMIT=${TRAVIS_COMMIT::7}
 
 before_install:
-  - echo 'beginning before install'
   - chmod +x mvnw
-#  - ./mvnw clean install -pl integration-test -DskipTests 
-#  - docker build integration-test/ -t integration-service
   - ./mvnw clean install -pl heimdall -DskipTests 
   - docker build heimdall/ -t heimdall-service
-  - ./mvnw -Dtest=GateControllerTests test -pl heimdall
+#  - ./mvnw -Dtest=GateControllerTests test -pl heimdall
 
 install: skip
-#  - ./mvnw -Dtest=SomeControllerTests test -pl integration-test
 
-after_failure: 
+after_failure:
+  - echo 'test failed'
+  - cat '/home/travis/build/LeonardoBonacci/oogway/heimdall/build/dockerLogs/GateControllerTests/heimdall-service.log'
 
 after_success:
   #!/bin/bash
-  - echo 'after success'
-  - cat /home/travis/build/LeonardoBonacci/oogway/heimdall/build/dockerLogs/GateControllerTests/heimdall-service.log
-
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
   #TAG

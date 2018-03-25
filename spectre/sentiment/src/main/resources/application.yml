@@ -1,6 +1,0 @@
-security:
-  basic:
-    enabled: false
-  cloud:
-    config:
-      enabled: false

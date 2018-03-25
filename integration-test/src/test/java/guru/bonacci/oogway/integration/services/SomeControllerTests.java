@@ -1,6 +1,7 @@
 package guru.bonacci.oogway.integration.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.palantir.docker.compose.logging.LogDirectory.circleAwareLogDirectory;
 
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
@@ -32,6 +33,7 @@ public class SomeControllerTests {
     @ClassRule
     public static DockerComposeRule docker = DockerComposeRule.builder()
             .file("src/test/resources/docker-compose-it.yml")
+            .saveLogsTo(circleAwareLogDirectory(SomeControllerTests.class))
             .projectName(ProjectName.random())
             .waitingForService(SERVICE, HealthChecks.toHaveAllPortsOpen())
             .build();

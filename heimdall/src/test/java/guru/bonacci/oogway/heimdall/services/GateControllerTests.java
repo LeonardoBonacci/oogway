@@ -1,5 +1,6 @@
 package guru.bonacci.oogway.heimdall.services;
 
+import static com.palantir.docker.compose.logging.LogDirectory.circleAwareLogDirectory;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.BeforeClass;
@@ -32,6 +33,7 @@ public class GateControllerTests {
     @ClassRule
     public static DockerComposeRule docker = DockerComposeRule.builder()
             .file("src/test/resources/docker-compose-it.yml")
+            .saveLogsTo(circleAwareLogDirectory(GateControllerTests.class))
             .projectName(ProjectName.random())
             .waitingForService(SERVICE, HealthChecks.toHaveAllPortsOpen())
             .build();

@@ -50,6 +50,6 @@ public class GateControllerTests {
     @Test
     public void insertOne() throws Exception {
         String endpoint = String.format("http://%s:%s", dockerPort.getIp(), dockerPort.getExternalPort());
-        assertThat(this.template.getForObject(endpoint + "/version", String.class)).contains("Hello Worlds");
+        assertThat(this.template.getForObject(endpoint + "/version", String.class)).contains("Hello World");
     }
 }

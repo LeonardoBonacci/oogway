@@ -18,9 +18,11 @@ env:
 
 before_install:
   - chmod +x mvnw
-  - ./mvnw clean install -DskipTests 
+  - ./mvnw clean install -pl integration-test -DskipTests 
+  - ./mvnw clean install -pl heimdall -DskipTests 
   - docker build integration-test/ -t integration-service
   - docker build heimdall/ -t heimdall-service
+  - cat /home/travis/build/LeonardoBonacci/oogway/heimdall/build/dockerLogs/GateControllerTests/heimdall-service.log
 
 install: 
   - ./mvnw -Dtest=SomeControllerTests test -pl integration-test

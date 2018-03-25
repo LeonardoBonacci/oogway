@@ -24,6 +24,10 @@ before_install:
 
 install: skip
 
+after_script:
+  - echo 'this is the end'
+  - cat '/home/travis/build/LeonardoBonacci/oogway/heimdall/build/dockerLogs/GateControllerTests/heimdall-service.log'
+
 after_failure:
   - echo 'test failed'
   - cat '/home/travis/build/LeonardoBonacci/oogway/heimdall/build/dockerLogs/GateControllerTests/heimdall-service.log'

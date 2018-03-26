@@ -18,13 +18,18 @@ env:
 
 before_install:
   - chmod +x mvnw
-  - ./mvnw clean install -DskipTests 
-  - docker build integration-test/ -t integration-service
-  - docker build heimdall/ -t heimdall-service
 
-install: 
-  - ./mvnw -Dtest=SomeControllerTests test -pl integration-test
-  - ./mvnw -Dtest=GateControllerTests test -pl heimdall
+#install: executes ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+before_script:
+  - docker build heimdall/ -t heimdall-service
+  - docker build integration-test/ -t integration-service
+
+#script: executes ./mvnw test -B
+#script: ./mvnw -Dtest=GateControllerTests test -pl heimdall
+  
+after_failure:
+  - cat '/home/travis/build/LeonardoBonacci/oogway/heimdall/build/dockerLogs/GateControllerTests/heimdall-service.log'
 
 after_success:
   #!/bin/bash

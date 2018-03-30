@@ -6,7 +6,7 @@
 		<artifactId>parent</artifactId>
 		<version>3.2-SNAPSHOT</version>
 	</parent>
-	<artifactId>heimdall</artifactId>
+	<artifactId>gateway</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -50,7 +50,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>heimdall-service</finalName>
+					<finalName>gateway-service</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

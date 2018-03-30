@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.heimdall.filter;
+package guru.bonacci.oogway.gateway.filter;
 
 import static org.slf4j.LoggerFactory.getLogger;
 

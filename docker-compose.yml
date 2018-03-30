@@ -61,12 +61,12 @@ services:
     ports:
       - 1111:1111
       
-  heimdall-service:
+  gateway-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
       SPRING_PROFILES_ACTIVE: dev
-    image: leonardobonacci/oogway-heimdall-service
+    image: leonardobonacci/oogway-gateway-service
     restart: always
     depends_on:
       config:

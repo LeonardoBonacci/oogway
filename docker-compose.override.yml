@@ -10,8 +10,8 @@ services:
   orchestration-service:
     build: orchestration
       
-  heimdall-service:
-    build: heimdall
+  gateway-service:
+    build: gateway
           
   auth-service:
     build: auth

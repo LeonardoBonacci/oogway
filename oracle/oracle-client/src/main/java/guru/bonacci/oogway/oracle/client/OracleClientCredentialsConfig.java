@@ -23,7 +23,7 @@ import feign.RequestInterceptor;
 @PropertySource("classpath:oracle-client.yml")
 @EnableOAuth2Client
 @Profile("!unit-test") //hack :)
-public class OracleClientConfig {
+public class OracleClientCredentialsConfig {
 	
 	/**
 	 * A few small things are needed to secure a service..

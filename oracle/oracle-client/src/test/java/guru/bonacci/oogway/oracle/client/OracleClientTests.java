@@ -47,7 +47,7 @@ public class OracleClientTests {
     public static WireMockClassRule wiremock = new WireMockClassRule(wireMockConfig().dynamicPort());
 
     @Autowired
-    OracleClient client;
+    OracleClientCredentialsClient client;
 
 	@Autowired
 	ObjectMapper objectMapper;
@@ -109,7 +109,7 @@ public class OracleClientTests {
     }
 
 	@SpringBootApplication
-	@EnableFeignClients(basePackageClasses = OracleClient.class)
+	@EnableFeignClients(basePackageClasses = OracleClientCredentialsClient.class)
 	@EnableCircuitBreaker
 	static class App {
 	    static void main(String[] args) {

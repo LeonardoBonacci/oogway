@@ -18,7 +18,7 @@ import feign.RequestInterceptor;
 
 @Configuration
 @ComponentScan
-@EnableFeignClients(basePackageClasses = OracleClient.class)
+@EnableFeignClients(basePackageClasses = OracleClientCredentialsClient.class)
 @EnableCircuitBreaker
 @PropertySource("classpath:oracle-client.yml")
 @EnableOAuth2Client

@@ -18,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.oracle.client.OracleClient;
+import guru.bonacci.oogway.oracle.client.OracleClientCredentialsClient;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.web.WebTestApp;
 import guru.bonacci.oogway.web.cheaters.Postponer;
@@ -31,7 +31,7 @@ public class FirstLineSupportServiceTests {
 	FirstLineSupportService service;
 
 	@MockBean
-	OracleClient oracleClient;
+	OracleClientCredentialsClient oracleClient;
 
 	@MockBean
 	Postponer postponer;

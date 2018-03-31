@@ -27,7 +27,7 @@ import org.springframework.messaging.Message;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import guru.bonacci.oogway.oracle.client.OracleClient;
+import guru.bonacci.oogway.oracle.client.OracleClientCredentialsClient;
 import guru.bonacci.oogway.shareddomain.COMINT;
 import guru.bonacci.oogway.web.events.WebEventChannels;
 
@@ -48,7 +48,7 @@ public class WebIntegrationTests {
 	MessageCollector messageCollector;
 
 	@MockBean
-	OracleClient oracleClient;
+	OracleClientCredentialsClient oracleClient;
 
 	@SuppressWarnings("unchecked")
 	@Test

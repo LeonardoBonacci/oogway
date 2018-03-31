@@ -53,7 +53,7 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     	clients.inMemory()
 	            .withClient("web-service")
 	            .secret("web-service-secret")
-				.authorizedGrantTypes("client_credentials", "password", "refresh_token")
+				.authorizedGrantTypes("password", "refresh_token")
 	            .scopes("resource-server-read", "resource-server-write")
                 .accessTokenValiditySeconds(1000)
                 .refreshTokenValiditySeconds(30000)

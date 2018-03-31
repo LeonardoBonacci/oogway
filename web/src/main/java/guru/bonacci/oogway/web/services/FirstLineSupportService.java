@@ -5,9 +5,12 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.stereotype.Service;
 
-import guru.bonacci.oogway.oracle.client.OracleClient;
+import guru.bonacci.oogway.oracle.client.OracleClientCredentialsClient;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.web.cheaters.Postponer;
 import guru.bonacci.oogway.web.intercept.WatchMe;
@@ -27,7 +30,7 @@ import guru.bonacci.oogway.web.intercept.WatchMe;
 public class FirstLineSupportService {
 
 	@Autowired
-	private OracleClient oracleClient;
+	private OracleClientCredentialsClient oracleClient;
 
 	@Autowired
 	private Postponer postponer;
@@ -37,6 +40,20 @@ public class FirstLineSupportService {
 		if (isEmpty(q))
 			return new GemCarrier("No question no answer..", "oogway");
 
+		ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
+		resource.setUsername("user1");
+		resource.setPassword("password");
+		resource.setAccessTokenUri("http://auth-service:5000/auth/oauth/token");
+		resource.setClientId("web-service");
+		resource.setClientSecret("web-service-secret");
+		resource.setGrantType("password");
+
+		DefaultOAuth2ClientContext clientContext = new DefaultOAuth2ClientContext();
+		OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(resource, clientContext);
+
+		GemCarrier gems = restTemplate.getForObject("http://oracle-service:4444/oracle/gems?q=dance", GemCarrier.class);
+		if (gems != null) return gems;
+		
 		Optional<GemCarrier> gem = oracleClient.consult(q, null);
 		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
 	}

@@ -11,6 +11,6 @@ import org.springframework.context.annotation.FilterType;
 										value = { OracleClientConfig.class, 
 												  OracleClientTests.App.class, 
 												  OracleClientTests.LocalRibbonClientConfiguration.class }))
-@EnableFeignClients(basePackageClasses = OracleClient.class)
+@EnableFeignClients(basePackageClasses = OracleClientCredentialsClient.class)
 public class OracleClientTestConfig {
 }

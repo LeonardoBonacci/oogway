@@ -8,9 +8,9 @@ import org.springframework.context.annotation.FilterType;
 
 @Configuration
 @ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, 
-										value = { OracleClientCredentialsConfig.class, 
+										value = { OracleClientConfig.class, 
 												  OracleClientTests.App.class, 
 												  OracleClientTests.LocalRibbonClientConfiguration.class }))
-@EnableFeignClients(basePackageClasses = OracleClientCredentialsClient.class)
+@EnableFeignClients(basePackageClasses = OracleClient.class)
 public class OracleClientTestConfig {
 }

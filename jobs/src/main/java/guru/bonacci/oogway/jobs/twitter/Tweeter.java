@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.oracle.client.OracleClientCredentialsClient;
+import guru.bonacci.oogway.oracle.client.OracleClient;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @Component
@@ -21,7 +21,7 @@ public class Tweeter {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
-	private OracleClientCredentialsClient oracleClient;
+	private OracleClient oracleClient;
 
 	@Autowired
 	private Twitter twitterTemplate;

@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import feign.hystrix.FallbackFactory;
-import guru.bonacci.oogway.oracle.client.OracleClientCredentialsClient.HystrixClientFallbackFactory;
+import guru.bonacci.oogway.oracle.client.OracleClient.HystrixClientFallbackFactory;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 /**
  * Talks to the Oracle via REST
  */
 @FeignClient(name = "oracle-service", fallbackFactory = HystrixClientFallbackFactory.class)
-public interface OracleClientCredentialsClient {
+public interface OracleClient {
 
 	@RequestMapping(value = "/oracle/gems", method = GET)
 	Optional<GemCarrier> consult(@RequestParam("q") String q, @RequestParam(value = "by") String author);
@@ -28,13 +28,13 @@ public interface OracleClientCredentialsClient {
     Optional<GemCarrier> random();
 
 	@Component
-	static class HystrixClientFallbackFactory implements FallbackFactory<OracleClientCredentialsClient> {
+	static class HystrixClientFallbackFactory implements FallbackFactory<OracleClient> {
 
 		private final Logger logger = getLogger(this.getClass());
 		
 		@Override
-		public OracleClientCredentialsClient create(Throwable cause) {
-			return new OracleClientCredentialsClient() {
+		public OracleClient create(Throwable cause) {
+			return new OracleClient() {
 
 				@Override
 				public Optional<GemCarrier> consult(String q, String author) {

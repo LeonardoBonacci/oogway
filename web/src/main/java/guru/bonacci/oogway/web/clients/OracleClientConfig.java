@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
@@ -11,7 +12,8 @@ import org.springframework.security.oauth2.client.token.grant.password.ResourceO
 
 @RefreshScope
 @Configuration
-public class OAuth2Config {
+@Profile("!unit-test") //hack :)
+public class OracleClientConfig {
 
 	public final static String OAUTH2_TEMPLATE_BEAN = "oAuth2RestTemplate";
 

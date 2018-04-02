@@ -1,0 +1,3 @@
+oracle:
+  service:
+    url: http://oracle-service:4444

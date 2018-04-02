@@ -21,9 +21,6 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
 @FeignClient(name = "oracle-service", fallbackFactory = HystrixClientFallbackFactory.class)
 public interface OracleClient {
 
-	@RequestMapping(value = "/oracle/gems", method = GET)
-	Optional<GemCarrier> consult(@RequestParam("q") String q, @RequestParam(value = "by") String author);
-
 	@RequestMapping(value = "/oracle/gems/random", method = GET)
     Optional<GemCarrier> random();
 
@@ -35,12 +32,6 @@ public interface OracleClient {
 		@Override
 		public OracleClient create(Throwable cause) {
 			return new OracleClient() {
-
-				@Override
-				public Optional<GemCarrier> consult(String q, String author) {
-					sos();    
-					return Optional.empty();
-				}
 
 				@Override
 				public Optional<GemCarrier> random() {

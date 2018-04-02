@@ -7,8 +7,9 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
@@ -20,11 +21,14 @@ public class OracleClient {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
-	private OAuth2RestTemplate restTemplate;
+	private RestTemplate restTemplate;
 
-	//you shouldn't be here..
-	private final String serviceUrl = "http://oracle-service:4444";
+	private final String serviceUrl;
 
+	public OracleClient(@Value("${oracle.service.url}") String serviceUrl) {
+		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
+	}
+	
 	@OracleRequestInterceptor
 	@HystrixCommand(fallbackMethod = "fallback")
 	public Optional<GemCarrier> consult(String searchString, String author) {

@@ -53,40 +53,6 @@ public class OracleClientTests {
 	ObjectMapper objectMapper;
 
     @Test
-	public void shouldAnswerQ() throws JsonProcessingException {
-    	GemCarrier gem = new GemCarrier("bla");
-        stubFor(get(urlEqualTo("/oracle/gems?q=something"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "application/json")
-                        .withBody(objectMapper.writeValueAsString(gem))));
-        
-		assertThat(client.consult("something", null).get()).isEqualTo(gem);
-    }
-    
-    @Test
-    public void shouldAnswerQAndBy() throws JsonProcessingException {
-    	GemCarrier gem = new GemCarrier("bla", "bloe");
-        stubFor(get(urlEqualTo("/oracle/gems?q=something&by=someone"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "application/json")
-                        .withBody(objectMapper.writeValueAsString(gem))));
-        
-        assertThat(client.consult("something", "someone").get()).isEqualTo(gem);
-    }
-    
-    @Test
-    public void shouldFallbackConsult() {
-    	stubFor(get(urlEqualTo("/oracle/gems?q=something&by=someone"))
-                .willReturn(aResponse()
-                        .withStatus(500)));
-        
-        Optional<GemCarrier> gem = client.consult("something", "someone");
-        assertThat(gem.isPresent(), is(false));
-    }
-
-    @Test
     public void shouldFindRandom() throws JsonProcessingException {
     	GemCarrier gem = new GemCarrier("bla", "bloe");
         stubFor(get(urlEqualTo("/oracle/gems/random"))

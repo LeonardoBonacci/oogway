@@ -10,7 +10,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-	    <module>oracle-client</module>
 		<module>oracle-service</module>
 	</modules>
 

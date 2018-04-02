@@ -99,5 +99,4 @@ public class OracleClientTests {
 	        SpringApplication.run(App.class, args);
 	    }
 	}
-   
 }

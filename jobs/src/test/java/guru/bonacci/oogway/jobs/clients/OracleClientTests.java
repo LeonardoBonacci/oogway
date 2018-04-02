@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.oracle.client;
+package guru.bonacci.oogway.jobs.clients;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
@@ -37,7 +37,8 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = {
-        "feign.hystrix.enabled=true"
+        "feign.hystrix.enabled=true",
+        "spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration"
 })
 @ContextConfiguration(classes = {OracleClientTests.LocalRibbonClientConfiguration.class})
 @ActiveProfiles("unit-test")

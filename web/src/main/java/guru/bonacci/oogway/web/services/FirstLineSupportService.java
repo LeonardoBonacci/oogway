@@ -7,10 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import guru.bonacci.oogway.oracle.client.OracleClient;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import guru.bonacci.oogway.web.bigbrother.WatchMe;
 import guru.bonacci.oogway.web.cheaters.Postponer;
-import guru.bonacci.oogway.web.intercept.WatchMe;
+import guru.bonacci.oogway.web.clients.OracleClient;
 
 /**
  * Tier I is the initial support level responsible for basic customer issues. It
@@ -28,7 +28,7 @@ public class FirstLineSupportService {
 
 	@Autowired
 	private OracleClient oracleClient;
-	
+
 	@Autowired
 	private Postponer postponer;
 
@@ -40,20 +40,4 @@ public class FirstLineSupportService {
 		Optional<GemCarrier> gem = oracleClient.consult(q, null);
 		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
 	}
-	
-//	public Optional<GemCarrier> consult(String q, String author) {
-//		ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
-//		resource.setUsername("user1");
-//		resource.setPassword("password");
-//		resource.setAccessTokenUri("http://auth-service:5000/auth/oauth/token");
-//		resource.setClientId("web-service");
-//		resource.setClientSecret("web-service-secret");
-//		resource.setGrantType("password");
-//
-//		DefaultOAuth2ClientContext clientContext = new DefaultOAuth2ClientContext();
-//		OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(resource, clientContext);
-//
-//		GemCarrier gem = restTemplate.getForObject("http://oracle-service:4444/oracle/gems?q=" + q, GemCarrier.class);
-//		return Optional.ofNullable(gem);
-//	}
 }

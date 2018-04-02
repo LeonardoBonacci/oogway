@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.web.intercept;
+package guru.bonacci.oogway.web.bigbrother;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

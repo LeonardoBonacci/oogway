@@ -7,10 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import guru.bonacci.oogway.oracle.client.OracleClient;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import guru.bonacci.oogway.web.bigbrother.WatchMe;
 import guru.bonacci.oogway.web.cheaters.Postponer;
-import guru.bonacci.oogway.web.intercept.WatchMe;
+import guru.bonacci.oogway.web.clients.OracleClient;
 
 /**
  * Tier I is the initial support level responsible for basic customer issues. It

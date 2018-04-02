@@ -27,8 +27,8 @@ import org.springframework.messaging.Message;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import guru.bonacci.oogway.oracle.client.OracleClient;
 import guru.bonacci.oogway.shareddomain.COMINT;
+import guru.bonacci.oogway.web.clients.OracleClient;
 import guru.bonacci.oogway.web.events.WebEventChannels;
 
 @RunWith(SpringRunner.class)

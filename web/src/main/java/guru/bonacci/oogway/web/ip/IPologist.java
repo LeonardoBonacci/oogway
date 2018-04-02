@@ -2,7 +2,11 @@ package guru.bonacci.oogway.web.ip;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +21,18 @@ public class IPologist implements IIPologist {
 
 	static final String LOCAL_IP_1 = "0:0:0:0:0:0:0:1";
 	static final String LOCAL_IP_2 = "127.0.0.1";
-	static final String DOCKER_IP_2 = "172.19.0.1";
+	static final String DOCKER_IP_1 = "172.19.0.1";
+	static final String DOCKER_IP_2 = "172.22.0.1";
 
+	List<String> ips;
+	
 	private Iterator<String> iperator;
 
+	@PostConstruct
+	public void init() {
+		ips = Arrays.asList(LOCAL_IP_1, LOCAL_IP_2, DOCKER_IP_1, DOCKER_IP_2);
+	}
+	
 	@Autowired
 	public IPologist(IPerable iperable) {
 		iperator = iperable.iterator();
@@ -28,7 +40,7 @@ public class IPologist implements IIPologist {
 
 	@Override
 	public String checkUp(String ipIn) {
-		String ipOut = ipIn == null || LOCAL_IP_1.equals(ipIn) || LOCAL_IP_2.equals(ipIn) || DOCKER_IP_2.equals(ipIn)
+		String ipOut = ipIn == null || ips.contains(ipIn)
 				? iperator.next()
 				: ipIn;
 		logger.debug(ipIn + " becomes " + ipOut);

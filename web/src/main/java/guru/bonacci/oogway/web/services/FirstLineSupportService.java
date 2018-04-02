@@ -2,14 +2,12 @@ package guru.bonacci.oogway.web.services;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
-import guru.bonacci.oogway.web.cheaters.Postponer;
 import guru.bonacci.oogway.web.clients.OAuth2RestTemplateFactory;
 import guru.bonacci.oogway.web.intercept.WatchMe;
 
@@ -28,10 +26,13 @@ import guru.bonacci.oogway.web.intercept.WatchMe;
 public class FirstLineSupportService {
 
 	@Autowired
+	private org.springframework.cloud.context.scope.refresh.RefreshScope refreshScope;
+	
+	@Autowired
 	private OAuth2RestTemplateFactory oracleClientFactory;
 	
 	@Autowired
-	private Postponer postponer;
+	private ApplicationContext appContext;
 
 	int i = 0;
 	
@@ -42,10 +43,8 @@ public class FirstLineSupportService {
 		else 
 			oracleClientFactory.setP("passwordsss");
 
-
-//		refreshScope.refresh("oracleClientConfig");
-//		refreshScope.refresh("guru.bonacci.oogway.oracle.client.OracleClient");
-//		refreshScope.refresh("last");
+		refreshScope.refresh("resource");
+		refreshScope.refresh("client");
 	}
 	
 	@WatchMe
@@ -53,10 +52,8 @@ public class FirstLineSupportService {
 		if (isEmpty(q))
 			return new GemCarrier("No question no answer..", "oogway");
 
-//		Optional<GemCarrier> gem = oracleClient.consult(q, null);
-//		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
 		prepare();
-		OAuth2RestTemplate oracleClient = oracleClientFactory.oracleClient();
+		OAuth2RestTemplate oracleClient = appContext.getBean(OAuth2RestTemplate.class);
 		GemCarrier gem = oracleClient.getForObject("http://oracle-service:4444/oracle/gems?q=" + q, GemCarrier.class);
 		return gem;
 

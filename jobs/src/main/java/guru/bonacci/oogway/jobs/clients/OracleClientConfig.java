@@ -11,15 +11,13 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
 import feign.RequestInterceptor;
 
 @Configuration
 @ComponentScan
-@EnableFeignClients(basePackageClasses = OracleClient.class)
+@EnableFeignClients
 @EnableCircuitBreaker
-@EnableOAuth2Client
 @Profile("!unit-test") //hack :)
 public class OracleClientConfig {
 	

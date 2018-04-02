@@ -12,10 +12,12 @@ import org.springframework.security.oauth2.client.token.grant.password.ResourceO
 @Configuration
 public class OAuth2RestTemplateFactory {
 
+	public final static String OAUTH2_TEMPLATE_BEAN = "oAuth2RestTemplate";
+
 	@RefreshScope
-	@Bean("client")
+	@Bean(OAUTH2_TEMPLATE_BEAN)
 	@Scope("prototype")
-	public OAuth2RestTemplate oracleClient(@Value("${u:user1}") String username,
+	public OAuth2RestTemplate restTemplate(@Value("${u:user1}") String username,
 										   @Value("${pw:password}") String pw) {
 		return new OAuth2RestTemplate(resourceDetails(pw, username), new DefaultOAuth2ClientContext());
 	}

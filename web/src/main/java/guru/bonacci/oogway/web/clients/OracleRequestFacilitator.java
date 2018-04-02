@@ -1,6 +1,8 @@
 package guru.bonacci.oogway.web.clients;
 
 import static org.slf4j.LoggerFactory.getLogger;
+import static guru.bonacci.oogway.web.clients.OAuth2RestTemplateFactory.OAUTH2_TEMPLATE_BEAN;
+import static guru.bonacci.oogway.web.WebConstants.WEB_PROPERTY_SOURCE;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +19,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.stereotype.Component;
+
 
 @Aspect
 @Component
@@ -36,8 +39,8 @@ public class OracleRequestFacilitator {
 		s.put("username", "user1");
 		s.put("pw", "password");
 
-		env.getPropertySources().addFirst(new MapPropertySource("security", s));
-		refreshScope.refresh("client");
+		env.getPropertySources().addFirst(new MapPropertySource(WEB_PROPERTY_SOURCE, s));
+		refreshScope.refresh(OAUTH2_TEMPLATE_BEAN);
 	}
 
 	int i = 0;
@@ -56,8 +59,8 @@ public class OracleRequestFacilitator {
 		logger.debug("Look who is calling: " + s.get("username") + " " + s.get("pw"));
 
 		MutablePropertySources sources = env.getPropertySources();
-		sources.replace("security", new MapPropertySource("security", s));
+		sources.replace(WEB_PROPERTY_SOURCE, new MapPropertySource(WEB_PROPERTY_SOURCE, s));
 		
-		refreshScope.refresh("client");
+		refreshScope.refresh(OAUTH2_TEMPLATE_BEAN);
 	}
 }

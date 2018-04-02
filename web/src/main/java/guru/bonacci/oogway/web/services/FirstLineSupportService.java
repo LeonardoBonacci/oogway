@@ -1,13 +1,25 @@
 package guru.bonacci.oogway.web.services;
 
+import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.cloud.context.scope.refresh.RefreshScope;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.MapPropertySource;
+import org.springframework.core.env.MutablePropertySources;
+import org.springframework.core.env.PropertiesPropertySource;
+import org.springframework.core.env.PropertySource;
+import org.springframework.core.io.support.ResourcePropertySource;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import guru.bonacci.oogway.web.cheaters.Postponer;
 import guru.bonacci.oogway.web.clients.OAuth2RestTemplateFactory;
 import guru.bonacci.oogway.web.intercept.WatchMe;
 
@@ -26,24 +38,41 @@ import guru.bonacci.oogway.web.intercept.WatchMe;
 public class FirstLineSupportService {
 
 	@Autowired
-	private org.springframework.cloud.context.scope.refresh.RefreshScope refreshScope;
+	private RefreshScope refreshScope;
 	
 	@Autowired
-	private OAuth2RestTemplateFactory oracleClientFactory;
-	
+	private OAuth2RestTemplate restTemplate;
+
 	@Autowired
-	private ApplicationContext appContext;
+	private Postponer postponer;
+
+	@Autowired
+	private ConfigurableEnvironment env;
 
 	int i = 0;
 	
 	public void prepare() {
+		//determine new value
+		Map<String, Object> s = new HashMap<>();
 		i++;
 		if (i % 2 == 0)
-			oracleClientFactory.setP("password");
+			s.put("pw", "password");
 		else 
-			oracleClientFactory.setP("passwordsss");
+			s.put("pw", "passwordsssss");
 
-		refreshScope.refresh("resource");
+		MapPropertySource newSource = new MapPropertySource("mytemp", s);
+		MutablePropertySources sources = env.getPropertySources();
+		
+		if (sources.contains("mytemp")) {
+			sources.replace("mytemp", newSource);
+		} else {
+	        sources.addFirst(newSource);
+		}
+
+
+//        PropertySource source = sources.get("temp");
+//        if (source == null)
+//        	source = new PropertiesPropertySource("temp");
 		refreshScope.refresh("client");
 	}
 	
@@ -52,26 +81,9 @@ public class FirstLineSupportService {
 		if (isEmpty(q))
 			return new GemCarrier("No question no answer..", "oogway");
 
-		prepare();
-		OAuth2RestTemplate oracleClient = appContext.getBean(OAuth2RestTemplate.class);
-		GemCarrier gem = oracleClient.getForObject("http://oracle-service:4444/oracle/gems?q=" + q, GemCarrier.class);
-		return gem;
-
+		prepare();//TODO to aspect
+		Optional<GemCarrier> gem = 
+				ofNullable(restTemplate.getForObject("http://oracle-service:4444/oracle/gems?q=" + q, GemCarrier.class));
+		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
 	}
-	
-//	public Optional<GemCarrier> consult(String q, String author) {
-//		ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
-//		resource.setUsername("user1");
-//		resource.setPassword("password");
-//		resource.setAccessTokenUri("http://auth-service:5000/auth/oauth/token");
-//		resource.setClientId("web-service");
-//		resource.setClientSecret("web-service-secret");
-//		resource.setGrantType("password");
-//
-//		DefaultOAuth2ClientContext clientContext = new DefaultOAuth2ClientContext();
-//		OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(resource, clientContext);
-//
-//		GemCarrier gem = restTemplate.getForObject("http://oracle-service:4444/oracle/gems?q=" + q, GemCarrier.class);
-//		return Optional.ofNullable(gem);
-//	}
 }

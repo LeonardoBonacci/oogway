@@ -1,5 +1,6 @@
 package guru.bonacci.oogway.web.clients;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,8 +9,7 @@ import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 
-@RefreshScope
-@Configuration("me")
+@Configuration
 public class OAuth2RestTemplateFactory {
 
 	String pw = "password";
@@ -20,14 +20,14 @@ public class OAuth2RestTemplateFactory {
 	@RefreshScope
 	@Bean("client")
 	@Scope("prototype")
-	public OAuth2RestTemplate oracleClient() {
-		return new OAuth2RestTemplate(resourceDetails(), new DefaultOAuth2ClientContext());
+	public OAuth2RestTemplate oracleClient(@Value("${pw:password}") String pw) {
+		return new OAuth2RestTemplate(resourceDetails(pw), new DefaultOAuth2ClientContext());
 	}
 
 	@RefreshScope
-	@Bean("resource")
+	@Bean
 	@Scope("prototype")
-	public ResourceOwnerPasswordResourceDetails resourceDetails() {
+	public ResourceOwnerPasswordResourceDetails resourceDetails(@Value("${pw:password}") String pw) {
 		ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
 		resource.setUsername("user1");
 		resource.setPassword(pw);

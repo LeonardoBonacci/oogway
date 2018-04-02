@@ -1,7 +1,7 @@
 package guru.bonacci.oogway.web.clients;
 
 import static org.slf4j.LoggerFactory.getLogger;
-import static guru.bonacci.oogway.web.clients.OAuth2RestTemplateFactory.OAUTH2_TEMPLATE_BEAN;
+import static guru.bonacci.oogway.web.clients.OAuth2Config.OAUTH2_TEMPLATE_BEAN;
 import static guru.bonacci.oogway.web.WebConstants.WEB_PROPERTY_SOURCE;
 
 import java.util.HashMap;

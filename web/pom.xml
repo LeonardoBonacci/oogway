@@ -23,11 +23,6 @@
 		<dependency>
 			<groupId>guru.bonacci.oogway</groupId>
 			<artifactId>oracle-client</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>guru.bonacci.oogway</groupId>
-			<artifactId>oracle-client</artifactId>
 			<type>test-jar</type>
 			<version>${project.version}</version>
 			<scope>test</scope>

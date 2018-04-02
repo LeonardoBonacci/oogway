@@ -46,7 +46,7 @@ public class OracleRequestFacilitator {
 	int i = 0;
 
 	@Before("@annotation(OracleRequestInterceptor)")
-	public void spreadTheNews(JoinPoint joinPoint) {
+	public void facilitate(JoinPoint joinPoint) {
 		//TODO this becomes the 'calling user'
 		Map<String, Object> s = new HashMap<>();
 		s.put("username", "user1");
@@ -54,7 +54,7 @@ public class OracleRequestFacilitator {
 		if (i % 2 == 0)
 			s.put("pw", "password");
 		else 
-			s.put("pw", "passwordsssss");
+			s.put("pw", "password"); //change to other value to fail
 
 		logger.debug("Look who is calling: " + s.get("username") + " " + s.get("pw"));
 

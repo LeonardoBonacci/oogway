@@ -16,14 +16,14 @@ services:
   auth-service:
     build: auth
 
-  web-service:
-    build: web
+  entrance-service:
+    build: heimdall/entrance
 
   oracle-service:
-    build: oracle/oracle-service
+    build: oracle
 
   sannyas-service:
-    build: sannyas/sannyas-service
+    build: sannyas
 
   job-service:
     build: jobs

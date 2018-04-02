@@ -62,21 +62,21 @@ after_success:
   - docker tag $AUTH:$COMMIT $AUTH:$TAG
   - docker push $AUTH
   
-  # WEB SERVICE
-  - export WEB=$DOCKER_USERNAME/oogway-web-service
-  - docker build -t $WEB:$COMMIT ./web
-  - docker tag $WEB:$COMMIT $WEB:$TAG
-  - docker push $WEB
+  # ENTRANCE SERVICE
+  - export ENTRANCE=$DOCKER_USERNAME/oogway-entrance-service
+  - docker build -t $ENTRANCE:$COMMIT ./heimdall/entrance
+  - docker tag $ENTRANCE:$COMMIT $ENTRANCE:$TAG
+  - docker push $ENTRANCE
   
   # ORACLE SERVICE
   - export ORACLE=$DOCKER_USERNAME/oogway-oracle-service
-  - docker build -t $ORACLE:$COMMIT ./oracle/oracle-service
+  - docker build -t $ORACLE:$COMMIT ./oracle
   - docker tag $ORACLE:$COMMIT $ORACLE:$TAG
   - docker push $ORACLE
   
   # SANNYAS SERVICE
   - export SANNYAS=$DOCKER_USERNAME/oogway-sannyas-service
-  - docker build -t $SANNYAS:$COMMIT ./sannyas/sannyas-service
+  - docker build -t $SANNYAS:$COMMIT ./sannyas
   - docker tag $SANNYAS:$COMMIT $SANNYAS:$TAG
   - docker push $SANNYAS
   

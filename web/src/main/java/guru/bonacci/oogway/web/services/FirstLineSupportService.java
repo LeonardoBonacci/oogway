@@ -1,23 +1,16 @@
 package guru.bonacci.oogway.web.services;
 
-import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.context.scope.refresh.RefreshScope;
-import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.core.env.MapPropertySource;
-import org.springframework.core.env.MutablePropertySources;
 import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import guru.bonacci.oogway.web.bigbrother.WatchMe;
 import guru.bonacci.oogway.web.cheaters.Postponer;
 import guru.bonacci.oogway.web.clients.OracleClient;
-import guru.bonacci.oogway.web.intercept.WatchMe;
 
 /**
  * Tier I is the initial support level responsible for basic customer issues. It

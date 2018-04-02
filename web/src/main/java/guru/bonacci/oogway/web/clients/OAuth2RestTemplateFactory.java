@@ -15,16 +15,18 @@ public class OAuth2RestTemplateFactory {
 	@RefreshScope
 	@Bean("client")
 	@Scope("prototype")
-	public OAuth2RestTemplate oracleClient(@Value("${pw:password}") String pw) {
-		return new OAuth2RestTemplate(resourceDetails(pw), new DefaultOAuth2ClientContext());
+	public OAuth2RestTemplate oracleClient(@Value("${u:user1}") String username,
+										   @Value("${pw:password}") String pw) {
+		return new OAuth2RestTemplate(resourceDetails(pw, username), new DefaultOAuth2ClientContext());
 	}
 
 	@RefreshScope
 	@Bean
 	@Scope("prototype")
-	public ResourceOwnerPasswordResourceDetails resourceDetails(@Value("${pw:password}") String pw) {
+	public ResourceOwnerPasswordResourceDetails resourceDetails(@Value("${u:user1}") String username,
+																@Value("${pw:password}") String pw) {
 		ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
-		resource.setUsername("user1");
+		resource.setUsername(username);
 		resource.setPassword(pw);
 		resource.setAccessTokenUri("http://auth-service:5000/auth/oauth/token");
 		resource.setClientId("web-service");

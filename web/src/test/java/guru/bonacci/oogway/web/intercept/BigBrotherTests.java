@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.client.OracleClient;
 import guru.bonacci.oogway.web.WebTestApp;
+import guru.bonacci.oogway.web.bigbrother.BigBrother;
 import guru.bonacci.oogway.web.events.SpectreGateway;
 import guru.bonacci.oogway.web.services.FirstLineSupportService;
 import guru.bonacci.oogway.web.utils.IPCatcher;

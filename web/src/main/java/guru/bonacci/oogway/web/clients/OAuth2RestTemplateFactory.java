@@ -10,6 +10,11 @@ import org.springframework.security.oauth2.client.token.grant.password.ResourceO
 @Configuration
 public class OAuth2RestTemplateFactory {
 
+	String pw = "password";
+	public void setP(String pw) {
+		this.pw = pw;
+	}
+	
 	@Bean
 	@Scope("prototype")
 	public OAuth2RestTemplate oracleClient() {
@@ -21,7 +26,7 @@ public class OAuth2RestTemplateFactory {
 	public ResourceOwnerPasswordResourceDetails resourceDetails() {
 		ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
 		resource.setUsername("user1");
-		resource.setPassword("password");
+		resource.setPassword(pw);
 		resource.setAccessTokenUri("http://auth-service:5000/auth/oauth/token");
 		resource.setClientId("web-service");
 		resource.setClientSecret("web-service-secret");

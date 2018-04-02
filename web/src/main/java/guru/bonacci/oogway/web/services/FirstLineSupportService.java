@@ -33,6 +33,21 @@ public class FirstLineSupportService {
 	@Autowired
 	private Postponer postponer;
 
+	int i = 0;
+	
+	public void prepare() {
+		i++;
+		if (i % 2 == 0)
+			oracleClientFactory.setP("password");
+		else 
+			oracleClientFactory.setP("passwordsss");
+
+
+//		refreshScope.refresh("oracleClientConfig");
+//		refreshScope.refresh("guru.bonacci.oogway.oracle.client.OracleClient");
+//		refreshScope.refresh("last");
+	}
+	
 	@WatchMe
 	public GemCarrier enquire(String q) {
 		if (isEmpty(q))
@@ -40,7 +55,7 @@ public class FirstLineSupportService {
 
 //		Optional<GemCarrier> gem = oracleClient.consult(q, null);
 //		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
-
+		prepare();
 		OAuth2RestTemplate oracleClient = oracleClientFactory.oracleClient();
 		GemCarrier gem = oracleClient.getForObject("http://oracle-service:4444/oracle/gems?q=" + q, GemCarrier.class);
 		return gem;

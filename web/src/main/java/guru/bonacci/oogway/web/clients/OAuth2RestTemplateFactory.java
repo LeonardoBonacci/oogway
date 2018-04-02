@@ -12,11 +12,6 @@ import org.springframework.security.oauth2.client.token.grant.password.ResourceO
 @Configuration
 public class OAuth2RestTemplateFactory {
 
-	String pw = "password";
-	public void setP(String pw) {
-		this.pw = pw;
-	}
-	
 	@RefreshScope
 	@Bean("client")
 	@Scope("prototype")

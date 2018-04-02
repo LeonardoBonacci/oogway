@@ -12,15 +12,11 @@ import org.springframework.cloud.context.scope.refresh.RefreshScope;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.MutablePropertySources;
-import org.springframework.core.env.PropertiesPropertySource;
-import org.springframework.core.env.PropertySource;
-import org.springframework.core.io.support.ResourcePropertySource;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.web.cheaters.Postponer;
-import guru.bonacci.oogway.web.clients.OAuth2RestTemplateFactory;
+import guru.bonacci.oogway.web.clients.OracleClient;
 import guru.bonacci.oogway.web.intercept.WatchMe;
 
 /**
@@ -38,52 +34,17 @@ import guru.bonacci.oogway.web.intercept.WatchMe;
 public class FirstLineSupportService {
 
 	@Autowired
-	private RefreshScope refreshScope;
-	
-	@Autowired
-	private OAuth2RestTemplate restTemplate;
+	private OracleClient oracleClient;
 
 	@Autowired
 	private Postponer postponer;
 
-	@Autowired
-	private ConfigurableEnvironment env;
-
-	int i = 0;
-	
-	public void prepare() {
-		//determine new value
-		Map<String, Object> s = new HashMap<>();
-		i++;
-		if (i % 2 == 0)
-			s.put("pw", "password");
-		else 
-			s.put("pw", "passwordsssss");
-
-		MapPropertySource newSource = new MapPropertySource("mytemp", s);
-		MutablePropertySources sources = env.getPropertySources();
-		
-		if (sources.contains("mytemp")) {
-			sources.replace("mytemp", newSource);
-		} else {
-	        sources.addFirst(newSource);
-		}
-
-
-//        PropertySource source = sources.get("temp");
-//        if (source == null)
-//        	source = new PropertiesPropertySource("temp");
-		refreshScope.refresh("client");
-	}
-	
 	@WatchMe
 	public GemCarrier enquire(String q) {
 		if (isEmpty(q))
 			return new GemCarrier("No question no answer..", "oogway");
 
-		prepare();//TODO to aspect
-		Optional<GemCarrier> gem = 
-				ofNullable(restTemplate.getForObject("http://oracle-service:4444/oracle/gems?q=" + q, GemCarrier.class));
+		Optional<GemCarrier> gem = oracleClient.consult(q, null);
 		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
 	}
 }

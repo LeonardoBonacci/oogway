@@ -38,10 +38,10 @@ services:
       - es
       - rabbit
 
-  config:
+  config-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: leonardobonacci/oogway-config
+    image: leonardobonacci/oogway-config-service
     restart: always
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8888/health"]
@@ -56,7 +56,7 @@ services:
     image: leonardobonacci/oogway-orchestration-service
     restart: always
     depends_on:
-      config:
+      config-service:
         condition: service_healthy
     ports:
       - 1111:1111
@@ -69,7 +69,7 @@ services:
     image: leonardobonacci/oogway-gateway-service
     restart: always
     depends_on:
-      config:
+      config-service:
         condition: service_healthy
     ports:
       - 80:9090
@@ -82,7 +82,7 @@ services:
     image: leonardobonacci/oogway-auth-service
     restart: always
     depends_on:
-      config:
+      config-service:
         condition: service_healthy
     ports:
       - 5000:5000
@@ -97,7 +97,7 @@ services:
     depends_on:
       rabbit:
         condition: service_started
-      config:
+      config-service:
         condition: service_healthy
     ports:
       - 3333:3333
@@ -115,7 +115,7 @@ services:
         condition: service_started
       es:
         condition: service_started
-      config:
+      config-service:
         condition: service_healthy
     ports:
       - 4444:4444
@@ -130,7 +130,7 @@ services:
     depends_on:
       rabbit:
         condition: service_started
-      config:
+      config-service:
         condition: service_healthy
     ports:
       - 2222:2222
@@ -143,7 +143,7 @@ services:
     image: leonardobonacci/oogway-job-service
     restart: always
     depends_on:
-      config:
+      config-service:
         condition: service_healthy
     ports:
       - 8765:8765
@@ -158,7 +158,7 @@ services:
     depends_on:
       rabbit:
         condition: service_started
-      config:
+      config-service:
         condition: service_healthy
     ports:
       - 6666:6666
@@ -173,7 +173,7 @@ services:
     depends_on:
       rabbit:
         condition: service_started
-      config:
+      config-service:
         condition: service_healthy
     ports:
       - 11111:11111
@@ -188,7 +188,7 @@ services:
     depends_on:
       rabbit:
         condition: service_started
-      config:
+      config-service:
         condition: service_healthy
     ports:
       - 7777:7777
@@ -203,7 +203,7 @@ services:
     depends_on:
       rabbit:
         condition: service_started
-      config:
+      config-service:
         condition: service_healthy
     ports:
       - 9999:9999

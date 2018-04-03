@@ -38,8 +38,8 @@ after_success:
   #TAG
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 
-  # CONFIG
-  - export CONFIG=$DOCKER_USERNAME/oogway-config
+  # CONFIG SERVICE
+  - export CONFIG=$DOCKER_USERNAME/oogway-config-service
   - docker build -t $CONFIG:$COMMIT ./config
   - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
   - docker push $CONFIG

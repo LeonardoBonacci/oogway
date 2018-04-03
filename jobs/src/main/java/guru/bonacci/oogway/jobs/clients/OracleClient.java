@@ -6,6 +6,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import java.util.Optional;
 
 import org.slf4j.Logger;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,8 @@ import feign.hystrix.FallbackFactory;
 import guru.bonacci.oogway.jobs.clients.OracleClient.HystrixClientFallbackFactory;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
-@FeignClient(name = "oracle-service", fallbackFactory = HystrixClientFallbackFactory.class)
+@RefreshScope
+@FeignClient(name = "${application.name.oracle}", fallbackFactory = HystrixClientFallbackFactory.class)
 public interface OracleClient {
 
 	@RequestMapping(value = "/oracle/gems/random", method = GET)

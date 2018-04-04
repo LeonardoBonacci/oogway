@@ -2,6 +2,7 @@ package guru.bonacci.oogway.auth.security;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.io.IOException;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
@@ -9,6 +10,7 @@ import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Security;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 
 import javax.crypto.Cipher;
@@ -25,13 +27,14 @@ public class RSAPasswordEncoderTests {
     PublicKey publicKey;
 
     @Before
-    public void generateKeys() throws NoSuchAlgorithmException, NoSuchProviderException {
+    public void generateKeys() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException, IOException {
     	Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
     	
     	 // Get RSA keys. Uses key size of 2048.
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-        keyPairGenerator.initialize(2048);
-        KeyPair keyPair = keyPairGenerator.generateKeyPair();
+//        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+//        keyPairGenerator.initialize(2048);
+//        KeyPair keyPair = keyPairGenerator.generateKeyPair();
+    	KeyPair keyPair = RSAKeyHelper.loadKeyPair();
         privateKey = keyPair.getPrivate();
         publicKey = keyPair.getPublic();
         

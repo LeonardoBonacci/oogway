@@ -20,55 +20,55 @@ public class RSAKeyHelper {
 	private static final SecureRandom srand = new SecureRandom();
 
 	public static void main(String[] args) throws Exception {
-		// Generate RSA key pair of 1024 bits
-		KeyPair keypair = genKeyPair("RSA", 1024);
+		KeyPair keypair = genKeyPair();
 		// Save to file system
-		saveKeyPair("D:/", keypair);
+		saveKeyPair(keypair);
 		// Loads from file system
-		KeyPair loaded = loadKeyPair("D:/", "RSA");
+		KeyPair loaded = loadKeyPair();
 		System.out.println(loaded.getPrivate());
 		System.out.println(loaded.getPublic());
 	}
 
-	public static KeyPair genKeyPair(String algorithm, int bitLength) throws NoSuchAlgorithmException {
-		KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance(algorithm);
+	public static KeyPair genKeyPair() throws NoSuchAlgorithmException {
+		KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance("RSA");
 		keyGenerator.initialize(1024, srand);
 		return keyGenerator.generateKeyPair();
 	}
 
-	public static void saveKeyPair(String dir, KeyPair keyPair) throws IOException {
+	public static void saveKeyPair(KeyPair keyPair) throws IOException {
 		PrivateKey privateKey = keyPair.getPrivate();
 		PublicKey publicKey = keyPair.getPublic();
 
 		X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(publicKey.getEncoded());
-		FileOutputStream fos = new FileOutputStream(dir + "/public.key");
+		FileOutputStream fos = new FileOutputStream("public.key");
 		fos.write(x509EncodedKeySpec.getEncoded());
 		fos.close();
 
 		PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(privateKey.getEncoded());
-		fos = new FileOutputStream(dir + "/private.key");
+		fos = new FileOutputStream("private.key");
 		fos.write(pkcs8EncodedKeySpec.getEncoded());
 		fos.close();
 	}
 
-	public static KeyPair loadKeyPair(String path, String algorithm)
+	public static KeyPair loadKeyPair()
 			throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
 		// read public key from file
-		File filePublicKey = new File(path + "/public.key");
+		ClassLoader classLoader = RSAKeyHelper.class.getClassLoader();
+		File filePublicKey = new File(classLoader.getResource("public.key").getFile());
 		FileInputStream fis = new FileInputStream(filePublicKey);
 		byte[] encodedPublicKey = new byte[(int) filePublicKey.length()];
 		fis.read(encodedPublicKey);
 		fis.close();
 
 		// read private key from file
-		File filePrivateKey = new File(path + "/private.key");
+		File filePrivateKey = new File(classLoader.getResource("private.key").getFile());
 		fis = new FileInputStream(filePrivateKey);
 		byte[] encodedPrivateKey = new byte[(int) filePrivateKey.length()];
 		fis.read(encodedPrivateKey);
 		fis.close();
 
 		// Convert them into KeyPair
-		KeyFactory keyFactory = KeyFactory.getInstance(algorithm);
+		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 		X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(encodedPublicKey);
 		PublicKey publicKey = keyFactory.generatePublic(publicKeySpec);
 

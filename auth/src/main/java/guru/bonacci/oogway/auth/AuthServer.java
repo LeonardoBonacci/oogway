@@ -21,7 +21,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 import guru.bonacci.oogway.auth.models.User;
-import guru.bonacci.oogway.auth.security.FoolishPasswordEncoder;
+import guru.bonacci.oogway.auth.security.RSAPasswordEncoder;
 import guru.bonacci.oogway.auth.services.MyUserService;
 
 @SpringBootApplication
@@ -33,8 +33,8 @@ public class AuthServer {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Bean
-	public FoolishPasswordEncoder passwordEncoder(){
-		return new FoolishPasswordEncoder();
+	public RSAPasswordEncoder passwordEncoder(){
+		return new RSAPasswordEncoder();
 	}
 
 	public static void main(String[] args) {

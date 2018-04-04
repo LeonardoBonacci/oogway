@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import guru.bonacci.oogway.auth.models.User;
-import guru.bonacci.oogway.auth.security.FoolishPasswordEncoder;
+import guru.bonacci.oogway.auth.security.RSAPasswordEncoderTests;
 
 @RestController
 @RequestMapping("/users")
@@ -24,7 +24,7 @@ public class UserController {
 	private MyUserService userService;
 
 	@Autowired 
-	private FoolishPasswordEncoder passwordEncoder;
+	private RSAPasswordEncoderTests passwordEncoder;
 
 	@RequestMapping(value = "/current", method = RequestMethod.GET)
     public Principal user(Principal user) {

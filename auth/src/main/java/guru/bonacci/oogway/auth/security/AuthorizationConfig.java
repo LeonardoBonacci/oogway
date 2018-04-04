@@ -46,7 +46,9 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		// @formatter:off
+    	//TODO .secret(env.getProperty("ENTRANCE_SERVICE_PASSWORD"))
+
+    	// @formatter:off
     	clients.inMemory()
 	            .withClient("entrance-service")
 	            .secret("entrance-service-secret")

@@ -28,7 +28,14 @@ public class OracleClient {
 	public OracleClient(@Value("${oracle.service.url}") String serviceUrl) {
 		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
 	}
-	
+
+	/**
+	 * A few small things are needed to secure a service..
+	 * 
+	 * The command line can pretend to be entrance-service:
+	 * curl entrance-service:entrance-service-secret@localhost:5000/auth/oauth/token -d "grant_type=password&username=user1&password=password"
+	 * curl -H "Authorization: Bearer 6d5e6804-d5fd-4cfc-a4e6-12138ed8f05b" -v http://localhost:4444/oracle/gems?q=dance
+	 */
 	@HystrixCommand(fallbackMethod = "fallback")
 	public Optional<GemCarrier> consult(String searchString, String author) {
 		String params = "?q={searchString}";

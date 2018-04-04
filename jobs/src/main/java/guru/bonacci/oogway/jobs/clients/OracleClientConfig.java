@@ -5,7 +5,6 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
@@ -15,7 +14,6 @@ import org.springframework.security.oauth2.client.token.grant.client.ClientCrede
 import feign.RequestInterceptor;
 
 @Configuration
-@ComponentScan
 @EnableFeignClients
 @EnableCircuitBreaker
 @Profile("!unit-test") //hack :)

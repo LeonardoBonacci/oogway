@@ -1,5 +1,6 @@
 package guru.bonacci.oogway.auth;
 
+import static org.apache.commons.lang.StringUtils.reverse;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.Arrays;
@@ -17,10 +18,10 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 import guru.bonacci.oogway.auth.models.User;
+import guru.bonacci.oogway.auth.security.FoolishPasswordEncoder;
 import guru.bonacci.oogway.auth.services.MyUserService;
 
 @SpringBootApplication
@@ -32,8 +33,8 @@ public class AuthServer {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Bean
-	public BCryptPasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
+	public FoolishPasswordEncoder passwordEncoder(){
+		return new FoolishPasswordEncoder();
 	}
 
 	public static void main(String[] args) {
@@ -57,6 +58,7 @@ public class AuthServer {
 					User user = new User();
 					user.setUsername(username);
 					user.setPassword("password");
+					user.setApiKey(reverse(user.getUsername()));
 					accountService.registerUser(user);
 					
 					logger.info("User added: " + user);

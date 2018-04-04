@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,15 +17,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class User implements UserDetails {
 
-    @Id
+	private static final long serialVersionUID = 1270982218058894480L;
+
+	@Id
     @GeneratedValue
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
     
-    @JsonIgnore
+	@JsonIgnore
+    @Column(nullable = false)
     private String password;
+
+    @Transient
+    private String pw;
+
+    @Column(unique = true, nullable =false)
+    private String apiKey;
 
     public Long getId() {
         return id;
@@ -41,36 +51,57 @@ public class User implements UserDetails {
 		this.username = username;
 	}
 
-    @JsonIgnore
-    public String getPassword() {
+	@JsonIgnore
+	public String getPassword() {
         return password;
     }
 
     @JsonProperty
-    public void setPassword(String password) {
+	public void setPassword(String password) {
         this.password = password;
     }
 
+    public String getPw() {
+        return pw;
+    }
+
+    public void setPw(String pw) {
+        this.pw = pw;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    @JsonIgnore
 	@Override
 	public List<GrantedAuthority> getAuthorities() {
 		return null;
 	}
 
+    @JsonIgnore
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 
+    @JsonIgnore
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
+    @JsonIgnore
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
+    @JsonIgnore
 	@Override
 	public boolean isEnabled() {
 		return true;

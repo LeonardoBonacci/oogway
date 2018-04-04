@@ -29,8 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder( passwordEncoder );
-        provider.setUserDetailsService( userDetailsService() );
+        provider.setPasswordEncoder(passwordEncoder);
+        provider.setUserDetailsService(userDetailsService());
         return provider;
     }
 
@@ -40,15 +40,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable() // disable form authentication
                 .anonymous().disable() // disable anonymous user
                 .httpBasic().and()
-                // restricting access to authenticated users
                 .authorizeRequests().anyRequest().authenticated();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder);
+	            .userDetailsService(userDetailsService)
+	            .passwordEncoder(passwordEncoder);
     }
 
     @Override

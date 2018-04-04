@@ -27,16 +27,16 @@ services:
 
   job-service:
     build: jobs
-
-  localtimer-service:
-    build: spectre/local-timer
-
-  money-service:
-    build: spectre/money
-
-  sentiment-service:
-    build: spectre/sentiment
-
-  weather-service:
-    build: spectre/weather
+#
+#  localtimer-service:
+#    build: spectre/local-timer
+#
+#  money-service:
+#    build: spectre/money
+#
+#  sentiment-service:
+#    build: spectre/sentiment
+#
+#  weather-service:
+#    build: spectre/weather
     

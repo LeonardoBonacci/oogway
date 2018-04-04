@@ -1,4 +1,5 @@
 package guru.bonacci.oogway.auth.security;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -22,47 +23,46 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class RSAPasswordEncoderTests {
 
 	PasswordEncoder passwordEncoder;
-	
-    PrivateKey privateKey;
-    PublicKey publicKey;
 
-    @Before
-    public void generateKeys() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException, IOException {
-    	Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
-    	
-    	 // Get RSA keys. Uses key size of 2048.
-//        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-//        keyPairGenerator.initialize(2048);
-//        KeyPair keyPair = keyPairGenerator.generateKeyPair();
-    	KeyPair keyPair = RSAKeyHelper.loadKeyPair();
-        privateKey = keyPair.getPrivate();
-        publicKey = keyPair.getPublic();
-        
-        System.out.println("private:");
-        System.out.println(privateKey.toString());
+	PrivateKey privateKey;
+	PublicKey publicKey;
 
-        System.out.println("public:");
-        System.out.println(publicKey.toString());
+	@Before
+	public void generateKeys()
+			throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException, IOException {
+		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 
-        passwordEncoder = new RSAPasswordEncoder(publicKey);
-    }
+		KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+		keyPairGenerator.initialize(2048);
+		KeyPair keyPair = keyPairGenerator.generateKeyPair();
+		privateKey = keyPair.getPrivate();
+		publicKey = keyPair.getPublic();
 
-    @Test
-    public void shouldMatch() throws Exception {
-        String plainPassword = "Hello World!";
+		System.out.println("private:");
+		System.out.println(privateKey.toString());
 
-        String encryptedPassword = passwordEncoder.encode(plainPassword);
-        assertThat(passwordEncoder.matches(plainPassword, encryptedPassword), is(true));
+		System.out.println("public:");
+		System.out.println(publicKey.toString());
 
-        String decryptPassword = decryptMessage(encryptedPassword, privateKey);
-        assertThat(decryptPassword, is(plainPassword));
+		passwordEncoder = new RSAPasswordEncoder(publicKey);
+	}
 
-    }
+	@Test
+	public void shouldMatch() throws Exception {
+		String plainPassword = "Hello World!";
 
-    // Decrypt using RSA private key
-    private static String decryptMessage(String encryptedText, PrivateKey privateKey) throws Exception {
-    	Cipher cipher = Cipher.getInstance("RSA/None/NoPadding", "BC");
-        cipher.init(Cipher.DECRYPT_MODE, privateKey);
-        return new String(cipher.doFinal(Base64.getDecoder().decode(encryptedText)));
-    }
+		String encryptedPassword = passwordEncoder.encode(plainPassword);
+		assertThat(passwordEncoder.matches(plainPassword, encryptedPassword), is(true));
+
+		String decryptPassword = decryptMessage(encryptedPassword, privateKey);
+		assertThat(decryptPassword, is(plainPassword));
+
+	}
+
+	// Decrypt using RSA private key
+	private static String decryptMessage(String encryptedText, PrivateKey privateKey) throws Exception {
+		Cipher cipher = Cipher.getInstance("RSA/None/NoPadding", "BC");
+		cipher.init(Cipher.DECRYPT_MODE, privateKey);
+		return new String(cipher.doFinal(Base64.getDecoder().decode(encryptedText)));
+	}
 }

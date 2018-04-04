@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.auth.security;
+package guru.bonacci.oogway.auth;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,58 +10,55 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 public class RSAKeyHelper {
 
-	private static final SecureRandom srand = new SecureRandom();
-
+	private static final String keyDir = "D:/";
+	
 	public static void main(String[] args) throws Exception {
 		KeyPair keypair = genKeyPair();
 		// Save to file system
-		saveKeyPair(keypair);
+		saveKeyPair(keyDir, keypair);
 		// Loads from file system
-		KeyPair loaded = loadKeyPair();
+		KeyPair loaded = loadKeyPair(keyDir);
 		System.out.println(loaded.getPrivate());
 		System.out.println(loaded.getPublic());
 	}
 
 	public static KeyPair genKeyPair() throws NoSuchAlgorithmException {
 		KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance("RSA");
-		keyGenerator.initialize(1024, srand);
+		keyGenerator.initialize(1024);
 		return keyGenerator.generateKeyPair();
 	}
 
-	public static void saveKeyPair(KeyPair keyPair) throws IOException {
+	public static void saveKeyPair(String dir, KeyPair keyPair) throws IOException {
 		PrivateKey privateKey = keyPair.getPrivate();
 		PublicKey publicKey = keyPair.getPublic();
 
 		X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(publicKey.getEncoded());
-		FileOutputStream fos = new FileOutputStream("public.key");
+		FileOutputStream fos = new FileOutputStream(dir + "/public.key");
 		fos.write(x509EncodedKeySpec.getEncoded());
 		fos.close();
 
 		PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(privateKey.getEncoded());
-		fos = new FileOutputStream("private.key");
+		fos = new FileOutputStream(dir + "/private.key");
 		fos.write(pkcs8EncodedKeySpec.getEncoded());
 		fos.close();
 	}
 
-	public static KeyPair loadKeyPair()
-			throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
+	public static KeyPair loadKeyPair(String path) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
 		// read public key from file
-		ClassLoader classLoader = RSAKeyHelper.class.getClassLoader();
-		File filePublicKey = new File(classLoader.getResource("public.key").getFile());
+		File filePublicKey = new File(path + "/public.key");
 		FileInputStream fis = new FileInputStream(filePublicKey);
 		byte[] encodedPublicKey = new byte[(int) filePublicKey.length()];
 		fis.read(encodedPublicKey);
 		fis.close();
 
 		// read private key from file
-		File filePrivateKey = new File(classLoader.getResource("private.key").getFile());
+		File filePrivateKey = new File(path + "/private.key");
 		fis = new FileInputStream(filePrivateKey);
 		byte[] encodedPrivateKey = new byte[(int) filePrivateKey.length()];
 		fis.read(encodedPrivateKey);

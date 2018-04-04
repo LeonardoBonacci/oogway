@@ -2,6 +2,7 @@ package guru.bonacci.oogway.entrance.clients;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -29,8 +31,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
-import guru.bonacci.oogway.entrance.clients.OracleClient;
-import guru.bonacci.oogway.entrance.clients.OracleClientConfig;
+import guru.bonacci.oogway.entrance.EntranceServer;
 import guru.bonacci.oogway.entrance.clients.OracleClientTests.App;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
@@ -46,9 +47,13 @@ public class OracleClientTests {
     @Autowired
     OracleClient client;
     
+    @MockBean
+    RestTemplateFactory restTemplateFactory;
+    
     @Before
     public void setup() {
         this.server = MockRestServiceServer.createServer(rest);
+        when(restTemplateFactory.oAuth2RestTemplate()).thenReturn(rest);
     }
 
     @After
@@ -89,7 +94,7 @@ public class OracleClientTests {
 	@SpringBootApplication
 	@EnableCircuitBreaker
 	@ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, 
-							value = { OracleClientConfig.class }))
+							value = { EntranceServer.class }))
 	static class App {
 
 		@Bean

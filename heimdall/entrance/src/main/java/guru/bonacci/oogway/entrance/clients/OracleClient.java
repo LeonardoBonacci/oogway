@@ -21,7 +21,7 @@ public class OracleClient {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
-	private RestTemplate restTemplate;
+	private RestTemplateFactory restTemplateFactory;
 
 	private final String serviceUrl;
 
@@ -29,13 +29,13 @@ public class OracleClient {
 		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
 	}
 	
-	@OracleRequestInterceptor
 	@HystrixCommand(fallbackMethod = "fallback")
 	public Optional<GemCarrier> consult(String searchString, String author) {
 		String params = "?q={searchString}";
 		if (author != null)
 			params += "&by={author}";
 
+		RestTemplate restTemplate = restTemplateFactory.oAuth2RestTemplate();
 		return ofNullable(restTemplate.getForObject(serviceUrl + "/oracle/gems" + params, GemCarrier.class, searchString, author));
 	}
 

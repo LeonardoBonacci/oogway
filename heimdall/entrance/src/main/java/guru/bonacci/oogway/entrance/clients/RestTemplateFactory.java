@@ -16,8 +16,8 @@ public class RestTemplateFactory {
 	@Autowired
 	private ApplicationContext appContext;
 
-	public RestTemplate oAuth2RestTemplate(Credentials credentials) {
-		OracleClientConfig config = appContext.getBean(OracleClientConfig.class);
+	public RestTemplate oAuth2PasswordGrantRestTemplate(Credentials credentials) {
+		OraclePasswordGrantClientConfig config = appContext.getBean(OraclePasswordGrantClientConfig.class);
 		OAuth2RestTemplate template = config.restTemplate();
 		ResourceOwnerPasswordResourceDetails resource = (ResourceOwnerPasswordResourceDetails)template.getResource();
 		resource.setUsername(credentials.getUsername());

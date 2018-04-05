@@ -14,8 +14,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import guru.bonacci.oogway.shareddomain.UserInfo;
+
 @Entity
-public class User implements UserDetails {
+public class User implements UserDetails, UserInfo {
 
 	private static final long serialVersionUID = 1270982218058894480L;
 
@@ -43,10 +45,12 @@ public class User implements UserDetails {
         this.id = id;
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
-    
+
+    @Override
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -61,18 +65,22 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    @Override
     public String getPw() {
         return pw;
     }
 
+    @Override
     public void setPw(String pw) {
         this.pw = pw;
     }
 
+    @Override
     public String getApiKey() {
         return apiKey;
     }
 
+    @Override
     public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
     }

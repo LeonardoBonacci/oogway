@@ -53,7 +53,7 @@ public class OracleClientTests {
     @Before
     public void setup() {
         this.server = MockRestServiceServer.createServer(rest);
-        when(restTemplateFactory.oAuth2RestTemplate(null)).thenReturn(rest);
+        when(restTemplateFactory.oAuth2PasswordGrantRestTemplate(null)).thenReturn(rest);
     }
 
     @After

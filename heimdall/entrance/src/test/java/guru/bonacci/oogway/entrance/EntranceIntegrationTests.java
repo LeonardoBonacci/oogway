@@ -2,6 +2,7 @@ package guru.bonacci.oogway.entrance;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
@@ -19,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.FilterType;
@@ -27,9 +29,11 @@ import org.springframework.messaging.Message;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import guru.bonacci.oogway.entrance.EntranceServer;
+import guru.bonacci.oogway.entrance.clients.AuthClient;
 import guru.bonacci.oogway.entrance.clients.OracleClient;
 import guru.bonacci.oogway.entrance.events.EntranceEventChannels;
+import guru.bonacci.oogway.entrance.security.Credentials;
+import guru.bonacci.oogway.entrance.security.TestDecryptor;
 import guru.bonacci.oogway.shareddomain.COMINT;
 
 @RunWith(SpringRunner.class)
@@ -49,12 +53,16 @@ public class EntranceIntegrationTests {
 	MessageCollector messageCollector;
 
 	@MockBean
+	AuthClient authClient;
+
+	@MockBean
 	OracleClient oracleClient;
 
 	@SuppressWarnings("unchecked")
 	@Test
 	public void shouldSendMessageAfterInterception() throws Exception {
-		when(oracleClient.consult(anyString(), anyString())).thenReturn(Optional.empty());
+		when(authClient.user()).thenReturn(new Credentials());
+		when(oracleClient.consult(anyString(), anyString(), any(Credentials.class))).thenReturn(Optional.empty());
 
 		String localIP = "127.0.0.1";
 		String input = "The art of living is more like wrestling than dancing.";
@@ -70,6 +78,11 @@ public class EntranceIntegrationTests {
 	@EnableBinding(EntranceEventChannels.class)
 	@IntegrationComponentScan
 	static class EntranceIntegrationTestApp {
+
+		@Bean
+		public TestDecryptor decryptor() {
+			return new TestDecryptor(); 
+		}
 
 		static void main(String[] args) {
 			SpringApplication.run(EntranceIntegrationTestApp.class, args);

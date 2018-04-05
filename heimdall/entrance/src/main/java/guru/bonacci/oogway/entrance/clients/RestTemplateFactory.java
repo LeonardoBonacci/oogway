@@ -7,26 +7,21 @@ import org.springframework.security.oauth2.client.token.grant.password.ResourceO
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import guru.bonacci.oogway.entrance.security.Credentials;
+
 
 @Component
 public class RestTemplateFactory {
 
 	@Autowired
 	private ApplicationContext appContext;
-	
-	public RestTemplate oAuth2RestTemplate() {
-		OracleClientConfig config = appContext.getBean(OracleClientConfig.class);
+
+	public RestTemplate oAuth2PasswordGrantRestTemplate(Credentials credentials) {
+		PasswordGrantConfig config = appContext.getBean(PasswordGrantConfig.class);
 		OAuth2RestTemplate template = config.restTemplate();
 		ResourceOwnerPasswordResourceDetails resource = (ResourceOwnerPasswordResourceDetails)template.getResource();
-		resource.setUsername("user1");
-		resource.setPassword(pw());
+		resource.setUsername(credentials.getUsername());
+		resource.setPassword(credentials.getPassword());
 		return template;
 	}
-	
-	int i = 0;
-	String pw() {
-		i++;
-		return i % 2 == 0 ? "password" : "passwordsss";
-	}	
-
 }

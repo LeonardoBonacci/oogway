@@ -31,6 +31,15 @@ public class MyUserService implements UserDetailsService {
 		}
 	}
 
+	public User loadUserByApiKey(String s) {
+		Optional<User> user = userRepo.findByApiKey(s);
+		if (user.isPresent()) {
+			return user.get();
+		} else {
+			throw new UsernameNotFoundException(String.format("ApiKey[%s] not found", s));
+		}
+	}
+
 	public User registerUser(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepo.save(user);

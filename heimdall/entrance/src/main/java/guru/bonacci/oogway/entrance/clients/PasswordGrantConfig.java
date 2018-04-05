@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @RefreshScope
 @Component
 @Profile("!unit-test") //hack :)
-public class OracleClientConfig {
+public class PasswordGrantConfig {
 
     @Value("${security.oauth2.client.accessTokenUri}")
 	private String accessTokenUri;
@@ -21,9 +21,6 @@ public class OracleClientConfig {
 
     @Value("${security.oauth2.client.clientSecret}")
 	private String clientSecret;
-    
-    @Value("${security.oauth2.client.grant-type}")
-	private String grantType;
     
     // Sad but true, my preferred solution to use RefreshScope in order to have a 
     // thread-bound username-password unique OAuth2RestTemplate didn't work (I ran out of patience) 
@@ -37,7 +34,7 @@ public class OracleClientConfig {
 		resource.setAccessTokenUri(accessTokenUri);
 		resource.setClientId(clientId);
 		resource.setClientSecret(clientSecret);
-		resource.setGrantType(grantType);
+		resource.setGrantType("password");
 		return resource;
 	}	
 }

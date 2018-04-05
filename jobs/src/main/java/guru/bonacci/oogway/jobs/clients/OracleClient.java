@@ -16,7 +16,8 @@ import guru.bonacci.oogway.jobs.clients.OracleClient.HystrixClientFallbackFactor
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RefreshScope
-@FeignClient(name = "${application.name.oracle}", fallbackFactory = HystrixClientFallbackFactory.class)
+@FeignClient( name = "${application.name.oracle}", 
+			  fallbackFactory = HystrixClientFallbackFactory.class)
 public interface OracleClient {
 
 	@RequestMapping(value = "/oracle/gems/random", method = GET)

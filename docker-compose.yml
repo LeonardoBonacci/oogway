@@ -86,7 +86,9 @@ services:
         condition: service_healthy
     ports:
       - 5000:5000
-
+    volumes:
+      - .:/ubuntu1
+            
   entrance-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
@@ -102,6 +104,8 @@ services:
     ports:
       - 3333:3333
       - 8000:8000 #for debugging
+    volumes:
+      - .:/ubuntu1
 
   oracle-service:
     environment:

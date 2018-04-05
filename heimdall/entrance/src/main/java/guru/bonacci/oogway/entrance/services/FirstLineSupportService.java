@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.entrance.bigbrother.WatchMe;
 import guru.bonacci.oogway.entrance.cheaters.Postponer;
+import guru.bonacci.oogway.entrance.clients.AuthClient;
 import guru.bonacci.oogway.entrance.clients.OracleClient;
+import guru.bonacci.oogway.entrance.security.Credentials;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 /**
@@ -30,14 +32,18 @@ public class FirstLineSupportService {
 	private OracleClient oracleClient;
 
 	@Autowired
+	private AuthClient authClient;
+
+	@Autowired
 	private Postponer postponer;
 
-	@WatchMe
+	@WatchMe //TODO interceptor will contain the check on nr. of hits
 	public GemCarrier enquire(String q) {
 		if (isEmpty(q))
 			return new GemCarrier("No question no answer..", "oogway");
 
-		Optional<GemCarrier> gem = oracleClient.consult(q, null);
+		Credentials currentUser = authClient.user();
+		Optional<GemCarrier> gem = oracleClient.consult(q, null, currentUser);
 		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
 	}
 }

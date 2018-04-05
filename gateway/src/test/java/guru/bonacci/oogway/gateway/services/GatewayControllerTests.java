@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +24,7 @@ import guru.bonacci.oogway.gateway.GatewayTestApp;
 	"spring.cloud.config.enabled=false",
 	"eureka.client.enabled=false"
 })
+@Ignore
 public class GatewayControllerTests {
 
 	private TestRestTemplate template = new TestRestTemplate();

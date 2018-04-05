@@ -9,6 +9,8 @@ import guru.bonacci.oogway.auth.models.User;
 public interface UserRepository extends Repository<User, Long> {
 
 	Optional<User> findByUsername(String username);
-    
+
+	Optional<User> findByApiKey(String apiKey);
+
 	User save(User user);
 }

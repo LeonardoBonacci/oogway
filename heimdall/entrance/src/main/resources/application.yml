@@ -1,3 +1,7 @@
 oracle:
   service:
     url: http://oracle-service:4444
+    
+auth:
+  service:
+    url: http://auth-service:5000    

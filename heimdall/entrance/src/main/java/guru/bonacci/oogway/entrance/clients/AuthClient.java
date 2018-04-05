@@ -1,19 +1,27 @@
 package guru.bonacci.oogway.entrance.clients;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
-import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.RequestMapping;
+import guru.bonacci.oogway.entrance.security.Credentials;
 
-import guru.bonacci.oogway.shareddomain.UserInfo;
+@Component
+public class AuthClient {
 
-@RefreshScope
-@FeignClient( name = "${application.name.auth}", 
-			  configuration = AuthClientConfig.class)
-public interface AuthClient {
+	@Autowired
+	private RestTemplateFactory restTemplateFactory;
 
-	@RequestMapping(value = "/auth/users/user1", method = GET)
-    UserInfo user();
+	private String serviceUrl;
+
+	public AuthClient(@Value("${auth.service.url}") String serviceUrl) {
+		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
+	}
+
+	public Credentials user() {
+		RestTemplate restTemplate = restTemplateFactory.oAuth2CCGrantRestTemplate();
+		return restTemplate.getForObject(serviceUrl + "/auth/users/user1", Credentials.class);
+	}
 }
 

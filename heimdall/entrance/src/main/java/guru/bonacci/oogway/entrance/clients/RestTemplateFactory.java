@@ -21,7 +21,14 @@ public class RestTemplateFactory {
 		OAuth2RestTemplate template = config.restTemplate();
 		ResourceOwnerPasswordResourceDetails resource = (ResourceOwnerPasswordResourceDetails)template.getResource();
 		resource.setUsername(credentials.getUsername());
-		resource.setPassword(credentials.getPassword());
+		resource.setPassword(credentials.getPw());
 		return template;
 	}
+	
+	public RestTemplate oAuth2CCGrantRestTemplate() {
+		OracleCCGrantConfig config = appContext.getBean(OracleCCGrantConfig.class);
+		OAuth2RestTemplate template = config.restTemplate();
+		return template;
+	}
+
 }

@@ -1,20 +1,44 @@
 package guru.bonacci.oogway.entrance.security;
 
-public class Credentials {
+import guru.bonacci.oogway.shareddomain.UserInfo;
 
-	private String username;
-	private String password;
-	
-	public Credentials(String u, String p) {
-		username = u;
-		password = p;
+public class Credentials implements UserInfo {
+
+    private String username;
+    
+    private String pw;
+
+    private String apiKey;
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getUsername() {
-		return username;
-	}
+    @Override
+    public String getPw() {
+        return pw;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    @Override
+    public void setPw(String pw) {
+        this.pw = pw;
+    }
+
+    @Override
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    @Override
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
 }
+
+

@@ -18,9 +18,9 @@ import javax.crypto.Cipher;
 import org.junit.Before;
 import org.junit.Test;
 
-public class RSADecoderTests {
+public class RSADecryptorTests {
 
-	EntranceDecoder decoder;
+	Decryptor decryptor;
 
 	PublicKey publicKey;
 
@@ -40,7 +40,7 @@ public class RSADecoderTests {
 		System.out.println("public:");
 		System.out.println(publicKey.toString());
 
-		decoder = new RSADecoder(privateKey);
+		decryptor = new RSADecryptor(privateKey);
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class RSADecoderTests {
 		String plainText = "Hello World!";
 
 		String encryptedText = encryptMessage(plainText, publicKey);
-		String decryptedText = decoder.decode(encryptedText);
+		String decryptedText = decryptor.decrypt(encryptedText);
 		assertThat(decryptedText, is(plainText));
 
 	}

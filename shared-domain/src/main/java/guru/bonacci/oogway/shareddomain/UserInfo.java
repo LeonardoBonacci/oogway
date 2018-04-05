@@ -6,9 +6,9 @@ public interface UserInfo {
 
 	void setUsername(String username);
 
-    String getPw();
+    String getEncryptedPassword();
 
-	void setPw(String pw);
+	void setEncryptedPassword(String pw);
 
     String getApiKey();
     

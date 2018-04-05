@@ -6,21 +6,21 @@ import java.util.Base64;
 
 import javax.crypto.Cipher;
 
-public class RSADecoder implements EntranceDecoder {
+public class RSADecryptor implements Decryptor {
 
 	private PrivateKey privateKey;
 
-	public RSADecoder(PrivateKey key) {
+	public RSADecryptor(PrivateKey key) {
     	Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 		this.privateKey = key;
 	}
 
 	@Override
-	public String decode(String encodedInput) {
+	public String decrypt(String encryptedInput) {
 		try {
 			Cipher cipher = Cipher.getInstance("RSA/None/NoPadding", "BC");
 			cipher.init(Cipher.DECRYPT_MODE, privateKey);
-			return new String(cipher.doFinal(Base64.getDecoder().decode(encodedInput)));
+			return new String(cipher.doFinal(Base64.getDecoder().decode(encryptedInput)));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";

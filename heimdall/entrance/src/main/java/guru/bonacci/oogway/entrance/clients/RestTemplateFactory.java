@@ -21,7 +21,7 @@ public class RestTemplateFactory {
 		OAuth2RestTemplate template = config.restTemplate();
 		ResourceOwnerPasswordResourceDetails resource = (ResourceOwnerPasswordResourceDetails)template.getResource();
 		resource.setUsername(credentials.getUsername());
-		resource.setPassword(credentials.getPw());
+		resource.setPassword(credentials.getPassword());
 		return template;
 	}
 }

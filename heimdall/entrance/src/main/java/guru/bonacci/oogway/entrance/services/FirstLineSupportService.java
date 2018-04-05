@@ -12,7 +12,6 @@ import guru.bonacci.oogway.entrance.cheaters.Postponer;
 import guru.bonacci.oogway.entrance.clients.AuthClient;
 import guru.bonacci.oogway.entrance.clients.OracleClient;
 import guru.bonacci.oogway.entrance.security.Credentials;
-import guru.bonacci.oogway.entrance.security.EntranceDecoder;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 /**
@@ -36,9 +35,6 @@ public class FirstLineSupportService {
 	private AuthClient authClient;
 
 	@Autowired
-	private EntranceDecoder decoder;
-
-	@Autowired
 	private Postponer postponer;
 
 	@WatchMe //TODO interceptor will contain the check on nr. of hits
@@ -47,7 +43,6 @@ public class FirstLineSupportService {
 			return new GemCarrier("No question no answer..", "oogway");
 
 		Credentials currentUser = authClient.user();
-		currentUser.setPw(decoder.decode(currentUser.getPw()));
 		Optional<GemCarrier> gem = oracleClient.consult(q, null, currentUser);
 		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
 	}

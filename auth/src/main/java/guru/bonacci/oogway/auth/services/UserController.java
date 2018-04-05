@@ -33,7 +33,7 @@ public class UserController {
 	@RequestMapping(value = "/user1", method = RequestMethod.GET)
 	public User getUserInfo() {
 		User u = userService.loadUserByApiKey("1resu");
-		u.setPw(u.getPassword());
+		u.setEncryptedPassword(u.getPassword()); // bit confusing...
 		return u;
 	}
 }

@@ -9,17 +9,11 @@ import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
 
-import feign.Logger;
 import feign.RequestInterceptor;
 
 @Configuration
 @Profile("!unit-test") // hack :)
 public class ClientCredentialsGrantConfig {
-
-	@Bean
-	Logger.Level feignLoggerLevel() {
-		return Logger.Level.FULL;
-	}
 
 	@Bean
 	public OAuth2RestTemplate clientCredentialsRestTemplate() {

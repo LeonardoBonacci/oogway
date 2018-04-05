@@ -12,13 +12,19 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 
+import guru.bonacci.oogway.entrance.clients.CredentialsConfig;
 import guru.bonacci.oogway.entrance.events.EntranceEventChannels;
-import guru.bonacci.oogway.entrance.security.RSADecoder;
+import guru.bonacci.oogway.entrance.security.RSADecryptor;
 import guru.bonacci.oogway.utils.security.RSAKeyHelper;
 
 @SpringBootApplication
+@ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, 
+										value = { CredentialsConfig.class })) 
 @EnableFeignClients
 @EnableEurekaClient
 @EnableCircuitBreaker
@@ -27,9 +33,9 @@ import guru.bonacci.oogway.utils.security.RSAKeyHelper;
 public class EntranceServer {
 
 	@Bean
-	public RSADecoder decoder() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+	public RSADecryptor decryptor() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
 		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
-		return new RSADecoder(RSAKeyHelper.loadPrivateKey("/ubuntu1/")); //volume mount in Dockerfile
+		return new RSADecryptor(RSAKeyHelper.loadPrivateKey("/ubuntu1/")); //volume mount in Dockerfile
 	}
 
 	public static void main(String[] args) {

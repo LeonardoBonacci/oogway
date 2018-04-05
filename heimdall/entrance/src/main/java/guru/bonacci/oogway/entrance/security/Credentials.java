@@ -1,12 +1,17 @@
 package guru.bonacci.oogway.entrance.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import guru.bonacci.oogway.shareddomain.UserInfo;
 
 public class Credentials implements UserInfo {
 
     private String username;
     
-    private String pw;
+    private String encryptedPassword;
+
+	@JsonIgnore
+    private String password;
 
     private String apiKey;
 
@@ -21,14 +26,24 @@ public class Credentials implements UserInfo {
 	}
 
     @Override
-    public String getPw() {
-        return pw;
+    public String getEncryptedPassword() {
+        return encryptedPassword;
     }
 
     @Override
-    public void setPw(String pw) {
-        this.pw = pw;
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
     }
+
+	@JsonIgnore
+	public String getPassword() {
+		return password;
+	}
+
+	@JsonIgnore
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
     @Override
     public String getApiKey() {

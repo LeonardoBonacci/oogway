@@ -33,7 +33,7 @@ public class User implements UserDetails, UserInfo {
     private String password;
 
     @Transient
-    private String pw;
+    private String encryptedPassword;
 
     @Column(unique = true, nullable =false)
     private String apiKey;
@@ -66,13 +66,13 @@ public class User implements UserDetails, UserInfo {
     }
 
     @Override
-    public String getPw() {
-        return pw;
+    public String getEncryptedPassword() {
+        return encryptedPassword;
     }
 
     @Override
-    public void setPw(String pw) {
-        this.pw = pw;
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
     }
 
     @Override

@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import guru.bonacci.oogway.entrance.security.Credentials;
 
 @RefreshScope
-@FeignClient( name = "${application.name.auth}" )
+@FeignClient( name = "${application.name.auth}", 
+			  configuration = CredentialsConfig.class)
 public interface AuthClient {
 
 	@RequestMapping(value = "/auth/users/user1", method = GET)

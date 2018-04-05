@@ -1,5 +1,6 @@
 package guru.bonacci.oogway.entrance.intercept;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
@@ -17,6 +18,7 @@ import guru.bonacci.oogway.entrance.EntranceTestApp;
 import guru.bonacci.oogway.entrance.bigbrother.BigBrother;
 import guru.bonacci.oogway.entrance.clients.OracleClient;
 import guru.bonacci.oogway.entrance.events.SpectreGateway;
+import guru.bonacci.oogway.entrance.security.Credentials;
 import guru.bonacci.oogway.entrance.services.FirstLineSupportService;
 import guru.bonacci.oogway.entrance.utils.IPCatcher;
 
@@ -42,7 +44,7 @@ public class BigBrotherTests {
 	@Test
 	public void shouldInterceptTheConsultMethod() {
 		String searchString = "something completely different";
-		when(oracleClient.consult(anyString(), anyString())).thenReturn(Optional.empty());
+		when(oracleClient.consult(anyString(), anyString(), any(Credentials.class))).thenReturn(Optional.empty());
 
 		service.enquire(searchString);
 

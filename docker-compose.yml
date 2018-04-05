@@ -104,6 +104,8 @@ services:
     ports:
       - 3333:3333
       - 8000:8000 #for debugging
+    volumes:
+      - .:/ubuntu1
 
   oracle-service:
     environment:

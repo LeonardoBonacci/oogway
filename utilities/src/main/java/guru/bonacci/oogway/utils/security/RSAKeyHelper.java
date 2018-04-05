@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.auth;
+package guru.bonacci.oogway.utils.security;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,6 +47,14 @@ public class RSAKeyHelper {
 		fos = new FileOutputStream(dir + "/private.key");
 		fos.write(pkcs8EncodedKeySpec.getEncoded());
 		fos.close();
+	}
+
+	public static PrivateKey loadPrivateKey(String path) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
+		return loadKeyPair(path).getPrivate();
+	}
+
+	public static PublicKey loadPublicKey(String path) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
+		return loadKeyPair(path).getPublic();
 	}
 
 	public static KeyPair loadKeyPair(String path) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {

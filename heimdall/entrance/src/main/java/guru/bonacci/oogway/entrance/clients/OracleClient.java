@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+import guru.bonacci.oogway.entrance.security.Credentials;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @Component
@@ -37,16 +38,16 @@ public class OracleClient {
 	 * curl -H "Authorization: Bearer 6d5e6804-d5fd-4cfc-a4e6-12138ed8f05b" -v http://localhost:4444/oracle/gems?q=dance
 	 */
 	@HystrixCommand(fallbackMethod = "fallback")
-	public Optional<GemCarrier> consult(String searchString, String author) {
+	public Optional<GemCarrier> consult(String searchString, String author, Credentials credentials) {
 		String params = "?q={searchString}";
 		if (author != null)
 			params += "&by={author}";
 
-		RestTemplate restTemplate = restTemplateFactory.oAuth2RestTemplate();
+		RestTemplate restTemplate = restTemplateFactory.oAuth2RestTemplate(credentials);
 		return ofNullable(restTemplate.getForObject(serviceUrl + "/oracle/gems" + params, GemCarrier.class, searchString, author));
 	}
 
-	public Optional<GemCarrier> fallback(String searchString, String by, Throwable cause) {
+	public Optional<GemCarrier> fallback(String searchString, String by, Credentials credentials, Throwable cause) {
         logger.error("Help!!! Can't reach the oracle...", cause);    
         return Optional.empty();
 	}

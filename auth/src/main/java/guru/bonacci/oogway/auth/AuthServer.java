@@ -4,7 +4,6 @@ import static org.apache.commons.lang.StringUtils.reverse;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.io.IOException;
-import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
@@ -27,6 +26,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import guru.bonacci.oogway.auth.models.User;
 import guru.bonacci.oogway.auth.security.RSAPasswordEncoder;
 import guru.bonacci.oogway.auth.services.MyUserService;
+import guru.bonacci.oogway.utils.security.RSAKeyHelper;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -38,8 +38,7 @@ public class AuthServer {
 
 	@Bean
 	public RSAPasswordEncoder passwordEncoder() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
-		KeyPair keyPair = RSAKeyHelper.loadKeyPair("/ubuntu1/"); //volume mount in dockerfile
-		return new RSAPasswordEncoder(keyPair.getPublic());
+		return new RSAPasswordEncoder(RSAKeyHelper.loadPublicKey("/ubuntu1/")); //volume mount in Dockerfile	
 	}
 
 	public static void main(String[] args) {

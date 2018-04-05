@@ -53,7 +53,7 @@ public class OracleClientTests {
     @Before
     public void setup() {
         this.server = MockRestServiceServer.createServer(rest);
-        when(restTemplateFactory.oAuth2RestTemplate()).thenReturn(rest);
+        when(restTemplateFactory.oAuth2RestTemplate(null)).thenReturn(rest);
     }
 
     @After
@@ -67,7 +67,7 @@ public class OracleClientTests {
 			        .andExpect(method(HttpMethod.GET))
 			        .andRespond(withSuccess("{\"saying\":\"bla\"}", MediaType.APPLICATION_JSON));
 
-		GemCarrier gem = client.consult("something", null).get();
+		GemCarrier gem = client.consult("something", null, null).get();
 		assertThat(gem).isEqualTo(new GemCarrier("bla"));
     }
     
@@ -77,7 +77,7 @@ public class OracleClientTests {
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess("{\"saying\":\"bla\", \"author\":\"bloe\"}", MediaType.APPLICATION_JSON));
         
-        GemCarrier gem = client.consult("something", "someone").get();
+        GemCarrier gem = client.consult("something", "someone", null).get();
         assertThat(gem).isEqualTo(new GemCarrier("bla", "bloe"));
     }
 
@@ -87,7 +87,7 @@ public class OracleClientTests {
         		.andExpect(method(HttpMethod.GET))
         		.andRespond(withServerError());
         
-        Optional<GemCarrier> gem = client.consult("something", "someone");
+        Optional<GemCarrier> gem = client.consult("something", "someone", null);
         assertThat(gem.isPresent()).isFalse();
     }
 

@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.auth.security;
+package guru.bonacci.oogway.entrance.security;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -17,22 +17,22 @@ import javax.crypto.Cipher;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-public class RSAPasswordEncoderTests {
+public class RSADecoderTests {
 
-	PasswordEncoder passwordEncoder;
+	EntranceDecoder decoder;
 
-	PrivateKey privateKey;
+	PublicKey publicKey;
 
 	@Before
 	public void generateKeys()
 			throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException, IOException {
+
 		KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
 		keyPairGenerator.initialize(2048);
 		KeyPair keyPair = keyPairGenerator.generateKeyPair();
-		privateKey = keyPair.getPrivate();
-		PublicKey publicKey = keyPair.getPublic();
+		PrivateKey privateKey = keyPair.getPrivate();
+		publicKey = keyPair.getPublic();
 
 		System.out.println("private:");
 		System.out.println(privateKey.toString());
@@ -40,25 +40,23 @@ public class RSAPasswordEncoderTests {
 		System.out.println("public:");
 		System.out.println(publicKey.toString());
 
-		passwordEncoder = new RSAPasswordEncoder(publicKey);
+		decoder = new RSADecoder(privateKey);
 	}
 
 	@Test
-	public void shouldMatch() throws Exception {
-		String plainPassword = "Hello World!";
+	public void shouldDecryptMatch() throws Exception {
+		String plainText = "Hello World!";
 
-		String encryptedPassword = passwordEncoder.encode(plainPassword);
-		assertThat(passwordEncoder.matches(plainPassword, encryptedPassword), is(true));
-
-		String decryptedPassword = decryptMessage(encryptedPassword, privateKey);
-		assertThat(decryptedPassword, is(plainPassword));
+		String encryptedText = encryptMessage(plainText, publicKey);
+		String decryptedText = decoder.decode(encryptedText);
+		assertThat(decryptedText, is(plainText));
 
 	}
 
-	// Decrypt using RSA private key
-	private static String decryptMessage(String encryptedText, PrivateKey privateKey) throws Exception {
+	// Encrypt using RSA public key
+	private static String encryptMessage(String plainText, PublicKey publicKey) throws Exception {
 		Cipher cipher = Cipher.getInstance("RSA/None/NoPadding", "BC");
-		cipher.init(Cipher.DECRYPT_MODE, privateKey);
-		return new String(cipher.doFinal(Base64.getDecoder().decode(encryptedText)));
+		cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+		return Base64.getEncoder().encodeToString(cipher.doFinal(plainText.getBytes()));
 	}
 }

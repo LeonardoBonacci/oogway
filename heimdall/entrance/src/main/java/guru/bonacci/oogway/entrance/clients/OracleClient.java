@@ -43,7 +43,7 @@ public class OracleClient {
 		if (author != null)
 			params += "&by={author}";
 
-		RestTemplate restTemplate = restTemplateFactory.oAuth2RestTemplate(credentials);
+		RestTemplate restTemplate = restTemplateFactory.oAuth2PasswordGrantRestTemplate(credentials);
 		return ofNullable(restTemplate.getForObject(serviceUrl + "/oracle/gems" + params, GemCarrier.class, searchString, author));
 	}
 

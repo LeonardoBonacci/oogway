@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.entrance.bigbrother.WatchMe;
 import guru.bonacci.oogway.entrance.cheaters.Postponer;
+import guru.bonacci.oogway.entrance.clients.AuthClient;
 import guru.bonacci.oogway.entrance.clients.OracleClient;
 import guru.bonacci.oogway.entrance.security.Credentials;
 import guru.bonacci.oogway.entrance.security.EntranceDecoder;
@@ -32,6 +33,9 @@ public class FirstLineSupportService {
 	private OracleClient oracleClient;
 
 	@Autowired
+	private AuthClient authClient;
+
+	@Autowired
 	private EntranceDecoder decoder;
 
 	@Autowired
@@ -42,9 +46,9 @@ public class FirstLineSupportService {
 		if (isEmpty(q))
 			return new GemCarrier("No question no answer..", "oogway");
 
-		String encryptedPassword = "oeVBzKWf0CTNawGWluG7lXZ+ov1ZLQTwbJKivIAtMa+i3o1z1XVOAUvk+2Azmpj5aJp0U62oIXhE2R3WIGzI7tkMnCXYC+fpA2WnPE7rRoZ8klL/Q+m6vVKZT1jZCga4bFtm8FYEewVkz4MWHLWHdZpJB2BVixCE48APnDVniLA=";
-		String password = decoder.decode(encryptedPassword);
-		Optional<GemCarrier> gem = oracleClient.consult(q, null, new Credentials("user1", password));
+		Credentials currentUser = authClient.user();
+		currentUser.setPw(decoder.decode(currentUser.getPw()));
+		Optional<GemCarrier> gem = oracleClient.consult(q, null, currentUser);
 		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
 	}
 }

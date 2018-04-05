@@ -25,8 +25,8 @@ services:
   sannyas-service:
     build: sannyas
 
-  job-service:
-    build: jobs
+#  job-service:
+#    build: jobs
 #
 #  localtimer-service:
 #    build: spectre/local-timer

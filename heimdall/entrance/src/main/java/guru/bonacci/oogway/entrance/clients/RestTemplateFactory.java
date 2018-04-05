@@ -16,12 +16,12 @@ public class RestTemplateFactory {
 	@Autowired
 	private ApplicationContext appContext;
 
-	public RestTemplate oAuth2RestTemplate(Credentials credentials) {
-		OracleClientConfig config = appContext.getBean(OracleClientConfig.class);
+	public RestTemplate oAuth2PasswordGrantRestTemplate(Credentials credentials) {
+		PasswordGrantConfig config = appContext.getBean(PasswordGrantConfig.class);
 		OAuth2RestTemplate template = config.restTemplate();
 		ResourceOwnerPasswordResourceDetails resource = (ResourceOwnerPasswordResourceDetails)template.getResource();
 		resource.setUsername(credentials.getUsername());
-		resource.setPassword(credentials.getPassword());
+		resource.setPassword(credentials.getPw());
 		return template;
 	}
 }

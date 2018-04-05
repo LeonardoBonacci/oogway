@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.client.token.grant.client.ClientCrede
 import feign.Logger;
 import feign.RequestInterceptor;
 
-@Configuration
+//@Configuration
 @Profile("!unit-test") // hack :)
 public class AuthClientConfig {
 

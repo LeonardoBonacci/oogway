@@ -11,7 +11,7 @@ import guru.bonacci.oogway.entrance.security.Credentials;
 public class AuthClient {
 
 	@Autowired
-	private RestTemplateFactory restTemplateFactory;
+	private RestTemplate restTemplate;
 
 	private String serviceUrl;
 
@@ -20,7 +20,6 @@ public class AuthClient {
 	}
 
 	public Credentials user() {
-		RestTemplate restTemplate = restTemplateFactory.oAuth2CCGrantRestTemplate();
 		return restTemplate.getForObject(serviceUrl + "/auth/users/user1", Credentials.class);
 	}
 }

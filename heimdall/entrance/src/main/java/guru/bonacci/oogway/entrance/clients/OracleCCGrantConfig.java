@@ -2,14 +2,15 @@ package guru.bonacci.oogway.entrance.clients;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
-import org.springframework.stereotype.Component;
 
 @RefreshScope
-@Component
+@Configuration
 @Profile("!unit-test") //hack :)
 public class OracleCCGrantConfig {
 
@@ -21,11 +22,13 @@ public class OracleCCGrantConfig {
 
     @Value("${security.oauth2.client.clientSecret}")
 	private String clientSecret;
-    
+
+    @Bean
 	OAuth2RestTemplate restTemplate() {
 		return new OAuth2RestTemplate(resourceDetails(), new DefaultOAuth2ClientContext());
 	}
 
+    @Bean
 	ClientCredentialsResourceDetails resourceDetails() {
 		ClientCredentialsResourceDetails resource = new ClientCredentialsResourceDetails();
 		resource.setAccessTokenUri(accessTokenUri);

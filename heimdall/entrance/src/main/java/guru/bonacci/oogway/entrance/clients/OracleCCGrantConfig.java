@@ -9,32 +9,32 @@ import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
 
-@RefreshScope
-@Configuration
-@Profile("!unit-test") //hack :)
+//@RefreshScope
+//@Configuration
+//@Profile("!unit-test") //hack :)
 public class OracleCCGrantConfig {
 
-    @Value("${security.oauth2.client.accessTokenUri}")
-	private String accessTokenUri;
-
-	@Value("${security.oauth2.client.clientId}")
-	private String clientId;
-
-    @Value("${security.oauth2.client.clientSecret}")
-	private String clientSecret;
-
-    @Bean
-	OAuth2RestTemplate restTemplate() {
-		return new OAuth2RestTemplate(resourceDetails(), new DefaultOAuth2ClientContext());
-	}
-
-    @Bean
-	ClientCredentialsResourceDetails resourceDetails() {
-		ClientCredentialsResourceDetails resource = new ClientCredentialsResourceDetails();
-		resource.setAccessTokenUri(accessTokenUri);
-		resource.setClientId(clientId);
-		resource.setClientSecret(clientSecret);
-		return resource;
-	}	
+//    @Value("${security.oauth2.client.accessTokenUri}")
+//	private String accessTokenUri;
+//
+//	@Value("${security.oauth2.client.clientId}")
+//	private String clientId;
+//
+//    @Value("${security.oauth2.client.clientSecret}")
+//	private String clientSecret;
+//
+//    @Bean
+//	OAuth2RestTemplate restTemplate() {
+//		return new OAuth2RestTemplate(resourceDetails(), new DefaultOAuth2ClientContext());
+//	}
+//
+//    @Bean
+//	ClientCredentialsResourceDetails resourceDetails() {
+//		ClientCredentialsResourceDetails resource = new ClientCredentialsResourceDetails();
+//		resource.setAccessTokenUri(accessTokenUri);
+//		resource.setClientId(clientId);
+//		resource.setClientSecret(clientSecret);
+//		return resource;
+//	}	
 }
 

@@ -10,12 +10,12 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import guru.bonacci.oogway.jobs.clients.OracleClientConfig;
+import guru.bonacci.oogway.jobs.clients.ClientCredentialsGrantConfig;
 
 @SpringBootApplication
 //ignores feign config
 @ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, 
-										value = { OracleClientConfig.class })) 
+										value = { ClientCredentialsGrantConfig.class })) 
 @EnableScheduling
 @EnableFeignClients
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})

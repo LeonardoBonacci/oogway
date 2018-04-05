@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @RefreshScope
 @Component
 @Profile("!unit-test") //hack :)
-public class OraclePasswordGrantClientConfig {
+public class PasswordGrantConfig {
 
     @Value("${security.oauth2.client.accessTokenUri}")
 	private String accessTokenUri;

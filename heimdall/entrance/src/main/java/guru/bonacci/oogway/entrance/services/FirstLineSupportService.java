@@ -13,7 +13,6 @@ import guru.bonacci.oogway.entrance.clients.AuthClient;
 import guru.bonacci.oogway.entrance.clients.OracleClient;
 import guru.bonacci.oogway.entrance.security.Credentials;
 import guru.bonacci.oogway.entrance.security.EntranceDecoder;
-import guru.bonacci.oogway.entrance.security.Credentials;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 /**

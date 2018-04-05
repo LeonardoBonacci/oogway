@@ -21,6 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.entrance.EntranceTestApp;
 import guru.bonacci.oogway.entrance.cheaters.Postponer;
+import guru.bonacci.oogway.entrance.clients.AuthClient;
 import guru.bonacci.oogway.entrance.clients.OracleClient;
 import guru.bonacci.oogway.entrance.security.Credentials;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
@@ -31,6 +32,9 @@ public class FirstLineSupportServiceTests {
 
 	@Autowired
 	FirstLineSupportService service;
+
+	@MockBean
+	AuthClient authClient;
 
 	@MockBean
 	OracleClient oracleClient;
@@ -49,6 +53,7 @@ public class FirstLineSupportServiceTests {
 	@Test
 	public void shouldGiveAnswer() {
 		GemCarrier expected = new GemCarrier("some answer", "some person");
+		when(authClient.user()).thenReturn(new Credentials());
 		when(oracleClient.consult(anyString(), anyString(), any(Credentials.class))).thenReturn(Optional.of(expected));
 
 		assertThat(service.enquire("some input"), is(equalTo(expected)));
@@ -57,6 +62,7 @@ public class FirstLineSupportServiceTests {
 	@Test
 	public void shouldGivePostponingAnswer() {
 		String postponingAnswer = "wait a second..";
+		when(authClient.user()).thenReturn(new Credentials());
 		when(oracleClient.consult(anyString(), anyString(), any(Credentials.class))).thenReturn(Optional.empty());
 		when(postponer.saySomething()).thenReturn(postponingAnswer);
 

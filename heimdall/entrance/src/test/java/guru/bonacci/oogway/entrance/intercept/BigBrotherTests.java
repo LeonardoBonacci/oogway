@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.entrance.EntranceTestApp;
 import guru.bonacci.oogway.entrance.bigbrother.BigBrother;
+import guru.bonacci.oogway.entrance.clients.AuthClient;
 import guru.bonacci.oogway.entrance.clients.OracleClient;
 import guru.bonacci.oogway.entrance.events.SpectreGateway;
 import guru.bonacci.oogway.entrance.security.Credentials;
@@ -32,6 +33,9 @@ public class BigBrotherTests {
 	@Autowired
 	BigBrother bigBrother;
 
+	@MockBean
+	AuthClient authClient;
+	
 	@MockBean
 	OracleClient oracleClient;
 

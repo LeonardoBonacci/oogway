@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,6 +34,7 @@ import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.entrance.EntranceServer;
 import guru.bonacci.oogway.entrance.clients.OracleClientTests.App;
+import guru.bonacci.oogway.entrance.security.TestDecryptor;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
@@ -42,7 +44,11 @@ public class OracleClientTests {
     MockRestServiceServer server;
 
     @Autowired
+    @Qualifier("tester")
     RestTemplate rest;
+
+	@MockBean
+	AuthClient authClient;
 
     @Autowired
     OracleClient client;
@@ -98,6 +104,11 @@ public class OracleClientTests {
 	static class App {
 
 		@Bean
+		TestDecryptor decryptor() {
+			return new TestDecryptor(); 
+		}
+
+		@Bean("tester")
 		RestTemplate restTemplate() {
 			return new RestTemplate();
 		}

@@ -22,7 +22,7 @@ public class OracleClient {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
-	private RestTemplateFactory restTemplateFactory;
+	private PasswordGrantFactoryConfig restTemplateFactory;
 
 	private final String serviceUrl;
 
@@ -43,7 +43,7 @@ public class OracleClient {
 		if (author != null)
 			params += "&by={author}";
 
-		RestTemplate restTemplate = restTemplateFactory.oAuth2PasswordGrantRestTemplate(credentials);
+		RestTemplate restTemplate = restTemplateFactory.restTemplate(credentials);
 		return ofNullable(restTemplate.getForObject(serviceUrl + "/oracle/gems" + params, GemCarrier.class, searchString, author));
 	}
 

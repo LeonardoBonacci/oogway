@@ -16,7 +16,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,7 +43,6 @@ public class OracleClientTests {
     MockRestServiceServer server;
 
     @Autowired
-    @Qualifier("tester")
     RestTemplate rest;
 
 	@MockBean
@@ -54,12 +52,12 @@ public class OracleClientTests {
     OracleClient client;
     
     @MockBean
-    RestTemplateFactory restTemplateFactory;
+    PasswordGrantFactoryConfig restTemplateFactory;
     
     @Before
     public void setup() {
         this.server = MockRestServiceServer.createServer(rest);
-        when(restTemplateFactory.oAuth2PasswordGrantRestTemplate(null)).thenReturn(rest);
+//        when(restTemplateFactory.restTemplate(null).thenReturn(rest);
     }
 
     @After

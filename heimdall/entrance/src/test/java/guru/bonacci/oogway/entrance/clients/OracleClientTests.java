@@ -34,32 +34,38 @@ import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.entrance.EntranceServer;
 import guru.bonacci.oogway.entrance.clients.OracleClientTests.App;
+import guru.bonacci.oogway.entrance.security.Credentials;
 import guru.bonacci.oogway.entrance.security.TestDecryptor;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = App.class, webEnvironment = NONE)
+@SpringBootTest(classes = App.class, webEnvironment = NONE, properties = {
+	"hystrix.command.default.execution.timeout.enabled=false"
+})
 public class OracleClientTests {
 
     MockRestServiceServer server;
 
+    @Qualifier("testTemplate")
     @Autowired
-    @Qualifier("tester")
     RestTemplate rest;
 
 	@MockBean
 	AuthClient authClient;
 
+	@MockBean
+	Credentials credentials;
+
     @Autowired
     OracleClient client;
     
     @MockBean
-    RestTemplateFactory restTemplateFactory;
+    PasswordGrantFactoryConfig restTemplateFactory;
     
     @Before
     public void setup() {
         this.server = MockRestServiceServer.createServer(rest);
-        when(restTemplateFactory.oAuth2PasswordGrantRestTemplate(null)).thenReturn(rest);
+        when(restTemplateFactory.restTemplate(null)).thenReturn(rest);
     }
 
     @After
@@ -108,7 +114,7 @@ public class OracleClientTests {
 			return new TestDecryptor(); 
 		}
 
-		@Bean("tester")
+		@Bean("testTemplate")
 		RestTemplate restTemplate() {
 			return new RestTemplate();
 		}

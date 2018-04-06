@@ -1,9 +1,15 @@
 package guru.bonacci.oogway.entrance.security;
 
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import guru.bonacci.oogway.shareddomain.UserInfo;
 
+@Component
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class Credentials implements UserInfo {
 
     private String username;

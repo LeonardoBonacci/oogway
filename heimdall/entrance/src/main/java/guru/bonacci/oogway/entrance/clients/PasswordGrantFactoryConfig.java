@@ -1,17 +1,24 @@
 package guru.bonacci.oogway.entrance.clients;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
-import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+import guru.bonacci.oogway.entrance.security.Credentials;
 
 @RefreshScope
-@Component
+@Configuration
 @Profile("!unit-test") //hack :)
-public class PasswordGrantConfig {
+public class PasswordGrantFactoryConfig {
 
     @Value("${security.oauth2.client.accessTokenUri}")
 	private String accessTokenUri;
@@ -22,19 +29,21 @@ public class PasswordGrantConfig {
     @Value("${security.oauth2.client.clientSecret}")
 	private String clientSecret;
     
-    // Sad but true, my preferred solution to use RefreshScope in order to have a 
-    // thread-bound username-password unique OAuth2RestTemplate didn't work (I ran out of patience) 
-    // Hystrix intercepts and recalls resourceDetails() a few times when executing the rest call.
-	OAuth2RestTemplate restTemplate() {
-		return new OAuth2RestTemplate(resourceDetails(), new DefaultOAuth2ClientContext());
+	@Bean
+    @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+	public RestTemplate restTemplate(Credentials credentials) {
+		return new OAuth2RestTemplate(resourceDetails(credentials), new DefaultOAuth2ClientContext());
 	}
 
-	ResourceOwnerPasswordResourceDetails resourceDetails() {
+	@Bean
+    @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+	OAuth2ProtectedResourceDetails resourceDetails(Credentials credentials) {
 		ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
 		resource.setAccessTokenUri(accessTokenUri);
 		resource.setClientId(clientId);
 		resource.setClientSecret(clientSecret);
-		resource.setGrantType("password");
+		resource.setUsername(credentials.getUsername());
+		resource.setPassword(credentials.getPassword());
 		return resource;
 	}	
 }

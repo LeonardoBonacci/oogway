@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,20 +34,27 @@ import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.entrance.EntranceServer;
 import guru.bonacci.oogway.entrance.clients.OracleClientTests.App;
+import guru.bonacci.oogway.entrance.security.Credentials;
 import guru.bonacci.oogway.entrance.security.TestDecryptor;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = App.class, webEnvironment = NONE)
+@SpringBootTest(classes = App.class, webEnvironment = NONE, properties = {
+	"hystrix.command.default.execution.timeout.enabled=false"
+})
 public class OracleClientTests {
 
     MockRestServiceServer server;
 
+    @Qualifier("testTemplate")
     @Autowired
     RestTemplate rest;
 
 	@MockBean
 	AuthClient authClient;
+
+	@MockBean
+	Credentials credentials;
 
     @Autowired
     OracleClient client;
@@ -57,7 +65,7 @@ public class OracleClientTests {
     @Before
     public void setup() {
         this.server = MockRestServiceServer.createServer(rest);
-//        when(restTemplateFactory.restTemplate(null).thenReturn(rest);
+        when(restTemplateFactory.restTemplate(null)).thenReturn(rest);
     }
 
     @After
@@ -106,7 +114,7 @@ public class OracleClientTests {
 			return new TestDecryptor(); 
 		}
 
-		@Bean("tester")
+		@Bean("testTemplate")
 		RestTemplate restTemplate() {
 			return new RestTemplate();
 		}

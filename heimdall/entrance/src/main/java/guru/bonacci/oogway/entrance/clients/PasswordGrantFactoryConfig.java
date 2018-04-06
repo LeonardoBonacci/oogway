@@ -9,7 +9,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
+import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.entrance.security.Credentials;
 
@@ -29,18 +31,17 @@ public class PasswordGrantFactoryConfig {
     
 	@Bean
     @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-	public OAuth2RestTemplate restTemplate(Credentials credentials) {
+	public RestTemplate restTemplate(Credentials credentials) {
 		return new OAuth2RestTemplate(resourceDetails(credentials), new DefaultOAuth2ClientContext());
 	}
 
 	@Bean
     @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-	ResourceOwnerPasswordResourceDetails resourceDetails(Credentials credentials) {
+	OAuth2ProtectedResourceDetails resourceDetails(Credentials credentials) {
 		ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
 		resource.setAccessTokenUri(accessTokenUri);
 		resource.setClientId(clientId);
 		resource.setClientSecret(clientSecret);
-		resource.setGrantType("password");
 		resource.setUsername(credentials.getUsername());
 		resource.setPassword(credentials.getPassword());
 		return resource;

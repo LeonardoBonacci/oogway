@@ -6,7 +6,7 @@
 		<artifactId>heimdall</artifactId>
 		<version>3.2-SNAPSHOT</version>
 	</parent>
-	<artifactId>prober</artifactId>
+	<artifactId>greeter</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -37,7 +37,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>prober</finalName>
+					<finalName>greeter</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -11,7 +11,7 @@
 
 	<modules>
 		<module>entrance</module>
-	    <module>prober</module>
+	    <module>greeter</module>
 	    <module>lumberjack</module>
   </modules>
 </project>

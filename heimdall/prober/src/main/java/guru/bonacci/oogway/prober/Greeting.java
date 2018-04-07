@@ -2,15 +2,15 @@ package guru.bonacci.oogway.prober;
 
 public class Greeting {
 
-    private String id;
+    private String key;
     private String content;
 
-    public String getId() {
-        return id;
+    public String getKey() {
+        return key;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getContent() {

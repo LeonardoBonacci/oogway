@@ -1,6 +1,6 @@
 FROM java:8-jre
 
-ADD ./target/visitlogger.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/visitlogger.jar"]
+ADD ./target/lumberjack.jar /app/
+CMD ["java", "-Xmx200m", "-jar", "/app/lumberjack.jar"]
 
 EXPOSE 11235

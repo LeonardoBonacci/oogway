@@ -1,0 +1,6 @@
+server:
+  port: 1123
+
+entrance:
+  service:
+    url: http://localhost:3333 

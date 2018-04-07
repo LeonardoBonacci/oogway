@@ -11,5 +11,7 @@
 
 	<modules>
 		<module>entrance</module>
-	</modules>
+	    <module>prober</module>
+	    <module>lumberjack</module>
+  </modules>
 </project>

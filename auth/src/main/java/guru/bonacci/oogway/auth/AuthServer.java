@@ -55,7 +55,7 @@ public class AuthServer {
 
 	@Bean
 	CommandLineRunner init(MyUserService accountService) {
-		return (evt) -> Arrays.asList("user1,user2".split(",")).forEach(username -> {
+		return (evt) -> Arrays.asList("oogway,user1,user2".split(",")).forEach(username -> {
 			User user = new User();
 			user.setUsername(username);
 			user.setPassword("password");

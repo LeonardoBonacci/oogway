@@ -47,25 +47,25 @@ public class FirstLineSupportServiceTests {
 	
 	@Test
 	public void shouldGiveEmptyStringAnswer() {
-		assertThat(service.enquire(""), is(equalTo(new GemCarrier("No question no answer..", "oogway"))));
+		assertThat(service.enquire("", ""), is(equalTo(new GemCarrier("No question no answer..", "oogway"))));
 	}
 
 	@Test
 	public void shouldGiveAnswer() {
 		GemCarrier expected = new GemCarrier("some answer", "some person");
-		when(authClient.user()).thenReturn(new Credentials());
+		when(authClient.user(anyString())).thenReturn(new Credentials());
 		when(oracleClient.consult(anyString(), anyString(), any(Credentials.class))).thenReturn(Optional.of(expected));
 
-		assertThat(service.enquire("some input"), is(equalTo(expected)));
+		assertThat(service.enquire("some input", ""), is(equalTo(expected)));
 	}
 
 	@Test
 	public void shouldGivePostponingAnswer() {
 		String postponingAnswer = "wait a second..";
-		when(authClient.user()).thenReturn(new Credentials());
+		when(authClient.user(anyString())).thenReturn(new Credentials());
 		when(oracleClient.consult(anyString(), anyString(), any(Credentials.class))).thenReturn(Optional.empty());
 		when(postponer.saySomething()).thenReturn(postponingAnswer);
 
-		assertThat(service.enquire("some input").getSaying(), is(equalTo(postponingAnswer)));
+		assertThat(service.enquire("some input", "").getSaying(), is(equalTo(postponingAnswer)));
 	}
 }

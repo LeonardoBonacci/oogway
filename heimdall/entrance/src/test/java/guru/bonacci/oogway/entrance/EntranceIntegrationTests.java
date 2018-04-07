@@ -61,12 +61,12 @@ public class EntranceIntegrationTests {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void shouldSendMessageAfterInterception() throws Exception {
-		when(authClient.user()).thenReturn(new Credentials());
+		when(authClient.user(anyString())).thenReturn(new Credentials());
 		when(oracleClient.consult(anyString(), anyString(), any(Credentials.class))).thenReturn(Optional.empty());
 
 		String localIP = "127.0.0.1";
 		String input = "The art of living is more like wrestling than dancing.";
-		mvc.perform(get("/consult?q=" + input));
+		mvc.perform(get("/consult?q=" + input + "&apikey=somekey"));
 		
 		Message<COMINT> received = (Message<COMINT>) messageCollector.forChannel(channels.spectreChannel()).poll();
 		assertThat(received.getPayload(), equalTo(new COMINT(localIP, input)));

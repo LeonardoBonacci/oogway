@@ -29,7 +29,7 @@ public class BigBrother {
 	@Autowired
     private SpectreGateway gateway;
 
-	@Before("@annotation(WatchMe) && args(searchString)")
+	@Before("@annotation(WatchMe) && args(searchString,..)")
 	public void spreadTheNews(JoinPoint joinPoint, String searchString) {
 		String ip = ipologist.checkUp(iPCatcher.getClientIp());
 		

@@ -50,7 +50,7 @@ public class BigBrotherTests {
 		String searchString = "something completely different";
 		when(oracleClient.consult(anyString(), anyString(), any(Credentials.class))).thenReturn(Optional.empty());
 
-		service.enquire(searchString);
+		service.enquire(searchString, "some key");
 
 		when(iPCatcher.getClientIp()).thenReturn("123");
 		//TODO verify(gateway, times(1)).send(isA(COMINT.class));

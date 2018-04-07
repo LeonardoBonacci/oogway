@@ -5,6 +5,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import guru.bonacci.oogway.entrance.security.Credentials;
 
@@ -13,6 +14,6 @@ import guru.bonacci.oogway.entrance.security.Credentials;
 			  configuration = CredentialsConfig.class)
 public interface AuthClient {
 
-	@RequestMapping(value = "/auth/users/user1", method = GET)
-    Credentials user();
+	@RequestMapping(value = "/auth/users", method = GET)
+    Credentials user(@RequestParam("apikey") String apiKey);
 }

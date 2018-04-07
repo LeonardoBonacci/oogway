@@ -40,10 +40,20 @@ public class EntranceControllerTests {
 	@Test
 	public void shouldReceive200OnConsult() throws Exception {
 		GemCarrier gem = new GemCarrier("why should I?", "oogway");
-		given(service.enquire("tell me the truth")).willReturn(gem);
+		given(service.enquire("tell me the truth", "somekey")).willReturn(gem);
 		
-		mvc.perform(get("/consult?q=tell me the truth"))
+		mvc.perform(get("/consult?q=tell me the truth&apikey=somekey"))
 			.andExpect(status().isOk())
 			.andExpect(content().json(objectMapper.writeValueAsString(gem)));
-		}
+	}
+	
+	@Test
+	public void shouldReceive400OnConsultWithoutApiKey() throws Exception {
+		GemCarrier gem = new GemCarrier("why should I?", "oogway");
+		given(service.enquire("tell me the truth", "somekey")).willReturn(gem);
+		
+		mvc.perform(get("/consult?q=tell me the truth"))
+			.andExpect(status().isBadRequest());
+	}
+
 }

@@ -25,10 +25,10 @@ public class EntranceController {
 
 	@ResponseBody
 	@RequestMapping(path = "/consult", method = GET)
-	public GemCarrier enquire(@RequestParam("q") String q) {
+	public GemCarrier enquire(@RequestParam("q") String q, @RequestParam("apikey") String apiKey) {
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
 
-		return service.enquire(q);
+		return service.enquire(q, apiKey);
 	}
 	
 	@ResponseBody

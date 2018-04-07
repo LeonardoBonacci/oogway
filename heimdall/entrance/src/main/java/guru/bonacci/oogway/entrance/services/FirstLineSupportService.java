@@ -38,11 +38,11 @@ public class FirstLineSupportService {
 	private Postponer postponer;
 
 	@WatchMe //TODO interceptor will contain the check on nr. of hits
-	public GemCarrier enquire(String q) {
+	public GemCarrier enquire(String q, String apiKey) {
 		if (isEmpty(q))
 			return new GemCarrier("No question no answer..", "oogway");
 
-		Credentials currentUser = authClient.user();
+		Credentials currentUser = authClient.user(apiKey);
 		Optional<GemCarrier> gem = oracleClient.consult(q, null, currentUser);
 		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
 	}

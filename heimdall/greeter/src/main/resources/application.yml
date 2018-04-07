@@ -3,4 +3,4 @@ server:
 
 entrance:
   service:
-    url: http://localhost:3333 
+    url: http://entrance-service:3333 

@@ -17,9 +17,12 @@ public class GreetingController {
 	@Autowired
 	RestTemplate restTemplate;
 
-	@Value("${entrance.service.url}")
-	private String serviceUrl;
+	private final String serviceUrl;
 
+	public GreetingController(@Value("${entrance.service.url}") String serviceUrl) {
+		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
+	}
+	
     @GetMapping("/greeting")
     public String greetingForm(Model model) {
         model.addAttribute("greeting", new Greeting());
@@ -32,7 +35,7 @@ public class GreetingController {
 
 		String apiKey = greeting.getKey();
 		String q = greeting.getQuestion();
-		GemCarrier gem = restTemplate.getForObject(serviceUrl + params, GemCarrier.class, q, apiKey);
+		GemCarrier gem = restTemplate.getForObject(serviceUrl + "/entrance/consult" + params, GemCarrier.class, q, apiKey);
 
 		greeting.setAnswer(gem.getSaying());
         return "result";

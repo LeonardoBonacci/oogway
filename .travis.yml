@@ -68,6 +68,12 @@ after_success:
   - docker tag $ENTRANCE:$COMMIT $ENTRANCE:$TAG
   - docker push $ENTRANCE
   
+  # GREETER
+  - export GREETER=$DOCKER_USERNAME/oogway-greeter
+  - docker build -t $GREETER:$COMMIT ./heimdall/greeter
+  - docker tag $GREETER:$COMMIT $GREETER:$TAG
+  - docker push $GREETER
+
   # ORACLE SERVICE
   - export ORACLE=$DOCKER_USERNAME/oogway-oracle-service
   - docker build -t $ORACLE:$COMMIT ./oracle
@@ -109,4 +115,3 @@ after_success:
   - docker build -t $WEATHER:$COMMIT ./spectre/weather
   - docker tag $WEATHER:$COMMIT $WEATHER:$TAG
   - docker push $WEATHER
-  

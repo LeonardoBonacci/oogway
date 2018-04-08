@@ -7,11 +7,9 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface VisitRepository extends CrudRepository<Visit, String> {
+public interface LogRepository extends CrudRepository<Log, String> {
 
-	Visit findByName(String name);
-
-	List<Visit> findByMomentBetween(Instant from, Instant until);
+	List<Log> findByMomentBetween(Instant from, Instant until);
 
 	long countByMomentBetween(Instant from, Instant until);
 }

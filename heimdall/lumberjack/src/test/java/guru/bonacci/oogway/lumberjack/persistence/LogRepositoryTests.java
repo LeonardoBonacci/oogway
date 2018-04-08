@@ -1,7 +1,6 @@
 package guru.bonacci.oogway.lumberjack.persistence;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.time.Instant;
@@ -19,38 +18,29 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class LogRepositoryTests {
 
 	@Autowired
-	private VisitRepository repository;
+	private LogRepository repository;
 
-	Visit visit1, visit2;
+	Log logline1, logline2;
 
 	@Before
 	public void init() {
 		repository.deleteAll();
 		
-		visit1 = new Visit();
-		visit1.setName("testing");
-		visit1.setApiKey("123");
-		visit1.setMoment(Instant.now());
-		repository.save(visit1);
+		logline1 = new Log();
+		logline1.setMoment(Instant.now());
+		logline1.setApiKey("123");
+		repository.save(logline1);
 		
-		visit2 = new Visit();
-		visit2.setName("jamming");
-		visit2.setApiKey("456");
-		visit2.setMoment(Instant.now());
-		repository.save(visit2);
-	}
-	
-	@Test
-	public void shouldFindLogByName() {
-		Visit found = repository.findByName(visit1.getName());
-		assertEquals(visit1.getApiKey(), found.getApiKey());
-		assertEquals(visit1.getMoment(), found.getMoment());
+		logline2 = new Log();
+		logline2.setMoment(Instant.now());
+		logline2.setApiKey("456");
+		repository.save(logline2);
 	}
 
 	@Test
 	public void shouldFindLogsByMomentRange() {
 		Instant now = Instant.now();
-		List<Visit> found = repository.findByMomentBetween(now.minusSeconds(10), now.plusSeconds(10));
+		List<Log> found = repository.findByMomentBetween(now.minusSeconds(10), now.plusSeconds(10));
 		assertThat(found.size(), is(2));
 	}
 

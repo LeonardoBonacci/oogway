@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class VisitController {
+public class LogController {
 	
 	@RequestMapping(path = "/visit", method = GET)
 	public void log(@RequestParam("apikey") String apiKey) {

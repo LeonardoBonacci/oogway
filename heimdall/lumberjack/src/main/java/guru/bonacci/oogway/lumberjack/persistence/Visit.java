@@ -1,7 +1,5 @@
 package guru.bonacci.oogway.lumberjack.persistence;
 
-import java.util.Date;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -10,17 +8,17 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Visit {
 
 	@Id
-	private Date moment;
+	private String name;
 
 	@Field
 	private String apiKey;
 
-	public Date getMoment() {
-		return moment;
+	public String getName() {
+		return name;
 	}
 
-	public void setMoment(Date moment) {
-		this.moment = moment;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getApiKey() {

@@ -8,5 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VisitRepository extends CrudRepository<Visit, String> {
 
-	int nrOfVisitsBetween(Date from, Date to);
+	Visit findByName(String name);
+
+//	int nrOfVisitsBetween(Date from, Date to);
 }

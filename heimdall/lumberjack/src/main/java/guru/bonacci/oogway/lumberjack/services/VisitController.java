@@ -12,5 +12,4 @@ public class VisitController {
 	@RequestMapping(path = "/visit", method = GET)
 	public void log(@RequestParam("apikey") String apiKey) {
 	}
-
 }

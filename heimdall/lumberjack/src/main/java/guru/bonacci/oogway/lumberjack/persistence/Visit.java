@@ -1,6 +1,9 @@
 package guru.bonacci.oogway.lumberjack.persistence;
 
+import java.time.Instant;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -9,6 +12,9 @@ public class Visit {
 
 	@Id
 	private String name;
+
+	@Indexed
+	private Instant moment;
 
 	@Field
 	private String apiKey;
@@ -19,6 +25,14 @@ public class Visit {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Instant getMoment() {
+		return moment;
+	}
+
+	public void setMoment(Instant moment) {
+		this.moment = moment;
 	}
 
 	public String getApiKey() {

@@ -1,36 +1,35 @@
 package guru.bonacci.oogway.lumberjack.persistence;
 
-import java.time.Instant;
+import static java.time.Instant.now;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
 import org.springframework.data.mongodb.core.mapping.event.AfterSaveEvent;
-import org.springframework.data.mongodb.core.mapping.event.LoggingEventListener;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LogService {
 
-	// This solution is not thread safe
-	// It is merely a creative exercise
-	private long nrOfVisitsInlastMinute;
+	// This solution is not thread safe.
+	// It is merely a creative solution to a boring exercise.
+	private long lastMinutesVisits;
 
 	@Autowired
 	private LogRepository repository;
 
 	public long insert(Log logLine) {
 		repository.save(logLine);
-		return nrOfVisitsInlastMinute;
+		return lastMinutesVisits;
 	}
 
-	@Component
-	public class MongoPersistListener extends LoggingEventListener {
-		
+	public class LogPersistListener extends AbstractMongoEventListener<Log> {
+
 		@Override
-		public void onAfterSave(AfterSaveEvent<Object> event) {
+		public void onAfterSave(AfterSaveEvent<Log> event) {
 			super.onAfterSave(event);
-			Log logLine = (Log)event.getSource();
-			nrOfVisitsInlastMinute = repository.countByApiKeyAndMomentBetween(logLine.getApiKey(), Instant.now().minusSeconds(60), Instant.now());
+			lastMinutesVisits = repository.countByApiKeyAndMomentBetween(event.getSource().getApiKey(), 
+																		 now().minusSeconds(60), 
+																		 now());
 		}
 	}
 }

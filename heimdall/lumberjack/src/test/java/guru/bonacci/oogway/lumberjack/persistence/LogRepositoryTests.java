@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class LogRepositoryTests {
 
 	@Autowired
-	private LogRepository repository;
+	LogRepository repository;
 
 	Log logline1, logline2;
 

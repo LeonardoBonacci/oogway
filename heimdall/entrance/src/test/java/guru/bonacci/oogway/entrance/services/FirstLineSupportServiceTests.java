@@ -22,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import guru.bonacci.oogway.entrance.EntranceTestApp;
 import guru.bonacci.oogway.entrance.cheaters.Postponer;
 import guru.bonacci.oogway.entrance.clients.AuthClient;
+import guru.bonacci.oogway.entrance.clients.LumberjackClient;
 import guru.bonacci.oogway.entrance.clients.OracleClient;
 import guru.bonacci.oogway.entrance.security.Credentials;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
@@ -38,6 +39,9 @@ public class FirstLineSupportServiceTests {
 
 	@MockBean
 	OracleClient oracleClient;
+
+	@MockBean
+	LumberjackClient lumberjackClient;
 
 	@MockBean
 	Postponer postponer;

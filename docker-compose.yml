@@ -43,7 +43,7 @@ services:
     restart: always
     ports:
       - 27017:27017
-
+    
   config-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
@@ -123,12 +123,16 @@ services:
 
   lumberjack:
     environment:
-      MONGODB_PASSWORD: mongo
-      image: sqshq/piggymetrics-mongodb
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
     image: leonardobonacci/oogway-lumberjack
     restart: always
     depends_on:
-      - mongo
+      mongo:
+        condition: service_started
+      config-service:
+        condition: service_healthy
     ports:
       - 11235:11235
 

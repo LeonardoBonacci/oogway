@@ -1,25 +1,16 @@
 package guru.bonacci.oogway.entrance.clients;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-@Component
-public class LumberjackClient {
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-	@Autowired
-	private RestTemplate restTemplate;
+@RefreshScope
+@FeignClient( name = "lumberjack")
+public interface LumberjackClient {
 
-	private final String serviceUrl;
-
-	public LumberjackClient(@Value("${lumberjack.service.url}") String serviceUrl) {
-		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
-	}
-
-	public Long consult(String apiKey) {
-		Long visits = restTemplate.getForObject(serviceUrl + "/visits/{apiKey}", Long.class, apiKey);
-		return visits;
-	}
+	@RequestMapping(value = "/visits/{apikey}", method = GET)
+    Long visits(@PathVariable("apikey") String apiKey);
 }
-

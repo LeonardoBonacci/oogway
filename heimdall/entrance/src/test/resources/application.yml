@@ -3,6 +3,8 @@ spring.activemq.queue.to-oracle: not-used
 application.name.auth: not-used
 
 oracle.service.url: not-used
+lumberjack.service.url: not-used
+
 security:
   oauth2:
     client: 

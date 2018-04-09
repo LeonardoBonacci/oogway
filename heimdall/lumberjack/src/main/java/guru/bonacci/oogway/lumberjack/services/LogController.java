@@ -1,15 +1,29 @@
 package guru.bonacci.oogway.lumberjack.services;
 
+import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-import org.springframework.stereotype.Controller;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import guru.bonacci.oogway.lumberjack.persistence.Log;
+import guru.bonacci.oogway.lumberjack.persistence.LogService;
+
+@RestController
 public class LogController {
+
+	private final Logger logger = getLogger(this.getClass());
+
+	@Autowired
+	private LogService service;
 	
 	@RequestMapping(path = "/visit", method = GET)
-	public void log(@RequestParam("apikey") String apiKey) {
+	public Long log(@RequestParam("apikey") String apiKey) {
+		logger.info("Visit key: " + apiKey);
+
+		return service.insert(new Log(apiKey));
 	}
 }

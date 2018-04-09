@@ -15,6 +15,12 @@ public class Log {
 	@Field
 	private String apiKey;
 
+	public Log() {}
+
+	public Log(String apiKey) {
+		this.apiKey = apiKey;
+	}
+
 	public Instant getMoment() {
 		return moment;
 	}

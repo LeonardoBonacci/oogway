@@ -18,6 +18,7 @@ public class LogService {
 	private LogRepository repository;
 
 	public long insert(Log logLine) {
+		logLine.setMoment(now());
 		repository.save(logLine);
 		return lastMinutesVisits;
 	}

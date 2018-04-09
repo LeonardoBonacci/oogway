@@ -3,8 +3,6 @@ package guru.bonacci.oogway.lumberjack.persistence;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.time.Instant;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,19 +30,16 @@ public class LogServiceTests {
 	@Test
 	public void shouldInsertAndReturnNrOfLogsLastMinute() {
 		logline1 = new Log();
-		logline1.setMoment(Instant.now());
 		logline1.setApiKey("123");
 		long howMany = service.insert(logline1);
 		assertThat(howMany, is(1l));
 		
 		logline2 = new Log();
-		logline2.setMoment(Instant.now());
 		logline2.setApiKey("456");
 		howMany = service.insert(logline2);
 		assertThat(howMany, is(1l));
 		
 		logline3 = new Log();
-		logline3.setMoment(Instant.now());
 		logline3.setApiKey("123");
 		howMany = service.insert(logline3);
 		assertThat(howMany, is(2l));

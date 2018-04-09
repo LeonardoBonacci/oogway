@@ -16,7 +16,7 @@ public class LumberjackServer {
 	public static void main(String[] args) {
 		SpringApplication.run(LumberjackServer.class, args);
 	}
-	
+
 	@Bean
 	public AbstractMongoEventListener<Log> mongoEventListener(LogService service) {
 	    return service.new LogPersistListener();

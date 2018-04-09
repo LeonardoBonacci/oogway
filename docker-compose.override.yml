@@ -19,6 +19,12 @@ services:
   entrance-service:
     build: heimdall/entrance
 
+  greeter:
+    build: heimdall/greeter
+
+  lumberjack:
+    build: heimdall/lumberjack
+
   oracle-service:
     build: oracle
 
@@ -40,6 +46,4 @@ services:
   weather-service:
     build: spectre/weather
 
-  greeter:
-    build: heimdall/greeter
     

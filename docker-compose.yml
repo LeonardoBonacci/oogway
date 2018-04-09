@@ -38,6 +38,12 @@ services:
       - es
       - rabbit
 
+  mongo:
+    image: mongo:3.4-jessie
+    restart: always
+    ports:
+      - 27017:27017
+    
   config-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
@@ -107,14 +113,24 @@ services:
     volumes:
       - .:/ubuntu1
 
-  visit-logger:
+  greeter:
+    image: leonardobonacci/oogway-greeter
+    ports:
+      - 1123:1123
+    depends_on:
+      entrance-service:
+        condition: service_started
+
+  lumberjack:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
       SPRING_PROFILES_ACTIVE: dev
-    image: leonardobonacci/oogway-visit-logger
+    image: leonardobonacci/oogway-lumberjack
     restart: always
     depends_on:
+      mongo:
+        condition: service_started
       config-service:
         condition: service_healthy
     ports:
@@ -234,14 +250,6 @@ services:
     ports:
       - 9411:9411
 
-  greeter:
-    image: leonardobonacci/greeter
-    ports:
-      - 1123:1123
-    depends_on:
-      entrance-service:
-        condition: service_started
-        
 #  tor: 
 #    image: osminogin/tor-simple
 #    ports:

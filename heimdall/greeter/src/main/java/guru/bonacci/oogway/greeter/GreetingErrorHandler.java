@@ -9,6 +9,8 @@ public class GreetingErrorHandler {
 
 	@ExceptionHandler(Exception.class)
 	public ModelAndView exception(Exception e) {
+		e.printStackTrace();
+		
 		Greeting g = new Greeting();
 		g.setKey("is invalid.");
 		g.setAnswer("Poor darling..");

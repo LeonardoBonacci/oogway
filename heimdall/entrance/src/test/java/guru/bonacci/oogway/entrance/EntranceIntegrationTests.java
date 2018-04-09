@@ -30,6 +30,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import guru.bonacci.oogway.entrance.clients.AuthClient;
+import guru.bonacci.oogway.entrance.clients.LumberjackClient;
 import guru.bonacci.oogway.entrance.clients.OracleClient;
 import guru.bonacci.oogway.entrance.events.EntranceEventChannels;
 import guru.bonacci.oogway.entrance.security.Credentials;
@@ -57,6 +58,9 @@ public class EntranceIntegrationTests {
 
 	@MockBean
 	OracleClient oracleClient;
+
+	@MockBean
+	LumberjackClient lumberjackClient;
 
 	@SuppressWarnings("unchecked")
 	@Test

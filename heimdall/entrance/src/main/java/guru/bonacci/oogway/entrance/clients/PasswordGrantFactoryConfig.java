@@ -1,7 +1,8 @@
 package guru.bonacci.oogway.entrance.clients;
 
+import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
+
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,13 +31,13 @@ public class PasswordGrantFactoryConfig {
 	private String clientSecret;
     
 	@Bean
-    @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+	@Scope(value = SCOPE_PROTOTYPE)
 	public RestTemplate restTemplate(Credentials credentials) {
 		return new OAuth2RestTemplate(resourceDetails(credentials), new DefaultOAuth2ClientContext());
 	}
 
 	@Bean
-    @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+	@Scope(value = SCOPE_PROTOTYPE)
 	OAuth2ProtectedResourceDetails resourceDetails(Credentials credentials) {
 		ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
 		resource.setAccessTokenUri(accessTokenUri);

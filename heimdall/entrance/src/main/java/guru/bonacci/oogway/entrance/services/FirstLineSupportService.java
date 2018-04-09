@@ -37,7 +37,7 @@ public class FirstLineSupportService {
 	@Autowired
 	private Postponer postponer;
 
-	@WatchMe //TODO interceptor will contain the check on nr. of hits
+	@WatchMe
 	public GemCarrier enquire(String q, String apiKey) {
 		if (isEmpty(q))
 			return new GemCarrier("No question no answer..", "oogway");

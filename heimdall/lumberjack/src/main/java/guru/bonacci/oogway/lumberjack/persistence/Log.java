@@ -1,25 +1,31 @@
 package guru.bonacci.oogway.lumberjack.persistence;
 
-import java.util.Date;
+import java.time.Instant;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "visits")
-public class Visit {
+public class Log {
 
 	@Id
-	private Date moment;
+	private Instant moment;
 
 	@Field
 	private String apiKey;
 
-	public Date getMoment() {
+	public Log() {}
+
+	public Log(String apiKey) {
+		this.apiKey = apiKey;
+	}
+
+	public Instant getMoment() {
 		return moment;
 	}
 
-	public void setMoment(Date moment) {
+	public void setMoment(Instant moment) {
 		this.moment = moment;
 	}
 

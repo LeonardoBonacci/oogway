@@ -16,15 +16,15 @@ services:
     ports:
       - 15672:15672 
 
-  kibana:
-    environment:
-      ELASTICSEARCH_URL: http://es:9200
-    image: kibana:4.6
-    restart: always
-    ports:
-      - 5601:5601
-    depends_on:
-      - es      
+#  kibana:
+#    environment:
+#      ELASTICSEARCH_URL: http://es:9200
+#    image: kibana:4.6
+#    restart: always
+#    ports:
+#      - 5601:5601
+#    depends_on:
+#      - es      
 
   logstash: 
     image: leonardobonacci/pruning-logstash:1.0
@@ -37,6 +37,12 @@ services:
     depends_on:
       - es
       - rabbit
+
+  mongo:
+    image: mongo:3.4-jessie
+    restart: always
+    ports:
+      - 27017:27017
 
   config-service:
     environment:
@@ -107,16 +113,22 @@ services:
     volumes:
       - .:/ubuntu1
 
-  visit-logger:
+  greeter:
+    image: leonardobonacci/oogway-greeter
+    ports:
+      - 1123:1123
+    depends_on:
+      entrance-service:
+        condition: service_started
+
+  lumberjack:
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-      SPRING_PROFILES_ACTIVE: dev
-    image: leonardobonacci/oogway-visit-logger
+      MONGODB_PASSWORD: mongo
+      image: sqshq/piggymetrics-mongodb
+    image: leonardobonacci/oogway-lumberjack
     restart: always
     depends_on:
-      config-service:
-        condition: service_healthy
+      - mongo
     ports:
       - 11235:11235
 
@@ -152,96 +164,88 @@ services:
     ports:
       - 2222:2222
 
-  job-service:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-      SPRING_PROFILES_ACTIVE: dev
-    image: leonardobonacci/oogway-job-service
-    restart: always
-    depends_on:
-      config-service:
-        condition: service_healthy
-    ports:
-      - 8765:8765
+#  job-service:
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+#      SPRING_PROFILES_ACTIVE: dev
+#    image: leonardobonacci/oogway-job-service
+#    restart: always
+#    depends_on:
+#      config-service:
+#        condition: service_healthy
+#    ports:
+#      - 8765:8765
+#
+#  localtimer-service:
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+#      SPRING_PROFILES_ACTIVE: dev
+#    image: leonardobonacci/oogway-localtimer-service
+#    restart: always
+#    depends_on:
+#      rabbit:
+#        condition: service_started
+#      config-service:
+#        condition: service_healthy
+#    ports:
+#      - 6666:6666
+#
+#  money-service:
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+#      SPRING_PROFILES_ACTIVE: dev
+#    image: leonardobonacci/oogway-money-service
+#    restart: always
+#    depends_on:
+#      rabbit:
+#        condition: service_started
+#      config-service:
+#        condition: service_healthy
+#    ports:
+#      - 11111:11111
+#
+#  sentiment-service:
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+#      SPRING_PROFILES_ACTIVE: dev
+#    image: leonardobonacci/oogway-sentiment-service
+#    restart: always
+#    depends_on:
+#      rabbit:
+#        condition: service_started
+#      config-service:
+#        condition: service_healthy
+#    ports:
+#      - 7777:7777
+#
+#  weather-service:
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+#      SPRING_PROFILES_ACTIVE: dev
+#    image: leonardobonacci/oogway-weather-service
+#    restart: always
+#    depends_on:
+#      rabbit:
+#        condition: service_started
+#      config-service:
+#        condition: service_healthy
+#    ports:
+#      - 9999:9999
+#
+#  zipkin:
+#    environment:
+#      STORAGE_TYPE: elasticsearch
+#      ES_HOSTS: es
+#    image: openzipkin/zipkin:2.5
+#    restart: always
+#    ports:
+#      - 9411:9411
 
-  localtimer-service:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-      SPRING_PROFILES_ACTIVE: dev
-    image: leonardobonacci/oogway-localtimer-service
-    restart: always
-    depends_on:
-      rabbit:
-        condition: service_started
-      config-service:
-        condition: service_healthy
-    ports:
-      - 6666:6666
-
-  money-service:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-      SPRING_PROFILES_ACTIVE: dev
-    image: leonardobonacci/oogway-money-service
-    restart: always
-    depends_on:
-      rabbit:
-        condition: service_started
-      config-service:
-        condition: service_healthy
-    ports:
-      - 11111:11111
-
-  sentiment-service:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-      SPRING_PROFILES_ACTIVE: dev
-    image: leonardobonacci/oogway-sentiment-service
-    restart: always
-    depends_on:
-      rabbit:
-        condition: service_started
-      config-service:
-        condition: service_healthy
-    ports:
-      - 7777:7777
-
-  weather-service:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-      SPRING_PROFILES_ACTIVE: dev
-    image: leonardobonacci/oogway-weather-service
-    restart: always
-    depends_on:
-      rabbit:
-        condition: service_started
-      config-service:
-        condition: service_healthy
-    ports:
-      - 9999:9999
-
-  zipkin:
-    environment:
-      STORAGE_TYPE: elasticsearch
-      ES_HOSTS: es
-    image: openzipkin/zipkin:2.5
-    restart: always
-    ports:
-      - 9411:9411
-
-  greeter:
-    image: leonardobonacci/greeter
-    ports:
-      - 1123:1123
-    depends_on:
-      entrance-service:
-        condition: service_started
-        
 #  tor: 
 #    image: osminogin/tor-simple
 #    ports:

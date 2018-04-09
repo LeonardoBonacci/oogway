@@ -74,6 +74,12 @@ after_success:
   - docker tag $GREETER:$COMMIT $GREETER:$TAG
   - docker push $GREETER
 
+   # LUMBERJACK
+  - export LUMBERJACK=$DOCKER_USERNAME/oogway-lumberjack
+  - docker build -t $LUMBERJACK:$COMMIT ./heimdall/lumberjack
+  - docker tag $LUMBERJACK:$COMMIT $LUMBERJACK:$TAG
+  - docker push $LUMBERJACK
+  
   # ORACLE SERVICE
   - export ORACLE=$DOCKER_USERNAME/oogway-oracle-service
   - docker build -t $ORACLE:$COMMIT ./oracle

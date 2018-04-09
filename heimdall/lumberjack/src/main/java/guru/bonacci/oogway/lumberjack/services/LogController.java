@@ -5,8 +5,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import guru.bonacci.oogway.lumberjack.persistence.Log;
@@ -20,8 +20,8 @@ public class LogController {
 	@Autowired
 	private LogService service;
 	
-	@RequestMapping(path = "/visit", method = GET)
-	public Long log(@RequestParam("apikey") String apiKey) {
+	@RequestMapping(path = "/visits/{apikey}", method = GET)
+	public Long log(@PathVariable("apikey") String apiKey) {
 		logger.info("Visit key: " + apiKey);
 
 		return service.insert(new Log(apiKey));

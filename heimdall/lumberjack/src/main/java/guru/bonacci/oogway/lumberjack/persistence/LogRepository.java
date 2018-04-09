@@ -12,4 +12,8 @@ public interface LogRepository extends CrudRepository<Log, String> {
 	List<Log> findByMomentBetween(Instant from, Instant until);
 
 	long countByMomentBetween(Instant from, Instant until);
+	
+	List<Log> findByApiKeyAndMomentBetween(String apiKey, Instant from, Instant until);
+
+	long countByApiKeyAndMomentBetween(String apiKey, Instant from, Instant until);
 }

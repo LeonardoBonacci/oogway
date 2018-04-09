@@ -50,4 +50,19 @@ public class LogRepositoryTests {
 		long nrFound = repository.countByMomentBetween(now.minusSeconds(10), now.plusSeconds(10));
 		assertThat(nrFound, is(2L));
 	}
+	
+	@Test
+	public void shouldFindLogByKeyAndMomentRange() {
+		Instant now = Instant.now();
+		List<Log> found = repository.findByApiKeyAndMomentBetween(logline1.getApiKey(), now.minusSeconds(10), now.plusSeconds(10));
+		assertThat(found.size(), is(1));
+	}
+
+	@Test
+	public void shouldCountLogByKeyAndMomentRange() {
+		Instant now = Instant.now();
+		long nrFound = repository.countByApiKeyAndMomentBetween(logline2.getApiKey(), now.minusSeconds(10), now.plusSeconds(10));
+		assertThat(nrFound, is(1L));
+	}
+
 }

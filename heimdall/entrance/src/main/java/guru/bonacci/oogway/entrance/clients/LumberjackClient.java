@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @FeignClient( name = "lumberjack")
 public interface LumberjackClient {
 
-	@RequestMapping(value = "/visits/{apikey}", method = GET)
+	@RequestMapping(value = "/lumber/visits/{apikey}", method = GET)
     Long visits(@PathVariable("apikey") String apiKey);
 }

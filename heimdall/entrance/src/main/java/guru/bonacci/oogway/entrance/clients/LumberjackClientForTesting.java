@@ -18,7 +18,7 @@ public class LumberjackClientForTesting {
 	}
 
 	public Long visits(String apiKey) {
-		Long visits = restTemplate.getForObject(serviceUrl + "/visits/{apiKey}", Long.class, apiKey);
+		Long visits = restTemplate.getForObject(serviceUrl + "/lumber/visits/{apiKey}", Long.class, apiKey);
 		return visits;
 	}
 }

@@ -41,7 +41,7 @@ public class GemRepositoryTests {
 		Gem input = new Gem(said, author);
 		repo.save(input);
 
-		Gem result = repo.findOne(input.getId());
+		Gem result = repo.findById(input.getId()).get();
 
 		assertThat(result.getSaying(), is(equalTo(said)));
 		assertThat(result.getAuthor(), is(equalTo(author)));
@@ -95,7 +95,7 @@ public class GemRepositoryTests {
 	public void shouldFindSimilarGemMultipleTimes() {
 		Gem gem1 = new Gem("how are you I am fine");
 		Gem gem2 = new Gem("how are you I am not fine");
-		repo.save(asList(gem1, gem2));
+		repo.saveAll(asList(gem1, gem2));
 		
 		Set<Gem> results = new HashSet<>();
 		for (int i=0; i<10; i++) 

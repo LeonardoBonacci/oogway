@@ -69,7 +69,7 @@ public class MoneyIntegrationTests {
 	@After
 	public void clean() {
 		try {
-			repo.delete(uuid);
+			repo.deleteById(uuid);
 		} catch (Exception ignore) {}
 	}
 
@@ -81,7 +81,7 @@ public class MoneyIntegrationTests {
 		String body = "{\"content\":\"" + uuid + "\"}";
 		sendMessage(body, SpectreEventChannels.ENRICHMENT, "application/json");
 
-		MoneySpec persisted = repo.findOne(uuid);
+		MoneySpec persisted = repo.findById(uuid).get();
 		assertThat(persisted.income, is(equalTo("aaaaa lot")));
 	}
 

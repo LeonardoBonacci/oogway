@@ -39,7 +39,7 @@ public class MoneyServiceTests {
 		Spec spec = new Spec();
 		spec.id = "ID";
 		spec.geoip.country_code2 = "NZ";
-		when(repo.findOne(spec.id)).thenReturn(spec);
+		when(repo.findById(spec.id).get()).thenReturn(spec);
 
 		String enrichmentData = "very little";
 		doReturn(enrichmentData).when(cache).get("NZ");

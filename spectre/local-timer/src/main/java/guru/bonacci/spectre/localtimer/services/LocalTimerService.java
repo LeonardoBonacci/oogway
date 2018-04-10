@@ -36,7 +36,7 @@ public class LocalTimerService implements SpectreService {
 	public void enrich(String id) {
 		try {
 			// Too lazy for refined error handling today...
-			Spec spec = repo.findOne(id);
+			Spec spec = repo.findById(id).get();
 			String q = searchQuery.replace("#lat#", String.valueOf(spec.geoip.latitude))
 								  .replace("#lng#", String.valueOf(spec.geoip.longitude))
 								  .replace("#username#", username);

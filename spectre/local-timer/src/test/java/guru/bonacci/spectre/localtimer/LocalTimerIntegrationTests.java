@@ -74,7 +74,7 @@ public class LocalTimerIntegrationTests {
 	@After
 	public void clean() {
 		try {
-			repo.delete(uuid);
+			repo.deleteById(uuid);
 		} catch (Exception ignore) {}
 	}
 
@@ -87,7 +87,7 @@ public class LocalTimerIntegrationTests {
 		String body = "{\"content\":\"" + uuid + "\"}";
 		sendMessage(body, SpectreEventChannels.ENRICHMENT, "application/json");
 
-		LocalTimerSpec persisted = repo.findOne(uuid);
+		LocalTimerSpec persisted = repo.findById(uuid).get();
 		assertThat(persisted.localtimer.get("a"), is(equalTo("is not b")));
 	}
 

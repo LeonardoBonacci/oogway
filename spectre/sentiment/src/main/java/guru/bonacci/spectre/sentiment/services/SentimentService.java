@@ -31,7 +31,7 @@ public class SentimentService implements SpectreService {
 	public void enrich(String id) {
 		try {
 			// Too lazy for refined error handling today...
-			Spec spec = repo.findOne(id);
+			Spec spec = repo.findById(id).get();
 			repo.addData("sentiment", findSentimentDesc(spec.message), spec);
 		} catch(Exception e) {
 			logger.error("Oops", e);

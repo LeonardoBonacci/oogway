@@ -42,12 +42,12 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 	@Override
 	public void saveTheNewOnly(Gem... entities) {
 		List<Gem> newOnes = stream(entities)
-									  .filter(gem -> !gemRepository.exists(gem.getId()))
-									  .peek(gem -> logger.info("About to gain wisdom: '" + gem.getSaying() + "'"))
-									  .collect(toList());
+				.filter(gem -> !gemRepository.findById(gem.getId()).isPresent())
+											 .peek(gem -> logger.info("About to gain wisdom: '" + gem.getSaying() + "'"))
+				    						 .collect(toList());
 		// strangely enough spring data or elasticsearch cannot deal with empty iterables
 		if (!newOnes.isEmpty())
-			gemRepository.save(newOnes);
+			gemRepository.saveAll(newOnes);
 	}
 
 	@WatchMe 
@@ -80,7 +80,7 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 	@Override
 	public Optional<Gem> findRandom() {
 		FunctionScoreQueryBuilder fsqb = new FunctionScoreQueryBuilder(matchAllQuery());
-		fsqb.add(ScoreFunctionBuilders.randomFunction(System.currentTimeMillis()));
+//FIXME		fsqb.add(ScoreFunctionBuilders.randomFunction(System.currentTimeMillis()));
 		return Optional.ofNullable(gemRepository.search(fsqb).iterator().next());
 	}
 }

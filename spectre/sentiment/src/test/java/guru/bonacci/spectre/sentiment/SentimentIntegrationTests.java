@@ -63,7 +63,7 @@ public class SentimentIntegrationTests {
 	@After
 	public void clean() {
 		try {
-			repo.delete(uuid);
+			repo.deleteById(uuid);
 		} catch (Exception ignore) {}
 	}
 
@@ -72,7 +72,7 @@ public class SentimentIntegrationTests {
 		String body = "{\"content\":\"" + uuid + "\"}";
 		sendMessage(body, SpectreEventChannels.ENRICHMENT,"application/json");
 
-		SentimentSpec persisted = repo.findOne(uuid);
+		SentimentSpec persisted = repo.findById(uuid).get();
 		assertThat(persisted.message, is(equalTo("what a wonderful wonderful life")));
 	}
 

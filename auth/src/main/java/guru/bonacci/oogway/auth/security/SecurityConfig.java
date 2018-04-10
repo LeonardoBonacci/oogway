@@ -17,7 +17,7 @@ import guru.bonacci.oogway.auth.services.MyUserService;
 
 @Configuration
 @EnableWebSecurity( debug = true )
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+//FIXME @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

@@ -1,8 +1,8 @@
 package guru.bonacci.oogway.oracle.service.persistence;
 
 import static java.lang.String.format;
-import static org.springframework.data.elasticsearch.annotations.FieldIndex.not_analyzed;
-import static org.springframework.data.elasticsearch.annotations.FieldType.String;
+import static org.springframework.data.elasticsearch.annotations.FieldType.keyword;
+import static org.springframework.data.elasticsearch.annotations.FieldType.text;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -26,10 +26,10 @@ public class Gem {
 	@JsonIgnore
 	private String id;
 
-	@Field(type = String, store = true, analyzer = "english", searchAnalyzer = "english")
+	@Field(type = text, store = true, analyzer = "english", searchAnalyzer = "english")
 	private String saying;
 
-	@Field(type = String, index = not_analyzed)
+	@Field(type = keyword)
 	private String author;
 
 	public Gem() {

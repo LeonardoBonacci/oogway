@@ -74,7 +74,7 @@ public class WeatherIntegrationTests {
 	@After
 	public void clean() {
 		try {
-			repo.delete(uuid);
+			repo.deleteById(uuid);
 		} catch (Exception ignore) {}
 	}
 
@@ -87,7 +87,7 @@ public class WeatherIntegrationTests {
 		String body = "{\"content\":\"" + uuid + "\"}";
 		sendMessage(body, SpectreEventChannels.ENRICHMENT, "application/json");
 
-		WeatherSpec persisted = repo.findOne(uuid);
+		WeatherSpec persisted = repo.findById(uuid).get();
 		assertThat(persisted.weather.get("a"), is(equalTo("is not b")));
 	}
 

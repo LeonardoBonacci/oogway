@@ -46,7 +46,7 @@ public class LocalTimerServiceTests {
 		spec.id = "ID";
 		spec.geoip.latitude = 1.1;
 		spec.geoip.longitude = 2.2;
-		when(repo.findOne(spec.id)).thenReturn(spec);
+		when(repo.findById(spec.id).get()).thenReturn(spec);
 
 		Map<String,Object> enrichmentData = new HashMap<>();
 		enrichmentData.put("a", "is not b");

@@ -4,6 +4,8 @@ spring:
       server:
         git:
           uri: https://github.com/LeonardoBonacci/oogway-config-data    
+#for demo effect - 
+#          uri: file://ubuntu1/oogway-config-data    
 
 server:
   port: 8888

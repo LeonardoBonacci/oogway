@@ -53,7 +53,10 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:8888/health"]
       interval: 10s
       timeout: 3s
-      
+#for demo effect - mount parent directory where (git) config resides
+#    volumes:
+#      - ./..:/ubuntu1
+
   orchestration-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD

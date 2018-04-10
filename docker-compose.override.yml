@@ -1,5 +1,6 @@
 version: '2.3'
 services:
+
   rabbit:
     ports:
       - 5672:5672
@@ -45,5 +46,4 @@ services:
 
   weather-service:
     build: spectre/weather
-
     

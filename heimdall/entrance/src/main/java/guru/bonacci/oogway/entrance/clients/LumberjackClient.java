@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RefreshScope
-@FeignClient( name = "lumberjack")
+@FeignClient( name = "${application.name.lumberjack}")
 public interface LumberjackClient {
 
 	@RequestMapping(value = "/lumber/visits/{apikey}", method = GET)

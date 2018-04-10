@@ -1,7 +1,4 @@
+#@Loadbalanced does not work for prototype scoped beans, port is needed
 oracle:
   service:
     url: http://oracle-service:4444
-
-lumberjack:
-  service:
-    url: http://lumberjack:11235

@@ -37,7 +37,7 @@ public class EntranceServer {
 		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 		return new RSADecryptor(RSAKeyHelper.loadPrivateKey("/ubuntu1/")); //volume mount in Dockerfile
 	}
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(EntranceServer.class, args);
 	}

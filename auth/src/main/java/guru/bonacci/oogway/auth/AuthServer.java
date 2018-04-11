@@ -21,12 +21,13 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 import guru.bonacci.oogway.auth.models.User;
+import guru.bonacci.oogway.auth.security.RSAPasswordEncoder;
 import guru.bonacci.oogway.auth.services.MyUserService;
+import guru.bonacci.oogway.utils.security.RSAKeyHelper;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -38,7 +39,7 @@ public class AuthServer {
 
 	@Bean
 	public PasswordEncoder passwordEncoder() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
-		return NoOpPasswordEncoder.getInstance(); //FIXME
+		return new RSAPasswordEncoder(RSAKeyHelper.loadPublicKey("/ubuntu1/")); //volume mount in Dockerfile		
 	}
 
 	public static void main(String[] args) {

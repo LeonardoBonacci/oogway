@@ -14,8 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import guru.bonacci.oogway.auth.services.MyUserService;
 
 @Configuration
-@EnableWebSecurity( debug = true )
-//FIXME @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

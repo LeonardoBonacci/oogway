@@ -26,8 +26,7 @@ public class CredentialsDecoder implements Decoder {
     	Object o = decoder.decode(response, type);
         if (Credentials.class.equals(type)) {
         	Credentials c = (Credentials)o;
-//FIXME    		c.setPassword(decryptor.decrypt(c.getEncryptedPassword()));
-    		c.setPassword(c.getEncryptedPassword());
+        	c.setPassword(decryptor.decrypt(c.getEncryptedPassword()));
     		c.setEncryptedPassword(null);
     		return c;
         }

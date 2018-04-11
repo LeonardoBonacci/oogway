@@ -26,11 +26,9 @@ public class ClientCredentialsGrantConfig {
 	/**
 	 * A few small things are needed to secure a service..
 	 * 
-	 * The command line can pretend to be jobs-service: curl
-	 * jobs-service:jobs-service-secret@localhost:5000/auth/oauth/token -d
-	 * grant_type=client_credentials curl -H "Authorization: Bearer
-	 * f8f016c2-184c-432f-8ee6-6613e7dbfdfd" -v
-	 * http://localhost:4444/oracle/gems/random
+	 * The command line can pretend to be jobs-service: 
+	 * curl jobs-service:jobs-service-secret@localhost:5000/auth/oauth/token -d grant_type=client_credentials 
+	 * curl -H "Authorization: Bearer f8f016c2-184c-432f-8ee6-6613e7dbfdfd" -v http://localhost:4444/oracle/gems/random
 	 */
 	@Bean
 	public OAuth2RestTemplate clientCredentialsRestTemplate() {

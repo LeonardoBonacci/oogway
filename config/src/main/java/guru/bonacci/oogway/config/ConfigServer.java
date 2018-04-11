@@ -28,6 +28,8 @@ public class ConfigServer {
 				.authorizeRequests()
 					.antMatchers("/**/logback-spring.xml").permitAll()
 					.requestMatchers(EndpointRequest.to("health")).permitAll()
+					.requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()//FIXME
+				    .antMatchers("/**").permitAll()//FIXME
 					.anyRequest().authenticated()
 			.and()
 				.httpBasic()

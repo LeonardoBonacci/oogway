@@ -37,7 +37,7 @@ public class AuthServer {
 
 	@Bean
 	public PasswordEncoder passwordEncoder() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
-		return NoOpPasswordEncoder.getInstance(); 
+		return NoOpPasswordEncoder.getInstance(); //FIXME
 	}
 
 	public static void main(String[] args) {
@@ -53,13 +53,13 @@ public class AuthServer {
 	}
 
 	@Bean
-	CommandLineRunner init(MyUserService accountService) {
+	CommandLineRunner init(MyUserService userService) {
 		return (evt) -> Arrays.asList("oogway,user1,user2".split(",")).forEach(username -> {
 			User user = new User();
 			user.setUsername(username);
 			user.setPassword("password");
-			user.setApiKey(user.getUsername());
-			accountService.registerUser(user);
+			user.setApiKey(user.getUsername()); //FIXME
+			userService.registerUser(user);
 
 			logger.info("User added: " + user);
 		});

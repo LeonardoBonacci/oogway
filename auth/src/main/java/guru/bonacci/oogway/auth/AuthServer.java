@@ -1,5 +1,6 @@
 package guru.bonacci.oogway.auth;
 
+import static org.apache.commons.lang.StringUtils.reverse;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.io.IOException;
@@ -58,7 +59,7 @@ public class AuthServer {
 			User user = new User();
 			user.setUsername(username);
 			user.setPassword("password");
-			user.setApiKey(user.getUsername()); //FIXME
+			user.setApiKey(reverse(user.getUsername()));
 			userService.registerUser(user);
 
 			logger.info("User added: " + user);

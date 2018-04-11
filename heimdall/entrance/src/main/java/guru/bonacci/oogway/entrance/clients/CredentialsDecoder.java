@@ -26,9 +26,10 @@ public class CredentialsDecoder implements Decoder {
     	Object o = decoder.decode(response, type);
         if (Credentials.class.equals(type)) {
         	Credentials c = (Credentials)o;
-    		c.setPassword(decryptor.decrypt(c.getEncryptedPassword()));
+//    		c.setPassword(decryptor.decrypt(c.getEncryptedPassword()));
+    		c.setPassword(c.getEncryptedPassword());
     		c.setEncryptedPassword(null);
-        	return c;
+    		return c;
         }
         throw new DecodeException(format("%s is not a type supported by this decoder.", type));
     }

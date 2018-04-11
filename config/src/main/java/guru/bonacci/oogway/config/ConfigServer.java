@@ -1,6 +1,7 @@
 package guru.bonacci.oogway.config;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.config.server.EnableConfigServer;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +27,7 @@ public class ConfigServer {
 			http
 				.authorizeRequests()
 					.antMatchers("/**/logback-spring.xml").permitAll()
-					.antMatchers("/health").permitAll()
+					.requestMatchers(EndpointRequest.to("health")).permitAll()
 					.anyRequest().authenticated()
 			.and()
 				.httpBasic()

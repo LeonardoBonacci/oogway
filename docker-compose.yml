@@ -5,6 +5,7 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:5.5.3
     restart: always
     environment:
+      - xpack.security.enabled=false
       - cluster.name=elasticsearch
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -15,9 +16,8 @@ services:
         soft: -1
         hard: -1
     mem_limit: 1g
-    volumes: 
+#    volumes: 
 #      - ${ES_PATH_DATA}:/usr/share/elasticsearch/data 
-      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     ports:
       - 9200:9200
       - 9300:9300
@@ -33,7 +33,7 @@ services:
     restart: always
     volumes: 
       - ./logstash/pipeline:/usr/share/logstash/pipeline/:ro 
-      - ./logstash/config:/usr/share/logstash/config/:ro
+      - ./logstash/config/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
     ports: 
       - 4560:4560
     depends_on:

@@ -11,6 +11,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,7 +47,7 @@ public class LocalTimerServiceTests {
 		spec.id = "ID";
 		spec.geoip.latitude = 1.1;
 		spec.geoip.longitude = 2.2;
-		when(repo.findById(spec.id).get()).thenReturn(spec);
+		when(repo.findById(spec.id)).thenReturn(Optional.of(spec));
 
 		Map<String,Object> enrichmentData = new HashMap<>();
 		enrichmentData.put("a", "is not b");

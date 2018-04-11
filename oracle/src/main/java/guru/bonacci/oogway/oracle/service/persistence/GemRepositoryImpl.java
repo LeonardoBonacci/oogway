@@ -41,6 +41,8 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 	 */
 	@Override
 	public void saveTheNewOnly(Gem... entities) {
+		// current version does not contain the bug fix for existsById
+		// https://jira.spring.io/browse/DATAES-363			
 		List<Gem> newOnes = stream(entities)
 				.filter(gem -> !gemRepository.findById(gem.getId()).isPresent())
 											 .peek(gem -> logger.info("About to gain wisdom: '" + gem.getSaying() + "'"))

@@ -168,6 +168,7 @@ services:
         condition: service_healthy
     ports:
       - 4444:4444
+      - 8001:8001
 
   sannyas-service:
     environment:

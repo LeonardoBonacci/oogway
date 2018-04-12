@@ -26,7 +26,7 @@ import org.springframework.test.context.junit4.SpringRunner;
         "spring.sleuth.enabled=false",
         "spring.zipkin.enabled=false"
 }, webEnvironment = NONE)
-@Ignore //FIXME
+@Ignore
 public class GemRepositoryTests {
 	
 	@Autowired

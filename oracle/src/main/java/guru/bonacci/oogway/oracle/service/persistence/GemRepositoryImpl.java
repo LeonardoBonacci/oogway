@@ -1,9 +1,9 @@
 package guru.bonacci.oogway.oracle.service.persistence;
 
+import static org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders.randomFunction;
 import static guru.bonacci.oogway.utils.MyListUtils.random;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
-import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
-import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -81,8 +80,7 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 
 	@Override
 	public Optional<Gem> findRandom() {
-		FunctionScoreQueryBuilder fsqb = new FunctionScoreQueryBuilder(matchAllQuery());
-//FIXME		fsqb.add(ScoreFunctionBuilders.randomFunction(System.currentTimeMillis()));
+		FunctionScoreQueryBuilder fsqb = new FunctionScoreQueryBuilder(randomFunction(System.currentTimeMillis()));
 		return Optional.ofNullable(gemRepository.search(fsqb).iterator().next());
 	}
 }

@@ -4,7 +4,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonMap;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.messaging.MessageHeaders.CONTENT_TYPE;
@@ -31,7 +31,8 @@ import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.sannyas.service.SannyasServer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import guru.bonacci.oogway.sannyas.service.events.SannyasEventChannels;
 import guru.bonacci.oogway.sannyas.service.gr.GRSeeker;
 import guru.bonacci.oogway.sannyas.service.processing.SannyasinPicker;
@@ -56,6 +57,9 @@ public class SannyasIntegrationTests {
 	@Autowired
 	MessageCollector messageCollector;
 
+	@Autowired
+	ObjectMapper objectMapper;
+
 	@SuppressWarnings("unchecked")
 	@Test
 	public void shouldDoSomething() throws Exception {
@@ -71,7 +75,11 @@ public class SannyasIntegrationTests {
 
 		//..and, after processing, receive published event
 		Message<GemCarrier> received = (Message<GemCarrier>) messageCollector.forChannel(channels.sannyasChannel()).poll();
-		assertThat(received.getPayload(), equalTo(hit));
+
+		String receivedAsString = objectMapper.writeValueAsString(received.getPayload()).replaceAll("\\\\", "");
+		// again, terribly ugly, but you get the point...
+		String somehowExpected = "\"" + objectMapper.writeValueAsString(hit) + "\"";
+		assertThat(receivedAsString, equalTo(somehowExpected));
 	}
 
 	private void sendMessage(String body, String target, Object contentType) {

@@ -2,8 +2,8 @@ package guru.bonacci.oogway.entrance;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -28,6 +28,8 @@ import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.messaging.Message;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import guru.bonacci.oogway.entrance.clients.AuthClient;
 import guru.bonacci.oogway.entrance.clients.LumberjackClient;
@@ -62,6 +64,9 @@ public class EntranceIntegrationTests {
 	@MockBean
 	LumberjackClient lumberjackClient;
 
+	@Autowired
+	ObjectMapper objectMapper;
+
 	@SuppressWarnings("unchecked")
 	@Test
 	public void shouldSendMessageAfterInterception() throws Exception {
@@ -73,7 +78,10 @@ public class EntranceIntegrationTests {
 		mvc.perform(get("/consult?q=" + input + "&apikey=somekey"));
 		
 		Message<COMINT> received = (Message<COMINT>) messageCollector.forChannel(channels.spectreChannel()).poll();
-		assertThat(received.getPayload(), equalTo(new COMINT(localIP, input)));
+		String receivedAsString = objectMapper.writeValueAsString(received.getPayload()).replaceAll("\\\\", "");
+		// terribly ugly, but you get the point...
+		String somehowExpected = "\"" + objectMapper.writeValueAsString(new COMINT(localIP, input)) + "\"";
+		assertThat(receivedAsString, equalTo(somehowExpected));
 	}
 	
 	@SpringBootApplication

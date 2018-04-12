@@ -29,6 +29,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.channel.DirectChannel;
@@ -42,6 +43,8 @@ import guru.bonacci.spectre.localtimer.services.LocalTimerSpec;
 import guru.bonacci.spectre.localtimer.services.LocalTimerSpecRepository;
 import guru.bonacci.spectre.spectreshared.events.SpectreEventChannels;
 import guru.bonacci.spectre.spectreshared.persistence.PersistenceTestConfig;
+import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
+import guru.bonacci.spectre.spectreshared.persistence.SpecRepositoryImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT, properties = {
@@ -57,6 +60,15 @@ public class LocalTimerIntegrationTests {
 
 	@MockBean
 	RestTemplate rest;
+
+	@MockBean
+	SpecRepository bla;
+
+	@MockBean
+	SpecRepositoryImpl notused;
+
+	@MockBean
+	ElasticsearchTemplate idem;
 
 	String uuid;
 

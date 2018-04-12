@@ -3,8 +3,8 @@ package guru.bonacci.oogway.entrance.services;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -58,7 +59,8 @@ public class FirstLineSupportServiceTests {
 	public void shouldGiveAnswer() {
 		GemCarrier expected = new GemCarrier("some answer", "some person");
 		when(authClient.user(anyString())).thenReturn(new Credentials());
-		when(oracleClient.consult(anyString(), anyString(), any(Credentials.class))).thenReturn(Optional.of(expected));
+		// Mockito.<String>any() allows for null
+		when(oracleClient.consult(anyString(), Mockito.<String>any(), any(Credentials.class))).thenReturn(Optional.of(expected));
 
 		assertThat(service.enquire("some input", ""), is(equalTo(expected)));
 	}

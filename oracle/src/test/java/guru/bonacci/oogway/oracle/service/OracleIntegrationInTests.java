@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.binding.BinderAwareChannelResolver;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,7 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.oracle.service.events.OracleEventChannels;
+import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
@@ -33,6 +35,9 @@ public class OracleIntegrationInTests {
 
 	@Autowired
 	BinderAwareChannelResolver resolver;
+
+	@MockBean
+	GemRepository repo; //thank you ES for your radical upgrade
 	
 	@Test
 	public void shouldDoSomething() throws Exception {

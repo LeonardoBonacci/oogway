@@ -29,9 +29,7 @@ import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
 import guru.bonacci.oogway.shareddomain.GenericEvent;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(properties = {
-        "security.basic.enabled=false"
-}, webEnvironment = RANDOM_PORT)
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 @AutoConfigureMockMvc
 public class OracleIntegrationOutTests {
 

@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import guru.bonacci.spectre.sentiment.SentimentTestApp;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=SentimentTestApp.class, webEnvironment=NONE)
+@Ignore
 public class SentimentServiceTests {
 
 	@Autowired

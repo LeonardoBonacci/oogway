@@ -5,4 +5,5 @@
     <logger name="guru.bonacci.oogway.sannyas" level="INFO"/>
     <logger name="com.netflix" level="WARN"/>
     <logger name="edu.stanford" level="WARN"/>
+	<logger name="org.apache.catalina" level="WARN"/>
 </configuration>

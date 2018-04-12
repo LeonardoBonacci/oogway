@@ -29,7 +29,10 @@ import guru.bonacci.oogway.entrance.security.Credentials;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = EntranceTestApp.class, webEnvironment = NONE)
+@SpringBootTest(classes = EntranceTestApp.class, properties = {
+        "spring.sleuth.enabled=false",
+        "spring.zipkin.enabled=false"
+}, webEnvironment = NONE)
 public class FirstLineSupportServiceTests {
 
 	@Autowired

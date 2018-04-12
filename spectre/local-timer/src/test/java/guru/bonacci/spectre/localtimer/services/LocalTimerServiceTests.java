@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -30,6 +31,7 @@ import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 @SpringBootTest(classes=LocalTimerTestApp.class, webEnvironment = NONE, properties = {
 	"geo.name.username=voldemort"		
 })
+@Ignore
 public class LocalTimerServiceTests {
 
 	@Autowired

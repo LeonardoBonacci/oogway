@@ -41,7 +41,8 @@ import guru.bonacci.oogway.shareddomain.COMINT;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = {
-        "security.basic.enabled=false"
+        "spring.sleuth.enabled=false",
+        "spring.zipkin.enabled=false"
 }, webEnvironment = RANDOM_PORT)
 @AutoConfigureMockMvc
 public class EntranceIntegrationTests {

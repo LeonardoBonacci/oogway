@@ -21,10 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.oracle.service.OracleTestApp;
-
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = OracleTestApp.class, webEnvironment = NONE)
+@SpringBootTest(properties = {
+        "spring.sleuth.enabled=false",
+        "spring.zipkin.enabled=false"
+}, webEnvironment = NONE)
 @Ignore //FIXME
 public class GemRepositoryTests {
 	

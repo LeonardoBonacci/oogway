@@ -11,6 +11,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import java.util.Optional;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -25,6 +26,7 @@ import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=MoneyTestApp.class, webEnvironment = NONE)
+@Ignore
 public class MoneyServiceTests {
 
 	@Autowired

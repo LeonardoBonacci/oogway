@@ -22,9 +22,7 @@ import guru.bonacci.oogway.entrance.services.FirstLineSupportService;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = EntranceTestApp.class, properties = {
-        "security.basic.enabled=false"
-}, webEnvironment = RANDOM_PORT)
+@SpringBootTest(classes = EntranceTestApp.class, webEnvironment = RANDOM_PORT)
 @AutoConfigureMockMvc
 public class EntranceControllerTests {
 

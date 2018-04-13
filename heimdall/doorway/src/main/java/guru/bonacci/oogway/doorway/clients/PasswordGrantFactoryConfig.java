@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
-import org.springframework.security.oauth2.client.token.AccessTokenProvider;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordAccessTokenProvider;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.web.client.RestOperations;
@@ -38,7 +37,7 @@ public class PasswordGrantFactoryConfig {
 	@Scope(value = SCOPE_PROTOTYPE)
 	public RestTemplate restTemplate(Credentials credentials) {
 		OAuth2RestTemplate template = new OAuth2RestTemplate(resourceDetails(credentials), new DefaultOAuth2ClientContext());
-		template.setAccessTokenProvider(accessTokenProvider);
+		template.setAccessTokenProvider(accessTokenProvider());
 		return template;
 	}
 
@@ -54,7 +53,12 @@ public class PasswordGrantFactoryConfig {
 		return resource;
 	}	
 
-	// some singleton like beans..
+	// don't tell spring...
+	ResourceOwnerPasswordAccessTokenProvider accessTokenProvider() {
+		return new MyResourceOwnerPasswordAccessTokenProvider(loadBalancedTemplate);
+	}
+
+	// A singleton restTemplate
 	RestTemplate loadBalancedTemplate;
 	
 	@LoadBalanced
@@ -62,14 +66,6 @@ public class PasswordGrantFactoryConfig {
 	RestTemplate loadBalancedTemplate() {
 		loadBalancedTemplate = new RestTemplate();
 		return loadBalancedTemplate;
-	}
-
-	AccessTokenProvider accessTokenProvider;
-	
-	@Bean
-	AccessTokenProvider accessTokenProvider() {
-		accessTokenProvider = new MyResourceOwnerPasswordAccessTokenProvider(loadBalancedTemplate);
-		return accessTokenProvider;
 	}
 
 	// Allows us to set a (loadbalanced) resttemplate

@@ -32,13 +32,13 @@ public class ClientCredentialsGrantConfig {
 	 * curl -H "Authorization: Bearer f8f016c2-184c-432f-8ee6-6613e7dbfdfd" -v http://localhost:4444/oracle/gems/random
 	 */
 	@Primary
+	@Bean
 	@LoadBalanced
 	RestTemplate clientCredentialsRestTemplate() {
 		OAuth2RestTemplate template = new OAuth2RestTemplate(clientCredentialsResourceDetails(), oAuth2ClientContext());
 		template.setAccessTokenProvider(accessTokenProvider());
 		return template;
 	}
-
 	
 	@Bean
 	OAuth2ClientContext oAuth2ClientContext() {

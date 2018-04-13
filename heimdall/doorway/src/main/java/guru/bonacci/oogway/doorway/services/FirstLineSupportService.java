@@ -37,15 +37,12 @@ public class FirstLineSupportService {
 	@Autowired
 	private Postponer postponer;
 
-//	@WatchMe
+	@WatchMe
 	public GemCarrier enquire(String q, String apiKey) {
 		if (isEmpty(q))
 			return new GemCarrier("No question no answer..", "oogway");
 
-//		Credentials currentUser = authClient.user(apiKey);
-		Credentials currentUser = new Credentials();
-		currentUser.setPassword("password");
-		currentUser.setUsername("oogway");
+		Credentials currentUser = authClient.user(apiKey);
 		Optional<GemCarrier> gem = oracleClient.consult(q, null, currentUser);
 		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
 	}

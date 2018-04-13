@@ -30,7 +30,6 @@ public class PasswordGrantFactoryConfig {
     @Value("${security.oauth2.client.clientSecret}")
 	private String clientSecret;
 
-    //Loadbalanced does not work for prototype scoped beans
 	@Bean
 	@Scope(value = SCOPE_PROTOTYPE)
 	public RestTemplate restTemplate(Credentials credentials) {

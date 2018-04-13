@@ -47,7 +47,7 @@ public class ClientCredentialsGrantConfig {
 
 	@Bean
 	AccessTokenProvider accessTokenProvider() {
-		return new CloudClientCredentialsAccessTokenProvider(loadBalancedTemplate());
+		return new MyClientCredentialsAccessTokenProvider(loadBalancedTemplate());
 	}
 
 	@LoadBalanced
@@ -63,17 +63,18 @@ public class ClientCredentialsGrantConfig {
 	}
 
 	@Bean
-	public RequestInterceptor oauth2FeignRequestInterceptor() {
+	RequestInterceptor oauth2FeignRequestInterceptor() {
 		OAuth2FeignRequestInterceptor interceptor = new OAuth2FeignRequestInterceptor(oAuth2ClientContext(), clientCredentialsResourceDetails());
 		interceptor.setAccessTokenProvider(accessTokenProvider());
 		return interceptor;
 	}
 	
-	public static class CloudClientCredentialsAccessTokenProvider extends ClientCredentialsAccessTokenProvider {
+	// Allows us to set a (loadbalanced) resttemplate
+	static class MyClientCredentialsAccessTokenProvider extends ClientCredentialsAccessTokenProvider {
 
 		private RestOperations restOperations;
 
-		public CloudClientCredentialsAccessTokenProvider(RestOperations restOperations) {
+		public MyClientCredentialsAccessTokenProvider(RestOperations restOperations) {
 			this.restOperations = restOperations;
 		}
 

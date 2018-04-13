@@ -62,11 +62,11 @@ after_success:
   - docker tag $AUTH:$COMMIT $AUTH:$TAG
   - docker push $AUTH
   
-  # ENTRANCE SERVICE
-  - export ENTRANCE=$DOCKER_USERNAME/oogway-entrance-service
-  - docker build -t $ENTRANCE:$COMMIT ./heimdall/entrance
-  - docker tag $ENTRANCE:$COMMIT $ENTRANCE:$TAG
-  - docker push $ENTRANCE
+  # DOORWAY SERVICE
+  - export DOORWAY=$DOCKER_USERNAME/oogway-doorway-service
+  - docker build -t $DOORWAY:$COMMIT ./heimdall/doorway
+  - docker tag $DOORWAY:$COMMIT $DOORWAY:$TAG
+  - docker push $DOORWAY
   
   # GREETER
   - export GREETER=$DOCKER_USERNAME/oogway-greeter

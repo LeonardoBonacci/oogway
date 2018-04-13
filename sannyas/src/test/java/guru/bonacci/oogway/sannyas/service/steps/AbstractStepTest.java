@@ -28,7 +28,10 @@ import guru.bonacci.oogway.sannyas.service.SannyasTestApp;
 @ContextConfiguration(classes = SannyasTestApp.class)
 @TestPropertySource(properties = {
 		"proxy.enabled=false",
-		"eureka.client.enabled=false"}
+		"eureka.client.enabled=false",
+        "spring.sleuth.enabled=false",
+        "spring.zipkin.enabled=false"
+	}
 )
 public abstract class AbstractStepTest<F extends Function<String,String>> {
 

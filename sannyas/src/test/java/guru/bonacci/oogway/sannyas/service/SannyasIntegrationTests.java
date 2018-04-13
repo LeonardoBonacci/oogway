@@ -39,7 +39,10 @@ import guru.bonacci.oogway.sannyas.service.processing.SannyasinPicker;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT)
+@SpringBootTest(properties = {
+        "spring.sleuth.enabled=false",
+        "spring.zipkin.enabled=false"
+}, webEnvironment = RANDOM_PORT)
 public class SannyasIntegrationTests {
 
 	@Autowired

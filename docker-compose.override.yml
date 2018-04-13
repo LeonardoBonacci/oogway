@@ -17,8 +17,8 @@ services:
   auth-service:
     build: auth
 
-  entrance-service:
-    build: heimdall/entrance
+  doorway-service:
+    build: heimdall/doorway
 
   greeter:
     build: heimdall/greeter

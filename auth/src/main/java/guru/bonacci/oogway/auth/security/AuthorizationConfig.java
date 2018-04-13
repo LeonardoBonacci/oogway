@@ -50,12 +50,12 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-    	//TODO .secret(env.getProperty("ENTRANCE_SERVICE_PASSWORD"))
+    	//TODO .secret(env.getProperty("DOORWAY_SERVICE_PASSWORD"))
 
     	// @formatter:off
     	clients.inMemory()
-	            .withClient("entrance-service")
-	            .secret(passwordEncoder.encode("entrance-service-secret")) //there must be a better way..
+	            .withClient("doorway-service")
+	            .secret(passwordEncoder.encode("doorway-service-secret")) //there must be a better way..
 				.authorizedGrantTypes("client_credentials", "password", "refresh_token")
 	            .scopes("resource-server-read")
                 .accessTokenValiditySeconds(1000)

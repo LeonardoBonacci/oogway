@@ -111,12 +111,12 @@ services:
     volumes:
       - .:/ubuntu1
             
-  entrance-service:
+  doorway-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
       SPRING_PROFILES_ACTIVE: dev
-    image: leonardobonacci/oogway-entrance-service
+    image: leonardobonacci/oogway-doorway-service
     restart: always
     depends_on:
       rabbit:
@@ -134,7 +134,7 @@ services:
     ports:
       - 1123:1123
     depends_on:
-      entrance-service:
+      doorway-service:
         condition: service_started
 
   lumberjack:

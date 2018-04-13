@@ -10,7 +10,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>entrance</module>
+		<module>doorway</module>
 	    <module>greeter</module>
 	    <module>lumberjack</module>
   </modules>

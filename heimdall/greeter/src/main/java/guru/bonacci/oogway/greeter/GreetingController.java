@@ -19,7 +19,7 @@ public class GreetingController {
 
 	private final String serviceUrl;
 
-	public GreetingController(@Value("${entrance.service.url}") String serviceUrl) {
+	public GreetingController(@Value("${doorway.service.url}") String serviceUrl) {
 		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
 	}
 	
@@ -35,7 +35,7 @@ public class GreetingController {
 
 		String apiKey = greeting.getKey();
 		String q = greeting.getQuestion();
-		GemCarrier gem = restTemplate.getForObject(serviceUrl + "/entrance/consult" + params, GemCarrier.class, q, apiKey);
+		GemCarrier gem = restTemplate.getForObject(serviceUrl + "/doors/consult" + params, GemCarrier.class, q, apiKey);
 
 		greeting.setKey(gem.getAuthor());
 		greeting.setAnswer(gem.getSaying());

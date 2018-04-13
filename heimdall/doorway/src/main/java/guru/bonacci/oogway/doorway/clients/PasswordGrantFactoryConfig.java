@@ -34,12 +34,11 @@ public class PasswordGrantFactoryConfig {
     @Value("${security.oauth2.client.clientSecret}")
 	private String clientSecret;
 
-    
 	@Bean
 	@Scope(value = SCOPE_PROTOTYPE)
 	public RestTemplate restTemplate(Credentials credentials) {
 		OAuth2RestTemplate template = new OAuth2RestTemplate(resourceDetails(credentials), new DefaultOAuth2ClientContext());
-		template.setAccessTokenProvider(accessTokenProvider());
+		template.setAccessTokenProvider(accessTokenProvider);
 		return template;
 	}
 
@@ -54,18 +53,25 @@ public class PasswordGrantFactoryConfig {
 		resource.setPassword(credentials.getPassword());
 		return resource;
 	}	
-	
-	@Bean
-	AccessTokenProvider accessTokenProvider() {
-		return new MyResourceOwnerPasswordAccessTokenProvider(loadBalancedTemplate());
-	}
 
+	// some singleton like beans..
+	RestTemplate loadBalancedTemplate;
+	
 	@LoadBalanced
 	@Bean
 	RestTemplate loadBalancedTemplate() {
-		return new RestTemplate();
+		loadBalancedTemplate = new RestTemplate();
+		return loadBalancedTemplate;
 	}
+
+	AccessTokenProvider accessTokenProvider;
 	
+	@Bean
+	AccessTokenProvider accessTokenProvider() {
+		accessTokenProvider = new MyResourceOwnerPasswordAccessTokenProvider(loadBalancedTemplate);
+		return accessTokenProvider;
+	}
+
 	// Allows us to set a (loadbalanced) resttemplate
 	static class MyResourceOwnerPasswordAccessTokenProvider extends ResourceOwnerPasswordAccessTokenProvider {
 

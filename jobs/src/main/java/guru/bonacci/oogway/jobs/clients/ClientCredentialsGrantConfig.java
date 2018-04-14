@@ -41,24 +41,24 @@ public class ClientCredentialsGrantConfig {
 	}
 	
 	@Bean
-	public OAuth2ClientContext oAuth2ClientContext() {
+	OAuth2ClientContext oAuth2ClientContext() {
 		return new DefaultOAuth2ClientContext();
 	}
 
 	@Bean
-	public AccessTokenProvider accessTokenProvider() {
+	AccessTokenProvider accessTokenProvider() {
 		return new MyClientCredentialsAccessTokenProvider(loadBalancedTemplate());
 	}
 
 	@LoadBalanced
 	@Bean
-	public RestTemplate loadBalancedTemplate() {
+	RestTemplate loadBalancedTemplate() {
 		return new RestTemplate();
 	}
 	
 	@Bean
 	@ConfigurationProperties(prefix = "security.oauth2.client")
-	public ClientCredentialsResourceDetails clientCredentialsResourceDetails() {
+	ClientCredentialsResourceDetails clientCredentialsResourceDetails() {
 		return new ClientCredentialsResourceDetails();
 	}
 

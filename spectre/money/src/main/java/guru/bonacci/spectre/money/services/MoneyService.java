@@ -24,7 +24,7 @@ public class MoneyService implements SpectreService {
 	public void enrich(String id) {
 		try {
 			// Too lazy for refined error handling today...
-			Spec spec = repo.findOne(id);
+			Spec spec = repo.findById(id).get();
 
 			// Show me the money!!
 			String enrichmentData = cache.get(spec.geoip.country_code2);

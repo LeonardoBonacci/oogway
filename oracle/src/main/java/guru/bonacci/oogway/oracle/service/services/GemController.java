@@ -83,6 +83,7 @@ public class GemController implements InitializingBean {
 		logger.info("Please find me a random gem");
 		
 		Optional<Gem> gem = repo.findRandom(); 
+		gem.ifPresent(g -> logger.info("Random gem found: " + g.getSaying()));
 		return gem.map(GemMapper.MAPPER::fromGem);
 	}	
 

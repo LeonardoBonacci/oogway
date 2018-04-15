@@ -1,6 +1,6 @@
 server:
   port: 1123
 
-entrance:
+doorway:
   service:
-    url: http://entrance-service:3333 
+    url: http://doorway-service:3333 

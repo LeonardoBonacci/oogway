@@ -12,8 +12,8 @@ public class GreetingErrorHandler {
 		e.printStackTrace();
 		
 		Greeting g = new Greeting();
-		g.setKey("is invalid.");
-		g.setAnswer("Poor darling..");
+		g.setKey("Oogway");
+		g.setAnswer("don't cheat!");
 		
 		ModelAndView mav = new ModelAndView("result");
 		mav.addObject("greeting", g);

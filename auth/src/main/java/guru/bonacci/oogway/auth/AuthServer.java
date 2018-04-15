@@ -21,6 +21,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 import guru.bonacci.oogway.auth.models.User;
@@ -37,8 +38,8 @@ public class AuthServer {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Bean
-	public RSAPasswordEncoder passwordEncoder() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
-		return new RSAPasswordEncoder(RSAKeyHelper.loadPublicKey("/ubuntu1/")); //volume mount in Dockerfile	
+	public PasswordEncoder passwordEncoder() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+		return new RSAPasswordEncoder(RSAKeyHelper.loadPublicKey("/ubuntu1/")); //volume mount in Dockerfile		
 	}
 
 	public static void main(String[] args) {
@@ -54,13 +55,13 @@ public class AuthServer {
 	}
 
 	@Bean
-	CommandLineRunner init(MyUserService accountService) {
+	CommandLineRunner init(MyUserService userService) {
 		return (evt) -> Arrays.asList("oogway,user1,user2".split(",")).forEach(username -> {
 			User user = new User();
 			user.setUsername(username);
 			user.setPassword("password");
 			user.setApiKey(reverse(user.getUsername()));
-			accountService.registerUser(user);
+			userService.registerUser(user);
 
 			logger.info("User added: " + user);
 		});

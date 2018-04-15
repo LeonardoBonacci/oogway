@@ -1,9 +1,9 @@
 package guru.bonacci.oogway.oracle.service.persistence;
 
+import static org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders.randomFunction;
 import static guru.bonacci.oogway.utils.MyListUtils.random;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
-import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
-import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -41,13 +40,15 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 	 */
 	@Override
 	public void saveTheNewOnly(Gem... entities) {
+		// current version does not contain the bug fix for existsById
+		// https://jira.spring.io/browse/DATAES-363			
 		List<Gem> newOnes = stream(entities)
-									  .filter(gem -> !gemRepository.exists(gem.getId()))
-									  .peek(gem -> logger.info("About to gain wisdom: '" + gem.getSaying() + "'"))
-									  .collect(toList());
+				.filter(gem -> !gemRepository.findById(gem.getId()).isPresent())
+											 .peek(gem -> logger.info("About to gain wisdom: '" + gem.getSaying() + "'"))
+				    						 .collect(toList());
 		// strangely enough spring data or elasticsearch cannot deal with empty iterables
 		if (!newOnes.isEmpty())
-			gemRepository.save(newOnes);
+			gemRepository.saveAll(newOnes);
 	}
 
 	@WatchMe 
@@ -79,8 +80,7 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 
 	@Override
 	public Optional<Gem> findRandom() {
-		FunctionScoreQueryBuilder fsqb = new FunctionScoreQueryBuilder(matchAllQuery());
-		fsqb.add(ScoreFunctionBuilders.randomFunction(System.currentTimeMillis()));
+		FunctionScoreQueryBuilder fsqb = new FunctionScoreQueryBuilder(randomFunction(System.currentTimeMillis()));
 		return Optional.ofNullable(gemRepository.search(fsqb).iterator().next());
 	}
 }

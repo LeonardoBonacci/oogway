@@ -2,14 +2,26 @@ version: '2.3'
 services:
 
   es:
-    image: elasticsearch:2.4
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.5.3
     restart: always
+    environment:
+      - xpack.security.enabled=false
+      - cluster.name=elasticsearch
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:9200/_cluster/health"]
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1g
 #    volumes: 
 #      - ${ES_PATH_DATA}:/usr/share/elasticsearch/data 
     ports:
       - 9200:9200
       - 9300:9300
-
+      
   rabbit:
     image: rabbitmq:3.6-management
     restart: always
@@ -33,6 +45,17 @@ services:
     restart: always
     ports:
       - 27017:27017
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:5.5.3
+    restart: always
+    environment:
+      - ELASTICSEARCH_URL=http://es:9200
+      - xpack.security.enabled=false
+    ports:
+      - 5601:5601
+    depends_on:
+      - es      
     
   config-service:
     environment:
@@ -40,7 +63,7 @@ services:
     image: leonardobonacci/oogway-config-service
     restart: always
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8888/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
       interval: 10s
       timeout: 3s
 #for demo effect - mount parent directory where (git) config resides
@@ -54,9 +77,6 @@ services:
       SPRING_PROFILES_ACTIVE: dev
     image: leonardobonacci/oogway-orchestration-service
     restart: always
-    depends_on:
-      config-service:
-        condition: service_healthy
     ports:
       - 1111:1111
       
@@ -88,12 +108,12 @@ services:
     volumes:
       - .:/ubuntu1
             
-  entrance-service:
+  doorway-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
       SPRING_PROFILES_ACTIVE: dev
-    image: leonardobonacci/oogway-entrance-service
+    image: leonardobonacci/oogway-doorway-service
     restart: always
     depends_on:
       rabbit:
@@ -111,7 +131,7 @@ services:
     ports:
       - 1123:1123
     depends_on:
-      entrance-service:
+      doorway-service:
         condition: service_started
 
   lumberjack:
@@ -145,6 +165,7 @@ services:
         condition: service_healthy
     ports:
       - 4444:4444
+      - 8001:8001
 
   sannyas-service:
     environment:
@@ -160,3 +181,98 @@ services:
         condition: service_healthy
     ports:
       - 2222:2222
+  
+  job-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
+    image: leonardobonacci/oogway-job-service
+    restart: always
+    depends_on:
+      config-service:
+        condition: service_healthy
+    ports:
+      - 8765:8765
+  
+  localtimer-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
+    image: leonardobonacci/oogway-localtimer-service
+    restart: always
+    depends_on:
+      rabbit:
+        condition: service_started
+      es:
+        condition: service_started
+      config-service:
+        condition: service_healthy
+    ports:
+      - 6666:6666
+
+  sentiment-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
+    image: leonardobonacci/oogway-sentiment-service
+    restart: always
+    depends_on:
+      rabbit:
+        condition: service_started
+      es:
+        condition: service_started
+      config-service:
+        condition: service_healthy
+    ports:
+      - 7777:7777
+
+  weather-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
+    image: leonardobonacci/oogway-weather-service
+    restart: always
+    depends_on:
+      rabbit:
+        condition: service_started
+      es:
+        condition: service_started
+      config-service:
+        condition: service_healthy
+    ports:
+      - 9999:9999
+      
+  money-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
+      SPRING_PROFILES_ACTIVE: dev
+    image: leonardobonacci/oogway-money-service
+    restart: always
+    depends_on:
+      rabbit:
+        condition: service_started
+      es:
+        condition: service_started
+      config-service:
+        condition: service_healthy
+    ports:
+      - 11111:11111
+
+  zipkin:
+    environment:
+      STORAGE_TYPE: elasticsearch
+      ES_HOSTS: es
+    image: openzipkin/zipkin:2.5
+    restart: always
+    ports:
+      - 9411:9411
+
+#  tor: 
+#    image: osminogin/tor-simple
+#    ports:
+#      - 127.0.0.1:9050:9050     

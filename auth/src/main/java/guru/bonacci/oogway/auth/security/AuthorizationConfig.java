@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -18,6 +19,9 @@ import guru.bonacci.oogway.auth.services.MyUserService;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 	private TokenStore tokenStore = new InMemoryTokenStore();
 
@@ -46,19 +50,19 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-    	//TODO .secret(env.getProperty("ENTRANCE_SERVICE_PASSWORD"))
+    	//TODO .secret(env.getProperty("DOORWAY_SERVICE_PASSWORD"))
 
     	// @formatter:off
     	clients.inMemory()
-	            .withClient("entrance-service")
-	            .secret("entrance-service-secret")
+	            .withClient("doorway-service")
+	            .secret(passwordEncoder.encode("doorway-service-secret")) //there must be a better way..
 				.authorizedGrantTypes("client_credentials", "password", "refresh_token")
 	            .scopes("resource-server-read")
                 .accessTokenValiditySeconds(1000)
                 .refreshTokenValiditySeconds(30000)
 		.and()
 				.withClient("job-service")
-				.secret("job-service-secret")
+				.secret(passwordEncoder.encode("job-service-secret")) //but it's already late.
 				.authorizedGrantTypes("client_credentials", "refresh_token")
 	            .scopes("resource-server-read", "resource-server-write");
 		// @formatter:on

@@ -10,6 +10,6 @@ import guru.bonacci.spectre.spectreshared.persistence.Spec;
  */
 public class MoneySpec extends Spec {
 
-	@Field(type = FieldType.String)
+	@Field(type = FieldType.text)
 	public String income;
 }

@@ -27,7 +27,7 @@ public class Tweeter {
 	private Twitter twitterTemplate;
 
 	@Scheduled(cron = "${twitter.cron}")
-	public void runForestRun() {
+	public void runForrestRun() {
 		Optional<GemCarrier> random = oracleClient.random();
 		String tweet = random.map(g -> g.getSaying()).orElse(UUID.randomUUID().toString());
 		logger.info("tweet: " + tweet);

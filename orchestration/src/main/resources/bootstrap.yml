@@ -1,13 +1,9 @@
+server:
+  port: 1111
+
 spring:
   application:
     name: orchestration-service
-  cloud:
-    config:
-      uri: http://config-service:8888
-      label: ${cloud.config.find.label:master}
-      fail-fast: true
-      password: ${config.service.password}
-      username: user
 
 eureka:
   instance:
@@ -15,5 +11,9 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
-    server:
-      waitTimeInMsWhenSyncEmpty: 0
+    serviceUrl: 
+      defaultZone: http://${spring.application.name}:1111/eureka/
+
+logging:
+  level.guru.bonacci.oogway.orchestration: INFO
+      

@@ -1,6 +1,5 @@
 package guru.bonacci.oogway.doorway.ip;
 
-import static guru.bonacci.oogway.doorway.ip.IPologist.LOCAL_IP_1;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -18,7 +17,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.doorway.DoorwayTestApp;
-import guru.bonacci.oogway.doorway.ip.IPologist;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DoorwayTestApp.class, webEnvironment = NONE)
@@ -33,7 +31,7 @@ public class IPologistTests {
 
     @Test
     public void shouldReturnRandomIpWhenLocal() {
-    	assertThat(ipologist.checkUp(LOCAL_IP_1), is(not(equalTo(LOCAL_IP_1))));
+    	assertThat(ipologist.checkUp("127.0.0.1"), is(not(equalTo("127.0.0.1"))));
     }
 
     @Test

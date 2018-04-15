@@ -19,22 +19,22 @@ public class IPologist implements IIPologist {
 
 	private final Logger logger = getLogger(this.getClass());
 
-	static final String LOCAL_IP_1 = "0:0:0:0:0:0:0:1";
-	static final String LOCAL_IP_2 = "127.0.0.1";
-
-	static final String DOCKER_IP_0 = "172.18.0.1";
-	static final String DOCKER_IP_1 = "172.19.0.1";
-	static final String DOCKER_IP_2 = "172.20.0.1";
-	static final String DOCKER_IP_3 = "172.21.0.1";
-	static final String DOCKER_IP_4 = "172.22.0.1";
-
 	List<String> ips;
 
 	private Iterator<String> iperator;
 
 	@PostConstruct
 	public void init() {
-		ips = Arrays.asList(LOCAL_IP_1, LOCAL_IP_2, DOCKER_IP_0, DOCKER_IP_1, DOCKER_IP_2, DOCKER_IP_3, DOCKER_IP_4);
+		ips = Arrays.asList("0:0:0:0:0:0:0:1", 
+							"127.0.0.1", 
+							//TODO list all possible docker-machine ip's
+							"172.18.0.1", 
+							"172.18.0.20", 
+							"172.19.0.1", 
+							"172.20.0.1", 
+							"172.21.0.1",
+							"172.22.0.1"
+							);
 	}
 
 	@Autowired

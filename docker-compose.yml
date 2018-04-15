@@ -77,9 +77,6 @@ services:
       SPRING_PROFILES_ACTIVE: dev
     image: leonardobonacci/oogway-orchestration-service
     restart: always
-    depends_on:
-      config-service:
-        condition: service_healthy
     ports:
       - 1111:1111
       
@@ -266,14 +263,14 @@ services:
     ports:
       - 11111:11111
 
-  #  zipkin:
-#    environment:
-#      STORAGE_TYPE: elasticsearch
-#      ES_HOSTS: es
-#    image: openzipkin/zipkin:2.5
-#    restart: always
-#    ports:
-#      - 9411:9411
+  zipkin:
+    environment:
+      STORAGE_TYPE: elasticsearch
+      ES_HOSTS: es
+    image: openzipkin/zipkin:2.5
+    restart: always
+    ports:
+      - 9411:9411
 
 #  tor: 
 #    image: osminogin/tor-simple

@@ -1,6 +1,6 @@
 package guru.bonacci.oogway.sannyas.service.processing;
 
-import static guru.bonacci.oogway.utils.MyListUtils.random;
+import static guru.bonacci.oogway.utilities.MyListUtils.random;
 
 import java.util.ArrayList;
 import java.util.List;

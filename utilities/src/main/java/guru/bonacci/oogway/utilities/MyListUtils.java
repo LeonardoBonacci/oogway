@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.utils;
+package guru.bonacci.oogway.utilities;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 

@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.utils;
+package guru.bonacci.oogway.utilities;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -15,6 +15,8 @@ import java.util.Set;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import guru.bonacci.oogway.utilities.MyListUtils;
 
 @RunWith(SpringRunner.class)
 public class MyListUtilsTests {

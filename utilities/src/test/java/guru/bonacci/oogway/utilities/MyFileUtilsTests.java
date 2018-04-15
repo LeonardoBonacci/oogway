@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.utils;
+package guru.bonacci.oogway.utilities;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
@@ -10,6 +10,8 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import guru.bonacci.oogway.utilities.MyFileUtils;
 
 @RunWith(SpringRunner.class)
 public class MyFileUtilsTests {

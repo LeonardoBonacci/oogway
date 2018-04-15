@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.utils.security;
+package guru.bonacci.oogway.utilities.security;
 
 import java.io.File;
 import java.io.FileInputStream;

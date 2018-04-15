@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.utils;
+package guru.bonacci.oogway.utilities;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;

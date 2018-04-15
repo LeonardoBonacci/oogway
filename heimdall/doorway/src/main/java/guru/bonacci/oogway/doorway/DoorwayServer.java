@@ -26,7 +26,7 @@ import guru.bonacci.oogway.doorway.clients.CredentialsConfig;
 import guru.bonacci.oogway.doorway.events.DoorwayEventChannels;
 import guru.bonacci.oogway.doorway.security.Decryptor;
 import guru.bonacci.oogway.doorway.security.RSADecryptor;
-import guru.bonacci.oogway.utils.security.RSAKeyHelper;
+import guru.bonacci.oogway.utilities.security.RSAKeyHelper;
 
 @SpringBootApplication
 @ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, 

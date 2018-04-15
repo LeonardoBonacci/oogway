@@ -27,7 +27,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import guru.bonacci.oogway.auth.models.User;
 import guru.bonacci.oogway.auth.security.RSAPasswordEncoder;
 import guru.bonacci.oogway.auth.services.MyUserService;
-import guru.bonacci.oogway.utils.security.RSAKeyHelper;
+import guru.bonacci.oogway.utilities.security.RSAKeyHelper;
 
 @SpringBootApplication
 @EnableEurekaClient

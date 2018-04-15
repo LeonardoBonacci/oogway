@@ -1,7 +1,7 @@
 package guru.bonacci.oogway.sannyas.service.bq;
 
-import static guru.bonacci.oogway.utils.MyFileUtils.readToList;
-import static guru.bonacci.oogway.utils.MyFileUtils.readToString;
+import static guru.bonacci.oogway.utilities.MyFileUtils.readToList;
+import static guru.bonacci.oogway.utilities.MyFileUtils.readToString;
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;

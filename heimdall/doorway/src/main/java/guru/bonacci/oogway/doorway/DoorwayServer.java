@@ -47,7 +47,8 @@ public class DoorwayServer {
 	public static void main(String[] args) {
 		SpringApplication.run(DoorwayServer.class, args);
 	}
-	
+
+	// Doorway offers a non secure web-service: thus open-up!
 	@Configuration
 	@EnableWebSecurity
 	protected static class webSecurityConfig extends WebSecurityConfigurerAdapter {

@@ -46,7 +46,7 @@ public class BigBrother {
 
 		// and block the greedy clients
 		long visits = lumberClient.visits(apiKey);
-		if (visits >= GREED_STARTS_HERE) { //TODO this could be user specific info
+		if (visits >= GREED_STARTS_HERE) { //this could be user specific info
 			throw new GreedyException();
 		}
 	}

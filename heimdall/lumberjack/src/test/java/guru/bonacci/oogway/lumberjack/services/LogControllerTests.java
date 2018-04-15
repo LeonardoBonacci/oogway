@@ -1,9 +1,8 @@
 package guru.bonacci.oogway.lumberjack.services;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Test;
@@ -38,9 +37,7 @@ public class LogControllerTests {
 	public void shouldReceive200OnRequest() throws Exception {
 		Long visits = 5L;
 		given(service.insert(any(Log.class))).willReturn(visits);
-		
-		mvc.perform(get("/visits/123"))
-			.andExpect(status().isOk())
-			.andExpect(content().json(visits.toString()));
+
+		mvc.perform(get("/visits/123")).andExpect(status().isUnauthorized());
 	}
 }

@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.springframework.cloud.stream.annotation.StreamListener;
 
 import guru.bonacci.oogway.shareddomain.GenericEvent;
-import guru.bonacci.spectre.spectreshared.enrichment.SpectreService;
+import guru.bonacci.spectre.spectreutilities.enrichment.SpectreService;
 
 public abstract class SpectreRabbitEar {
 

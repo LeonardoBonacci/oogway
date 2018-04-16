@@ -13,7 +13,7 @@
 		<module>local-timer</module>
 	    <module>money</module>
 		<module>sentiment</module>
-	    <module>spectre-shared</module>
+	    <module>spectre-utilities</module>
 		<module>weather</module>
 	</modules>
 </project>

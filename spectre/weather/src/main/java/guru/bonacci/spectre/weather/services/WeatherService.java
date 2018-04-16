@@ -14,9 +14,9 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import guru.bonacci.spectre.spectreshared.enrichment.SpectreService;
 import guru.bonacci.spectre.spectreshared.persistence.Spec;
 import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
+import guru.bonacci.spectre.spectreutilities.enrichment.SpectreService;
 
 @RefreshScope
 @Service

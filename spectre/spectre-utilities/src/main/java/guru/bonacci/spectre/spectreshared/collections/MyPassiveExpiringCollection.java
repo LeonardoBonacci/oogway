@@ -1,4 +1,4 @@
-package guru.bonacci.spectre.spectreshared.utilities.collections;
+package guru.bonacci.spectre.spectreshared.collections;
 
 import static java.util.UUID.randomUUID;
 import static java.util.stream.Collectors.toMap;

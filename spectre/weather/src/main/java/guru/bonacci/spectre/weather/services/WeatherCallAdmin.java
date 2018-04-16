@@ -2,8 +2,8 @@ package guru.bonacci.spectre.weather.services;
 
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.spectre.spectreshared.utilities.collections.MyPassiveExpiringCollection;
-import guru.bonacci.spectre.spectreshared.utilities.collections.TooEnthusiasticWebserviceUsageException;
+import guru.bonacci.spectre.spectreshared.collections.MyPassiveExpiringCollection;
+import guru.bonacci.spectre.spectreshared.collections.TooEnthusiasticWebserviceUsageException;
 
 @Component
 public class WeatherCallAdmin {

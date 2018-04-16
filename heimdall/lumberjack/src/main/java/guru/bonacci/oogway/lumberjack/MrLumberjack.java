@@ -25,13 +25,13 @@ import guru.bonacci.oogway.lumberjack.security.CustomUserInfoTokenServices;
 @SpringBootApplication
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableResourceServer
-public class LumberjackServer extends ResourceServerConfigurerAdapter {
+public class MrLumberjack extends ResourceServerConfigurerAdapter {
 	
 	@Autowired
 	private ResourceServerProperties sso;
 
 	public static void main(String[] args) {
-		SpringApplication.run(LumberjackServer.class, args);
+		SpringApplication.run(MrLumberjack.class, args);
 	}
 
 	@LoadBalanced

@@ -50,7 +50,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>gateway-service</finalName>
+					<finalName>gateway</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

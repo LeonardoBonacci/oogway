@@ -1,6 +1,6 @@
 FROM java:8-jre
 
-ADD ./target/sentiment-service.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/sentiment-service.jar"]
+ADD ./target/sentiment.jar /app/
+CMD ["java", "-Xmx200m", "-jar", "/app/sentiment.jar"]
 
 EXPOSE 1234

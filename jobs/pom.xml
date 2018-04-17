@@ -88,7 +88,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>job-service</finalName>
+					<finalName>jobs</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

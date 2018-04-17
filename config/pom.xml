@@ -36,7 +36,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>config-service</finalName>
+					<finalName>config</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

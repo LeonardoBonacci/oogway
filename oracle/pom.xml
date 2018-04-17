@@ -108,7 +108,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>oracle-service</finalName>
+					<finalName>oracle</finalName>
 				</configuration>
 			</plugin>
 			<plugin>

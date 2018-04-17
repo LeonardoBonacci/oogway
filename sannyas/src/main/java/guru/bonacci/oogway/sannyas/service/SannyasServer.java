@@ -14,9 +14,6 @@ import org.springframework.integration.annotation.IntegrationComponentScan;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import guru.bonacci.oogway.sannyas.service.events.SannyasEventChannels;
 
-/**
- * Micro-service for retrieval and indexing of wisdom
- */
 @SpringBootApplication
 @EnableEurekaClient
 @EnableAutoConfiguration

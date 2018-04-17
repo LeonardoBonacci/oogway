@@ -1,6 +1,6 @@
 FROM java:8-jre
 
-ADD ./target/job-service.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/job-service.jar"]
+ADD ./target/jobs.jar /app/
+CMD ["java", "-Xmx200m", "-jar", "/app/jobs.jar"]
 
 EXPOSE 8765

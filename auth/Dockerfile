@@ -1,7 +1,7 @@
 FROM java:8-jre
 
-ADD ./target/auth-service.jar /app/
+ADD ./target/auth.jar /app/
 VOLUME /ubuntu1
-CMD ["java", "-Xmx200m", "-jar", "/app/auth-service.jar"]
+CMD ["java", "-Xmx200m", "-jar", "/app/auth.jar"]
 
 EXPOSE 5000

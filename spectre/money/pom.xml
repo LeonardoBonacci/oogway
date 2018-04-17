@@ -46,7 +46,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>money-service</finalName>
+					<finalName>money</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

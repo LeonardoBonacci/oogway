@@ -12,7 +12,7 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl: 
-      defaultZone: http://${spring.application.name}:1111/eureka/
+      defaultZone: http://orchestration-service:1111/eureka/
 
 logging:
   level.guru.bonacci.oogway.orchestration: INFO

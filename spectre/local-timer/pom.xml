@@ -40,7 +40,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>localtimer-service</finalName>
+					<finalName>localtimer</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

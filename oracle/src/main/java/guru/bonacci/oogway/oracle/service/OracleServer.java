@@ -20,7 +20,6 @@ import org.springframework.security.oauth2.client.resource.BaseOAuth2ProtectedRe
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
-import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.oracle.service.events.OracleEventChannels;
 import guru.bonacci.oogway.oracle.service.security.CustomUserInfoTokenServices;
@@ -30,9 +29,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-/**
- * Micro-service for the user to communicate with
- */
 @SpringBootApplication
 @EnableEurekaClient
 @EnableSwagger2

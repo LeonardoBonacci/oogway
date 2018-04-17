@@ -1,6 +1,6 @@
 FROM java:8-jre
 
-ADD ./target/weather-service.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/weather-service.jar"]
+ADD ./target/weather.jar /app/
+CMD ["java", "-Xmx200m", "-jar", "/app/weather.jar"]
 
 EXPOSE 9999

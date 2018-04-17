@@ -11,20 +11,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.utilities.MyFileUtils;
+import guru.bonacci.oogway.utilities.CustomFileUtils;
 
 @RunWith(SpringRunner.class)
-public class MyFileUtilsTests {
+public class CustomFileUtilsTests {
 
 	@Test
 	public void shouldReadFileToList() throws IOException {
-		List<String> output = MyFileUtils.readToList("read-me-test.txt");
+		List<String> output = CustomFileUtils.readToList("read-me-test.txt");
 		assertThat(output, hasSize(4));
 	}
 	
 	@Test
 	public void shouldReadFileToString() throws IOException {
-		String output = MyFileUtils.readToString("read-me-test.txt");
+		String output = CustomFileUtils.readToString("read-me-test.txt");
 		String expectedOutput = "a line\na phrase\na saying\na poem";
 		assertThat(output, is(expectedOutput));
 	}

@@ -11,21 +11,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.spectre.spectreshared.collections.MyPassiveExpiringCollection;
+import guru.bonacci.spectre.spectreshared.collections.CustomPassiveExpiringCollection;
 
 
 @RunWith(SpringRunner.class)
-public class MyPassiveExpiringCollectionTests {
+public class CustomPassiveExpiringCollectionTests {
 
 	@Test
 	public void shouldBeEmpty() {
-		MyPassiveExpiringCollection<String> c = new MyPassiveExpiringCollection<>();
+		CustomPassiveExpiringCollection<String> c = new CustomPassiveExpiringCollection<>();
 		assertThat(c.values(), hasSize(0));
 	}
 	
 	@Test
 	public void shouldBeEqualToCollectionSize() {
-		MyPassiveExpiringCollection<String> c = new MyPassiveExpiringCollection<>();
+		CustomPassiveExpiringCollection<String> c = new CustomPassiveExpiringCollection<>();
 		assertThat(c.size(), is(equalTo(c.values().size())));
 		c.add("aa");
 		assertThat(c.size(), is(equalTo(c.values().size())));
@@ -37,7 +37,7 @@ public class MyPassiveExpiringCollectionTests {
 	
 	@Test
 	public void shouldEmptyCollection() {
-		MyPassiveExpiringCollection<String> c = new MyPassiveExpiringCollection<>();
+		CustomPassiveExpiringCollection<String> c = new CustomPassiveExpiringCollection<>();
 		c.addAll(of("dd","ee").collect(toList()));
 		c.clear();
 		assertThat(c.size(), is(equalTo(0)));
@@ -45,7 +45,7 @@ public class MyPassiveExpiringCollectionTests {
 
 	@Test
 	public void shouldReturnTrueWhenEmpty() {
-		MyPassiveExpiringCollection<String> c = new MyPassiveExpiringCollection<>();
+		CustomPassiveExpiringCollection<String> c = new CustomPassiveExpiringCollection<>();
 		c.addAll(of("dd","ee").collect(toList()));
 		assertThat(c.isEmpty(), is(false));
 		c.clear();
@@ -54,7 +54,7 @@ public class MyPassiveExpiringCollectionTests {
 
 	@Test
 	public void shouldContainElement() {
-		MyPassiveExpiringCollection<String> c = new MyPassiveExpiringCollection<>();
+		CustomPassiveExpiringCollection<String> c = new CustomPassiveExpiringCollection<>();
 		String el1 = "abc", el2 = "def";
 		c.add(el1);
 		assertThat(c.contains(el1), is(true));
@@ -64,7 +64,7 @@ public class MyPassiveExpiringCollectionTests {
 	// now the more interesting test cases
 	@Test
 	public void shouldRemoveElementAfterExpiring() throws InterruptedException {
-		MyPassiveExpiringCollection<String> c = new MyPassiveExpiringCollection<>(100);
+		CustomPassiveExpiringCollection<String> c = new CustomPassiveExpiringCollection<>(100);
 		String e = "abc";
 		c.add(e);
 		assertThat(c.contains(e), is(true));
@@ -76,7 +76,7 @@ public class MyPassiveExpiringCollectionTests {
 
 	@Test
 	public void shouldRemoveElementsAfterExpiring() throws InterruptedException {
-		MyPassiveExpiringCollection<String> c = new MyPassiveExpiringCollection<>(1000);
+		CustomPassiveExpiringCollection<String> c = new CustomPassiveExpiringCollection<>(1000);
 		c.addAll(of("aa","bb").collect(toList()));
 		assertThat(c.size(), is(equalTo(2)));
 		Thread.sleep(600); //little nap

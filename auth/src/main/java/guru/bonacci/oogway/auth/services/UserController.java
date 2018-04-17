@@ -21,7 +21,7 @@ public class UserController {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired 
-	private MyUserService userService;
+	private CustomUserService userService;
 
 	@RequestMapping(value = "/current", method = GET)
     public Principal user(Principal user) {

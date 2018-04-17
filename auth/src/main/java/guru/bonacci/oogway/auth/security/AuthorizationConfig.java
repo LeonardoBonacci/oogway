@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
-import guru.bonacci.oogway.auth.services.MyUserService;
+import guru.bonacci.oogway.auth.services.CustomUserService;
 
 @Configuration
 @EnableAuthorizationServer
@@ -27,7 +27,7 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService(){
-        return new MyUserService();
+        return new CustomUserService();
     }
 
     @Autowired

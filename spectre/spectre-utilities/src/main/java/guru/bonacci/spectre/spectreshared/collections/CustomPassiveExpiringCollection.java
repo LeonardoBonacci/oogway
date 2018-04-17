@@ -11,7 +11,7 @@ import java.util.UUID;
 
 import org.apache.commons.collections4.map.PassiveExpiringMap;
 
-public class MyPassiveExpiringCollection<E> implements Serializable {
+public class CustomPassiveExpiringCollection<E> implements Serializable {
 
 	/** Serialization version */
 	private static final long serialVersionUID = 1L;
@@ -27,7 +27,7 @@ public class MyPassiveExpiringCollection<E> implements Serializable {
 	/**
 	 * Never expiring
 	 */
-	public MyPassiveExpiringCollection() {
+	public CustomPassiveExpiringCollection() {
 		decoratorMap = new PassiveExpiringMap<>();
 	}
 
@@ -35,7 +35,7 @@ public class MyPassiveExpiringCollection<E> implements Serializable {
 	 * Construct a map decorator using the given time-to-live value measured in
 	 * milliseconds
 	 */
-	public MyPassiveExpiringCollection(long timeToLiveMillis) {
+	public CustomPassiveExpiringCollection(long timeToLiveMillis) {
 		decoratorMap = new PassiveExpiringMap<>(timeToLiveMillis);
 	}
 
@@ -43,7 +43,7 @@ public class MyPassiveExpiringCollection<E> implements Serializable {
 	 * Construct a map decorator that decorates the given collection using the given
 	 * time-to-live value measured in milliseconds
 	 */
-	public MyPassiveExpiringCollection(long timeToLiveMillis, Collection<E> c) {
+	public CustomPassiveExpiringCollection(long timeToLiveMillis, Collection<E> c) {
 		this(timeToLiveMillis);
 		this.addAll(c);
 	}
@@ -51,7 +51,7 @@ public class MyPassiveExpiringCollection<E> implements Serializable {
 	/**
 	 * Never expiring collection
 	 */
-	public MyPassiveExpiringCollection(Collection<E> c) {
+	public CustomPassiveExpiringCollection(Collection<E> c) {
 		this();
 		this.addAll(c);
 	}

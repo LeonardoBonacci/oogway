@@ -1,8 +1,8 @@
 package guru.bonacci.oogway.doorway.cheaters;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
-import static guru.bonacci.oogway.utilities.MyFileUtils.readToList;
-import static guru.bonacci.oogway.utilities.MyListUtils.random;
+import static guru.bonacci.oogway.utilities.CustomFileUtils.readToList;
+import static guru.bonacci.oogway.utilities.CustomListUtils.random;
 import static java.util.Collections.singletonList;
 import static org.slf4j.LoggerFactory.getLogger;
 

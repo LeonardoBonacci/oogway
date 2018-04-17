@@ -2,9 +2,12 @@ package guru.bonacci.oogway.doorway.clients;
 
 import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.cloud.netflix.ribbon.SpringClientFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -33,11 +36,19 @@ public class PasswordGrantFactoryConfig {
     @Value("${security.oauth2.client.clientSecret}")
 	private String clientSecret;
 
+    @Autowired
+    public SpringClientFactory clientFactory;
+	
+	@Autowired
+    public LoadBalancerClient loadBalancer;
+
 	@Bean
+    @LoadBalanced
 	@Scope(value = SCOPE_PROTOTYPE)
 	public RestTemplate restTemplate(Credentials credentials) {
 		OAuth2RestTemplate template = new OAuth2RestTemplate(resourceDetails(credentials), new DefaultOAuth2ClientContext());
 		template.setAccessTokenProvider(accessTokenProvider());
+    	template.setRequestFactory(new CustomRibbonClientHttpRequestFactory(clientFactory, loadBalancer));
 		return template;
 	}
 
@@ -55,7 +66,7 @@ public class PasswordGrantFactoryConfig {
 
 	// Sssst, don't tell spring...
 	private ResourceOwnerPasswordAccessTokenProvider accessTokenProvider() {
-		return new MyResourceOwnerPasswordAccessTokenProvider(loadBalancedTemplate());
+		return new CustomResourceOwnerPasswordAccessTokenProvider(loadBalancedTemplate());
 	}
 
 	@LoadBalanced
@@ -65,11 +76,11 @@ public class PasswordGrantFactoryConfig {
 	}
 
 	// Allows us to set a (loadbalanced) resttemplate
-	static class MyResourceOwnerPasswordAccessTokenProvider extends ResourceOwnerPasswordAccessTokenProvider {
+	static class CustomResourceOwnerPasswordAccessTokenProvider extends ResourceOwnerPasswordAccessTokenProvider {
 
 		private RestOperations restOperations;
 
-		public MyResourceOwnerPasswordAccessTokenProvider(RestOperations restOperations) {
+		public CustomResourceOwnerPasswordAccessTokenProvider(RestOperations restOperations) {
 			this.restOperations = restOperations;
 		}
 

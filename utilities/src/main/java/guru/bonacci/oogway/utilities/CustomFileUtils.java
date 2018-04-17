@@ -13,7 +13,7 @@ import java.util.stream.Collector;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-public class MyFileUtils {
+public class CustomFileUtils {
 
 	public static String readToString(String fileName) throws IOException {
 		Resource resource = new ClassPathResource(fileName);

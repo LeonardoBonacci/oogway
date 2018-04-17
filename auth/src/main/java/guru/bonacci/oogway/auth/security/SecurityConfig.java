@@ -11,14 +11,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import guru.bonacci.oogway.auth.services.MyUserService;
+import guru.bonacci.oogway.auth.services.CustomUserService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    public MyUserService userDetailsService;
+    public CustomUserService userDetailsService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

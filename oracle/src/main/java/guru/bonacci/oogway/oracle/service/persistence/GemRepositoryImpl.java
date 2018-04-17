@@ -1,7 +1,7 @@
 package guru.bonacci.oogway.oracle.service.persistence;
 
 import static org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders.randomFunction;
-import static guru.bonacci.oogway.utilities.MyListUtils.random;
+import static guru.bonacci.oogway.utilities.CustomListUtils.random;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;

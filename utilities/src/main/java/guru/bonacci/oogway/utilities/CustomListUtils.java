@@ -14,7 +14,7 @@ import java.util.Random;
  * However, I couldn't find one.
  * That's why it is here.
  */
-public class MyListUtils {
+public class CustomListUtils {
 
 	/**
 	 * Random object used by random method. This has to be not local to the

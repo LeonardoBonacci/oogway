@@ -16,10 +16,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.bonacci.oogway.utilities.MyListUtils;
+import guru.bonacci.oogway.utilities.CustomListUtils;
 
 @RunWith(SpringRunner.class)
-public class MyListUtilsTests {
+public class CustomListUtilsTests {
 
 	@Test
 	public void shouldReturnDifferentElements() {
@@ -29,7 +29,7 @@ public class MyListUtilsTests {
 
 		Set<String> results = new HashSet<>();
 		for (int i=0; i<10; i++) 
-			results.add(MyListUtils.random(asList(s1, s2, s3)).get());
+			results.add(CustomListUtils.random(asList(s1, s2, s3)).get());
 
 		assertThat(results.size(), greaterThan(1));
 	}
@@ -37,13 +37,13 @@ public class MyListUtilsTests {
 	@Test
 	public void shouldReturnNoElementForEmptyCollection() {
 		List<String> input = emptyList();
-		Optional<String> result = MyListUtils.random(input);
+		Optional<String> result = CustomListUtils.random(input);
 		assertThat(true, is(not(result.isPresent())));
 	}
 
 	@Test
 	public void shouldReturnNoElementForNull() {
-		Optional<String> result = MyListUtils.random(null);
+		Optional<String> result = CustomListUtils.random(null);
 		assertThat(true, is(not(result.isPresent())));
 	}
 }

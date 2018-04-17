@@ -13,7 +13,7 @@ import guru.bonacci.oogway.auth.models.User;
 import guru.bonacci.oogway.auth.repositories.UserRepository;
 
 @Service
-public class MyUserService implements UserDetailsService {
+public class CustomUserService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepo;

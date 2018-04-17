@@ -47,7 +47,7 @@ public class ClientCredentialsGrantConfig {
 
 	@Bean
 	AccessTokenProvider accessTokenProvider() {
-		return new MyClientCredentialsAccessTokenProvider(loadBalancedTemplate());
+		return new CustomClientCredentialsAccessTokenProvider(loadBalancedTemplate());
 	}
 
 	@LoadBalanced
@@ -70,11 +70,11 @@ public class ClientCredentialsGrantConfig {
 	}
 	
 	// Allows us to set a (loadbalanced) resttemplate
-	static class MyClientCredentialsAccessTokenProvider extends ClientCredentialsAccessTokenProvider {
+	static class CustomClientCredentialsAccessTokenProvider extends ClientCredentialsAccessTokenProvider {
 
 		private RestOperations restOperations;
 
-		public MyClientCredentialsAccessTokenProvider(RestOperations restOperations) {
+		public CustomClientCredentialsAccessTokenProvider(RestOperations restOperations) {
 			this.restOperations = restOperations;
 		}
 

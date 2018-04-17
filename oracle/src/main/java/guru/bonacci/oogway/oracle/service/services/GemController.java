@@ -1,6 +1,6 @@
 package guru.bonacci.oogway.oracle.service.services;
 
-import static guru.bonacci.oogway.utilities.MyFileUtils.readToList;
+import static guru.bonacci.oogway.utilities.CustomFileUtils.readToList;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;

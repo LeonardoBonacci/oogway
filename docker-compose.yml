@@ -164,8 +164,7 @@ services:
       config-service:
         condition: service_healthy
     ports:
-      - 4444:4444
-      - 8001:8001
+      - 4444
 
   sannyas-service:
     environment:
@@ -180,7 +179,7 @@ services:
       config-service:
         condition: service_healthy
     ports:
-      - 2222:2222
+      - 2222
   
   job-service:
     environment:
@@ -263,15 +262,17 @@ services:
     ports:
       - 11111:11111
 
-  zipkin:
-    environment:
-      STORAGE_TYPE: elasticsearch
-      ES_HOSTS: es
-    image: openzipkin/zipkin:2.5
-    restart: always
-    ports:
-      - 9411:9411
+#  -- not working since upgrade --
+#  zipkin: 
+#    environment:
+#      STORAGE_TYPE: elasticsearch
+#      ES_HOSTS: es
+#    image: openzipkin/zipkin:2.5
+#    restart: always
+#    ports:
+#      - 9411:9411
 
+#  -- experimental feature working since upgrade --
 #  tor: 
 #    image: osminogin/tor-simple
 #    ports:

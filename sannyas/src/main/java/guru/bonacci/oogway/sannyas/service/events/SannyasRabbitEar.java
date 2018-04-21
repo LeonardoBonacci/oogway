@@ -21,7 +21,7 @@ public class SannyasRabbitEar {
 
     @StreamListener(ORACLE)
 	public void onMessage(GenericEvent event) {
-		logger.info("An opportunity to learn... '" + event.getContent() + "'");
+		logger.error("An opportunity to learn... '" + event.getContent() + "'");//error: to show load balancing
 		manager.delegate(event.getContent());
 	}
 }

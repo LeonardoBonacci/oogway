@@ -69,6 +69,8 @@ services:
 #for demo effect - mount parent directory where (git) config resides
 #    volumes:
 #      - ./..:/ubuntu1
+    ports:
+      - 8888:8888
 
   orchestration-service:
     environment:

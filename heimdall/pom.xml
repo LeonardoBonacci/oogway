@@ -13,5 +13,6 @@
 		<module>doorway</module>
 	    <module>greeter</module>
 	    <module>lumberjack</module>
+    <module>answer-the-app</module>
   </modules>
 </project>

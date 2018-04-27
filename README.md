@@ -13,7 +13,7 @@ Thus, engineers, computer scientists, software developers, programmers and hacke
 Installation guide
 ------------------
 
-First check out this code. You will need two environment variables, CLOUD_CONFIG_FIND_LABEL:master to define the configuration branch name and CONFIG_SERVICE_PASSWORD:<any value> to secure the configuration service. Having docker installed run 'docker-compose up' from oogway's root directory and all should work smoothly. A linux-like terminal accessible on 'localhost' allows you to chat. I have never tested to build and run it on a clean machine, so if some instruction is missing: please let me know! 
+First check out this code. You will need two environment variables. CLOUD_CONFIG_FIND_LABEL with value 'master' to define the configuration branch name and CONFIG_SERVICE_PASSWORD with any value to secure the configuration service. Having docker installed run 'docker-compose up' from oogway's root directory and all should work smoothly. A linux-like terminal accessible on 'localhost' allows you to chat. I have never tested to build and run it on a clean machine, so if some instruction is missing: please let me know! 
 
 *Disclaimer* :) 
 Inspecting the project you will notice strange or at least uncommon words throughout the code ('Sannyasin' instead of 'Worker', 'Manager' instead of 'WorkerEngine'). This being a hobby project, I have used the lack of supervision to take a few coding short cuts, and have been excessively creative in choosing class, method and variable names. Don't try this at home when you're creating real life production software and please stick to the commonly used patterns and naming conventions to ease your colleagues' professional life.

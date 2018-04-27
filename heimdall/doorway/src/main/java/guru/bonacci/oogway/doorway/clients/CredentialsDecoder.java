@@ -21,15 +21,15 @@ public class CredentialsDecoder implements Decoder {
 	@Autowired
 	private Decryptor decryptor;
 
-    @Override
-    public Object decode(Response response, Type type) throws IOException {
-    	Object o = decoder.decode(response, type);
-        if (Credentials.class.equals(type)) {
-        	Credentials c = (Credentials)o;
-        	c.setPassword(decryptor.decrypt(c.getEncryptedPassword()));
-    		c.setEncryptedPassword(null);
-    		return c;
-        }
-        throw new DecodeException(format("%s is not a type supported by this decoder.", type));
-    }
+	@Override
+	public Object decode(Response response, Type type) throws IOException {
+		Object o = decoder.decode(response, type);
+		if (Credentials.class.equals(type)) {
+			Credentials c = (Credentials) o;
+			c.setPassword(decryptor.decrypt(c.getEncryptedPassword()));
+			c.setEncryptedPassword(null);
+			return c;
+		}
+		throw new DecodeException(format("%s is not a type supported by this decoder.", type));
+	}
 }

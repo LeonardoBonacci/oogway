@@ -1,6 +1,6 @@
 package guru.bonacci.oogway.doorway.services;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.springframework.util.StringUtils.isEmpty;
 
 import java.util.Optional;
 

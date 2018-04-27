@@ -13,13 +13,7 @@ Thus, engineers, computer scientists, software developers, programmers and hacke
 Installation guide
 ------------------
 
-ElasticSearch is used to create a simple knowledge base with (borrowed) wisdom, referred to here as 'the Oracle'. Go here https://www.elastic.co/ and install ElasticSearch on your computer. I'm using version 2.4.4 and it runs fine. Define a cluster named 'delphi'. To simply test it you can leave default values for all other configurations.
-
-Through RabbitMQ the different micro-services communicate. Go here https://www.rabbitmq.com/ and install RabbitMQ. Version 3.6.10. should do. No need to configure anything. Just run it.
-
-At last, for playing with logs also install logstash. Adapt and run run-env.bat to start up the just mentioned tooling in one go.
-
-Now check out this code. It being a micro-services architecture, you need to run OrchestrationServer, SannyasServer and WebServer. Easiest, for Windows users at least, is to run the script build-and-run.bat. It does what the title suggests. Load balancing on multiple running instances of the SannyasServer and/or of the WebServer are dealt with by the OrchestrationServer. 
+First check out this code. You will need two environment variables, CLOUD_CONFIG_FIND_LABEL:master to define the configuration branch name and CONFIG_SERVICE_PASSWORD:<any value> to secure the configuration service. Having docker installed run 'docker-compose up' from oogway's root directory and all should work smoothly. A linux-like terminal accessible on 'localhost' allows you to chat. I have never tested to build and run it on a clean machine, so if some instruction is missing: please let me know! 
 
 *Disclaimer* :) 
 Inspecting the project you will notice strange or at least uncommon words throughout the code ('Sannyasin' instead of 'Worker', 'Manager' instead of 'WorkerEngine'). This being a hobby project, I have used the lack of supervision to take a few coding short cuts, and have been excessively creative in choosing class, method and variable names. Don't try this at home when you're creating real life production software and please stick to the commonly used patterns and naming conventions to ease your colleagues' professional life.

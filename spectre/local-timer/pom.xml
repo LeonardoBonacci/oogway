@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>guru.bonacci.oogway</groupId>
 		<artifactId>spectre</artifactId>
-		<version>3.3-SNAPSHOT</version>
+		<version>4.0</version>
 	</parent>
 	<artifactId>local-timer</artifactId>
 	<packaging>jar</packaging>

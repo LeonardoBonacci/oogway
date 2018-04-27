@@ -56,11 +56,11 @@ public class AuthServer {
 
 	@Bean
 	CommandLineRunner init(CustomUserService userService) {
-		return (evt) -> Arrays.asList("oogway,user1,user2".split(",")).forEach(username -> {
+		return (evt) -> Arrays.asList("oogway,user1,app".split(",")).forEach(username -> {
 			User user = new User();
 			user.setUsername(username);
 			user.setPassword("password");
-			user.setApiKey(reverse(user.getUsername()));
+			user.setApiKey(reverse(username));
 			userService.registerUser(user);
 
 			logger.info("User added: " + user);

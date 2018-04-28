@@ -38,6 +38,8 @@ public class AnsweringMachine {
 					.collect(toList());
 			answers.addAll(readToList("schop.txt").stream().map(quote -> new GemCarrier(quote, "Arthur Schopenhauer"))
 					.collect(toList()));
+			answers.addAll(readToList("david.txt").stream().map(quote -> new GemCarrier(quote, "David Thoreau"))
+					.collect(toList()));
 		};
 	}
 

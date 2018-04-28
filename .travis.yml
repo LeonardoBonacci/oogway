@@ -68,13 +68,7 @@ after_success:
   - docker tag $DOORWAY:$COMMIT $DOORWAY:$TAG
   - docker push $DOORWAY
   
-  # GREETER
-  - export GREETER=$DOCKER_USERNAME/oogway-greeter
-  - docker build -t $GREETER:$COMMIT ./heimdall/greeter
-  - docker tag $GREETER:$COMMIT $GREETER:$TAG
-  - docker push $GREETER
-
-   # LUMBERJACK
+  # LUMBERJACK
   - export LUMBERJACK=$DOCKER_USERNAME/oogway-lumberjack
   - docker build -t $LUMBERJACK:$COMMIT ./heimdall/lumberjack
   - docker tag $LUMBERJACK:$COMMIT $LUMBERJACK:$TAG

@@ -128,14 +128,6 @@ services:
     volumes:
       - .:/ubuntu1
 
-  greeter:
-    image: leonardobonacci/oogway-greeter
-    ports:
-      - 1123:1123
-    depends_on:
-      doorway-service:
-        condition: service_started
-
   lumberjack:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD

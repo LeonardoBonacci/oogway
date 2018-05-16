@@ -6,8 +6,8 @@
 		<artifactId>heimdall</artifactId>
 		<version>4.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>answer-the-app</artifactId>
-	<name>answer-the-app</name>
+	<artifactId>doorway-stub</artifactId>
+	<name>doorway-stub</name>
 
 	<dependencies>
 		<dependency>

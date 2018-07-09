@@ -1,19 +1,15 @@
 package guru.bonacci.oogway.oracle.service.services;
 
-import static guru.bonacci.oogway.utilities.CustomFileUtils.readToList;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import java.io.IOException;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -32,7 +28,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/gems")
 @Api(value = "gemming", description = "Made for Gem Mining")
-public class GemController implements InitializingBean {
+public class GemController {
 
 	private final Logger logger = getLogger(this.getClass());
 
@@ -45,25 +41,6 @@ public class GemController implements InitializingBean {
 		binder.addValidators(new GemValidator());
 	}
 
-	@Autowired
-	Environment env;
-	
-	@Override
-	public void afterPropertiesSet() {
-		// creative exclusion, is it not?
-		if (env.acceptsProfiles("!unit-test")) {
-			try {
-				Gem[] friedrichsBest = readToList("nietzsche.txt").stream()
-																	.map(quote -> new Gem(quote, "Friedrich Nietzsche"))
-																	.toArray(Gem[]::new);
-				repo.saveTheNewOnly(friedrichsBest);
-			} catch (IOException e) {
-				logger.error("Nietzsche!!", e);
-			}
-		}	
-	}	
-
-	
 	@ApiOperation(value = "Search for a gem", response = GemCarrier.class)
 	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
 	@RequestMapping(method = GET)

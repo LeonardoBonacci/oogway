@@ -10,6 +10,7 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -17,6 +18,7 @@ import lombok.ToString;
  * use in jewelry. In this context: wisdom is a gem of infinite value.
  */
 @Data
+@NoArgsConstructor
 @ToString(exclude="id")
 @Document(indexName = "oracle", type = "quote", shards = 1, replicas = 0, refreshInterval = "-1")
 public class Gem {
@@ -33,9 +35,6 @@ public class Gem {
 
 	@Field(type = keyword)
 	private String author;
-
-	public Gem() {
-	}
 
 	/**
 	 * We don't want to have multiple ES-documents for the same quotes. In

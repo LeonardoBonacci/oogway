@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.oracle.service.events.OracleGateway;
@@ -21,6 +22,7 @@ public class EnquiryInterceptor {
 	@Autowired
 	private OracleGateway gateway;
 
+	@Async
 	@Before("@annotation(WatchMe) && args(searchString,..)")
 	public void spreadTheNews(JoinPoint joinPoint, String searchString) {
 		logger.info("Someone asked '" + searchString + "'");

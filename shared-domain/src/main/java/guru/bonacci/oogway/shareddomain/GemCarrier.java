@@ -3,6 +3,7 @@ package guru.bonacci.oogway.shareddomain;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 /**
@@ -11,6 +12,7 @@ import lombok.NonNull;
  * Therefore an IDTO: Incognito-DTO.
  */
 @Data
+@NoArgsConstructor
 public class GemCarrier {
 
 	@ApiModelProperty(notes = "Once said", required = true)
@@ -19,9 +21,6 @@ public class GemCarrier {
 
 	@ApiModelProperty(notes = "By a certain individual")
 	private String author;
-
-	public GemCarrier() {
-	}
 
 	public GemCarrier(String saying) {
 		this.saying = saying;

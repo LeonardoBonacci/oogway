@@ -1,11 +1,13 @@
 package guru.bonacci.oogway.doorway.intercept;
 
+import static java.util.Optional.empty;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.isA;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
-
-import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +17,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import guru.bonacci.oogway.doorway.DoorwayTestApp;
-import guru.bonacci.oogway.doorway.bigbrother.BigBrother;
 import guru.bonacci.oogway.doorway.clients.AuthClient;
 import guru.bonacci.oogway.doorway.clients.LumberjackClient;
 import guru.bonacci.oogway.doorway.clients.OracleClient;
@@ -23,6 +24,7 @@ import guru.bonacci.oogway.doorway.events.SpectreGateway;
 import guru.bonacci.oogway.doorway.security.Credentials;
 import guru.bonacci.oogway.doorway.services.FirstLineSupportService;
 import guru.bonacci.oogway.doorway.utils.IPCatcher;
+import guru.bonacci.oogway.shareddomain.COMINT;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DoorwayTestApp.class, properties = {
@@ -33,9 +35,6 @@ public class BigBrotherTests {
 
 	@Autowired
 	FirstLineSupportService service;
-
-	@Autowired
-	BigBrother bigBrother;
 
 	@MockBean
 	AuthClient authClient;
@@ -53,13 +52,15 @@ public class BigBrotherTests {
 	SpectreGateway gateway;
 
 	@Test
-	public void shouldInterceptTheConsultMethod() {
+	public void shouldInterceptMethod() {
 		String searchString = "something completely different";
-		when(oracleClient.consult(anyString(), anyString(), any(Credentials.class))).thenReturn(Optional.empty());
+		when(oracleClient.consult(anyString(), anyString(), any(Credentials.class))).thenReturn(empty());
 
 		service.enquire(searchString, "some key");
 
+		verify(lumberjackClient, times(1)).visits("some key");
+
 		when(iPCatcher.getClientIp()).thenReturn("123");
-		//TODO verify(gateway, times(1)).send(isA(COMINT.class));
+		verify(gateway, times(1)).send(isA(COMINT.class));
 	}
 }

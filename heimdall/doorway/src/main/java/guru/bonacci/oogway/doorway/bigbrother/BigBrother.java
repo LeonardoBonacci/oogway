@@ -3,8 +3,10 @@ package guru.bonacci.oogway.doorway.bigbrother;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,18 +38,23 @@ public class BigBrother {
 	@Autowired
 	private SpectreGateway gateway;
 
-	@Before("@annotation(WatchMe) && args(q,apiKey)")
-	public void spreadTheNews(JoinPoint joinPoint, String q, String apiKey) throws Throwable {
-		// eavesdrop
-		String ip = ipologist.checkUp(iPCatcher.getClientIp());
-		logger.info(ip + " said '" + q + "'");
-		gateway.send(new COMINT(ip, q));
+    @Pointcut("@annotation(WatchMe)")
+    public void watchMePointCut(){
+    }
 
-
-		// and block the greedy clients
+	@Before("watchMePointCut() && args(..,apiKey)")
+	public void blockTheGreedyClients(JoinPoint joinPoint, String apiKey) throws Throwable {
 		long visits = lumberClient.visits(apiKey);
 		if (!"yawgoo".equals(apiKey) && visits >= GREED_STARTS_HERE) { //this could be user specific info
 			throw new GreedyException();
 		}
+	}
+	
+	// cannot be @Async, ip is read from the request
+	@After("watchMePointCut() && args(q,..)")
+	public void eavesdrop(JoinPoint joinPoint, String q) throws Throwable {
+		String ip = ipologist.checkUp(iPCatcher.getClientIp());
+		logger.info(ip + " said '" + q + "'");
+		gateway.send(new COMINT(ip, q));
 	}
 }

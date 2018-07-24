@@ -20,9 +20,6 @@ services:
   doorway-service:
     build: heimdall/doorway
 
-  greeter:
-    build: heimdall/greeter
-
   lumberjack:
     build: heimdall/lumberjack
 

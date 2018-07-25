@@ -1,21 +1,23 @@
 package guru.bonacci.oogway.sannyas.service.filters;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import guru.bonacci.oogway.sannyas.service.SannyasTestApp;
-import guru.bonacci.oogway.sannyas.service.filters.LengthFilter;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = SannyasTestApp.class, properties = {
+        "spring.sleuth.enabled=false",
+        "spring.zipkin.enabled=false"
+}, webEnvironment = NONE)
 public class LengthFilterTests {
 
    	private final static String LEO_SAID = "Study without desire spoils the memory, and it retains nothing that it takes in";

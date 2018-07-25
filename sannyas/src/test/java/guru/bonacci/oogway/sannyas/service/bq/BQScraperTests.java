@@ -1,14 +1,14 @@
 package guru.bonacci.oogway.sannyas.service.bq;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static guru.bonacci.oogway.utilities.CustomFileUtils.readToList;
 import static guru.bonacci.oogway.utilities.CustomFileUtils.readToString;
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.jsoup.Jsoup.parse;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
@@ -16,17 +16,16 @@ import java.io.IOException;
 import java.util.List;
 
 import org.jsoup.nodes.Document;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import guru.bonacci.oogway.sannyas.service.SannyasTestApp;
-import guru.bonacci.oogway.sannyas.service.bq.BQScraper;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
 public class BQScraperTests {
 

@@ -1,29 +1,27 @@
 package guru.bonacci.oogway.sannyas.service.bq;
 
 import static java.util.Arrays.asList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import guru.bonacci.oogway.sannyas.service.SannyasTestApp;
-import guru.bonacci.oogway.sannyas.service.bq.BQScraper;
-import guru.bonacci.oogway.sannyas.service.bq.BQSeeker;
 import guru.bonacci.oogway.sannyas.service.filters.LengthFilter;
 import guru.bonacci.oogway.sannyas.service.steps.CharacterGuardian;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
 public class BQSeekerTests {
 

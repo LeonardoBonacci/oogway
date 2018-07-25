@@ -6,22 +6,18 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import guru.bonacci.oogway.sannyas.service.SannyasTestApp;
 import guru.bonacci.oogway.sannyas.service.gr.GRSeeker;
-import guru.bonacci.oogway.sannyas.service.processing.CleaningAgent;
-import guru.bonacci.oogway.sannyas.service.processing.ForePlayer;
-import guru.bonacci.oogway.sannyas.service.processing.PitchforkManager;
-import guru.bonacci.oogway.sannyas.service.processing.SannyasinPicker;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
 public class PitchforkManagerTests {
 

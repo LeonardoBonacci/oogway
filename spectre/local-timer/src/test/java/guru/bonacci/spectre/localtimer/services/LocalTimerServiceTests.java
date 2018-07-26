@@ -2,8 +2,8 @@ package guru.bonacci.spectre.localtimer.services;
 
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,25 +13,25 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.spectre.localtimer.LocalTimerTestApp;
 import guru.bonacci.spectre.spectreshared.persistence.Spec;
 import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes=LocalTimerTestApp.class, webEnvironment = NONE, properties = {
 	"geo.name.username=voldemort"		
 })
-@Ignore
+@Disabled
 public class LocalTimerServiceTests {
 
 	@Autowired

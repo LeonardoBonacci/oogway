@@ -3,41 +3,40 @@ package guru.bonacci.oogway.oracle.service.persistence;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(properties = {
         "spring.sleuth.enabled=false",
         "spring.zipkin.enabled=false"
 }, webEnvironment = NONE)
-@Ignore
+@Disabled
 public class GemRepositoryTests {
 	
 	@Autowired
 	GemRepository repo;
 	
-	@Before
+	@BeforeEach
 	public void setup() {
 		repo.deleteAll();
 	}
 
-	@Ignore
 	@Test
 	public void shouldSaveAllFields1() {
 		String said = "the said";
@@ -51,7 +50,6 @@ public class GemRepositoryTests {
 		assertThat(result.getAuthor(), is(equalTo(author)));
 	}
 
-	@Ignore
 	@Test
 	public void shouldSaveAllFields2() {
 		String said = "the said";
@@ -65,7 +63,6 @@ public class GemRepositoryTests {
 		assertThat(result.getAuthor(), is(equalTo(author)));
 	}
 
-	@Ignore
 	@Test
 	public void shouldSaveAUnique() {
 		assertThat(repo.count(), is(equalTo(0L)));
@@ -74,7 +71,6 @@ public class GemRepositoryTests {
 		assertThat(repo.count(), is(equalTo(1L)));
 	}
 
-	@Ignore
 	@Test
 	public void shouldNotSaveAnExisting() {
 		repo.saveTheNewOnly(new Gem("a"));
@@ -82,7 +78,6 @@ public class GemRepositoryTests {
 		assertThat(repo.count(), is(equalTo(1L)));
 	}
 
-	@Ignore
 	@Test
 	public void shouldSaveTheNewOnly() {
 		repo.saveTheNewOnly(new Gem("a"));
@@ -90,7 +85,6 @@ public class GemRepositoryTests {
 		assertThat(repo.count(), is(equalTo(2L)));
 	}
 
-	@Ignore
 	@Test
 	public void shouldFindSimilarGem() {
 		Gem gem = new Gem("how are you I am fine");
@@ -100,7 +94,6 @@ public class GemRepositoryTests {
 		assertThat(gem, is(equalTo(result.get())));
 	}
 
-	@Ignore
 	@Test
 	public void shouldFindSimilarGemMultipleTimes() {
 		Gem gem1 = new Gem("how are you I am fine");
@@ -114,7 +107,6 @@ public class GemRepositoryTests {
 		assertThat(results.size(), greaterThan(1));
 	}
 
-	@Ignore
 	@Test
 	public void shouldNotFindDifferentGem() {
 		Gem gem = new Gem("how are you I am fine");
@@ -124,7 +116,6 @@ public class GemRepositoryTests {
 		assertThat(true, is(not(result.isPresent())));
 	}
 	
-	@Ignore
 	@Test
 	public void shouldFilterByAuthor() {
 		Gem gem = new Gem("hello", "Harry");
@@ -134,7 +125,6 @@ public class GemRepositoryTests {
 		assertThat(gem, is(equalTo(result.get())));
 	}
 
-	@Ignore
 	@Test
 	public void shouldFilterOutByAuthor() {
 		Gem gem = new Gem("hello", "Harry");
@@ -144,7 +134,6 @@ public class GemRepositoryTests {
 		assertFalse(result.isPresent());
 	}
 	
-	@Ignore
 	@Test
 	public void shouldRandomize() {
 		repo.save(new Gem("one", "A"));

@@ -1,13 +1,15 @@
 package guru.bonacci.oogway.sannyas.service.bq;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static guru.bonacci.oogway.utilities.CustomFileUtils.readToList;
 import static guru.bonacci.oogway.utilities.CustomFileUtils.readToString;
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.jsoup.Jsoup.parse;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
@@ -26,7 +28,10 @@ import guru.bonacci.oogway.sannyas.service.SannyasTestApp;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
+@SpringBootTest(classes = SannyasTestApp.class, properties = {
+        "spring.sleuth.enabled=false",
+        "spring.zipkin.enabled=false"
+}, webEnvironment = NONE)
 public class BQScraperTests {
 
 	@Spy
@@ -42,7 +47,13 @@ public class BQScraperTests {
 		List<String> quotes = found.stream().map(GemCarrier::getSaying).collect(toList());
 		
 		List<String> expected = readToList("bq/bq-quotes-faith.txt");
-		assertEquals(expected, quotes);
+		assertAll("new junit 5 functionality",
+			() -> {
+				assertNotNull(expected);
+				assertAll("execution depends on previous assertion",
+					() -> assertEquals(expected, quotes)
+				);		
+			});
 	}
 
 	@Test

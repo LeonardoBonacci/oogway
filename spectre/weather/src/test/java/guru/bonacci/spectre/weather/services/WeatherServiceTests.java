@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -22,13 +23,12 @@ import org.springframework.web.client.RestTemplate;
 import guru.bonacci.spectre.spectreshared.persistence.Spec;
 import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 import guru.bonacci.spectre.weather.WeatherTestApp;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes=WeatherTestApp.class, webEnvironment = NONE, properties = {
 	"openweathermap.apikey=1234567890"		
 })
-@Ignore
+@Disabled
 public class WeatherServiceTests {
 
 	@Autowired

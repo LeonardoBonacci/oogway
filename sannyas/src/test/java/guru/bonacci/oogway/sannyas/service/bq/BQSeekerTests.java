@@ -22,7 +22,10 @@ import guru.bonacci.oogway.sannyas.service.steps.CharacterGuardian;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
+@SpringBootTest(classes = SannyasTestApp.class, properties = {
+        "spring.sleuth.enabled=false",
+        "spring.zipkin.enabled=false"
+}, webEnvironment = NONE)
 public class BQSeekerTests {
 
 	@Autowired

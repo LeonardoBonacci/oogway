@@ -1,19 +1,17 @@
 package guru.bonacci.oogway.utilities;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import guru.bonacci.oogway.utilities.CustomFileUtils;
-
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class CustomFileUtilsTests {
 
 	@Test

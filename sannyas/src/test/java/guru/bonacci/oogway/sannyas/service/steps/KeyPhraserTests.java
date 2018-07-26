@@ -6,6 +6,8 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,7 +19,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import guru.bonacci.oogway.sannyas.service.SannyasTestApp;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = SannyasTestApp.class, webEnvironment = NONE)
+@SpringBootTest(classes = SannyasTestApp.class, properties = {
+        "spring.sleuth.enabled=false",
+        "spring.zipkin.enabled=false"
+}, webEnvironment = NONE)
 public class KeyPhraserTests {
 
 	@Autowired
@@ -38,4 +43,12 @@ public class KeyPhraserTests {
 	public void shouldWork(String input, String output) {
 		assertEquals(keyPhraser.apply(input), output);
 	}
+	
+	@Test
+	public void shouldComplain() {
+		Assertions.assertThrows(IllegalStateException.class, () -> {
+			keyPhraser.apply(null);
+		});	
+	}
+
 }

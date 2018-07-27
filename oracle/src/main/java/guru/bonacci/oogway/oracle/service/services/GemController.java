@@ -1,8 +1,6 @@
 package guru.bonacci.oogway.oracle.service.services;
 
 import static org.slf4j.LoggerFactory.getLogger;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.Optional;
 
@@ -12,7 +10,9 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,7 +43,7 @@ public class GemController {
 
 	@ApiOperation(value = "Search for a gem", response = GemCarrier.class)
 	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
-	@RequestMapping(method = GET)
+	@GetMapping
 	public Optional<GemCarrier> search(@RequestParam("q") String q, 
 							 		   @RequestParam(value="by", required = false) Optional<String> author) {
 		logger.error("Receiving request for a wise answer on: '" + q + "'");//error: to show load balancing
@@ -55,7 +55,7 @@ public class GemController {
 
 	@ApiOperation(value = "Pick a random gem", response = GemCarrier.class)
 	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
-	@RequestMapping(path = "/random", method = GET)
+	@GetMapping("/random")
 	public Optional<GemCarrier> random() {
 		logger.info("Please find me a random gem");
 		
@@ -65,7 +65,7 @@ public class GemController {
 	}	
 
 	@ApiOperation(value = "Add a gem")
-	@RequestMapping(path = "/backdoor", method = POST)
+	@PostMapping("/backdoor")
 	public void index(@Valid @RequestBody GemCarrier carrier) {
 		logger.info("Receiving secret request to index: '" + carrier + "'");
 		

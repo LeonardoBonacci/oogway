@@ -1,7 +1,6 @@
 package guru.bonacci.oogway.jobs;
 
 import static org.slf4j.LoggerFactory.getLogger;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import guru.bonacci.oogway.jobs.twitter.Tweeter;
@@ -36,7 +35,7 @@ public class JobRunner {
     @Autowired
     public Tweeter tweeter;
     
-	@RequestMapping(value = "/tweet", method = GET)
+	@GetMapping("/tweet")
 	public String tweet() {
 		logger.info("Manual tweet");
 		

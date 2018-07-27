@@ -1,13 +1,13 @@
 package guru.bonacci.oogway.oracle.service;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,14 +21,14 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.messaging.Message;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import guru.bonacci.oogway.oracle.service.events.OracleEventChannels;
 import guru.bonacci.oogway.oracle.service.persistence.GemRepository;
 import guru.bonacci.oogway.shareddomain.GenericEvent;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @AutoConfigureMockMvc
 public class OracleIntegrationOutTests {
@@ -47,7 +47,7 @@ public class OracleIntegrationOutTests {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	@Ignore // until further notice
+	@Disabled // until further notice
 	public void shouldSendMessageAfterInterception() throws Exception {
 		String q = "The art of living is more like wrestling than dancing.";
 		mvc.perform(get("/gems?q=" + q));

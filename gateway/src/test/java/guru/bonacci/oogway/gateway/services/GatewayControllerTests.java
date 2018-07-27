@@ -7,10 +7,10 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.palantir.docker.compose.DockerComposeRule;
 import com.palantir.docker.compose.configuration.ProjectName;
@@ -19,7 +19,7 @@ import com.palantir.docker.compose.connection.waiting.HealthChecks;
 
 import guru.bonacci.oogway.gateway.GatewayTestApp;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = GatewayTestApp.class, properties = {
 	"spring.cloud.config.enabled=false",
 	"eureka.client.enabled=false"

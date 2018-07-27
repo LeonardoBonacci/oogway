@@ -1,20 +1,20 @@
 package guru.bonacci.spectre.spectreutilities.collections;
 
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Stream.of;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Stream.of;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import guru.bonacci.spectre.spectreshared.collections.CustomPassiveExpiringCollection;
 
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class CustomPassiveExpiringCollectionTests {
 
 	@Test

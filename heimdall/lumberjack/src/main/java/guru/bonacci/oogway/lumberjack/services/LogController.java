@@ -1,11 +1,9 @@
 package guru.bonacci.oogway.lumberjack.services;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import guru.bonacci.oogway.lumberjack.persistence.Log;
@@ -18,7 +16,7 @@ public class LogController {
 	private LogService service;
 	
 	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
-	@RequestMapping(path = "/visits/{apikey}", method = GET)
+	@GetMapping("/visits/{apikey}")
 	public Long log(@PathVariable("apikey") String apiKey) {
 		return service.insert(new Log(apiKey));
 	}

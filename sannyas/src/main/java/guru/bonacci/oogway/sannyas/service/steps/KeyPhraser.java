@@ -28,7 +28,10 @@ public class KeyPhraser implements Function<String,String> {
 	@Override
 	public String apply(String input) {
 		logger.debug("in: " + input);
-
+		if (input == null) {
+			throw new IllegalStateException("for test purposes only");
+		}
+		
 		Sentence sentence = new Sentence(input);
 		SentenceAlgorithms algorithms = new SentenceAlgorithms(sentence);
 		List<String> keyphrases = algorithms.keyphrases();

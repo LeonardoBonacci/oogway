@@ -1,16 +1,17 @@
 package guru.bonacci.oogway.sannyas.service;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonMap;
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.messaging.MessageHeaders.CONTENT_TYPE;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,7 +30,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -38,7 +39,7 @@ import guru.bonacci.oogway.sannyas.service.gr.GRSeeker;
 import guru.bonacci.oogway.sannyas.service.processing.SannyasinPicker;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(properties = {
         "spring.sleuth.enabled=false",
         "spring.zipkin.enabled=false"
@@ -82,7 +83,7 @@ public class SannyasIntegrationTests {
 		String receivedAsString = objectMapper.writeValueAsString(received.getPayload()).replaceAll("\\\\", "");
 		// again, terribly ugly, but you get the point...
 		String somehowExpected = "\"" + objectMapper.writeValueAsString(hit) + "\"";
-		assertThat(receivedAsString, equalTo(somehowExpected));
+		assertThat(receivedAsString, is(equalTo(somehowExpected)));
 	}
 
 	private void sendMessage(String body, String target, Object contentType) {

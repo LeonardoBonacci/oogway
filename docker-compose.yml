@@ -173,7 +173,8 @@ services:
       config-service:
         condition: service_healthy
     ports:
-      - 2222
+      - 2222:2222
+      - 8002:8002
   
   job-service:
     environment:

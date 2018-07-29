@@ -34,6 +34,7 @@
 		<module>config</module>
 		<module>gateway</module>
 		<module>heimdall</module>
+		<module>intercapere</module>
 		<module>jobs</module>
 		<module>oracle</module>
 		<module>orchestration</module>

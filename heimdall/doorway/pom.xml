@@ -20,7 +20,12 @@
 			<artifactId>shared-domain</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>guru.bonacci.oogway</groupId>
+			<artifactId>intercapere-starter</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>

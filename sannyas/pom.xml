@@ -99,7 +99,6 @@
 			<artifactId>stanford-corenlp</artifactId>
 			<classifier>models</classifier>
 		</dependency>
-
 	</dependencies>
 
 	<build>

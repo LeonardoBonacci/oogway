@@ -1,12 +1,13 @@
 package guru.bonacci.oogway.sannyas.service.processing;
 
-import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class SannyasPickerTests {
 	@Autowired
 	SannyasinPicker picker;
 
+	@Disabled // with only one seeker-impl this has become a useless test
 	@Test
     public void shouldPickDifferentOnes() {
 		Set<Sannyasin> result = new HashSet<>();	

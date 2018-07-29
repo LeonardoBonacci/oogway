@@ -18,5 +18,4 @@ public class InterCapereLineRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		this.service.take("World");
 	}
-
 }

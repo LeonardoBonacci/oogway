@@ -2,3 +2,7 @@
 oracle:
   service:
     url: http://oracle-service
+
+inter:
+  capere:
+    prefix: IC 

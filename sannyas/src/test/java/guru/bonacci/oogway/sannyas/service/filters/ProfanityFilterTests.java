@@ -3,21 +3,27 @@ package guru.bonacci.oogway.sannyas.service.filters;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import guru.bonacci.oogway.sannyas.service.SannyasTestApp;
-
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = SannyasTestApp.class, webEnvironment = NONE, properties = {
-	"filter.profanity.file.name=badwords-test.txt"
-})
+@TestPropertySource(properties = "filter.profanity.file.name=badwords-test.txt")
 public class ProfanityFilterTests {
+
+	@TestConfiguration
+    static class TestContext {
+  
+        @Bean
+        public ProfanityFilter filter() {
+    		return new ProfanityFilter();
+        }
+    }
 
 	@Autowired
 	ProfanityFilter filter;

@@ -11,10 +11,10 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 import java.util.Optional;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
@@ -28,20 +28,17 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
 import guru.bonacci.oogway.doorway.DoorwayServer;
-import guru.bonacci.oogway.doorway.clients.AuthClient;
-import guru.bonacci.oogway.doorway.clients.OracleClient;
-import guru.bonacci.oogway.doorway.clients.PasswordGrantFactoryConfig;
 import guru.bonacci.oogway.doorway.clients.OracleClientTests.App;
 import guru.bonacci.oogway.doorway.security.Credentials;
 import guru.bonacci.oogway.doorway.security.TestDecryptor;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = App.class, webEnvironment = NONE, properties = {
 	"hystrix.command.default.execution.timeout.enabled=false"
 })
@@ -65,13 +62,13 @@ public class OracleClientTests {
     @MockBean
     PasswordGrantFactoryConfig restTemplateFactory;
     
-    @Before
+    @BeforeEach
     public void setup() {
         this.server = MockRestServiceServer.createServer(rest);
         when(restTemplateFactory.restTemplate(null)).thenReturn(rest);
     }
 
-    @After
+    @AfterEach
     public void teardown() {
         this.server = null;
     }

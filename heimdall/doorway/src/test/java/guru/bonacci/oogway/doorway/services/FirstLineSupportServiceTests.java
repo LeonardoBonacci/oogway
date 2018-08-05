@@ -1,40 +1,42 @@
 package guru.bonacci.oogway.doorway.services;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import guru.bonacci.oogway.doorway.DoorwayTestApp;
 import guru.bonacci.oogway.doorway.cheaters.Postponer;
 import guru.bonacci.oogway.doorway.clients.AuthClient;
-import guru.bonacci.oogway.doorway.clients.LumberjackClient;
 import guru.bonacci.oogway.doorway.clients.OracleClient;
 import guru.bonacci.oogway.doorway.security.Credentials;
-import guru.bonacci.oogway.doorway.services.FirstLineSupportService;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = DoorwayTestApp.class, properties = {
-        "spring.sleuth.enabled=false",
-        "spring.zipkin.enabled=false"
-}, webEnvironment = NONE)
+@ExtendWith(SpringExtension.class)
 public class FirstLineSupportServiceTests {
+
+	@TestConfiguration
+	@Profile("!integration-test")
+    static class TestContext {
+  
+        @Bean
+        public FirstLineSupportService service() {
+    		return new FirstLineSupportService();
+        }
+    }
 
 	@Autowired
 	FirstLineSupportService service;
@@ -46,14 +48,8 @@ public class FirstLineSupportServiceTests {
 	OracleClient oracleClient;
 
 	@MockBean
-	LumberjackClient lumberjackClient;
-
-	@MockBean
 	Postponer postponer;
 
-	@MockBean
-	HttpServletRequest request;
-	
 	@Test
 	public void shouldGiveEmptyStringAnswer() {
 		assertThat(service.enquire("", ""), is(equalTo(new GemCarrier("No question no answer..", "oogway"))));

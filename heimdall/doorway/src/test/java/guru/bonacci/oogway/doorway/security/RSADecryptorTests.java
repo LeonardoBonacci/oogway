@@ -1,7 +1,7 @@
 package guru.bonacci.oogway.doorway.security;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
 import java.security.KeyPair;
@@ -15,11 +15,8 @@ import java.util.Base64;
 
 import javax.crypto.Cipher;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import guru.bonacci.oogway.doorway.security.Decryptor;
-import guru.bonacci.oogway.doorway.security.RSADecryptor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class RSADecryptorTests {
 
@@ -27,7 +24,7 @@ public class RSADecryptorTests {
 
 	PublicKey publicKey;
 
-	@Before
+	@BeforeEach
 	public void generateKeys()
 			throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException, IOException {
 

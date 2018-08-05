@@ -1,7 +1,7 @@
 package guru.bonacci.oogway.doorway;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -10,8 +10,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import java.util.Optional;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,21 +26,22 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.messaging.Message;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import guru.bonacci.oogway.doorway.DoorwayServer;
+import guru.bonacci.intercapere.InterCapereService;
 import guru.bonacci.oogway.doorway.clients.AuthClient;
 import guru.bonacci.oogway.doorway.clients.LumberjackClient;
 import guru.bonacci.oogway.doorway.clients.OracleClient;
 import guru.bonacci.oogway.doorway.events.DoorwayEventChannels;
+import guru.bonacci.oogway.doorway.ip.IPologist;
 import guru.bonacci.oogway.doorway.security.Credentials;
 import guru.bonacci.oogway.doorway.security.TestDecryptor;
 import guru.bonacci.oogway.shareddomain.COMINT;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(properties = {
         "spring.sleuth.enabled=false",
         "spring.zipkin.enabled=false"
@@ -61,6 +62,12 @@ public class DoorwayIntegrationTests {
 	AuthClient authClient;
 
 	@MockBean
+	IPologist iPologist;
+
+	@MockBean
+	InterCapereService interCapereService;
+
+	@MockBean
 	OracleClient oracleClient;
 
 	@MockBean
@@ -74,7 +81,8 @@ public class DoorwayIntegrationTests {
 	public void shouldSendMessageAfterInterception() throws Exception {
 		when(authClient.user(anyString())).thenReturn(new Credentials());
 		when(oracleClient.consult(anyString(), anyString(), any(Credentials.class))).thenReturn(Optional.empty());
-
+		when(iPologist.checkUp(anyString())).thenAnswer(i -> i.getArguments()[0]);
+		
 		String localIP = "127.0.0.1";
 		String input = "The art of living is more like wrestling than dancing.";
 		mvc.perform(get("/consult?q=" + input + "&apikey=somekey"));

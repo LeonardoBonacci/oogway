@@ -5,38 +5,51 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import guru.bonacci.oogway.sannyas.service.SannyasTestApp;
 import guru.bonacci.oogway.sannyas.service.filters.LengthFilter;
 import guru.bonacci.oogway.sannyas.service.steps.CharacterGuardian;
+import guru.bonacci.oogway.sannyas.service.steps.KeyPhraser;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)
 public class GRSeekerTests {
 
+	@TestConfiguration
+	@Profile("!integration-test")
+    static class TestContext {
+  
+        @Bean
+        public GRSeeker grseeker() {
+    		return new GRSeeker();
+        }
+    }
+	
 	@Autowired
 	GRSeeker seeker;
 	
 	@MockBean
+	GRScraper scraper;
+
+	@MockBean
 	CharacterGuardian characterGuardian;
 	
 	@MockBean
-	LengthFilter lengthFilter;
+	KeyPhraser keyPhraser;
 
 	@MockBean
-	GRScraper finder;
-
+	LengthFilter lengthFilter;
+	
 	@Test
 	public void shouldPreProcess() {
 		String in = "some input";
@@ -59,8 +72,7 @@ public class GRSeekerTests {
 	public void shouldSeek() {
 		List<GemCarrier> out = asList(new GemCarrier("a"), new GemCarrier("b"));
 		
-		when(finder.find("a", "b")).thenReturn(out);
+		when(scraper.find("a", "b")).thenReturn(out);
 		assertThat(seeker.seek("a b"), is(equalTo(out)));
 	}
-
 }

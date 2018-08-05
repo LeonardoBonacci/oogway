@@ -30,10 +30,12 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import guru.bonacci.oogway.sannyas.service.SannyasServer;
 import guru.bonacci.oogway.sannyas.service.events.SannyasEventChannels;
 import guru.bonacci.oogway.sannyas.service.gr.GRSeeker;
 import guru.bonacci.oogway.sannyas.service.processing.SannyasinPicker;
@@ -44,6 +46,7 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
         "spring.sleuth.enabled=false",
         "spring.zipkin.enabled=false"
 }, webEnvironment = RANDOM_PORT)
+@ActiveProfiles("integration-test")
 public class SannyasIntegrationTests {
 
 	@Autowired
@@ -53,7 +56,7 @@ public class SannyasIntegrationTests {
 	SannyasinPicker picker;
 
 	@MockBean
-	GRSeeker sannyasin;
+	GRSeeker grseeker;
 
 	@Autowired
     SannyasEventChannels channels;
@@ -70,8 +73,8 @@ public class SannyasIntegrationTests {
 		GemCarrier hit = new GemCarrier("does not matter", "dear");
 
 		// DON'T SEEK!
-		doReturn(sannyasin).when(picker).pickOne();
-		doReturn(asList(hit)).when(sannyasin).seek(anyString());
+		doReturn(grseeker).when(picker).pickOne();
+		doReturn(asList(hit)).when(grseeker).seek(anyString());
 
 		//send..
 		String body = "{\"content\":\"I am Malcolm X\"}";

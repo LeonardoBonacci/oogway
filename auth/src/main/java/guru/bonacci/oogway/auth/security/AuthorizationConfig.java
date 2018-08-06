@@ -1,6 +1,7 @@
 package guru.bonacci.oogway.auth.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +20,12 @@ import guru.bonacci.oogway.auth.services.CustomUserService;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
+
+	@Value("${job.secret:}")
+	private String jobSecret;
+
+	@Value("${doorway.secret:}")
+	private String doorwaySecret;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -50,19 +57,17 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-    	//TODO .secret(env.getProperty("DOORWAY_SERVICE_PASSWORD"))
-
     	// @formatter:off
     	clients.inMemory()
 	            .withClient("doorway-service")
-	            .secret(passwordEncoder.encode("doorway-service-secret")) //there must be a better way..
+	            .secret(passwordEncoder.encode(doorwaySecret))
 				.authorizedGrantTypes("client_credentials", "password", "refresh_token")
 	            .scopes("resource-server-read")
                 .accessTokenValiditySeconds(1000)
                 .refreshTokenValiditySeconds(30000)
 		.and()
 				.withClient("job-service")
-				.secret(passwordEncoder.encode("job-service-secret")) //but it's already late.
+				.secret(passwordEncoder.encode(jobSecret))
 				.authorizedGrantTypes("client_credentials", "refresh_token")
 	            .scopes("resource-server-read", "resource-server-write");
 		// @formatter:on

@@ -107,6 +107,7 @@ services:
         condition: service_healthy
     ports:
       - 5000:5000
+      - 8004:8004
     volumes:
       - .:/ubuntu1
             

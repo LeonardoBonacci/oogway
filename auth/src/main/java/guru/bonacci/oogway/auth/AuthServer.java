@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -55,11 +56,11 @@ public class AuthServer {
 	}
 
 	@Bean
-	CommandLineRunner init(CustomUserService userService) {
+	CommandLineRunner init(CustomUserService userService, @Value("${the.password:}") String password) {
 		return (evt) -> Arrays.asList("oogway,user1,app".split(",")).forEach(username -> {
 			User user = new User();
 			user.setUsername(username);
-			user.setPassword("password");
+			user.setPassword(password);
 			user.setApiKey(reverse(username));
 			userService.registerUser(user);
 

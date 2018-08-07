@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>guru.bonacci.oogway</groupId>
 	<artifactId>parent</artifactId>
-	<version>4.1</version>
+	<version>4.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<parent>
@@ -14,7 +14,7 @@
 
 	<scm>
 		<developerConnection>scm:git:git@github.com:LeonardoBonacci/oogway.git</developerConnection>
-		<tag>omnia</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<properties>

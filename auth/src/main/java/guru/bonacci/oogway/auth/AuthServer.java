@@ -21,7 +21,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
@@ -33,7 +32,6 @@ import guru.bonacci.oogway.utilities.security.RSAKeyHelper;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableResourceServer
-@EnableAsync
 public class AuthServer {
 
 	private final Logger logger = getLogger(this.getClass());

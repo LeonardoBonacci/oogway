@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -30,7 +29,6 @@ import guru.bonacci.oogway.auth.services.CustomUserService;
 import guru.bonacci.oogway.utilities.security.RSAKeyHelper;
 
 @SpringBootApplication
-@EnableEurekaClient
 @EnableResourceServer
 public class AuthServer {
 

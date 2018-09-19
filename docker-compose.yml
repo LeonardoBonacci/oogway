@@ -57,31 +57,6 @@ services:
     depends_on:
       - es      
     
-  config-service:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: leonardobonacci/oogway-config-service
-    restart: always
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
-      interval: 10s
-      timeout: 3s
-#for demo effect - mount parent directory where (git) config resides
-#    volumes:
-#      - ./..:/ubuntu1
-    ports:
-      - 8888:8888
-
-  orchestration-service:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-      SPRING_PROFILES_ACTIVE: dev
-    image: leonardobonacci/oogway-orchestration-service
-    restart: always
-    ports:
-      - 1111:1111
-      
   gateway-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
@@ -257,16 +232,6 @@ services:
         condition: service_healthy
     ports:
       - 11111
-
-#  -- not working since upgrade --
-#  zipkin: 
-#    environment:
-#      STORAGE_TYPE: elasticsearch
-#      ES_HOSTS: es
-#    image: openzipkin/zipkin:2.5
-#    restart: always
-#    ports:
-#      - 9411:9411
 
 #  -- experimental feature working since upgrade --
 #  tor: 

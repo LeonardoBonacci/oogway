@@ -5,12 +5,6 @@ services:
     ports:
       - 5672:5672
 
-  config-service:
-    build: config
-    
-  orchestration-service:
-    build: orchestration
-      
   gateway-service:
     build: gateway
           

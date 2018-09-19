@@ -1,0 +1,16 @@
+server: 
+  port: 4444
+  servlet:
+    context-path: /oracle
+
+spring:
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: es:9300 
+    
+logging: 
+  level.guru.bonacci.oogway.oracle: DEBUG
+    
+build: 
+  version: "@project.version@" 

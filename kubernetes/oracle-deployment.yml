@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oracle
+spec:
+  selector:
+      matchLabels:
+        app: oracle
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: oracle
+    spec:
+      containers:
+        - name: oracle
+          image: leonardobonacci/oogway-oracle-service
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 4444
+

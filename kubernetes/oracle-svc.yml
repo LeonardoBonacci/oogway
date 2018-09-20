@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: oracle-service
+spec:
+  selector:
+    app: oracle
+  ports:
+  - protocol: TCP
+    port: 4444
+  type: NodePort

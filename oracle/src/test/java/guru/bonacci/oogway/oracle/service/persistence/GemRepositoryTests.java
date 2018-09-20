@@ -24,7 +24,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(properties = {
         "spring.sleuth.enabled=false",
-        "spring.zipkin.enabled=false"
 }, webEnvironment = NONE)
 @Disabled
 public class GemRepositoryTests {

@@ -3,6 +3,7 @@ package guru.bonacci.oogway.auth.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,6 +32,7 @@ public class CustomUserService implements UserDetailsService {
 		}
 	}
 
+	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
 	public User loadUserByApiKey(String s) {
 		Optional<User> user = userRepo.findByApiKey(s);
 		if (user.isPresent()) {

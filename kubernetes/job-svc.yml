@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: job-service
+spec:
+  selector:
+    app: job
+  ports:
+  - protocol: TCP
+    port: 8765
+  type: NodePort

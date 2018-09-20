@@ -31,7 +31,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import guru.bonacci.intercapere.InterCapereService;
 import guru.bonacci.oogway.doorway.clients.AuthClient;
 import guru.bonacci.oogway.doorway.clients.LumberjackClient;
 import guru.bonacci.oogway.doorway.clients.OracleClient;
@@ -63,9 +62,6 @@ public class DoorwayIntegrationTests {
 
 	@MockBean
 	IPologist iPologist;
-
-	@MockBean
-	InterCapereService interCapereService;
 
 	@MockBean
 	OracleClient oracleClient;

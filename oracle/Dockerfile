@@ -1,6 +1,6 @@
-FROM java:8-jre
+FROM openjdk:8-jre-alpine
 
 ADD ./target/oracle.jar /app/
-CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,address=8001,suspend=n", "-Xmx200m", "-jar", "/app/oracle.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app/oracle.jar"]
 
-EXPOSE 4444 8001
+EXPOSE 4444

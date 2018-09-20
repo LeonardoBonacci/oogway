@@ -16,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import guru.bonacci.intercapere.InterCapereService;
 import guru.bonacci.oogway.doorway.DoorwayTestApp;
 import guru.bonacci.oogway.doorway.clients.AuthClient;
 import guru.bonacci.oogway.doorway.clients.LumberjackClient;
@@ -42,9 +41,6 @@ public class BigBrotherTests {
 	
 	@MockBean
 	OracleClient oracleClient;
-
-	@MockBean
-	InterCapereService intercapere;
 
 	@MockBean
 	LumberjackClient lumberjackClient;

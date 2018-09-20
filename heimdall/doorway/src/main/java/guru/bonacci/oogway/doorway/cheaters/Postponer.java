@@ -12,12 +12,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
-
-import guru.bonacci.intercapere.InterCapereService;
 
 /**
  * Postponer - someone who postpones work (especially out of laziness or
@@ -27,9 +24,6 @@ import guru.bonacci.intercapere.InterCapereService;
 @Component
 public class Postponer {
 
-	@Autowired
-	private InterCapereService intercapere;
-	
 	@Value("${file.name.answers.to.win.time:}")
 	private String fileName;
 
@@ -50,7 +44,6 @@ public class Postponer {
 	}
 	
 	public String saySomething() {
-		return intercapere.take(
-					random(answers).get());
+		return random(answers).get();
 	}
 }

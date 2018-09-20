@@ -1,0 +1,30 @@
+server: 
+  port: 8765
+
+security:
+  oauth2:
+    client:
+      clientId: job-service
+      clientSecret: job-service-secret
+      accessTokenUri: http://auth-service:5000/auth/oauth/token
+      scope: resource-server-read
+
+feign:
+  hystrix:
+    enabled: true
+
+logging: 
+  level.guru.bonacci.oogway.jobs: DEBUG
+  
+# LAO ZU once said: FROM CARING COMES COURAGE
+# if you care the slightest bit about your twitter account then don't show your keys in a property file
+twitter:
+  oauth:
+    consumerKey: shIN5k9zQWOLMGo769ANGGtKZ
+    consumerSecret: mIQ0hgpKMMgXg3iP1AN7CpLMNQcGfoLuWdDHKOcaXcoSupFgFI
+    accessToken: 884771066496913409-YfIJwKPDo6DLhslhsqBUBCekXxtl8JG
+    accessTokenSecret: ALxVXquVaD6oY7Ptog2AFkpCCMv2LaacB2KEWwzLYTn1g
+# on spring cron: second, minute, hour, day of month, month, day(s) of week. 
+#Asterisk (*) means match any. */X means "every X". Numeric days of the week do not work. "MON-FRI" works and is much easier to read
+  cron: 0 * * * * *  
+  

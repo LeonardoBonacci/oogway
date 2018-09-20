@@ -21,12 +21,6 @@ import guru.bonacci.oogway.auth.services.CustomUserService;
 @EnableAuthorizationServer
 public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
-	@Value("${job.secret:}")
-	private String jobSecret;
-
-	@Value("${doorway.secret:}")
-	private String doorwaySecret;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -60,14 +54,14 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     	// @formatter:off
     	clients.inMemory()
 	            .withClient("doorway-service")
-	            .secret(passwordEncoder.encode(doorwaySecret))
+	            .secret(passwordEncoder.encode("doorway-service-secret"))
 				.authorizedGrantTypes("client_credentials", "password", "refresh_token")
 	            .scopes("resource-server-read")
                 .accessTokenValiditySeconds(1000)
                 .refreshTokenValiditySeconds(30000)
 		.and()
 				.withClient("job-service")
-				.secret(passwordEncoder.encode(jobSecret))
+				.secret(passwordEncoder.encode("job-service-secret"))
 				.authorizedGrantTypes("client_credentials", "refresh_token")
 	            .scopes("resource-server-read", "resource-server-write");
 		// @formatter:on

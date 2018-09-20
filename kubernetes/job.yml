@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: job
+spec:
+  selector:
+      matchLabels:
+        app: job
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: job
+    spec:
+      containers:
+        - name: oracle
+          image: leonardobonacci/oogway-job-service
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8765
+

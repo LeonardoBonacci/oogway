@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import guru.bonacci.intercapere.InterCapereService;
 import guru.bonacci.oogway.doorway.DoorwayTestApp;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
@@ -33,9 +32,6 @@ public class DoorwayControllerTests {
 
 	@MockBean
 	FirstLineSupportService service;
-
-	@MockBean
-	InterCapereService interCapereService;
 
 	@Autowired
 	ObjectMapper objectMapper;

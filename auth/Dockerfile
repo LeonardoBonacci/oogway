@@ -1,7 +1,7 @@
-FROM java:8-jre
+FROM openjdk:8-jre-alpine
 
 ADD ./target/auth.jar /app/
 VOLUME /ubuntu1
-CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,address=8004,suspend=n", "-Xmx200m", "-jar", "/app/auth.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app/auth.jar"]
 
-EXPOSE 5000 8004
+EXPOSE 5000

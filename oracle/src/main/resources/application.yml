@@ -3,6 +3,11 @@ server:
   servlet:
     context-path: /oracle
 
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://auth-service:5000/auth/users/current
+
 spring:
   data:
     elasticsearch:

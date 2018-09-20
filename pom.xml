@@ -29,13 +29,10 @@
 
 	<modules>
 		<module>auth</module>
-		<module>config</module>
 		<module>gateway</module>
 		<module>heimdall</module>
-		<module>intercapere</module>
 		<module>jobs</module>
 		<module>oracle</module>
-		<module>orchestration</module>
 		<module>sannyas</module>
 		<module>shared-domain</module>
 		<module>spectre</module>
@@ -43,11 +40,6 @@
 	</modules>
 
 	<repositories>
-		<repository>
-			<id>Bintray</id>
-			<name>For now</name>
-			<url>https://dl.bintray.com/palantir/releases</url>
-		</repository>
 		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>

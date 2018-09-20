@@ -18,3 +18,11 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 5000
+        volumeMounts:
+        - name: hostvol
+          mountPath: /ubuntu1
+      volumes:
+        - name: hostvol
+          hostPath:
+            path: /home/docker
+        

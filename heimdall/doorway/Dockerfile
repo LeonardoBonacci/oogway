@@ -1,8 +1,7 @@
-FROM java:8-jre
+FROM openjdk:8-jre-alpine
 
 ADD ./target/doorway.jar /app/
 VOLUME /ubuntu1
-CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,address=8000,suspend=n", "-Xmx200m", "-jar", "/app/doorway.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app/doorway.jar"]
 
-# remote debugging port 
-EXPOSE 3333 8000
+EXPOSE 3333

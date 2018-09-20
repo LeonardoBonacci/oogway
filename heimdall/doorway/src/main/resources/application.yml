@@ -1,8 +1,28 @@
-#No port needed :)
-oracle:
-  service:
-    url: http://oracle-service
+server: 
+  port: 3333
+  servlet:
+    context-path: /doors
 
-inter:
-  capere:
-    prefix: IC>   
+service:  
+  lumberjack:
+    name: lumberjack-service
+    url: http://lumberjack-service:11235
+  oracle:
+    name: oracle-service
+    url: http://oracle-service:4444
+  auth:
+    name: auth-service
+    url: http://auth-service:5000
+
+security:
+  oauth2:
+    client:
+      clientId: doorway-service
+      clientSecret: doorway-service-secret
+      accessTokenUri: http://auth-service:5000/auth/oauth/token
+      scope: resource-server-read
+      
+logging: 
+  level.guru.bonacci.oogway.doorway: INFO
+  
+file.name.answers.to.win.time: answers-to-win-time.txt 

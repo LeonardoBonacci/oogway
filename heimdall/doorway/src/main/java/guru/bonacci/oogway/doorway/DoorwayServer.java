@@ -9,21 +9,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import guru.bonacci.oogway.doorway.clients.CredentialsConfig;
-import guru.bonacci.oogway.doorway.events.DoorwayEventChannels;
 import guru.bonacci.oogway.doorway.security.Decryptor;
 import guru.bonacci.oogway.doorway.security.RSADecryptor;
 import guru.bonacci.oogway.utilities.security.RSAKeyHelper;
@@ -32,10 +28,9 @@ import guru.bonacci.oogway.utilities.security.RSAKeyHelper;
 @ComponentScan(excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, 
 										value = { CredentialsConfig.class })) 
 @EnableFeignClients
-@EnableEurekaClient
 @EnableCircuitBreaker
-@EnableBinding(DoorwayEventChannels.class)
-@IntegrationComponentScan
+//@EnableBinding(DoorwayEventChannels.class)
+//@IntegrationComponentScan
 public class DoorwayServer {
 
 	@Bean

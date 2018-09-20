@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doorway
+spec:
+  selector:
+      matchLabels:
+        app: doorway
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: doorway
+    spec:
+      containers:
+      - name: doorway
+        image: leonardobonacci/oogway-doorway-service
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: hostvol
+          mountPath: /ubuntu1
+      volumes:
+        - name: hostvol
+          hostPath:
+            path: /home/docker
+        

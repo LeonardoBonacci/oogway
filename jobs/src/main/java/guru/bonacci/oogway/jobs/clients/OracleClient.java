@@ -13,7 +13,8 @@ import feign.hystrix.FallbackFactory;
 import guru.bonacci.oogway.jobs.clients.OracleClient.HystrixClientFallbackFactory;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
-@FeignClient( name = "oracle-service", url = "http://oracle-service:4444", 
+@FeignClient( name = "oracle-service", 
+			  url = "http://oracle-service:4444", 
 			  fallbackFactory = HystrixClientFallbackFactory.class)
 public interface OracleClient {
 

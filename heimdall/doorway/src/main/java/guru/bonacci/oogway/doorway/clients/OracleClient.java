@@ -26,7 +26,7 @@ public class OracleClient {
 
 	private final String serviceUrl;
 
-	public OracleClient(@Value("${oracle.service.url}") String serviceUrl) {
+	public OracleClient(@Value("${service.oracle.url}") String serviceUrl) {
 		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
 	}
 

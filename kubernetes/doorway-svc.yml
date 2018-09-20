@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: doorway-service
+spec:
+  selector:
+    app: doorway
+  ports:
+  - protocol: TCP
+    port: 3333
+  type: NodePort

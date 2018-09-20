@@ -14,7 +14,7 @@ feign:
     enabled: true
 
 logging: 
-  level.guru.bonacci.oogway.jobs: DEBUG
+  level.guru.bonacci.oogway.jobs: INFO
   
 # LAO ZU once said: FROM CARING COMES COURAGE
 # if you care the slightest bit about your twitter account then don't show your keys in a property file

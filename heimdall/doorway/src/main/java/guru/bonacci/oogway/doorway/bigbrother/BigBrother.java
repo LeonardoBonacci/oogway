@@ -38,9 +38,11 @@ public class BigBrother {
 
 	@Before("watchMePointCut() && args(..,apiKey)")
 	public void blockTheGreedyClients(JoinPoint joinPoint, String apiKey) throws Throwable {
-//		long visits = lumberClient.visits(apiKey);
-//		if (!"yawgoo".equals(apiKey) && visits >= GREED_STARTS_HERE) { //this could be user specific info
-//			throw new GreedyException();
-//		}
+		logger.debug("spotted: " + apiKey);
+		
+		long visits = lumberClient.visits(apiKey);
+		if (!"yawgoo".equals(apiKey) && visits >= GREED_STARTS_HERE) { //this could be user specific info
+			throw new GreedyException();
+		}
 	}
 }

@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: lumberjack-service
+spec:
+  selector:
+    app: lumberjack
+  ports:
+  - protocol: TCP
+    port: 11235
+  type: NodePort

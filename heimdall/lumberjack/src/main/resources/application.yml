@@ -1,20 +1,21 @@
-eureka:
-  instance:
-    prefer-ip-address: true
-  client: 
-    serviceUrl: 
-      defaultZone: http://orchestration-service:1111/eureka/
+server:
+  port: 11235
+  servlet:
+    context-path: /lumber
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://auth-service:5000/auth/users/current
 
 spring:
-  application:
-    name: lumberjack
-  cloud:
-    config:
-      label: ${cloud.config.find.label:master}
-      fail-fast: true
-      password: ${config.service.password:}
-      username: user      
-      discovery:
-        enabled: true      
-        serviceId: config-service
-      
+  data:
+    mongodb:
+      host: mongodb-service
+      database: admin
+      port: 27017
+      username: main_admin
+      password: abc123
+
+logging: 
+  level.guru.bonacci.oogway.lumberjack: INFO  

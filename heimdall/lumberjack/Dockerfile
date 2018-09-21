@@ -1,6 +1,6 @@
-FROM java:8-jre
+FROM openjdk:8-jre-alpine
 
 ADD ./target/lumberjack.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/lumberjack.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app/lumberjack.jar"]
 
 EXPOSE 11235

@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
@@ -21,7 +19,6 @@ import guru.bonacci.oogway.lumberjack.persistence.LogService;
 import guru.bonacci.oogway.lumberjack.security.CustomUserInfoTokenServices;
 
 @EnableMongoRepositories
-@EnableEurekaClient
 @SpringBootApplication
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableResourceServer
@@ -34,9 +31,8 @@ public class MrLumberjack extends ResourceServerConfigurerAdapter {
 		SpringApplication.run(MrLumberjack.class, args);
 	}
 
-	@LoadBalanced
 	@Bean
-	public OAuth2RestTemplate loadBalancedTemplate() {
+	public OAuth2RestTemplate restTemplate() {
 		BaseOAuth2ProtectedResourceDetails resource = new BaseOAuth2ProtectedResourceDetails();
 		return new OAuth2RestTemplate(resource);
 	}
@@ -44,7 +40,7 @@ public class MrLumberjack extends ResourceServerConfigurerAdapter {
 	@Bean
 	public ResourceServerTokenServices tokenServices() {
 		CustomUserInfoTokenServices serv = new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
-		serv.setRestTemplate(loadBalancedTemplate());
+		serv.setRestTemplate(restTemplate());
 		return serv;
 	}
 

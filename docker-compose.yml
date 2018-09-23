@@ -46,16 +46,16 @@ services:
 #    ports:
 #      - 27017:27017
 
-  kibana:
-    image: docker.elastic.co/kibana/kibana:5.5.3
-    restart: always
-    environment:
-      - ELASTICSEARCH_URL=http://es:9200
-      - xpack.security.enabled=false
-    ports:
-      - 5601:5601
-    depends_on:
-      - es      
+#  kibana:
+#    image: docker.elastic.co/kibana/kibana:5.5.3
+#    restart: always
+#    environment:
+#      - ELASTICSEARCH_URL=http://es:9200
+#      - xpack.security.enabled=false
+#    ports:
+#      - 5601:5601
+#    depends_on:
+#      - es      
     
   gateway-service:
     environment:

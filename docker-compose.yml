@@ -28,17 +28,17 @@ services:
     ports:
       - 15672:15672 
 
-  logstash: 
-    image: leonardobonacci/pruning-logstash:1.0
-    restart: always
-    volumes: 
-      - ./logstash/pipeline:/usr/share/logstash/pipeline/:ro 
-      - ./logstash/config/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
-    ports: 
-      - 4560:4560
-    depends_on:
-      - es
-      - rabbit
+#  logstash: 
+#    image: leonardobonacci/pruning-logstash:1.0
+#    restart: always
+#    volumes: 
+#      - ./logstash/pipeline:/usr/share/logstash/pipeline/:ro 
+#      - ./logstash/config/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
+#    ports: 
+#      - 4560:4560
+#    depends_on:
+#      - es
+#      - rabbit
 
 #  mongo:
 #    image: mongo:3.4-jessie

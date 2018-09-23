@@ -4,9 +4,13 @@ metadata:
   name: logging-configmap
 data:
   logstash.yml: |
-    http.host: "0.0.0.0"
-    path.config: /usr/share/logstash/pipeline
-  logstash.conf: |
+#    for mysterious reasons the presence of this (empty) yml is required.
+  pipelines.yml: |    
+    - pipeline.id: spectre
+      path.config: "/usr/share/logstash/pipeline/spectre-pipeline.conf"
+    - pipeline.id: log-collector
+      path.config: "/usr/share/logstash/pipeline/log-collector.conf"
+  log-collector.conf: |
     input { 
       tcp { 
         port => 4560 codec => "json" 
@@ -19,3 +23,17 @@ data:
         index => "micro-%{serviceName}"
       }
     }
+  spectre-pipeline.conf: |
+    input {
+      beats {
+        port => 5044
+      }
+    }
+    
+    output { 
+      elasticsearch { 
+        hosts => ["http://es:9200"]
+        index => "micro-%{serviceName}"
+      }
+    }
+    

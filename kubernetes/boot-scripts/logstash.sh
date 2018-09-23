@@ -10,7 +10,7 @@ echo "clean first"
 kubectl.exe delete cm logging-configmap
 kubectl.exe delete deployment logstash
 kubectl.exe delete service logstash-service
-sleep 1
+sleep 5
 
 echo "create config map"
 kubectl create -f logging-configmap.yaml

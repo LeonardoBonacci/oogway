@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: logstash
-        image: docker.elastic.co/logstash/logstash-oss:6.2.2
+        image: leonardobonacci/pruning-logstash:1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 4560
@@ -27,12 +27,16 @@ spec:
           items:
             - key: logstash.yml
               path: logstash.yml
+            - key: pipelines.yml
+              path: pipelines.yml
       - name: logstash-pipeline-volume
         configMap:
           name: logging-configmap
           items:
-            - key: logstash.conf
-              path: logstash.conf
+            - key: log-collector.conf
+              path: log-collector.conf
+            - key: spectre-pipeline.conf
+              path: spectre-pipeline.conf
 ---
 kind: Service
 apiVersion: v1

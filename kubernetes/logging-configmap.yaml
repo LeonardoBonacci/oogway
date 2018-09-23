@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logging-configmap
+data:
+  logstash.yml: |
+    http.host: "0.0.0.0"
+    path.config: /usr/share/logstash/pipeline
+  logstash.conf: |
+    input { 
+      tcp { 
+        port => 4560 codec => "json" 
+      } 
+    }
+
+    output { 
+      elasticsearch { 
+        hosts => ["http://es:9200"]
+        index => "micro-%{serviceName}"
+      }
+    }

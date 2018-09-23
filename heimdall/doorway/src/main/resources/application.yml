@@ -5,14 +5,18 @@ server:
 
 service:  
   lumberjack:
+    enabled: false
     name: lumberjack-service
     url: http://lumberjack-service:11235
   oracle:
+    enabled: false
     name: oracle-service
     url: http://oracle-service:4444
   auth:
     name: auth-service
     url: http://auth-service:5000
+  spectre:
+    enabled: false
 
 security:
   oauth2:
@@ -22,9 +26,9 @@ security:
       accessTokenUri: http://auth-service:5000/auth/oauth/token
       scope: resource-server-read
 
-#logstash:
-#  host: logstash
-#  port: 4560
+logstash:
+  host: logstash-service
+  port: 4560
       
 logging: 
   level: 
@@ -32,5 +36,5 @@ logging:
     org.springframework: INFO
     guru.bonacci.oogway.doorway: INFO
 
-lumbering.enabled: false  
+
 file.name.answers.to.win.time: answers-to-win-time.txt 

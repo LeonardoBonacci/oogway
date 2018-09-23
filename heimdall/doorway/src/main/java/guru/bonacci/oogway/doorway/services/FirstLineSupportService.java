@@ -1,17 +1,10 @@
 package guru.bonacci.oogway.doorway.services;
 
-import static org.springframework.util.StringUtils.isEmpty;
-
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.doorway.bigbrother.WatchMe;
-import guru.bonacci.oogway.doorway.cheaters.Postponer;
-import guru.bonacci.oogway.doorway.clients.AuthClient;
-import guru.bonacci.oogway.doorway.clients.OracleClient;
-import guru.bonacci.oogway.doorway.security.Credentials;
+import guru.bonacci.oogway.doorway.oracle.Oracle;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 /**
@@ -29,21 +22,10 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
 public class FirstLineSupportService {
 
 	@Autowired
-	private OracleClient oracleClient;
-
-	@Autowired
-	private AuthClient authClient;
-
-	@Autowired
-	private Postponer postponer;
+	private Oracle oracle;
 
 	@WatchMe
 	public GemCarrier enquire(String q, String apiKey) {
-		if (isEmpty(q))
-			return new GemCarrier("No question no answer..", "oogway");
-
-		Credentials currentUser = authClient.user(apiKey);
-		Optional<GemCarrier> gem = oracleClient.consult(q, null, currentUser);
-		return gem.orElse(new GemCarrier(postponer.saySomething(), "oogway"));
+		return oracle.enquire(q, apiKey);
 	}
 }

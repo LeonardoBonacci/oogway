@@ -13,6 +13,10 @@ feign:
   hystrix:
     enabled: true
 
+logstash:
+  host: logstash-service
+  port: 4560
+
 logging: 
   level.guru.bonacci.oogway.jobs: INFO
   

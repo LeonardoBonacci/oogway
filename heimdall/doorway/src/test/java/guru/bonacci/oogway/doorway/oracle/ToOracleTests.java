@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.doorway.services;
+package guru.bonacci.oogway.doorway.oracle;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -26,20 +26,20 @@ import guru.bonacci.oogway.doorway.security.Credentials;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @ExtendWith(SpringExtension.class)
-public class FirstLineSupportServiceTests {
+public class ToOracleTests {
 
 	@TestConfiguration
 	@Profile("!integration-test")
     static class TestContext {
   
         @Bean
-        public FirstLineSupportService service() {
-    		return new FirstLineSupportService();
+        public Oracle service() {
+    		return new ToOracle();
         }
     }
 
 	@Autowired
-	FirstLineSupportService service;
+	Oracle service;
 
 	@MockBean
 	AuthClient authClient;

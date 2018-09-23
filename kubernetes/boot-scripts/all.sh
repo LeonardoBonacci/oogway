@@ -14,5 +14,5 @@ sleep 2
 
 /bin/bash deployments.sh
 
-echo "As a polite reminder: did you run encryption-keys.sh first?"
+echo "As a polite reminder: did you run encryption-keys.sh?"
 sleep 3

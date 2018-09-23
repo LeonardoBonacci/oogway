@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.doorway.bigbrother;
+package guru.bonacci.oogway.doorway.lumber;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -8,8 +8,8 @@ import guru.bonacci.oogway.doorway.clients.LumberjackClient;
 import guru.bonacci.oogway.doorway.exceptions.GreedyException;
 
 @Component
-@ConditionalOnProperty(name = "lumbering.enabled", havingValue = "true")
-public class ToLumber implements Lumbering {
+@ConditionalOnProperty(name = "service.lumberjack.enabled", havingValue = "true")
+public class ToLumber implements Lumberjack {
 
 	private static final Long GREED_STARTS_HERE = 6l;
 	

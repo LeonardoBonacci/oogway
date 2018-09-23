@@ -13,9 +13,10 @@ spring:
     elasticsearch:
       cluster-name: elasticsearch
       cluster-nodes: es:9300 
+
+logstash:
+  host: logstash-service
+  port: 4560
     
 logging: 
   level.guru.bonacci.oogway.oracle: DEBUG
-    
-build: 
-  version: "@project.version@" 

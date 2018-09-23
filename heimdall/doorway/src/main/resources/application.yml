@@ -21,8 +21,16 @@ security:
       clientSecret: doorway-service-secret
       accessTokenUri: http://auth-service:5000/auth/oauth/token
       scope: resource-server-read
+
+#logstash:
+#  host: logstash
+#  port: 4560
       
 logging: 
-  level.guru.bonacci.oogway.doorway: INFO
-  
+  level: 
+    root: WARN
+    org.springframework: INFO
+    guru.bonacci.oogway.doorway: INFO
+
+lumbering.enabled: false  
 file.name.answers.to.win.time: answers-to-win-time.txt 

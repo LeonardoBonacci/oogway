@@ -10,8 +10,6 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.doorway.clients.LumberjackClient;
-import guru.bonacci.oogway.doorway.exceptions.GreedyException;
 import guru.bonacci.oogway.doorway.ip.IIPologist;
 import guru.bonacci.oogway.doorway.utils.IPCatcher;
 
@@ -21,16 +19,16 @@ public class BigBrother {
 
 	private final Logger logger = getLogger(this.getClass());
 
-	private static final Long GREED_STARTS_HERE = 10l;
-	
-	@Autowired
-	private LumberjackClient lumberClient;
-
 	@Autowired
 	public IPCatcher iPCatcher;
 
 	@Autowired
 	private IIPologist ipologist;
+
+
+	@Autowired
+	private Lumbering lumbering;
+
 
     @Pointcut("@annotation(WatchMe)")
     public void watchMePointCut(){
@@ -39,10 +37,7 @@ public class BigBrother {
 	@Before("watchMePointCut() && args(..,apiKey)")
 	public void blockTheGreedyClients(JoinPoint joinPoint, String apiKey) throws Throwable {
 		logger.debug("spotted: " + apiKey);
-		
-		long visits = lumberClient.visits(apiKey);
-		if (!"yawgoo".equals(apiKey) && visits >= GREED_STARTS_HERE) { //this could be user specific info
-			throw new GreedyException();
-		}
+
+		lumbering.lumber(apiKey);
 	}
 }

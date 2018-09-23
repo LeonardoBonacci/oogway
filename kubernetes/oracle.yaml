@@ -18,4 +18,12 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 4444
+          volumeMounts:
+          - name: app-config
+            mountPath: /config
+      volumes:
+      - name: app-config
+        configMap:
+          name: oracle
+            
 

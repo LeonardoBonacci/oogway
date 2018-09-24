@@ -1,6 +1,6 @@
-FROM java:8-jre
+FROM openjdk:8-jre-alpine
 
 ADD ./target/weather.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/weather.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app/weather.jar"]
 
 EXPOSE 9999

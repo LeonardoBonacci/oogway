@@ -1,6 +1,6 @@
-FROM java:8-jre
+FROM openjdk:8-jre-alpine
 
 ADD ./target/money.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/money.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app/money.jar"]
 
 EXPOSE 11111

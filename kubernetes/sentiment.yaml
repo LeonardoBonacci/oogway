@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sentiment
+spec:
+  containers:
+  - name: sentiment
+    image: leonardobonacci/oogway-sentiment-service
+    imagePullPolicy: Never
+    ports:
+      - containerPort: 7777            

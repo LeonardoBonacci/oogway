@@ -28,11 +28,11 @@ data:
       rabbitmq {
         durable => true
         exchange => "spectre"
-      exchange_type => "direct"
+        exchange_type => "direct"
         host => "rabbit"
         queue => "logstash"
-      key => "eavesdrop"
-      metadata_enabled => true
+        key => "eavesdrop"
+        metadata_enabled => true
       } 
     }
     

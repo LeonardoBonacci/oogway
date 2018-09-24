@@ -7,7 +7,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,7 +14,6 @@ import guru.bonacci.spectre.spectreshared.persistence.Spec;
 import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 import guru.bonacci.spectre.spectreutilities.enrichment.SpectreService;
 
-@RefreshScope
 @Service
 public class LocalTimerService implements SpectreService {
 

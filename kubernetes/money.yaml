@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: money
+spec:
+  containers:
+  - name: money
+    image: leonardobonacci/oogway-money-service
+    imagePullPolicy: Never
+    ports:
+      - containerPort: 6666
+

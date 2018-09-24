@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: localtimer
+spec:
+  containers:
+  - name: localtimer
+    image: leonardobonacci/oogway-localtimer-service
+    imagePullPolicy: Never
+    ports:
+      - containerPort: 11111            

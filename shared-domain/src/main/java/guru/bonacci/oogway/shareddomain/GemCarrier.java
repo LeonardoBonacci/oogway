@@ -1,7 +1,6 @@
 package guru.bonacci.oogway.shareddomain;
 
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -15,11 +14,9 @@ import lombok.NonNull;
 @NoArgsConstructor
 public class GemCarrier {
 
-	@ApiModelProperty(notes = "Once said", required = true)
 	@NonNull
 	private String saying;
 
-	@ApiModelProperty(notes = "By a certain individual")
 	private String author;
 
 	public GemCarrier(String saying) {

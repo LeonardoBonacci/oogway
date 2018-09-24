@@ -3,6 +3,21 @@ server:
   servlet:
     context-path: /doors
 
+spring:
+  rabbitmq:
+    host: rabbit
+  cloud:
+    stream:
+      default:
+        contentType: application/json
+        binder: rabbit
+      rabbit:
+        bindings:
+          spectre:
+            producer:
+              exchangeType: direct
+              routingKeyExpression: '''eavesdrop'''
+
 service:  
   lumberjack:
     enabled: false
@@ -16,7 +31,7 @@ service:
     name: auth-service
     url: http://auth-service:5000
   spectre:
-    enabled: false
+    enabled: true
 
 security:
   oauth2:

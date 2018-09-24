@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
  * Iterable supplying an infinite stream of ip addresses
  */
 @Component
-@Profile("dev")
+@Profile("!prod")
 public class IPerable implements Iterable<String> {
 
 	private int bufferSize = 10;

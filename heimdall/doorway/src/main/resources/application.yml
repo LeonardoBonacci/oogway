@@ -1,7 +1,5 @@
 server: 
   port: 3333
-  servlet:
-    context-path: /doors
 
 spring:
   rabbitmq:
@@ -31,7 +29,7 @@ service:
     name: auth-service
     url: http://auth-service:5000
   spectre:
-    enabled: true
+    enabled: false
 
 security:
   oauth2:

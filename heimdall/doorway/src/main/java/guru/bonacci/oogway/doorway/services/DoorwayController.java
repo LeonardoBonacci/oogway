@@ -18,6 +18,12 @@ public class DoorwayController {
 	@Autowired
 	private FirstLineSupportService service;
 
+	@GetMapping
+	public String test() {
+		logger.error("found");
+		return "Alive!";
+	}
+
 	@GetMapping("/consult")
 	public GemCarrier enquire(@RequestParam("q") String q, @RequestParam("apikey") String apiKey) {
 		logger.info("Receiving request for a wise answer on: '" + q + "'");

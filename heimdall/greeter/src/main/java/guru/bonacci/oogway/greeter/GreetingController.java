@@ -35,7 +35,7 @@ public class GreetingController {
 
 		String apiKey = greeting.getKey();
 		String q = greeting.getQuestion();
-		GemCarrier gem = restTemplate.getForObject(serviceUrl + "/doors/consult" + params, GemCarrier.class, q, apiKey);
+		GemCarrier gem = restTemplate.getForObject(serviceUrl + "/consult" + params, GemCarrier.class, q, apiKey);
 
 		greeting.setKey(gem.getAuthor());
 		greeting.setAnswer(gem.getSaying());

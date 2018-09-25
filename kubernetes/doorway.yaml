@@ -17,7 +17,7 @@ spec:
         image: leonardobonacci/oogway-doorway-service
         imagePullPolicy: Never
         ports:
-        - containerPort: 5000
+        - containerPort: 3333
         volumeMounts:
         - name: hostvol
           mountPath: /ubuntu1

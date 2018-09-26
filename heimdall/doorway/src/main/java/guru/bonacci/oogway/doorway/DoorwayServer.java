@@ -8,6 +8,7 @@ import java.security.spec.InvalidKeySpecException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -23,6 +24,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import guru.bonacci.oogway.doorway.clients.CredentialsConfig;
 import guru.bonacci.oogway.doorway.events.DoorwayEventChannels;
+import guru.bonacci.oogway.doorway.oracle.ToOracle;
 import guru.bonacci.oogway.doorway.security.Decryptor;
 import guru.bonacci.oogway.doorway.security.RSADecryptor;
 import guru.bonacci.oogway.utilities.security.RSAKeyHelper;
@@ -37,6 +39,7 @@ import guru.bonacci.oogway.utilities.security.RSAKeyHelper;
 public class DoorwayServer {
 
 	@Bean
+	@ConditionalOnBean(ToOracle.class)
 	public Decryptor decryptor() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
 		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 		return new RSADecryptor(RSAKeyHelper.loadPrivateKey("/ubuntu1/")); //volume mount in Dockerfile

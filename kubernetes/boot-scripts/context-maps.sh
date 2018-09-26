@@ -34,6 +34,5 @@ echo "lumberjack from: " $(pwd)
 kubectl create configmap lumberjack --from-file=src/main/resources/application.yml
 
 echo "(well) done"
-
-sleep 4
+sleep 2
 

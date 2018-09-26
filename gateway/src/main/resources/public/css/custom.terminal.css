@@ -1,9 +1,0 @@
-
-.response{
-  font-family: monospace;
-  /*font-family: FreeMono, monospace; this don't work on Android */
-  color: #0e907e;
-  background-color: #000;
-  font-size: 12px;
-  line-height: 14px;
-}

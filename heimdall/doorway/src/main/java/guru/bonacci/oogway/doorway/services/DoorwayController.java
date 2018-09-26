@@ -28,6 +28,9 @@ public class DoorwayController {
 	public GemCarrier enquire(@RequestParam("q") String q, @RequestParam("apikey") String apiKey) {
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
 
-		return service.enquire(q, apiKey);
+		GemCarrier answer = service.enquire(q, apiKey);
+
+		logger.info("return " + answer);
+		return answer;
 	}
 }

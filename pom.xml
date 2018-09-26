@@ -29,7 +29,6 @@
 
 	<modules>
 		<module>auth</module>
-		<module>gateway</module>
 		<module>heimdall</module>
 		<module>jobs</module>
 		<module>oracle</module>

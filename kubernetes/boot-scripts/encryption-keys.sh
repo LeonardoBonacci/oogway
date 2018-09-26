@@ -16,5 +16,5 @@ echo "Copying public key"
 scp -i ~/.minikube/machines/minikube/id_rsa ../../public.key docker@${1}:/home/docker
 
 echo "Keys copied"
-sleep 4
+sleep 2
 

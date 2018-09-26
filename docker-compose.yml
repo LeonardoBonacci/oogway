@@ -1,56 +1,43 @@
 version: '2.3'
 services:
 
-#  gateway-service:
-#    environment:
-#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-#      CLOUD_CONFIG_FIND_LABEL: $CLOUD_CONFIG_FIND_LABEL
-#      SPRING_PROFILES_ACTIVE: dev
-#    image: leonardobonacci/oogway-gateway-service
-#    restart: always
-#    depends_on:
-#      config-service:
-#        condition: service_healthy
-#    ports:
-#      - 80:9090
-#      
-  auth-service:
+  auth:
     image: leonardobonacci/oogway-auth-service
     build: auth
             
-  doorway-service:
+  doorway:
     image: leonardobonacci/oogway-doorway-service
     build: heimdall/doorway
 
-  lumberjack-service:
+  lumberjack:
     image: leonardobonacci/oogway-lumberjack-service
     build: heimdall/lumberjack
 
-  oracle-service:
+  oracle:
     image: leonardobonacci/oogway-oracle-service
     build: oracle
 
-  sannyas-service:
+  sannyas:
     image: leonardobonacci/oogway-sannyas-service
     build: sannyas
   
-  job-service:
+  job:
     image: leonardobonacci/oogway-job-service
     build: jobs
   
-  localtimer-service:
+  localtimer:
     image: leonardobonacci/oogway-localtimer-service
     build: spectre/local-timer
 
-  sentiment-service:
+  sentiment:
     image: leonardobonacci/oogway-sentiment-service
     build: spectre/sentiment
 
-  weather-service:
+  weather:
     image: leonardobonacci/oogway-weather-service
     build: spectre/weather
       
-  money-service:
+  money:
     image: leonardobonacci/oogway-money-service
     build: spectre/money
 

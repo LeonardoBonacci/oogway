@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana-service
+spec:
+  selector:
+    app: kibana
+  ports:
+  - protocol: TCP
+    port: 5601
+  type: LoadBalancer
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -19,15 +31,3 @@ spec:
           value: http://es:9200
         - name: xpack.security.enabled
           value: "false"
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: kibana-service
-spec:
-  selector:
-    app: kibana
-  ports:
-  - protocol: TCP
-    port: 5601
-  type: LoadBalancer

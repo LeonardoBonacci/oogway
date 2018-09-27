@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: oracle-service
+spec:
+  selector:
+    app: oracle
+  ports:
+  - protocol: TCP
+    port: 4444
+  type: NodePort
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -24,6 +36,5 @@ spec:
       volumes:
       - name: app-config
         configMap:
-          name: oracle
-            
+          name: oracle        
 

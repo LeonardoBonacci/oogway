@@ -17,9 +17,9 @@ services:
     image: leonardobonacci/oogway-oracle-service
     build: oracle
 
-  sannyas:
-    image: leonardobonacci/oogway-sannyas-service
-    build: sannyas
+#  sannyas:
+#    image: leonardobonacci/oogway-sannyas-service
+#    build: sannyas
   
   job:
     image: leonardobonacci/oogway-job-service

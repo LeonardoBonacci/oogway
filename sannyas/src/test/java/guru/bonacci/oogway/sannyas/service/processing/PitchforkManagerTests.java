@@ -13,9 +13,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import guru.bonacci.oogway.sannyas.service.events.SannyasGateway;
-import guru.bonacci.oogway.sannyas.service.gr.GRSeeker;
+import guru.bonacci.oogway.sannyas.gr.GRSeeker;
+import guru.bonacci.oogway.sannyas.processing.CleaningAgent;
+import guru.bonacci.oogway.sannyas.processing.ForePlayer;
+import guru.bonacci.oogway.sannyas.processing.SannyasinPicker;
+import guru.bonacci.oogway.sannyas.services.SannyasService;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import reactor.core.publisher.Flux;
 
 @ExtendWith(SpringExtension.class)
 public class PitchforkManagerTests {
@@ -24,13 +28,13 @@ public class PitchforkManagerTests {
     static class TestContext {
   
         @Bean
-        public PitchforkManager manager() {
-    		return new PitchforkManager();
+        public SannyasService manager() {
+    		return new SannyasService();
         }
     }
 
 	@Autowired
-	PitchforkManager manager;
+	SannyasService manager;
 
 	@MockBean
 	SannyasinPicker sannyasinPicker;
@@ -44,22 +48,19 @@ public class PitchforkManagerTests {
 	@MockBean
 	CleaningAgent cleaningAgent;
 
-	@MockBean
-	SannyasGateway gateway;
-	
 	@Test
 	public void shouldJustRunThroughAllTheseMockCallsInThisMeaninglessTest() {
 		String input = "yet another beautiful day today";
 		String preprocessedInput = "another beautiful day";
-		List<GemCarrier> found = asList(new GemCarrier("that"), new GemCarrier("is true"), new GemCarrier("beautiful stranger"));
+		Flux<GemCarrier> found = Flux.just(new GemCarrier("that"), new GemCarrier("is true"), new GemCarrier("beautiful stranger"));
 		List<GemCarrier> clutterless = asList(new GemCarrier("that"), new GemCarrier("true"), new GemCarrier("stranger"));
 		
 		when(sannyasinPicker.pickOne()).thenReturn(sannyasin);
 		when(forePlayer.play(sannyasin, input)).thenReturn(preprocessedInput);
 		when(sannyasin.seek(preprocessedInput)).thenReturn(found);
-		when(cleaningAgent.noMoreClutter(sannyasin, found)).thenReturn(clutterless);
+//TODO		when(cleaningAgent.noMoreClutter(sannyasin, found)).thenReturn(clutterless);
 		
-		manager.delegate(input);
+		manager.feed(input);
 		//TODO verify something
 	}
 }

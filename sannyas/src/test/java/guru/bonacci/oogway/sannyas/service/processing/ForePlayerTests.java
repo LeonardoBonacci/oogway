@@ -2,7 +2,7 @@ package guru.bonacci.oogway.sannyas.service.processing;
 
 import static java.util.Arrays.asList;
 import static java.util.function.Function.identity;
-import static org.apache.commons.lang.StringUtils.reverse;
+import static org.apache.commons.lang3.StringUtils.reverse;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -18,8 +18,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import guru.bonacci.oogway.sannyas.service.gr.GRSeeker;
-import guru.bonacci.oogway.sannyas.service.steps.DuplicateRemover;
+import guru.bonacci.oogway.sannyas.gr.GRSeeker;
+import guru.bonacci.oogway.sannyas.processing.ForePlayer;
+import guru.bonacci.oogway.sannyas.steps.DuplicateRemover;
 
 @ExtendWith(SpringExtension.class)
 public class ForePlayerTests {

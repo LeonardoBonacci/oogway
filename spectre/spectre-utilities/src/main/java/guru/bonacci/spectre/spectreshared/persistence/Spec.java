@@ -16,7 +16,7 @@ public class Spec {
 	@Id
 	public String id;
 
-	@Field(type = FieldType.text)
+	@Field(type = FieldType.Text)
 	public String message;
 
 	@Field(type = FieldType.Nested)
@@ -27,7 +27,7 @@ public class Spec {
 
 		public Geoip() {}
 
-		@Field(type = FieldType.keyword)
+		@Field(type = FieldType.Keyword)
 		public String country_code2;
 
 		@Field(type = FieldType.Double)

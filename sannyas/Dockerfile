@@ -1,6 +1,6 @@
-FROM java:8-jre
+FROM openjdk:8-jre-alpine
 
 ADD ./target/sannyas.jar /app/
-CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,address=8002,suspend=n", "-Xmx512m", "-jar", "/app/sannyas.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app/sannyas.jar"]
 
-EXPOSE 2222 8002
+EXPOSE 2222

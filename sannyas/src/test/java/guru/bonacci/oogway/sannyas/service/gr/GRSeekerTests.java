@@ -6,8 +6,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +15,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import guru.bonacci.oogway.sannyas.service.filters.LengthFilter;
-import guru.bonacci.oogway.sannyas.service.steps.CharacterGuardian;
-import guru.bonacci.oogway.sannyas.service.steps.KeyPhraser;
+import guru.bonacci.oogway.sannyas.filters.LengthFilter;
+import guru.bonacci.oogway.sannyas.gr.GRScraper;
+import guru.bonacci.oogway.sannyas.gr.GRSeeker;
+import guru.bonacci.oogway.sannyas.steps.CharacterGuardian;
+import guru.bonacci.oogway.sannyas.steps.KeyPhraser;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import reactor.core.publisher.Flux;
 
 @ExtendWith(SpringExtension.class)
 public class GRSeekerTests {
@@ -70,7 +71,7 @@ public class GRSeekerTests {
 
 	@Test
 	public void shouldSeek() {
-		List<GemCarrier> out = asList(new GemCarrier("a"), new GemCarrier("b"));
+		Flux<GemCarrier> out = Flux.just(new GemCarrier("a"), new GemCarrier("b"));
 		
 		when(scraper.find("a", "b")).thenReturn(out);
 		assertThat(seeker.seek("a b"), is(equalTo(out)));

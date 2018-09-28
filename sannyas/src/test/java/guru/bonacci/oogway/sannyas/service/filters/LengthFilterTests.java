@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import guru.bonacci.oogway.sannyas.filters.LengthFilter;
+
 @ExtendWith(SpringExtension.class)
 public class LengthFilterTests {
 

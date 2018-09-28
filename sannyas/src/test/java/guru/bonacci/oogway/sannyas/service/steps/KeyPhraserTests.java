@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import guru.bonacci.oogway.sannyas.service.SannyasTestApp;
+import guru.bonacci.oogway.sannyas.steps.KeyPhraser;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = SannyasTestApp.class, properties = {

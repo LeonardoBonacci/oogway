@@ -18,8 +18,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import guru.bonacci.oogway.sannyas.service.filters.ProfanityFilter;
-import guru.bonacci.oogway.sannyas.service.gr.GRSeeker;
+import guru.bonacci.oogway.sannyas.filters.ProfanityFilter;
+import guru.bonacci.oogway.sannyas.gr.GRSeeker;
+import guru.bonacci.oogway.sannyas.processing.CleaningAgent;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 
 @ExtendWith(SpringExtension.class)

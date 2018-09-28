@@ -10,6 +10,6 @@ import guru.bonacci.spectre.spectreshared.persistence.Spec;
  */
 public class SentimentSpec extends Spec {
 
-	@Field(type = FieldType.text)
+	@Field(type = FieldType.Text)
 	public String sentiment;
 }

@@ -14,8 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import guru.bonacci.oogway.sannyas.general.Sannyasin;
+import guru.bonacci.oogway.sannyas.processing.SannyasinPicker;
 import guru.bonacci.oogway.sannyas.service.SannyasTestApp;
-import guru.bonacci.oogway.sannyas.service.general.Sannyasin;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes=SannyasTestApp.class, webEnvironment=NONE)

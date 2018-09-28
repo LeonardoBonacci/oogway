@@ -1,0 +1,21 @@
+server:
+  port: 2222
+  servlet:
+    context-path: /sannyas
+
+logstash:
+  host: logstash-service
+  port: 4560
+
+logging:
+  level.guru.bonacci.oogway.sannyas: INFO
+
+# URLs of web pages we visit
+web:
+  url:
+    gr: https://www.goodreads.com/quotes/tag/
+
+# Filter configs
+filter:
+  maxlength: 144
+  profanity.file.name: badwords.txt  

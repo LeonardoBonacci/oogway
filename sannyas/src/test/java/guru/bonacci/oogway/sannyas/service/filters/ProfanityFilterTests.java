@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import guru.bonacci.oogway.sannyas.filters.ProfanityFilter;
+
 @ExtendWith(SpringExtension.class)
 @TestPropertySource(properties = "filter.profanity.file.name=badwords-test.txt")
 public class ProfanityFilterTests {

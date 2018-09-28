@@ -19,6 +19,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import guru.bonacci.oogway.sannyas.service.SannyasTestApp;
+import guru.bonacci.oogway.sannyas.steps.Lemmatizor;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = SannyasTestApp.class, webEnvironment = NONE)

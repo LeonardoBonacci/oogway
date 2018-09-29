@@ -44,7 +44,7 @@ public class OracleClient {
 			params += "&by={author}";
 
 		RestTemplate restTemplate = restTemplateFactory.restTemplate(credentials);
-		return ofNullable(restTemplate.getForObject(serviceUrl + "/oracle/gems" + params, GemCarrier.class, searchString, author));
+		return ofNullable(restTemplate.getForObject(serviceUrl + "/gems" + params, GemCarrier.class, searchString, author));
 	}
 
 	public Optional<GemCarrier> fallback(String searchString, String by, Credentials credentials, Throwable cause) {

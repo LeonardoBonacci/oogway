@@ -11,6 +11,6 @@ import guru.bonacci.oogway.doorway.security.Credentials;
 			  configuration = CredentialsConfig.class)
 public interface AuthClient {
 
-	@GetMapping(value = "/auth/users")
+	@GetMapping(value = "/users")
     Credentials user(@RequestParam("apikey") String apiKey);
 }

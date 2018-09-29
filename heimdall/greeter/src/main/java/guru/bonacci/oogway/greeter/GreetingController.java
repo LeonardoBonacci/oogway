@@ -31,11 +31,11 @@ public class GreetingController {
 
     @PostMapping("/greeting")
     public String greetingSubmit(@ModelAttribute Greeting greeting) {
-		String params = "?q={q}&apikey={apiKey}";
+		String params = "/iam/{apikey}?q={q}";
 
-		String apiKey = greeting.getKey();
+		String apikey = greeting.getKey();
 		String q = greeting.getQuestion();
-		GemCarrier gem = restTemplate.getForObject(serviceUrl + "/consult" + params, GemCarrier.class, q, apiKey);
+		GemCarrier gem = restTemplate.getForObject(serviceUrl + params, GemCarrier.class, apikey, q);
 
 		greeting.setKey(gem.getAuthor());
 		greeting.setAnswer(gem.getSaying());

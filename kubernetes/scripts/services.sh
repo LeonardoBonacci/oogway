@@ -20,4 +20,7 @@ sleep 1
 kubectl.exe apply -f job.yaml	
 sleep 1
 
+kubectl.exe apply -f sannyas.yaml	
+sleep 1
+
 echo "OK"

@@ -6,7 +6,9 @@ cd ../..
 echo "Home: " $(pwd)
 
 echo 'Building and dockerizing, takes a while..'
-mvn clean install -DskipTests; docker-compose build;
+ eval $(minikube docker-env); 
+ mvn clean install -DskipTests; 
+ docker-compose build;
 
 echo "OK"
 sleep 2

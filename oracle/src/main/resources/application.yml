@@ -1,12 +1,10 @@
 server: 
   port: 4444
-  servlet:
-    context-path: /oracle
 
 security:
   oauth2:
     resource:
-      user-info-uri: http://auth-service:5000/auth/users/current
+      user-info-uri: http://auth-service:5000/users/current
 
 spring:
   data:
@@ -14,9 +12,14 @@ spring:
       cluster-name: elasticsearch
       cluster-nodes: es:9300 
 
+service:  
+  sannyas:
+    enabled: true
+    url: http://sannyas-service:2222
+
 logstash:
   host: logstash-service
   port: 4560
     
 logging: 
-  level.guru.bonacci.oogway.oracle: DEBUG
+  level.guru.bonacci.oogway.oracle: INFO

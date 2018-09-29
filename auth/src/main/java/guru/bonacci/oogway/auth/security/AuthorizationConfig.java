@@ -55,14 +55,14 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 	            .withClient("doorway-service")
 	            .secret(passwordEncoder.encode("doorway-service-secret"))
 				.authorizedGrantTypes("client_credentials", "password", "refresh_token")
-	            .scopes("resource-server-read")
+	            .scopes("resource-server-read", "resource-server-write")
                 .accessTokenValiditySeconds(1000)
                 .refreshTokenValiditySeconds(30000)
 		.and()
 				.withClient("job-service")
 				.secret(passwordEncoder.encode("job-service-secret"))
 				.authorizedGrantTypes("client_credentials", "refresh_token")
-	            .scopes("resource-server-read", "resource-server-write");
+	            .scopes("resource-server-read");
 		// @formatter:on
     }
 }

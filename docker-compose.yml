@@ -17,9 +17,9 @@ services:
     image: leonardobonacci/oogway-oracle-service
     build: oracle
 
-#  sannyas:
-#    image: leonardobonacci/oogway-sannyas-service
-#    build: sannyas
+  sannyas:
+    image: leonardobonacci/oogway-sannyas-service
+    build: sannyas
   
   job:
     image: leonardobonacci/oogway-job-service
@@ -40,9 +40,3 @@ services:
   money:
     image: leonardobonacci/oogway-money-service
     build: spectre/money
-
-#  -- experimental feature working since upgrade --
-#  tor: 
-#    image: osminogin/tor-simple
-#    ports:
-#      - 127.0.0.1:9050:9050     

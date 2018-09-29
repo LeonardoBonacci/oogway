@@ -20,7 +20,7 @@ public class UserController {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired 
-	private CustomUserService userService;
+	private CustomUserService service;
 
 	@GetMapping("/current")
     public Principal user(Principal user) {
@@ -31,7 +31,7 @@ public class UserController {
 	
 	@GetMapping
 	public User getUserInfo(@RequestParam("apikey") String apiKey) {
-		User u = userService.loadUserByApiKey(apiKey);
+		User u = service.loadUserByApiKey(apiKey);
 		u.setEncryptedPassword(u.getPassword()); // bit confusing...
 		return u;
 	}

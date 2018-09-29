@@ -64,7 +64,7 @@ public class GRScraper extends WebScraper implements PageCache {
 	@Override
 	public Elements consultWeb(String searchURL) {
 		try {
-			logger.debug("Firing request " + searchURL);
+			logger.info("Firing request " + searchURL);
 			Document doc = get(searchURL);
 			return doc.select("div.quoteText");
 		} catch (IOException e) {
@@ -77,7 +77,7 @@ public class GRScraper extends WebScraper implements PageCache {
 	public GemCarrier toGem(Element el) {
 		String quote = stripText(el.ownText());
 
-		Elements els = el.select("a.authorOrTitle");
+		Elements els = el.select("span.authorOrTitle");
 		String author = els.size() > 0 ? els.first().ownText() : null;
 		
 		return new GemCarrier(quote, author);

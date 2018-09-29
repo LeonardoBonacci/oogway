@@ -20,8 +20,8 @@ import guru.bonacci.oogway.sannyas.services.SannyasHandler;
 @EnableAutoConfiguration
 @EnableCaching(proxyTargetClass=true)
 public class SannyasServer {
-	@Bean
 
+	@Bean
 	RouterFunction<ServerResponse> helloRouterFunction(SannyasHandler handler) {
 		return route(GET("/feed"), handler::feed);
 	}

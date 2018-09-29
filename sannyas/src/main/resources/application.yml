@@ -1,7 +1,5 @@
 server:
   port: 2222
-  servlet:
-    context-path: /sannyas
 
 logstash:
   host: logstash-service

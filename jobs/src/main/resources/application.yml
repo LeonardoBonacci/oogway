@@ -31,4 +31,3 @@ twitter:
 # on spring cron: second, minute, hour, day of month, month, day(s) of week. 
 #Asterisk (*) means match any. */X means "every X". Numeric days of the week do not work. "MON-FRI" works and is much easier to read
   cron: 0 * * * * *  
-  

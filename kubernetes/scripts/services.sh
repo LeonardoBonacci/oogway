@@ -11,13 +11,13 @@ sleep 1
 kubectl.exe apply -f auth.yaml	
 sleep 1
 
-kubectl.exe apply -f lumberjack.yaml	
+#kubectl.exe apply -f lumberjack.yaml	
 sleep 1
 
-kubectl.exe apply -f doorway.yaml	
+#kubectl.exe apply -f doorway.yaml	
 sleep 1
 
-kubectl.exe apply -f job.yaml	
+#kubectl.exe apply -f job.yaml	
 sleep 1
 
 kubectl.exe apply -f sannyas.yaml	

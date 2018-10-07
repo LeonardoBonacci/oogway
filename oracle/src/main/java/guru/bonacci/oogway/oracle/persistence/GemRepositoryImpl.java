@@ -1,11 +1,11 @@
 package guru.bonacci.oogway.oracle.persistence;
 
-import static org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders.randomFunction;
 import static guru.bonacci.oogway.utilities.CustomListUtils.random;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termQuery;
+import static org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders.randomFunction;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.List;
@@ -17,8 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
-
-import guru.bonacci.oogway.oracle.intercept.WatchMe;
 
 /**
  * Following the spring data naming convention we implement 'custom
@@ -51,15 +49,11 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 			gemRepository.saveAll(newOnes);
 	}
 
-	@WatchMe 
-	// don't ask me why, but the @WachtMe annotation is needed here to intercept
-	// these overloaded methods...
 	@Override
 	public Optional<Gem> consultTheOracle(String searchString) {
 		return consultTheOracle(searchString, null);
 	}
 
-	@WatchMe // as spring data offers no proper hook to intercept search queries we do it the traditional way...
 	@Override
 	public Optional<Gem> consultTheOracle(String searchString, String author) {
 		SearchQuery searchQuery = createQuery(searchString, author);

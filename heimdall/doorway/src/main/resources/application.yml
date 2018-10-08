@@ -25,19 +25,8 @@ service:
     enabled: true
     name: oracle-service
     url: http://oracle-service:4444
-  auth:
-    name: auth-service
-    url: http://auth-service:5000
   spectre:
     enabled: false
-
-security:
-  oauth2:
-    client:
-      clientId: doorway-service
-      clientSecret: doorway-service-secret
-      accessTokenUri: http://auth-service:5000/oauth/token
-      scope: resource-server-read
 
 logstash:
   host: logstash-service

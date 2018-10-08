@@ -17,10 +17,6 @@ services:
     image: leonardobonacci/oogway-sannyas-service
     build: sannyas
   
-  job:
-    image: leonardobonacci/oogway-jobs-service
-    build: jobs
-  
   localtimer:
     image: leonardobonacci/oogway-localtimer-service
     build: spectre/local-timer

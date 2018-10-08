@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import reactor.core.publisher.Mono;
 
 @RestController
 public class DoorwayController {
@@ -21,17 +22,14 @@ public class DoorwayController {
 
 	@GetMapping
 	public String test() {
-		logger.error("found");
+		logger.warn("found");
 		return "Alive!";
 	}
 
 	@GetMapping("/iam/{apikey}")
-	public GemCarrier enquire(@PathVariable("apikey") String apikey, @RequestParam("q") String q) {
+	public Mono<GemCarrier> enquire(@PathVariable("apikey") String apikey, @RequestParam("q") String q) {
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
 
-		GemCarrier answer = serv.enquire(q, apikey);
-
-		logger.info("return " + answer);
-		return answer;
+		return serv.enquire(q, apikey);
 	}
 }

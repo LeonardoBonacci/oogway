@@ -30,7 +30,6 @@
 
 	<modules>
 		<module>heimdall</module>
-		<module>jobs</module>
 		<module>oracle</module>
 		<module>sannyas</module>
 		<module>shared-domain</module>

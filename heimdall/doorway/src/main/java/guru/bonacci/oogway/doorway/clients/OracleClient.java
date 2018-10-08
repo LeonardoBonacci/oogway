@@ -1,55 +1,45 @@
 package guru.bonacci.oogway.doorway.clients;
 
-import static java.util.Optional.ofNullable;
 import static org.slf4j.LoggerFactory.getLogger;
 
-import java.util.Optional;
+import java.util.function.BiFunction;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
-
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import guru.bonacci.oogway.doorway.security.Credentials;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import reactivefeign.cloud.CloudReactiveFeign;
+import reactor.core.publisher.Mono;
 
 @Component
 public class OracleClient {
 
 	private final Logger logger = getLogger(this.getClass());
-
+	
 	@Autowired
-	private PasswordGrantFactoryConfig restTemplateFactory;
+	private BiFunction<String, String, WebClient> webClientFactory;
 
-	private final String serviceUrl;
+	@Value("${service.oracle.url}") 
+	private String url;
+	
+	public Mono<GemCarrier> search(String searchString, Credentials creds) {
+		WebClient webClient = webClientFactory.apply(creds.getUsername(), creds.getPassword());
 
-	public OracleClient(@Value("${service.oracle.url}") String serviceUrl) {
-		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl.trim() : "http://" + serviceUrl.trim();
-	}
-
-	/**
-	 * A few small things are needed to secure a service..
-	 * 
-	 * The command line can pretend to be doorway-service:
-	 * curl doorway-service:doorway-service-secret@localhost:5000/auth/oauth/token -d "grant_type=password&username=user1&password=password"
-	 * curl -H "Authorization: Bearer 6d5e6804-d5fd-4cfc-a4e6-12138ed8f05b" -v http://localhost:4444/oracle/gems?q=dance
-	 */
-	@HystrixCommand(fallbackMethod = "fallback")
-	public Optional<GemCarrier> consult(String searchString, String author, Credentials credentials) {
-		String params = "?q={searchString}";
-		if (author != null)
-			params += "&by={author}";
-
-		RestTemplate restTemplate = restTemplateFactory.restTemplate(credentials);
-		return ofNullable(restTemplate.getForObject(serviceUrl + "/gems" + params, GemCarrier.class, searchString, author));
-	}
-
-	public Optional<GemCarrier> fallback(String searchString, String by, Credentials credentials, Throwable cause) {
-        logger.error("Help!!! Can't reach the oracle...", cause);    
-        return Optional.empty();
-	}
+		OracleApi oracle = CloudReactiveFeign.<OracleApi>builder(webClient)
+			.setFallbackFactory(cause -> new OracleApi() {
+		        @Override
+		        public Mono<GemCarrier> search(String q) {
+		        	logger.error(cause.getMessage());
+		            return Mono.just(GemCarrier.builder().saying("Can't reach the Oracle").author("Sorry!").build());
+		        }
+		    })
+			.target(OracleApi.class, url);
+		
+    	return oracle.search(searchString);
+    }
 }
 

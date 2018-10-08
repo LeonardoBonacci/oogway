@@ -54,12 +54,11 @@ public class OracleServer {
         
     	@Bean
     	public MapReactiveUserDetailsService userDetailsRepository() {
-    		UserDetails jobs = User.withDefaultPasswordEncoder().username("jobs").password("sboj").roles("read").build();
     		UserDetails oogway = User.withDefaultPasswordEncoder().username("oogway").password("yawgoo").roles("read").build();
     		UserDetails user1 = User.withDefaultPasswordEncoder().username("user1").password("1resu").roles("read").build();
     		UserDetails app = User.withDefaultPasswordEncoder().username("app").password("ppa").roles("read").build();
     		UserDetails alfred = User.withDefaultPasswordEncoder().username("alfred").password("derfla").roles("read", "write").build();
-    		return new MapReactiveUserDetailsService(jobs, oogway, user1, app, alfred);
+    		return new MapReactiveUserDetailsService(oogway, user1, app, alfred);
     	}
     }
 }

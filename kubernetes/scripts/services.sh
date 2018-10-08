@@ -11,10 +11,7 @@ sleep 1
 #kubectl.exe apply -f lumberjack.yaml	
 sleep 1
 
-#kubectl.exe apply -f doorway.yaml	
-sleep 1
-
-kubectl.exe apply -f jobs.yaml	
+kubectl.exe apply -f doorway.yaml	
 sleep 1
 
 #kubectl.exe apply -f sannyas.yaml	

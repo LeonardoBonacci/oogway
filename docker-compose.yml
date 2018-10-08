@@ -1,10 +1,6 @@
 version: '2.3'
 services:
 
-  auth:
-    image: leonardobonacci/oogway-auth-service
-    build: auth
-            
   doorway:
     image: leonardobonacci/oogway-doorway-service
     build: heimdall/doorway
@@ -22,7 +18,7 @@ services:
     build: sannyas
   
   job:
-    image: leonardobonacci/oogway-job-service
+    image: leonardobonacci/oogway-jobs-service
     build: jobs
   
   localtimer:

@@ -7,20 +7,21 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+import org.springframework.security.authentication.ReactiveAuthenticationManager;
+import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import guru.bonacci.oogway.oracle.services.GemHandler;
-
 @SpringBootApplication
 @EnableElasticsearchRepositories
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
-//@EnableResourceServer
-public class OracleServer { //extends ResourceServerConfigurerAdapter {
-
-//	@Autowired
-//	private ResourceServerProperties sso;
-
+public class OracleServer { 
 	
 	@Bean
 	RouterFunction<ServerResponse> routes(GemHandler handler) {
@@ -28,21 +29,37 @@ public class OracleServer { //extends ResourceServerConfigurerAdapter {
  			.andRoute(GET("/gems/random"), handler::random);
 	}
 
-//	@Bean
-//	public OAuth2RestTemplate restTemplate() {
-//		BaseOAuth2ProtectedResourceDetails resource = new BaseOAuth2ProtectedResourceDetails();
-//		return new OAuth2RestTemplate(resource);
-//	}
-//	
-//	@Bean
-//	public ResourceServerTokenServices tokenServices() {
-//		CustomUserInfoTokenServices serv = new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
-//		serv.setRestTemplate(restTemplate());
-//		return serv;
-//	}
-	
 	public static void main(String[] args) {
 		SpringApplication.run(OracleServer.class, args);
 	}
+	
+    @EnableWebFluxSecurity
+    @EnableReactiveMethodSecurity
+    class SecurityConfig {
 
+        @Bean
+        SecurityWebFilterChain springWebFilterChain(ServerHttpSecurity http) throws Exception {
+            return http
+                    .authorizeExchange()
+                    .anyExchange().authenticated()
+                    .and().authenticationManager(reactiveAuthenticationManager())
+                    .httpBasic().and()
+                    .build();
+        }
+        
+        @Bean
+        ReactiveAuthenticationManager reactiveAuthenticationManager(){
+            return new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsRepository());
+        }
+        
+    	@Bean
+    	public MapReactiveUserDetailsService userDetailsRepository() {
+    		UserDetails jobs = User.withDefaultPasswordEncoder().username("jobs").password("sboj").roles("read").build();
+    		UserDetails oogway = User.withDefaultPasswordEncoder().username("oogway").password("yawgoo").roles("read").build();
+    		UserDetails user1 = User.withDefaultPasswordEncoder().username("user1").password("1resu").roles("read").build();
+    		UserDetails app = User.withDefaultPasswordEncoder().username("app").password("ppa").roles("read").build();
+    		UserDetails alfred = User.withDefaultPasswordEncoder().username("alfred").password("derfla").roles("read", "write").build();
+    		return new MapReactiveUserDetailsService(jobs, oogway, user1, app, alfred);
+    	}
+    }
 }

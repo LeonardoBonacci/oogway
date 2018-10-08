@@ -3,7 +3,6 @@ package guru.bonacci.oogway.jobs.twitter;
 import static java.lang.Math.min;
 import static org.slf4j.LoggerFactory.getLogger;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.jobs.clients.OracleClient;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import reactor.core.publisher.Mono;
 
 @Component
 public class Tweeter {
@@ -28,8 +28,13 @@ public class Tweeter {
 
 	@Scheduled(cron = "${twitter.cron}")
 	public void runForrestRun() {
-		Optional<GemCarrier> random = oracleClient.random();
-		String tweet = random.map(g -> g.getSaying()).orElse(UUID.randomUUID().toString());
+		Mono<GemCarrier> random = oracleClient.random();
+		random.map(g -> g.getSaying())
+			  .switchIfEmpty(Mono.just(UUID.randomUUID().toString()))
+			  .subscribe(this::tweet);
+	}
+	
+	private void tweet(String tweet) {
 		logger.info("tweet: " + tweet);
 
 		try {

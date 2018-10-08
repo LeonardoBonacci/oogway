@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.doorway.events.SpectreGateway;
 import guru.bonacci.oogway.doorway.ip.IIPologist;
-import guru.bonacci.oogway.doorway.utils.IPCatcher;
 import guru.bonacci.oogway.shareddomain.COMINT;
 
 @Component
@@ -18,8 +17,8 @@ public class ToSpectre implements Spectre {
 
 	private final Logger logger = getLogger(this.getClass());
 
-	@Autowired
-	public IPCatcher iPCatcher;
+//	@Autowired
+//	public IPCatcher iPCatcher;
 
 	@Autowired
 	private IIPologist ipologist;
@@ -29,7 +28,7 @@ public class ToSpectre implements Spectre {
 
 	@Override
 	public void eavesdrop(String q)  {
-		String ip = ipologist.checkUp(iPCatcher.getClientIp());
+		String ip = ""; //ipologist.checkUp(iPCatcher.getClientIp());
 		logger.info(ip + " said '" + q + "'");
 		gateway.send(new COMINT(ip, q));
 	}

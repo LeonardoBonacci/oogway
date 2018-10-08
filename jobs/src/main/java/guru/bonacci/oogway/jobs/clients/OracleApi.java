@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 interface OracleApi {
 
 	@GetMapping("")
-	@RequestLine("GET /oracle/gems/random")
+	@RequestLine("GET /gems/random")
     Mono<GemCarrier> random();
 }
 

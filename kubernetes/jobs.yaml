@@ -8,6 +8,7 @@ spec:
   ports:
   - protocol: TCP
     port: 8765
+  type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -24,7 +25,7 @@ spec:
         app: jobs
     spec:
       containers:
-        - name: oracle
+        - name: jobs
           image: leonardobonacci/oogway-jobs-service
           imagePullPolicy: Never
           ports:

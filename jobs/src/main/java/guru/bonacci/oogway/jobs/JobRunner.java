@@ -7,12 +7,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
-import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
-import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootApplication
@@ -29,20 +24,5 @@ public class JobRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(JobRunner.class, args);
-    }
-    
-
-    @EnableWebFluxSecurity
-    @EnableReactiveMethodSecurity
-    class SecurityConfig {
-
-        @Bean
-        SecurityWebFilterChain springWebFilterChain(ServerHttpSecurity http) throws Exception {
-        	return http
-        			.authorizeExchange()
-        				.pathMatchers(HttpMethod.GET, "/tweet/**").permitAll()
-    				.and()
-        			.build();
-        }
     }
 }

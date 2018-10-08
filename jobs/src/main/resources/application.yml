@@ -1,6 +1,10 @@
 server: 
   port: 8765
 
+service:  
+  oracle:
+    url: http://oracle-service:4444
+
 logstash:
   host: logstash-service
   port: 4560

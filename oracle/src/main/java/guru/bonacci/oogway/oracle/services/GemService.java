@@ -36,6 +36,10 @@ public class GemService {
 				  .doOnTerminate(() -> sannyas.learn(q)); // ..and learn!!
 	}
 
+    @PreAuthorize("hasRole('read')")
+	public Mono<Gem> random() {
+		return Mono.justOrEmpty(repo.findRandom()); 
+    }	 
 	
 	@Bean
 	CommandLineRunner demo(Environment env, GemRepository repo) {

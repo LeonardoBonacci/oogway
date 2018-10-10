@@ -6,6 +6,7 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -33,4 +34,12 @@ public class GemHandler {
         				 	.log("found match!"), GemCarrier.class)
         		 .switchIfEmpty(notFound().build());
     }
+	
+	@PreAuthorize("hasRole('read')")
+	public Mono<ServerResponse> random(ServerRequest request) {
+		logger.info("Receiving request for a random quote");
+
+		 return ok()
+				 .body(serv.random()
+						 	.map(GemMapper.MAPPER::fromGem), GemCarrier.class);}
 }

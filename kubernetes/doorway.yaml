@@ -30,14 +30,9 @@ spec:
         ports:
         - containerPort: 3333
         volumeMounts:
-        - name: hostvol
-          mountPath: /ubuntu1
         - name: app-config
           mountPath: /config
       volumes:
-        - name: hostvol
-          hostPath:
-            path: /home/docker
         - name: app-config
           configMap:
             name: doorway

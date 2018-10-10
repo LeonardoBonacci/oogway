@@ -25,6 +25,7 @@ public class OracleClient {
 
 	@Value("${service.oracle.url}") 
 	private String url;
+
 	
 	public Mono<GemCarrier> search(String searchString, Credentials creds) {
 		WebClient webClient = webClientFactory.apply(creds.getUsername(), creds.getPassword());

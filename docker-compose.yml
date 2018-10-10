@@ -9,6 +9,10 @@ services:
     image: leonardobonacci/oogway-lumberjack-service
     build: heimdall/lumberjack
 
+  jobs:
+    image: leonardobonacci/oogway-jobs-service
+    build: jobs
+
   oracle:
     image: leonardobonacci/oogway-oracle-service
     build: oracle

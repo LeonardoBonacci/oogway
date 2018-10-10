@@ -26,7 +26,7 @@ public class GreedWebFilter implements WebFilter {
 			return Mono.empty();
 
 		
-		return lumber.greed("iam")
+		return lumber.isGreedy("iam")
 				.flatMap(greedy -> {
 					if (greedy) {
 						serverWebExchange.getResponse().setStatusCode(HttpStatus.BAD_GATEWAY);

@@ -4,5 +4,5 @@ import reactor.core.publisher.Mono;
 
 public interface Lumberjack {
 
-	Mono<Boolean> greed(String apikey);
+	Mono<Boolean> isGreedy(String apikey);
 }

@@ -11,7 +11,7 @@ public class OrNotToLumber implements Lumberjack {
 
 
 	@Override
-	public Mono<Boolean> greed(String apikey) {
+	public Mono<Boolean> isGreedy(String apikey) {
 		return Mono.just(false);
 	}
 }

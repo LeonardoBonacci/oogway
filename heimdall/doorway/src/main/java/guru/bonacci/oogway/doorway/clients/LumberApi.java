@@ -6,7 +6,7 @@ import reactor.core.publisher.Mono;
 
 interface LumberApi {
 
-	@RequestLine("GET /lumber/visits/{apikey}")
+	@RequestLine("GET /visits/{apikey}")
     Mono<Long> visits(@Param("apikey") String apikey);
 }
 

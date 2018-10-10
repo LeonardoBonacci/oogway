@@ -17,7 +17,7 @@ public class ToLumber implements Lumberjack {
 	private LumberClient lumberClient;
 
 	@Override
-	public Mono<Boolean> greed(String apikey) {
+	public Mono<Boolean> isGreedy(String apikey) {
 		return lumberClient.visits(apikey)
 							.map(v -> v > GREED_STARTS_HERE);
 	}

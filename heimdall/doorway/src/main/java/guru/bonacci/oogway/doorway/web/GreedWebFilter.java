@@ -29,7 +29,7 @@ public class GreedWebFilter implements WebFilter {
 		return lumber.isGreedy("iam")
 				.flatMap(greedy -> {
 					if (greedy) {
-						serverWebExchange.getResponse().setStatusCode(HttpStatus.BAD_GATEWAY);
+						serverWebExchange.getResponse().setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
 						return Mono.empty();
 					} else 
 						return webFilterChain.filter(serverWebExchange);

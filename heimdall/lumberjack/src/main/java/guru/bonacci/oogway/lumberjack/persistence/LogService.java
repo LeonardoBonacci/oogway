@@ -5,6 +5,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import reactor.core.publisher.Mono;
@@ -17,6 +18,7 @@ public class LogService {
 	@Autowired
 	private LogRepository repository;
 
+	@PreAuthorize("hasRole('read')")
 	public Mono<Long> insert(Log logLine) {
 		logger.info("check on " + logLine.getApiKey());
 

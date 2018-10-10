@@ -25,8 +25,8 @@ public class ToSpectre implements Spectre {
 
 	@Override
 	public void eavesdrop(String q, String ip)  {
-		ip = ipologist.checkUp(ip);
 		logger.info(ip + " said '" + q + "'");
+		ip = ipologist.checkUp(ip);
 		gateway.send(new COMINT(ip, q));
 	}
 }

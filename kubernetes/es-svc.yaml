@@ -8,9 +8,7 @@ spec:
     role: data
   ports:
   - name: http
-# for testing purposes
-    port: 80
-#    port: 9200
-    targetPort: 9200
+    port: 9200
   - name: transport
     port: 9300
+  type: NodePort

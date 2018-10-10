@@ -8,7 +8,7 @@ echo "Running scripts from: " $(pwd)
 #kubectl.exe apply -f oracle.yaml	
 sleep 1
 
-kubectl.exe apply -f lumberjack.yaml	
+#kubectl.exe apply -f lumberjack.yaml	
 sleep 1
 
 kubectl.exe apply -f doorway.yaml	

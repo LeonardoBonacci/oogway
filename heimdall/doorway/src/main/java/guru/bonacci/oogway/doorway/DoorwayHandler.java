@@ -32,7 +32,7 @@ public class DoorwayHandler {
 		String q = request.queryParam("q").orElse("nothing matches this string");
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
 
-		return ok().body(fromPublisher(serv.enquire(q, apikey)
+		return ok().body(fromPublisher(serv.enquire(q, apikey) //TODO spectre not working yet
 										   .doOnTerminate(() -> spectre.eavesdrop(q, request.headers().header(IP_HEADER).get(0))), 
 									   GemCarrier.class));
    	}

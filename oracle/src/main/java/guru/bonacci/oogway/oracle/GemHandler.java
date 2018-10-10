@@ -27,7 +27,6 @@ public class GemHandler {
 		String q = request.queryParam("q").orElse("nothing matches this string");
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
 
-//TODO		return ok().contentType(MediaType.TEXT_EVENT_STREAM)?
 		return ok()
         		 .body(serv.search(q)
         				 	.map(GemMapper.MAPPER::fromGem)

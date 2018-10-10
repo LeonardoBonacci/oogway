@@ -16,11 +16,3 @@ spec:
         backend:
           serviceName: doorway-service
           servicePort: 80
-# for testing purposes
-  - host: for.search
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: es
-          servicePort: 80

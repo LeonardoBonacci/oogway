@@ -5,13 +5,11 @@ import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termQuery;
-import static org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders.randomFunction;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.List;
 import java.util.Optional;
 
-import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -70,11 +68,5 @@ public class GemRepositoryImpl implements GemRepositoryCustom {
 		if (author != null)
 			queryBuilder.withFilter(termQuery(Gem.AUTHOR, author));
 		return queryBuilder.build();
-	}
-
-	@Override
-	public Optional<Gem> findRandom() {
-		FunctionScoreQueryBuilder fsqb = new FunctionScoreQueryBuilder(randomFunction(System.currentTimeMillis()));
-		return Optional.ofNullable(gemRepository.search(fsqb).iterator().next());
 	}
 }

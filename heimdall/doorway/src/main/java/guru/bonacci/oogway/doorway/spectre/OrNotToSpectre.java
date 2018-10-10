@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class OrNotToSpectre implements Spectre {
 
 	@Override
-	public void eavesdrop(String q) {
+	public void eavesdrop(String q, String ip) {
 		// day off..
 	}
 }

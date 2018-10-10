@@ -16,6 +16,4 @@ public interface GemRepositoryCustom {
 	Optional<Gem> consultTheOracle(String searchString);
 
 	Optional<Gem> consultTheOracle(String searchString, String author);
-	
-	Optional<Gem> findRandom();
 }

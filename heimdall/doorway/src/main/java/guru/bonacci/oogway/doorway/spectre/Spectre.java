@@ -2,5 +2,5 @@ package guru.bonacci.oogway.doorway.spectre;
 
 public interface Spectre {
 
-	void eavesdrop(String q);
+	void eavesdrop(String q, String ip);
 }

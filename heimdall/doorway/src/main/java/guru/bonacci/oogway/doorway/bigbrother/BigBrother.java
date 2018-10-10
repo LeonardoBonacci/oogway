@@ -3,7 +3,6 @@ package guru.bonacci.oogway.doorway.bigbrother;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -12,16 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.doorway.lumber.Lumberjack;
-import guru.bonacci.oogway.doorway.spectre.Spectre;
 
 @Aspect
 @Component
 public class BigBrother {
 
 	private final Logger logger = getLogger(this.getClass());
-
-	@Autowired
-	public Spectre spectre;
 
 	@Autowired
 	private Lumberjack lumbering;
@@ -31,16 +26,10 @@ public class BigBrother {
 	public void watchMePointCut() {
 	}
 
-	@Before("watchMePointCut() && args(..,apiKey)")
-	public void blockTheGreedyClients(JoinPoint joinPoint, String apiKey) throws Throwable {
-		logger.debug("spotted: " + apiKey);
+	@Before("watchMePointCut() && args(..,apikey)")
+	public void blockTheGreedyClients(JoinPoint joinPoint, String apikey) throws Throwable {
+		logger.debug("spotted: " + apikey);
 
-		lumbering.lumber(apiKey);
-	}
-
-	//cannot be @Async, ip is read from the request
-	@After("watchMePointCut() && args(q,..)")
-	public void eavesdrop(JoinPoint joinPoint, String q) throws Throwable {
-		spectre.eavesdrop(q);
+		lumbering.lumber(apikey);
 	}
 }

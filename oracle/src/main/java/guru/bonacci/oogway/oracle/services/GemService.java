@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.oracle.persistence.Gem;
@@ -29,16 +30,11 @@ public class GemService {
 	private Sannyas sannyas;
 	
 
-//	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
+    @PreAuthorize("hasRole('read')")
 	public Mono<Gem> search(String q) {
-		return Mono.justOrEmpty(repo.consultTheOracle(q)) // inquiry..
+		return Mono.justOrEmpty(repo.consultTheOracle(q)) // enquiry..
 				  .doOnTerminate(() -> sannyas.learn(q)); // ..and learn!!
 	}
-
-//	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
-	public Mono<Gem> random() {
-		return Mono.justOrEmpty(repo.findRandom()); 
-	}	
 
 	
 	@Bean

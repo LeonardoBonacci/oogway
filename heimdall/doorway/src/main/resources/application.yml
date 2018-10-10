@@ -18,15 +18,15 @@ spring:
 
 service:  
   lumberjack:
-    enabled: false
+    enabled: true
     name: lumberjack-service
     url: http://lumberjack-service:11235
   oracle:
-    enabled: true
+    enabled: false
     name: oracle-service
     url: http://oracle-service:4444
   spectre:
-    enabled: false
+    enabled: true
 
 logstash:
   host: logstash-service

@@ -25,8 +25,7 @@ public class OracleServer {
 	
 	@Bean
 	RouterFunction<ServerResponse> routes(GemHandler handler) {
-		return route(GET("/gems"), handler::search)
- 			.andRoute(GET("/gems/random"), handler::random);
+		return route(GET("/gems"), handler::search);
 	}
 
 	public static void main(String[] args) {
@@ -52,7 +51,8 @@ public class OracleServer {
             return new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsRepository());
         }
         
-    	@Bean
+    	@SuppressWarnings("deprecation")
+		@Bean
     	public MapReactiveUserDetailsService userDetailsRepository() {
     		UserDetails oogway = User.withDefaultPasswordEncoder().username("oogway").password("yawgoo").roles("read").build();
     		UserDetails user1 = User.withDefaultPasswordEncoder().username("user1").password("1resu").roles("read").build();

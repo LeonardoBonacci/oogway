@@ -17,9 +17,6 @@ public class ToSpectre implements Spectre {
 
 	private final Logger logger = getLogger(this.getClass());
 
-//	@Autowired
-//	public IPCatcher iPCatcher;
-
 	@Autowired
 	private IIPologist ipologist;
 
@@ -27,8 +24,8 @@ public class ToSpectre implements Spectre {
 	private SpectreGateway gateway;
 
 	@Override
-	public void eavesdrop(String q)  {
-		String ip = ""; //ipologist.checkUp(iPCatcher.getClientIp());
+	public void eavesdrop(String q, String ip)  {
+		ip = ipologist.checkUp(ip);
 		logger.info(ip + " said '" + q + "'");
 		gateway.send(new COMINT(ip, q));
 	}

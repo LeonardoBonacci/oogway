@@ -9,9 +9,9 @@ import reactor.core.publisher.Mono;
 @ConditionalOnMissingBean(ToLumber.class)
 public class OrNotToLumber implements Lumberjack {
 
+
 	@Override
-	public Mono<Void> lumber(String apikey) {
-		//doing nothing
-		return Mono.empty();
+	public Mono<Boolean> greed(String apikey) {
+		return Mono.just(false);
 	}
 }

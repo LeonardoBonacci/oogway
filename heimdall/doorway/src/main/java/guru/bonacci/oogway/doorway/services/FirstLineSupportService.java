@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import guru.bonacci.oogway.doorway.bigbrother.WatchMe;
 import guru.bonacci.oogway.doorway.oracle.Oracle;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 import reactor.core.publisher.Mono;
@@ -30,7 +29,7 @@ public class FirstLineSupportService {
 	@Autowired
 	private Oracle oracle;
 
-	@WatchMe
+	
 	public Mono<GemCarrier> enquire(String q, String apikey) {
 		return oracle.enquire(q, apikey).map(gem -> {
 			logger.info("oracle responded: " + gem);

@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.doorway.clients.LumberClient;
-import guru.bonacci.oogway.doorway.exceptions.GreedyException;
+import reactor.core.publisher.Mono;
 
 @Component
 @ConditionalOnProperty(name = "service.lumberjack.enabled", havingValue = "true")
@@ -17,9 +17,8 @@ public class ToLumber implements Lumberjack {
 	private LumberClient lumberClient;
 
 	@Override
-	public void lumber(String apikey) throws GreedyException {
-		// Called from a webfilter: cannot be included in reactive chain
-		if (lumberClient.visits(apikey).block() >= GREED_STARTS_HERE)
-			throw new GreedyException();
+	public Mono<Boolean> greed(String apikey) {
+		return lumberClient.visits(apikey)
+							.map(v -> v > GREED_STARTS_HERE);
 	}
 }

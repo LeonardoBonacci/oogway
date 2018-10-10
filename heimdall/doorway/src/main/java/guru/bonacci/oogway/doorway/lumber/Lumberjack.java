@@ -1,6 +1,8 @@
 package guru.bonacci.oogway.doorway.lumber;
 
+import reactor.core.publisher.Mono;
+
 public interface Lumberjack {
 
-	void lumber(String apikey);
+	Mono<Boolean> greed(String apikey);
 }

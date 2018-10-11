@@ -1,17 +1,9 @@
 version: '2.3'
 services:
 
-  rabbit:
-    image: rabbitmq:3.7.5-management-alpine
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-
   doorway:
     image: leonardobonacci/oogway-doorway-service
     build: heimdall/doorway
-    ports:
-      - "3333:3333"
 
   lumberjack:
     image: leonardobonacci/oogway-lumberjack-service

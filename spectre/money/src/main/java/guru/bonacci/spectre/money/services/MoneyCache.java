@@ -23,9 +23,9 @@ public class MoneyCache {
 
 	private final Map<String,Object> cache = new HashMap<>();
 	
-	@Autowired
-	private RestTemplate restTemplate;
-
+//	@Autowired
+//	private RestTemplate restTemplate;
+//
 	public String get(String key) {
 		return (String)cache.get(key);
 	}
@@ -47,10 +47,11 @@ public class MoneyCache {
 	 */
 	@SuppressWarnings("rawtypes")
 	int howManyPages() {
-		//[0] is general data
-		Object[] allData = restTemplate.getForObject(serviceURL, Object[].class);
-		Object pages = ((Map)allData[0]).get("pages"); 
-		return (int)pages;
+//		//[0] is general data
+//		Object[] allData = restTemplate.getForObject(serviceURL, Object[].class);
+//		Object pages = ((Map)allData[0]).get("pages"); 
+//		return (int)pages;
+		return 0;
 	}
 
 	/**
@@ -61,10 +62,11 @@ public class MoneyCache {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Map<String,Object> retrievePage(int pagenr) {
 		//[1] is the actual data as an array with Maps
-		Object[] allData = restTemplate.getForObject(serviceURL + "&page=" + pagenr, Object[].class);
-		List<Map> theData = (List<Map>)allData[1]; 
-		return theData.stream()
-					  .collect(toConcurrentMap(map -> (String) map.get("iso2Code"),
-							  			       map -> ((Map) map.get("incomeLevel")).get("value")));
+//		Object[] allData = restTemplate.getForObject(serviceURL + "&page=" + pagenr, Object[].class);
+//		List<Map> theData = (List<Map>)allData[1]; 
+//		return theData.stream()
+//					  .collect(toConcurrentMap(map -> (String) map.get("iso2Code"),
+//							  			       map -> ((Map) map.get("incomeLevel")).get("value")));
+		return null;
 	}
 }

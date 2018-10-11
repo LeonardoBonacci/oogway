@@ -12,10 +12,6 @@ spring:
       bindings:
         enrichment:
           group: weather
-  data:
-    elasticsearch:
-      cluster-name: elasticsearch
-      cluster-nodes: es:9300 
 
 logstash:
   host: logstash-service

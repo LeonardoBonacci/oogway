@@ -1,17 +1,15 @@
 package guru.bonacci.spectre.spectreshared.events;
 
-import static guru.bonacci.spectre.spectreshared.events.SpectreEventChannels.ENRICHMENT;
-import static org.slf4j.LoggerFactory.getLogger;
+import static guru.bonacci.spectre.spectreshared.events.SpectreStreams.ENRICHMENT;
 
-import org.slf4j.Logger;
+import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.StreamListener;
 
 import guru.bonacci.oogway.shareddomain.GenericEvent;
 import guru.bonacci.spectre.spectreutilities.enrichment.SpectreService;
+import reactor.core.publisher.Flux;
 
 public abstract class SpectreRabbitEar {
-
-	private final Logger logger = getLogger(this.getClass());
 
 	private final SpectreService service;
 	
@@ -19,10 +17,10 @@ public abstract class SpectreRabbitEar {
 		this.service = service;
 	}
 
-	@StreamListener(ENRICHMENT)
-	public void onMessage(GenericEvent event) {
-		logger.info("Incoming... " + event.getContent());
-
-		service.enrich(event.getContent());
+	@StreamListener
+	public void onMessage(@Input(ENRICHMENT) Flux<GenericEvent> event) {
+		event.map(GenericEvent::getContent)
+			.flatMap(service::enrich)
+			.subscribe();
 	}	
 }

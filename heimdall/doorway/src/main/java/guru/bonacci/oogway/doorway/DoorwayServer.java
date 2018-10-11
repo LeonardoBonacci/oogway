@@ -13,11 +13,11 @@ import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import guru.bonacci.oogway.doorway.events.DoorwayEventChannels;
+import guru.bonacci.oogway.doorway.events.DoorwayStreams;
 import reactor.core.publisher.Mono;
 
 @SpringBootApplication
-@EnableBinding(DoorwayEventChannels.class)
+@EnableBinding(DoorwayStreams.class)
 @IntegrationComponentScan
 public class DoorwayServer {
 

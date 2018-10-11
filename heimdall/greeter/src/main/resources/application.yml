@@ -1,6 +1,0 @@
-server:
-  port: 1123
-
-doorway:
-  service:
-    url: http://talk.to.oogway

@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.stereotype.Component;
 
+import reactor.core.publisher.Mono;
+
 @Component
 @ConditionalOnMissingBean(ToSpectre.class)
 public class OrNotToSpectre implements Spectre {
@@ -13,7 +15,8 @@ public class OrNotToSpectre implements Spectre {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Override
-	public void eavesdrop(String q, String ip) {
+	public Mono<Void> eavesdrop(String q, String ip) {
 		logger.info("day off..");
+		return Mono.empty();
 	}
 }

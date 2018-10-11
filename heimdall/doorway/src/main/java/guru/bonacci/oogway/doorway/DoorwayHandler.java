@@ -2,7 +2,6 @@ package guru.bonacci.oogway.doorway;
 
 import static guru.bonacci.oogway.doorway.web.IPWebFilter.IP_HEADER;
 import static org.slf4j.LoggerFactory.getLogger;
-import static org.springframework.web.reactive.function.BodyInserters.fromPublisher;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
 import org.slf4j.Logger;
@@ -27,13 +26,12 @@ public class DoorwayHandler {
 	@Autowired
 	private Spectre spectre;
 	
-	public Mono<ServerResponse> search(ServerRequest request) {
+	public Mono<ServerResponse> searchOne(ServerRequest request) {
 		String apikey = request.pathVariable("apikey");
 		String q = request.queryParam("q").orElse("nothing matches this string");
 		logger.info("Receiving request for a wise answer on: '" + q + "'");
 
-		return ok().body(fromPublisher(serv.enquire(q, apikey)
-										   .doOnSuccess(g -> spectre.eavesdrop(q, request.headers().header(IP_HEADER).get(0))), 
-									   GemCarrier.class));
+		return ok().body(spectre.eavesdrop(q, request.headers().header(IP_HEADER).get(0))
+					  .then(serv.enquire(q, apikey)), GemCarrier.class);
    	}
 }

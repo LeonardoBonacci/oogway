@@ -1,6 +1,8 @@
 package guru.bonacci.oogway.doorway.ip;
 
+import reactor.core.publisher.Mono;
+
 public interface IIPologist {
 
-	public String checkUp(String ip);
+	public Mono<String> checkUp(String ip);
 }

@@ -23,7 +23,7 @@ public class GreedWebFilter implements WebFilter {
 	public Mono<Void> filter(ServerWebExchange serverWebExchange, WebFilterChain webFilterChain) {
 		List<PathContainer.Element> es = serverWebExchange.getRequest().getPath().elements();
 		if (es.size() < 4 || !es.get(1).value().equals("iam")) 	
-			return Mono.empty();
+			return webFilterChain.filter(serverWebExchange);
 
 		
 		return lumber.isGreedy("iam")

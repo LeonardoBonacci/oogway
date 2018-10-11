@@ -24,7 +24,7 @@ public class DoorwayServer {
 	@Bean
 	RouterFunction<ServerResponse> routes(DoorwayHandler handler) {
 		return route(GET("/"), req -> ok().body(fromPublisher(Mono.just("Alive!"), String.class)))
-			.andRoute(GET("/iam/{apikey}"), handler::search);
+			.andRoute(GET("/iam/{apikey}"), handler::searchOne);
 	}
 
 	public static void main(String[] args) {

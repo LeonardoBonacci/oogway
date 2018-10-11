@@ -1,7 +1,6 @@
 package guru.bonacci.oogway.sannyas;
 
 import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
-import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;

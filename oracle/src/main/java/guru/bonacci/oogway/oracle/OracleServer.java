@@ -1,78 +1,66 @@
 package guru.bonacci.oogway.oracle;
 
-import static guru.bonacci.oogway.utilities.CustomFileUtils.readToList;
-import static org.slf4j.LoggerFactory.getLogger;
+import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
-import java.io.IOException;
-
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.core.env.Environment;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-import org.springframework.security.oauth2.client.resource.BaseOAuth2ProtectedResourceDetails;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
-
-import guru.bonacci.oogway.oracle.persistence.Gem;
-import guru.bonacci.oogway.oracle.persistence.GemRepository;
-import guru.bonacci.oogway.oracle.security.CustomUserInfoTokenServices;
+import org.springframework.security.authentication.ReactiveAuthenticationManager;
+import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.ServerResponse;
 
 @SpringBootApplication
-@EnableAsync
 @EnableElasticsearchRepositories
-@EnableAspectJAutoProxy 
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-@EnableResourceServer
-public class OracleServer extends ResourceServerConfigurerAdapter {
-
-	private final Logger logger = getLogger(this.getClass());
+public class OracleServer { 
 	
-	@Autowired
-	private ResourceServerProperties sso;
+	@Bean
+	RouterFunction<ServerResponse> routes(GemHandler handler) {
+		return route(GET("/gems"), handler::search)
+				.andRoute(GET("/gems/random"), handler::random);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(OracleServer.class, args);
 	}
+	
+    @EnableWebFluxSecurity
+    @EnableReactiveMethodSecurity
+    class SecurityConfig {
 
-	@Bean
-	CommandLineRunner demo(Environment env, GemRepository repo) {
-		return args -> {
-			// creative exclusion, is it not?
-//			if (env.acceptsProfiles("!unit-test")) {
-				try {
-					Gem[] friedrichsBest = readToList("nietzsche.txt").stream()
-																		.map(quote -> new Gem(quote, "Friedrich Nietzsche"))
-																		.toArray(Gem[]::new);
-					repo.saveTheNewOnly(friedrichsBest);
-				} catch (IOException e) {
-					logger.error("Nietzsche!!", e);
-				}
-//			}	
-		};
-	}
-	
-	@LoadBalanced
-	@Bean
-	public OAuth2RestTemplate loadBalancedTemplate() {
-		BaseOAuth2ProtectedResourceDetails resource = new BaseOAuth2ProtectedResourceDetails();
-		return new OAuth2RestTemplate(resource);
-	}
-	
-	@Bean
-	public ResourceServerTokenServices tokenServices() {
-		CustomUserInfoTokenServices serv = new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
-		serv.setRestTemplate(loadBalancedTemplate());
-		return serv;
-	}
+        @Bean
+        SecurityWebFilterChain springWebFilterChain(ServerHttpSecurity http) throws Exception {
+            return http
+                    .authorizeExchange()
+                    .anyExchange().authenticated()
+                    .and().authenticationManager(reactiveAuthenticationManager())
+                    .httpBasic().and()
+                    .build();
+        }
+        
+        @Bean
+        ReactiveAuthenticationManager reactiveAuthenticationManager(){
+            return new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsRepository());
+        }
+        
+    	@SuppressWarnings("deprecation")
+		@Bean
+    	public MapReactiveUserDetailsService userDetailsRepository() {
+    		UserDetails jobs = User.withDefaultPasswordEncoder().username("jobs").password("sboj").roles("read").build();
+    		UserDetails oogway = User.withDefaultPasswordEncoder().username("oogway").password("yawgoo").roles("read").build();
+    		UserDetails user1 = User.withDefaultPasswordEncoder().username("user1").password("1resu").roles("read").build();
+    		UserDetails app = User.withDefaultPasswordEncoder().username("app").password("ppa").roles("read").build();
+    		UserDetails alfred = User.withDefaultPasswordEncoder().username("alfred").password("derfla").roles("read", "write").build();
+    		return new MapReactiveUserDetailsService(jobs, oogway, user1, app, alfred);
+    	}
+    }
 }

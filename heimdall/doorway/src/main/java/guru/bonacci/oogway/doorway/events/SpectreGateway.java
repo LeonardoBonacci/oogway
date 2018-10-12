@@ -1,6 +1,6 @@
 package guru.bonacci.oogway.doorway.events;
 
-import static guru.bonacci.oogway.doorway.events.DoorwayEventChannels.SPECTRE;
+import static guru.bonacci.oogway.doorway.events.DoorwayStreams.SPECTRE;
 
 import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.MessagingGateway;

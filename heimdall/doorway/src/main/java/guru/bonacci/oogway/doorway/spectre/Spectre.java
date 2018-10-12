@@ -1,6 +1,8 @@
 package guru.bonacci.oogway.doorway.spectre;
 
+import reactor.core.publisher.Mono;
+
 public interface Spectre {
 
-	void eavesdrop(String q);
+	Mono<Void> eavesdrop(String q, String ip);
 }

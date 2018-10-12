@@ -15,6 +15,9 @@ spring:
             producer:
               exchangeType: direct
               routingKeyExpression: '''eavesdrop'''
+      bindings:
+        input:
+          destination: spectre.sink
 
 service:  
   lumberjack:
@@ -22,22 +25,11 @@ service:
     name: lumberjack-service
     url: http://lumberjack-service:11235
   oracle:
-    enabled: true
+    enabled: false
     name: oracle-service
     url: http://oracle-service:4444
-  auth:
-    name: auth-service
-    url: http://auth-service:5000
   spectre:
-    enabled: false
-
-security:
-  oauth2:
-    client:
-      clientId: doorway-service
-      clientSecret: doorway-service-secret
-      accessTokenUri: http://auth-service:5000/oauth/token
-      scope: resource-server-read
+    enabled: true
 
 logstash:
   host: logstash-service

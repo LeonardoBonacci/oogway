@@ -1,34 +1,60 @@
 package guru.bonacci.oogway.oracle.services;
 
-import java.util.Optional;
+import static guru.bonacci.oogway.utilities.CustomFileUtils.readToList;
+import static org.slf4j.LoggerFactory.getLogger;
 
+import java.io.IOException;
+
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import guru.bonacci.oogway.oracle.persistence.Gem;
 import guru.bonacci.oogway.oracle.persistence.GemRepository;
+import guru.bonacci.oogway.oracle.sannyas.Sannyas;
+import reactor.core.publisher.Mono;
 
 @Service
 public class GemService {
 
+	private final Logger logger = getLogger(this.getClass());
+
 	@Autowired
 	private GemRepository repo;
 
-	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
-	public Optional<Gem> search(String q, Optional<String> author) {
-		return author.map(a -> repo.consultTheOracle(q, a))
-					  .orElse(repo.consultTheOracle(q));
-	}	
+	@Autowired
+	private Sannyas sannyas;
+	
 
-	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
-	public Optional<Gem> random() {
-		return repo.findRandom(); 
-	}	
+    @PreAuthorize("hasRole('read')")
+	public Mono<Gem> search(String q) {
+		return Mono.justOrEmpty(repo.consultTheOracle(q)) // enquiry..
+				  .doOnTerminate(() -> sannyas.learn(q)); // ..and learn!!
+	}
 
-	@PostMapping("/backdoor")
-	public void index(Gem gem) {
-		repo.saveTheNewOnly(gem);
+    @PreAuthorize("hasRole('read')")
+	public Mono<Gem> random() {
+		return Mono.justOrEmpty(repo.findRandom()); 
+    }	 
+	
+	@Bean
+	CommandLineRunner demo(Environment env, GemRepository repo) {
+		return args -> {
+			// creative exclusion, is it not?
+			if (env.acceptsProfiles("!unit-test")) {
+				try {
+					Gem[] friedrichsBest = readToList("nietzsche.txt").stream()
+																		.map(quote -> new Gem(quote, "Friedrich Nietzsche"))
+																		.toArray(Gem[]::new);
+					repo.saveTheNewOnly(friedrichsBest);
+				} catch (IOException e) {
+					logger.error("Nietzsche!!", e);
+				}
+			}	
+		};
 	}
 }

@@ -2,12 +2,16 @@ package guru.bonacci.oogway.shareddomain;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * COMINT
  * All intelligence gathered from intercepted communications
  */
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class COMINT implements Serializable {
 
@@ -15,11 +19,4 @@ public class COMINT implements Serializable {
 
 	private String ip;
 	private String message;
-	
-	public COMINT() {}
-
-	public COMINT(String ip, String message) {
-		this.ip = ip;
-		this.message = message;
-	}
 }

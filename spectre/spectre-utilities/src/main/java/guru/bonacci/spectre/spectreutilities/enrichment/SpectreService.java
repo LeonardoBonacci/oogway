@@ -1,6 +1,8 @@
 package guru.bonacci.spectre.spectreutilities.enrichment;
 
+import reactor.core.publisher.Mono;
+
 public interface SpectreService {
 
-	public void enrich(String id);
+	public Mono<String> enrich(String id);
 }

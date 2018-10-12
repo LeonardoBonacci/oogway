@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>guru.bonacci.oogway</groupId>
 	<artifactId>parent</artifactId>
@@ -29,62 +27,36 @@
 	</properties>
 
 	<modules>
-		<module>auth</module>
 		<module>heimdall</module>
-		<module>jobs</module>
+	    <module>jobs</module>
 		<module>oracle</module>
 		<module>sannyas</module>
 		<module>shared-domain</module>
 		<module>spectre</module>
 		<module>utilities</module>
-	</modules>
+  </modules>
 
-	<pluginRepositories>
-		<pluginRepository>
+	<repositories>
+		<repository>
 			<id>spring-libs-release</id>
 			<name>Spring Releases</name>
 			<url>https://repo.spring.io/libs-release</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
+		</repository>
+		<repository>
+			<id>bintray-kptfh-feign-reactive</id>
+			<name>bintray</name>
+			<url>https://dl.bintray.com/kptfh/feign-reactive</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version><!--$NO-MVN-MAN-VER$-->
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.platform</groupId>
-			<artifactId>junit-platform-engine</artifactId>
-			<version>${junit-platform.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.platform</groupId>
-			<artifactId>junit-platform-launcher</artifactId>
-			<version>${junit-platform.version}</version>
+			<version>${lombok.version}</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 	</dependencies>
 
@@ -105,27 +77,9 @@
 			</dependency>
 
 			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-autoconfigure</artifactId>
-				<version>2.0.5.RELEASE</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security.oauth.boot</groupId>
-				<artifactId>spring-security-oauth2-autoconfigure</artifactId>
-				<version>2.0.5.RELEASE</version>
-			</dependency>
-
-
-			<dependency>
-				<groupId>org.springframework.security.oauth</groupId>
-				<artifactId>spring-security-oauth2</artifactId>
-				<version>2.3.3.RELEASE</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.aspectj</groupId>
-				<artifactId>aspectjweaver</artifactId>
-				<version>1.9.0</version>
+				<groupId>io.github.reactivefeign</groupId>
+				<artifactId>feign-reactor-cloud</artifactId>
+				<version>1.0.0</version>
 			</dependency>
 
 			<dependency>

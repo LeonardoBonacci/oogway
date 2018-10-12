@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.doorway.events.SpectreGateway;
 import guru.bonacci.oogway.doorway.ip.IIPologist;
-import guru.bonacci.oogway.doorway.utils.IPCatcher;
 import guru.bonacci.oogway.shareddomain.COMINT;
+import reactor.core.publisher.Mono;
 
 @Component
 @ConditionalOnProperty(name = "service.spectre.enabled", havingValue = "true")
@@ -19,18 +19,15 @@ public class ToSpectre implements Spectre {
 	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
-	public IPCatcher iPCatcher;
-
-	@Autowired
 	private IIPologist ipologist;
 
 	@Autowired
 	private SpectreGateway gateway;
 
 	@Override
-	public void eavesdrop(String q)  {
-		String ip = ipologist.checkUp(iPCatcher.getClientIp());
+	public Mono<Void> eavesdrop(String q, String ip)  {
 		logger.info(ip + " said '" + q + "'");
-		gateway.send(new COMINT(ip, q));
+		return ipologist.checkUp(ip)
+						.flatMap(pi -> Mono.fromRunnable(() -> gateway.send(new COMINT(pi, q))));
 	}
 }

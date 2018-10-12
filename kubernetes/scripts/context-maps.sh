@@ -7,12 +7,11 @@ echo "Home: " $(pwd)
 
 kubectl.exe delete cm --all
 
-kubectl create configmap job --from-file=jobs/src/main/resources/application.yml
-kubectl create configmap auth --from-file=auth/src/main/resources/application.yml
 kubectl create configmap oracle --from-file=oracle/src/main/resources/application.yml
 kubectl create configmap doorway --from-file=heimdall/doorway/src/main/resources/application.yml
 kubectl create configmap lumberjack --from-file=heimdall/lumberjack/src/main/resources/application.yml
 kubectl create configmap sannyas --from-file=sannyas/src/main/resources/application.yml
+kubectl create configmap jobs --from-file=jobs/src/main/resources/application.yml
 
 echo "OK"
 sleep 2

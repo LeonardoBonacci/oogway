@@ -1,51 +1,67 @@
 package guru.bonacci.oogway.lumberjack;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.web.reactive.function.BodyInserters.fromPublisher;
+import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+import static org.springframework.web.reactive.function.server.RouterFunctions.route;
+import static org.springframework.web.reactive.function.server.ServerResponse.ok;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-import org.springframework.security.oauth2.client.resource.BaseOAuth2ProtectedResourceDetails;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
+import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
+import org.springframework.security.authentication.ReactiveAuthenticationManager;
+import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.ServerResponse;
 
-import guru.bonacci.oogway.lumberjack.persistence.Log;
-import guru.bonacci.oogway.lumberjack.persistence.LogService;
-import guru.bonacci.oogway.lumberjack.security.CustomUserInfoTokenServices;
+import reactor.core.publisher.Mono;
 
-@EnableMongoRepositories
+@EnableReactiveMongoRepositories
 @SpringBootApplication
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-@EnableResourceServer
-public class MrLumberjack extends ResourceServerConfigurerAdapter {
-	
-	@Autowired
-	private ResourceServerProperties sso;
+public class MrLumberjack {
+
+	@Bean
+	RouterFunction<ServerResponse> routes(LogHandler handler) {
+		return route(GET("/"), req -> ok().body(fromPublisher(Mono.just("Alive!"), String.class)))
+				.andRoute(GET("/visits/{apikey}"), handler::insert);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(MrLumberjack.class, args);
 	}
 
-	@Bean
-	public OAuth2RestTemplate restTemplate() {
-		BaseOAuth2ProtectedResourceDetails resource = new BaseOAuth2ProtectedResourceDetails();
-		return new OAuth2RestTemplate(resource);
-	}
-	
-	@Bean
-	public ResourceServerTokenServices tokenServices() {
-		CustomUserInfoTokenServices serv = new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
-		serv.setRestTemplate(restTemplate());
-		return serv;
+	@EnableWebFluxSecurity
+	@EnableReactiveMethodSecurity
+	class SecurityConfig {
+
+		@Bean
+		SecurityWebFilterChain springWebFilterChain(ServerHttpSecurity http) throws Exception {
+			return http
+                    .authorizeExchange()
+                    .anyExchange().authenticated()
+                    .and().authenticationManager(reactiveAuthenticationManager())
+                    .httpBasic().and()
+                    .build();
+		}
+
+		@Bean
+		ReactiveAuthenticationManager reactiveAuthenticationManager() {
+			return new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsRepository());
+		}
+
+		@SuppressWarnings("deprecation")
+		@Bean
+		public MapReactiveUserDetailsService userDetailsRepository() {
+			UserDetails doorway = User.withDefaultPasswordEncoder().username("dw").password("wd").roles("read").build();
+			return new MapReactiveUserDetailsService(doorway);
+		}
 	}
 
-	@Bean
-	public AbstractMongoEventListener<Log> mongoEventListener(LogService service) {
-	    return service.new LogPersistListener();
-	}
 }

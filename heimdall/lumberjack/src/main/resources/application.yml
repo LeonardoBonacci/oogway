@@ -3,11 +3,6 @@ server:
   servlet:
     context-path: /lumber
 
-security:
-  oauth2:
-    resource:
-      user-info-uri: http://auth-service:5000/auth/users/current
-
 spring:
   data:
     mongodb:

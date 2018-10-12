@@ -12,10 +12,8 @@ spring:
       bindings:
         enrichment:
           group: weather
-  data:
-    elasticsearch:
-      cluster-name: elasticsearch
-      cluster-nodes: es:9300 
+        output:
+          destination: spectre.sink
 
 logstash:
   host: logstash-service

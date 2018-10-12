@@ -1,6 +1,7 @@
 package guru.bonacci.oogway.shareddomain;
 
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -11,6 +12,7 @@ import lombok.NonNull;
  * Therefore an IDTO: Incognito-DTO.
  */
 @Data
+@Builder
 @NoArgsConstructor
 public class GemCarrier {
 

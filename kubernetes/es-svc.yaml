@@ -9,8 +9,6 @@ spec:
   ports:
   - name: http
     port: 9200
-# for testing purposes
-#    port: 80
-#    targetPort: 9200
   - name: transport
     port: 9300
+  type: NodePort

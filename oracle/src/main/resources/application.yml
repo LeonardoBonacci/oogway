@@ -1,11 +1,6 @@
 server: 
   port: 4444
 
-security:
-  oauth2:
-    resource:
-      user-info-uri: http://auth-service:5000/users/current
-
 spring:
   data:
     elasticsearch:
@@ -14,7 +9,7 @@ spring:
 
 service:  
   sannyas:
-    enabled: true
+    enabled: false
     url: http://sannyas-service:2222
 
 logstash:

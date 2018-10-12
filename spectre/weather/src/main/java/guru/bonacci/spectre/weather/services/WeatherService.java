@@ -4,18 +4,15 @@ import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.slf4j.LoggerFactory.getLogger;
 
-import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import guru.bonacci.spectre.spectreshared.persistence.Spec;
-import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 import guru.bonacci.spectre.spectreutilities.enrichment.SpectreService;
+import reactor.core.publisher.Mono;
 
 @Service
 public class WeatherService implements SpectreService {
@@ -31,33 +28,36 @@ public class WeatherService implements SpectreService {
 	@Autowired
 	private WeatherCallAdmin weatherCallAdmin;
 
-	@Autowired
-	private RestTemplate restTemplate;
+//	@Autowired
+//	private RestTemplate restTemplate;
 
-	@Autowired
-	private SpecRepository repo;
+//	@Autowired
+//	private SpecRepository repo;
 
 	@Value("${openweathermap.apikey}")
 	private String apiKey;
 	
-	public void enrich(String id) {
+	public Mono<String> enrich(String id) {
 		try {
+			logger.error("processing " + id);
 			weatherCallAdmin.checkWhetherCallIsAllowed(id);	
 			
 			// Too lazy for refined error handling today...
-			Spec spec = repo.findById(id).get();
-			String q = searchQuery.replace("#lat#", String.valueOf(spec.geoip.latitude))
-								  .replace("#lon#", String.valueOf(spec.geoip.longitude))
-								  .replace("#apiKey#", apiKey);
+//			Spec spec = repo.findById(id).get();
+//			String q = searchQuery.replace("#lat#", String.valueOf(spec.geoip.latitude))
+//								  .replace("#lon#", String.valueOf(spec.geoip.longitude))
+//								  .replace("#apiKey#", apiKey);
 
-			@SuppressWarnings("unchecked")
-			Map<String,Object> enrichmentData = restTemplate.getForObject(serviceURL + q, Map.class);
-			enrichmentData.keySet().removeAll(redundantFields);
-			logger.debug(enrichmentData.toString());
+//			@SuppressWarnings("unchecked")
+//			Map<String,Object> enrichmentData = restTemplate.getForObject(serviceURL + q, Map.class);
+//			enrichmentData.keySet().removeAll(redundantFields);
+//			logger.debug(enrichmentData.toString());
 			
-			repo.addData("weather", enrichmentData, spec);
+//			repo.addData("weather", enrichmentData, spec);
+			return Mono.just("TODO");
 		} catch(Exception e) {
 			logger.error("Oops", e);
+			return Mono.just("no weather");
 		}
 	}
 }

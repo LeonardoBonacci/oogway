@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.doorway.clients.LumberjackClient;
-import guru.bonacci.oogway.doorway.exceptions.GreedyException;
+import guru.bonacci.oogway.doorway.clients.LumberClient;
+import reactor.core.publisher.Mono;
 
 @Component
 @ConditionalOnProperty(name = "service.lumberjack.enabled", havingValue = "true")
@@ -14,12 +14,11 @@ public class ToLumber implements Lumberjack {
 	private static final Long GREED_STARTS_HERE = 10l;
 	
 	@Autowired
-	private LumberjackClient lumberClient;
+	private LumberClient lumberClient;
 
 	@Override
-	public void lumber(String apiKey) throws GreedyException {
-		if (lumberClient.visits(apiKey) >= GREED_STARTS_HERE) { //this could be user specific info
-			throw new GreedyException();
-		}
+	public Mono<Boolean> isGreedy(String apikey) {
+		return lumberClient.visits(apikey)
+							.map(v -> v > GREED_STARTS_HERE);
 	}
 }

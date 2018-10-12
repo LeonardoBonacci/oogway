@@ -13,30 +13,31 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.sentiment.SentimentCoreAnnotations;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.util.CoreMap;
-import guru.bonacci.spectre.spectreshared.persistence.Spec;
-import guru.bonacci.spectre.spectreshared.persistence.SpecRepository;
 import guru.bonacci.spectre.spectreutilities.enrichment.SpectreService;
+import reactor.core.publisher.Mono;
 
 @Service
 public class SentimentService implements SpectreService {
 
 	private final Logger logger = getLogger(this.getClass());
 
-	@Autowired
-	private SpecRepository repo;
+//	@Autowired
+//	private SpecRepository repo;
 
 	@Autowired
 	private StanfordCoreNLP pipeline;
 	
-	public void enrich(String id) {
+	public Mono<String> enrich(String id) {
 		try {
+			logger.error("processing " + id);
 			// Too lazy for refined error handling today...
-			Spec spec = repo.findById(id).get();
-			repo.addData("sentiment", findSentimentDesc(spec.message), spec);
+//			Spec spec = repo.findById(id).get();
+//			repo.addData("sentiment", findSentimentDesc(spec.message), spec);
+			return Mono.just("TODO");
 		} catch(Exception e) {
 			logger.error("Oops", e);
-		}
-
+			return Mono.just("No sentiment");
+		} 
 	}
 
 	String findSentimentDesc(String line) {

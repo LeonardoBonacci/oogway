@@ -1,8 +1,8 @@
 package guru.bonacci.oogway.doorway.lumber;
 
-import guru.bonacci.oogway.doorway.exceptions.GreedyException;
+import reactor.core.publisher.Mono;
 
 public interface Lumberjack {
 
-	void lumber(String apikey) throws GreedyException;
+	Mono<Boolean> isGreedy(String apikey);
 }

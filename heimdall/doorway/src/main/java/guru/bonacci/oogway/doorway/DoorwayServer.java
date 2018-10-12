@@ -1,7 +1,9 @@
 package guru.bonacci.oogway.doorway;
 
+import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
 import static org.springframework.web.reactive.function.BodyInserters.fromPublisher;
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
@@ -23,9 +25,10 @@ import reactor.core.publisher.Mono;
 public class DoorwayServer {
 
 	@Bean
-	RouterFunction<ServerResponse> routes(DoorwayHandler handler) {
+	RouterFunction<ServerResponse> routes(DoorwayHandler handler, SpectreHandler spectre) {
 		return route(GET("/"), req -> ok().body(fromPublisher(Mono.just("Alive!"), String.class)))
-			.andRoute(GET("/iam/{apikey}"), handler::searchOne);
+			.andRoute(GET("/iam/{apikey}"), handler::searchOne)
+			.andRoute(GET("/spectre").and(accept(TEXT_EVENT_STREAM)), spectre::sink);
 	}
 
 	public static void main(String[] args) {

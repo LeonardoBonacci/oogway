@@ -1,5 +1,6 @@
 package guru.bonacci.oogway.sannyas;
 
+import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
@@ -8,6 +9,7 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 
 import java.util.Properties;
 
+import org.slf4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -23,12 +25,14 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
 @EnableCaching(proxyTargetClass=true)
 public class SannyasServer {
 
+	private final Logger logger = getLogger(this.getClass());
+
 	@Bean
 	RouterFunction<ServerResponse> routes(SannyasService serv) {
 		return route(GET("/feed").and(accept(TEXT_EVENT_STREAM)), 
 						req -> { String q = req.queryParam("q").orElse("");
 								 return ok().contentType(TEXT_EVENT_STREAM)
-										 	.body(serv.feed(q).log(), GemCarrier.class);
+										 	.body(serv.feed(q).doOnEach(s -> logger.info(s.toString())), GemCarrier.class);
 								});
 	}
 

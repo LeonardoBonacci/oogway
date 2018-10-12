@@ -1,9 +1,14 @@
 package guru.bonacci.spectre.spectreshared.events;
 
+import static guru.bonacci.spectre.spectreshared.events.SpectreStreams.ENRICHED;
 import static guru.bonacci.spectre.spectreshared.events.SpectreStreams.ENRICHMENT;
 
 import org.springframework.cloud.stream.annotation.Input;
+import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.cloud.stream.messaging.Processor;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 
 import guru.bonacci.oogway.shareddomain.GenericEvent;
 import guru.bonacci.spectre.spectreutilities.enrichment.SpectreService;
@@ -18,9 +23,10 @@ public abstract class SpectreRabbitEar {
 	}
 
 	@StreamListener
-	public void onMessage(@Input(ENRICHMENT) Flux<GenericEvent> event) {
-		event.map(GenericEvent::getContent)
-			.flatMap(service::enrich)
-			.subscribe();
+	@Output(Processor.OUTPUT)
+	public Flux<Message<String>> onMessage(@Input(ENRICHMENT) Flux<GenericEvent> event) {
+		return event.map(GenericEvent::getContent)
+					.flatMap(service::enrich)
+					.map(m -> MessageBuilder.withPayload(m).build());
 	}	
 }

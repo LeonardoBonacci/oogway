@@ -11,6 +11,7 @@ sleep 1
 #kubectl.exe apply -f lumberjack.yaml	
 sleep 1
 
+kubectl.exe delete deployment doorway
 kubectl.exe apply -f doorway.yaml	
 sleep 1
 

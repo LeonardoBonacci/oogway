@@ -12,6 +12,8 @@ spring:
       bindings:
         enrichment:
           group: weather
+        output:
+          destination: spectre.sink
 
 logstash:
   host: logstash-service

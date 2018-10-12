@@ -12,6 +12,8 @@ spring:
       bindings:
         enrichment:
           group: money
+        output:
+          destination: spectre.sink
 
 logstash:
   host: logstash-service

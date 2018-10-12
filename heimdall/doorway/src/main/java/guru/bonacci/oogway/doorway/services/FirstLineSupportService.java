@@ -31,9 +31,7 @@ public class FirstLineSupportService {
 
 	
 	public Mono<GemCarrier> enquire(String q, String apikey) {
-		return oracle.enquire(q, apikey).map(gem -> {
-			logger.info("oracle responded: " + gem);
-			return gem;
-		});
+		return oracle.enquire(q, apikey)
+					.doOnEach(gem -> logger.info("oracle responded: " + gem));
 	}
 }

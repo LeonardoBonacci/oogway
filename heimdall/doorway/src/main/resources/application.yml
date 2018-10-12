@@ -15,6 +15,9 @@ spring:
             producer:
               exchangeType: direct
               routingKeyExpression: '''eavesdrop'''
+      bindings:
+        input:
+          destination: spectre.sink
 
 service:  
   lumberjack:

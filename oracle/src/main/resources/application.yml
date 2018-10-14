@@ -1,11 +1,13 @@
 server: 
   port: 4444
 
-spring:
-  data:
-    elasticsearch:
-      cluster-name: elasticsearch
-      cluster-nodes: es:9300 
+elasticsearch:
+  hosts:
+    - http://es:9200
+  connectTimeout: 10000
+  connectionRequestTimeout: 10000
+  socketTimeout: 10000
+  maxRetryTimeoutMillis: 60000
 
 service:  
   sannyas:

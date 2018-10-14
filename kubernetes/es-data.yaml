@@ -28,24 +28,24 @@ spec:
             add:
               - IPC_LOCK
               - SYS_RESOURCE
-        image: docker.elastic.co/elasticsearch/elasticsearch:5.5.3
+        image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
         imagePullPolicy: IfNotPresent
         env:
-        - name: xpack.security.enabled
-          value: "false"
-        - name: cluster.name
-          value: elasticsearch
         - name: HTTP_ENABLE
           value: "true"
-        - name: "ES_JAVA_OPTS"
-          value: "-Xms512m -Xmx512m"
+        - name: ES_JAVA_OPTS
+          value: -Xms512m -Xmx512m
         ports:
         - containerPort: 9200
           name: http
-          protocol: TCP
         - containerPort: 9300
           name: transport
-          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /_cluster/health
+            port: http
+          initialDelaySeconds: 20
+          timeoutSeconds: 5
         volumeMounts:
         - name: storage
           mountPath: /data

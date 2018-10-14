@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import guru.bonacci.oogway.oracle.persistence.Gem;
 import guru.bonacci.oogway.oracle.persistence.GemRepository;
 import guru.bonacci.oogway.oracle.sannyas.Sannyas;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -32,29 +33,27 @@ public class GemService {
 
     @PreAuthorize("hasRole('read')")
 	public Mono<Gem> search(String q) {
-		return Mono.justOrEmpty(repo.consultTheOracle(q)) // enquiry..
+		return repo.find(q) // enquiry..
 				  .doOnTerminate(() -> sannyas.learn(q)); // ..and learn!!
 	}
 
     @PreAuthorize("hasRole('read')")
 	public Mono<Gem> random() {
-		return Mono.justOrEmpty(repo.findRandom()); 
+		return repo.random(); 
     }	 
-	
+
+    
 	@Bean
 	CommandLineRunner demo(Environment env, GemRepository repo) {
 		return args -> {
-			// creative exclusion, is it not?
-			if (env.acceptsProfiles("!unit-test")) {
-				try {
-					Gem[] friedrichsBest = readToList("nietzsche.txt").stream()
-																		.map(quote -> new Gem(quote, "Friedrich Nietzsche"))
-																		.toArray(Gem[]::new);
-					repo.saveTheNewOnly(friedrichsBest);
-				} catch (IOException e) {
-					logger.error("Nietzsche!!", e);
-				}
-			}	
+			try {
+				Flux.fromIterable(readToList("nietzsche.txt"))
+								.map(quote -> Gem.builder().saying(quote).author("Friedrich Nietzsche").build())
+								.flatMap(repo::upsert)
+								.subscribe(x -> logger.info("inserted"));
+			} catch (IOException e) {
+				logger.error("Nietzsche!!", e);
+			}
 		};
 	}
 }

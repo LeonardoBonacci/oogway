@@ -1,12 +1,32 @@
 package guru.bonacci.oogway.oracle.persistence;
 
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- * Following the spring data naming convention we define a 'generic interface'
- * called ...Repository
- */
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
+
 @Repository
-public interface GemRepository extends ElasticsearchRepository<Gem, String>, GemRepositoryCustom {
+@Slf4j
+@RequiredArgsConstructor
+public class GemRepository {
+
+    private final ElasticAdapter adapter;
+
+	public Mono<Void> upsert(Gem gem) {
+		log.info("about to upsert " + gem);
+		return adapter.index(gem).then();
+	}
+
+	public Mono<Gem> find(String searchString) {
+		return find(searchString, null);
+	}
+
+	public Mono<Gem> find(String searchString, String author) {
+		return adapter.find(searchString, author);
+	}
+
+	public Mono<Gem> random() {
+		return adapter.random();
+	}
 }

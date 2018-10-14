@@ -1,6 +1,5 @@
 package guru.bonacci.spectre.spectreshared.events;
 
-import static guru.bonacci.spectre.spectreshared.events.SpectreStreams.ENRICHED;
 import static guru.bonacci.spectre.spectreshared.events.SpectreStreams.ENRICHMENT;
 
 import org.springframework.cloud.stream.annotation.Input;

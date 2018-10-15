@@ -32,7 +32,3 @@ services:
   weather:
     image: leonardobonacci/oogway-weather-service
     build: spectre/weather
-      
-  money:
-    image: leonardobonacci/oogway-money-service
-    build: spectre/money

@@ -59,6 +59,7 @@ public class ElasticAdapter {
     private void doUpdate(String docId, String field, Object nestedObject, ActionListener<UpdateResponse> listener) throws IOException {
     	final UpdateRequest updateRequest = new UpdateRequest(INDEX, TYPE, docId);
         updateRequest.doc(jsonBuilder().startObject().field(field, nestedObject).endObject());
+        updateRequest.retryOnConflict(10);
         client.updateAsync(updateRequest, RequestOptions.DEFAULT, listener);
     }
     

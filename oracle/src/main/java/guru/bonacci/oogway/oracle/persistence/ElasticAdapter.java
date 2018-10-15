@@ -3,7 +3,6 @@ package guru.bonacci.oogway.oracle.persistence;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 
-import java.util.Random;
 import java.util.UUID;
 
 import org.elasticsearch.action.ActionListener;
@@ -66,14 +65,12 @@ public class ElasticAdapter {
     }
 
 	private Mono<Gem> search(SearchSourceBuilder search) {
-		log.info("search");
         return Mono
                 .<SearchResponse>create(sink ->
                         client.searchAsync(new SearchRequest(INDEX).types(TYPE).source(search), listenerToSink(sink))
                 )
                 .map(SearchResponse::getHits)
                 .filter(hits -> hits.totalHits > 0)
-                .doOnEach(s -> log.info("blabla" + s.toString()))
                 .map(hits  -> hits.getAt(0))
                 .map(SearchHit::getSourceAsMap)
                 .map(map -> objectMapper.convertValue(map, Gem.class));
@@ -85,7 +82,6 @@ public class ElasticAdapter {
     }
 
     private Mono<IndexResponse> indexDoc(Gem doc) {
-    	log.info("indexing " + doc);
         return Mono.create(sink -> {
             try {
                 doIndex(doc, listenerToSink(sink));

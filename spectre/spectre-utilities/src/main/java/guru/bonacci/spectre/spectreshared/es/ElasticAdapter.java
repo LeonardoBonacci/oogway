@@ -1,4 +1,4 @@
-package guru.bonacci.spectre.sentiment.services;
+package guru.bonacci.spectre.spectreshared.es;
 
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
@@ -13,7 +13,8 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.spectre.sentiment.es.Spec;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
@@ -29,18 +30,19 @@ public class ElasticAdapter {
 	public static final String TYPE = "logs";
 	
     private final RestHighLevelClient client;
+    private final ObjectMapper objectMapper;
 
-    Mono<Spec> findById(String id) {
+    public Mono<Spec> findById(String id) {
     	return Mono
                 .<GetResponse>create(sink ->
                         client.getAsync(new GetRequest(INDEX, TYPE, id), listenerToSink(sink))
                 )
                 .filter(GetResponse::isExists)
                 .map(GetResponse::getSource)
-                .map(map -> Spec.builder().message(map.get(Spec.MESSAGE).toString()).id(id).build());
+                .map(map -> objectMapper.convertValue(map, Spec.class));
     }
 
-    Mono<UpdateResponse> update(String specId, String field, Object nestedObject) {
+    public Mono<UpdateResponse> update(String specId, String field, Object nestedObject) {
         return updateDoc(specId, field, nestedObject);
     }
 

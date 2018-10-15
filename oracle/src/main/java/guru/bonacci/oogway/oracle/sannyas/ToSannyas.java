@@ -26,7 +26,7 @@ public class ToSannyas implements Sannyas {
 			 .delayElements(Duration.ofSeconds(1)) // for the show...
 			 .log()
 			 .map(GemMapper.MAPPER::toGem)
-			 .map(repo::upsert)
+			 .map(repo::insert)
 			 .subscribe();
 	}
 }

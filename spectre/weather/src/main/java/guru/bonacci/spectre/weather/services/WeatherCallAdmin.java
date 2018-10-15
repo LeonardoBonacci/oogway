@@ -3,7 +3,7 @@ package guru.bonacci.spectre.weather.services;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.spectre.spectreshared.collections.CustomPassiveExpiringCollection;
-import guru.bonacci.spectre.spectreshared.collections.TooEnthusiasticWebserviceUsageException;
+import reactor.core.publisher.Mono;
 
 @Component
 public class WeatherCallAdmin {
@@ -11,11 +11,9 @@ public class WeatherCallAdmin {
 	// 60000 milliseconds in a minute
 	private final CustomPassiveExpiringCollection<String> hitsAdministrator = new CustomPassiveExpiringCollection<>(60000l);
 
-	public void checkWhetherCallIsAllowed(String id) throws TooEnthusiasticWebserviceUsageException {
-		hitsAdministrator.add(id);
-
+	public Mono<Boolean> isWeatherCallAllowed(String id) {
 		// Maximum free usage of openweathermap is 60 calls per minute
-		if (hitsAdministrator.size() > 60) 
-			throw new TooEnthusiasticWebserviceUsageException("we're getting too popular...");
+		return Mono.fromRunnable(() -> hitsAdministrator.add(id))
+				.then(Mono.just(hitsAdministrator.size() < 60));
 	}
 }

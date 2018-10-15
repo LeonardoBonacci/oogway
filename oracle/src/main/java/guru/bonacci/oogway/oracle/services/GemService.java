@@ -49,7 +49,7 @@ public class GemService {
 			try {
 				Flux.fromIterable(readToList("nietzsche.txt"))
 								.map(quote -> Gem.builder().saying(quote).author("Friedrich Nietzsche").build())
-								.flatMap(repo::upsert)
+								.flatMap(repo::insert)
 								.subscribe(x -> logger.info("inserted"));
 			} catch (IOException e) {
 				logger.error("Nietzsche!!", e);

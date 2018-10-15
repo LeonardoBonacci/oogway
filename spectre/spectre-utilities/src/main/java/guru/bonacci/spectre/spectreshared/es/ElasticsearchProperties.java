@@ -1,4 +1,4 @@
-package guru.bonacci.spectre.sentiment.es;
+package guru.bonacci.spectre.spectreshared.es;
 
 import lombok.Data;
 import org.apache.http.HttpHost;

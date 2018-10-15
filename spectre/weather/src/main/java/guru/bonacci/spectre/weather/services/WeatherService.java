@@ -1,63 +1,63 @@
 package guru.bonacci.spectre.weather.services;
 
-import static java.util.stream.Collectors.toSet;
-import static java.util.stream.Stream.of;
-import static org.slf4j.LoggerFactory.getLogger;
+import java.util.Map;
 
-import java.util.Set;
-
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
+import guru.bonacci.spectre.spectreshared.es.ElasticAdapter;
+import guru.bonacci.spectre.spectreshared.es.Spec;
 import guru.bonacci.spectre.spectreutilities.enrichment.SpectreService;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @Service
+@Slf4j
 public class WeatherService implements SpectreService {
-
-	private final Logger logger = getLogger(this.getClass());
 
 	public static final String serviceURL = "http://api.openweathermap.org/data/2.5/weather";
 	public static final String searchQuery = "?lat=#lat#&lon=#lon#&appid=#apiKey#";
 
-	// Help Java 9!!
-	private static final Set<String> redundantFields = of("coord", "base", "sys", "id", "name", "cod", "dt").collect(toSet());
+	private final WeatherCallAdmin weatherCallAdmin;
 
-	@Autowired
-	private WeatherCallAdmin weatherCallAdmin;
+	private final ElasticAdapter repo;
 
-//	@Autowired
-//	private RestTemplate restTemplate;
-
-//	@Autowired
-//	private SpecRepository repo;
-
-	@Value("${openweathermap.apikey}")
-	private String apiKey;
+	private final WebClient client;
 	
-	public Mono<String> enrich(String id) {
-		try {
-			logger.error("processing " + id);
-			weatherCallAdmin.checkWhetherCallIsAllowed(id);	
-			
-			// Too lazy for refined error handling today...
-//			Spec spec = repo.findById(id).get();
-//			String q = searchQuery.replace("#lat#", String.valueOf(spec.geoip.latitude))
-//								  .replace("#lon#", String.valueOf(spec.geoip.longitude))
-//								  .replace("#apiKey#", apiKey);
+	private final String apiKey;
 
-//			@SuppressWarnings("unchecked")
-//			Map<String,Object> enrichmentData = restTemplate.getForObject(serviceURL + q, Map.class);
-//			enrichmentData.keySet().removeAll(redundantFields);
-//			logger.debug(enrichmentData.toString());
-			
-//			repo.addData("weather", enrichmentData, spec);
-			return Mono.just("TODO");
-		} catch(Exception e) {
-			logger.error("Oops", e);
-			return Mono.just("no weather");
-		}
+	public WeatherService(ElasticAdapter es, WeatherCallAdmin admin, @Value("${openweathermap.apikey}") String key) {
+		this.repo = es;
+		this.weatherCallAdmin = admin;
+		this.apiKey = key;
+		
+		client = WebClient.create(serviceURL);
+	}
+
+	
+	public Mono<String> enrich(final String id) {
+		log.info("processing " + id);
+
+		return weatherCallAdmin.isWeatherCallAllowed(id)
+						.filter(b -> b)
+						.flatMap(b -> repo.findById(id))
+						.filter(spec -> spec.getGeoip().getLatitude() != null)
+						.flatMap(this::call)
+						.flatMap(data -> repo.update(id, "weather", data).then(Mono.just(data.toString())))
+						.onErrorReturn("no weather");
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Mono<Map> call(Spec spec) {
+		String q = searchQuery.replace("#lat#", String.valueOf(spec.getGeoip().getLatitude()))
+							  .replace("#lon#", String.valueOf(spec.getGeoip().getLongitude()))
+							  .replace("#apiKey#", apiKey);
+
+		return client.get()
+					.uri(q)
+					.retrieve()
+					.bodyToMono(Map.class)
+					.doOnEach(s -> log.debug("" + s.get()));
 	}
 }

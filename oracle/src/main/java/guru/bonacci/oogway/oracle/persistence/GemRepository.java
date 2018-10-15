@@ -13,8 +13,8 @@ public class GemRepository {
 
     private final ElasticAdapter adapter;
 
-	public Mono<Void> upsert(Gem gem) {
-		log.info("about to upsert " + gem);
+	public Mono<Void> insert(Gem gem) {
+		log.info("about to insert " + gem);
 		return adapter.index(gem).then();
 	}
 

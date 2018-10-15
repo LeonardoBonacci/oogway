@@ -1,6 +1,5 @@
 package guru.bonacci.spectre.sentiment.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.stanford.nlp.ling.CoreAnnotations;
@@ -10,21 +9,21 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.sentiment.SentimentCoreAnnotations;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.util.CoreMap;
-import guru.bonacci.spectre.sentiment.es.Spec;
+import guru.bonacci.spectre.spectreshared.es.ElasticAdapter;
+import guru.bonacci.spectre.spectreshared.es.Spec;
 import guru.bonacci.spectre.spectreutilities.enrichment.SpectreService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
-@Slf4j
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class SentimentService implements SpectreService {
 
-	
-	@Autowired
-	private ElasticAdapter repo;
+	private final ElasticAdapter repo;
 
-	@Autowired
-	private StanfordCoreNLP pipeline;
+	private final StanfordCoreNLP pipeline;
 	
 	
 	public Mono<String> enrich(final String id) {

@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * A gem is a cut and polished precious stone or pearl fine enough for
- * use in jewelry. In this context: wisdom is a gem of infinite value.
+ * A gem is a cut and polished precious stone or pearl fine enough for use in
+ * jewelry. In this context: wisdom is a gem of infinite value.
  */
 @Data
 @Builder
-@ToString(exclude="id")
+@ToString(exclude = "id")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Gem {

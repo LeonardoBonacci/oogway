@@ -1,8 +1,5 @@
 package guru.bonacci.spectre.sentiment.services;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,39 +10,39 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.sentiment.SentimentCoreAnnotations;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.util.CoreMap;
+import guru.bonacci.spectre.sentiment.es.Spec;
 import guru.bonacci.spectre.spectreutilities.enrichment.SpectreService;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @Service
 public class SentimentService implements SpectreService {
 
-	private final Logger logger = getLogger(this.getClass());
-
-//	@Autowired
-//	private SpecRepository repo;
+	
+	@Autowired
+	private ElasticAdapter repo;
 
 	@Autowired
 	private StanfordCoreNLP pipeline;
 	
-	public Mono<String> enrich(String id) {
-		try {
-			logger.error("processing " + id);
-			// Too lazy for refined error handling today...
-//			Spec spec = repo.findById(id).get();
-//			repo.addData("sentiment", findSentimentDesc(spec.message), spec);
-			return Mono.just("TODO");
-		} catch(Exception e) {
-			logger.error("Oops", e);
-			return Mono.just("No sentiment");
-		} 
+	
+	public Mono<String> enrich(final String id) {
+		log.info("processing " + id);
+
+		return repo.findById(id)
+			.map(Spec::getMessage)
+			.flatMap(this::findSentimentDesc)
+			.flatMap(desc -> repo.update(id, "sentiment", desc).then(Mono.just(desc)))
+			.onErrorReturn("no sentiment");
 	}
 
-	String findSentimentDesc(String line) {
-		return toCss(findSentiment(line));
+	Mono<String> findSentimentDesc(String line) {
+		return Mono.just(toCss(findSentiment(line)));
 	}
 
 	Integer findSentiment(String line) {
-		logger.debug("in: " + line);
+		log.debug("in: " + line);
 
 		int mainSentiment = 0;
 		if (line != null && line.length() > 0) {
@@ -63,7 +60,7 @@ public class SentimentService implements SpectreService {
 			}
 		}
 
-		logger.debug("out: " + mainSentiment);
+		log.debug("out: " + mainSentiment);
 		return mainSentiment;
 	}
 	

@@ -29,7 +29,7 @@ service:
     name: oracle-service
     url: http://oracle-service:4444
   spectre:
-    enabled: false
+    enabled: true
 
 logstash:
   host: logstash-service

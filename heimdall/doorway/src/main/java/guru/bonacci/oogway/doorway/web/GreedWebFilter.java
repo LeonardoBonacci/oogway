@@ -11,9 +11,11 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 
 import guru.bonacci.oogway.doorway.lumber.Lumberjack;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @Component
+@Slf4j
 public class GreedWebFilter implements WebFilter {
 
 	@Autowired
@@ -25,8 +27,8 @@ public class GreedWebFilter implements WebFilter {
 		if (es.size() < 4 || !es.get(1).value().equals("iam")) 	
 			return webFilterChain.filter(serverWebExchange);
 
-		
-		return lumber.isGreedy("iam")
+		log.info("user " + es.get(3));
+		return lumber.isGreedy(es.get(3).toString())
 				.flatMap(greedy -> {
 					if (greedy) {
 						serverWebExchange.getResponse().setStatusCode(HttpStatus.TOO_MANY_REQUESTS);

@@ -1,6 +1,14 @@
 server: 
   port: 6666
 
+elasticsearch:
+  hosts:
+    - http://192.168.178.155:30779
+  connectTimeout: 10000
+  connectionRequestTimeout: 10000
+  socketTimeout: 10000
+  maxRetryTimeoutMillis: 60000
+
 spring:
   rabbitmq:
     host: rabbit

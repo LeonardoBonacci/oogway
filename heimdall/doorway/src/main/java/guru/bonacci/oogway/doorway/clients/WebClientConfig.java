@@ -13,6 +13,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class WebClientConfig {
 
+	
 	@Bean
     public BiFunction<String, String, WebClient> webClientFactory() {
         return (user, password) -> webClient(user, password);

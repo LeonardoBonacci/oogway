@@ -2,20 +2,21 @@ package guru.bonacci.oogway.lumberjack.persistence;
 
 import static java.time.Instant.now;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class LogService {
 
-	@Autowired
-	private LogRepository repository;
+	private final LogRepository repository;
 
+	
 	@PreAuthorize("hasRole('read')")
 	public Mono<Long> insert(Log logLine) {
 		log.info("check on " + logLine.getApiKey());

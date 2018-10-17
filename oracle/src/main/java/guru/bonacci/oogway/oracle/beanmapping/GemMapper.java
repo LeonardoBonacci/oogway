@@ -15,7 +15,6 @@ public interface GemMapper {
 
     @Mappings({
         @Mapping(source = "saying", target = "saying"),
-        @Mapping(source = "saying", target = "id"), //let's not forget...
         @Mapping(source = "author", target = "author")
     })
     Gem toGem(GemCarrier carrier);

@@ -1,31 +1,28 @@
 package guru.bonacci.oogway.jobs.tutor;
 
-import java.net.URLEncoder;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.jobs.clients.OracleClient;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class Educator {
 
-	@Autowired
-	private OracleClient oracleClient;
+	private final OracleClient oracleClient;
 
 
-	@SuppressWarnings("deprecation")
 	@Scheduled(cron = "${tutor.cron}")
 	public void educate() {
 		log.info("Teaching");
 
 		Mono<GemCarrier> random = oracleClient.random();
 		random.map(r -> r.getSaying())
-			  .subscribe(r -> oracleClient.search(URLEncoder.encode(r)).subscribe());
+			  .subscribe(r -> oracleClient.search(r).subscribe());
 	}
 }

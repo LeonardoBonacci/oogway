@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  * A gem is a cut and polished precious stone or pearl fine enough for use in
@@ -14,7 +13,6 @@ import lombok.ToString;
  */
 @Data
 @Builder
-@ToString(exclude = "id")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Gem {

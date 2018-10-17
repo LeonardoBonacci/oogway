@@ -9,6 +9,7 @@ import reactor.core.publisher.Mono;
 @Headers({ "Accept: application/json" })
 interface OracleApi {
 
+	
 	@RequestLine("GET /gems?q={q}")
     Mono<GemCarrier> search(@Param("q") String q);
 }

@@ -1,8 +1,9 @@
-package guru.bonacci.oogway.doorway;
+package guru.bonacci.oogway.doorway.spectre;
 
 import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.messaging.Message;
@@ -17,11 +18,13 @@ import reactor.core.publisher.WorkQueueProcessor;
 
 @Component
 @Slf4j
-public class SpectreHandler {
+@ConditionalOnProperty(name = "service.spectre.enabled", havingValue = "true")
+public class ToSpectreHandler implements SpectreHandler {
 
 	public final WorkQueueProcessor<String> queueProcessor = WorkQueueProcessor.create();
 	public final FluxSink<String> sink = queueProcessor.sink();
 
+	
 	@StreamListener(Processor.INPUT)
 	public void listen(Message<String> message) {
 		String payload = message.getPayload();
@@ -30,6 +33,7 @@ public class SpectreHandler {
 		sink.next(payload);
 	}
 
+	@Override
 	public Mono<ServerResponse> sink(ServerRequest request) {
 		return ok().contentType(TEXT_EVENT_STREAM).body(queueProcessor, String.class);
    	}

@@ -4,7 +4,6 @@ import static guru.bonacci.oogway.utilities.CustomFileUtils.readToList;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
@@ -14,19 +13,19 @@ import org.springframework.stereotype.Service;
 import guru.bonacci.oogway.oracle.persistence.Gem;
 import guru.bonacci.oogway.oracle.persistence.GemRepository;
 import guru.bonacci.oogway.oracle.sannyas.Sannyas;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class GemService {
 
-	@Autowired
-	private GemRepository repo;
+	private final GemRepository repo;
 
-	@Autowired
-	private Sannyas sannyas;
+	private final Sannyas sannyas;
 	
 
     @PreAuthorize("hasRole('read')")

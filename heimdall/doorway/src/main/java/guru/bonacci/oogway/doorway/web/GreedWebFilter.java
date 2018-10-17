@@ -2,7 +2,6 @@ package guru.bonacci.oogway.doorway.web;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.PathContainer;
 import org.springframework.stereotype.Component;
@@ -11,16 +10,18 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 
 import guru.bonacci.oogway.doorway.lumber.Lumberjack;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class GreedWebFilter implements WebFilter {
 
-	@Autowired
-	private Lumberjack lumber;
+	private final Lumberjack lumber;
 
+	
 	@Override
 	public Mono<Void> filter(ServerWebExchange serverWebExchange, WebFilterChain webFilterChain) {
 		List<PathContainer.Element> es = serverWebExchange.getRequest().getPath().elements();

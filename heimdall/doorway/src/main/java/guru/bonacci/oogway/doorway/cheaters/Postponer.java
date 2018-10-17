@@ -28,6 +28,7 @@ public class Postponer {
 
 	private List<String> answers;
 
+	
 	@PostConstruct
 	public void setup() {
 		try {

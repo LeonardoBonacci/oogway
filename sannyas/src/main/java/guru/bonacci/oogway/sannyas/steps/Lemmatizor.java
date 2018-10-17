@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
@@ -16,6 +15,7 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -38,11 +38,12 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class Lemmatizor implements Function<String, String> {
 
-	@Autowired
-	private StanfordCoreNLP pipeline;
+	private final StanfordCoreNLP pipeline;
 
+	
 	@Override
 	public String apply(String documentText) {
 		log.debug("in: " + documentText);

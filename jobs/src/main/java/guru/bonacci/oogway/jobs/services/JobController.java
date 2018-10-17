@@ -1,16 +1,16 @@
 package guru.bonacci.oogway.jobs.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import guru.bonacci.oogway.jobs.tutor.Educator;
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 public class JobController {
 
-    @Autowired
-    public Educator educator;
+    public final Educator educator;
 
     
 	@GetMapping("/teach")

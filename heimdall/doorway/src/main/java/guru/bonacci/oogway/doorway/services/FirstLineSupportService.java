@@ -1,10 +1,10 @@
 package guru.bonacci.oogway.doorway.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.doorway.oracle.Oracle;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
@@ -21,10 +21,10 @@ import reactor.core.publisher.Mono;
  */
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class FirstLineSupportService {
 
-	@Autowired
-	private Oracle oracle;
+	private final Oracle oracle;
 
 	
 	public Mono<GemCarrier> enquire(String q, String apikey) {

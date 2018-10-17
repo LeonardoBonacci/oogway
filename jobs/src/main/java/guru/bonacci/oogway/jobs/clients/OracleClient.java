@@ -1,21 +1,23 @@
 package guru.bonacci.oogway.jobs.clients;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.net.URLEncoder;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactivefeign.cloud.CloudReactiveFeign;
 import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class OracleClient {
 
-	@Autowired
-	private WebClient webClient;
+	private final WebClient webClient;
 
 	@Value("${service.oracle.url}") 
 	private String url;
@@ -29,17 +31,18 @@ public class OracleClient {
     	return oracle.random();
     }
 	
+	@SuppressWarnings("deprecation")
 	public Mono<GemCarrier> search(String searchString) {
 		OracleApi oracle = CloudReactiveFeign.<OracleApi>builder(webClient)
 			.setFallbackFactory(cause -> new FallbackOracleApi(cause))
 			.target(OracleApi.class, url);
 		
-    	return oracle.search(searchString);
+    	return oracle.search(URLEncoder.encode(searchString));
     }
 	
-	class FallbackOracleApi implements OracleApi {
+	private class FallbackOracleApi implements OracleApi {
 
-		Throwable cause;
+		private final Throwable cause;
 	
 		FallbackOracleApi (Throwable t) {
 			cause = t;

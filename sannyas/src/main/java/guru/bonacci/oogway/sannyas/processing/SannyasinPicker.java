@@ -5,11 +5,11 @@ import static guru.bonacci.oogway.utilities.CustomListUtils.random;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
+import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 /**
@@ -19,10 +19,10 @@ import reactor.core.publisher.Mono;
  * by cipher August 06, 2003
  */
 @Component
+@RequiredArgsConstructor
 public class SannyasinPicker {
 
-	@Autowired
-	private ApplicationContext applicationContext;
+	private final ApplicationContext applicationContext;
 
 	public Mono<Sannyasin> pickOne() {
 		List<Sannyasin> sannyas = new ArrayList<>(applicationContext.getBeansOfType(Sannyasin.class).values());

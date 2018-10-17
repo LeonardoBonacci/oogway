@@ -4,7 +4,6 @@ package guru.bonacci.oogway.sannyas.gr;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannyas.filters.LengthFilter;
@@ -13,23 +12,21 @@ import guru.bonacci.oogway.sannyas.general.Scraper;
 import guru.bonacci.oogway.sannyas.steps.CharacterGuardian;
 import guru.bonacci.oogway.sannyas.steps.KeyPhraser;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Component
+@RequiredArgsConstructor
 public class GRSeeker implements Sannyasin {
 
-	@Autowired
-	private CharacterGuardian characterGuardian;
+	private final CharacterGuardian characterGuardian;
 
-	@Autowired
-	private KeyPhraser keyPhraser;
+	private final KeyPhraser keyPhraser;
 
-	@Autowired
-	private LengthFilter lengthFilter;
+	private final LengthFilter lengthFilter;
 
-	@Autowired
-	private GRScraper scraper;
+	private final GRScraper scraper;
 
 	@Override
 	public Flux<Function<String,String>> preprocessingSteps() {

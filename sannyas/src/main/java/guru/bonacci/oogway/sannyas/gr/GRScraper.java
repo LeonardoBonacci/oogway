@@ -28,6 +28,7 @@ public class GRScraper extends WebScraper implements PageCache {
 	@Value("${web.url.gr:https://www.goodreads.com/quotes/tag/}")
 	private String url;
 
+	
 	@Override
 	public String determineURL(String searchStr) {
 		String searchURL = url + searchStr;

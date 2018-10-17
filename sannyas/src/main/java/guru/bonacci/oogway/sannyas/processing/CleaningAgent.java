@@ -2,12 +2,12 @@ package guru.bonacci.oogway.sannyas.processing;
 
 import java.util.function.Predicate;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.sannyas.filters.ProfanityFilter;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -17,10 +17,10 @@ import reactor.core.publisher.Mono;
  * - Karen Kingston
  */
 @Component
+@RequiredArgsConstructor
 public class CleaningAgent {
 
-	@Autowired
-	private ProfanityFilter profanityFilter;
+	private final ProfanityFilter profanityFilter;
 
 	public Mono<Predicate<GemCarrier>> clutterFilter(Mono<Sannyasin> sannyas) {
 		return Flux.concat(sannyas.flatMapMany(Sannyasin::postfilteringStep), Mono.just(profanityFilter))

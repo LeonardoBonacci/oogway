@@ -11,7 +11,7 @@ elasticsearch:
 
 service:  
   sannyas:
-    enabled: false
+    enabled: true
     url: http://sannyas-service:2222
 
 logstash:

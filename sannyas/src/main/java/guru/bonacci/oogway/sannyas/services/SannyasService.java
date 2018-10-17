@@ -1,6 +1,5 @@
 package guru.bonacci.oogway.sannyas.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
@@ -8,22 +7,21 @@ import guru.bonacci.oogway.sannyas.processing.CleaningAgent;
 import guru.bonacci.oogway.sannyas.processing.ForePlayer;
 import guru.bonacci.oogway.sannyas.processing.SannyasinPicker;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class SannyasService {
 
-	@Autowired
-	private SannyasinPicker sannyasinPicker;
+	private final SannyasinPicker sannyasinPicker;
 
-	@Autowired
-	private ForePlayer forePlayer;
+	private final ForePlayer forePlayer;
 
-	@Autowired
-	private CleaningAgent cleaningAgent;
+	private final CleaningAgent cleaningAgent;
 
 
 	public Flux<GemCarrier> feed(String input) {

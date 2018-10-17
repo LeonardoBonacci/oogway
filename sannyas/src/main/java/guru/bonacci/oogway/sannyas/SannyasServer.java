@@ -1,6 +1,6 @@
 package guru.bonacci.oogway.sannyas;
 
-import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
+import static org.springframework.http.MediaType.APPLICATION_STREAM_JSON;
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
@@ -27,9 +27,9 @@ public class SannyasServer {
 
 	@Bean
 	RouterFunction<ServerResponse> routes(SannyasService serv) {
-		return route(GET("/feed").and(accept(TEXT_EVENT_STREAM)), 
+		return route(GET("/feed").and(accept(APPLICATION_STREAM_JSON)), 
 						req -> { String q = req.queryParam("q").orElse("");
-								 return ok().contentType(TEXT_EVENT_STREAM)
+								 return ok().contentType(APPLICATION_STREAM_JSON)
 										 	.body(serv.feed(q).doOnEach(s -> log.info(s.toString())), GemCarrier.class);
 								});
 	}

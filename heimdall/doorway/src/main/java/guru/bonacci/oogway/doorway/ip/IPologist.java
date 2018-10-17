@@ -19,6 +19,6 @@ public class IPologist implements IIPologist {
 
 	@Override
 	public Mono<String> checkUp(String ip) {
-		return Mono.defer(() -> Mono.just(iperator.next()));
+		return Mono.fromSupplier(() -> iperator.next());
 	}
 }

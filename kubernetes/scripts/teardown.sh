@@ -23,4 +23,9 @@ echo "ingress"
 kubectl.exe delete ingress --all	
 sleep 2
 
+echo "pods"
+kubectl.exe delete pods --all	
+sleep 2
+
+
 echo "OK"

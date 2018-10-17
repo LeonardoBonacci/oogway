@@ -27,7 +27,7 @@ public class DoorwayServer {
 	
 	@Bean
 	RouterFunction<ServerResponse> routes(DoorwayHandler handler, SpectreHandler spectre) {
-		return route(GET("/"), req -> ok().body(Mono.just("Alive!"), String.class))
+		return route(GET("/"), req -> ok().body(Mono.fromSupplier(() -> "Alive!"), String.class))
 			.andRoute(GET("/iam/{apikey}"), handler::searchOne)
 			.andRoute(GET("/spectre").and(accept(TEXT_EVENT_STREAM)), spectre::sink);
 	}

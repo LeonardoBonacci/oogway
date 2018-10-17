@@ -14,6 +14,6 @@ public class WeatherCallAdmin {
 	public Mono<Boolean> isWeatherCallAllowed(String id) {
 		// Maximum free usage of openweathermap is 60 calls per minute
 		return Mono.fromRunnable(() -> hitsAdministrator.add(id))
-				.then(Mono.just(hitsAdministrator.size() < 60));
+				.then(Mono.fromSupplier(() -> hitsAdministrator.size() < 60));
 	}
 }

@@ -32,12 +32,12 @@ public class SentimentService implements SpectreService {
 		return repo.findById(id)
 			.map(Spec::getMessage)
 			.flatMap(this::findSentimentDesc)
-			.flatMap(desc -> repo.update(id, "sentiment", desc).then(Mono.just(desc)))
+			.flatMap(desc -> repo.update(id, "sentiment", desc).then(Mono.fromSupplier(() -> desc)))
 			.onErrorReturn("no sentiment");
 	}
 
 	Mono<String> findSentimentDesc(String line) {
-		return Mono.just(toCss(findSentiment(line)));
+		return Mono.fromSupplier(() -> toCss(findSentiment(line)));
 	}
 
 	Integer findSentiment(String line) {

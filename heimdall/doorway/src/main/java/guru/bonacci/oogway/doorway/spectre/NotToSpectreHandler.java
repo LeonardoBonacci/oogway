@@ -18,6 +18,6 @@ public class NotToSpectreHandler implements SpectreHandler {
 	@Override
 	public Mono<ServerResponse> sink(ServerRequest request) {
 		log.info("day off..");
-		return ok().body(Mono.just("Out of service.."), String.class);
+		return ok().body(Mono.fromSupplier(() -> "Out of service.."), String.class);
    	}
 }

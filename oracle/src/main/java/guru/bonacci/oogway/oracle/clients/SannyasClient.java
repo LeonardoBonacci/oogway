@@ -1,6 +1,6 @@
 package guru.bonacci.oogway.oracle.clients;
 
-import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
+import static org.springframework.http.MediaType.APPLICATION_STREAM_JSON;
 
 import java.net.URLEncoder;
 
@@ -27,7 +27,7 @@ public class SannyasClient {
 		String params = "?q=" + URLEncoder.encode(searchString);
 		return client.get()
 					.uri("/feed" + params)
-					.accept(TEXT_EVENT_STREAM)
+					.accept(APPLICATION_STREAM_JSON)
 					.retrieve()
 					.bodyToFlux(GemCarrier.class);
 	}	

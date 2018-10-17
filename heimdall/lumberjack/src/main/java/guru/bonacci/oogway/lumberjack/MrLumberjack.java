@@ -1,6 +1,5 @@
 package guru.bonacci.oogway.lumberjack;
 
-import static org.springframework.web.reactive.function.BodyInserters.fromPublisher;
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
@@ -29,7 +28,7 @@ public class MrLumberjack {
 
 	@Bean
 	RouterFunction<ServerResponse> routes(LogHandler handler) {
-		return route(GET("/"), req -> ok().body(fromPublisher(Mono.just("Alive!"), String.class)))
+		return route(GET("/"), req -> ok().body(Mono.fromSupplier(() -> "Alive!"), String.class))
 				.andRoute(GET("/visits/{apikey}"), handler::insert);
 	}
 

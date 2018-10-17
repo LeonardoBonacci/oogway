@@ -11,6 +11,6 @@ public class LazyIPologist implements IIPologist {
 
 	@Override
 	public Mono<String> checkUp(String ip) {
-		return Mono.just(ip);
+		return Mono.fromSupplier(() -> ip);
 	}
 }

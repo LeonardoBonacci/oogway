@@ -39,7 +39,7 @@ public class LocalTimerService implements SpectreService {
 		return repo.findById(id)
 			.filter(spec -> spec.getGeoip().getLatitude() != null)
 			.flatMap(this::webCall)
-			.flatMap(data -> repo.update(id, "localtimer", data).then(Mono.just(data.toString())))
+			.flatMap(data -> repo.update(id, "localtimer", data).then(Mono.fromSupplier(() -> data.toString())))
 			.onErrorReturn("no weather");
 	}
 	

@@ -34,7 +34,7 @@ public class OracleClient {
 		        @Override
 		        public Mono<GemCarrier> search(String q) {
 		        	log.error(cause.getMessage());
-		            return Mono.just(GemCarrier.builder().saying("Can't reach the Oracle").author("Sorry!").build());
+		            return Mono.fromSupplier(() -> GemCarrier.builder().saying("Can't reach the Oracle").author("Sorry!").build());
 		        }
 		    })
 			.target(OracleApi.class, url);

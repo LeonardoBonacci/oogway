@@ -26,7 +26,7 @@ public class SannyasinPicker {
 
 	public Mono<Sannyasin> pickOne() {
 		List<Sannyasin> sannyas = new ArrayList<>(applicationContext.getBeansOfType(Sannyasin.class).values());
-		return Mono.just(random(sannyas).get());
+		return Mono.fromSupplier(() -> random(sannyas).get());
 	}
 
 }

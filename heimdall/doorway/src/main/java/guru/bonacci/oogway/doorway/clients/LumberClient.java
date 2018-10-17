@@ -32,7 +32,7 @@ public class LumberClient {
 		        @Override
 		        public Mono<Long> visits(String apikey) {
 		        	log.error(cause.getMessage());
-		            return Mono.just(1l);
+		            return Mono.fromSupplier(() -> 1l);
 		        }
 		    })
 			.target(LumberApi.class, url);

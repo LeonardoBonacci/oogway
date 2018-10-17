@@ -1,8 +1,5 @@
 package guru.bonacci.oogway.sannyas.services;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +8,13 @@ import guru.bonacci.oogway.sannyas.processing.CleaningAgent;
 import guru.bonacci.oogway.sannyas.processing.ForePlayer;
 import guru.bonacci.oogway.sannyas.processing.SannyasinPicker;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
+@Slf4j
 public class SannyasService {
-
-	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
 	private SannyasinPicker sannyasinPicker;
@@ -30,7 +27,7 @@ public class SannyasService {
 
 
 	public Flux<GemCarrier> feed(String input) {
-		logger.info("About to analyzer input: '" + input + "'");
+		log.info("About to analyzer input: '" + input + "'");
 
 		// we pick the sannyasin only at subscription, and cache for subsequent other subscriptions
 		Mono<Sannyasin> sannyas = Mono.defer(() -> sannyasinPicker.pickOne()).cache();

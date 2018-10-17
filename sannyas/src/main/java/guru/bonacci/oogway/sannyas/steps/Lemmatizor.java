@@ -1,13 +1,11 @@
 package guru.bonacci.oogway.sannyas.steps;
 
 import static java.util.stream.Collectors.joining;
-import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +16,7 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
+import lombok.extern.slf4j.Slf4j;
 
 /*
  * Lemmatisation (or lemmatization) in linguistics is the process of grouping together 
@@ -38,16 +37,15 @@ import edu.stanford.nlp.util.CoreMap;
  * Other analysis components build and store parse trees, dependency graphs, etc.
  */
 @Component
+@Slf4j
 public class Lemmatizor implements Function<String, String> {
-
-	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
 	private StanfordCoreNLP pipeline;
 
 	@Override
 	public String apply(String documentText) {
-		logger.debug("in: " + documentText);
+		log.debug("in: " + documentText);
 
 		List<String> lemmas = new LinkedList<>();
 		// Create an empty Annotation just with the given text
@@ -66,7 +64,7 @@ public class Lemmatizor implements Function<String, String> {
 		}
 		String output = lemmas.stream().collect(joining(" "));
 
-		logger.debug("out: " + output);
+		log.debug("out: " + output);
 		return output;
 	}
 }

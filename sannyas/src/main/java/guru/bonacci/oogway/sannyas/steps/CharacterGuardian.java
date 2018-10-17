@@ -1,27 +1,25 @@
 package guru.bonacci.oogway.sannyas.steps;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
 import java.util.function.Function;
 
-import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Keeps letters, numbers and spaces
  */
 @Component
+@Slf4j
 public class CharacterGuardian implements Function<String,String> {
-
-	private final Logger logger = getLogger(this.getClass());
 
 	@Override
 	public String apply(String input) {
-		logger.debug("in: " + input);
+		log.debug("in: " + input);
 
 		String output = input.replaceAll("[^\\w\\s]","");
 	    
-		logger.debug("out: " + output);
+		log.debug("out: " + output);
 		return output;
 	}
 }

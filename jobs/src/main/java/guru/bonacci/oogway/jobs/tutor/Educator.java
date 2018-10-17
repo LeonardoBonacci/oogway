@@ -1,22 +1,19 @@
 package guru.bonacci.oogway.jobs.tutor;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
 import java.net.URLEncoder;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.jobs.clients.OracleClient;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @Component
+@Slf4j
 public class Educator {
-
-	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
 	private OracleClient oracleClient;
@@ -25,7 +22,7 @@ public class Educator {
 	@SuppressWarnings("deprecation")
 	@Scheduled(cron = "${tutor.cron}")
 	public void educate() {
-		logger.info("Teaching");
+		log.info("Teaching");
 
 		Mono<GemCarrier> random = oracleClient.random();
 		random.map(r -> r.getSaying())

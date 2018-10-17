@@ -1,7 +1,5 @@
 package guru.bonacci.oogway.sannyas.filters;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,13 +10,13 @@ import java.util.function.Predicate;
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * A swear filter, also known as a profanity filter or language filter is a
@@ -27,12 +25,11 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
  * in custom-programmed chat rooms and online video games.
  */
 @Component
+@Slf4j
 public class ProfanityFilter implements Predicate<GemCarrier> {
 
 	@Value("${filter.profanity.file.name:}")
 	private String fileName;
-
-	private final Logger logger = getLogger(this.getClass());
 
 	/**
 	 * Borrowed code
@@ -59,7 +56,7 @@ public class ProfanityFilter implements Predicate<GemCarrier> {
 			searchAlongTree(input, i, root);
 		}
 		if (merdaFound) {
-			logger.info("Blocking indecent quote: " + input);
+			log.info("Blocking indecent quote: " + input);
 		}
 		return !merdaFound;
 	}
@@ -100,7 +97,7 @@ public class ProfanityFilter implements Predicate<GemCarrier> {
 			in = new BufferedReader(new InputStreamReader(resource.getInputStream()));
 			while ((line = in.readLine()) != null) {
 				// for each bad word
-				logger.info("Adding to profanity filter: '" + line + "'");
+				log.info("Adding to profanity filter: '" + line + "'");
 				addToTree(line, 0, root);
 			}
 		} catch (FileNotFoundException e) { // FileReader

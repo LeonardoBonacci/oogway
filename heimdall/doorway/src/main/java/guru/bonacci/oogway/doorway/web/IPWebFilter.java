@@ -1,20 +1,17 @@
 package guru.bonacci.oogway.doorway.web;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
-import org.slf4j.Logger;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @Component
+@Slf4j
 public class IPWebFilter implements WebFilter {
-
-	private final Logger logger = getLogger(this.getClass());
 
 	public final static String IP_HEADER = "ip";
 	
@@ -23,7 +20,7 @@ public class IPWebFilter implements WebFilter {
 		ServerWebExchange theServerWebExchange = serverWebExchange;
 
 		String ip = serverWebExchange.getRequest().getRemoteAddress().getAddress().getHostAddress();
-		logger.debug("found ip " + ip); 
+		log.debug("found ip " + ip); 
 
 		/*
 		 * Create a mutable wrapper around the ServerHttpRequest 

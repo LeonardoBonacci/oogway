@@ -1,14 +1,12 @@
 package guru.bonacci.oogway.sannyas.filters;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
 import java.util.function.Predicate;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Puts a limit on the length of the quotes to be indexed
@@ -25,9 +23,8 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
  * units are defined.
  */
 @Component
+@Slf4j
 public class LengthFilter implements Predicate<GemCarrier> {
-
-	private final Logger logger = getLogger(this.getClass());
 
 	@Value("${filter.maxlength:1000}")
 	private Integer maxLength;
@@ -35,11 +32,11 @@ public class LengthFilter implements Predicate<GemCarrier> {
 	@Override
 	public boolean test(GemCarrier gem) {
 		String input = gem.getSaying();
-		logger.debug("check: " + input);
+		log.debug("check: " + input);
 
 		boolean result = input.length() < maxLength;
 		if (!result) 
-			logger.debug("failed: " + input);
+			log.debug("failed: " + input);
 
 		return result;
 	}

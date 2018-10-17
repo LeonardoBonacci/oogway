@@ -1,23 +1,20 @@
 package guru.bonacci.oogway.doorway.clients;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
 import java.util.function.BiFunction;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import lombok.extern.slf4j.Slf4j;
 import reactivefeign.cloud.CloudReactiveFeign;
 import reactor.core.publisher.Mono;
 
 @Component
+@Slf4j
 public class LumberClient {
 
-	private final Logger logger = getLogger(this.getClass());
-	
 	@Autowired
 	private BiFunction<String, String, WebClient> webClientFactory;
 
@@ -31,7 +28,7 @@ public class LumberClient {
 			.setFallbackFactory(cause -> new LumberApi() {
 		        @Override
 		        public Mono<Long> visits(String apikey) {
-		        	logger.error(cause.getMessage());
+		        	log.error(cause.getMessage());
 		            return Mono.just(1l);
 		        }
 		    })

@@ -1,21 +1,18 @@
 package guru.bonacci.oogway.jobs.clients;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import lombok.extern.slf4j.Slf4j;
 import reactivefeign.cloud.CloudReactiveFeign;
 import reactor.core.publisher.Mono;
 
 @Component
+@Slf4j
 public class OracleClient {
-
-	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
 	private WebClient webClient;
@@ -50,13 +47,13 @@ public class OracleClient {
 		
 		@Override
         public Mono<GemCarrier> search(String q) {
-        	logger.error(cause.getMessage());
+        	log.error(cause.getMessage());
             return Mono.just(GemCarrier.builder().saying("Can't reach the Oracle").author("Sorry!").build());
         }
 
 		@Override
 		public Mono<GemCarrier> random() {
-        	logger.error(cause.getMessage());
+        	log.error(cause.getMessage());
 			return null;
 		}
 	}	

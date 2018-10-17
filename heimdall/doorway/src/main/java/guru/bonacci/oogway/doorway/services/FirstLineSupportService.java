@@ -1,13 +1,11 @@
 package guru.bonacci.oogway.doorway.services;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import guru.bonacci.oogway.doorway.oracle.Oracle;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 /**
@@ -22,9 +20,8 @@ import reactor.core.publisher.Mono;
  * symptom instead of a problem."
  */
 @Service
+@Slf4j
 public class FirstLineSupportService {
-
-	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
 	private Oracle oracle;
@@ -32,6 +29,6 @@ public class FirstLineSupportService {
 	
 	public Mono<GemCarrier> enquire(String q, String apikey) {
 		return oracle.enquire(q, apikey)
-					.doOnEach(gem -> logger.info("oracle responded: " + gem));
+					.doOnEach(gem -> log.info("oracle responded: " + gem));
 	}
 }

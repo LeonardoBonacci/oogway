@@ -1,8 +1,5 @@
 package guru.bonacci.oogway.doorway.spectre;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
@@ -10,13 +7,13 @@ import org.springframework.stereotype.Component;
 import guru.bonacci.oogway.doorway.events.SpectreGateway;
 import guru.bonacci.oogway.doorway.ip.IIPologist;
 import guru.bonacci.oogway.shareddomain.COMINT;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @Component
+@Slf4j
 @ConditionalOnProperty(name = "service.spectre.enabled", havingValue = "true")
 public class ToSpectre implements Spectre {
-
-	private final Logger logger = getLogger(this.getClass());
 
 	@Autowired
 	private IIPologist ipologist;
@@ -26,7 +23,7 @@ public class ToSpectre implements Spectre {
 
 	@Override
 	public Mono<Void> eavesdrop(String q, String ip)  {
-		logger.info(ip + " said '" + q + "'");
+		log.info(ip + " said '" + q + "'");
 		return ipologist.checkUp(ip)
 						.flatMap(pi -> Mono.fromRunnable(() -> gateway.send(new COMINT(pi, q))));
 	}

@@ -1,16 +1,15 @@
 package guru.bonacci.oogway.sannyas.steps;
 
 import static java.util.stream.Collectors.joining;
-import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.List;
 import java.util.function.Function;
 
-import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import edu.stanford.nlp.simple.Sentence;
 import edu.stanford.nlp.simple.SentenceAlgorithms;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Determines the important words from a phrase
@@ -21,13 +20,12 @@ import edu.stanford.nlp.simple.SentenceAlgorithms;
  * will yield a smaller number of more specific and relevant traffic.
  */
 @Component
+@Slf4j
 public class KeyPhraser implements Function<String,String> {
-
-	private final Logger logger = getLogger(this.getClass());
 
 	@Override
 	public String apply(String input) {
-		logger.debug("in: " + input);
+		log.debug("in: " + input);
 		if (input == null) {
 			throw new IllegalStateException("for test purposes only");
 		}
@@ -37,7 +35,7 @@ public class KeyPhraser implements Function<String,String> {
 		List<String> keyphrases = algorithms.keyphrases();
 		String output = keyphrases.stream().collect(joining(" "));
 		
-		logger.debug("out: " + output);
+		log.debug("out: " + output);
 		return output;
 	}
 }

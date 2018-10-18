@@ -9,9 +9,9 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.sentiment.SentimentCoreAnnotations;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.util.CoreMap;
-import guru.bonacci.spectre.spectreshared.es.ElasticAdapter;
-import guru.bonacci.spectre.spectreshared.es.Spec;
-import guru.bonacci.spectre.spectreutilities.enrichment.SpectreService;
+import guru.bonacci.spectre.utilities.enrichment.SpectreService;
+import guru.bonacci.spectre.utilities.es.Spec;
+import guru.bonacci.spectre.utilities.es.SpectreRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
@@ -21,7 +21,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class SentimentService implements SpectreService {
 
-	private final ElasticAdapter repo;
+	private final SpectreRepository repo;
 
 	private final StanfordCoreNLP pipeline;
 	

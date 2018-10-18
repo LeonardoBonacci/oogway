@@ -2,7 +2,7 @@ package guru.bonacci.spectre.weather.events;
 
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.spectre.spectreshared.events.SpectreRabbitEar;
+import guru.bonacci.spectre.utilities.events.SpectreRabbitEar;
 import guru.bonacci.spectre.weather.services.WeatherService;
 
 @Component

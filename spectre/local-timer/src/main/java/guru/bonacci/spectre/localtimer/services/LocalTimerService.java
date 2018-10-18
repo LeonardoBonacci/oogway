@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import guru.bonacci.spectre.spectreshared.es.ElasticAdapter;
-import guru.bonacci.spectre.spectreshared.es.Spec;
-import guru.bonacci.spectre.spectreutilities.enrichment.SpectreService;
+import guru.bonacci.spectre.utilities.enrichment.SpectreService;
+import guru.bonacci.spectre.utilities.es.Spec;
+import guru.bonacci.spectre.utilities.es.SpectreRepository;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
@@ -19,13 +19,13 @@ public class LocalTimerService implements SpectreService {
 	public static final String serviceURL = "http://api.geonames.org/timezoneJSON";
 	public static final String searchQuery = "?lat=#lat#&lng=#lng#&username=#username#";
 
-	private final ElasticAdapter repo;
+	private final SpectreRepository repo;
 
 	private final WebClient client;
 
 	private final String username;
 	
-	public LocalTimerService(ElasticAdapter es, @Value("${geo.name.username:leonardobonacci}") String username) {
+	public LocalTimerService(SpectreRepository es, @Value("${geo.name.username:leonardobonacci}") String username) {
 		this.repo = es;
 		this.username = username;
 		

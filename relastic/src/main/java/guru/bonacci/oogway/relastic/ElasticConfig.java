@@ -1,4 +1,4 @@
-package guru.bonacci.spectre.spectreshared.es;
+package guru.bonacci.oogway.relastic;
 
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;

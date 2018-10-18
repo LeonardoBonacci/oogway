@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import guru.bonacci.spectre.spectreshared.es.ElasticAdapter;
-import guru.bonacci.spectre.spectreshared.es.Spec;
-import guru.bonacci.spectre.spectreutilities.enrichment.SpectreService;
+import guru.bonacci.spectre.utilities.enrichment.SpectreService;
+import guru.bonacci.spectre.utilities.es.Spec;
+import guru.bonacci.spectre.utilities.es.SpectreRepository;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
@@ -21,13 +21,13 @@ public class WeatherService implements SpectreService {
 
 	private final WeatherCallAdmin weatherCallAdmin;
 
-	private final ElasticAdapter repo;
+	private final SpectreRepository repo;
 
 	private final WebClient client;
 	
 	private final String apiKey;
 
-	public WeatherService(ElasticAdapter es, WeatherCallAdmin admin, @Value("${openweathermap.apikey}") String key) {
+	public WeatherService(SpectreRepository es, WeatherCallAdmin admin, @Value("${openweathermap.apikey}") String key) {
 		this.repo = es;
 		this.weatherCallAdmin = admin;
 		this.apiKey = key;

@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.env.Environment;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +40,7 @@ public class GemService {
 
     
 	@Bean
-	CommandLineRunner demo(Environment env, GemRepository repo) {
+	CommandLineRunner demo(GemRepository repo) {
 		return args -> {
 			try {
 				Flux.fromIterable(readToList("nietzsche.txt"))

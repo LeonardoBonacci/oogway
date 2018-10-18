@@ -3,7 +3,7 @@ package guru.bonacci.spectre.localtimer.events;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.spectre.localtimer.services.LocalTimerService;
-import guru.bonacci.spectre.spectreshared.events.SpectreRabbitEar;
+import guru.bonacci.spectre.utilities.events.SpectreRabbitEar;
 
 @Component
 public class LocalTimerRabbitEar extends SpectreRabbitEar {

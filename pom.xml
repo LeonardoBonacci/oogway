@@ -32,6 +32,7 @@
 		<module>heimdall</module>
 		<module>jobs</module>
 		<module>oracle</module>
+		<module>relastic</module>
 		<module>sannyas</module>
 		<module>shared-domain</module>
 		<module>spectre</module>
@@ -82,17 +83,6 @@
 				<groupId>io.github.reactivefeign</groupId>
 				<artifactId>feign-reactor-cloud</artifactId>
 				<version>1.0.0</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.elasticsearch</groupId>
-				<artifactId>elasticsearch</artifactId>
-				<version>6.4.2</version>
-			</dependency>
-			<dependency>
-				<groupId>org.elasticsearch.client</groupId>
-				<artifactId>elasticsearch-rest-high-level-client</artifactId>
-				<version>6.4.2</version>
 			</dependency>
 
 			<dependency>
@@ -163,6 +153,17 @@
 						<artifactId>lucene-queryparser</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.elasticsearch</groupId>
+				<artifactId>elasticsearch</artifactId>
+				<version>6.4.2</version><!--$NO-MVN-MAN-VER$ -->
+			</dependency>
+			<dependency>
+				<groupId>org.elasticsearch.client</groupId>
+				<artifactId>elasticsearch-rest-high-level-client</artifactId>
+				<version>6.4.2</version>
 			</dependency>
 
 			<dependency>

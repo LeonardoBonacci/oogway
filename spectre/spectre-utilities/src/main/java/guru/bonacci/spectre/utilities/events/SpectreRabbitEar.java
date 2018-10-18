@@ -1,6 +1,6 @@
-package guru.bonacci.spectre.spectreshared.events;
+package guru.bonacci.spectre.utilities.events;
 
-import static guru.bonacci.spectre.spectreshared.events.SpectreStreams.ENRICHMENT;
+import static guru.bonacci.spectre.utilities.events.SpectreStreams.ENRICHMENT;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
@@ -10,7 +10,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
 import guru.bonacci.oogway.shareddomain.GenericEvent;
-import guru.bonacci.spectre.spectreutilities.enrichment.SpectreService;
+import guru.bonacci.spectre.utilities.enrichment.SpectreService;
 import reactor.core.publisher.Flux;
 
 public abstract class SpectreRabbitEar {

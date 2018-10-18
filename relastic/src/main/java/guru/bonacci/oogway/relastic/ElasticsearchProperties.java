@@ -1,4 +1,4 @@
-package guru.bonacci.spectre.spectreshared.es;
+package guru.bonacci.oogway.relastic;
 
 import lombok.Data;
 import org.apache.http.HttpHost;

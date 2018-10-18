@@ -6,12 +6,12 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Import;
 
-import guru.bonacci.spectre.spectreshared.es.ElasticConfig;
-import guru.bonacci.spectre.spectreshared.events.SpectreStreams;
+import guru.bonacci.spectre.utilities.SpectreConfig;
+import guru.bonacci.spectre.utilities.events.SpectreStreams;
 
 @SpringBootApplication
 @EnableBinding({SpectreStreams.class, Processor.class})
-@Import(ElasticConfig.class)
+@Import(SpectreConfig.class)
 public class WeatherServer {
 	
 	public static void main(String[] args) {

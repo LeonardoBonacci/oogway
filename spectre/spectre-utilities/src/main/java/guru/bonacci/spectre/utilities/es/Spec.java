@@ -1,4 +1,4 @@
-package guru.bonacci.spectre.spectreshared.es;
+package guru.bonacci.spectre.utilities.es;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -10,12 +10,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import guru.bonacci.spectre.spectreshared.es.ElasticConfig;
-import guru.bonacci.spectre.spectreshared.events.SpectreStreams;
+import guru.bonacci.spectre.utilities.SpectreConfig;
+import guru.bonacci.spectre.utilities.events.SpectreStreams;
 
 @SpringBootApplication
 @EnableBinding({SpectreStreams.class, Processor.class})
-@Import(ElasticConfig.class)
+@Import(SpectreConfig.class)
 public class SentimentServer {
 
 	public static void main(String[] args) {

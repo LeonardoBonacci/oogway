@@ -2,7 +2,7 @@ package guru.bonacci.spectre.weather.services;
 
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.spectre.spectreshared.collections.CustomPassiveExpiringCollection;
+import guru.bonacci.spectre.utilities.collections.CustomPassiveExpiringCollection;
 import reactor.core.publisher.Mono;
 
 @Component

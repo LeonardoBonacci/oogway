@@ -1,4 +1,4 @@
-package guru.bonacci.spectre.spectreutilities.enrichment;
+package guru.bonacci.spectre.utilities.enrichment;
 
 import reactor.core.publisher.Mono;
 

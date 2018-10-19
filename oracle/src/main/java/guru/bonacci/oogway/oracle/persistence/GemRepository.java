@@ -36,11 +36,11 @@ public class GemRepository {
     }
 
 	public Mono<Gem> find(String searchString) {
+		log.info("looking for " + searchString);
 		return find(searchString, null);
 	}
 
 	public Mono<Gem> find(String searchString, String author) {
-		log.info("looking for " + searchString + " by " + author);
 		return adapter.search(createFindQuery(searchString, author));
 	}
 

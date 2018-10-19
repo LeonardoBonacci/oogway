@@ -1,6 +1,8 @@
 package guru.bonacci.oogway.relastic;
 
 import java.io.IOException;
+import java.util.Objects;
+import java.util.Random;
 import java.util.UUID;
 
 import org.elasticsearch.action.ActionListener;
@@ -63,7 +65,8 @@ public class ElasticAdapter<T> {
     }
     
     public ElasticAdapter<T> genericType(Class<T> genericType) {
-        this.genericType = genericType;
+        Objects.requireNonNull(genericType, "this temporary workaround does not allow null values");
+    	this.genericType = genericType;
         return this;
     }
     
@@ -79,7 +82,7 @@ public class ElasticAdapter<T> {
 
     public Mono<T> random() {
     	FunctionScoreQueryBuilder functionScoreQueryBuilder = QueryBuilders
-                .functionScoreQuery(QueryBuilders.matchAllQuery(), ScoreFunctionBuilders.randomFunction());
+                .functionScoreQuery(ScoreFunctionBuilders.randomFunction());
     	SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
     	searchSourceBuilder.query(functionScoreQueryBuilder);
     	return search(searchSourceBuilder);
@@ -92,7 +95,7 @@ public class ElasticAdapter<T> {
                 )
                 .map(SearchResponse::getHits)
                 .filter(hits -> hits.totalHits > 0)
-                .map(hits  -> hits.getAt(0))
+                .map(hits  -> hits.getAt(new Random().nextInt(hits.getHits().length)))
                 .map(SearchHit::getSourceAsMap)
                 .map(map -> objectMapper.convertValue(map, genericType));
     }

@@ -21,7 +21,7 @@ public class GemRepository {
     private final ElasticAdapter<Gem> adapter;
 
 	public GemRepository(ElasticAdapter<Gem> adapter) {
-    	this.adapter = adapter.index(INDEX).type(TYPE).genericType(Gem.class);
+    	this.adapter = adapter.theIndex(INDEX).theType(TYPE).theGenericType(Gem.class);
     }
 
 

@@ -22,7 +22,7 @@ public class SpectreRepository {
     private final ElasticAdapter<Spec> adapter;
 
 	public SpectreRepository(ElasticAdapter<Spec> adapter) {
-    	this.adapter = adapter.index(INDEX).type(TYPE).genericType(Spec.class);
+    	this.adapter = adapter.theIndex(INDEX).theType(TYPE).theGenericType(Spec.class);
     }
 
 

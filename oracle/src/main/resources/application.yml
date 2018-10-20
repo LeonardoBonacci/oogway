@@ -11,7 +11,7 @@ elasticsearch:
 
 service:  
   sannyas:
-    enabled: true
+    enabled: false
     url: http://sannyas-service:2222
 
 logstash:
@@ -20,3 +20,10 @@ logstash:
     
 logging: 
   level.guru.bonacci.oogway.oracle: INFO
+
+#https://github.com/nurkiewicz/elastic-flux/blob/micrometer/src/main/docs/grafana-elastic-flux-micrometer.json  
+#spring.metrics.export.graphite:
+#  host: 192.168.99.100
+#  port: 2003
+#  protocol: Plaintext
+#  step: PT1S  

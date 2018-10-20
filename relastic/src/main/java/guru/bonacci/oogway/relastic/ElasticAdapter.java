@@ -54,17 +54,17 @@ public class ElasticAdapter<T> {
         this.genericType = (Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), ElasticAdapter.class);
     }
     
-    public ElasticAdapter<T> index(String index) {
+    public ElasticAdapter<T> theIndex(String index) {
         this.index = index;
         return this;
     }
     
-    public ElasticAdapter<T> type(String type) {
+    public ElasticAdapter<T> theType(String type) {
         this.type = type;
         return this;
     }
     
-    public ElasticAdapter<T> genericType(Class<T> genericType) {
+    public ElasticAdapter<T> theGenericType(Class<T> genericType) {
         Objects.requireNonNull(genericType, "this temporary workaround does not allow null values");
     	this.genericType = genericType;
         return this;

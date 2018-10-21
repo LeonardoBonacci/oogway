@@ -3,11 +3,13 @@ package guru.bonacci.oogway.oracle.persistence;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.stereotype.Repository;
-import guru.bonacci.oogway.relastic.ElasticAdapter;
 
+import guru.bonacci.oogway.relastic.ElasticAdapter;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
@@ -25,15 +27,30 @@ public class GemRepository {
     }
 
 
-    public Mono<Void> insert(Gem gem) {
+    public Mono<String> insert(Gem gem) {
 		log.info("about to insert " + gem);
-		return index(gem).then();
+		return index(gem).map(resp -> resp.getId());
 	}
 
     private Mono<IndexResponse> index(Gem gem) {
         return adapter.indexDoc(gem)
                 .doOnError(e -> log.error("Unable to index {}", gem, e));
     }
+
+    public Mono<UpdateResponse> update(Gem gem) {
+	    return adapter.updateDoc(gem)
+  			  		  .doOnError(e -> log.error("Unable to update {}", gem, e));
+    }
+
+    public Mono<DeleteResponse> delete(String id) {
+    	return adapter.deleteDoc(id)
+  			  		  .doOnError(e -> log.error("Unable to delete {}", id, e));
+    }
+
+	public Mono<Gem> findById(String id) {
+		log.info("looking for gem with id " + id);
+		return adapter.findById(id);
+	}
 
 	public Mono<Gem> find(String searchString) {
 		log.info("looking for " + searchString);

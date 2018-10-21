@@ -27,8 +27,8 @@ public class ToSannyas implements Sannyas {
 		client.feed(q)
 			 .delayElements(Duration.ofSeconds(1)) // for the show...
 			 .log()
-			 .map(GemMapper.MAPPER::toGem)
+			 .map(GemMapper.MAPPER::toIntGem)
 			 .flatMap(repo::insert)
-			.subscribe(x -> log.info("inserted"));
+			 .subscribe(x -> log.info("inserted"));
 	}
 }

@@ -26,9 +26,9 @@ public class ToOracle implements Oracle {
 	@Override
 	public Mono<GemCarrier> enquire(String q, String apikey) {
 		if (isEmpty(q))
-			return Mono.fromSupplier(() -> new GemCarrier("No question no answer..", "oogway"));
+			return Mono.fromSupplier(() -> GemCarrier.builder().saying("No question no answer..").author("oogway").build());
 
 		Mono<GemCarrier> gem = client.search(q, userDetails.userDetailsRepository(apikey));
-		return gem.switchIfEmpty(Mono.fromSupplier(() -> new GemCarrier(postponer.saySomething(), "oogway")));
+		return gem.switchIfEmpty(Mono.fromSupplier(() -> GemCarrier.builder().saying(postponer.saySomething()).author("oogway").build()));
 	}
 }

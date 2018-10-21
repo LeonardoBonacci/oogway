@@ -66,7 +66,7 @@ public class Indexer {
     void startIndexing() {
         Flux
                 .range(0, 21)
-                .map(x -> 4) //or something more advanced..
+                .map(x -> 4) //or do something more intelligent..
                 .doOnNext(x -> log.debug("Target concurrency: {}", x))
                 .concatMap(concurrency -> index(21, concurrency))
                 .window(Duration.ofSeconds(1))

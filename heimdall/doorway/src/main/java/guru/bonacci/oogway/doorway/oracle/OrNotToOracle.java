@@ -12,6 +12,6 @@ public class OrNotToOracle implements Oracle {
 
 	@Override
 	public Mono<GemCarrier> enquire(String q, String apikey) {
-		return Mono.fromSupplier(() -> new GemCarrier("I'm off today...", "oogway"));
+		return Mono.fromSupplier(() -> GemCarrier.builder().saying("I'm off today...").author("oogway").build());
 	}
 }

@@ -20,9 +20,9 @@ import guru.bonacci.oogway.sannyas.services.SannyasService;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 import lombok.extern.slf4j.Slf4j;
 
-@SpringBootApplication
-@EnableCaching(proxyTargetClass=true)
 @Slf4j
+@EnableCaching(proxyTargetClass=true)
+@SpringBootApplication
 public class SannyasServer {
 
 	@Bean

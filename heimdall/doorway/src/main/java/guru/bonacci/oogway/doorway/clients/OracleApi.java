@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 interface OracleApi {
 
 	
-	@RequestLine("GET /gems?q={q}")
+	@RequestLine("GET /gems/searchone?q={q}")
     Mono<GemCarrier> search(@Param("q") String q);
 }
 

@@ -1,11 +1,18 @@
 package guru.bonacci.oogway.relastic;
 
+import static org.elasticsearch.common.xcontent.NamedXContentRegistry.EMPTY;
+import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
+import static org.elasticsearch.common.xcontent.XContentFactory.xContent;
+import static org.elasticsearch.common.xcontent.XContentType.JSON;
+
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 
 import org.elasticsearch.action.ActionListener;
+import org.elasticsearch.action.delete.DeleteRequest;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -17,7 +24,7 @@ import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentBuilder;
-import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.common.xcontent.XContentParser;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
 import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
@@ -33,7 +40,7 @@ import reactor.core.publisher.Mono;
 import reactor.core.publisher.MonoSink;
 
 @Component
-public class ElasticAdapter<T> {
+public class ElasticAdapter<T extends BaseObject> {
 
 	// works on single index and single type only
 	private String index;
@@ -76,8 +83,11 @@ public class ElasticAdapter<T> {
                         client.getAsync(new GetRequest(index, type, id), RequestOptions.DEFAULT, listenerToSink(sink))
                 )
                 .filter(GetResponse::isExists)
-                .map(GetResponse::getSource)
-                .map(map -> objectMapper.convertValue(map, genericType));
+                .map(resp -> {
+                	T t = objectMapper.convertValue(resp.getSource(), genericType);
+                	t.setId(resp.getId());
+                	return t;
+                });
     }
 
     public Mono<T> random() {
@@ -111,29 +121,48 @@ public class ElasticAdapter<T> {
     }
 
     private void doIndex(T doc, ActionListener<IndexResponse> listener) throws JsonProcessingException {
-    	final IndexRequest indexRequest = new IndexRequest(index, type, UUID.randomUUID().toString());
+    	final IndexRequest request = new IndexRequest(index, type, UUID.randomUUID().toString());
         final String json = objectMapper.writeValueAsString(doc);
-        indexRequest.source(json, XContentType.JSON);
-        client.indexAsync(indexRequest, RequestOptions.DEFAULT, listener);
+        request.source(json, JSON);
+        client.indexAsync(request, RequestOptions.DEFAULT, listener);
     }
 
-    public Mono<UpdateResponse> updateDoc(String docId, XContentBuilder json) {
-        return Mono.create(sink -> {
+    public Mono<UpdateResponse> updateDoc(T doc) {
+    	return Mono.create(sink -> {
             try {
-                doUpdate(docId, json, listenerToSink(sink));
+                doUpdate(doc, listenerToSink(sink));
             } catch (IOException e) {
-        	   sink.error(e);
-			}
+                sink.error(e);
+            }
         });
     }
 
-    private void doUpdate(String docId, XContentBuilder json, ActionListener<UpdateResponse> listener) throws IOException {
-    	final UpdateRequest updateRequest = new UpdateRequest(index, type, docId);
-        updateRequest.doc(json);
-        updateRequest.retryOnConflict(5);
-        client.updateAsync(updateRequest, RequestOptions.DEFAULT, listener);
+    private void doUpdate(T doc, ActionListener<UpdateResponse> listener) throws IOException {
+    	XContentParser parser = xContent(JSON).createParser(EMPTY, null, objectMapper.writeValueAsBytes(doc));
+    	XContentBuilder json = jsonBuilder().copyCurrentStructure(parser);
+        doUpdate(doc.getId(), json, listener);
     }
-    
+
+    public Mono<UpdateResponse> updateDoc(String docId, XContentBuilder json) {
+        return Mono.create(sink -> doUpdate(docId, json, listenerToSink(sink)));
+    }
+
+    private void doUpdate(String docId, XContentBuilder json, ActionListener<UpdateResponse> listener) {
+    	final UpdateRequest request = new UpdateRequest(index, type, docId);
+        request.doc(json);
+        request.retryOnConflict(5);
+        client.updateAsync(request, RequestOptions.DEFAULT, listener);
+    }
+
+    public Mono<DeleteResponse> deleteDoc(String docId) {
+        return Mono.create(sink -> doDelete(docId, listenerToSink(sink)));
+    }
+
+    private void doDelete(String docId, ActionListener<DeleteResponse> listener) {
+    	final DeleteRequest request = new DeleteRequest(index, type, docId);
+        client.deleteAsync(request, RequestOptions.DEFAULT, listener);
+    }
+
 
     private <U> ActionListener<U> listenerToSink(MonoSink<U> sink) {
         return new ActionListener<U>() {

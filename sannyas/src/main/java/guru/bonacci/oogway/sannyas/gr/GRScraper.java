@@ -79,7 +79,7 @@ public class GRScraper extends WebScraper implements PageCache {
 		Elements els = el.select("span.authorOrTitle");
 		String author = els.size() > 0 ? els.first().ownText() : null;
 		
-		return new GemCarrier(quote, author);
+		return GemCarrier.builder().saying(quote).author(author).build();
 	}
 
 	private String stripText(String str) {

@@ -1,15 +1,16 @@
 package guru.bonacci.spectre.utilities.es;
 
+import guru.bonacci.oogway.relastic.BaseObject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Spec {
-
-	public static final String MESSAGE = "message";
+public class Spec extends BaseObject {
 
 	private String message;
 

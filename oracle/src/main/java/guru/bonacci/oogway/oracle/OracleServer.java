@@ -26,8 +26,8 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import guru.bonacci.oogway.relastic.ElasticConfig;
 
-@SpringBootApplication
 @Import(ElasticConfig.class)
+@SpringBootApplication
 public class OracleServer { 
 	
 	@Bean

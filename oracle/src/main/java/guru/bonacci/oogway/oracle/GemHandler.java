@@ -19,11 +19,12 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.shareddomain.GemIdCarrier;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@Component
 @Slf4j
 @RequiredArgsConstructor
+@Component
 public class GemHandler {
 
 	private final GemService serv;
@@ -47,13 +48,11 @@ public class GemHandler {
 									.switchIfEmpty(notFound().build());
     }
 
-	//TODO
 	public Mono<ServerResponse> all(ServerRequest request) {
 		log.info("Receiving request to see all...");
 
-		return ok().contentType(TEXT_EVENT_STREAM)
-        		 .body(serv.all()
-        				   .map(MAPPER::toExtIdGem), GemIdCarrier.class);
+		Flux<GemCarrier> gems = serv.all().map(MAPPER::toExtGem);
+        return ok().contentType(TEXT_EVENT_STREAM).body(gems, GemCarrier.class);
     }
 
 	public Mono<ServerResponse> update(ServerRequest request) {
@@ -77,22 +76,19 @@ public class GemHandler {
 					  .switchIfEmpty(notFound().build());
     }
 
-	//TODO
 	public Mono<ServerResponse> search(ServerRequest request) {
 		String q = request.queryParam("q").orElse("nothing matches this string");
 		log.info("Receiving request for a wise answer on: '" + q + "'");
 
-		return ok().contentType(TEXT_EVENT_STREAM)
-        		 .body(serv.search(q)
-        				 	.map(MAPPER::toExtGem), GemCarrier.class)
-        		 .switchIfEmpty(notFound().build());
+		Flux<GemCarrier> gems = serv.search(q).map(MAPPER::toExtGem);
+        return ok().contentType(TEXT_EVENT_STREAM).body(gems, GemCarrier.class);
     }
 
 	public Mono<ServerResponse> searchOne(ServerRequest request) {
 		String q = request.queryParam("q").orElse("nothing matches this string");
 		log.info("Receiving request for a wise answer on: '" + q + "'");
 
-		Mono<GemCarrier> gem = serv.search(q).map(MAPPER::toExtGem);
+		Mono<GemCarrier> gem = serv.searchOne(q).map(MAPPER::toExtGem);
 		return gem.flatMap(g -> ok().body(fromObject(g)))
 									.switchIfEmpty(notFound().build());
     }

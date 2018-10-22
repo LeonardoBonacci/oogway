@@ -1,10 +1,10 @@
 package guru.bonacci.oogway.relastic;
 
+import static java.util.UUID.randomUUID;
 import static org.elasticsearch.common.xcontent.NamedXContentRegistry.EMPTY;
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 import static org.elasticsearch.common.xcontent.XContentFactory.xContent;
 import static org.elasticsearch.common.xcontent.XContentType.JSON;
-import static java.util.UUID.randomUUID;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -36,6 +36,8 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.FluxSink;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.MonoSink;
 
@@ -95,10 +97,10 @@ public class ElasticAdapter<T extends BaseObject> {
                 .functionScoreQuery(ScoreFunctionBuilders.randomFunction());
     	SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
     	searchSourceBuilder.query(functionScoreQueryBuilder);
-    	return search(searchSourceBuilder);
+    	return searchOne(searchSourceBuilder);
     }
 
-	public Mono<T> search(SearchSourceBuilder search) {
+	public Mono<T> searchOne(SearchSourceBuilder search) {
         return Mono
                 .<SearchResponse>create(sink ->
                         client.searchAsync(new SearchRequest(index).types(type).source(search), RequestOptions.DEFAULT, listenerToSink(sink))
@@ -106,6 +108,17 @@ public class ElasticAdapter<T extends BaseObject> {
                 .map(SearchResponse::getHits)
                 .filter(hits -> hits.totalHits > 0)
                 .map(hits  -> hits.getAt(new Random().nextInt(hits.getHits().length)))
+                .map(SearchHit::getSourceAsMap)
+                .map(map -> objectMapper.convertValue(map, genericType));
+    }
+	
+	public Flux<T> search(SearchSourceBuilder search) {
+       return Flux
+                .<SearchResponse>create(sink ->
+                        client.searchAsync(new SearchRequest(index).types(type).source(search), RequestOptions.DEFAULT, listenerToSink(sink))
+                )
+                .map(SearchResponse::getHits)
+                .flatMap(hs -> Flux.fromArray(hs.getHits()))
                 .map(SearchHit::getSourceAsMap)
                 .map(map -> objectMapper.convertValue(map, genericType));
     }
@@ -177,4 +190,19 @@ public class ElasticAdapter<T extends BaseObject> {
             }
         };
     }
+    
+    private <U> ActionListener<U> listenerToSink(FluxSink<U> sink) {
+        return new ActionListener<U>() {
+            @Override
+            public void onResponse(U response) {
+                sink.next(response);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                sink.error(e);
+            }
+        };
+    }
+
 }

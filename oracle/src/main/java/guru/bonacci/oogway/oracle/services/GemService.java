@@ -13,8 +13,8 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class GemService {
 
 	private final GemRepository repo;
@@ -32,9 +32,9 @@ public class GemService {
 		return repo.findById(id);
 	}
 
-//TODO    @PreAuthorize("hasRole('read')")
+    @PreAuthorize("hasRole('read')")
 	public Flux<Gem> all() {
-		return Flux.empty();
+		return repo.all();
 	}
 
     @PreAuthorize("hasRole('write')")
@@ -51,9 +51,14 @@ public class GemService {
 	}
 
 	@PreAuthorize("hasRole('read')")
-	public Mono<Gem> search(String q) {
-		return repo.find(q) // enquiry..
+	public Mono<Gem> searchOne(String q) {
+		return repo.findOne(q) // enquiry..
 				  .doOnTerminate(() -> sannyas.learn(q)); // ..and learn!!
+	}
+
+	@PreAuthorize("hasRole('read')")
+	public Flux<Gem> search(String q) {
+		return repo.find(q);
 	}
 
     @PreAuthorize("hasRole('read')")

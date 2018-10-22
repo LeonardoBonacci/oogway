@@ -4,11 +4,11 @@ import static org.elasticsearch.common.xcontent.NamedXContentRegistry.EMPTY;
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 import static org.elasticsearch.common.xcontent.XContentFactory.xContent;
 import static org.elasticsearch.common.xcontent.XContentType.JSON;
+import static java.util.UUID.randomUUID;
 
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Random;
-import java.util.UUID;
 
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.delete.DeleteRequest;
@@ -121,7 +121,7 @@ public class ElasticAdapter<T extends BaseObject> {
     }
 
     private void doIndex(T doc, ActionListener<IndexResponse> listener) throws JsonProcessingException {
-    	final IndexRequest request = new IndexRequest(index, type, UUID.randomUUID().toString());
+    	final IndexRequest request = new IndexRequest(index, type, randomUUID().toString());
         final String json = objectMapper.writeValueAsString(doc);
         request.source(json, JSON);
         client.indexAsync(request, RequestOptions.DEFAULT, listener);

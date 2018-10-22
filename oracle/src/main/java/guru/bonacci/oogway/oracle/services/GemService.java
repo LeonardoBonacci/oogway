@@ -1,6 +1,7 @@
 package guru.bonacci.oogway.oracle.services;
 
 import static org.elasticsearch.action.DocWriteResponse.Result.DELETED;
+import static org.elasticsearch.action.DocWriteResponse.Result.UPDATED;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -37,8 +38,10 @@ public class GemService {
 	}
 
     @PreAuthorize("hasRole('write')")
-	public Mono<Void> update(Gem gem) {
-		return repo.update(gem).then();
+	public Mono<Boolean> update(Gem gem) {
+		return repo.update(gem)
+				   .map(resp -> resp.getResult() == UPDATED)
+				   .onErrorReturn(false);
 	}
 
     @PreAuthorize("hasRole('write')")

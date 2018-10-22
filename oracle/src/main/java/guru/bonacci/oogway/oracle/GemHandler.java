@@ -4,6 +4,7 @@ import static guru.bonacci.oogway.oracle.beanmapping.GemMapper.MAPPER;
 import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
 import static org.springframework.web.reactive.function.server.ServerResponse.notFound;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
+import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -28,22 +29,22 @@ public class GemHandler {
 	public Mono<ServerResponse> create(ServerRequest request) {
 		log.info("Receiving request to create a new gem");
 
-		Mono<Gem> gem = request.bodyToMono(GemCarrier.class)
-							   .map(MAPPER::toIntGem);
-		return ok()
-        		 .body(gem.flatMap(g -> serv.create(g)), String.class);
+		Mono<Gem> gem = request.bodyToMono(GemCarrier.class).map(MAPPER::toIntGem);
+		// how to add create() with HTTP status 201 and location header URI.create("/gems/id")?
+		// spring forces me to generate the id here instead of the persistence layer..
+		return ok().body(gem.flatMap(g -> serv.create(g)), String.class);
     }
 
 	public Mono<ServerResponse> get(ServerRequest request) {
 		log.info("Receiving request to retrieve a gem");
 
 		String id = request.pathVariable("id");
-		return ok()
-        		 .body(serv.retrieve(id)
-        				 	.map(MAPPER::toExtIdGem), GemIdCarrier.class)
-        		 .switchIfEmpty(notFound().build());
+		Mono<GemIdCarrier> gem = serv.retrieve(id).map(MAPPER::toExtIdGem);
+		return gem.flatMap(g -> ok().body(fromObject(g)))
+									.switchIfEmpty(notFound().build());
     }
 
+	//TODO
 	public Mono<ServerResponse> all(ServerRequest request) {
 		log.info("Receiving request to see all...");
 
@@ -57,15 +58,21 @@ public class GemHandler {
 
 		Mono<Gem> gem = request.bodyToMono(GemIdCarrier.class)
 								.map(MAPPER::toIntIdGem);
-		return ok().body(gem.flatMap(g -> serv.update(g)), Void.class);
+
+		Mono<Boolean> updated = gem.flatMap(g -> serv.update(g));
+		return updated.filter(d -> d)
+					  .flatMap(g -> ok().build())
+					  .switchIfEmpty(notFound().build());
     }
 
 	public Mono<ServerResponse> delete(ServerRequest request) {
 		log.info("Receiving request to delete a gem");
 
 		String id = request.pathVariable("id");
-		return ok()
-       		 	.body(serv.delete(id), Boolean.class);
+		Mono<Boolean> deleted = serv.delete(id);
+		return deleted.filter(d -> d)
+					  .flatMap(g -> ok().build())
+					  .switchIfEmpty(notFound().build());
     }
 
 	//TODO
@@ -83,17 +90,14 @@ public class GemHandler {
 		String q = request.queryParam("q").orElse("nothing matches this string");
 		log.info("Receiving request for a wise answer on: '" + q + "'");
 
-		return ok()
-        		 .body(serv.search(q)
-        				 	.map(MAPPER::toExtGem), GemCarrier.class)
-        		 .switchIfEmpty(notFound().build());
+		Mono<GemCarrier> gem = serv.search(q).map(MAPPER::toExtGem);
+		return gem.flatMap(g -> ok().body(fromObject(g)))
+									.switchIfEmpty(notFound().build());
     }
 	
 	public Mono<ServerResponse> random(ServerRequest request) {
 		log.info("Receiving request for a random quote");
 
-		 return ok()
-				 .body(serv.random()
-						 	.map(MAPPER::toExtGem), GemCarrier.class);
+		 return ok().body(fromObject(serv.random().map(MAPPER::toExtGem)));
 	}
 }

@@ -2,9 +2,12 @@ package guru.bonacci.oogway.oracle;
 
 import static guru.bonacci.oogway.oracle.beanmapping.GemMapper.MAPPER;
 import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
+import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 import static org.springframework.web.reactive.function.server.ServerResponse.notFound;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
-import static org.springframework.web.reactive.function.BodyInserters.fromObject;
+import static org.springframework.web.reactive.function.server.ServerResponse.created;
+
+import java.net.URI;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -30,10 +33,10 @@ public class GemHandler {
 		log.info("Receiving request to create a new gem");
 
 		Mono<Gem> gem = request.bodyToMono(GemCarrier.class).map(MAPPER::toIntGem);
-		// how to add create() with HTTP status 201 and location header URI.create("/gems/id")?
-		// spring forces me to generate the id here instead of the persistence layer..
-		return ok().body(gem.flatMap(g -> serv.create(g)), String.class);
-    }
+		Mono<String> id = gem.flatMap(g -> serv.create(g));
+		return id.flatMap(di -> created(URI.create("gems/" + di)).body(fromObject(di)));
+
+	}
 
 	public Mono<ServerResponse> get(ServerRequest request) {
 		log.info("Receiving request to retrieve a gem");
@@ -56,8 +59,7 @@ public class GemHandler {
 	public Mono<ServerResponse> update(ServerRequest request) {
 		log.info("Receiving request for an update");
 
-		Mono<Gem> gem = request.bodyToMono(GemIdCarrier.class)
-								.map(MAPPER::toIntIdGem);
+		Mono<Gem> gem = request.bodyToMono(GemIdCarrier.class).map(MAPPER::toIntIdGem);
 
 		Mono<Boolean> updated = gem.flatMap(g -> serv.update(g));
 		return updated.filter(d -> d)

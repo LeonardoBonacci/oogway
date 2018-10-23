@@ -59,7 +59,6 @@ public class GemHandler {
 		log.info("Receiving request for an update");
 
 		Mono<Gem> gem = request.bodyToMono(GemIdCarrier.class).map(MAPPER::toIntIdGem);
-
 		Mono<Boolean> updated = gem.flatMap(g -> serv.update(g));
 		return updated.filter(d -> d)
 					  .flatMap(g -> ok().build())

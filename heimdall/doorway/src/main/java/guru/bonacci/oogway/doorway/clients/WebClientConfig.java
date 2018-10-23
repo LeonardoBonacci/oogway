@@ -19,9 +19,9 @@ public class WebClientConfig {
         return (user, password) -> webClient(user, password);
     } 
 	
-	@Bean
 	@Scope(value = SCOPE_PROTOTYPE)
-    public WebClient webClient(String user, String password) {
+	@Bean
+	public WebClient webClient(String user, String password) {
         return WebClient.builder()
         				.filter(basicAuthentication(user, password))
         				.build();

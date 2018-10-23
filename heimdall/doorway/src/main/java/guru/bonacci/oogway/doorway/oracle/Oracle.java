@@ -12,9 +12,9 @@ public interface Oracle {
 	
     Mono<String> insert(GemCarrier gem);
 
-    Mono<Boolean> update(GemIdCarrier gem);
+    Mono<Void> update(GemIdCarrier gem);
     
-    Mono<Boolean> delete(String id);
+    Mono<Void> delete(String id);
 
 	Mono<GemIdCarrier> findById(String id);
 

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.netflix.hystrix.exception.HystrixRuntimeException;
+
 import guru.bonacci.oogway.doorway.security.Credentials;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.shareddomain.GemIdCarrier;
@@ -26,133 +28,129 @@ public class OracleClient {
 
 	private final BiFunction<String, String, WebClient> webClientFactory;
 
-	@Value("${service.oracle.url}") 
+	@Value("${service.oracle.url}")
 	private String url;
 
-	
+
 	private OracleApi theOracle(Credentials creds) {
 		WebClient webClient = webClientFactory.apply(creds.getUsername(), creds.getPassword());
 		OracleApi oracle = CloudReactiveFeign.<OracleApi>builder(webClient)
-				.setFallbackFactory(cause -> new FallbackOracleApi(cause))
-				.statusHandler(new ReactiveStatusHandler() {
+				.setFallbackFactory(cause -> new FallbackOracleApi(cause)).statusHandler(new ReactiveStatusHandler() {
 					@Override
 					public boolean shouldHandle(int status) {
-						return status ==  404 || status ==  403;
+						return status == 404 || status == 401;
 					}
-					
+
 					@Override
 					public Mono<? extends Throwable> decode(String method, ReactiveHttpResponse resp) {
-						return Mono.error(new NotFoundException());
+						Exception e;
+						switch (resp.status()){
+							case 404:
+								e = new NotFoundException();
+								break;
+							case 401:
+								e = new UnauthorizedException();
+								break;
+							default:
+								e = new Exception("nothing?");
+								break;
+						}
+						return Mono.error(e);
 					}
-				})
-				.target(OracleApi.class, url);
+				}).target(OracleApi.class, url);
 		return oracle;
 	}
+
 	
 	@SuppressWarnings("deprecation")
 	public Mono<GemCarrier> searchOne(String q, Credentials creds) {
-    	return theOracle(creds).searchOne(URLEncoder.encode(q))
-    						   .onErrorResume(NoSuchElementException.class, t -> Mono.empty()); 
-    }
+		return theOracle(creds).searchOne(URLEncoder.encode(q))
+				.onErrorResume(HystrixRuntimeException.class, e -> Mono.error(e.getCause()));
+	}
 
 	public Mono<String> create(GemCarrier gem, Credentials creds) {
-    	return theOracle(creds).create(gem);
+		return theOracle(creds).create(gem)
+				.onErrorResume(HystrixRuntimeException.class, e -> Mono.error(e.getCause()));
 	}
 
-	public Mono<Boolean> update(GemIdCarrier gem, Credentials creds) {
-    	return theOracle(creds).update(gem)
-    								 .onErrorResume(x -> Mono.empty()) // something strange here...
-    								 .then(Mono.just(true));
+	public Mono<Void> update(GemIdCarrier gem, Credentials creds) {
+		return theOracle(creds).update(gem)
+				.onErrorResume(HystrixRuntimeException.class, e -> Mono.error(e.getCause()))
+				.onErrorResume(NoSuchElementException.class, e -> Mono.empty()); 
+		//FIXME java.util.NoSuchElementException: Observable emitted no items
 	}
 
-	public Mono<Boolean> delete(String id, Credentials creds) {
-    	return theOracle(creds).delete(id)
-									 .onErrorResume(x -> Mono.empty()) // something strange here...
-									 .then(Mono.just(true));
+	public Mono<Void> delete(String id, Credentials creds) {
+		return theOracle(creds).delete(id)
+				.onErrorResume(HystrixRuntimeException.class, e -> Mono.error(e.getCause()))
+				.onErrorResume(NoSuchElementException.class, e -> Mono.empty()); //FIXME 
 	}
 
 	public Mono<GemIdCarrier> findById(String id, Credentials creds) {
-    	return theOracle(creds).retrieve(id)
-    						   .onErrorResume(NoSuchElementException.class, t -> Mono.empty()); 
+		return theOracle(creds).retrieve(id)
+				.onErrorResume(HystrixRuntimeException.class, e -> Mono.error(e.getCause()));
 	}
 
 	public Flux<GemCarrier> all(Credentials creds) {
-    	return theOracle(creds).all();
+		return theOracle(creds).all()
+				.onErrorResume(HystrixRuntimeException.class, e -> Mono.error(e.getCause()));
 	}
 
 	@SuppressWarnings("deprecation")
 	public Flux<GemCarrier> search(String q, Credentials creds) {
-    	return theOracle(creds).search(URLEncoder.encode(q));
+		return theOracle(creds).search(URLEncoder.encode(q))
+				.onErrorResume(HystrixRuntimeException.class, e -> Mono.error(e.getCause()));
 	}
-
 
 	private class FallbackOracleApi implements OracleApi {
 
 		private final Throwable cause;
-	
-		FallbackOracleApi (Throwable t) {
+
+		FallbackOracleApi(Throwable t) {
 			cause = t;
 		}
 
-		private Mono<GemIdCarrier> notIdFounder(GemIdCarrier result) {
-			return cause instanceof NotFoundException ? Mono.defer(() -> Mono.empty()) : Mono.fromSupplier(() -> result);
-        }
-
-		// To not break the contract a default should be sent. The downstream code assumes an empty mono to return an http 404. 
-		// Therefore, working around for now, we nevertheless return an empty mono that should be caught by the caller as a NoSuchElementException.
-		private Mono<GemCarrier> notFounder(GemCarrier result) {
-			return Mono.defer(() -> cause instanceof NotFoundException ? Mono.empty() : Mono.just(result));
-        }
 
 		@Override
 		public Mono<GemCarrier> searchOne(String q) {
 			log.error(cause.toString());
-			return notFounder(sorry());
-        }
+			return Mono.error(cause);
+		}
 
 		@Override
 		public Flux<GemCarrier> search(String q) {
 			log.error(cause.toString());
-            return Flux.defer(() -> Flux.just(sorry()));
-        }
+			return Flux.error(cause);
+		}
 
 		@Override
 		public Mono<GemIdCarrier> retrieve(String id) {
 			log.error(cause.toString());
-			return notIdFounder(sorryId());
+			return Mono.error(cause);
 		}
 
 		@Override
 		public Mono<String> create(GemCarrier gem) {
 			log.error(cause.toString());
-            return Mono.fromSupplier(() -> "Can't reach the Oracle");
+			return Mono.error(cause);
 		}
 
 		@Override
 		public Mono<Void> update(GemIdCarrier gem) {
 			log.error(cause.toString());
-            return Mono.defer(() -> Mono.empty());
+			return Mono.error(cause);
 		}
 
 		@Override
 		public Mono<Void> delete(String id) {
 			log.error(cause.toString());
-            return Mono.defer(() -> Mono.empty());
+			return Mono.error(cause);
 		}
 
 		@Override
 		public Flux<GemCarrier> all() {
 			log.error(cause.toString());
-            return Flux.defer(() -> Flux.just(sorry()));
+			return Flux.error(cause);
 		}
-
-		private GemCarrier sorry() {
-			return GemCarrier.builder().saying("Can't reach the Oracle").author("Sorry!").build();
-		}
-
-		private GemIdCarrier sorryId() {
-			return new GemIdCarrier("Can't reach the Oracle");
-		}
-	}	
+	}
 }
-

@@ -57,18 +57,21 @@ public class FirstLineSupportService {
 		return oracle.all();
 	}
 
-	public Mono<Boolean> update(GemIdCarrier gem, String apikey) {
+	public Mono<Void> update(GemIdCarrier gem, String apikey) {
 		Oracle oracle = oracleFactory.apply(apikey);
 		return oracle.update(gem);
 	}
 
-	public Mono<Boolean> delete(String id, String apikey) {
+	public Mono<Void> delete(String id, String apikey) {
 		Oracle oracle = oracleFactory.apply(apikey);
 		return oracle.delete(id);
 	}
 
 	public Flux<GemCarrier> search(String q, String apikey) {
 		Oracle oracle = oracleFactory.apply(apikey);
-		return oracle.find(q);
+		return oracle.find(q).onErrorReturn(GemCarrier.builder()
+										.saying("Generally speaking, the errors in religion are dangerous; those in philosophy only ridiculous.")
+										.author("David Hume")
+										.build());
 	}
 }

@@ -27,7 +27,7 @@ service:
   oracle:
     enabled: true
     name: oracle-service
-    url: http://localhost:4444
+    url: http://oracle-service:4444
   spectre:
     enabled: false
 

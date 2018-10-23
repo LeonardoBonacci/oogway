@@ -3,6 +3,7 @@ package guru.bonacci.oogway.doorway.oracle;
 import static org.springframework.util.StringUtils.isEmpty;
 
 import guru.bonacci.oogway.doorway.cheaters.Postponer;
+import guru.bonacci.oogway.doorway.clients.NotFoundException;
 import guru.bonacci.oogway.doorway.clients.OracleClient;
 import guru.bonacci.oogway.doorway.security.UserDetailsMagic;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
@@ -26,9 +27,9 @@ public class ToOracle implements Oracle {
 	public Mono<GemCarrier> findOne(String q) {
 		if (isEmpty(q))
 			return Mono.fromSupplier(() -> GemCarrier.builder().saying("No question no answer..").author("oogway").build());
-
+		
 		Mono<GemCarrier> gem = client.searchOne(q, userDetails.userDetailsRepository(apikey));
-		return gem.switchIfEmpty(Mono.fromSupplier(() -> GemCarrier.builder().saying(postponer.saySomething()).author("oogway").build()));
+		return gem.onErrorReturn(NotFoundException.class, GemCarrier.builder().saying(postponer.saySomething()).author("oogway").build());
 	}
 
 	@Override
@@ -37,12 +38,12 @@ public class ToOracle implements Oracle {
 	}
 
 	@Override
-	public Mono<Boolean> update(GemIdCarrier gem) {
+	public Mono<Void> update(GemIdCarrier gem) {
 		return client.update(gem, userDetails.userDetailsRepository(apikey));
 	}
 
 	@Override
-	public Mono<Boolean> delete(String id) {
+	public Mono<Void> delete(String id) {
 		return client.delete(id, userDetails.userDetailsRepository(apikey));
 	}
 

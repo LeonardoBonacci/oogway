@@ -51,8 +51,8 @@ public class GemHandler {
 	public Mono<ServerResponse> all(ServerRequest request) {
 		log.info("Receiving request to see all...");
 
-		Flux<GemCarrier> gems = serv.all().map(MAPPER::toExtGem);
-        return ok().contentType(TEXT_EVENT_STREAM).body(gems, GemCarrier.class);
+		Flux<GemIdCarrier> gems = serv.all().map(MAPPER::toExtIdGem);
+        return ok().contentType(TEXT_EVENT_STREAM).body(gems, GemIdCarrier.class);
     }
 
 	public Mono<ServerResponse> update(ServerRequest request) {
@@ -60,7 +60,7 @@ public class GemHandler {
 
 		Mono<Gem> gem = request.bodyToMono(GemIdCarrier.class).map(MAPPER::toIntIdGem);
 		Mono<Boolean> updated = gem.flatMap(g -> serv.update(g));
-		return updated.filter(d -> d)
+		return updated.filter(u -> u)
 					  .flatMap(g -> ok().build())
 					  .switchIfEmpty(notFound().build());
     }

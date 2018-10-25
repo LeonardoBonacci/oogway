@@ -12,7 +12,6 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -105,12 +104,8 @@ public class DoorwayHandler {
 		String apikey = request.pathVariable("apikey");
 		log.info("Receiving request to see all...");
 
-		Flux<GemCarrier> gems = serv.all(apikey).limitRequest(25);
-		// no flowing gems here... 
-		Mono<List<GemCarrier>> mg = gems.collectList();
-        return mg.flatMap(g -> ok().contentType(TEXT_EVENT_STREAM).body(fromObject(g)))
-        					.onErrorResume(UnauthorizedException.class, e -> status(UNAUTHORIZED).build())
-        					.onErrorResume(e -> ok().contentType(TEXT_PLAIN).body(fromObject(FALLBACK)));
+		Flux<GemIdCarrier> gems = serv.all(apikey).limitRequest(25);
+		return ok().contentType(TEXT_EVENT_STREAM).body(gems, GemIdCarrier.class);
     }
 
 	public Mono<ServerResponse> search(ServerRequest request) {
@@ -118,7 +113,7 @@ public class DoorwayHandler {
 		String q = request.queryParam("q").orElse("nothing matches this string");
 		log.info("Receiving request for a wise answer on: '" + q + "'");
 
-		Flux<GemCarrier> gems = serv.search(q, apikey).limitRequest(1);
+		Flux<GemCarrier> gems = serv.search(q, apikey);
 		return ok().contentType(TEXT_EVENT_STREAM).body(gems, GemCarrier.class);
     }
 }

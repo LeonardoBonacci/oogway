@@ -117,11 +117,14 @@ public class ElasticAdapter<T extends BaseObject> {
                 .<SearchResponse>create(sink ->
                         client.searchAsync(new SearchRequest(index).types(type).source(search), RequestOptions.DEFAULT, listenerToSink(sink))
                 )
-                .map(SearchResponse::getHits)
-                .flatMap(hs -> Flux.fromArray(hs.getHits()))
-                .map(SearchHit::getSourceAsMap)
-                .map(map -> objectMapper.convertValue(map, genericType));
-    }
+				.map(SearchResponse::getHits)
+				.flatMap(hs -> Flux.fromArray(hs.getHits()))
+				.map(resp -> {
+					T t = objectMapper.convertValue(resp.getSourceAsMap(), genericType);
+					t.setId(resp.getId());
+					return t;
+				});
+	}
 
     public Mono<IndexResponse> indexDoc(T doc) {
         return Mono.create(sink -> {

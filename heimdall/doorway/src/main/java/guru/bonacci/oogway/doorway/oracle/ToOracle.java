@@ -53,7 +53,7 @@ public class ToOracle implements Oracle {
 	}
 
 	@Override
-	public Flux<GemCarrier> all() {
+	public Flux<GemIdCarrier> all() {
 		return client.all(userDetails.userDetailsRepository(apikey));
 	}
 

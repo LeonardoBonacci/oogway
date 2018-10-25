@@ -18,7 +18,7 @@ public interface Oracle {
 
 	Mono<GemIdCarrier> findById(String id);
 
-	Flux<GemCarrier> all();
+	Flux<GemIdCarrier> all();
 
 	Flux<GemCarrier> find(String q);
 }

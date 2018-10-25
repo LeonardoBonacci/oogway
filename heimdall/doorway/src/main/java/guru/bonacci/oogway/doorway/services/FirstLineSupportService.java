@@ -52,7 +52,7 @@ public class FirstLineSupportService {
 		return oracle.findById(id);
 	}
 
-	public Flux<GemCarrier> all(String apikey) {
+	public Flux<GemIdCarrier> all(String apikey) {
 		Oracle oracle = oracleFactory.apply(apikey);
 		return oracle.all();
 	}

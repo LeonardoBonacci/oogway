@@ -37,6 +37,6 @@ interface OracleApi {
 
 	@RequestLine("GET /gems")
 	@Headers({ "Accept: text/event-stream" })
-    Flux<GemCarrier> all();
+    Flux<GemIdCarrier> all();
 }
 

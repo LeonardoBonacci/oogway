@@ -41,7 +41,7 @@ public class OrNotToOracle implements Oracle {
 	}
 
 	@Override
-	public Flux<GemCarrier> all() {
+	public Flux<GemIdCarrier> all() {
 		log.info("all on my day off");
 		return Flux.error(new Exception("I will be caught"));
 	}

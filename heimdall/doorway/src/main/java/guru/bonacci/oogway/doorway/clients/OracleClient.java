@@ -38,7 +38,7 @@ public class OracleClient {
 				.setFallbackFactory(cause -> new FallbackOracleApi(cause)).statusHandler(new ReactiveStatusHandler() {
 					@Override
 					public boolean shouldHandle(int status) {
-						return status == 404 || status == 401;
+						return status == 404 || status == 401 || status == 403;
 					}
 
 					@Override
@@ -49,6 +49,9 @@ public class OracleClient {
 								e = new NotFoundException();
 								break;
 							case 401:
+								e = new UnauthorizedException();
+								break;
+							case 403:
 								e = new UnauthorizedException();
 								break;
 							default:
@@ -91,7 +94,7 @@ public class OracleClient {
 				.onErrorResume(HystrixRuntimeException.class, e -> Mono.error(e.getCause()));
 	}
 
-	public Flux<GemCarrier> all(Credentials creds) {
+	public Flux<GemIdCarrier> all(Credentials creds) {
 		return theOracle(creds).all()
 				.onErrorResume(HystrixRuntimeException.class, e -> Mono.error(e.getCause()));
 	}
@@ -148,7 +151,7 @@ public class OracleClient {
 		}
 
 		@Override
-		public Flux<GemCarrier> all() {
+		public Flux<GemIdCarrier> all() {
 			log.error(cause.toString());
 			return Flux.error(cause);
 		}

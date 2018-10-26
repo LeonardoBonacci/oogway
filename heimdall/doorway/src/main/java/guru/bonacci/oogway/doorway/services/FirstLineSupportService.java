@@ -69,9 +69,7 @@ public class FirstLineSupportService {
 
 	public Flux<GemCarrier> search(String q, String apikey) {
 		Oracle oracle = oracleFactory.apply(apikey);
-		return oracle.find(q).onErrorReturn(GemCarrier.builder()
-										.saying("Generally speaking, the errors in religion are dangerous; those in philosophy only ridiculous.")
-										.author("David Hume")
-										.build());
+		return oracle.find(q).onErrorReturn(
+				new GemCarrier("Generally speaking, the errors in religion are dangerous; those in philosophy only ridiculous.", "David Hume"));
 	}
 }

@@ -23,6 +23,7 @@ public class Educator {
 
 		Mono<GemCarrier> random = oracleClient.random();
 		random.map(r -> r.getSaying())
+			  .doOnNext(s -> log.info(s))
 			  .subscribe(r -> oracleClient.search(r).subscribe());
 	}
 }

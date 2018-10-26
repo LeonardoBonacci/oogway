@@ -26,10 +26,10 @@ public class ToOracle implements Oracle {
 	@Override
 	public Mono<GemCarrier> findOne(String q) {
 		if (isEmpty(q))
-			return Mono.fromSupplier(() -> GemCarrier.builder().saying("No question no answer..").author("oogway").build());
+			return Mono.fromSupplier(() -> new GemCarrier("No question no answer..", "oogway"));
 		
 		Mono<GemCarrier> gem = client.searchOne(q, userDetails.userDetailsRepository(apikey));
-		return gem.onErrorReturn(NotFoundException.class, GemCarrier.builder().saying(postponer.saySomething()).author("oogway").build());
+		return gem.onErrorReturn(NotFoundException.class, new GemCarrier(postponer.saySomething(), "oogway"));
 	}
 
 	@Override

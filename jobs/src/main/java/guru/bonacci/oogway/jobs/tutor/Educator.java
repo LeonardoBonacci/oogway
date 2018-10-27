@@ -23,7 +23,9 @@ public class Educator {
 
 		Mono<GemCarrier> random = oracleClient.random();
 		random.map(r -> r.getSaying())
-			  .doOnNext(s -> log.info(s))
-			  .subscribe(r -> oracleClient.search(r).subscribe());
+			  .subscribe(r -> {
+				  log.info("random quote " + r.toString());
+				  oracleClient.search(r).subscribe(f -> log.info("to find " + f.toString()));
+			  });
 	}
 }

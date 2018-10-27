@@ -95,6 +95,8 @@ public class GemHandler {
 	public Mono<ServerResponse> random(ServerRequest request) {
 		log.info("Receiving request for a random quote");
 
-		 return ok().body(fromObject(serv.random().map(MAPPER::toExtGem)));
+		Mono<GemCarrier> gem = serv.random().map(MAPPER::toExtGem);
+		return gem.flatMap(g -> ok().body(fromObject(g)))
+									.switchIfEmpty(notFound().build());
 	}
 }

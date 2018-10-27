@@ -100,11 +100,13 @@ public class DoorwayHandler {
 						  .onErrorResume(e -> ok().contentType(TEXT_PLAIN).body(fromObject(FALLBACK)));
     }
 
+	//ERROR: .ReactorHttpHandlerAdapter: Handling completed with error: writevAddresses(..) failed: Connection reset by peer
+	//sad but true: https://coredump.pt/questions/50280830/spring-webflux-reactive-server-aborts-connection-by-reactive-client
 	public Mono<ServerResponse> all(ServerRequest request) {
 		String apikey = request.pathVariable("apikey");
 		log.info("Receiving request to see all...");
 
-		Flux<GemIdCarrier> gems = serv.all(apikey).limitRequest(25);
+		Flux<GemIdCarrier> gems = serv.all(apikey);
 		return ok().contentType(TEXT_EVENT_STREAM).body(gems, GemIdCarrier.class);
     }
 

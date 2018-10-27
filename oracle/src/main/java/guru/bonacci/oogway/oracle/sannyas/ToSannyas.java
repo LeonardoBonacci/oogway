@@ -29,6 +29,6 @@ public class ToSannyas implements Sannyas {
 			 .log()
 			 .map(GemMapper.MAPPER::toIntGem)
 			 .flatMap(repo::insert)
-			 .subscribe(x -> log.info("inserted"));
+			 .subscribe(ok -> log.info("inserted"), notok -> log.error(notok.getMessage()));
 	}
 }

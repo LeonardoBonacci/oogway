@@ -15,6 +15,7 @@ import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.shareddomain.GemIdCarrier;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import reactivefeign.ReactiveOptions;
 import reactivefeign.client.ReactiveHttpResponse;
 import reactivefeign.client.statushandler.ReactiveStatusHandler;
 import reactivefeign.cloud.CloudReactiveFeign;
@@ -35,6 +36,10 @@ public class OracleClient {
 	private OracleApi theOracle(Credentials creds) {
 		WebClient webClient = webClientFactory.apply(creds.getUsername(), creds.getPassword());
 		OracleApi oracle = CloudReactiveFeign.<OracleApi>builder(webClient)
+				.options(new ReactiveOptions.Builder()
+		                .setConnectTimeoutMillis(10000)
+		                .setReadTimeoutMillis(10000)
+		                .build())
 				.setFallbackFactory(cause -> new FallbackOracleApi(cause)).statusHandler(new ReactiveStatusHandler() {
 					@Override
 					public boolean shouldHandle(int status) {

@@ -100,7 +100,7 @@ public class DoorwayHandler {
 						  .onErrorResume(e -> ok().contentType(TEXT_PLAIN).body(fromObject(FALLBACK)));
     }
 
-	//ERROR: .ReactorHttpHandlerAdapter: Handling completed with error: writevAddresses(..) failed: Connection reset by peer
+	//FIXME: ...ReactorHttpHandlerAdapter: Handling completed with error: writevAddresses(..) failed: Connection reset by peer
 	//sad but true: https://coredump.pt/questions/50280830/spring-webflux-reactive-server-aborts-connection-by-reactive-client
 	public Mono<ServerResponse> all(ServerRequest request) {
 		String apikey = request.pathVariable("apikey");

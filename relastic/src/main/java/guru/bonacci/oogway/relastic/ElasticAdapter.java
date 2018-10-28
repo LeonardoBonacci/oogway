@@ -198,7 +198,9 @@ public class ElasticAdapter<T extends BaseObject> {
         return new ActionListener<U>() {
             @Override
             public void onResponse(U response) {
+            	// not the beautiful reactive stream that we were hoping for...
                 sink.next(response);
+                sink.complete(); 
             }
 
             @Override

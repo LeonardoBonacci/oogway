@@ -54,7 +54,7 @@ public class FirstLineSupportService {
 
 	public Flux<GemIdCarrier> all(String apikey) {
 		Oracle oracle = oracleFactory.apply(apikey);
-		return oracle.all();
+		return oracle.all().take(25l);
 	}
 
 	public Mono<Void> update(GemIdCarrier gem, String apikey) {

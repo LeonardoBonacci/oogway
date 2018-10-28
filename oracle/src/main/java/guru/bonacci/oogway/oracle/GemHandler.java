@@ -1,7 +1,7 @@
 package guru.bonacci.oogway.oracle;
 
 import static guru.bonacci.oogway.oracle.beanmapping.GemMapper.MAPPER;
-import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
+import static org.springframework.http.MediaType.APPLICATION_STREAM_JSON;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 import static org.springframework.web.reactive.function.server.ServerResponse.notFound;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
@@ -52,7 +52,7 @@ public class GemHandler {
 		log.info("Receiving request to see all...");
 
 		Flux<GemIdCarrier> gems = serv.all().map(MAPPER::toExtIdGem);
-        return ok().contentType(TEXT_EVENT_STREAM).body(gems, GemIdCarrier.class);
+        return ok().contentType(APPLICATION_STREAM_JSON).body(gems, GemIdCarrier.class);
     }
 
 	public Mono<ServerResponse> update(ServerRequest request) {
@@ -80,7 +80,7 @@ public class GemHandler {
 		log.info("Receiving request for a wise answer on: '" + q + "'");
 
 		Flux<GemCarrier> gems = serv.search(q).map(MAPPER::toExtGem);
-        return ok().contentType(TEXT_EVENT_STREAM).body(gems, GemCarrier.class);
+        return ok().contentType(APPLICATION_STREAM_JSON).body(gems, GemCarrier.class);
     }
 
 	public Mono<ServerResponse> searchOne(ServerRequest request) {

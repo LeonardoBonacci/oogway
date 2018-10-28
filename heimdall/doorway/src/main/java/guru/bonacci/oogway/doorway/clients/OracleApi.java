@@ -16,7 +16,7 @@ interface OracleApi {
     Mono<GemCarrier> searchOne(@Param("q") String q);
 	
 	@RequestLine("GET /gems/search?q={q}")
-	@Headers({ "Accept: text/event-stream" })
+	@Headers({ "Accept: application/stream+json" })
     Flux<GemCarrier> search(@Param("q") String q);
 	
 	@RequestLine("GET /gems/{id}")
@@ -36,7 +36,7 @@ interface OracleApi {
     Mono<Void> delete(@Param("id") String id);
 
 	@RequestLine("GET /gems")
-	@Headers({ "Accept: text/event-stream" })
+	@Headers({ "Accept: application/stream+json" })
     Flux<GemIdCarrier> all();
 }
 

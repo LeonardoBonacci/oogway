@@ -1,7 +1,7 @@
 package guru.bonacci.oogway.oracle.services;
 
-import static org.elasticsearch.action.DocWriteResponse.Result.NOOP;
 import static org.elasticsearch.action.DocWriteResponse.Result.DELETED;
+import static org.elasticsearch.action.DocWriteResponse.Result.NOOP;
 import static org.elasticsearch.action.DocWriteResponse.Result.UPDATED;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,9 +11,11 @@ import guru.bonacci.oogway.oracle.persistence.Gem;
 import guru.bonacci.oogway.oracle.persistence.GemRepository;
 import guru.bonacci.oogway.oracle.sannyas.Sannyas;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class GemService {
@@ -35,7 +37,7 @@ public class GemService {
 
     @PreAuthorize("hasRole('read')")
 	public Flux<Gem> all() {
-		return repo.all();
+		return repo.all().onBackpressureDrop(g -> log.error("Could not deliver " + g));
 	}
 
     @PreAuthorize("hasRole('write')")

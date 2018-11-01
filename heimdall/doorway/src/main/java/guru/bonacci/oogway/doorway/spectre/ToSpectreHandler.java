@@ -16,10 +16,10 @@ import reactor.core.publisher.FluxSink;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.WorkQueueProcessor;
 
-@Component
 @Slf4j
 @ConditionalOnProperty(name = "service.spectre.enabled", havingValue = "true")
-public class ToSpectreHandler implements SpectreHandler {
+@Component
+public class ToSpectreHandler extends SpectreHandler {
 
 	public final WorkQueueProcessor<String> queueProcessor = WorkQueueProcessor.create();
 	public final FluxSink<String> sink = queueProcessor.sink();

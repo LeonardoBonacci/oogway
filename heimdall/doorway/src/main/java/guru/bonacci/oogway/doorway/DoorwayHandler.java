@@ -2,10 +2,21 @@ package guru.bonacci.oogway.doorway;
 
 import static guru.bonacci.oogway.doorway.web.IPWebFilter.IP_HEADER;
 import static java.net.URLEncoder.encode;
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
 import static org.springframework.http.MediaType.TEXT_PLAIN;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
+import static org.springframework.web.reactive.function.server.RequestPredicates.DELETE;
+import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
+import static org.springframework.web.reactive.function.server.RequestPredicates.method;
+import static org.springframework.web.reactive.function.server.RequestPredicates.path;
+import static org.springframework.web.reactive.function.server.RouterFunctions.nest;
+import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 import static org.springframework.web.reactive.function.server.ServerResponse.created;
 import static org.springframework.web.reactive.function.server.ServerResponse.notFound;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
@@ -14,14 +25,17 @@ import static org.springframework.web.reactive.function.server.ServerResponse.st
 import java.net.URI;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import guru.bonacci.oogway.doorway.bigbang.BigGem;
 import guru.bonacci.oogway.doorway.clients.NotFoundException;
 import guru.bonacci.oogway.doorway.clients.UnauthorizedException;
+import guru.bonacci.oogway.doorway.lumber.Lumberjack;
 import guru.bonacci.oogway.doorway.services.FirstLineSupportService;
 import guru.bonacci.oogway.doorway.spectre.Spectre;
+import guru.bonacci.oogway.doorway.web.GreedFilterFunction;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 import guru.bonacci.oogway.shareddomain.GemIdCarrier;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +54,25 @@ public class DoorwayHandler {
 
 	private final Spectre spectre;
 	
+
+	public RouterFunction<ServerResponse> routes(Lumberjack lumber) {
+		RouterFunction<ServerResponse> jsons = 
+				nest(accept(APPLICATION_JSON), 
+						route(GET("/searchone"), this::searchOne)
+						.andRoute(GET("/{id}"), this::get)  
+						.andRoute(method(POST), this::create)
+						.andRoute(method(PUT), this::update)
+						.andRoute(DELETE("/{id}"), this::delete));
+
+		RouterFunction<ServerResponse> streams = 
+				nest(accept(TEXT_EVENT_STREAM), 
+						route(GET("/search").and(accept(TEXT_EVENT_STREAM)), this::search)
+						.andRoute(method(GET).and(accept(TEXT_EVENT_STREAM)), this::all));
+
+		return nest(path("/iam/{apikey}"), jsons.and(streams)
+												.filter(new GreedFilterFunction(lumber)));
+	}
+
 	
 	public Mono<ServerResponse> searchOne(ServerRequest request) {
 		String apikey = request.pathVariable("apikey");
@@ -100,8 +133,7 @@ public class DoorwayHandler {
 						  .onErrorResume(e -> ok().contentType(TEXT_PLAIN).body(fromObject(FALLBACK)));
     }
 
-	//FIXME: ...ReactorHttpHandlerAdapter: Handling completed with error: writevAddresses(..) failed: Connection reset by peer
-	//sad but true: https://coredump.pt/questions/50280830/spring-webflux-reactive-server-aborts-connection-by-reactive-client
+	//FIXME: https://stackoverflow.com/questions/52181552/spring-webflux-httpwebhandleradapter-an-established-connection-was-aborted/53075313#53075313
 	public Mono<ServerResponse> all(ServerRequest request) {
 		String apikey = request.pathVariable("apikey");
 		log.info("Receiving request to see all...");

@@ -10,10 +10,10 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
-@Component
 @Slf4j
 @ConditionalOnMissingBean(ToSpectreHandler.class)
-public class NotToSpectreHandler implements SpectreHandler {
+@Component
+public class OrNotToSpectreHandler extends SpectreHandler {
 
 	@Override
 	public Mono<ServerResponse> sink(ServerRequest request) {

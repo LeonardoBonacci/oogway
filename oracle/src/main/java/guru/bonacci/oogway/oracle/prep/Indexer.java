@@ -72,5 +72,5 @@ public class Indexer {
                 .window(Duration.ofSeconds(1))
                 .flatMap(Flux::count)
                 .subscribe(winSize -> log.debug("Got {} responses in last second", winSize));
-}
+	}
 }

@@ -10,10 +10,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
-@Component
 @Slf4j
 @RequiredArgsConstructor
 @ConditionalOnProperty(name = "service.spectre.enabled", havingValue = "true")
+@Component
 public class ToSpectre implements Spectre {
 
 	private final IIPologist ipologist;

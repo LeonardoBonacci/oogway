@@ -1,13 +1,5 @@
 package guru.bonacci.oogway.oracle;
 
-import static org.springframework.http.MediaType.APPLICATION_STREAM_JSON;
-import static org.springframework.web.reactive.function.server.RequestPredicates.DELETE;
-import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
-import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
-import static org.springframework.web.reactive.function.server.RequestPredicates.PUT;
-import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
-import static org.springframework.web.reactive.function.server.RouterFunctions.route;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -30,21 +22,17 @@ import guru.bonacci.oogway.relastic.ElasticConfig;
 @SpringBootApplication
 public class OracleServer { 
 	
+	
 	@Bean
 	RouterFunction<ServerResponse> routes(GemHandler handler) {
-		return route(GET("/gems/searchone"), handler::searchOne)
-			.andRoute(GET("/gems/search").and(accept(APPLICATION_STREAM_JSON)), handler::search)
-			.andRoute(GET("/gems/random"), handler::random)
-			.andRoute(GET("/gems/{id}"), handler::get)  
-			.andRoute(POST("/gems"), handler::create)
-			.andRoute(PUT("/gems"), handler::update)
-			.andRoute(DELETE("/gems/{id}"), handler::delete)
-			.andRoute(GET("/gems").and(accept(APPLICATION_STREAM_JSON)), handler::all);
+		return handler.routes();
 	}
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(OracleServer.class, args);
 	}
+
 	
     @EnableWebFluxSecurity
     @EnableReactiveMethodSecurity

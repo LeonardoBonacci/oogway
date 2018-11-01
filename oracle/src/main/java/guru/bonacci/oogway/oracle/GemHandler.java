@@ -1,15 +1,28 @@
 package guru.bonacci.oogway.oracle;
 
 import static guru.bonacci.oogway.oracle.beanmapping.GemMapper.MAPPER;
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_STREAM_JSON;
+import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
+import static org.springframework.web.reactive.function.server.RequestPredicates.DELETE;
+import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
+import static org.springframework.web.reactive.function.server.RequestPredicates.method;
+import static org.springframework.web.reactive.function.server.RequestPredicates.path;
+import static org.springframework.web.reactive.function.server.RouterFunctions.nest;
+import static org.springframework.web.reactive.function.server.RouterFunctions.route;
+import static org.springframework.web.reactive.function.server.ServerResponse.created;
 import static org.springframework.web.reactive.function.server.ServerResponse.notFound;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
-import static org.springframework.web.reactive.function.server.ServerResponse.created;
 
 import java.net.URI;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
@@ -30,6 +43,25 @@ public class GemHandler {
 	private final GemService serv;
 
 
+	public RouterFunction<ServerResponse> routes() {
+		RouterFunction<ServerResponse> jsons = 
+				nest(accept(APPLICATION_JSON), 
+						route(GET("/searchone"), this::searchOne)
+						.andRoute(GET("/random"), this::get)  
+						.andRoute(GET("/{id}"), this::get)  
+						.andRoute(method(POST), this::create)
+						.andRoute(method(PUT), this::update)
+						.andRoute(DELETE("/{id}"), this::delete));
+
+		RouterFunction<ServerResponse> streams = 
+				nest(accept(TEXT_EVENT_STREAM), 
+						route(GET("/search").and(accept(TEXT_EVENT_STREAM)), this::search)
+						.andRoute(method(GET).and(accept(TEXT_EVENT_STREAM)), this::all));
+
+		return nest(path("/gems"), jsons.and(streams));
+	}
+
+		
 	public Mono<ServerResponse> create(ServerRequest request) {
 		log.info("Receiving request to create a new gem");
 

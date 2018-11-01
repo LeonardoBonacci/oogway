@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
-@Component
 @Slf4j
 @ConditionalOnMissingBean(ToSpectre.class)
+@Component
 public class OrNotToSpectre implements Spectre {
 
 	@Override

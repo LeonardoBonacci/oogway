@@ -21,11 +21,12 @@ public class GemRepository {
 
 	public static final String INDEX = "oracle";
 	public static final String TYPE = "quote";
+	public static final String PIPELINE = "watch";
 	
     private final ElasticAdapter<Gem> adapter;
 
 	public GemRepository(ElasticAdapter<Gem> adapter) {
-    	this.adapter = adapter.theIndex(INDEX).theType(TYPE).theGenericType(Gem.class);
+    	this.adapter = adapter.theIndex(INDEX).theType(TYPE).thePipeline(PIPELINE).theGenericType(Gem.class);
     }
 
 

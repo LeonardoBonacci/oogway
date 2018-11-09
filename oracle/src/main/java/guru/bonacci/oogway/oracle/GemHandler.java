@@ -47,7 +47,7 @@ public class GemHandler {
 		RouterFunction<ServerResponse> jsons = 
 				nest(accept(APPLICATION_JSON), 
 						route(GET("/searchone"), this::searchOne)
-						.andRoute(GET("/random"), this::get)  
+						.andRoute(GET("/random"), this::random)  
 						.andRoute(GET("/{id}"), this::get)  
 						.andRoute(method(POST), this::create)
 						.andRoute(method(PUT), this::update)

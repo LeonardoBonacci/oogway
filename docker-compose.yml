@@ -9,10 +9,6 @@ services:
     image: leonardobonacci/oogway-lumberjack-service
     build: heimdall/lumberjack
 
-  jobs:
-    image: leonardobonacci/oogway-jobs-service
-    build: jobs
-
   oracle:
     image: leonardobonacci/oogway-oracle-service
     build: oracle
@@ -32,3 +28,9 @@ services:
   weather:
     image: leonardobonacci/oogway-weather-service
     build: spectre/weather
+    
+  tutor:
+    image: leonardobonacci/oogway-tutor-service
+    build: jobs/tutor
+
+    

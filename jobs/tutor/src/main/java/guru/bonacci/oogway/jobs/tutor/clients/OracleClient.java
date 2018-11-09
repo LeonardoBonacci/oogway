@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.jobs.clients;
+package guru.bonacci.oogway.jobs.tutor.clients;
 
 import java.net.URLEncoder;
 

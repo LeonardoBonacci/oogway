@@ -1,40 +1,15 @@
-apiVersion: v1
-kind: Service
+apiVersion: batch/v1beta1
+kind: CronJob
 metadata:
-  name: jobs-service
+  name: tutor
 spec:
-  selector:
-    app: jobs
-  ports:
-  - protocol: TCP
-    port: 8765
-  type: NodePort
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: jobs
-spec:
-  selector:
-      matchLabels:
-        app: jobs
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: jobs
+  schedule: "*/1 * * * *"
+  jobTemplate:
     spec:
-      containers:
-        - name: jobs
-          image: leonardobonacci/oogway-jobs-service
-          imagePullPolicy: Never
-          ports:
-            - containerPort: 8765
-          volumeMounts:
-          - name: app-config
-            mountPath: /config
-      volumes:
-      - name: app-config
-        configMap:
-          name: jobs        
-
+      template:
+        spec:
+          containers:
+          - name: tutor
+            image: leonardobonacci/oogway-tutor-service
+            imagePullPolicy: Never
+          restartPolicy: OnFailure

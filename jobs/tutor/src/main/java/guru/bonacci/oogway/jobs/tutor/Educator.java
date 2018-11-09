@@ -1,9 +1,8 @@
 package guru.bonacci.oogway.jobs.tutor;
 
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.jobs.clients.OracleClient;
+import guru.bonacci.oogway.jobs.tutor.clients.OracleClient;
 import guru.bonacci.oogway.shareddomain.GemCarrier;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +16,7 @@ public class Educator {
 	private final OracleClient oracleClient;
 
 
-	@Scheduled(cron = "${tutor.cron}")
-	public void educate() {
+	public void ucate() {
 		log.info("Teaching");
 
 		Mono<GemCarrier> random = oracleClient.random();

@@ -29,7 +29,7 @@ data:
         durable => true
         exchange => "spectre"
         exchange_type => "direct"
-        host => "rabbit"
+        host => "rabbitmq"
         queue => "logstash"
         key => "eavesdrop"
         metadata_enabled => true
@@ -82,7 +82,7 @@ data:
         rabbitmq {
           exchange => 'enrichment'
           exchange_type => 'topic'
-          host => 'rabbit'
+          host => 'rabbitmq'
           durable => true
         }
       } else {

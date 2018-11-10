@@ -3,7 +3,7 @@ server:
 
 spring:
   rabbitmq:
-    host: rabbit
+    host: rabbitmq
   cloud:
     stream:
       default:

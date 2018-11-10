@@ -11,7 +11,7 @@ elasticsearch:
 
 spring:
   rabbitmq:
-    host: rabbit
+    host: rabbitmq
   cloud:
     stream:
 # no content-type:json here. the message is sent from logstash where headers cannot be set

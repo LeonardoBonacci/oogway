@@ -19,6 +19,14 @@ kubectl.exe delete rolebindings --all
 kubectl.exe delete roles --all	
 sleep 2
 
+echo "daemons"
+kubectl.exe delete ds --all	
+sleep 2
+
+echo "service accounts"
+kubectl.exe delete sa --all
+sleep 2
+
 echo "ingress"
 kubectl.exe delete ingress --all	
 sleep 2

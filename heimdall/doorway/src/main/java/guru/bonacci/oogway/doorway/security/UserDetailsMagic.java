@@ -1,8 +1,10 @@
 package guru.bonacci.oogway.doorway.security;
 
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
-import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
+
 
 @Component
 public class UserDetailsMagic {

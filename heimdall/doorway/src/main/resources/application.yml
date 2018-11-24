@@ -18,6 +18,12 @@ spring:
       bindings:
         input:
           destination: spectre.sink
+  sleuth:
+    sampler:
+      percentage: 1.0
+    web:
+      skipPattern: (^cleanup.*)
+
 
 service:  
   lumberjack:
@@ -25,16 +31,12 @@ service:
     name: lumberjack-service
     url: http://lumberjack-service:11235
   oracle:
-    enabled: true
+    enabled: false
     name: oracle-service
     url: http://oracle-service:4444
   spectre:
     enabled: false
 
-logstash:
-  host: logstash-service
-  port: 4560
-      
 logging: 
   level: 
     root: WARN

@@ -8,21 +8,6 @@ data:
   pipelines.yml: |    
     - pipeline.id: spectre
       path.config: "/usr/share/logstash/pipeline/spectre-pipeline.conf"
-    - pipeline.id: log-collector
-      path.config: "/usr/share/logstash/pipeline/log-collector.conf"
-  log-collector.conf: |
-    input { 
-      tcp { 
-        port => 4560 codec => "json" 
-      } 
-    }
-
-    output { 
-      elasticsearch { 
-        hosts => ["http://es:9200"]
-        index => "micro-%{serviceName}"
-      }
-    }
   spectre-pipeline.conf: |
     input {
       rabbitmq {

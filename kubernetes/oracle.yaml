@@ -23,6 +23,7 @@ spec:
     metadata:
       labels:
         app: oracle
+        fluentd-log-format: "spring-boot"
     spec:
       containers:
         - name: oracle

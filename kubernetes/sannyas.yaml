@@ -22,6 +22,7 @@ spec:
     metadata:
       labels:
         app: sannyas
+        fluentd-log-format: "spring-boot"
     spec:
       containers:
       - name: doorway

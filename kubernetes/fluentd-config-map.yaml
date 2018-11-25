@@ -4,35 +4,48 @@ metadata:
   name: fluentd-config
 data:
   fluent.conf: |
-    <match fluent.**>
-        # this tells fluentd to not output its log on stdout
-        @type null
-    </match>
-
-    # here we read the logs from Docker's containers and parse them
     <source>
+      @id fluentd-containers.log
       @type tail
       path /var/log/containers/*.log
       pos_file /var/log/fluentd-containers.log.pos
+      time_format %Y-%m-%dT%H:%M:%S.%NZ
       tag kubernetes.*
+      format json
       read_from_head true
-      <parse>
-        @type json
-        time_format %Y-%m-%dT%H:%M:%S.%NZ
-      </parse>      
     </source>
 
-    # we use kubernetes metadata plugin to add metadatas to the log
     <filter kubernetes.**>
         @type kubernetes_metadata
     </filter>
 
-    <match kubernetes.var.log.containers.**kube-system**.log>                                                                            
-        @type null
+    <match kubernetes.**>
+      @type rewrite_tag_filter
+     <rule>
+        key $.kubernetes.labels.fluentd-log-format
+        pattern ^(.+)$
+        tag $1.${tag}
+      </rule>
+      <rule>
+        key log
+        pattern ^(.*)$
+        tag no-parse.${tag}
+      </rule>
     </match>
 
-    # we send the logs to Elasticsearch
-    <match kubernetes.**>
+    <filter spring-boot.**>
+      @type parser
+      key_name log
+      reserve_data true
+      <parse>
+        @type multiline
+        format_firstline /\d{4}-\d{2}-\d{2}/
+        format1 /^(?<time>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3})\s+(?<level>[^\s]+)\s+(\[(?<service>[^,]*),(?<trace>[^,]*),(?<span>[^,]*),(?<exportable>[^\]]*)\]\s+)?(?<pid>\d+)\s+---\s+\[(?<thread>[^\]]+)\]\s+(?<source>[^\s]+)\s*:\s+(?<message>.*)/
+        time_format %Y-%m-%d %H:%M:%S.%N
+      </parse>
+    </filter>
+
+    <match spring-boot.**>
         @type elasticsearch
         include_tag_key true
         host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"

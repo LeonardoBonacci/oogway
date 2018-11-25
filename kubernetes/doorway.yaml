@@ -21,6 +21,7 @@ spec:
   template:
     metadata:
       labels:
+        fluentd-log-format: "spring-boot"
         app: doorway
     spec:
       containers:

@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.domain.GemCarrier;
 import guru.bonacci.oogway.sannyas.general.PageCache;
 import guru.bonacci.oogway.sannyas.general.WebScraper;
-import guru.bonacci.oogway.shareddomain.GemCarrier;
 import lombok.extern.slf4j.Slf4j;
 
 /**

@@ -6,12 +6,12 @@ import java.util.function.Predicate;
 
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.domain.GemCarrier;
 import guru.bonacci.oogway.sannyas.filters.LengthFilter;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 import guru.bonacci.oogway.sannyas.general.Scraper;
 import guru.bonacci.oogway.sannyas.steps.CharacterGuardian;
 import guru.bonacci.oogway.sannyas.steps.KeyPhraser;
-import guru.bonacci.oogway.shareddomain.GemCarrier;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

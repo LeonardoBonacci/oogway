@@ -15,8 +15,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import guru.bonacci.oogway.domain.GemCarrier;
 import guru.bonacci.oogway.sannyas.http.IConnectionProvider;
-import guru.bonacci.oogway.shareddomain.GemCarrier;
 import reactor.core.publisher.Flux;
 
 /**

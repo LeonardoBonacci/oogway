@@ -2,11 +2,11 @@ package guru.bonacci.oogway.sannyas.services;
 
 import org.springframework.stereotype.Service;
 
+import guru.bonacci.oogway.domain.GemCarrier;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 import guru.bonacci.oogway.sannyas.processing.CleaningAgent;
 import guru.bonacci.oogway.sannyas.processing.ForePlayer;
 import guru.bonacci.oogway.sannyas.processing.SannyasinPicker;
-import guru.bonacci.oogway.shareddomain.GemCarrier;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;

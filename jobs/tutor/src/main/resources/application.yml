@@ -1,6 +1,0 @@
-service:  
-  oracle:
-    url: http://oracle-service:4444
-
-logging: 
-  level.guru.bonacci.oogway.jobs.tutor: INFO

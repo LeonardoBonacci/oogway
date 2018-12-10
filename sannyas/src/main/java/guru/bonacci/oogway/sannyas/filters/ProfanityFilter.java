@@ -15,7 +15,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.shareddomain.GemCarrier;
+import guru.bonacci.oogway.domain.GemCarrier;
 import lombok.extern.slf4j.Slf4j;
 
 /**

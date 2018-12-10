@@ -5,7 +5,7 @@ import static org.apache.commons.lang3.StringUtils.split;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import guru.bonacci.oogway.shareddomain.GemCarrier;
+import guru.bonacci.oogway.domain.GemCarrier;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

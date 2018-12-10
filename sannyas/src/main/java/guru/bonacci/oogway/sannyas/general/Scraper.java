@@ -1,6 +1,6 @@
 package guru.bonacci.oogway.sannyas.general;
 
-import guru.bonacci.oogway.shareddomain.GemCarrier;
+import guru.bonacci.oogway.domain.GemCarrier;
 import reactor.core.publisher.Flux;
 
 /**

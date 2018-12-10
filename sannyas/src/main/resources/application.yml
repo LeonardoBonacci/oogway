@@ -1,10 +1,6 @@
 server:
   port: 2222
 
-logstash:
-  host: logstash-service
-  port: 4560
-
 logging:
   level.guru.bonacci.oogway.sannyas: INFO
 

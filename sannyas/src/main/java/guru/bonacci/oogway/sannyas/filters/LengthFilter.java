@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.oogway.shareddomain.GemCarrier;
+import guru.bonacci.oogway.domain.GemCarrier;
 import lombok.extern.slf4j.Slf4j;
 
 /**

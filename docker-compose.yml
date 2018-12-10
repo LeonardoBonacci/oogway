@@ -5,10 +5,6 @@ services:
     image: leonardobonacci/oogway-doorway-service
     build: heimdall/doorway
 
-  lumberjack:
-    image: leonardobonacci/oogway-lumberjack-service
-    build: heimdall/lumberjack
-
   oracle:
     image: leonardobonacci/oogway-oracle-service
     build: oracle
@@ -16,21 +12,3 @@ services:
   sannyas:
     image: leonardobonacci/oogway-sannyas-service
     build: sannyas
-  
-  localtimer:
-    image: leonardobonacci/oogway-localtimer-service
-    build: spectre/local-timer
-
-  sentiment:
-    image: leonardobonacci/oogway-sentiment-service
-    build: spectre/sentiment
-
-  weather:
-    image: leonardobonacci/oogway-weather-service
-    build: spectre/weather
-    
-  tutor:
-    image: leonardobonacci/oogway-tutor-service
-    build: jobs/tutor
-
-    

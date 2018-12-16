@@ -4,34 +4,29 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.profanity.domain.Gem;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
 public class Processor {
 
-	private final KafkaTemplate<String, Order> template;
+	private final KafkaTemplate<String, Gem> template;
 
 	@StreamListener("input")
 	public void process(String input) {
-		sendMsg(input);
+		send(input);
 	}
 
-	private Order sendMsg(String name)
+	private void send(String name)
 	{
-        Order order = Order.newBuilder()
-        		.setOrderId("OId234")
-        		.setCustomerId("CId432")
-        		.setSupplierId("SId543")
-                .setItems(4)
-                .setFirstName(name)
-                .setLastName("V")
-                .setPrice(178f)
-                .setWeight(75f)
+        Gem quote = Gem.newBuilder()
+        		.setSaying(name)
+        		.setAuthor("constant")
                 .build();
 
-        template.send("bla", order);
-        return order;
+        template.send("blaas", quote);
+        System.out.println(quote + " - sent");
 	}
 
 }

@@ -1,5 +1,6 @@
 package guru.bonacci.oogway.profanity;
 
+import guru.bonacci.oogway.profanity.domain.Gem;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class Config {
 	String registry;
 
 	@Bean
-	public ProducerFactory<String, Order> producerFactory() {
+	public ProducerFactory<String, Gem> producerFactory() {
 		return new DefaultKafkaProducerFactory<>(producerConfigs());
 	}
 	
@@ -45,7 +46,7 @@ public class Config {
     }
 	
 	@Bean
-    public KafkaTemplate<String, Order> kafkaTemplate() {
-        return new KafkaTemplate<String, Order>(producerFactory());
+    public KafkaTemplate<String, Gem> kafkaTemplate() {
+        return new KafkaTemplate<String, Gem>(producerFactory());
     }
 }

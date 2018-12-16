@@ -9,12 +9,13 @@ spring.cloud.stream.kafka.streams.binder:
     default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
     default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
 spring.cloud.stream.bindings.output.destination: enquiry
-spring.cloud.stream.bindings.output.binder: kafka
+spring.cloud.stream.bindings.input.destination: enquiry
+
 
 
 service:  
   oracle:
-    enabled: true
+    enabled: false
     name: oracle-service
     url: http://localhost:4444
 

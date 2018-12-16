@@ -21,8 +21,8 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import guru.bonacci.oogway.domain.GemCarrier;
 import guru.bonacci.oogway.domain.EnquiryEvent;
+import guru.bonacci.oogway.domain.GemCarrier;
 import guru.bonacci.oogway.doorway.clients.UnauthorizedException;
 import guru.bonacci.oogway.doorway.events.Binding;
 import guru.bonacci.oogway.doorway.lumber.Lumberjack;
@@ -61,6 +61,7 @@ public class DoorwayHandler {
 		String q = request.queryParam("q").orElse("nothing matches this string");
 		log.info("Receiving request for a wise answer on: '" + q + "'");
 
+		//TODO event-sending could go to a separate HandlerFilterFunction
 		Message<EnquiryEvent> message = MessageBuilder
 				.withPayload(new EnquiryEvent(q, apikey))
 				.setHeader(KafkaHeaders.MESSAGE_KEY, apikey.getBytes())

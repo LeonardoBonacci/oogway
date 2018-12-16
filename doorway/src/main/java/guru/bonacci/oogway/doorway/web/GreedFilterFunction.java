@@ -25,7 +25,7 @@ public class GreedFilterFunction implements HandlerFilterFunction<ServerResponse
 		List<PathContainer.Element> es = serverRequest.pathContainer().elements();
 		log.info("user " + es.get(3));
 
-		return lumber.isGreedy(es.get(3).toString())
+		return lumber.isGreedy(es.get(3).value())
 				.flatMap(greedy -> {
 					if (greedy) {
 						return ServerResponse.status(TOO_MANY_REQUESTS).build();

@@ -1,6 +1,22 @@
 server: 
   port: 4444
 
+
+spring:
+  kafka: 
+    bootstrap-servers: localhost:9092
+
+spring.cloud.stream.bindings.output.contentType: application/json
+spring.cloud.stream.kafka.streams.binder.configuration.commit.interval.ms: 1000
+spring.cloud.stream.kafka.streams:
+  binder.configuration:
+    default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+#For testing
+spring.cloud.stream.bindings.output1.destination: words
+spring.cloud.stream.bindings.output1.binder: kafka
+
+
 elasticsearch:
   hosts:
     - http://es:9200
@@ -8,6 +24,7 @@ elasticsearch:
   connectionRequestTimeout: 10000
   socketTimeout: 10000
   maxRetryTimeoutMillis: 60000
+
 
 logging: 
   level.guru.bonacci.oogway.oracle: INFO

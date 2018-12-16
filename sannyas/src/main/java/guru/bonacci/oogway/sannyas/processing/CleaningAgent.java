@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.domain.GemCarrier;
-import guru.bonacci.oogway.sannyas.filters.ProfanityFilter;
 import guru.bonacci.oogway.sannyas.general.Sannyasin;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
@@ -20,10 +19,8 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class CleaningAgent {
 
-	private final ProfanityFilter profanityFilter;
-
 	public Mono<Predicate<GemCarrier>> clutterFilter(Mono<Sannyasin> sannyas) {
-		return Flux.concat(sannyas.flatMapMany(Sannyasin::postfilteringStep), Mono.just(profanityFilter))
+		return Flux.concat(sannyas.flatMapMany(Sannyasin::postfilteringStep))
 				.reduce(p -> true, Predicate::and);
 	}
 }

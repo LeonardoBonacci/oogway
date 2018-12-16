@@ -5,11 +5,14 @@ import java.util.Properties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import guru.bonacci.oogway.sannyas.events.Binding;
 
 
+@EnableBinding(Binding.class)
 @EnableCaching(proxyTargetClass=true)
 @SpringBootApplication
 public class SannyasServer {

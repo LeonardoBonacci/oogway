@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.profanity;
+package guru.bonacci.oogway.words;
 
 
 import org.apache.commons.logging.Log;
@@ -9,21 +9,21 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.SubscribableChannel;
 
 
-public class SampleRunner {
+public class JustToShow {
 
-	//Following sink is used as test consumer for the above processor. It logs the data received through the processor.
-	@EnableBinding(TestSink.class)
-	static class TestConsumer {
+	//Following sink is used as test consumer.
+	@EnableBinding(Binding.class)
+	static class Consumer {
 
 		private final Log logger = LogFactory.getLog(getClass());
 
-		@StreamListener(TestSink.INPUT)
+		@StreamListener(Binding.INPUT)
 		public void receive(String data) {
 			logger.info("Data received..." + data);
 		}
 	}
 
-	interface TestSink {
+	interface Binding {
 
 		String INPUT = "input1";
 

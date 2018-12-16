@@ -5,6 +5,7 @@
 /.gradle/
 .classpath
 .project
+.springBeans
 /bin/
 /.idea/
 *.iml

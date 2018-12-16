@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.profanity;
+package guru.bonacci.oogway.words;
 
 
 import org.apache.kafka.common.serialization.Serdes;
@@ -18,14 +18,14 @@ import java.util.Arrays;
 import java.util.Date;
 
 @SpringBootApplication
-public class App {
+public class WordsApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(App.class, args);
+		SpringApplication.run(WordsApp.class, args);
 	}
 
 	@EnableBinding(KafkaStreamsProcessor.class)
-	public static class WordCountProcessorApplication {
+	public static class WordCounter {
 
 		@StreamListener("input")
 		@SendTo("output")
@@ -36,7 +36,7 @@ public class App {
 					.map((key, value) -> new KeyValue<>(value, value))
 					.groupByKey(Serialized.with(Serdes.String(), Serdes.String()))
 					.windowedBy(TimeWindows.of(30000))
-					.count(Materialized.as("WordCounts-1"))
+					.count(Materialized.as("word-counts"))
 					.toStream()
 					.map((key, value) -> new KeyValue<>(null, new WordCount(key.key(), value, new Date(key.window().start()), new Date(key.window().end()))));
 		}

@@ -8,7 +8,7 @@
 		<artifactId>parent</artifactId>
 		<version>4.2-SNAPSHOT</version>
 	</parent>
-	<artifactId>profanity-agent</artifactId>
+	<artifactId>word-counter</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -41,7 +41,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>profane</finalName>
+					<finalName>words</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

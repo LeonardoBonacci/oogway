@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>guru.bonacci.oogway</groupId>
 	<artifactId>parent</artifactId>
@@ -27,12 +29,13 @@
 	<modules>
 		<module>doorway</module>
 		<module>oracle</module>
-	    <module>profanity-agent</module>
+		<module>profanity-guard</module>
 		<module>relastic</module>
 		<module>sannyas</module>
 		<module>shared-domain</module>
 		<module>utilities</module>
-  </modules>
+		<module>word-counter</module>
+	</modules>
 
 	<dependencies>
 		<dependency>
@@ -50,14 +53,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-<!-- 			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-stream-dependencies</artifactId>
-				<version>Fishtown.RC2</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
- -->
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
@@ -233,12 +228,8 @@
 
 	<repositories>
 		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
+			<id>confluent</id>
+			<url>https://packages.confluent.io/maven/</url>
 		</repository>
 		<repository>
 			<id>spring-libs-release</id>

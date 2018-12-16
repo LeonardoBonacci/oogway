@@ -3,7 +3,7 @@ services:
 
   doorway:
     image: leonardobonacci/oogway-doorway-service
-    build: heimdall/doorway
+    build: doorway
 
   oracle:
     image: leonardobonacci/oogway-oracle-service

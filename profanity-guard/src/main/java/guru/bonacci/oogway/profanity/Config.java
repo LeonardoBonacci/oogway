@@ -20,10 +20,10 @@ import io.confluent.kafka.serializers.KafkaAvroSerializer;
 public class Config {
 
 	@Value("${bootstrap.url}")
-	String bootstrap;
+	private String bootstrap;
 	
 	@Value("${registry.url}")
-	String registry;
+	private String registry;
 
 	@Bean
 	public ProducerFactory<String, Gem> producerFactory() {

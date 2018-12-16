@@ -35,12 +35,12 @@ public class Indexer {
 
 
 	@EnableBinding(Binding.class)
-	static class TestProducer {
+	static class Producer {
 
 		private Random random = new Random();
 
 		@Bean
-		@InboundChannelAdapter(channel = Binding.OUTPUT, poller = @Poller(fixedDelay = "1000"))
+		@InboundChannelAdapter(channel = Binding.OUTPUT, poller = @Poller(fixedDelay = "5000"))
 		public MessageSource<String> sendTestData() {
 			return () -> {
 				int idx = random.nextInt(someQuotes.length);

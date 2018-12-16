@@ -9,9 +9,14 @@ spring.cloud.stream.bindings.input:
 #for the output
 bootstrap.url: localhost:9092
 registry.url: http://localhost:8081
+topic.name: oracle
 
 logging: 
   level: 
     root: WARN
     org.springframework: INFO
     guru.bonacci.oogway.profanity: INFO
+
+# Filter configs
+filter:
+  profanity.file.name: badwords.txt  

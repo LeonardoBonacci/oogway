@@ -58,7 +58,8 @@ public class OracleServer {
 		@Bean
     	public MapReactiveUserDetailsService userDetailsRepository() {
     		UserDetails oogway = User.withDefaultPasswordEncoder().username("oogway").password("yawgoo").roles("read").build();
-    		return new MapReactiveUserDetailsService(oogway);
+    		UserDetails app = User.withDefaultPasswordEncoder().username("app").password("ppa").roles("read").build();
+    		return new MapReactiveUserDetailsService(oogway, app);
     	}
     }
 }

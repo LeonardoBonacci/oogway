@@ -1,9 +1,10 @@
 package guru.bonacci.oogway.profanity;
 
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
+
+import guru.bonacci.oogway.profanity.events.Binding;
 
 
 @EnableBinding(Binding.class)

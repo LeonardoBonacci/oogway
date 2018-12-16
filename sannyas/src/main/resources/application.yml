@@ -31,4 +31,3 @@ web:
 # Filter configs
 filter:
   maxlength: 144
-  profanity.file.name: badwords.txt  

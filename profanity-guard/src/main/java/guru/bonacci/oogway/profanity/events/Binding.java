@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.profanity;
+package guru.bonacci.oogway.profanity.events;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;

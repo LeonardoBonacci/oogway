@@ -15,7 +15,7 @@ spring.cloud.stream.bindings.output1.binder: kafka
 
 elasticsearch:
   hosts:
-    - http://es:9200
+    - http://localhost:9200
   connectTimeout: 10000
   connectionRequestTimeout: 10000
   socketTimeout: 10000

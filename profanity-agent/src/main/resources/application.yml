@@ -1,6 +1,9 @@
 server: 
-  port: 3333
+  port: 6666
 
+spring:
+  kafka: 
+    bootstrap-servers: localhost:9092
 
 spring.cloud.stream.bindings.output.contentType: application/json
 spring.cloud.stream.kafka.streams.binder.configuration.commit.interval.ms: 1000
@@ -20,18 +23,8 @@ spring.cloud.stream.bindings.input1.binder: kafka
 spring.cloud.stream.bindings.output1.binder: kafka
 
 
-service:  
-  oracle:
-    enabled: false
-    name: oracle-service
-    url: http://oracle-service:4444
-
-
 logging: 
   level: 
     root: WARN
     org.springframework: INFO
-    guru.bonacci.oogway.doorway: INFO
-
-
-file.name.answers.to.win.time: answers-to-win-time.txt 
+    guru.bonacci.oogway.profanity: INFO

@@ -3,10 +3,10 @@ package guru.bonacci.oogway.doorway.events;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 
-public interface DoorwayBinding {
+public interface Binding {
 
-    String SPECTRE = "spectre";
+	String OUTPUT = "output1";
 
-    @Output(SPECTRE)
-    MessageChannel spectre();
+	@Output(OUTPUT)
+	MessageChannel output();
 }

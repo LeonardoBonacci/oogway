@@ -12,29 +12,39 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
 
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import guru.bonacci.oogway.domain.GemCarrier;
+import guru.bonacci.oogway.domain.GenericEvent;
 import guru.bonacci.oogway.doorway.clients.UnauthorizedException;
+import guru.bonacci.oogway.doorway.events.Binding;
 import guru.bonacci.oogway.doorway.lumber.Lumberjack;
 import guru.bonacci.oogway.doorway.services.FirstLineSupportService;
 import guru.bonacci.oogway.doorway.web.GreedFilterFunction;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
-@Component
+
 @Slf4j
-@RequiredArgsConstructor
+@Component
 public class DoorwayHandler {
 
 	private static final String FALLBACK = "The oracle has a sick day, try again later...";
 	
 	private final FirstLineSupportService serv;
+	private final MessageChannel eventChannel;
 
+	
+	public DoorwayHandler(FirstLineSupportService service, Binding binding) {
+		this.serv = service;
+		this.eventChannel = binding.output();
+	}
 
 	public RouterFunction<ServerResponse> routes(Lumberjack lumber) {
 		RouterFunction<ServerResponse> jsons = 
@@ -49,6 +59,9 @@ public class DoorwayHandler {
 		String apikey = request.pathVariable("apikey");
 		String q = request.queryParam("q").orElse("nothing matches this string");
 		log.info("Receiving request for a wise answer on: '" + q + "'");
+
+		Message<GenericEvent> message = MessageBuilder.withPayload(new GenericEvent(q)).build();
+		eventChannel.send(message);
 
 		Mono<GemCarrier> bg = serv.searchOne(q, apikey);
 		return bg.flatMap(g -> ok().body(fromObject(g)))

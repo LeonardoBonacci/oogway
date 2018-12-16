@@ -8,8 +8,8 @@ import org.springframework.web.server.WebFilterChain;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
-@Component
 @Slf4j
+@Component
 public class PrintWebFilter implements WebFilter {
 
 	@Override

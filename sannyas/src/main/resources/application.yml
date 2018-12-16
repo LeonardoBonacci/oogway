@@ -1,23 +1,16 @@
 server:
   port: 2222
 
-
-spring:
-  kafka: 
-    bootstrap-servers: localhost:9092
-
-
-spring.cloud.stream.bindings.output.contentType: application/json
-spring.cloud.stream.kafka.streams.binder.configuration.commit.interval.ms: 1000
-spring.cloud.stream.kafka.streams:
+spring.cloud.stream.kafka.streams.binder:
+  brokers: localhost
+  configuration:
+      commit.interval.ms: 1000
   binder.configuration:
     default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
     default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
   bindings.input.consumer.application-id: sannyas
-spring.cloud.stream.bindings.input:
-  destination: enquiry
-spring.cloud.stream.bindings.output:
-  destination: words
+spring.cloud.stream.bindings.input.destination: enquiry
+spring.cloud.stream.bindings.output.destination: quote
 
 
 logging:

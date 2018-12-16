@@ -5,7 +5,7 @@ import org.springframework.messaging.MessageChannel;
 
 public interface Binding {
 
-	String OUTPUT = "output1";
+	String OUTPUT = "output";
 
 	@Output(OUTPUT)
 	MessageChannel output();

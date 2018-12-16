@@ -1,6 +1,9 @@
 package guru.bonacci.oogway.words;
 
 
+import java.util.Arrays;
+import java.util.Date;
+
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.KStream;
@@ -14,8 +17,7 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.binder.kafka.streams.annotations.KafkaStreamsProcessor;
 import org.springframework.messaging.handler.annotation.SendTo;
 
-import java.util.Arrays;
-import java.util.Date;
+import guru.bonacci.oogway.domain.GemCarrier;
 
 @SpringBootApplication
 public class WordsApp {
@@ -29,10 +31,10 @@ public class WordsApp {
 
 		@StreamListener("input")
 		@SendTo("output")
-		public KStream<?, WordCount> process(KStream<Object, String> input) {
+		public KStream<?, WordCount> process(KStream<Object, GemCarrier> quotes) {
 
-			return input
-					.flatMapValues(value -> Arrays.asList(value.toLowerCase().split("\\W+")))
+			return quotes
+					.flatMapValues(value -> Arrays.asList(value.getSaying().toLowerCase().split("\\W+")))
 					.map((key, value) -> new KeyValue<>(value, value))
 					.groupByKey(Serialized.with(Serdes.String(), Serdes.String()))
 					.windowedBy(TimeWindows.of(30000))

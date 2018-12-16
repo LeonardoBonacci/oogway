@@ -12,6 +12,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
 
+import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
@@ -21,7 +22,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import guru.bonacci.oogway.domain.GemCarrier;
-import guru.bonacci.oogway.domain.GenericEvent;
+import guru.bonacci.oogway.domain.EnquiryEvent;
 import guru.bonacci.oogway.doorway.clients.UnauthorizedException;
 import guru.bonacci.oogway.doorway.events.Binding;
 import guru.bonacci.oogway.doorway.lumber.Lumberjack;
@@ -60,7 +61,10 @@ public class DoorwayHandler {
 		String q = request.queryParam("q").orElse("nothing matches this string");
 		log.info("Receiving request for a wise answer on: '" + q + "'");
 
-		Message<GenericEvent> message = MessageBuilder.withPayload(new GenericEvent(q)).build();
+		Message<EnquiryEvent> message = MessageBuilder
+				.withPayload(new EnquiryEvent(q, apikey))
+				.setHeader(KafkaHeaders.MESSAGE_KEY, apikey.getBytes())
+				.build();
 		eventChannel.send(message);
 
 		Mono<GemCarrier> bg = serv.searchOne(q, apikey);

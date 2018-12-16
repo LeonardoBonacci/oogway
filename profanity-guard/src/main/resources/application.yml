@@ -4,7 +4,7 @@ spring.cloud.stream.kafka.streams:
     default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
   bindings.input.consumer.application-id: quote-filter
 spring.cloud.stream.bindings.input:
-  destination: words
+  destination: quote
 
 #for the output
 bootstrap.url: localhost:9092

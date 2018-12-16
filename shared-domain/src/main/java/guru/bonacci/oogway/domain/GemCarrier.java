@@ -11,7 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GemCarrier {
 
-	private String saying;
-
-	private String author;
+	private String saying, author;
 }

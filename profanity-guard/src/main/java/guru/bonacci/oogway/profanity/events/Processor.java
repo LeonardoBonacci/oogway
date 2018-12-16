@@ -6,6 +6,7 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.oogway.domain.GemCarrier;
 import guru.bonacci.oogway.profanity.domain.Gem;
 import guru.bonacci.oogway.profanity.filter.ProfanityFilter;
 import lombok.RequiredArgsConstructor;
@@ -25,19 +26,19 @@ public class Processor {
 
 
 	@StreamListener
-	public void process(@Input(Binding.INPUT) Flux<String> input) {
-		input.filter(filter::test)
+	public void process(@Input(Binding.INPUT) Flux<GemCarrier> input) {
+		input.filter(gem -> filter.test(gem.getSaying()))
 			 .subscribe(quote -> send(quote));
 	}
 
-	private void send(String name) {
-        Gem quote = Gem.newBuilder()
-        		.setSaying(name)
-        		.setAuthor("constant")
+	private void send(GemCarrier gemC) {
+        Gem gem = Gem.newBuilder()
+        		.setSaying(gemC.getSaying())
+        		.setAuthor(gemC.getAuthor())
                 .build();
 
-        template.send(topic, quote);
-        log.debug(quote + " - sent");
+        template.send(topic, gem);
+        log.debug(gem + " - sent");
 	}
 
 }

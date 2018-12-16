@@ -41,10 +41,10 @@ public class Indexer {
 
 		@Bean
 		@InboundChannelAdapter(channel = Binding.OUTPUT, poller = @Poller(fixedDelay = "5000"))
-		public MessageSource<String> sendTestData() {
+		public MessageSource<GemCarrier> sendTestData() {
 			return () -> {
 				int idx = random.nextInt(someQuotes.length);
-				return new GenericMessage<>(someQuotes[idx].getSaying());
+				return new GenericMessage<>(someQuotes[idx]);
 			};
 		}
 	}

@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.profanity.events;
+package guru.bonacci.oogway.enricher.events;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.stream.annotation.Input;
@@ -7,8 +7,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.domain.GemCarrier;
-import guru.bonacci.oogway.profanity.domain.Gem;
-import guru.bonacci.oogway.profanity.filter.ProfanityFilter;
+import guru.bonacci.oogway.enricher.domain.Gem;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
@@ -22,13 +21,11 @@ public class Processor {
 	private String topic;
 
 	private final KafkaTemplate<String, Gem> template;
-	private final ProfanityFilter filter;
 
 
 	@StreamListener
 	public void process(@Input(Binding.INPUT) Flux<GemCarrier> input) {
-		input.filter(gem -> filter.test(gem.getSaying()))
-			 .subscribe(quote -> send(quote));
+		input.subscribe(quote -> send(quote));
 	}
 
 	private void send(GemCarrier gemC) {

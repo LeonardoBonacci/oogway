@@ -10,8 +10,9 @@ import guru.bonacci.oogway.domain.EnquiryEvent;
 
 public class HitCounter {
 
+	
 	@EnableBinding(Binding.class)
-	public static class WordCounter {
+	public static class Counter {
 
 		@StreamListener(Binding.INPUT)
 		public void process(KStream<Object, EnquiryEvent> events) {

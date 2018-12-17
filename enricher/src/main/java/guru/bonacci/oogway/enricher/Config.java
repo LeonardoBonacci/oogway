@@ -1,6 +1,5 @@
-package guru.bonacci.oogway.profanity;
+package guru.bonacci.oogway.enricher;
 
-import guru.bonacci.oogway.profanity.domain.Gem;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +12,7 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
+import guru.bonacci.oogway.enricher.domain.Gem;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 
 @Configuration

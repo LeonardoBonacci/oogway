@@ -1,25 +1,17 @@
-server: 
-  port: 6666
-
 spring.cloud.stream.kafka.streams:
   binder.configuration:
     default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
     default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
   bindings.input.consumer.application-id: quote-filter
-spring.cloud.stream.bindings.input:
-  destination: quote
+spring.cloud.stream.bindings.input.destination: decent
 
 #for the output
 bootstrap.url: localhost:9092
 registry.url: http://localhost:8081
-topic.name: oracle
+topic.name: oracles
 
 logging: 
   level: 
     root: WARN
     org.springframework: INFO
-    guru.bonacci.oogway.profanity: INFO
-
-# Filter configs
-filter:
-  profanity.file.name: badwords.txt  
+    guru.bonacci.oogway.enricher: INFO

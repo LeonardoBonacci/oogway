@@ -18,6 +18,7 @@ import reactor.core.publisher.Mono;
 @Component
 public class Lumberjack {
 
+	
 	@Autowired
 	private QueryableStoreRegistry queryableStoreRegistry;
 	

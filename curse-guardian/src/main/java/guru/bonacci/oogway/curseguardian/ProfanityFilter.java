@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.profanity.filter;
+package guru.bonacci.oogway.curseguardian;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

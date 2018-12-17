@@ -16,7 +16,7 @@
     "type.name": "quote",
 
     "_comment": "Which topic to stream data from into Elasticsearch",
-    "topics": "oracle",
+    "topics": "oracles",
 
     "_comment": "If the Kafka message doesn't have a key you need to specify key.ignore=true.", 
     "key.ignore": "true"

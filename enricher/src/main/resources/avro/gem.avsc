@@ -1,6 +1,6 @@
 {
      "type": "record",
-     "namespace": "guru.bonacci.oogway.profanity.domain",
+     "namespace": "guru.bonacci.oogway.enricher.domain",
      "name": "Gem",
      "version": "1",
      "fields": [

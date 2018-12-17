@@ -8,7 +8,7 @@
 		<artifactId>parent</artifactId>
 		<version>4.2-SNAPSHOT</version>
 	</parent>
-	<artifactId>profanity-guard</artifactId>
+	<artifactId>enricher</artifactId>
 	<packaging>jar</packaging>
 
 	<properties>

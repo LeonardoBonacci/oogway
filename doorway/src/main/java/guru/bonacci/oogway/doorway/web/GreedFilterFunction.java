@@ -18,6 +18,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class GreedFilterFunction implements HandlerFilterFunction<ServerResponse, ServerResponse> {
 
+	
 	private final Lumberjack lumber;
 
 	@Override

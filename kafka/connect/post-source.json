@@ -1,5 +1,5 @@
 {
-    "name": "jdbc_source_post_enrichment",
+    "name": "jdbc_source_enrichment",
     "config": {
             "_comment": "The JDBC connector class. Don't change this if you want to use the JDBC Source.",
             "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",

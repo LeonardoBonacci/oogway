@@ -1,0 +1,54 @@
+CREATE OR REPLACE FUNCTION trigger_set_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.update_ts = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TABLE enrichment (
+  author varchar(255),
+  comment varchar(255),
+  create_ts timestamp DEFAULT NOW(),
+  update_ts timestamp DEFAULT NOW()
+);
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON enrichment
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
+
+insert into enrichment (author,comment) values('Friedrich Nietzsche','Nonsense');
+insert into enrichment (author,comment) values('Jesus','Sheer...');
+update enrichment set comment='Sheep' where author='Jesus';
+
+
+
+
+CREATE OR REPLACE FUNCTION trigger_set_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.update_ts = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TABLE enquiryevent (
+  question varchar(255),
+  apikey varchar(255),
+  create_ts timestamp DEFAULT NOW(),
+  update_ts timestamp DEFAULT NOW()
+);
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON enquiryevent
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
+
+insert into enquiryevent (question,apikey) values('Friedrich Nietzsche','aaaa');
+insert into enquiryevent (question,apikey) values('Why','aaaa');
+
+
+

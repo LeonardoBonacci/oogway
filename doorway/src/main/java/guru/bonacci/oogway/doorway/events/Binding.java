@@ -5,8 +5,6 @@ import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 
-import guru.bonacci.oogway.domain.EnquiryEvent;
-
 public interface Binding {
 
 	String OUTPUT = "output";
@@ -16,5 +14,5 @@ public interface Binding {
 	MessageChannel output();
 	
 	@Input(INPUT)
-	KStream<Object, EnquiryEvent> input();
+	KStream<?, ?> input();
 }

@@ -27,7 +27,7 @@ public class Lumberjack {
 				queryableStoreRegistry.getQueryableStoreType("hits", QueryableStoreTypes.windowStore());
 	
 		long hits, now = System.currentTimeMillis();
-		try (WindowStoreIterator<Long> it = keyValueStore.fetch(apikey.getBytes(), now - 60000, now)) {
+		try (WindowStoreIterator<Long> it = keyValueStore.fetch(apikey, now - 60000, now)) {
 			Spliterator<KeyValue<Long, Long>> spliterator = Spliterators.spliteratorUnknownSize(it, Spliterator.NONNULL);
 			Stream<KeyValue<Long, Long>> stream = StreamSupport.stream(spliterator, false);
 			hits = stream.map(kv -> kv.value).mapToLong(Long::longValue).sum();

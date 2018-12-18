@@ -36,6 +36,8 @@ public class SannyasService {
 		// seek 
 		Flux<GemCarrier> found = sannyas.flatMapMany(s -> prep.flatMapMany(p -> s.seek(p)));
 
+		found.doOnEach(c -> System.out.println(c.get()));
+		
 		// and post-process
 		return cleaningAgent.clutterFilter(sannyas)
 							.flatMapMany(postp -> found.filter(f -> postp.test(f)));

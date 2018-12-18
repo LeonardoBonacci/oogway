@@ -34,7 +34,8 @@
 		<module>shared-domain</module>
 		<module>utilities</module>
 		<module>word-counter</module>
-	</modules>
+    <module>post-hub</module>
+  </modules>
 
 	<dependencies>
 		<dependency>

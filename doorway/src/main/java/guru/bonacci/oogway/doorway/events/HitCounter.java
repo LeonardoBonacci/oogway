@@ -15,7 +15,8 @@ public class HitCounter {
 	public static class Counter {
 
 		@StreamListener(Binding.INPUT)
-		public void process(KStream<Object, EnquiryEvent> events) {
+		public void process(KStream<String, EnquiryEvent> events) {
+			events.print("was here");
 			events.groupByKey()
 				  .windowedBy(TimeWindows.of(1000))
 				  .count(MaterializedInternal.as("hits"));

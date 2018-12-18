@@ -1,5 +1,6 @@
 package guru.bonacci.oogway.curseguardian;
 
+import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,6 +10,9 @@ import org.springframework.cloud.stream.binder.kafka.streams.annotations.KafkaSt
 import org.springframework.messaging.handler.annotation.SendTo;
 
 import guru.bonacci.oogway.domain.GemCarrier;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @SpringBootApplication
@@ -26,9 +30,22 @@ public class NoCurseApp {
 
 		@SendTo("output")
 		@StreamListener("input")
-		public KStream<?, GemCarrier> process(KStream<?, GemCarrier> line) {
-		    return line.filter((k,v) -> profane.test(v.getSaying()));
+		public KStream<String, Some> process(KStream<String, Some> gems) {
+			gems.print("aaa");
+//			gems.mapValues(v -> v.getAuthor()).print("r");
+
+//		    return gems.filter((k,v) -> profane.test(v.getSaying()))
+//		    		  .map((k,v) -> new KeyValue<>(v.getAuthor(), v));
+			return gems;
 		}
+	}
+	
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public class Some {
+
+		private String author, comment;
 	}
 
 }

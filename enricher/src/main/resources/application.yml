@@ -1,14 +1,13 @@
-spring.cloud.stream.kafka.streams:
-  binder.configuration:
-    default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-    default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-  bindings.input.consumer.application-id: quote-filter
-spring.cloud.stream.bindings.input.destination: decent
 
-#for the output
-bootstrap.url: localhost:9092
-registry.url: http://localhost:8081
-topic.name: oracles
+spring.cloud.stream.kafka.streams.binder.configuration.commit.interval.ms: 1000
+spring.cloud.stream.kafka.streams.binder.configuration.default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+spring.cloud.stream.kafka.streams.binder.configuration.default.value.serde: org.springframework.kafka.support.serializer.JsonSerde
+spring.cloud.stream.bindings.enrich:
+  destination: postum-enquiryevent
+  group: enricher
+  consumer:
+    headerMode: raw
+    nativeDecoding: true
 
 logging: 
   level: 

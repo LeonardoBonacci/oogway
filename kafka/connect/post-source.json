@@ -4,7 +4,7 @@
             "_comment": "The JDBC connector class. Don't change this if you want to use the JDBC Source.",
             "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
 
-            "_comment": "How to serialise the value of keys - here use the Confluent Avro serialiser. Note that the JDBC Source Connector always returns null for the key ",
+            "_comment": "How to serialise the value of keys. Note that the JDBC Source Connector always returns null for the key ",
             "key.converter": "org.apache.kafka.connect.storage.StringConverter",
 
             "_comment": "As above, but for the value of the message.",
@@ -16,7 +16,7 @@
 			"connection.url": "jdbc:postgresql://localhost:5432/demo?user=demo&password=pw",
 
             "_comment": "Which table(s) to include",
-            "table.whitelist": "enrichment",
+            "table.whitelist": "enrichments",
 
             "_comment": "Pull all rows based on an timestamp column. You can also do bulk or incrementing column-based extracts. For more information, see http://docs.confluent.io/current/connect/connect-jdbc/docs/source_config_options.html#mode",
             "mode": "timestamp",

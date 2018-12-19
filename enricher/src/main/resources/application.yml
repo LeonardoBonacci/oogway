@@ -16,6 +16,13 @@ spring.cloud.stream.bindings.quote:
     headerMode: raw
     nativeDecoding: true
     valueSerde: guru.bonacci.oogway.enricher.EnquiryEventSerde
+spring.cloud.stream.bindings.biggem:
+  destination: oracle
+  producer:
+    headerMode: raw
+    nativeEncoding: true
+    valueSerde: guru.bonacci.oogway.enricher.EnquiryEventSerde
+
 
 logging: 
   level: 

@@ -3,17 +3,16 @@ server.port: 3333
 spring.cloud.stream.kafka.streams.binder.configuration.commit.interval.ms: 1000
 spring.cloud.stream.kafka.streams.binder.configuration.default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
 spring.cloud.stream.kafka.streams.binder.configuration.default.value.serde: org.springframework.kafka.support.serializer.JsonSerde
+
 spring.cloud.stream.bindings.output:
-  destination: postum-enquiryevent
-  producer:
-    headerMode: raw
-    nativeEncoding: true
+  destination: enquiries
+  contentType: application/json #default
+  producer.headerMode: raw
 spring.cloud.stream.bindings.input:
-  destination: postum-enquiryevent
+  destination: enquiries
+  contentType: application/json #default
   group: doorway
-  consumer:
-    headerMode: raw
-    nativeDecoding: true
+  consumer.headerMode: raw
 
 service:  
   oracle:

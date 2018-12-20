@@ -1,20 +1,17 @@
-#spring.cloud.stream.kafka.streams.binder.configuration.commit.interval.ms: 1000
-#spring.cloud.stream.kafka.streams.binder.configuration:
-#  default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-#  default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+
 spring.cloud.stream.kafka.streams.binder.configuration.commit.interval.ms: 1000
 spring.cloud.stream.kafka.streams.binder.configuration.default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
 spring.cloud.stream.kafka.streams.binder.configuration.default.value.serde: org.springframework.kafka.support.serializer.JsonSerde
+
 spring.cloud.stream.bindings.input:
-  destination: post-enrichment
+  destination: quotes
+  contentType: application/json 
   group: cursings
-  consumer:
-    nativeDecoding: true
+  consumer.headerMode: raw
 spring.cloud.stream.bindings.output:
-  destination: decentss
-  producer:
-    headerMode: raw
-    nativeDecoding: true
+  destination: decent-quotes
+  contentType: application/json 
+  producer.headerMode: raw
 
 
 logging: 
@@ -23,6 +20,6 @@ logging:
     org.springframework: INFO
     guru.bonacci.oogway.curseguardian: INFO
 
-    # Filter configs
+# Filter configs
 filter:
   profanity.file.name: badwords.txt  

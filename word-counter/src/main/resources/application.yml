@@ -1,6 +1,3 @@
-server: 
-  port: 7777
-
 spring.cloud.stream.kafka.streams.binder:
   brokers: localhost
   configuration:
@@ -10,7 +7,7 @@ spring.cloud.stream.kafka.streams.binder:
     default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
   bindings.input.consumer.application-id: word-counter
 spring.cloud.stream.bindings.output.destination: counts
-spring.cloud.stream.bindings.input.destination: quote
+spring.cloud.stream.bindings.input.destination: quotes
 spring.cloud.stream.bindings.input1.destination: counts
 spring.cloud.stream.bindings.input1.binder: kafka
 

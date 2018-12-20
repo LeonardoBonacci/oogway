@@ -2,26 +2,26 @@
 spring.cloud.stream.kafka.streams.binder.configuration.commit.interval.ms: 1000
 spring.cloud.stream.kafka.streams.binder.configuration.default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
 spring.cloud.stream.kafka.streams.binder.configuration.default.value.serde: org.springframework.kafka.support.serializer.JsonSerde
+
+spring.cloud.stream.bindings.quote:
+  destination: decent-quotes
+  contentType: application/json 
+  group: enricher
+  consumer:
+    headerMode: raw
+    valueSerde: guru.bonacci.oogway.domain.GemCarrierSerde
 spring.cloud.stream.bindings.enrich:
   destination: post-enrichments
   group: enrichers
   consumer:
     headerMode: raw
     nativeDecoding: true
-    valueSerde: guru.bonacci.oogway.enricher.EnrichmentSerde
-spring.cloud.stream.bindings.quote:
-  destination: postum-enquiryevent
-  group: enricherss
-  consumer:
-    headerMode: raw
-    nativeDecoding: true
-    valueSerde: guru.bonacci.oogway.enricher.EnquiryEventSerde
+    valueSerde: guru.bonacci.oogway.enricher.domain.EnrichmentSerde
 spring.cloud.stream.bindings.biggem:
   destination: oracle
   producer:
     headerMode: raw
     nativeEncoding: true
-    valueSerde: guru.bonacci.oogway.enricher.EnquiryEventSerde
 
 
 logging: 

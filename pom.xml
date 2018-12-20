@@ -34,7 +34,7 @@
 		<module>shared-domain</module>
 		<module>utilities</module>
 		<module>word-counter</module>
-	</modules>
+  </modules>
 
 	<dependencies>
 		<dependency>

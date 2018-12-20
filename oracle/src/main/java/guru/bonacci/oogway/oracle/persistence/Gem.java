@@ -24,6 +24,5 @@ public class Gem extends BaseObject {
 
 	@NonNull
 	private String saying;
-
 	private String author;
 }

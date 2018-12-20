@@ -1,0 +1,28 @@
+CREATE OR REPLACE FUNCTION trigger_set_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.update_ts = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TABLE enrichments (
+  author varchar(255),
+  comment varchar(255),
+  create_ts timestamp DEFAULT NOW(),
+  update_ts timestamp DEFAULT NOW()
+);
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON enrichments
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
+
+insert into enrichments (author,comment) values('Friedrich Nietzsche','Nonsense');
+insert into enrichments (author,comment) values('William William Shakespeare,','Sense');
+update enrichments set comment='Sheep' where author='Friedrich Nietzsche';
+
+
+
+

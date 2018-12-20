@@ -1,0 +1,31 @@
+{
+    "name": "jdbc_source_enrichment",
+    "config": {
+            "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+
+            "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+            "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+			"value.converter.schemas.enable": "false",
+
+			"connection.url": "jdbc:postgresql://localhost:5432/demo?user=demo&password=pw",
+
+            "table.whitelist": "enrichments",
+
+            "mode": "timestamp",
+            "timestamp.column.name": "update_ts",
+
+            "validate.non.null": "false",
+
+            "topic.prefix": "post-",
+
+            "transforms":"createKey,extractString,dropFieldD1,dropFieldD2",
+            "transforms.createKey.type":"org.apache.kafka.connect.transforms.ValueToKey",
+            "transforms.createKey.fields":"author",
+            "transforms.extractString.type":"org.apache.kafka.connect.transforms.ExtractField$Key",
+            "transforms.extractString.field":"author",
+            "transforms.dropFieldD1.type":"org.apache.kafka.connect.transforms.ReplaceField$Value",  
+			"transforms.dropFieldD1.blacklist":"create_ts",
+            "transforms.dropFieldD2.type":"org.apache.kafka.connect.transforms.ReplaceField$Value",  
+			"transforms.dropFieldD2.blacklist":"update_ts"
+    }
+}

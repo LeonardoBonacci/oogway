@@ -1,4 +1,5 @@
 
+spring.cloud.stream.kafka.binder.brokers: kafka
 spring.cloud.stream.kafka.streams.binder.configuration.commit.interval.ms: 1000
 spring.cloud.stream.kafka.streams.binder.configuration.default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
 spring.cloud.stream.kafka.streams.binder.configuration.default.value.serde: org.springframework.kafka.support.serializer.JsonSerde

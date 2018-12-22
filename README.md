@@ -13,7 +13,9 @@ Thus, engineers, computer scientists, software developers, programmers and hacke
 Installation guide
 ------------------
 
-TODO
+Before running docker-compose up set an environment variable 'SET BROKER_HOST=123.456.78.90'.
+Also, configure kafka's server.properties setting 'advertised.listeners=PLAINTEXT://123.456.78.90:9092' to make sure that kafka returns the right broker-host information to its requesting clients.
+
 
 *Disclaimer* :) 
 Inspecting the project you will notice strange or at least uncommon words throughout the code ('Sannyasin' instead of 'Worker', 'Manager' instead of 'WorkerEngine'). This being a hobby project, I have used the lack of supervision to take a few coding short cuts, and have been excessively creative in choosing class, method and variable names. Don't try this at home when you're creating real life production software and please stick to the commonly used patterns and naming conventions to ease your colleagues' professional life.

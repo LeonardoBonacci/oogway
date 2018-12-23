@@ -1,6 +1,5 @@
 #SET BROKER_HOST=123.456.78.90
 version: '2.3'
-services:
 
 services:
 
@@ -71,6 +70,12 @@ services:
   enricher:
     image: leonardobonacci/oogway-enricher-service
     build: enricher
+    extra_hosts:  
+     - "kafka:${BROKER_HOST}"
+  
+  words:
+    image: leonardobonacci/oogway-words-service
+    build: word-counter
     extra_hosts:  
      - "kafka:${BROKER_HOST}"
     

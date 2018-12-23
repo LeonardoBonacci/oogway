@@ -5,7 +5,8 @@ echo '> Script to setup services and deployments'
 cd ..
 echo "Running scripts from: " $(pwd)
 
-#kubectl.exe apply -f oracle.yaml	
+kubectl.exe delete deployment oracle
+kubectl.exe apply -f oracle.yaml	
 sleep 1
 
 kubectl.exe delete deployment doorway	

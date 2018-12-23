@@ -1,10 +1,18 @@
----
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
-  name: franz
+  name: kafka
 spec:
-  type: ExternalName
-  externalName: bootstrap.kafka.svc.cluster.local
   ports:
   - port: 9092
+    targetPort: 9092
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: kafka
+subsets:
+  - addresses:
+    - ip: 123.45.678.90
+    ports:
+      - port: 9092

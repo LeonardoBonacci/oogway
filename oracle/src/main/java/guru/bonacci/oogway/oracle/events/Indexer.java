@@ -1,4 +1,4 @@
-package guru.bonacci.oogway.oracle.prep;
+package guru.bonacci.oogway.oracle.events;
 
 
 import java.io.IOException;
@@ -13,9 +13,10 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.stereotype.Component;
 
 import guru.bonacci.oogway.domain.GemCarrier;
-import guru.bonacci.oogway.oracle.events.Binding;
 import guru.bonacci.oogway.utilities.CustomFileUtils;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class Indexer {
 
@@ -44,6 +45,7 @@ public class Indexer {
 		public MessageSource<GemCarrier> sendTestData() {
 			return () -> {
 				int idx = random.nextInt(someQuotes.length);
+				log.info("indexing " + someQuotes[idx]);
 				return new GenericMessage<>(someQuotes[idx]);
 			};
 		}

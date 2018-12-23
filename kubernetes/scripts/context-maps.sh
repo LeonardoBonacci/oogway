@@ -10,7 +10,7 @@ kubectl.exe delete cm doorway
 kubectl.exe delete cm sannyas
 
 kubectl create configmap oracle --from-file=oracle/src/main/resources/application.yml
-kubectl create configmap doorway --from-file=heimdall/doorway/src/main/resources/application.yml
+kubectl create configmap doorway --from-file=doorway/src/main/resources/application.yml
 kubectl create configmap sannyas --from-file=sannyas/src/main/resources/application.yml
 
 echo "OK"
